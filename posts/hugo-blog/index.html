@@ -1670,7 +1670,7 @@
 <div class="single__infos">
   <time class="single__info" title="작성일">📅&nbsp;2021년 03월 04일 </time>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="읽는 시간"> ☕&nbsp;1&nbsp;min read </span>
+  &nbsp;&middot;&nbsp; <span class="single__info" title="읽는 시간"> ☕&nbsp;2&nbsp;min read </span>
   
   <span class="single__info">
     
@@ -1717,6 +1717,43 @@ $ cd public
 $ git add .
 $ git commit -m &quot;deploy updates&quot;
 $ git push origin main
+</code></pre><h2 id="커밋-자동화-스크립트">커밋 자동화 스크립트</h2>
+<pre><code>#!/bin/bash
+
+echo -e &quot;\033[0;32mDeploying updates to GitHub...\033[0m&quot;
+
+# Build the project.
+hugo -t zzo
+
+# Go To Public folder
+cd public
+# Add changes to git.
+git add .
+
+# Commit changes.
+msg=&quot;rebuilding site `date`&quot;
+if [ $# -eq 1 ]
+  then msg=&quot;$1&quot;
+fi
+git commit -m &quot;$msg&quot;
+
+# Push source and build repos.
+git push origin main
+
+# Come Back up to the Project Root
+cd ..
+
+
+# blog 저장소 Commit &amp; Push
+git add .
+
+msg=&quot;rebuilding site `date`&quot;
+if [ $# -eq 1 ]
+  then msg=&quot;$1&quot;
+fi
+git commit -m &quot;$msg&quot;
+
+git push origin master
 </code></pre>
     </article>
     
@@ -2380,6 +2417,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <li><a href="#깃-준비">깃 준비</a></li>
     <li><a href="#글-작성-후-확인">글 작성 후 확인</a></li>
     <li><a href="#페이지-작성-후-업로드">페이지 작성 후 업로드</a></li>
+    <li><a href="#커밋-자동화-스크립트">커밋 자동화 스크립트</a></li>
   </ul>
 </nav>
   </div>
