@@ -1859,7 +1859,28 @@ git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span cla
 git push origin master
 </code></pre></td></tr></table>
 </div>
-</div>
+</div><h2 id="검색엔진에-등록">검색엔진에 등록</h2>
+<h3 id="google-search-console">Google Search Console</h3>
+<ul>
+<li><a href="https://www.google.com/webmasters/tools/">Google Search Console</a>에 접속</li>
+<li>속성 추가 후 URL 접두어에서 github.io 주소 입력</li>
+<li>HTML파일로 확인 선택 -&gt; 파일 다운로드</li>
+<li>hugo의 public 폴더에 복사하면 루트에 업로드 됨</li>
+<li>소유권 확인됨</li>
+</ul>
+<h3 id="configtoml-수정">config.toml 수정</h3>
+<pre><code># 로봇 검색 허용
+enableRobotsTXT = true
+   
+[outputs]
+home = [&quot;HTML&quot;, &quot;RSS&quot;, &quot;JSON&quot;]
+
+# 사이트맵 작성
+[sitemap]
+changefreq = &quot;weekly&quot;
+filename = &quot;sitemap.xml&quot;
+</code></pre><h3 id="서치콘솔에-등록">서치콘솔에 등록</h3>
+<p>Sitemaps 메뉴에서 &hellip;/sitemap.xml과, &hellip;/index.xml을 등록.</p>
     </article>
     
     
@@ -2530,6 +2551,13 @@ document.addEventListener('DOMContentLoaded', function () {
     <li><a href="#글-작성-후-확인">글 작성 후 확인</a></li>
     <li><a href="#페이지-작성-후-업로드">페이지 작성 후 업로드</a></li>
     <li><a href="#커밋-자동화-스크립트">커밋 자동화 스크립트</a></li>
+    <li><a href="#검색엔진에-등록">검색엔진에 등록</a>
+      <ul>
+        <li><a href="#google-search-console">Google Search Console</a></li>
+        <li><a href="#configtoml-수정">config.toml 수정</a></li>
+        <li><a href="#서치콘솔에-등록">서치콘솔에 등록</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
