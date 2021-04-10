@@ -1722,7 +1722,7 @@ if (!doNotTrack) {
       <p>이번 포스팅에서는 ProgressDialog와 Thread 사용법에 대해 알아보도록 하겠습니다.</p>
 <h2 id="들어가기">들어가기</h2>
 <p><a href="https://developer.android.com/reference/android/app/ProgressDialog">ProgressDialog</a>는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황과 부가적인 문장을 팝업창으로 보여주는 모듈입니다. 시간이 걸리는 파일 다운로드나 복사를 수행할 때 이런창을 띄워주면 기다리는데 유저의 거부감을 줄일 수 있습니다.</p>
-<p><img src="../images/screenshot_1616835329.png" alt="screenshot_1616835329.png" /></p>
+<p><img src="/images/posts/screenshot_1616835329.png" alt="screenshot_1616835329.png" /></p>
 <p>ProgressDialog는 다이얼로그가 표시되는 동안 유저가 다른 조작을 못하게 된다는 이유로 Android 8.0(API level 26)부터는 deprecated 되고 대신 ProgressBar를 사용하도록 권장하고 있습니다.</p>
 <p>&hellip;만, 쓰레드를 설명하는데 좋은 예제이기 때문에 여기서는 프로그레스 다이알로그를 구현하면서 쓰레드에 대해 이해해 보도록 하겠습니다</p>
 <h2 id="스레드란">스레드란</h2>
@@ -1784,7 +1784,7 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="스레드와-핸들러">스레드와 핸들러</h3>
-<p><img src="../images/android-thread-looper-handler.png" alt="스레드 구조" /></p>
+<p><img src="/images/posts/android-thread-looper-handler.png" alt="스레드 구조" /></p>
 <p>출처 : <a href="https://academy.realm.io/kr/posts/android-thread-looper-handler/">https://academy.realm.io/kr/posts/android-thread-looper-handler/</a></p>
 <p>한 프로세스 안에서 여러개의 스레드를 사용하게 되면 서로다른 스레드가 버튼이나 텍스트뷰 등의 UI 컴포넌트에 동시에 접근하는 문제가 생길 수 있습니다. 안드로이드에서는 이것을 막기 위해 처리흐름 중간에 Looper와 Handler를 끼워 넣었습니다.</p>
 <p>스레드는 수행해야 할 UI 작업이 발생하면 message 또는 runnable을 만들어내고 이걸 message queue에 담습니다. looper는 무한히 루프를 돌며 message queue속의 객체를 핸들러에 전달합니다. 핸들러는 메시지를 받으면 운영체제가 정해주는 타이밍에 따라 UI조작을 수행하게 되므로 UI요소에 대한 동시접근을 막을 수 있게 됩니다.</p>
