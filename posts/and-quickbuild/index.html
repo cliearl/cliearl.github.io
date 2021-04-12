@@ -1729,10 +1729,8 @@ if (!doNotTrack) {
 <p>예를들어 릴리즈시에는 코드의 암호화를 설정해야 하는데 디버그에서는 적용할 필요가 없으므로 설정을 구분해서 빌드를 할 수 있습니다.</p>
 <h2 id="multidex-사용하지-않음">multidex 사용하지 않음</h2>
 <p>자바 코드는 실행환경에 의존하지 않는 바이트코드로 컴파일 되어 자바 가상머신(JVM)이 실행되는 환경이라면 어디서나 동일하게 실행할 수 있습니다.<br />
-구글에서는 라이센스 문제를 피하기 위해 JVM 대신 Dalvik VM을 만들었고 이 DVM에서 돌리기 위해 자바 바이트코드를 DEX(Dalvik Executable)로 변환하여 사용하도록 했습니다.</p>
-<p>그런데 DVM을 사용하다보니 여러가지 문제가 있어서 새로 개발한 것이 ART VM입니다. 차이점을 간단하게 정리해 보면 다음과 같습니다.<br />
-<a href="https://source.android.com/devices/tech/dalvik">https://source.android.com/devices/tech/dalvik</a><br />
-<a href="https://www.geeksforgeeks.org/difference-between-dalvik-and-art-in-android/">https://www.geeksforgeeks.org/difference-between-dalvik-and-art-in-android/</a></p>
+구글에서는 라이센스 문제를 피하기 위해 JVM 대신 <a href="https://source.android.com/devices/tech/dalvik">Dalvik VM</a>을 만들었고 이 DVM에서 돌리기 위해 자바 바이트코드를 DEX(Dalvik Executable)로 변환하여 사용하도록 했습니다.</p>
+<p>그런데 DVM을 사용하다보니 여러가지 문제가 있어서 새로 개발한 것이 <a href="https://source.android.com/devices/tech/dalvik">ART VM</a>입니다. 차이점을 간단하게 정리해 보면 다음과 같습니다.</p>
 <h3 id="dalvik-vm">Dalvik VM</h3>
 <ul>
 <li>32비트만 지원.</li>
@@ -1744,7 +1742,7 @@ if (!doNotTrack) {
 <li>32, 64 비트 지원.</li>
 <li>AOT(Ahead On Time) 컴파일러 사용.</li>
 <li>설치시 모든 컴파일 작업을 수행해 놓으므로 설치파일이 크고 설치가 느리지만 실행중 자원소모량은 JIT보다 적어 배터리 효율이 높다.</li>
-<li>GC 효율이 향상됨.</li>
+<li><a href="https://developer.android.com/guide/practices/verifying-apps-art#GC_Migration">GC 효율이 향상됨.</a></li>
 <li>킷캣 KitKat 버전부터 지원이 시작되었으며 롤리팝 Lolipop 버전 이후는 AOT 컴파일러가 기본으로 적용됨</li>
 <li>누가 Nougat 버전 부터  JIT와 AOT를 모두 탑재하여 최초 설치시에는 JIT으로 컴파일 해 설치시간과 용량을 줄이고, 차후 기기를 사용하지 않을 때나 충전 중일 경우 컴파일을 조금씩 하여, 자주 사용되는 앱을 AOT 방식으로 전환하는 방식으로 바뀜.</li>
 </ul>
