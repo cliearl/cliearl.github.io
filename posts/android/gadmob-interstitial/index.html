@@ -1808,28 +1808,28 @@ if (!doNotTrack) {
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">private</span> <span class="k">var</span> <span class="py">mInterstitialAd</span><span class="p">:</span> <span class="n">InterstitialAd</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">var</span> <span class="py">mInterstitialAd</span><span class="p">:</span> <span class="n">InterstitialAd</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
 
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-        <span class="n">binding</span> <span class="p">=</span> <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
-        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+<span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+    <span class="n">binding</span> <span class="p">=</span> <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
+    <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
 
-        <span class="n">MobileAds</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="n">MobileAds</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
 
-        <span class="k">val</span> <span class="py">testDeviceIds</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;My device ID1&#34;</span><span class="p">,</span> <span class="s2">&#34;My device ID2&#34;</span><span class="p">)</span>
-        <span class="n">MobileAds</span><span class="p">.</span><span class="n">setRequestConfiguration</span><span class="p">(</span>
-            <span class="n">RequestConfiguration</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
-                <span class="p">.</span><span class="n">setTestDeviceIds</span><span class="p">(</span><span class="n">testDeviceIds</span><span class="p">)</span>
-                <span class="p">.</span><span class="n">build</span><span class="p">()</span>
-        <span class="p">)</span>
+    <span class="k">val</span> <span class="py">testDeviceIds</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;My device ID1&#34;</span><span class="p">,</span> <span class="s2">&#34;My device ID2&#34;</span><span class="p">)</span>
+    <span class="n">MobileAds</span><span class="p">.</span><span class="n">setRequestConfiguration</span><span class="p">(</span>
+        <span class="n">RequestConfiguration</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
+            <span class="p">.</span><span class="n">setTestDeviceIds</span><span class="p">(</span><span class="n">testDeviceIds</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+    <span class="p">)</span>
 
-        <span class="n">loadInterstitialAd</span><span class="p">()</span>
+    <span class="n">loadInterstitialAd</span><span class="p">()</span>
 
-        <span class="n">binding</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="n">showInterstitialad</span><span class="p">()</span>
-        <span class="p">}</span>
+    <span class="n">binding</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+        <span class="n">showInterstitialad</span><span class="p">()</span>
     <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>우선은 광고를 불러오는 부분을 작성하겠습니다.</p>
@@ -1860,27 +1860,27 @@ if (!doNotTrack) {
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">private</span> <span class="k">fun</span> <span class="nf">loadInterstitialAd</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">adRequest</span> <span class="p">=</span> <span class="n">AdRequest</span><span class="p">.</span><span class="n">Builder</span><span class="p">().</span><span class="n">build</span><span class="p">()</span>
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadInterstitialAd</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">adRequest</span> <span class="p">=</span> <span class="n">AdRequest</span><span class="p">.</span><span class="n">Builder</span><span class="p">().</span><span class="n">build</span><span class="p">()</span>
 
-        <span class="n">mInterstitialAd</span> <span class="p">=</span> <span class="n">InterstitialAd</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
-        <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">adUnitId</span> <span class="p">=</span> <span class="s2">&#34;ca-app-pub-3940256099942544/1033173712&#34;</span>
-        <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">loadAd</span><span class="p">(</span><span class="n">adRequest</span><span class="p">)</span>
-        <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">adListener</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">AdListener</span><span class="p">()</span> <span class="p">{</span>
-            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onAdLoaded</span><span class="p">()</span> <span class="p">{</span>
-                <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="s2">&#34;Ad loading succeed&#34;</span><span class="p">,</span>  <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-            <span class="p">}</span>
- 
-            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onAdFailedToLoad</span><span class="p">(</span><span class="n">p0</span><span class="p">:</span> <span class="n">LoadAdError</span><span class="p">?)</span> <span class="p">{</span>
-                <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="s2">&#34;Ad loading failed&#34;</span><span class="p">,</span>  <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-                <span class="n">mInterstitialAd</span> <span class="p">=</span> <span class="k">null</span>
-            <span class="p">}</span>
- 
-            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onAdClosed</span><span class="p">()</span> <span class="p">{</span>
-                <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">loadAd</span><span class="p">(</span><span class="n">adRequest</span><span class="p">)</span>
-            <span class="p">}</span>
+    <span class="n">mInterstitialAd</span> <span class="p">=</span> <span class="n">InterstitialAd</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">adUnitId</span> <span class="p">=</span> <span class="s2">&#34;ca-app-pub-3940256099942544/1033173712&#34;</span>
+    <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">loadAd</span><span class="p">(</span><span class="n">adRequest</span><span class="p">)</span>
+    <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">adListener</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">AdListener</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onAdLoaded</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="s2">&#34;Ad loading succeed&#34;</span><span class="p">,</span>  <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onAdFailedToLoad</span><span class="p">(</span><span class="n">p0</span><span class="p">:</span> <span class="n">LoadAdError</span><span class="p">?)</span> <span class="p">{</span>
+            <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="s2">&#34;Ad loading failed&#34;</span><span class="p">,</span>  <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+            <span class="n">mInterstitialAd</span> <span class="p">=</span> <span class="k">null</span>
+        <span class="p">}</span>
+
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onAdClosed</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">loadAd</span><span class="p">(</span><span class="n">adRequest</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>다음은 광고를 보여주는 부분입니다. 광고가 잘 불러와졌는지 확인하고 show()로 표시하면 됩니다.</p>
@@ -1894,12 +1894,12 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">private</span> <span class="k">fun</span> <span class="nf">showInterstitialad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">mInterstitialAd</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">mInterstitialAd</span><span class="o">!!</span><span class="p">.</span><span class="n">isLoaded</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">show</span><span class="p">()</span>
-            <span class="p">}</span>
-    <span class="p">}</span>
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showInterstitialad</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mInterstitialAd</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">mInterstitialAd</span><span class="o">!!</span><span class="p">.</span><span class="n">isLoaded</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">show</span><span class="p">()</span>
+        <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="google-admob-version-1970-이상에서의-구현">Google Admob Version 19.7.0 이상에서의 구현</h2>
@@ -2251,6 +2251,13 @@ if (!doNotTrack) {
       </a>
     
     <div class="grow"></div>
+    
+      <a href="https://cliearl.github.io/posts/android/gadmob-rewarded/" class="pagination-single__right">      
+        <div class="pagination-single__right-title">Google Admob으로 보상형 광고 표시하기 </div>
+        <div class="pagination-single__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z"/></svg>
+        </div>
+      </a>
     
   
 </nav>
