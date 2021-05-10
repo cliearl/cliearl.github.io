@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>json on Hugo Zzo Theme</title>
+    <link>https://cliearl.github.io/en/tags/json/</link>
+    <description>Recent content in json on Hugo Zzo Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Wed, 05 May 2021 23:05:14 +0900</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    
+        <atom:link href="https://cliearl.github.io/en/tags/json/index.xml" rel="self" type="application/rss+xml" />
+    
+
+      
+      <item>
+        <title>Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기</title>
+        <link>https://cliearl.github.io/en/posts/assets-json-recycler/</link>
+        <pubDate>Wed, 05 May 2021 23:05:14 +0900</pubDate>
+        
+        <atom:modified>Wed, 05 May 2021 23:05:14 +0900</atom:modified>
+        <guid>https://cliearl.github.io/en/posts/assets-json-recycler/</guid>
+        <description>&lt;p&gt;이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.&lt;/p&gt;</description>
+        <content:encoded>&lt;p&gt;이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;안드로이드의-읽기전용-파일-저장폴더&#34;&gt;안드로이드의 읽기전용 파일 저장폴더&lt;/h2&gt;
+&lt;p&gt;앱을 만들다보면 읽기전용 로우파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;assets folder&lt;/li&gt;
+&lt;li&gt;res/raw folder&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;각 폴더의 특징은 다음과 같습니다. 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;값&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;assets&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;res/raw&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;파일명&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;자유롭게 설정 가능&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;a-z, 0-9, _ 만 사용가능&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;서브폴더&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;사용가능&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;사용불가&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;컴파일타임&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;파일체크 없음&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;파일체크 있음&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;파일 리스팅&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;list()로 가능&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;불가능&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;XML에서 접근&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;불가능&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;가능&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;앱-만들어보기&#34;&gt;앱 만들어보기&lt;/h2&gt;
+&lt;p&gt;그럼 assets 폴더에서 json 파일을 불러와서 리사이클러뷰에 표시하는 간단한 앱을 만들어 보겠습니다. 리사이클러뷰는 기존에 &lt;a href=&#34;https://youtu.be/cN1UVAeP63c&#34;&gt;다른강의&lt;/a&gt;에서 작성했던 프로젝트를 수정해서 사용하겠습니다. Json 포맷을 다룰 것이므로 Gson 라이브러리를 추가합니다. Gson에 대한 구체적인 설명에 대해서는 역시 &lt;a href=&#34;https://youtu.be/wkOa_-NGhd4&#34;&gt;다른강의&lt;/a&gt;에서 설명한 내용을 참조하시기 바랍니다.&lt;/p&gt;
+&lt;h3 id=&#34;데이터-준비&#34;&gt;데이터 준비&lt;/h3&gt;
+&lt;p&gt;New &amp;gt; Folder &amp;gt; Asset Folder로 assets 폴더를 추가합니다.&lt;/p&gt;
+&lt;p&gt;데이터는 &lt;a href=&#34;https://data.gg.go.kr/&#34;&gt;경기데이터드림&lt;/a&gt;에서 제공하는 &amp;ldquo;코로나바이러스 감염증 선별진료소 운영 의료기관 현황&amp;rdquo; 데이터를 사용하겠습니다. sheet 탭에서 json을 클릭하여 데이터를 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 이쁘게 정렬해보겠습니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://jsonformatter.curiousconcept.com/&#34;&gt;Json Formatter&lt;/a&gt; 에서 파일을 정렬하고 data.json으로 assets 폴더에 저장합니다.&lt;/p&gt;
+&lt;h3 id=&#34;데이터클래스-준비&#34;&gt;데이터클래스 준비&lt;/h3&gt;
+&lt;p&gt;데이터 파일에는 데이터기준일자, 시군명,	의료기관명,	의료기관 구분,	의료기관 전화번호1,	의료기관 전화번호2,	소재지지번주소,	소재지도로명주소,	WGS84위도,	WGS84경도 등 여러가지 탭이 있습니다.&lt;/p&gt;
+&lt;p&gt;각 데이터는 배열 속의 데이터클래스로 관리하기 위해 데이터클래스를 만들어줍니다. 데이터클래스의 특징에 대해서는 &lt;a href=&#34;https://youtu.be/opPmxtI4rLQ&#34;&gt;다른 강의&lt;/a&gt;에서 설명한 내용을 참고하시기 바랍니다.&lt;/p&gt;
+&lt;p&gt;New &amp;gt; Kotlin data class File from JSON을 선택하여 위에서 만든 json 데이터를 넣어주면 자동으로 데이터클래스와 배열 클래스가 생성됩니다.&lt;/p&gt;
+&lt;p&gt;새로 만들어진 데이터클래스의 형식에 맞게 리사이클러뷰 어댑터와 xml의 내용을 수정해줍니다.&lt;/p&gt;
+&lt;h3 id=&#34;assets-폴더속-파일-불러오기&#34;&gt;assets 폴더속 파일 불러오기&lt;/h3&gt;
+&lt;p&gt;그리고 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 &lt;a href=&#34;https://developer.android.com/reference/android/content/res/AssetManager&#34;&gt;Asset Manager&lt;/a&gt; 인스턴스를 생성하고 bufferedReader()를 이용해 InputStream을 텍스트로 변환합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span class=&#34;k&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;fun&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;getJsonData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CoronaMed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;assetManager&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;resources&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assets&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CoronaMed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;null&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;inputStream&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;assetManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;reader&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inputStream&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bufferedReader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;gson&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Gson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fromJson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;reader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CoronaMed&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;java&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;printStackTrace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;나머지는 이렇게 얻어온 CoronaMed 객체를 리사이클러뷰 어댑터에 전달해주면 됩니다. 이렇게 해서 assets 폴더에서 json 파일을 불러오는 법에 대해 알아보았습니다.&lt;/p&gt;</content:encoded>
+        <dc:creator>냉동코더</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>assets</category>
+            
+          
+            
+              <category>json</category>
+            
+          
+            
+              <category>recyclerview</category>
+            
+          
+        
+        
+          
+            
+              <category>android</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>
