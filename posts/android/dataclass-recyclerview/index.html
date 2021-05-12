@@ -1839,6 +1839,18 @@ if (!doNotTrack) {
 </span><span class="c1"></span><span class="k">true</span>
 </code></pre></td></tr></table>
 </div>
+</div><h3 id="copy">copy()</h3>
+<p>.copy는 이미 존재하는 인스턴스의 파라미터만을 바꿔서 새로운 객체를 만들어주는 메소드입니다. 이때 복사는 얕은복사로 이루어집니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">person5</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
+<span class="k">val</span> <span class="py">person6</span> <span class="p">=</span> <span class="n">person5</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;Alice&#34;</span><span class="p">)</span>  <span class="c1">// Person(name=Alice, age=22, sex=Male)
+</span></code></pre></td></tr></table>
+</div>
 </div><h3 id="data-class">data class</h3>
 <p>그런데 그냥 프로퍼티만을 가지는 단순한 클래스의 경우 이런 것들을 다 정의해주는 행위가 번거로운 일이기 때문에, 코틀린에서는 data class라고 하는 클래스 형식을 하나 더 준비했습니다. data class를 사용하면 위에 언급한 메소드를 자동으로 정의하여 주기 때문에 다음과 같이 간단하게 클래스를 만들수 있게 됩니다.</p>
 <p>사용하는 법은 매우 간단한데요 class 앞에 data라는 접두어를 붙여주기만 하면 됩니다.</p>
@@ -2827,6 +2839,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <li><a href="#tostring">toString()</a></li>
         <li><a href="#equals">equals()</a></li>
         <li><a href="#hashcode">hashCode()</a></li>
+        <li><a href="#copy">copy()</a></li>
         <li><a href="#data-class">data class</a></li>
       </ul>
     </li>
