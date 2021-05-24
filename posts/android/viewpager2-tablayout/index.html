@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ProgressBar로 AsyncTask 이해하기 – Home</title>
+    <title>ViewPager2로 TabLayout 구현하기 – Home</title>
     
 
 
@@ -653,7 +653,7 @@
     
     var baseurl = JSON.parse("\"https://cliearl.github.io\"");
     
-    var permalink = JSON.parse("\"https://cliearl.github.io/posts/android/progressbar-asynctask/\"");
+    var permalink = JSON.parse("\"https://cliearl.github.io/posts/android/viewpager2-tablayout/\"");
     
     var langprefix = JSON.parse("\"\"");
     var searchResults = null;
@@ -1326,18 +1326,16 @@
 <meta name="description" content="냉동코더의 기술블로그" />
 
 
-<meta name="keywords" content="ProgressBar,AsyncTask,Thread">
-
-<meta name="created" content="2021-04-25T15:35:18&#43;0900">
-<meta name="modified" content="2021-04-25T15:35:18&#43;0900">
-<meta property="article:published_time" content="2021-04-25T15:35:18&#43;0900">
+<meta name="created" content="2021-05-02T22:44:04&#43;0900">
+<meta name="modified" content="2021-05-02T22:44:04&#43;0900">
+<meta property="article:published_time" content="2021-05-02T22:44:04&#43;0900">
 
 <meta name="author" content="냉동코더">
 
 
 <meta property="og:site_name" content="Home">
-<meta property="og:title" content="ProgressBar로 AsyncTask 이해하기">
-<meta property="og:url" content="https://cliearl.github.io/posts/android/progressbar-asynctask/">
+<meta property="og:title" content="ViewPager2로 TabLayout 구현하기">
+<meta property="og:url" content="https://cliearl.github.io/posts/android/viewpager2-tablayout/">
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
@@ -1350,7 +1348,7 @@
 
 <meta name="apple-mobile-web-app-status-bar-style" content="#fff">
 
-<link rel="canonical" href="https://cliearl.github.io/posts/android/progressbar-asynctask/">
+<link rel="canonical" href="https://cliearl.github.io/posts/android/viewpager2-tablayout/">
 
 <link rel="manifest" href="/manifest.json">
 
@@ -1376,12 +1374,11 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "headline": "ProgressBar로 AsyncTask 이해하기",
-    "datePublished": "2021-04-25T15:35:18+09:00",
-    "dateModified": "2021-04-25T15:35:18+09:00",
-    "url" : "https://cliearl.github.io/posts/android/progressbar-asynctask/",
-    "description": "\u003cp\u003e이번 포스팅에서는 ProgressBar와 AsyncTask의 사용방법에 대해 알아보도록 하겠습니다.\u003c/p\u003e",
-    "keywords": ["ProgressBar","AsyncTask","Thread"],
+    "headline": "ViewPager2로 TabLayout 구현하기",
+    "datePublished": "2021-05-02T22:44:04+09:00",
+    "dateModified": "2021-05-02T22:44:04+09:00",
+    "url" : "https://cliearl.github.io/posts/android/viewpager2-tablayout/",
+    "description": "이번 포스팅에서는 ViewPager2와 TabLayout을 이용하여 다음과 같은 디자인을 구현해 보도록 하겠습니다. 들어가기 ViewPager2를 사",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://cliearl.github.io"
@@ -1674,7 +1671,7 @@ if (!doNotTrack) {
   
   <li  class="is-active" >
     
-      <span>ProgressBar로 AsyncTask 이해하기</span>
+      <span>ViewPager2로 TabLayout 구현하기</span>
     
   </li>
   
@@ -1686,14 +1683,14 @@ if (!doNotTrack) {
   <div class="single ">
     <div class="single__nojs">자바스크립트를 활성화 해주세요</div>
     <script>document.querySelector('.single').classList.remove('hide'); document.querySelector('.single__nojs').classList.add('hide');</script>
-    <h2 class="single__title" data-ani="true">ProgressBar로 AsyncTask 이해하기</h2>
+    <h2 class="single__title" data-ani="true">ViewPager2로 TabLayout 구현하기</h2>
     <h3 class="single__subtitle"></h3>
     <div class="single__meta">
       
 <div class="single__infos">
-  <time class="single__info" title="작성일">📅&nbsp;2021년 04월 25일 </time>
+  <time class="single__info" title="작성일">📅&nbsp;2021년 05월 02일 </time>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="읽는 시간"> ☕&nbsp;6&nbsp;min read </span>
+  &nbsp;&middot;&nbsp; <span class="single__info" title="읽는 시간"> ☕&nbsp;3&nbsp;min read </span>
   
   <span class="single__info">
     
@@ -1703,30 +1700,68 @@ if (!doNotTrack) {
       
 <ul class="single__tags caption">
   
-  🏷️
-  
-
-  <li><a href="https://cliearl.github.io/tags/progressbar/" class="single__tag" title="ProgressBar">#ProgressBar</a></li>
-
-  <li><a href="https://cliearl.github.io/tags/asynctask/" class="single__tag" title="AsyncTask">#AsyncTask</a></li>
-
-  <li><a href="https://cliearl.github.io/tags/thread/" class="single__tag" title="Thread">#Thread</a></li>
 
 </ul>
 
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>이번 포스팅에서는 ProgressBar와 AsyncTask의 사용방법에 대해 알아보도록 하겠습니다.</p>
+      <p>이번 포스팅에서는 ViewPager2와 TabLayout을 이용하여 다음과 같은 디자인을 구현해 보도록 하겠습니다.</p>
 <h2 id="들어가기">들어가기</h2>
-<p><a href="https://developer.android.com/reference/android/widget/ProgressBar">ProgressBar</a>는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황을 보여주는 모듈입니다. 시간이 걸리는 처리가 필요할 때 표시해주면 기다리는 유저의 거부감을 줄일 수 있습니다.<br />
-이 기능은 기존에는 <a href="https://developer.android.com/reference/android/app/ProgressDialog">ProgressDialog</a>를 이용해서 구현했는데 다이얼로그가 표시될 때 유저의 조작을 제한한다는 문제가 있어 deprecated 되고 ProgressBar로 대체되는 추세입니다.</p>
-<p>메인 스레드의 관점에서 보면 ProgressBar는 처리에 긴 시간이 걸리기 때문에 메인 스레드와는 별개의 스레드에서 처리를 수행해야 할 필요가 있습니다. 별개의 스레드에서 처리를 수행하는데는 여러가지 방법이 있을 수 있는데 여기서는 <a href="https://youtu.be/fPiL4IsmXgc">AsyncTask</a> 클래스를 이용해서 ProgressBar를 구현해 보도록 하겠습니다.</p>
-<h2 id="asynctask란">AsyncTask란</h2>
-<p>스레드와 핸들러에 대한 구체적인 설명과 사용법은 제가 했던 <a href="https://cliearl.github.io/posts/and-progressdialog-thread/">다른 강의</a>를 참조하시면 좋을 것 같습니다.</p>
-<p>AsyncTask는 주로 짧은 시간동안 운용되는 스레드를 더 사용하기 편하도록 만든 헬퍼 클래스입니다. 실제 사용시에는 메모리 리크등 문제가 있었기에 Android 11(API level 30) 부터 deprecated 되었으나 그래도 아직은 현역이라 할 수 있습니다.</p>
-<h3 id="asynctask-구조">AsyncTask 구조</h3>
-<p>AsyncTask를 상속받는 클래스는 다음과 같이 구성합니다.</p>
+<p>ViewPager2를 사용하는 이유나 장점에 대해서는 <a href="https://youtu.be/3YE9bGaqVuk">다른 강의</a>에서 다루었으니 그 내용을 참조해 주시기 바랍니다.</p>
+<h2 id="프로젝트-작성">프로젝트 작성</h2>
+<h3 id="gradle-설정">gradle 설정</h3>
+<p>우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-gradle" data-lang="gradle"><span class="c1">// 뷰바인딩 사용준비
+</span><span class="c1"></span><span class="n">android</span> <span class="o">{</span>
+    <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
+<span class="o">}</span>
+
+<span class="c1">// 뷰페이저2 라이브러리 추가
+</span><span class="c1"></span><span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">implementation</span> <span class="s1">&#39;androidx.viewpager2:viewpager2:1.0.0&#39;</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="fragment의-화면-준비">Fragment의 화면 준비</h3>
+<p>다음은 new -&gt; fragment를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;TextView</span>
+    <span class="na">android:id=</span><span class="s">&#34;@+id/textview&#34;</span>
+    <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+    <span class="na">android:text=</span><span class="s">&#34;@string/hello_blank_fragment&#34;</span>
+    <span class="na">android:textAppearance=</span><span class="s">&#34;@style/TextAppearance.AppCompat.Large&#34;</span> <span class="nt">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="fragment-클래스-작성">Fragment 클래스 작성</h3>
+<p>기본 프래그먼트에 뷰 바인딩을 적용하고 텍스트를 표시하도록 변경합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1750,52 +1785,210 @@ if (!doNotTrack) {
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
+</span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyAsyncTask</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">&gt;()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPreExecute</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onPreExecute</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">p0</span><span class="p">:</span> <span class="n">String</span><span class="p">?):</span> <span class="n">Boolean</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">true</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onProgressUpdate</span><span class="p">(</span><span class="k">vararg</span> <span class="n">values</span><span class="p">:</span> <span class="n">Int</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onProgressUpdate</span><span class="p">(*</span><span class="n">values</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">Boolean</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-    <span class="p">}</span>
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">BlankFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">var</span> <span class="py">_binding</span><span class="p">:</span> <span class="n">FragmentBlankBinding</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_binding</span><span class="o">!!</span>
     
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCancelled</span><span class="p">()</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
+        <span class="n">inflater</span><span class="p">:</span> <span class="n">LayoutInflater</span><span class="p">,</span> <span class="n">container</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">?,</span>
+        <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?,</span>
+    <span class="p">):</span> <span class="n">View</span><span class="p">?</span> <span class="p">{</span>
+        <span class="c1">// Inflate the layout for this fragment
+</span><span class="c1"></span>        <span class="n">_binding</span> <span class="p">=</span> <span class="n">FragmentBlankBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">binding</span><span class="p">.</span><span class="n">root</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroyView</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onDestroyView</span><span class="p">()</span>
+        <span class="n">_binding</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">View</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="n">binding</span><span class="p">.</span><span class="n">textview</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">param1</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>AsyncTask&lt;A, B, C&gt; 안에는 세가지 데이터 타입을 정의하게 됩니다. 내용은 순서대로 다음과 같고, 이 때 값은 가변인자 형태이므로 배열 형태의 값도 사용할 수 있습니다. 또한 데이터를 전달할 필요가 없을 경우 Void로 정의를 생략할 수 있습니다.</p>
-<ul>
-<li>A : doInBackground가 메인스레드 execute()에서 전달받는 값</li>
-<li>B : doInBackground가 실행중일 때 onProgressUpdate()로 전달하는 값</li>
-<li>C : doInBackground가 종료되었을 때 onPostExecute()로 전달하는 값</li>
-</ul>
-<h3 id="asynctask의-동작">AsyncTask의 동작</h3>
-<p>AsyncTask의 동작은 다음과 같이 이루어지게 됩니다.<br />
-<img src="https://images.ctfassets.net/s72atsk5w5jo/1GAPdfN1W82SkQCgmss0Gu/91aaeb2fa1808dd1a7c03ba21552ae7b/android-thread-asynctask.png" alt="asynctask" /><br />
-<a href="https://academy.realm.io/kr/posts/android-thread-looper-handler/">출처 : https://academy.realm.io/kr/posts/android-thread-looper-handler/</a></p>
-<ol>
-<li>메인 스레드에서 AsyncTask의 인스턴스를 생성하고 execute() 로 실행.</li>
-<li>AsyncTask 스레드가 시작되기 직전에 onPreExcuted()가 실행됨. 스레드 실행전 필요한 컴포넌트들을 로딩하는데 사용.</li>
-<li>execute() 호출시 입력된 파라미터가 AsyncTask 스레드로 전달됨.</li>
-<li>doInBackground()에서 AsyncTask 작업을 수행.</li>
-<li>doInBackground()에서 publishProgress()를 호출하면 메인스레드에서 onProgressUpdate()가 호출됨.</li>
-<li>doInBackground()가 끝나면 메인스레드의 onPostExcuted()로 결과값 result를 리턴하면서 AsyncTask 스레드가 종료됨.</li>
-</ol>
-<h2 id="코드-작성">코드 작성</h2>
-<h3 id="화면-구성">화면 구성</h3>
-<p>진행상황을 표시하는 텍스트뷰와 ProgressBar를 추가하고, AsyncTask를 시작하는 다운로드 버튼과 취소버튼을 추가합니다.</p>
+</div><h3 id="viewpager2의-pageradapter-작성">ViewPager2의 PagerAdapter 작성</h3>
+<p>방금 작성한 프래그먼트에 텍스트를 전해주는 뷰페이저2 어댑터를 작성합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">NUM_PAGES</span> <span class="p">=</span> <span class="m">3</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">=</span> <span class="n">NUM_PAGES</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">createFragment</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Fragment</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+            <span class="m">0</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">BlankFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="s2">&#34;Page 1&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)}</span>
+            <span class="m">1</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">BlankFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="s2">&#34;Page 2&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)}</span>
+            <span class="k">else</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">BlankFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="s2">&#34;Page 3&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="activity_mainxml">activity_main.xml</h4>
+<p>메인 액티비티의 화면을 구성합니다. 화면 위쪽에 뷰페이저를 배치하고 나머지 공간에 AppBarLayout을 배치한 뒤 그 내부에 TabLayout을 배치합니다. 그리고 TabLayout의 속성을 사용해서 색을 지정합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span>
+    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;androidx.viewpager2.widget.ViewPager2</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/viewpager&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;0dp&#34;</span>
+        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
+        <span class="na">app:layout_constraintBottom_toTopOf=</span><span class="s">&#34;@+id/appBarLayout&#34;</span>
+        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;com.google.android.material.appbar.AppBarLayout</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/appBarLayout&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:theme=</span><span class="s">&#34;@style/Theme.AppCompat.Light.DarkActionBar&#34;</span>
+        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;com.google.android.material.tabs.TabLayout</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/tabs&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;60dp&#34;</span>
+            <span class="na">android:background=</span><span class="s">&#34;@color/white&#34;</span>
+            <span class="na">app:tabIndicatorColor=</span><span class="s">&#34;@color/design_default_color_primary&#34;</span>
+            <span class="na">app:tabRippleColor=</span><span class="s">&#34;@color/design_default_color_primary&#34;</span>
+            <span class="na">app:tabSelectedTextColor=</span><span class="s">&#34;@color/design_default_color_primary&#34;</span>
+            <span class="na">app:tabTextColor=</span><span class="s">&#34;@color/black&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/com.google.android.material.appbar.AppBarLayout&gt;</span>
+<span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mainactivity-설정">Mainactivity 설정</h3>
+<p>뷰페이저 어댑터 클래스의 인스턴스를 만들어 뷰페이저 어댑터 속성에 연결시킵니다. 그리고 TabLayoutMediator를 이용해서 탭레이아웃과 뷰페이저를 연결합니다. 각 탭의 타이틀과 아이콘은 블럭내부에서 지정할 수 있습니다. 탭의 이름은 Title 0 형식으로 지정하고 아이콘은 벡터 이미지를 추가한 뒤 setIcon에서 불러오도록 하였습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+        <span class="n">binding</span> <span class="p">=</span> <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
+        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+
+        <span class="n">binding</span><span class="p">.</span><span class="n">viewpager</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
+            <span class="n">adapter</span> <span class="p">=</span> <span class="n">MyPagerAdapter</span><span class="p">(</span><span class="n">context</span> <span class="k">as</span> <span class="n">FragmentActivity</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">TabLayoutMediator</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">tabs</span><span class="p">,</span> <span class="n">binding</span><span class="p">.</span><span class="n">viewpager</span><span class="p">)</span> <span class="p">{</span> <span class="n">tab</span><span class="p">,</span> <span class="n">position</span> <span class="o">-&gt;</span>
+            <span class="n">tab</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Title </span><span class="si">$position</span><span class="s2">&#34;</span>
+            <span class="k">when</span> <span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+                <span class="m">0</span> <span class="o">-&gt;</span> <span class="n">tab</span><span class="p">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">ic_baseline_format_list_bulleted_24</span><span class="p">)</span>
+                <span class="m">1</span> <span class="o">-&gt;</span> <span class="n">tab</span><span class="p">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">ic_baseline_map_24</span><span class="p">)</span>
+                <span class="m">2</span> <span class="o">-&gt;</span> <span class="n">tab</span><span class="p">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">ic_baseline_info_24</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}.</span><span class="n">attach</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="pagetransformer-설정">PageTransformer 설정</h3>
+<p>뷰페이저2는 페이지를 변경할때 여러가지 효과를 줄 수 있습니다. 구글에서 공개하는 <a href="https://developer.android.com/training/animation/screen-slide-2#zoom-out">ZoomOutPageTransformer</a>를 사용한다면 스크롤할때 페이지가 축소되면서 페이드아웃되고, 페이지가 중앙에 가까워지면 원래 크기로 다시 커지면서 페이드인 되는 효과를 낼 수 있습니다.</p>
+<p>그 외에도 여러가지 페이지 전환효과를 사용하고 싶다면 다음 <a href="https://medium.com/codex/33-viewpager2-transformers-for-your-android-uis-bbdab801eb2b">블로그</a>를 참고하세요.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1845,316 +2038,64 @@ if (!doNotTrack) {
 </span><span class="lnt">45
 </span><span class="lnt">46
 </span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
-    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:paddingStart=</span><span class="s">&#34;30dp&#34;</span>
-    <span class="na">android:paddingEnd=</span><span class="s">&#34;30dp&#34;</span>
-    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span> <span class="nt">&gt;</span>
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">MIN_SCALE</span> <span class="p">=</span> <span class="m">0.85f</span>
+<span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">MIN_ALPHA</span> <span class="p">=</span> <span class="m">0.5f</span>
 
-    <span class="nt">&lt;TextView</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/textView&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
-        <span class="na">android:text=</span><span class="s">&#34;Progress : 0&#34;</span>
-        <span class="na">android:textSize=</span><span class="s">&#34;20sp&#34;</span> <span class="nt">/&gt;</span>
+<span class="k">class</span> <span class="nc">ZoomOutPageTransformer</span> <span class="p">:</span> <span class="n">ViewPager2</span><span class="p">.</span><span class="n">PageTransformer</span> <span class="p">{</span>
 
-    <span class="nt">&lt;ProgressBar</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/progressBar&#34;</span>
-        <span class="na">style=</span><span class="s">&#34;?android:attr/progressBarStyleHorizontal&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
-        <span class="na">android:scaleY=</span><span class="s">&#34;1&#34;</span>
-        <span class="na">android:progressBackgroundTint=</span><span class="s">&#34;@color/design_default_color_primary_dark&#34;</span>
-        <span class="na">android:progressTint=</span><span class="s">&#34;@color/design_default_color_primary&#34;</span>
-        <span class="na">android:indeterminate=</span><span class="s">&#34;false&#34;</span>
-        <span class="na">android:progress=</span><span class="s">&#34;0&#34;</span>
-        <span class="na">android:max=</span><span class="s">&#34;100&#34;</span> <span class="nt">/&gt;</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">transformPage</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">View</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">view</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">pageWidth</span> <span class="p">=</span> <span class="n">width</span>
+            <span class="k">val</span> <span class="py">pageHeight</span> <span class="p">=</span> <span class="n">height</span>
 
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span> <span class="nt">&gt;</span>
+            <span class="k">when</span> <span class="p">{</span>
+                <span class="n">position</span> <span class="p">&lt;</span> <span class="p">-</span><span class="m">1</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="c1">// [-Infinity,-1)
+</span><span class="c1"></span>                    <span class="c1">// This page is way off-screen to the left.
+</span><span class="c1"></span>                    <span class="n">alpha</span> <span class="p">=</span> <span class="m">0f</span>
+                <span class="p">}</span>
+                <span class="n">position</span> <span class="o">&lt;=</span> <span class="m">1</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="c1">// [-1,1]
+</span><span class="c1"></span>                    <span class="c1">// Modify the default slide transition to shrink the page as well
+</span><span class="c1"></span>                    <span class="k">val</span> <span class="py">scaleFactor</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">MIN_SCALE</span><span class="p">,</span> <span class="m">1</span> <span class="p">-</span> <span class="n">abs</span><span class="p">(</span><span class="n">position</span><span class="p">))</span>
+                    <span class="k">val</span> <span class="py">vertMargin</span> <span class="p">=</span> <span class="n">pageHeight</span> <span class="p">*</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">scaleFactor</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span>
+                    <span class="k">val</span> <span class="py">horzMargin</span> <span class="p">=</span> <span class="n">pageWidth</span> <span class="p">*</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">scaleFactor</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span>
+                    <span class="n">translationX</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">position</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">horzMargin</span> <span class="p">-</span> <span class="n">vertMargin</span> <span class="p">/</span> <span class="m">2</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="n">horzMargin</span> <span class="p">+</span> <span class="n">vertMargin</span> <span class="p">/</span> <span class="m">2</span>
+                    <span class="p">}</span>
 
-        <span class="nt">&lt;Button</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/downloadButton&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
-            <span class="na">android:layout_marginEnd=</span><span class="s">&#34;20dp&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;다운로드&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;16sp&#34;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;Button</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/cancelButton&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;취소&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;16sp&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
+                    <span class="c1">// Scale the page down (between MIN_SCALE and 1)
+</span><span class="c1"></span>                    <span class="n">scaleX</span> <span class="p">=</span> <span class="n">scaleFactor</span>
+                    <span class="n">scaleY</span> <span class="p">=</span> <span class="n">scaleFactor</span>
 
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="downloadtask-클래스-준비">DownloadTask 클래스 준비</h3>
-<p>AsyncTask를 상속받는 DownloadTask 클래스를 작성합니다. 이 때 doInBackground()에서는 0.1초 마다 진행률을 max값에 대해10퍼센트씩 증가시킵니다. 키고 이 값을 publishProgress로 메인스레드에 전달하여 onProgressUpdate()로 UI를 변경할 수 있도록 합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DownloadTask</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span> <span class="p">{</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">count</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="n">size</span>
-
-        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">InterruptedException</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+                    <span class="c1">// Fade the page relative to its size.
+</span><span class="c1"></span>                    <span class="n">alpha</span> <span class="p">=</span> <span class="p">(</span><span class="n">MIN_ALPHA</span> <span class="p">+</span>
+                            <span class="p">(((</span><span class="n">scaleFactor</span> <span class="p">-</span> <span class="n">MIN_SCALE</span><span class="p">)</span> <span class="p">/</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">MIN_SCALE</span><span class="p">))</span> <span class="p">*</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">MIN_ALPHA</span><span class="p">)))</span>
+                <span class="p">}</span>
+                <span class="k">else</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="c1">// (1,+Infinity]
+</span><span class="c1"></span>                    <span class="c1">// This page is way off-screen to the right.
+</span><span class="c1"></span>                    <span class="n">alpha</span> <span class="p">=</span> <span class="m">0f</span>
+                <span class="p">}</span>
             <span class="p">}</span>
-            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">*</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">isCancelled</span><span class="p">)</span> <span class="k">break</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="s2">&#34;Download Completed&#34;</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onProgressUpdate</span><span class="p">(</span><span class="k">vararg</span> <span class="n">values</span><span class="p">:</span> <span class="n">Int</span><span class="p">?)</span> <span class="p">{</span>
-
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">String</span><span class="p">?)</span> <span class="p">{</span>
-
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="액티비티-처리">액티비티 처리</h3>
-<p>작성한 DownloadTask{}를 메인액티비티에서 사용하기 위한 코드를 작성해 줍니다. 다운로드 버튼을 클릭하면 AsyncTask 인스턴스를 만들어 실행하는데 excute()에서는 vararg 입력 확인을 위해 굳이 10개의 스트링으로 이루어진 값을 전달해 주었습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
-    <span class="k">private</span> <span class="k">var</span> <span class="py">downloadTask</span><span class="p">:</span> <span class="n">DownloadTask</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-        <span class="n">binding</span> <span class="p">=</span> <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
-        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
-
-        <span class="n">binding</span><span class="p">.</span><span class="n">downloadButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="n">downloadTask</span> <span class="p">=</span> <span class="n">DownloadTask</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
-            <span class="n">downloadTask</span><span class="o">?.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span> <span class="s2">&#34;4&#34;</span><span class="p">,</span> <span class="s2">&#34;5&#34;</span><span class="p">,</span> <span class="s2">&#34;6&#34;</span><span class="p">,</span> <span class="s2">&#34;7&#34;</span><span class="p">,</span> <span class="s2">&#34;8&#34;</span><span class="p">,</span> <span class="s2">&#34;9&#34;</span><span class="p">,</span> <span class="s2">&#34;10&#34;</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="작업-중-취소-처리">작업 중 취소 처리</h3>
-<p>doInBackground()에서 작업중인 스레드는 메인스레드에서 cancel()을 호출하여 취소할 수 있습니다. 이 경우 백그라운드 스레드 내부의 isCancelled가 true를 반환하게 되며 doInBackground()가 종료된 후, onPostExecute() 대신 onCancelled()가 호출됩니다.</p>
-<p>이때 스레드 실행중에 중단해도 상관없는 작업이라면 mayInterruptIfRunning 파라메터에 true를, 스레드를 끝까지 처리하고 종료해야 할 경우 false를 전달해줍니다.</p>
-<p>메인액티비티에서 취소버튼을 클릭하면 AsyncTask 작업을 취소합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// MainActivity
-</span><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="n">binding</span><span class="p">.</span><span class="n">cancelButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="n">downloadTask</span><span class="o">?.</span><span class="n">cancel</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
 
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPause</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onPause</span><span class="p">()</span>
-        <span class="n">downloadTask</span><span class="o">?.</span><span class="n">cancel</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-<span class="c1">// DownloadTask
-</span><span class="c1"></span><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : 0&#34;</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="m">0</span>
+<span class="c1">// MainActivity
+</span><span class="c1"></span><span class="n">binding</span><span class="p">.</span><span class="n">viewpager</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
+    <span class="n">setPageTransformer</span><span class="p">(</span><span class="n">ZoomOutPageTransformer</span><span class="p">())</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="메모리-누수-방어하기">메모리 누수 방어하기</h2>
-<h3 id="asynctask의-특징">AsyncTask의 특징</h3>
-<p>자바에서는 객체간의 관계를 Strong reference, Soft reference, Weak reference, Phantom reference 등으로 구분하는데 메모리 확보를 위해 가비지 컬렉터가 작동하면 강한참조는 무시되고 약한참조를 가진 객체만 삭제되게 됩니다.</p>
-<p>여기서 만들어진 AsyncTask 객체가 액티비티를 참조하면 강한 참조를 가지게 됩니다. 그러면 가비지콜렉터가 인스턴스를 제거하지 않게 되어 메모리 누수가 발생하게 되죠.</p>
-<p>또한 AsyncTask는 하나의 객체만 생성할 수 있으며 액티비티가 종료되어도 스레드 작업이 끝나지 않았을 경우 종료되지 않는다는 특징이 있습니다.</p>
-<p>그런데 이런 특징때문에 액티비티가 종료되고 재시작되면 스레드 객체가 액티비티 참조를 잃어버리게 되서 액티비티에 영향을 줄 수 없는 스레드만 좀비처럼 살아남아버리는 문제가 발생하게 됩니다.</p>
-<h3 id="weakreference화-하기">Weakreference화 하기</h3>
-<p>이러한 문제를 방지하기 위해 WeakReference를 이용해서 AsyncTask클래스가 액티비티에 대해 약한참조를 가지도록 합니다. 그러면 액티비티가 종료되었을 때 가비지콜렉터가 AsyncTask 인스턴스를 메모리에서 해제할 수 있게 됩니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DownloadTask</span><span class="p">(</span><span class="n">activity</span><span class="p">:</span> <span class="n">MainActivity</span><span class="p">)</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">weakReference</span><span class="p">:</span> <span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">MainActivity</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">WeakReference</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">count</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="n">size</span>
-
-        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">InterruptedException</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-            <span class="p">}</span>
-            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">*</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">isCancelled</span><span class="p">)</span> <span class="k">break</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="s2">&#34;Download Completed&#34;</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onProgressUpdate</span><span class="p">(</span><span class="k">vararg</span> <span class="n">values</span><span class="p">:</span> <span class="n">Int</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">weakReference</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
-
-        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : </span><span class="si">${values[0]}</span><span class="s2">&#34;</span>
-        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="n">values</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">!!</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">String</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">weakReference</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
-
-        <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">weakReference</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
-
-        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : 0&#34;</span>
-        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="m">0</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>이렇게 해서 AsyncTask를 사용하는 법에 대해 알아보았습니다.</p>
+</div><p>이렇게 해서 ViewPager2와 TabLayout을 조합한 디자인을 구축하는 법에 대해 알아보았습니다.</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/mqVcJvtW9TQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+  <iframe src="https://www.youtube.com/embed/3o98y7h9dfE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
+
+
     </article>
     
     
@@ -2353,13 +2294,13 @@ if (!doNotTrack) {
     
     
       
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcliearl.github.io%2fposts%2fandroid%2fprogressbar-asynctask%2f" title="Facebook" aria-label="Facebook Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcliearl.github.io%2fposts%2fandroid%2fviewpager2-tablayout%2f" title="Facebook" aria-label="Facebook Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="facebook" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m15.997 3.985h2.191v-3.816c-.378-.052-1.678-.169-3.192-.169-3.159 0-5.323 1.987-5.323 5.639v3.361h-3.486v4.266h3.486v10.734h4.274v-10.733h3.345l.531-4.266h-3.877v-2.939c.001-1.233.333-2.077 2.051-2.077z"/></svg>
         </a>
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=ProgressBar%eb%a1%9c%20AsyncTask%20%ec%9d%b4%ed%95%b4%ed%95%98%ea%b8%b0&url=https%3a%2f%2fcliearl.github.io%2fposts%2fandroid%2fprogressbar-asynctask%2f&hashtags=ProgressBar%2cAsyncTask%2cThread&via=" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=ViewPager2%eb%a1%9c%20TabLayout%20%ea%b5%ac%ed%98%84%ed%95%98%ea%b8%b0&url=https%3a%2f%2fcliearl.github.io%2fposts%2fandroid%2fviewpager2-tablayout%2f&via=" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       
@@ -2374,41 +2315,19 @@ if (!doNotTrack) {
     <section class="related">
     
     
-    <h1 class="related__title">
-      <hr class="hr-dots"/>
-      <div>
-        관련글
-      </div>
-      <hr class="hr-dots"/>
-    </h1>
-    <ul class="related-ul">
-        
-        <li>
-          <a href="/posts/android/progressdialog-thread/" class="related__link">ProgressDialog로 Thread와 Handler 이해하기</a>
-        </li>
-        
-    </ul>
-    
   </section>
     <div class="grow"></div>
 <nav class="pagination-single">
   
     
-      <a href="https://cliearl.github.io/posts/android/gadmob-rewarded/" class="pagination-single__left">
+      <a href="https://cliearl.github.io/posts/android/splashscreen/" class="pagination-single__left">
         <div class="pagination-single__icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42-.39-.39-1.02-.39-1.41 0l-6.59 6.59c-.39.39-.39 1.02 0 1.41l6.59 6.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>
         </div>
-        <div class="pagination-single__left-title">Google Admob으로 보상형 광고 표시하기 </div>      
+        <div class="pagination-single__left-title">스플래쉬 스크린 설정하기</div>      
       </a>
     
     <div class="grow"></div>
-    
-      <a href="https://cliearl.github.io/posts/android/appicon/" class="pagination-single__right">      
-        <div class="pagination-single__right-title">App Icon 설정하기</div>
-        <div class="pagination-single__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z"/></svg>
-        </div>
-      </a>
     
   
 </nav>
@@ -2821,24 +2740,18 @@ document.addEventListener('DOMContentLoaded', function () {
     <nav id="TableOfContents">
   <ul>
     <li><a href="#들어가기">들어가기</a></li>
-    <li><a href="#asynctask란">AsyncTask란</a>
+    <li><a href="#프로젝트-작성">프로젝트 작성</a>
       <ul>
-        <li><a href="#asynctask-구조">AsyncTask 구조</a></li>
-        <li><a href="#asynctask의-동작">AsyncTask의 동작</a></li>
-      </ul>
-    </li>
-    <li><a href="#코드-작성">코드 작성</a>
-      <ul>
-        <li><a href="#화면-구성">화면 구성</a></li>
-        <li><a href="#downloadtask-클래스-준비">DownloadTask 클래스 준비</a></li>
-        <li><a href="#액티비티-처리">액티비티 처리</a></li>
-        <li><a href="#작업-중-취소-처리">작업 중 취소 처리</a></li>
-      </ul>
-    </li>
-    <li><a href="#메모리-누수-방어하기">메모리 누수 방어하기</a>
-      <ul>
-        <li><a href="#asynctask의-특징">AsyncTask의 특징</a></li>
-        <li><a href="#weakreference화-하기">Weakreference화 하기</a></li>
+        <li><a href="#gradle-설정">gradle 설정</a></li>
+        <li><a href="#fragment의-화면-준비">Fragment의 화면 준비</a></li>
+        <li><a href="#fragment-클래스-작성">Fragment 클래스 작성</a></li>
+        <li><a href="#viewpager2의-pageradapter-작성">ViewPager2의 PagerAdapter 작성</a>
+          <ul>
+            <li><a href="#activity_mainxml">activity_main.xml</a></li>
+          </ul>
+        </li>
+        <li><a href="#mainactivity-설정">Mainactivity 설정</a></li>
+        <li><a href="#pagetransformer-설정">PageTransformer 설정</a></li>
       </ul>
     </li>
   </ul>

@@ -1913,7 +1913,238 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>나머지는 이렇게 얻어온 CoronaMed 객체를 리사이클러뷰 어댑터에 전달해주면 됩니다. 이렇게 해서 assets 폴더에서 json 파일을 불러오는 법에 대해 알아보았습니다.</p>
+</div><h3 id="리사이클러뷰-구축하기">리사이클러뷰 구축하기</h3>
+<p>activity_main.xml에 recyclerview를 추가합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;androidx.recyclerview.widget.RecyclerView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/recycler_view&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:scrollbars=</span><span class="s">&#34;vertical&#34;</span>
+        <span class="na">tools:listitem=</span><span class="s">&#34;@layout/list_item&#34;</span>
+        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>list_item.xml 파일을 만들어서 뷰를 구성합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;LinearLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span> <span class="nt">&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/tv_name&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:paddingStart=</span><span class="s">&#34;24dp&#34;</span>
+        <span class="na">android:paddingEnd=</span><span class="s">&#34;16dp&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;Name&#34;</span>
+        <span class="na">android:textSize=</span><span class="s">&#34;20sp&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/tv_type&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:paddingStart=</span><span class="s">&#34;32dp&#34;</span>
+        <span class="na">android:paddingEnd=</span><span class="s">&#34;16dp&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;type&#34;</span>
+        <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/tv_phonenum&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:paddingStart=</span><span class="s">&#34;32dp&#34;</span>
+        <span class="na">android:paddingEnd=</span><span class="s">&#34;16dp&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;phonenum&#34;</span>
+        <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/tv_address&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:paddingStart=</span><span class="s">&#34;32dp&#34;</span>
+        <span class="na">android:paddingEnd=</span><span class="s">&#34;16dp&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;address&#34;</span>
+        <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/LinearLayout&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>그리고 마지막으로 리사이클러뷰 어댑터를 작성합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyRecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataset</span><span class="p">:</span> <span class="n">CoronaMed</span><span class="p">):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">MyRecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">ViewHolder</span> <span class="p">{</span>
+        <span class="k">val</span> <span class="py">binding</span> <span class="p">=</span> <span class="n">ListItemBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span> <span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBindViewHolder</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span> <span class="n">ViewHolder</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">holder</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="p">.</span><span class="n">size</span>
+    <span class="p">}</span>
+
+
+    <span class="k">class</span> <span class="nc">ViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ListItemBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span> <span class="n">CoronaMedItem</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">binding</span><span class="p">.</span><span class="n">tvName</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">.</span><span class="n">mEDINSTNM</span>
+            <span class="n">binding</span><span class="p">.</span><span class="n">tvType</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">.</span><span class="n">dISTRCTDIVDTLS</span>
+            <span class="n">binding</span><span class="p">.</span><span class="n">tvPhonenum</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">.</span><span class="n">eMGCCENTERTELNO</span>
+            <span class="n">binding</span><span class="p">.</span><span class="n">tvAddress</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">.</span><span class="n">rEFINEROADNMADDR</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>나머지는 이렇게 얻어온 CoronaMed 객체를 리사이클러뷰 어댑터에 전달해주면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+    <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+
+    <span class="k">val</span> <span class="py">testdata</span> <span class="p">=</span> <span class="n">getJsonData</span><span class="p">(</span><span class="s2">&#34;data.json&#34;</span><span class="p">)</span>
+
+    <span class="n">binding</span><span class="p">.</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
+        <span class="n">layoutManager</span> <span class="p">=</span> <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+        <span class="n">adapter</span> <span class="p">=</span> <span class="n">MyRecyclerViewAdapter</span><span class="p">(</span><span class="n">testdata</span><span class="o">!!</span><span class="p">)</span>
+        <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 assets 폴더에서 json 파일을 불러오는 법에 대해 알아보았습니다.</p>
     </article>
     
     
@@ -2137,13 +2368,6 @@ if (!doNotTrack) {
     <div class="grow"></div>
 <nav class="pagination-single">
   
-    
-      <a href="https://cliearl.github.io/en/posts/viewpager2-tablayout/" class="pagination-single__left">
-        <div class="pagination-single__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42-.39-.39-1.02-.39-1.41 0l-6.59 6.59c-.39.39-.39 1.02 0 1.41l6.59 6.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>
-        </div>
-        <div class="pagination-single__left-title">ViewPager2로 TabLayout 구현하기</div>      
-      </a>
     
     <div class="grow"></div>
     
@@ -2570,6 +2794,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <li><a href="#데이터-준비">데이터 준비</a></li>
         <li><a href="#데이터클래스-준비">데이터클래스 준비</a></li>
         <li><a href="#assets-폴더속-파일-불러오기">assets 폴더속 파일 불러오기</a></li>
+        <li><a href="#리사이클러뷰-구축하기">리사이클러뷰 구축하기</a></li>
       </ul>
     </li>
   </ul>
