@@ -1800,7 +1800,7 @@ if (!doNotTrack) {
 <div class="single__infos">
   <time class="single__info" title="Written At">📅&nbsp;May 13, 2021 </time>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;6&nbsp;min read </span>
+  &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;7&nbsp;min read </span>
   
   <span class="single__info">
     
@@ -1813,7 +1813,7 @@ if (!doNotTrack) {
   🏷️
   
 
-  <li><a href="https://cliearl.github.io/en/tags/recyclerview/" class="single__tag" title="recyclerview">#recyclerview</a></li>
+  <li><a href="https://cliearl.github.io/en/tags/recyclerview/" class="single__tag" title="RecyclerView">#RecyclerView</a></li>
 
   <li><a href="https://cliearl.github.io/en/tags/listadapter/" class="single__tag" title="ListAdapter">#ListAdapter</a></li>
 
@@ -1823,21 +1823,29 @@ if (!doNotTrack) {
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
       <p>이번 포스팅에서는 RecyclerView에 ListAdapter를 적용하는 법에 대해 알아보도록 하겠습니다.</p>
-<h2 id="이론">이론</h2>
-<p>리사이클러뷰의 데이터가 변하면 리사이클러뷰 어댑터가 제공하는 notifyItem 메소드를 사용해서 뷰홀더 내용을 갱신할 수 있습니다. 그런데 이렇게 notify를 일일이 해 주는것은 귀찮기도 하고 사용하기에 따라서는 갱신이 필요없는 뷰홀더를 갱신하는 일이 생기기도 한다.</p>
-<h3 id="diffutil">DiffUtil</h3>
-<p><a href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil">DiffUtil</a>은 두 리스트의 차이를 계산하는 클래스입니다.</p>
-<p>Eugene W. Myers의 difference 알고리즘을 이용해서 O(N + D^2)시간 안에 리스트의 비교를 수행하는데 넥서스 5X에서 테스트를 수행한 결과는 다음과 같았다고 합니다.</p>
-<pre><code>    100 items and 10 modifications: avg: 0.39 ms, median: 0.35 ms
-    100 items and 100 modifications: 3.82 ms, median: 3.75 ms
-    100 items and 100 modifications without moves: 2.09 ms, median: 2.06 ms
-    1000 items and 50 modifications: avg: 4.67 ms, median: 4.59 ms
-    1000 items and 50 modifications without moves: avg: 3.59 ms, median: 3.50 ms
-    1000 items and 200 modifications: 27.07 ms, median: 26.92 ms
-    1000 items and 200 modifications without moves: 13.54 ms, median: 13.36 ms 
-</code></pre><p>DiffUtil을 사용하기 위해서는 DiffUtil.Callback()을 상속받아 areItemsTheSame()과 areContentsTheSame()을 구현하면 되는데, 전자는 두 아이템이 동일한 아이템인지 체크하고 만약 동일하면 후자의 메소드로 내용물까지 동일한지 확인하게 됩니다.</p>
-<h3 id="asynclistdiffer">AsyncListDiffer</h3>
-<p>DiffUtil은 아이템 개수가 많을 경우 비교연산시간이 길어질 수 있기 때문에 백그라운드 스레드에서 처리되어야 합니다. <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer">AsyncListDiffer</a>는 DiffUtil을 편하게 쓰도록 만들어진 클래스로, 자체적으로 스레드 처리를 해 줍니다. 코드를 사용하기 위해서는 우선 어댑터 내부에 DiffUtil 콜백을 전달해 준 AsyncListDiffer 객체를 만들어 줍니다. 그리고 currentList로 데이터를 참조하고 submitList()로 리스트 데이터를 갱신하면 됩니다.</p>
+<h2 id="들어가기">들어가기</h2>
+<p>리사이클러뷰의 데이터가 변하면 리사이클러뷰 어댑터가 제공하는 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter#notifyItemChanged(int)">notifyItem 메소드</a>를 사용해서 뷰홀더 내용을 갱신할 수 있습니다.</p>
+<pre><code>notifyItemChanged(int)
+notifyItemInserted(int)
+notifyItemRemoved(int)
+notifyItemRangeChanged(int, int)
+notifyItemRangeInserted(int, int)
+notifyItemRangeRemoved(int, int)
+</code></pre><p>그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 뷰홀더를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.</p>
+<h2 id="diffutil">DiffUtil</h2>
+<p><a href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil">DiffUtil</a>은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 리사이클러뷰에 반영할 수 있습니다.</p>
+<p>DiffUtil은 Eugene W. Myers의 difference 알고리즘을 이용해서 O(N + D^2)시간 안에 리스트의 비교를 수행하는데 넥서스 5X에서 테스트를 수행한 결과는 다음과 같았다고 합니다.</p>
+<pre><code>100 items and 10 modifications: avg: 0.39 ms, median: 0.35 ms
+100 items and 100 modifications: 3.82 ms, median: 3.75 ms
+100 items and 100 modifications without moves: 2.09 ms, median: 2.06 ms
+1000 items and 50 modifications: avg: 4.67 ms, median: 4.59 ms
+1000 items and 50 modifications without moves: avg: 3.59 ms, median: 3.50 ms
+1000 items and 200 modifications: 27.07 ms, median: 26.92 ms
+1000 items and 200 modifications without moves: 13.54 ms, median: 13.36 ms 
+</code></pre><p>DiffUtil을 사용하기 위해서는 DiffUtil.Callback()을 상속받아 areItemsTheSame()과 areContentsTheSame()을 구현하면 되는데, 전자는 두 아이템이 동일한 아이템인지 체크하고 결과가 만약 동일하다면 후자의 메소드로 아이템의 내용물까지 동일한지 확인하게 됩니다.</p>
+<h2 id="asynclistdiffer">AsyncListDiffer</h2>
+<p>DiffUtil은 아이템 개수가 많을 경우 비교연산시간에 필요한 시간이 길어질 수 있기 때문에 백그라운드 스레드에서 처리되어야 합니다. <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer">AsyncListDiffer</a>는 DiffUtil을 편하게 쓰기 위해서 만들어진 클래스로, DiffUtil에 대해 자체적으로 스레드 처리를 해 줍니다.</p>
+<p>코드를 사용하기 위해서는 우선 어댑터 내부로 DiffUtil 콜백을 전달받은 AsyncListDiffer 객체를 만들어 줍니다. 그리고 currentList로 데이터를 참조하고 submitList()로 리스트 데이터를 갱신하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1910,11 +1918,11 @@ if (!doNotTrack) {
  <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="listadapter">ListAdapter</h3>
+</div><h2 id="listadapter">ListAdapter</h2>
 <p><a href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter">ListAdapter</a>는 AsyncListDiffer를 더 쓰기 편하도록 랩핑한 클래스로 리사이클러뷰 어댑터를 만들때 ListAdapter를 상속하도록 하면 됩니다. 초기화할때 DiffUtil 콜백 객체를 받도록 하면 나머지는 AsyncListDiffer와 같이 currentList로 현재 데이터를 불러올 수 있고, submitList로 데이터를 갱신할 수 있습니다.</p>
-<p>다시말해 ListAdapter로 리사이클러뷰 어댑터를 구현하면 데이터를 어떻게 바뀌든간에 submitList로 전체 리스트를 넘겨주기만 하면 어댑터가 알아서 백그라운드 스레드를 사용해 리스트 차이를 계산하여 화면을 갱신시켜주게 됩니다.</p>
+<p>다시말해 리사이클러뷰 어댑터를 ListAdapter로 구현하면 데이터가 어떻게 바뀌든간에 submitList로 전체 리스트를 넘겨주기만 하면 어댑터가 알아서 백그라운드 스레드를 사용해 리스트 차이를 계산하여 화면을 갱신시켜주게 됩니다.</p>
 <h2 id="앱-작성">앱 작성</h2>
-<p>기존에 다른 강의에서 작성했던 프로젝트를 고치는 형태로 프로젝트를 만들어 보겠습니다.</p>
+<p>기존에 <a href="https://youtu.be/opPmxtI4rLQ">다른 강의</a>에서 작성했던 프로젝트를 고치는 형태로 프로젝트를 만들어 보겠습니다.</p>
 <h3 id="monsterkt">Monster.kt</h3>
 <p>우선 리사이클러뷰에 표시할 데이터를 데이터클래스형태로 준비합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -2090,7 +2098,7 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="myviewholderkt">MyViewHolder.kt</h3>
-<p>리사이클러뷰의 뷰홀더 클래스를 만들어줍니다. 뷰바인딩을 사용하도록 세팅하고 나중에 사용하도록 setAlpha() 함수를 만들어줍니다.</p>
+<p>리사이클러뷰의 뷰홀더 클래스를 만들어줍니다. 뷰바인딩을 사용하도록 세팅하고 나중에 투명도를 바꾸는데 사용하도록 setAlpha() 함수를 만들어줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -2150,7 +2158,7 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="mydiffcallbackkt">MyDiffCallback.kt</h3>
-<p>Monster 클래스가 데이터 클래스이므로 areItemsTheSame()은 자동으로 정의되는 hashCode()로 비교하도록 하였습니다. equals()도 자동으로 정의되므로 areContentsTheSame() 메소드는 equals를 이용해 구현합니다.</p>
+<p>Monster 클래스가 데이터 클래스이므로 areItemsTheSame()은 자동으로 정의되는 hashCode()로 비교하도록 하였습니다. 데이터클래스의 정의에 따라 동일한 두 객체의 hashCode()는 동일한 값을 갖게 됩니다. 또한 equals()도 자동으로 정의되므로 areContentsTheSame() 메소드는 equals를 이용해 구현합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -2176,8 +2184,8 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="mylistadapterkt">MyListAdapter.kt</h3>
-<p>ListAdapter를 상속받는 리사이클러뷰 어댑터를 작성합니다. onCreateViewHolder에서 뷰바인딩을 사용하도록 설정합니다. 데이터의 개수는 ListAdapter가 관리하므로 getItemCount()는 오버라이드하지 않아도 됩니다.</p>
-<p>그리고 아이템을 이동 및 지우기 위해 moveItem(), removeItem() 메소드를 작성해줍니다. ListAdapter에서는 데이터를 직접 조작할 수 없고 비교만 할수 있기 때문에 새로운 데이터셋을 만들어 submitList()를 수행하는 방법으로 데이터를 갱신합니다.</p>
+<p>ListAdapter를 상속받는 리사이클러뷰 어댑터를 작성합니다. onCreateViewHolder에서 뷰바인딩을 사용하도록 설정합니다. 데이터의 개수는 ListAdapter가 관리하므로 기존의 리사이클러뷰 어댑터에서 정의했던 getItemCount()는 오버라이드하지 않아도 됩니다.</p>
+<p>그리고 아이템을 이동했을때 실행할 moveItem(), 지울때 실행할 removeItem() 메소드를 작성해줍니다. 이 때 ListAdapter에서는 데이터를 직접 조작할 수 없고 비교만 할수 있기 때문에 변형된 데이터셋은 새로운 객체로 만들어 기존의 데이터셋과 비교도록 submitList()를 수행하게 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -2213,6 +2221,7 @@ if (!doNotTrack) {
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
+</span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyListAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">,</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;(</span><span class="n">MyDiffCallback</span><span class="p">())</span> <span class="p">{</span>
@@ -2237,8 +2246,9 @@ if (!doNotTrack) {
 
     <span class="k">fun</span> <span class="nf">moveItem</span><span class="p">(</span><span class="n">fromPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">toPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">val</span> <span class="py">newList</span> <span class="p">=</span> <span class="n">currentList</span><span class="p">.</span><span class="n">toMutableList</span><span class="p">()</span>
-        <span class="k">val</span> <span class="py">item</span> <span class="p">=</span> <span class="n">newList</span><span class="p">.</span><span class="n">removeAt</span><span class="p">(</span><span class="n">fromPosition</span><span class="p">)</span>
-        <span class="n">newList</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">toPosition</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="c1">// val item = newList.removeAt(fromPosition)
+</span><span class="c1"></span>        <span class="c1">// newList.add(toPosition, item)
+</span><span class="c1"></span>        <span class="n">Collections</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">newList</span><span class="p">,</span> <span class="n">fromPosition</span><span class="p">,</span> <span class="n">toPosition</span><span class="p">)</span>
         <span class="n">submitList</span><span class="p">(</span><span class="n">newList</span><span class="p">)</span>
     <span class="p">}</span>
 
@@ -2251,8 +2261,8 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="myitemtouchhelpercallbackkt">MyItemTouchHelperCallback.kt</h3>
-<p>기존에 MainActivity에서 수행했던 ItemTouchHelper.SimpleCallback은 코드의 가독성을 위해 개별 클래스로 분리시킵니다.</p>
-<p>이때 홀딩중인 뷰홀더의 투명도를 변화시켜 더 인지하기 쉽게 만들겠습니다. 그를 위해 onSelectedChanged()에서 투명도를 50%로 낮추었다가 clearView()애서 다시 100%로 되돌리도록 하였습니다.</p>
+<p>기존 프로젝트에서 터치 콜백을 받기 위해 MainActivity에서 사용했던 ItemTouchHelper.SimpleCallback 클래스는 코드의 가독성을 위해 개별 클래스로 분리시키겠습니다.</p>
+<p>그리고 추가로 홀딩중인 뷰홀더의 투명도를 변화시켜 더 인지하기 쉽게 만들겠습니다. 그럴려면 onSelectedChanged()에서 투명도를 50%로 낮추었다가 clearView()애서 다시 100%로 되돌리도록 하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -2340,7 +2350,7 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="activity_mainxml">activity_main.xml</h3>
-<p>리사이클러뷰와 플로팅버튼을 배치해줍니다.</p>
+<p>리사이클러뷰와 플로팅버튼을 배치해줍니다. 기존의 터치조작에 더해 DiffUtil의 테스트를 위해 플로팅버튼을 누르면 데이터가 랜덤하게 뒤섞이는 기능이 수행되도록 하겠습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -2406,7 +2416,7 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="mainactivitykt">MainActivity.kt</h3>
-<p>데이터셋을 초기화한뒤 어댑터를 만들어 리사이클러뷰와 연동시킵니다. 플로팅버튼을 누르면 데이터가 랜덤하게 뒤섞이도록 합니다. 그리고 터치헬퍼를 달아 스와이프와 드래그를 했을때 데이터가 잘 갱신되는지 확인합니다.</p>
+<p>데이터셋에 초기값을 넣어주고, 어댑터 인스턴스를 생성하여 리사이클러뷰와 연동시킵니다. 그리고 터치헬퍼를 달아 스와이프와 드래그를 했을때 데이터가 잘 갱신되는지 확인합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -2447,14 +2457,16 @@ if (!doNotTrack) {
 </span><span class="lnt">36
 </span><span class="lnt">37
 </span><span class="lnt">38
-</span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
         <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
     <span class="p">}</span>
-    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">adapter</span><span class="p">:</span> <span class="n">MyListAdapter</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">myListAdapter</span><span class="p">:</span> <span class="n">MyListAdapter</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+        <span class="n">MyListAdapter</span><span class="p">()</span>
+    <span class="p">}</span>
+
     <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;().</span><span class="n">apply</span> <span class="p">{</span>
         <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;타일런트&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Zombie</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">50</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
         <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;조커&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">23</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">200</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
@@ -2463,26 +2475,22 @@ if (!doNotTrack) {
         <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;사우론&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="m">200</span><span class="p">,</span> <span class="m">1000</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
         <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;리바이어던&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span> <span class="m">250</span><span class="p">,</span> <span class="m">10000</span><span class="p">),</span> <span class="k">true</span><span class="p">))</span>
     <span class="p">}</span>
-    
+
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
         <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
         <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
 
-        <span class="n">adapter</span> <span class="p">=</span> <span class="n">MyListAdapter</span><span class="p">()</span>
-        <span class="n">adapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
+        <span class="n">myListAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
 
-        <span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">.</span><span class="n">layoutManager</span> <span class="p">=</span>
-            <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
-        <span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">.</span><span class="n">adapter</span> <span class="p">=</span> <span class="n">adapter</span>
-        <span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">.</span><span class="n">addItemDecoration</span><span class="p">(</span>
-            <span class="n">DividerItemDecoration</span><span class="p">(</span>
-                <span class="n">applicationContext</span><span class="p">,</span>
-                <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
+        <span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
+            <span class="n">layoutManager</span> <span class="p">=</span>
+                <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+            <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
+            <span class="n">adapter</span> <span class="p">=</span> <span class="n">myListAdapter</span>
+        <span class="p">}</span>
 
         <span class="n">binding</span><span class="p">.</span><span class="n">fab</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="n">adapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">.</span><span class="n">shuffled</span><span class="p">())</span>
+            <span class="n">myListAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">.</span><span class="n">shuffled</span><span class="p">())</span>
         <span class="p">}</span>
 
         <span class="k">val</span> <span class="py">itemTouchHelper</span> <span class="p">=</span> <span class="n">ItemTouchHelper</span><span class="p">(</span><span class="n">MyItemTouchHelperCallback</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">))</span>
@@ -2491,7 +2499,7 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div>
+</div><p>이렇게해서 ListAdapter를 RecyclerView에 적용하는 법에 대해 알아보았습니다.</p>
     </article>
     
     
@@ -2724,6 +2732,13 @@ if (!doNotTrack) {
       </a>
     
     <div class="grow"></div>
+    
+      <a href="https://cliearl.github.io/en/posts/lotto-generator/" class="pagination-single__right">      
+        <div class="pagination-single__right-title">로또번호 생성기 만들기</div>
+        <div class="pagination-single__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z"/></svg>
+        </div>
+      </a>
     
   
 </nav>
@@ -3135,13 +3150,10 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="toc " data-dir="ltr" data-folding="false" data-ani="true">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#이론">이론</a>
-      <ul>
-        <li><a href="#diffutil">DiffUtil</a></li>
-        <li><a href="#asynclistdiffer">AsyncListDiffer</a></li>
-        <li><a href="#listadapter">ListAdapter</a></li>
-      </ul>
-    </li>
+    <li><a href="#들어가기">들어가기</a></li>
+    <li><a href="#diffutil">DiffUtil</a></li>
+    <li><a href="#asynclistdiffer">AsyncListDiffer</a></li>
+    <li><a href="#listadapter">ListAdapter</a></li>
     <li><a href="#앱-작성">앱 작성</a>
       <ul>
         <li><a href="#monsterkt">Monster.kt</a></li>
