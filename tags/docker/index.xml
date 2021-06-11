@@ -12,12 +12,108 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Mon, 23 Nov 2020 02:55:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 11 Jun 2021 20:55:40 +0900</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     
         <atom:link href="https://cliearl.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
 
+      
+      <item>
+        <title>전자책 관리 앱 Calibre-web 도입</title>
+        <link>https://cliearl.github.io/posts/etc/introduce-calibre-web/</link>
+        <pubDate>Fri, 11 Jun 2021 20:55:40 +0900</pubDate>
+        
+        <atom:modified>Fri, 11 Jun 2021 20:55:40 +0900</atom:modified>
+        <guid>https://cliearl.github.io/posts/etc/introduce-calibre-web/</guid>
+        <description>&lt;p&gt;전자책을 관리해야 할 필요성이 생겨서 셀프호스팅 가능한 오픈소스 앱을 알아봤다.&lt;/p&gt;</description>
+        <content:encoded>&lt;p&gt;전자책을 관리해야 할 필요성이 생겨서 셀프호스팅 가능한 오픈소스 앱을 알아봤다.&lt;/p&gt;
+&lt;p&gt;전자책 프로젝트 중 현재 활발하게 업데이트 되는 프로젝트는 다음 세개 정도 되는것 같았다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://calibre-ebook.com/&#34;&gt;Calibre&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://vaemendis.net/ubooquity/&#34;&gt;Ubooquity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://komga.org/&#34;&gt;Komga&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;그런데 이 중 Ubooquity와 Komga는 일반서적보다는 만화책 관리가 더 메인인 것 같아서 Calibre를 선택했다.&lt;/p&gt;
+&lt;p&gt;캘리버를 도커에 띄우기 위한 이미지가 여러가지 있는데 linuxserver.io에서 관리하는 훌륭한 &lt;a href=&#34;https://hub.docker.com/r/linuxserver/calibre-web&#34;&gt;linuxserver/calibre-web&lt;/a&gt; 이미지가 있어서 그걸 사용하기로 했다.&lt;/p&gt;
+&lt;p&gt;캘리버-웹 설치시 문제가 하나 있는데 설치 직후 DB 로케이션 입력이 안된다는 점이다. 캘리버가 실행될려면 DB 폴더 아래에 metadata.db 파일이 있어야 되는데 파일이 없을경우 자동으로 생성되지 않게 되어 있다. 아마도 오프라인 캘리버 앱을 연동해서 쓰는 사람들을 배려해서 DB를 자동으로 초기화하지 않도록 한 것 같다.&lt;/p&gt;
+&lt;p&gt;근데 어쨌든 처음 사용자는 metadata.db가 필요하다. 이 파일이 없으면 오프라인 앱에서 생성해서 복사하는 법이 있는데 이것보다는 설치할 때 자동으로 생성되게 하고 퍼미션도 줘버리는게 편하다.&lt;/p&gt;
+&lt;p&gt;찾아보니 역시 깃헙에서 &lt;a href=&#34;https://github.com/linuxserver/docker-calibre-web/issues/30&#34;&gt;이슈&lt;/a&gt;가 열렸고 해결책도 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;우선은 /books 디렉토리 아래에 /custom-cont-init.d 라는 디렉토리를 만든다.&lt;/li&gt;
+&lt;li&gt;이 안에 다음과 같은 내용의 metadata_generator.sh 파일을 생성한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;FILE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/books/metadata.db
+&lt;span class=&#34;nv&#34;&gt;PUID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;PGID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -f &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; already exists, skipping generation.&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; does not exists, generating...&amp;#34;&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /app/calibre/bin
+    calibredb restore_database --really-do-it --with-library /books
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; created, setting permissions...&amp;#34;&lt;/span&gt;
+    chmod a+w &lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;# this is needed for uploads, you can remove it if you don&amp;#39;t want to allow uploads&lt;/span&gt;
+    chown &lt;span class=&#34;nv&#34;&gt;$PUID&lt;/span&gt;:&lt;span class=&#34;nv&#34;&gt;$PGID&lt;/span&gt; /books
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Permissions fixed, use /books as library path&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;profit!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;부록으로 프로그래밍 관련 서적을 무료로 다운받을 수 있는 사이트를 하나 적어둔다&lt;br /&gt;
+&lt;a href=&#34;https://ebookfoundation.github.io/free-programming-books/&#34;&gt;free-programming-books&lt;/a&gt;&lt;/p&gt;</content:encoded>
+        <dc:creator>냉동코더</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Calibre-web</category>
+            
+          
+            
+              <category>docker</category>
+            
+          
+        
+        
+          
+            
+              <category>etc</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>시놀로지 도커 이미지 업데이트하기</title>
