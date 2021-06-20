@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -1328,9 +1336,9 @@
 <meta name="description" content="냉동코더의 기술블로그" />
 
 
-<meta name="created" content="2021-06-13T21:51:49&#43;0900">
-<meta name="modified" content="2021-06-13T21:51:49&#43;0900">
-<meta property="article:published_time" content="2021-06-13T21:51:49&#43;0900">
+<meta name="created" content="2021-06-20T21:10:32&#43;0900">
+<meta name="modified" content="2021-06-20T21:10:32&#43;0900">
+<meta property="article:published_time" content="2021-06-20T21:10:32&#43;0900">
 
 <meta name="author" content="냉동코더">
 
@@ -1677,6 +1685,39 @@ if (!doNotTrack) {
             
             
             
+            
+                
+  <article class="summary-classic" data-ani="true">
+  <div class="summary-classic__flex-box" >
+
+    
+
+    <div class="summary-classic__content">
+      <header>
+        <h5 class="title h5"><a href='https://cliearl.github.io/posts/android/autoset-buildnumber/'>프로젝트의 빌드넘버 자동증가 시키기</a> </h5>
+        <h6 class="subtitle caption">
+          <time title="작성일" dir="ltr">📅&nbsp;2021년 04월 06일 </time>
+          
+          <span title="읽는 시간" dir="ltr"> &middot; ☕&nbsp;3&nbsp;min read </span>
+          
+        </h6>
+      </header>
+      <div>
+        <div class="summary-classic__text p2">
+          
+            <p>이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다.</p>
+          
+        </div>
+      </div>
+    </div>
+
+    
+    
+  </div>
+  <hr />
+</article>
+
+
             
                 
   <article class="summary-classic" data-ani="true">
@@ -2074,39 +2115,6 @@ if (!doNotTrack) {
 
 
             
-                
-  <article class="summary-classic" data-ani="true">
-  <div class="summary-classic__flex-box" >
-
-    
-
-    <div class="summary-classic__content">
-      <header>
-        <h5 class="title h5"><a href='https://cliearl.github.io/posts/etc/docker-hexo-blog/'>도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</a> </h5>
-        <h6 class="subtitle caption">
-          <time title="작성일" dir="ltr">📅&nbsp;2020년 10월 09일 </time>
-          
-          <span title="읽는 시간" dir="ltr"> &middot; ☕&nbsp;3&nbsp;min read </span>
-          
-        </h6>
-      </header>
-      <div>
-        <div class="summary-classic__text p2">
-          
-            <p>도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다.</p>
-          
-        </div>
-      </div>
-    </div>
-
-    
-    
-  </div>
-  <hr />
-</article>
-
-
-            
             
 
 
@@ -2131,6 +2139,11 @@ if (!doNotTrack) {
       
       
         <li class="active"><a href="/page/3/">3</a></li>
+      
+    
+      
+      
+        <li ><a href="/page/4/">4</a></li>
       
     
   </ul>
@@ -2331,6 +2344,10 @@ if (!doNotTrack) {
             <ul class="sidebar-recent__ul">
                 
                     <li>
+                        <a href="/posts/android/lotto-generator/" class="sidebar-recent__a p2">로또번호 생성기 만들기</a>
+                    </li>
+                
+                    <li>
                         <a href="/posts/android/check-connection/" class="sidebar-recent__a p2">단말의 인터넷 연결상태 체크하기</a>
                     </li>
                 
@@ -2339,15 +2356,11 @@ if (!doNotTrack) {
                     </li>
                 
                     <li>
-                        <a href="/posts/etc/introduce-inflearn/" class="sidebar-recent__a p2">인프런에서 iOS 게임만들기 강의공개를 시작하였습니다.</a>
+                        <a href="/posts/etc/introduce-inflearn/" class="sidebar-recent__a p2">인프런에서 iOS 게임만들기 강의공개를 시작하였습니다</a>
                     </li>
                 
                     <li>
                         <a href="/posts/android/assets-json-recycler/" class="sidebar-recent__a p2">Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기</a>
-                    </li>
-                
-                    <li>
-                        <a href="/posts/android/viewpager2-tablayout/" class="sidebar-recent__a p2">ViewPager2로 TabLayout 구현하기</a>
                     </li>
                 
             </ul>
@@ -2903,6 +2916,32 @@ if (!doNotTrack) {
         
         
             <span class="tag">
+                <a href="/tags/list/" class="is-tags taxo__link" data-dir="ltr">
+                    <span class="taxo__text">
+                        list
+                    </span>
+                    <span class="taxo__num" dir="auto">
+                        1
+                    </span>
+                </a>
+            </span>
+        
+        
+        
+            <span class="tag">
+                <a href="/tags/lotto-number-generator/" class="is-tags taxo__link" data-dir="ltr">
+                    <span class="taxo__text">
+                        lotto number generator
+                    </span>
+                    <span class="taxo__num" dir="auto">
+                        1
+                    </span>
+                </a>
+            </span>
+        
+        
+        
+            <span class="tag">
                 <a href="/tags/mediaplayer/" class="is-tags taxo__link" data-dir="ltr">
                     <span class="taxo__text">
                         MediaPlayer
@@ -3036,6 +3075,19 @@ if (!doNotTrack) {
                 <a href="/tags/python/" class="is-tags taxo__link" data-dir="ltr">
                     <span class="taxo__text">
                         python
+                    </span>
+                    <span class="taxo__num" dir="auto">
+                        1
+                    </span>
+                </a>
+            </span>
+        
+        
+        
+            <span class="tag">
+                <a href="/tags/random/" class="is-tags taxo__link" data-dir="ltr">
+                    <span class="taxo__text">
+                        random
                     </span>
                     <span class="taxo__num" dir="auto">
                         1
@@ -3324,7 +3376,7 @@ if (!doNotTrack) {
                         android
                     </span>
                     <span class="taxo__num" dir="auto">
-                        26
+                        27
                     </span>
                 </a>
             </span>

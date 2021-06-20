@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -1681,6 +1689,16 @@ if (!doNotTrack) {
           <span class="archive__meta" data-ani="true">
             
               <span class="archive__type">posts</span>
+              <span class="archive__date">04-06</span>
+            
+          </span>
+          <a href="https://cliearl.github.io/posts/android/autoset-buildnumber/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">프로젝트의 빌드넘버 자동증가 시키기</a>        
+        </li>
+        
+        <li class="archive__li" data-dir="ltr">
+          <span class="archive__meta" data-ani="true">
+            
+              <span class="archive__type">posts</span>
               <span class="archive__date">04-05</span>
             
           </span>
@@ -1827,16 +1845,6 @@ if (!doNotTrack) {
           <a href="https://cliearl.github.io/posts/etc/vscode-extensions/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">내가 사용하는 VS Code Extensions</a>        
         </li>
         
-        <li class="archive__li" data-dir="ltr">
-          <span class="archive__meta" data-ani="true">
-            
-              <span class="archive__type">posts</span>
-              <span class="archive__date">10-09</span>
-            
-          </span>
-          <a href="https://cliearl.github.io/posts/etc/docker-hexo-blog/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</a>        
-        </li>
-        
       </ul>
     
   
@@ -1867,6 +1875,11 @@ if (!doNotTrack) {
       
       
         <li class="active"><a href="/archive/page/3/">3</a></li>
+      
+    
+      
+      
+        <li ><a href="/archive/page/4/">4</a></li>
       
     
   </ul>

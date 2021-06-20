@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -2700,6 +2708,32 @@ if (!doNotTrack) {
         
         
             <span class="tag">
+                <a href="/tags/list/" class="is-tags taxo__link" data-dir="ltr">
+                    <span class="taxo__text">
+                        list
+                    </span>
+                    <span class="taxo__num" dir="auto">
+                        1
+                    </span>
+                </a>
+            </span>
+        
+        
+        
+            <span class="tag">
+                <a href="/tags/lotto-number-generator/" class="is-tags taxo__link" data-dir="ltr">
+                    <span class="taxo__text">
+                        lotto number generator
+                    </span>
+                    <span class="taxo__num" dir="auto">
+                        1
+                    </span>
+                </a>
+            </span>
+        
+        
+        
+            <span class="tag">
                 <a href="/tags/mediaplayer/" class="is-tags taxo__link" data-dir="ltr">
                     <span class="taxo__text">
                         MediaPlayer
@@ -2833,6 +2867,19 @@ if (!doNotTrack) {
                 <a href="/tags/python/" class="is-tags taxo__link" data-dir="ltr">
                     <span class="taxo__text">
                         python
+                    </span>
+                    <span class="taxo__num" dir="auto">
+                        1
+                    </span>
+                </a>
+            </span>
+        
+        
+        
+            <span class="tag">
+                <a href="/tags/random/" class="is-tags taxo__link" data-dir="ltr">
+                    <span class="taxo__text">
+                        random
                     </span>
                     <span class="taxo__num" dir="auto">
                         1
@@ -3121,7 +3168,7 @@ if (!doNotTrack) {
                         android
                     </span>
                     <span class="taxo__num" dir="auto">
-                        26
+                        27
                     </span>
                 </a>
             </span>

@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -1681,6 +1689,16 @@ if (!doNotTrack) {
           <span class="archive__meta" data-ani="true">
             
               <span class="archive__type">posts</span>
+              <span class="archive__date">06-20</span>
+            
+          </span>
+          <a href="https://cliearl.github.io/posts/android/lotto-generator/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">로또번호 생성기 만들기</a>        
+        </li>
+        
+        <li class="archive__li" data-dir="ltr">
+          <span class="archive__meta" data-ani="true">
+            
+              <span class="archive__type">posts</span>
               <span class="archive__date">06-13</span>
             
           </span>
@@ -1709,7 +1727,7 @@ if (!doNotTrack) {
               <span class="archive__date">05-27</span>
             
           </span>
-          <a href="https://cliearl.github.io/posts/etc/introduce-inflearn/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">인프런에서 iOS 게임만들기 강의공개를 시작하였습니다.</a>        
+          <a href="https://cliearl.github.io/posts/etc/introduce-inflearn/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">인프런에서 iOS 게임만들기 강의공개를 시작하였습니다</a>        
         </li>
         
         <li class="archive__li" data-dir="ltr">
@@ -1807,16 +1825,6 @@ if (!doNotTrack) {
           <a href="https://cliearl.github.io/posts/android/gadmobbanner/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">Google Admob으로 배너광고 표시하기</a>        
         </li>
         
-        <li class="archive__li" data-dir="ltr">
-          <span class="archive__meta" data-ani="true">
-            
-              <span class="archive__type">posts</span>
-              <span class="archive__date">04-20</span>
-            
-          </span>
-          <a href="https://cliearl.github.io/posts/android/sharedpreferences-basic/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">SharedPreferences로 앱 설정값 저장하고 불러오기</a>        
-        </li>
-        
       </ul>
     
   
@@ -1847,6 +1855,11 @@ if (!doNotTrack) {
       
       
         <li ><a href="/archive/page/3/">3</a></li>
+      
+    
+      
+      
+        <li ><a href="/archive/page/4/">4</a></li>
       
     
   </ul>

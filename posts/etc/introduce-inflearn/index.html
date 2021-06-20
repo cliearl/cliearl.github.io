@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>인프런에서 iOS 게임만들기 강의공개를 시작하였습니다. – Home</title>
+    <title>인프런에서 iOS 게임만들기 강의공개를 시작하였습니다 – Home</title>
     
 
 
@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -1334,7 +1342,7 @@
 
 
 <meta property="og:site_name" content="Home">
-<meta property="og:title" content="인프런에서 iOS 게임만들기 강의공개를 시작하였습니다.">
+<meta property="og:title" content="인프런에서 iOS 게임만들기 강의공개를 시작하였습니다">
 <meta property="og:url" content="https://cliearl.github.io/posts/etc/introduce-inflearn/">
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
@@ -1374,7 +1382,7 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "headline": "인프런에서 iOS 게임만들기 강의공개를 시작하였습니다.",
+    "headline": "인프런에서 iOS 게임만들기 강의공개를 시작하였습니다",
     "datePublished": "2021-05-27T07:32:39+09:00",
     "dateModified": "2021-05-27T07:32:39+09:00",
     "url" : "https://cliearl.github.io/posts/etc/introduce-inflearn/",
@@ -1671,7 +1679,7 @@ if (!doNotTrack) {
   
   <li  class="is-active" >
     
-      <span>인프런에서 iOS 게임만들기 강의공개를 시작하였습니다.</span>
+      <span>인프런에서 iOS 게임만들기 강의공개를 시작하였습니다</span>
     
   </li>
   
@@ -1683,7 +1691,7 @@ if (!doNotTrack) {
   <div class="single ">
     <div class="single__nojs">자바스크립트를 활성화 해주세요</div>
     <script>document.querySelector('.single').classList.remove('hide'); document.querySelector('.single__nojs').classList.add('hide');</script>
-    <h2 class="single__title" data-ani="true">인프런에서 iOS 게임만들기 강의공개를 시작하였습니다.</h2>
+    <h2 class="single__title" data-ani="true">인프런에서 iOS 게임만들기 강의공개를 시작하였습니다</h2>
     <h3 class="single__subtitle"></h3>
     <div class="single__meta">
       
@@ -1928,7 +1936,7 @@ if (!doNotTrack) {
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=%ec%9d%b8%ed%94%84%eb%9f%b0%ec%97%90%ec%84%9c%20iOS%20%ea%b2%8c%ec%9e%84%eb%a7%8c%eb%93%a4%ea%b8%b0%20%ea%b0%95%ec%9d%98%ea%b3%b5%ea%b0%9c%eb%a5%bc%20%ec%8b%9c%ec%9e%91%ed%95%98%ec%98%80%ec%8a%b5%eb%8b%88%eb%8b%a4.&url=https%3a%2f%2fcliearl.github.io%2fposts%2fetc%2fintroduce-inflearn%2f&via=" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=%ec%9d%b8%ed%94%84%eb%9f%b0%ec%97%90%ec%84%9c%20iOS%20%ea%b2%8c%ec%9e%84%eb%a7%8c%eb%93%a4%ea%b8%b0%20%ea%b0%95%ec%9d%98%ea%b3%b5%ea%b0%9c%eb%a5%bc%20%ec%8b%9c%ec%9e%91%ed%95%98%ec%98%80%ec%8a%b5%eb%8b%88%eb%8b%a4&url=https%3a%2f%2fcliearl.github.io%2fposts%2fetc%2fintroduce-inflearn%2f&via=" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       

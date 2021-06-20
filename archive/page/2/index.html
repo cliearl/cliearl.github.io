@@ -663,6 +663,12 @@
     
     var enableSearch = JSON.parse("true");
     
+    var searchDistance = JSON.parse("null");
+    
+    var searchThreshold = JSON.parse("null");
+    
+    var searchContent = JSON.parse("null");
+    
     var enableSearchHighlight = JSON.parse("true");
     
     var searchResultPosition = JSON.parse("\"main\"");
@@ -686,12 +692,13 @@
         xhr.onload = function () {
           if (xhr.status === 200) {
             fuse = new Fuse(JSON.parse(xhr.response.toString('utf-8')), {
-              keys: sectionType.includes('publication') ? ['title', 'abstract'] : ['title', 'description', 'content'],
+              keys: sectionType.includes('publication') ? ['title', 'abstract'] : 
+                searchContent ? ['title', 'description', 'content'] : ['title', 'description'],
               includeMatches: enableSearchHighlight,
               shouldSort: true, 
-              threshold: 0.4, 
+              threshold: searchThreshold ? searchThreshold : 0.4, 
               location: 0, 
-              distance: 100, 
+              distance: searchDistance ? searchDistance : 100, 
               maxPatternLength: 32,
               minMatchCharLength: 1,
               isCaseSensitive: false, 
@@ -715,7 +722,7 @@
       var a = document.createElement('a');
       a.innerHTML = obj.item.title;
       a.setAttribute('class', 'search-result__item--title');
-      a.setAttribute('href', obj.item.permalink);
+      a.setAttribute('href', obj.item.uri);
 
       var descDiv = document.createElement('div');
       descDiv.setAttribute('class', 'search-result__item--desc');
@@ -1315,7 +1322,8 @@
     }
   
   });
-</script>    
+</script>
+    
     
 
 
@@ -1681,6 +1689,16 @@ if (!doNotTrack) {
           <span class="archive__meta" data-ani="true">
             
               <span class="archive__type">posts</span>
+              <span class="archive__date">04-20</span>
+            
+          </span>
+          <a href="https://cliearl.github.io/posts/android/sharedpreferences-basic/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">SharedPreferences로 앱 설정값 저장하고 불러오기</a>        
+        </li>
+        
+        <li class="archive__li" data-dir="ltr">
+          <span class="archive__meta" data-ani="true">
+            
+              <span class="archive__type">posts</span>
               <span class="archive__date">04-18</span>
             
           </span>
@@ -1797,16 +1815,6 @@ if (!doNotTrack) {
           <a href="https://cliearl.github.io/posts/android/dataclass-recyclerview/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">Data class 이해하고 RecyclerView에서 사용하기</a>        
         </li>
         
-        <li class="archive__li" data-dir="ltr">
-          <span class="archive__meta" data-ani="true">
-            
-              <span class="archive__type">posts</span>
-              <span class="archive__date">04-06</span>
-            
-          </span>
-          <a href="https://cliearl.github.io/posts/android/autoset-buildnumber/" class="archive__title" data-title-wrap="wrap" data-dir="ltr">프로젝트의 빌드넘버 자동증가 시키기</a>        
-        </li>
-        
       </ul>
     
   
@@ -1837,6 +1845,11 @@ if (!doNotTrack) {
       
       
         <li ><a href="/archive/page/3/">3</a></li>
+      
+    
+      
+      
+        <li ><a href="/archive/page/4/">4</a></li>
       
     
   </ul>
