@@ -1842,7 +1842,7 @@ notifyItemRangeRemoved(int, int)
 </code></pre><p>그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 뷰홀더를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.</p>
 <h2 id="diffutil">DiffUtil</h2>
 <p><a href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil">DiffUtil</a>은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 리사이클러뷰에 반영할 수 있습니다.</p>
-<p>DiffUtil은 Eugene W. Myers의 difference 알고리즘을 이용해서 O(N + D^2)시간 안에 리스트의 비교를 수행하는데 넥서스 5X에서 테스트를 수행한 결과는 다음과 같았다고 합니다.</p>
+<p>DiffUtil은 Eugene W. Myers의 difference 알고리즘을 이용해서 O(N + D^2)시간 안에 리스트의 비교를 수행하는데 넥서스 5X에서 테스트를 수행한 결과는 다음과 같았다고 합니다. 이때 N은 추가 및 제거된 항목의 갯수이고, D는 스크립트의 길이입니다.</p>
 <pre><code>100 items and 10 modifications: avg: 0.39 ms, median: 0.35 ms
 100 items and 100 modifications: 3.82 ms, median: 3.75 ms
 100 items and 100 modifications without moves: 2.09 ms, median: 2.06 ms
@@ -1850,7 +1850,7 @@ notifyItemRangeRemoved(int, int)
 1000 items and 50 modifications without moves: avg: 3.59 ms, median: 3.50 ms
 1000 items and 200 modifications: 27.07 ms, median: 26.92 ms
 1000 items and 200 modifications without moves: 13.54 ms, median: 13.36 ms 
-</code></pre><p>DiffUtil을 사용하기 위해서는 DiffUtil.Callback()을 상속받아 areItemsTheSame()과 areContentsTheSame()을 구현하면 되는데, 전자는 두 아이템이 동일한 아이템인지 체크하고 결과가 만약 동일하다면 후자의 메소드로 아이템의 내용물까지 동일한지 확인하게 됩니다.</p>
+</code></pre><p>DiffUtil을 사용하기 위해서는 <a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback">DiffUtil.Callback()</a>을 상속받아 areItemsTheSame()으로 비교대상인 두 객체가 동일한지 확인하고, areContentsTheSame()으로 두 아이템이 동일한 데이터를 가지는지 확인하면 됩니다.</p>
 <h2 id="asynclistdiffer">AsyncListDiffer</h2>
 <p>DiffUtil은 아이템 개수가 많을 경우 비교연산시간에 필요한 시간이 길어질 수 있기 때문에 백그라운드 스레드에서 처리되어야 합니다. <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer">AsyncListDiffer</a>는 DiffUtil을 편하게 쓰기 위해서 만들어진 클래스로, DiffUtil에 대해 자체적으로 스레드 처리를 해 줍니다.</p>
 <p>코드를 사용하기 위해서는 우선 어댑터 내부로 DiffUtil 콜백을 전달받은 AsyncListDiffer 객체를 만들어 줍니다. 그리고 currentList로 데이터를 참조하고 submitList()로 리스트 데이터를 갱신하면 됩니다.</p>
@@ -1891,7 +1891,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Google Developer에서 제공하는 코드
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Google Developers에서 제공하는 코드
 </span><span class="c1"></span>
  <span class="kd">class</span> <span class="nc">UserAdapter</span> <span class="kd">extends</span> <span class="n">RecyclerView</span><span class="o">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="n">UserViewHolder</span><span class="o">&gt;</span> <span class="o">{</span>
      <span class="kd">private</span> <span class="kd">final</span> <span class="n">AsyncListDiffer</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">mDiffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AsyncListDiffer</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">DIFF_CALLBACK</span><span class="o">);</span>
@@ -1928,7 +1928,67 @@ notifyItemRangeRemoved(int, int)
 </div>
 </div><h2 id="listadapter">ListAdapter</h2>
 <p><a href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter">ListAdapter</a>는 AsyncListDiffer를 더 쓰기 편하도록 랩핑한 클래스로 리사이클러뷰 어댑터를 만들때 ListAdapter를 상속하도록 하면 됩니다. 초기화할때 DiffUtil 콜백 객체를 받도록 하면 나머지는 AsyncListDiffer와 같이 currentList로 현재 데이터를 불러올 수 있고, submitList로 데이터를 갱신할 수 있습니다.</p>
-<p>다시말해 리사이클러뷰 어댑터를 ListAdapter로 구현하면 데이터가 어떻게 바뀌든간에 submitList로 전체 리스트를 넘겨주기만 하면 어댑터가 알아서 백그라운드 스레드를 사용해 리스트 차이를 계산하여 화면을 갱신시켜주게 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Google Developers에서 제공하는 코드
+</span><span class="c1"></span>
+ <span class="k">class</span> <span class="nc">UserAdapter</span> <span class="n">extends</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">User</span><span class="p">,</span> <span class="n">UserViewHolder</span><span class="p">&gt;</span> <span class="p">{</span>
+     <span class="k">public</span> <span class="n">UserAdapter</span><span class="p">()</span> <span class="p">{</span>
+         <span class="k">super</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="n">DIFF_CALLBACK</span><span class="p">);</span>
+     <span class="p">}</span>
+     <span class="nd">@Override</span>
+     <span class="k">public</span> <span class="n">void</span> <span class="n">onBindViewHolder</span><span class="p">(</span><span class="n">UserViewHolder</span> <span class="n">holder</span><span class="p">,</span> <span class="n">int</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">holder</span><span class="p">.</span><span class="n">bindTo</span><span class="p">(</span><span class="n">getItem</span><span class="p">(</span><span class="n">position</span><span class="p">));</span>
+     <span class="p">}</span>
+     <span class="k">public</span> <span class="n">static</span> <span class="k">final</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">DIFF_CALLBACK</span> <span class="p">=</span>
+             <span class="n">new</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;()</span> <span class="p">{</span>
+         <span class="nd">@Override</span>
+         <span class="k">public</span> <span class="n">boolean</span> <span class="n">areItemsTheSame</span><span class="p">(</span>
+                 <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="p">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="p">)</span> <span class="p">{</span>
+             <span class="c1">// User properties may have changed if reloaded from the DB, but ID is fixed
+</span><span class="c1"></span>             <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">getId</span><span class="p">()</span> <span class="o">==</span> <span class="n">newUser</span><span class="p">.</span><span class="n">getId</span><span class="p">();</span>
+         <span class="p">}</span>
+         <span class="nd">@Override</span>
+         <span class="k">public</span> <span class="n">boolean</span> <span class="n">areContentsTheSame</span><span class="p">(</span>
+                 <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="p">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="p">)</span> <span class="p">{</span>
+             <span class="c1">// NOTE: if you use equals, your object must properly override Object#equals()
+</span><span class="c1"></span>             <span class="c1">// Incorrectly returning false here will result in too many animations.
+</span><span class="c1"></span>             <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">newUser</span><span class="p">);</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>다시말해 리사이클러뷰 어댑터를 ListAdapter로 구현하면 데이터가 어떻게 바뀌든간에 submitList로 전체 리스트를 넘겨주기만 하면 어댑터가 알아서 백그라운드 스레드를 사용해 리스트 차이를 계산하여 화면을 갱신시켜주게 됩니다.</p>
 <h2 id="앱-작성">앱 작성</h2>
 <p>기존에 <a href="https://youtu.be/opPmxtI4rLQ">다른 강의</a>에서 작성했던 프로젝트를 고치는 형태로 프로젝트를 만들어 보겠습니다.</p>
 <h3 id="monsterkt">Monster.kt</h3>
@@ -2027,12 +2087,6 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">60
 </span><span class="lnt">61
 </span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
@@ -2041,10 +2095,10 @@ notifyItemRangeRemoved(int, int)
     <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
     <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
     <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span>
+    <span class="na">android:baselineAligned=</span><span class="s">&#34;false&#34;</span>
     <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span>
     <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
-    <span class="na">android:paddingStart=</span><span class="s">&#34;20dp&#34;</span>
-    <span class="na">android:paddingEnd=</span><span class="s">&#34;20dp&#34;</span><span class="nt">&gt;</span>
+    <span class="na">android:padding=</span><span class="s">&#34;10dp&#34;</span><span class="nt">&gt;</span>
 
     <span class="nt">&lt;LinearLayout</span>
         <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
@@ -2089,18 +2143,12 @@ notifyItemRangeRemoved(int, int)
             <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/LinearLayout&gt;</span>
 
-    <span class="nt">&lt;FrameLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;ImageView</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
-            <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
-            <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;/FrameLayout&gt;</span>
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
+        <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
+        <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
 </code></pre></td></tr></table>
@@ -2135,9 +2183,11 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">24
 </span><span class="lnt">25
 </span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ViewItemlistBinding</span><span class="p">)</span> <span class="p">:</span>
+
     <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span> <span class="n">Monster</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
@@ -2166,21 +2216,23 @@ notifyItemRangeRemoved(int, int)
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="mydiffcallbackkt">MyDiffCallback.kt</h3>
-<p>Monster 클래스가 데이터 클래스이므로 areItemsTheSame()은 자동으로 정의되는 hashCode()로 비교하도록 하였습니다. 데이터클래스의 정의에 따라 동일한 두 객체의 hashCode()는 동일한 값을 갖게 됩니다. 또한 equals()도 자동으로 정의되므로 areContentsTheSame() 메소드는 equals를 이용해 구현합니다.</p>
+<p>Monster 클래스가 데이터 클래스이므로 areItemsTheSame()은 자동으로 생성되는 hashCode()로 비교하도록 하였습니다. 데이터클래스의 정의에 따라 동일한 두 객체의 hashCode()는 동일한 값을 갖게 됩니다. 또한 equals()도 데이터클래스의 정의에 의해 자동으로 생성되므로 areContentsTheSame() 메소드는 equals를 이용해 구현합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyDiffCallback</span> <span class="p">:</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;()</span> <span class="p">{</span>
+
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">areItemsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">oldItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span> <span class="o">==</span> <span class="n">newItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>
     <span class="p">}</span>
@@ -2392,7 +2444,8 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
     <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
@@ -2401,8 +2454,8 @@ notifyItemRangeRemoved(int, int)
 
     <span class="nt">&lt;androidx.recyclerview.widget.RecyclerView</span>
         <span class="na">android:id=</span><span class="s">&#34;@+id/recyclerview&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;0dp&#34;</span>
         <span class="na">android:scrollbars=</span><span class="s">&#34;vertical&#34;</span>
         <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
         <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
@@ -2414,8 +2467,7 @@ notifyItemRangeRemoved(int, int)
         <span class="na">android:id=</span><span class="s">&#34;@+id/fab&#34;</span>
         <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
         <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_marginEnd=</span><span class="s">&#34;20dp&#34;</span>
-        <span class="na">android:layout_marginBottom=</span><span class="s">&#34;20dp&#34;</span>
+        <span class="na">android:layout_margin=</span><span class="s">&#34;20dp&#34;</span>
         <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_add_24&#34;</span>
         <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
         <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
@@ -2488,7 +2540,6 @@ notifyItemRangeRemoved(int, int)
         <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
         <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
 
-        <span class="n">myListAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
 
         <span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
             <span class="n">layoutManager</span> <span class="p">=</span>
@@ -2496,6 +2547,7 @@ notifyItemRangeRemoved(int, int)
             <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
             <span class="n">adapter</span> <span class="p">=</span> <span class="n">myListAdapter</span>
         <span class="p">}</span>
+        <span class="n">myListAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
 
         <span class="n">binding</span><span class="p">.</span><span class="n">fab</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
             <span class="n">myListAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">.</span><span class="n">shuffled</span><span class="p">())</span>
