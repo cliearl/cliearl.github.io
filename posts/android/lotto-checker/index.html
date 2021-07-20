@@ -1951,21 +1951,21 @@ if (!doNotTrack) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">        <span class="n">binding</span><span class="p">.</span><span class="n">generateButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="k">val</span> <span class="py">lottoNumbers</span> <span class="p">=</span> <span class="n">createLottoNumbers</span><span class="p">()</span>
-            <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">toString</span><span class="p">())</span>
-            <span class="n">updateLottoBallImage</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">)</span>
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">binding</span><span class="p">.</span><span class="n">generateButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">lottoNumbers</span> <span class="p">=</span> <span class="n">createLottoNumbers</span><span class="p">()</span>
+    <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">toString</span><span class="p">())</span>
+    <span class="n">updateLottoBallImage</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">)</span>
 
-            <span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span> <span class="p">+</span> <span class="n">job</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
-                <span class="k">val</span> <span class="py">winningNumbers</span> <span class="p">=</span> <span class="n">async</span> <span class="p">{</span> <span class="n">getLottoNumbers</span><span class="p">()</span> <span class="p">}</span>
-                <span class="k">val</span> <span class="py">rank</span> <span class="p">=</span> <span class="n">whatIsRank</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">,</span> <span class="n">winningNumbers</span><span class="p">.</span><span class="n">await</span><span class="p">())</span>
-                <span class="k">val</span> <span class="py">text</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="si">${winningNumbers.await()}</span><span class="s2"> : </span><span class="si">$rank</span><span class="s2">&#34;</span>
+    <span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span> <span class="p">+</span> <span class="n">job</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
+        <span class="k">val</span> <span class="py">winningNumbers</span> <span class="p">=</span> <span class="n">async</span> <span class="p">{</span> <span class="n">getLottoNumbers</span><span class="p">()</span> <span class="p">}</span>
+        <span class="k">val</span> <span class="py">rank</span> <span class="p">=</span> <span class="n">whatIsRank</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">,</span> <span class="n">winningNumbers</span><span class="p">.</span><span class="n">await</span><span class="p">())</span>
+        <span class="k">val</span> <span class="py">text</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="si">${winningNumbers.await()}</span><span class="s2"> : </span><span class="si">$rank</span><span class="s2">&#34;</span>
 
-                <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">Main</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">binding</span><span class="p">.</span><span class="n">tvWinning</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">text</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
+        <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">Main</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">binding</span><span class="p">.</span><span class="n">tvWinning</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">text</span>
         <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="코루틴-취소하기">코루틴 취소하기</h2>
@@ -1993,7 +1993,6 @@ if (!doNotTrack) {
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
@@ -2015,7 +2014,6 @@ if (!doNotTrack) {
         <span class="k">super</span><span class="p">.</span><span class="n">onDestroy</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-
 </code></pre></td></tr></table>
 </div>
 </div><p>이렇게 코루틴을 이용해서 나의 로또번호를 인터넷의 당첨결과와 비교하는 법에 대해 알아보았습니다.</p>
