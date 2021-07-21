@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.85.0" />
+<meta name="generator" content="Hugo 0.86.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1740,12 +1740,12 @@ if (!doNotTrack) {
 <p>가장 먼저 해야할 것은 뷰페이저2 라이브러리를 추가하는 것입니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;androidx.viewpager2:viewpager2:1.0.0&#39;</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -1753,7 +1753,7 @@ if (!doNotTrack) {
 </div><p>다음은 xml에서 viewpager 모듈을 viewpager2로 바꾸면서 orientation 이라는 속성도 추가해주는데요 이 때 값을 vertical로 주면 세로로 스크롤할 수 있게 됩니다. 또 인디케이터도 viewpager2에 대응하는 CircleIndicator3로 변경하여 줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1780,7 +1780,7 @@ if (!doNotTrack) {
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -1810,7 +1810,7 @@ if (!doNotTrack) {
 </div><p>다음은 어댑터를 변환하여 줍니다. 뷰페이저2의 어댑터는 FragementStateAdapter를 상속받습니다. 그리고 getCount()라는 함수 이름을 getItemCount()로 변경합니다. 마지막으로 getItem() 함수이름을 createFragment()로 변경합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1829,7 +1829,7 @@ if (!doNotTrack) {
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">CustomPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">CustomPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">PAGENUMBER</span> <span class="p">=</span> <span class="m">4</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
@@ -1851,7 +1851,7 @@ if (!doNotTrack) {
 </div><p>마지막으로 뷰페이저와 어댑터를 다음과 같이 연결하여 줍니다. vpAdapter의 형은 FragmentStateAdapter이고 this로 액티비티를 전달받도록 변경하면 완료입니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1866,7 +1866,7 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">vpAdapter</span><span class="p">:</span> <span class="n">FragmentStateAdapter</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>

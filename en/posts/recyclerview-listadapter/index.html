@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.85.0" />
+<meta name="generator" content="Hugo 0.86.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1856,7 +1856,7 @@ notifyItemRangeRemoved(int, int)
 <p>코드를 사용하기 위해서는 우선 어댑터 내부로 DiffUtil 콜백을 전달받은 AsyncListDiffer 객체를 만들어 줍니다. 그리고 currentList로 데이터를 참조하고 submitList()로 리스트 데이터를 갱신하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1891,7 +1891,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Google Developers에서 제공하는 코드
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Google Developers에서 제공하는 코드
 </span><span class="c1"></span>
  <span class="kd">class</span> <span class="nc">UserAdapter</span> <span class="kd">extends</span> <span class="n">RecyclerView</span><span class="o">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="n">UserViewHolder</span><span class="o">&gt;</span> <span class="o">{</span>
      <span class="kd">private</span> <span class="kd">final</span> <span class="n">AsyncListDiffer</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">mDiffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AsyncListDiffer</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">DIFF_CALLBACK</span><span class="o">);</span>
@@ -1930,7 +1930,7 @@ notifyItemRangeRemoved(int, int)
 <p><a href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter">ListAdapter</a>는 AsyncListDiffer를 더 쓰기 편하도록 랩핑한 클래스로 리사이클러뷰 어댑터를 만들때 ListAdapter를 상속하도록 하면 됩니다. 초기화할때 DiffUtil 콜백 객체를 받도록 하면 나머지는 AsyncListDiffer와 같이 currentList로 현재 데이터를 불러올 수 있고, submitList로 데이터를 갱신할 수 있습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1959,7 +1959,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Google Developers에서 제공하는 코드
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Google Developers에서 제공하는 코드
 </span><span class="c1"></span>
  <span class="k">class</span> <span class="nc">UserAdapter</span> <span class="n">extends</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">User</span><span class="p">,</span> <span class="n">UserViewHolder</span><span class="p">&gt;</span> <span class="p">{</span>
      <span class="k">public</span> <span class="n">UserAdapter</span><span class="p">()</span> <span class="p">{</span>
@@ -1995,7 +1995,7 @@ notifyItemRangeRemoved(int, int)
 <p>우선 리사이클러뷰에 표시할 데이터를 데이터클래스형태로 준비합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2008,7 +2008,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
     <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
     <span class="k">val</span> <span class="py">race</span><span class="p">:</span> <span class="n">Race</span><span class="p">,</span>
     <span class="k">val</span> <span class="py">level</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
@@ -2025,7 +2025,7 @@ notifyItemRangeRemoved(int, int)
 <p>리사이클러뷰의 뷰홀더 xml을 만들어줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2089,7 +2089,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span>
     <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
@@ -2157,7 +2157,7 @@ notifyItemRangeRemoved(int, int)
 <p>리사이클러뷰의 뷰홀더 클래스를 만들어줍니다. 뷰바인딩을 사용하도록 세팅하고 나중에 투명도를 바꾸는데 사용하도록 setAlpha() 함수를 만들어줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2186,7 +2186,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ViewItemlistBinding</span><span class="p">)</span> <span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ViewItemlistBinding</span><span class="p">)</span> <span class="p">:</span>
 
     <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span> <span class="n">Monster</span><span class="p">)</span> <span class="p">{</span>
@@ -2219,7 +2219,7 @@ notifyItemRangeRemoved(int, int)
 <p>Monster 클래스가 데이터 클래스이므로 areItemsTheSame()은 자동으로 생성되는 hashCode()로 비교하도록 하였습니다. 데이터클래스의 정의에 따라 동일한 두 객체의 hashCode()는 동일한 값을 갖게 됩니다. 또한 equals()도 데이터클래스의 정의에 의해 자동으로 생성되므로 areContentsTheSame() 메소드는 equals를 이용해 구현합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2231,7 +2231,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyDiffCallback</span> <span class="p">:</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyDiffCallback</span> <span class="p">:</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;()</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">areItemsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">oldItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span> <span class="o">==</span> <span class="n">newItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>
@@ -2248,7 +2248,7 @@ notifyItemRangeRemoved(int, int)
 <p>그리고 아이템을 이동했을때 실행할 moveItem(), 지울때 실행할 removeItem() 메소드를 작성해줍니다. 이 때 ListAdapter에서는 데이터를 직접 조작할 수 없고 비교만 할수 있기 때문에 변형된 데이터셋은 새로운 객체로 만들어 기존의 데이터셋과 비교도록 submitList()를 수행하게 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2284,7 +2284,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyListAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">,</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;(</span><span class="n">MyDiffCallback</span><span class="p">())</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyListAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">,</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;(</span><span class="n">MyDiffCallback</span><span class="p">())</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span> <span class="p">{</span>
         <span class="k">val</span> <span class="py">viewHolder</span> <span class="p">=</span> <span class="n">MyViewHolder</span><span class="p">(</span>
@@ -2325,7 +2325,7 @@ notifyItemRangeRemoved(int, int)
 <p>그리고 추가로 홀딩중인 뷰홀더의 투명도를 변화시켜 더 인지하기 쉽게 만들겠습니다. 그럴려면 onSelectedChanged()에서 투명도를 50%로 낮추었다가 clearView()애서 다시 100%로 되돌리도록 하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2367,7 +2367,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyItemTouchHelperCallback</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">)</span> <span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyItemTouchHelperCallback</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span><span class="p">(</span>
         <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">UP</span> <span class="n">or</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">DOWN</span><span class="p">,</span>
         <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">LEFT</span>
@@ -2413,7 +2413,7 @@ notifyItemRangeRemoved(int, int)
 <p>리사이클러뷰와 플로팅버튼을 배치해줍니다. 기존의 터치조작에 더해 DiffUtil의 테스트를 위해 플로팅버튼을 누르면 데이터가 랜덤하게 뒤섞이는 기능이 수행되도록 하겠습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2444,7 +2444,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -2479,7 +2479,7 @@ notifyItemRangeRemoved(int, int)
 <p>데이터셋에 초기값을 넣어주고, 어댑터 인스턴스를 생성하여 리사이클러뷰와 연동시킵니다. 그리고 터치헬퍼를 달아 스와이프와 드래그를 했을때 데이터가 잘 갱신되는지 확인합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2519,7 +2519,7 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
         <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
     <span class="p">}</span>

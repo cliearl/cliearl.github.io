@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.85.0" />
+<meta name="generator" content="Hugo 0.86.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1751,12 +1751,12 @@ if (!doNotTrack) {
 <p>다음과 같은 인터페이스로 정의되며 특정한 dispatcher를 지정하여 동작이 실행될 스코프를 제한할 수 있습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">public</span> <span class="k">interface</span> <span class="nc">CoroutineScope</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">public</span> <span class="k">interface</span> <span class="nc">CoroutineScope</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">val</span> <span class="py">coroutineContext</span><span class="p">:</span> <span class="n">CoroutineContext</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -1807,12 +1807,12 @@ if (!doNotTrack) {
 <p>코루틴이라는 것은 프로그램의 흐름이라고 하는 추상적인 개념인데요, 코루틴 한 덩어리를 한 개의 Job이라는 오브젝트로 만들게 되면 그 오브젝트에 대해 취소나 예외처리를 함으로써 용이하게 코루틴의 흐름제어를 할 수 있게 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
     <span class="c1">// New coroutine
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></td></tr></table>
@@ -1890,7 +1890,7 @@ if (!doNotTrack) {
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1902,7 +1902,7 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">fetchDocs</span><span class="p">()</span> <span class="p">{</span>                      <span class="c1">// Dispatchers.Main
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">fetchDocs</span><span class="p">()</span> <span class="p">{</span>                      <span class="c1">// Dispatchers.Main
 </span><span class="c1"></span>    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="k">get</span><span class="p">(</span><span class="s2">&#34;developer.android.com&#34;</span><span class="p">)</span>  <span class="c1">// Dispatchers.Main
 </span><span class="c1"></span>    <span class="n">show</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>                               <span class="c1">// Dispatchers.Main
 </span><span class="c1"></span><span class="p">}</span>

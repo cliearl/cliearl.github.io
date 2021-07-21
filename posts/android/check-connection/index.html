@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.85.0" />
+<meta name="generator" content="Hugo 0.86.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1730,11 +1730,11 @@ if (!doNotTrack) {
 <p>인터넷에 접근하고 네트워크 상태를 가져오기 위해 AndroidManifest.xml에 다음 권한을 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> <span class="nt">/&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
 </code></pre></td></tr></table>
 </div>
@@ -1742,7 +1742,7 @@ if (!doNotTrack) {
 <p>우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1761,7 +1761,7 @@ if (!doNotTrack) {
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getNetworkType</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getNetworkType</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">connMgr</span> <span class="p">=</span>
         <span class="n">context</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">CONNECTIVITY_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">ConnectivityManager</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">Build</span><span class="p">.</span><span class="n">VERSION</span><span class="p">.</span><span class="n">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="p">.</span><span class="n">VERSION_CODES</span><span class="p">.</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
@@ -1790,7 +1790,7 @@ if (!doNotTrack) {
 <p>우선은 <a href="http://clients3.google.com/generate_204">http://clients3.google.com/generate_204</a>에 접속하여 response code를 받아오는 함수를 작성합니다. 네트워크에 접속해야 하므로 비동기로 처리하기 위해 Thread 클래스를 상속받도록 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1812,7 +1812,7 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">CheckConnection</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">host</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">CheckConnection</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">host</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">isSuccess</span> <span class="p">=</span> <span class="k">false</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
@@ -1837,7 +1837,7 @@ if (!doNotTrack) {
 </div><p>다음은 CheckConnection을 실행시켜주면 되겠죠. 스레드를 시작하고 204 응답이 돌아왔다면 true를 반환하는 함수를 만들어줍니다.메인스레드에서 작업이 끝날때까지 대기하도록 하기 위해 join()을 추가로 실행시켜 줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1850,7 +1850,7 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isOnline</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isOnline</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">cc</span> <span class="p">=</span> <span class="n">CheckConnection</span><span class="p">(</span><span class="s2">&#34;http://clients3.google.com/generate_204&#34;</span><span class="p">)</span>
     <span class="n">cc</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
     <span class="k">try</span> <span class="p">{</span>

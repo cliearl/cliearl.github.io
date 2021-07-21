@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.85.0" />
+<meta name="generator" content="Hugo 0.86.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1735,12 +1735,12 @@ if (!doNotTrack) {
 <p>뷰바인딩은 다음과 같이 사용하도록 변경합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
     <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -1748,7 +1748,7 @@ if (!doNotTrack) {
 </div><p>메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 리사이클러뷰 어댑터 안쪽으로 이동시키고 받아오는 파라미터를 삭제합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1757,7 +1757,7 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;().</span><span class="n">apply</span> <span class="p">{</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">99</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">add</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th main&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th sub&#34;</span><span class="p">))</span>
@@ -1769,7 +1769,7 @@ if (!doNotTrack) {
 </div><p>메인액티비티의 리사이클러뷰 프로퍼티를 정하는 부분은 with함수로 묶어줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1784,7 +1784,7 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">rvAdapter</span> <span class="p">=</span> <span class="n">RecyclerViewAdapter</span><span class="p">()</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -1803,7 +1803,7 @@ if (!doNotTrack) {
 <p>데이터를 조작하는 함수를 리사이클러뷰 안에 다음과 같이 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1825,7 +1825,7 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
 
     <span class="c1">// 뷰홀더 포지션을 받아 그 위치의 데이터를 삭제하고 notifyItemRemoved로 어댑터에 갱신명령을 전달
 </span><span class="c1"></span>    <span class="k">fun</span> <span class="nf">removeData</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
@@ -1851,7 +1851,7 @@ if (!doNotTrack) {
 <p>안드로이드에서는 리사이클러뷰에 입력되는 스와이프와 드래그 동작을 감지하는 콜백함수가 이미 준비되어 있습니다. 이 콜백함수는 onCreate() 안에 다음과 같이 정의하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1873,7 +1873,7 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">itemTouchCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span> <span class="p">(</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">itemTouchCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span> <span class="p">(</span>
     <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">UP</span> <span class="n">or</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">DOWN</span><span class="p">,</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">LEFT</span>
         <span class="p">){</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onMove</span><span class="p">(</span>
@@ -1905,7 +1905,7 @@ if (!doNotTrack) {
 <p>아이콘은 Vector Asset 메뉴에서 추가하고 리니어 레이아웃과 프레임 레이아웃을 섞어서 뷰홀더 모양을 수정했습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1952,7 +1952,7 @@ if (!doNotTrack) {
 </span><span class="lnt">45
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
     <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
     <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
@@ -2003,7 +2003,7 @@ if (!doNotTrack) {
 <p>다음으로 스와이프를 할때 미끄러져 나간 뷰홀더 아래에 Canvas클래스를 이용해 작성한 빨간색 비트맵 이미지와 휴지통 아이콘을 표시되도록 하겠습니다. 이것을 위해서는 ItemTouchHelper.SimpleCallback의 onChildDraw()를 사용합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2045,7 +2045,7 @@ if (!doNotTrack) {
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onChildDraw</span><span class="p">(</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin">            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onChildDraw</span><span class="p">(</span>
                 <span class="n">c</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">,</span>
                 <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
                 <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span>
@@ -2091,12 +2091,12 @@ if (!doNotTrack) {
 <p>리사이클러뷰 어댑터 안에 정의한 뷰홀더 클래스에 클릭 리스너를 붙여주면 뷰홀더의 터치를 인식할 수 있습니다. 그럴려면 뷰홀더가 사용하는 list_item.xml에서 전체 레이아웃에 id를 부여해줘야 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
     <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span> <span class="nt">&gt;</span>
 <span class="nt">&lt;/LinearLayout&gt;</span>
 </code></pre></td></tr></table>
@@ -2104,7 +2104,7 @@ if (!doNotTrack) {
 </div><p>그리고 클릭 리스너를 붙여주고 스낵바로 터치한 위치를 보여주고 setData() 함수가 실행되도록 합니다. 이때 setData는 리사이클러뷰 안의 함수이므로 뷰홀더 클래스에서 접근을 할 수가 없습니다. 그래서 뷰홀더를 inner 클래스로 변경하여줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2120,7 +2120,7 @@ if (!doNotTrack) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
 
     <span class="k">inner</span> <span class="k">class</span> <span class="nc">ViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ListItemBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
@@ -2140,12 +2140,12 @@ if (!doNotTrack) {
 <p>현재는 뷰홀더를 터치했을 때 내용이 바뀌도록 하긴 했지만 정확히 어떤 뷰홀더를 터치한건지에 대한 표시가 나타나지 않습니다. 하지만 xml에 다음과 같이 속성을 정의하면 터치한 뷰홀더를 주목시키는 효과를 추가할 수 있습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
     <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/LinearLayout&gt;</span>
 </code></pre></td></tr></table>

@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.85.0" />
+<meta name="generator" content="Hugo 0.86.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1728,12 +1728,12 @@ if (!doNotTrack) {
 <h2 id="google-admob-version-1960-이하에서의-구현">Google Admob Version 19.6.0 이하에서의 구현</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;com.google.android.gms:play-services-ads:19.6.0&#39;</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -1741,7 +1741,7 @@ if (!doNotTrack) {
 </div><p>AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 <a href="https://developers.google.com/admob/android/quick-start">구글에서 테스트용으로 제공하는 ID</a>를 입력하였습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1750,7 +1750,7 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;application</span>
         <span class="err">&lt;meta-data</span>
@@ -1762,7 +1762,7 @@ if (!doNotTrack) {
 </div><p>다음은 화면에 광고를 표시하는 버튼을 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1775,7 +1775,7 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
     <span class="err">&lt;Button</span>
         <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
         <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
@@ -1792,7 +1792,7 @@ if (!doNotTrack) {
 <p>광고를 불러오는 작업은 loadRewardedAd()에서 수행하고 광고를 표시하는 작업은 showRewardedAd()에서 수행하도록 합니다. 또한 보상값을 저장하는 reward 전역변수도 만들어 줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1819,7 +1819,7 @@ if (!doNotTrack) {
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">mRewardedAd</span><span class="p">:</span> <span class="n">RewardedAd</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">reward</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="m">0</span>
@@ -1851,7 +1851,7 @@ if (!doNotTrack) {
 <p>그리고 RewardedAdLoadCallback()의 인스턴스를 만들어서 loadAd에 바로 전달해줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1868,7 +1868,7 @@ if (!doNotTrack) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadRewardedAd</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadRewardedAd</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">adRequest</span> <span class="p">=</span> <span class="n">AdRequest</span><span class="p">.</span><span class="n">Builder</span><span class="p">().</span><span class="n">build</span><span class="p">()</span>
 
     <span class="n">mRewardedAd</span> <span class="p">=</span> <span class="n">RewardedAd</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&#34;ca-app-pub-3940256099942544/5224354917&#34;</span><span class="p">)</span>
@@ -1890,7 +1890,7 @@ if (!doNotTrack) {
 <p>그리고 RewardedAdCallback 객체를 만들어서 show()에 전달해주는데 이때 onRewardedAdClosed()로 광고를 닫으면 다음광고를 다시 로딩하도록 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1920,7 +1920,7 @@ if (!doNotTrack) {
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showRewardedAd</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showRewardedAd</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">mRewardedAd</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">mRewardedAd</span><span class="o">!!</span><span class="p">.</span><span class="n">isLoaded</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">mRewardedAd</span><span class="o">?.</span><span class="n">show</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">object</span> <span class="err">: </span><span class="nc">RewardedAdCallback</span><span class="p">()</span> <span class="p">{</span>
@@ -1954,7 +1954,7 @@ if (!doNotTrack) {
 <p>구현은 loadRewardedAd()와 showRewardedAd()의 내용만 변경하면 됩니다. 우선 loadRewardedAd()는 다음과 같이 변경됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1973,7 +1973,7 @@ if (!doNotTrack) {
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadRewardedAd</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadRewardedAd</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">adRequest</span> <span class="p">=</span> <span class="n">AdRequest</span><span class="p">.</span><span class="n">Builder</span><span class="p">().</span><span class="n">build</span><span class="p">()</span>
 
     <span class="n">RewardedAd</span><span class="p">.</span><span class="n">load</span><span class="p">(</span>
@@ -1995,7 +1995,7 @@ if (!doNotTrack) {
 </div><p>그리고 showRewardedAd()는 다음과 같이 변경합니다. mRewardedAd 대해 null체크를 수행한 뒤 FullScreenContentCallback 프로퍼티를 작성해주고 show()로 광고를 보여주면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2025,7 +2025,7 @@ if (!doNotTrack) {
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showRewardedAd</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showRewardedAd</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">mRewardedAd</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">mRewardedAd</span><span class="o">?.</span><span class="n">fullScreenContentCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">FullScreenContentCallback</span><span class="p">()</span> <span class="p">{</span>
             <span class="k">override</span> <span class="k">fun</span> <span class="nf">onAdDismissedFullScreenContent</span><span class="p">()</span> <span class="p">{</span>

@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.85.0" />
+<meta name="generator" content="Hugo 0.86.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1734,12 +1734,12 @@ if (!doNotTrack) {
 <p>우선 Gson을 디펜던시에 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;com.google.code.gson:gson:2.8.6&#39;</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -1747,7 +1747,7 @@ if (!doNotTrack) {
 </div><p>다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1762,7 +1762,7 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
     <span class="err">&lt;com.google.android.material.floatingactionbutton.FloatingActionButton</span>
         <span class="na">android:id=</span><span class="s">&#34;@+id/button_load&#34;</span>
         <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
@@ -1780,13 +1780,13 @@ if (!doNotTrack) {
 </div><p>SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY_PREFS</span> <span class="p">=</span> <span class="s2">&#34;shared_preferences&#34;</span>
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY_DATA</span> <span class="p">=</span> <span class="s2">&#34;monster_data&#34;</span>
 <span class="p">}</span>
@@ -1795,7 +1795,7 @@ if (!doNotTrack) {
 </div><p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 다른 <a href="https://youtu.be/4rYMfpbpwPA">강의</a>에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. 리사이클러뷰 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1806,7 +1806,7 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">savePref</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">savePref</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
     <span class="k">val</span> <span class="py">editor</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">edit</span><span class="p">()</span>
     <span class="k">val</span> <span class="py">gson</span> <span class="p">=</span> <span class="n">Gson</span><span class="p">()</span>
@@ -1820,7 +1820,7 @@ if (!doNotTrack) {
 </div><p>이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, 타입토큰을 적용해서 데이터를 복원하는 부분이 추가되었습니다. json으로 SharedPreferences에 저장하는 순간 데이터가 가지고 있는 타입정보가 모두 사라지기 때문에 데이터를 복원하면서 타입정보를 다시 부여하기 위해 타입토큰을 사용합니다. 여기서는 &laquo;ArrayList<Monster>&gt;라는 타입을 만들어서 데이터에 부여해 줍니다. 그리고 리사이클러뷰 어댑터 안의 데이터는 변경가능하도록 var 로 변경해줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1836,7 +1836,7 @@ if (!doNotTrack) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadPref</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadPref</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">sharedPreferences</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">val</span> <span class="py">gson</span> <span class="p">=</span> <span class="n">Gson</span><span class="p">()</span>
@@ -1855,7 +1855,7 @@ if (!doNotTrack) {
 </div><p>다음은 메인액티비티 안에서 savePref()와 loadPref()를 실행시키면 됩니다. loadPref()를 실행하면 어댑터에 데이터 변경을 알려주면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1869,7 +1869,7 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
     <span class="n">binding</span><span class="p">.</span><span class="n">buttonLoad</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
         <span class="n">loadPref</span><span class="p">()</span>
         <span class="n">rvAdapter</span><span class="p">.</span><span class="n">notifyItemChanged</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">rvAdapter</span><span class="p">.</span><span class="n">dataSet</span><span class="p">.</span><span class="n">size</span><span class="p">)</span>

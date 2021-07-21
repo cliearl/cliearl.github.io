@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.85.0" />
+<meta name="generator" content="Hugo 0.86.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1745,14 +1745,14 @@ if (!doNotTrack) {
 <h3 id="view-binding-처리">view binding 처리</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">build</span><span class="o">.</span><span class="na">gradle</span>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">build</span><span class="o">.</span><span class="na">gradle</span>
 
 <span class="n">android</span> <span class="o">{</span>
 	<span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
@@ -1763,17 +1763,17 @@ if (!doNotTrack) {
 <p>메인액티비티 안에 프로그래스다이얼로그용 전역변수를 만들어줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">progressDialog</span><span class="p">:</span> <span class="n">ProgressDialog</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">progressDialog</span><span class="p">:</span> <span class="n">ProgressDialog</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>버튼을 터치했을때 다이얼로그가 표시되게 할 것이므로<br />
 버튼의 클릭리스너 안에서 프로그레스다이얼로그를 설정합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1782,7 +1782,7 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">progressDialog</span> <span class="p">=</span> <span class="n">ProgressDialog</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">progressDialog</span> <span class="p">=</span> <span class="n">ProgressDialog</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">max</span> <span class="p">=</span> <span class="m">100</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">setProgressStyle</span><span class="p">(</span><span class="n">ProgressDialog</span><span class="p">.</span><span class="n">STYLE_HORIZONTAL</span><span class="p">)</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&#34;Download Task&#34;</span><span class="p">)</span>
@@ -1800,7 +1800,7 @@ if (!doNotTrack) {
 <p>스레드에서 사용할 핸들러 객체는 다음과 같이 만들어 줍니다. handleMessage 메소드를 오버라이드하고 그 안에 수행할 UI작업을 작성하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1808,7 +1808,7 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span><span class="p">:</span> <span class="n">Handler</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">Handler</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span><span class="p">:</span> <span class="n">Handler</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">Handler</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">super</span><span class="p">.</span><span class="n">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">progressDialog</span><span class="p">.</span><span class="n">incrementProgressBy</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
@@ -1820,7 +1820,7 @@ if (!doNotTrack) {
 <p>코틀린에서 스레드를 사용하는 방법은 Thread 클래스를 상속받아 스레드를 직접 구현하는 법, 그리고 Runnable 인터페이스로 구현하는 법이 있습니다. 여기서는 스레드 클래스를 변경할 필요가 없으므로 간편하게 구현할 수 있는 runnable 인터페이스를 사용하겠습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1835,7 +1835,7 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">Thread</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">Thread</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
         <span class="k">while</span> <span class="p">(</span><span class="n">progressDialog</span><span class="p">.</span><span class="n">progress</span> <span class="o">&lt;=</span> <span class="n">progressDialog</span><span class="p">.</span><span class="n">max</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">200</span><span class="p">)</span>
@@ -1859,7 +1859,7 @@ if (!doNotTrack) {
 <p>그렇게 하기 위해서는 핸들러를 만들 때 메인 스레드의 루퍼를 전달해주면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1867,7 +1867,7 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span><span class="p">:</span> <span class="n">Handler</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">Handler</span><span class="p">(</span><span class="n">Looper</span><span class="p">.</span><span class="n">getMainLooper</span><span class="p">())</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span><span class="p">:</span> <span class="n">Handler</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">Handler</span><span class="p">(</span><span class="n">Looper</span><span class="p">.</span><span class="n">getMainLooper</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">super</span><span class="p">.</span><span class="n">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">progressDialog</span><span class="p">.</span><span class="n">incrementProgressBy</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
@@ -1885,7 +1885,7 @@ if (!doNotTrack) {
 <p>코틀린에서 만들어지는 클래스는 기본적으로 static 이므로 다음과 같이 핸들러 클래스를 만들어 사용하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1894,7 +1894,7 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span> <span class="p">=</span> <span class="n">MyHandler</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span> <span class="p">=</span> <span class="n">MyHandler</span><span class="p">()</span>
 
 <span class="k">private</span> <span class="k">class</span> <span class="nc">MyHandler</span><span class="p">()</span> <span class="p">:</span> <span class="n">Handler</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="p">{</span>
@@ -1907,7 +1907,7 @@ if (!doNotTrack) {
 <p>그런데 정적인 핸들러 클래스를 만들었지만 우리가 사용할 핸들러는 액티비티의 progressDialog를 참조하여야 하므로 다시 참조가 생기게 됩니다, 따라서 weakreference를 이용해서 이를 약한참조로 만들어 줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1919,7 +1919,7 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">MyHandler</span><span class="p">(</span><span class="n">activity</span><span class="p">:</span> <span class="n">MainActivity</span><span class="p">?)</span> <span class="p">:</span> <span class="n">Handler</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">MyHandler</span><span class="p">(</span><span class="n">activity</span><span class="p">:</span> <span class="n">MainActivity</span><span class="p">?)</span> <span class="p">:</span> <span class="n">Handler</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">weakReference</span><span class="p">:</span> <span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">MainActivity</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">WeakReference</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="p">{</span>

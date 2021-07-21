@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.85.0" />
+<meta name="generator" content="Hugo 0.86.0" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1869,15 +1869,15 @@ if (!doNotTrack) {
 <p>이 화면을 브라우저의 개발자도구로 보면 html의 레이아웃을 확인할 수 있습니다. 우리가 원하는 정보는 containerWrap &gt; article &gt; wrap_box wrap1 &gt; box win win645 &gt; content 클래스 안에 위치하고 있네요. 여기서 회차와 당첨번호는 다음과 같은 요소로 정의되어 있습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">strong</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;lottoDrwNo&#34;</span><span class="p">&gt;</span>968<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">strong</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;lottoDrwNo&#34;</span><span class="p">&gt;</span>968<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1888,7 +1888,7 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;accessibility&#34;</span><span class="p">&gt;</span>당첨번호<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;accessibility&#34;</span><span class="p">&gt;</span>당첨번호<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;drwtNo1&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;ball_645 ball1&#34;</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;drwtNo2&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;ball_645 ball1&#34;</span><span class="p">&gt;</span>5<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;drwtNo3&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;ball_645 ball2&#34;</span><span class="p">&gt;</span>12<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
@@ -1902,16 +1902,16 @@ if (!doNotTrack) {
 </div><p>우선은 dependency를 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="n">jsoup</span><span class="p">:</span><span class="n">jsoup</span><span class="p">:</span><span class="m">1.13</span><span class="p">.</span><span class="m">1</span><span class="err">&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="n">jsoup</span><span class="p">:</span><span class="n">jsoup</span><span class="p">:</span><span class="m">1.13</span><span class="p">.</span><span class="m">1</span><span class="err">&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>다음은 당첨번호를 가져오는 crawlLottoNumbers함수를 작성합니다. API로 당첨번호를 가져오는 getLottoNumbers와 동일하게 반환값이 당첨번호, 보너스번호, 회차 정보를 가지도록 하겠습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1933,7 +1933,7 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">private</span> <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">crawlLottoNumbers</span><span class="p">()</span> <span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">private</span> <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">crawlLottoNumbers</span><span class="p">()</span> <span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
         <span class="k">val</span> <span class="py">lottoNumbers</span> <span class="p">=</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
         <span class="c1">// var doc: Document? = null
 </span><span class="c1"></span>        <span class="k">try</span> <span class="p">{</span>
