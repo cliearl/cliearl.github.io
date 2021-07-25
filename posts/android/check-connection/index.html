@@ -1725,7 +1725,8 @@ if (!doNotTrack) {
       
       <p>이번 포스팅에서는 단말의 인터넷 연결상태를 체크하는 법에 대해 알아보도록 하겠습니다.</p>
 <p>앱을 만들다보면 WIFI를 사용할 수 있는 환경에서 대용량 데이터를 다운로드하도록 하는 등의 처리를 위해 단말의 인터넷 연결상태를 체크해야 할 일이 있습니다.<br />
-이때 <a href="https://developer.android.com/reference/android/net/ConnectivityManager">ConnectivityManager</a>를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.</p>
+이때 <a href="https://developer.android.com/reference/android/net/ConnectivityManager" target="_blank" rel="noopener">ConnectivityManager</a>
+를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.</p>
 <h2 id="권한추가">권한추가</h2>
 <p>인터넷에 접근하고 네트워크 상태를 가져오기 위해 AndroidManifest.xml에 다음 권한을 추가합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -1784,10 +1785,13 @@ if (!doNotTrack) {
 <p>그러나 마시멜로우 이상에서는 ConnectivityManager의 activeNetwork 프로퍼티로 우선 기본 데이터 네트워크를 받아옵니다. 그리고 TransportInfo로 네트워크 타입을 가져오기 위해 getNetworkCapabilities 인스턴스를 만들어줍니다. 이 시점에서 접속이 확인되지 않을 경우 네트워크에 접속되지 않은 것입니다.</p>
 <h2 id="네트워크-접속여부-확인">네트워크 접속여부 확인</h2>
 <p>NetworkInfo 인스턴스의 isConnected() 메소드를 사용하면 현재 인터넷에 접속되어있는지를 확인할 수 있습니다. 그런데 이 메소드로는 버스나 공항에서 접속할 수 있는 인증이 필요한 와이파이에 대해서는 인증이 되지 않아서 실제로는 와아파이를 사용할 수 없어도 true를 반환하게 됩니다.</p>
-<p>따라서 실제로 임의의 주소에 핑을 날려보는게 더 확실합니다. 구글에서는 이렇게 네트워크 접속을 확인할 때 쓰라고 <a href="https://www.chromium.org/chromium-os/chromiumos-design-docs/network-portal-detection">Network Portal Detection 사이트</a>를 준비해 놓았습니다. 그 주소는 다음과 같습니다.<br />
-<a href="http://clients3.google.com/generate_204">http://clients3.google.com/generate_204</a></p>
+<p>따라서 실제로 임의의 주소에 핑을 날려보는게 더 확실합니다. 구글에서는 이렇게 네트워크 접속을 확인할 때 쓰라고 <a href="https://www.chromium.org/chromium-os/chromiumos-design-docs/network-portal-detection" target="_blank" rel="noopener">Network Portal Detection 사이트</a>
+를 준비해 놓았습니다. 그 주소는 다음과 같습니다.<br />
+<a href="http://clients3.google.com/generate_204" target="_blank" rel="noopener">http://clients3.google.com/generate_204</a>
+</p>
 <p>이 주소로 접속에 성공하면 &lsquo;HTTP 204 No Content&rsquo; 를 반환합니다. 204 응답이 돌아오면 단말이 인터넷을 사용할 수 있는 상태라는 거지요.</p>
-<p>우선은 <a href="http://clients3.google.com/generate_204">http://clients3.google.com/generate_204</a>에 접속하여 response code를 받아오는 함수를 작성합니다. 네트워크에 접속해야 하므로 비동기로 처리하기 위해 Thread 클래스를 상속받도록 합니다.</p>
+<p>우선은 <a href="http://clients3.google.com/generate_204" target="_blank" rel="noopener">http://clients3.google.com/generate_204</a>
+에 접속하여 response code를 받아오는 함수를 작성합니다. 네트워크에 접속해야 하므로 비동기로 처리하기 위해 Thread 클래스를 상속받도록 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1

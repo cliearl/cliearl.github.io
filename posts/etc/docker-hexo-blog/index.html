@@ -1731,14 +1731,20 @@ if (!doNotTrack) {
 <p>개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다.</p>
 <p>처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기.</p>
 <p>그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다.<br />
-그래서 <a href="https://ani2life.com/wp/?p=898">TTXML Importer</a>로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.</p>
-<p>어차피 블로그를 깔끔하게 옮길 수 없다면 기술블로그 전용 툴을 쓰자 해서 찾은게 <a href="https://ghost.org/">Ghost</a>인데 얘는 카테고리나 사이드바 기능이 부족해서 탈락시켰다.</p>
-<p>그 다음으로 찾은 선택지는 정적 사이트 생성기를 이용하는 거였다. 마크다운 쓰기도 좋고, github.io 주소도 사용할 수 있으니 괜찮아보였다. 그래서 찾아보니 <a href="https://jekyllrb.com/">Jekyll</a>에는 맘에 드는 스킨이 없어서 <a href="https://hexo.io/ko/index.html">Hexo</a>에 <a href="https://blog.zhangruipeng.me/hexo-theme-icarus/">Icarus</a>라는 테마를 붙여 써보기로 했다.</p>
+그래서 <a href="https://ani2life.com/wp/?p=898" target="_blank" rel="noopener">TTXML Importer</a>
+로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.</p>
+<p>어차피 블로그를 깔끔하게 옮길 수 없다면 기술블로그 전용 툴을 쓰자 해서 찾은게 <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+인데 얘는 카테고리나 사이드바 기능이 부족해서 탈락시켰다.</p>
+<p>그 다음으로 찾은 선택지는 정적 사이트 생성기를 이용하는 거였다. 마크다운 쓰기도 좋고, github.io 주소도 사용할 수 있으니 괜찮아보였다. 그래서 찾아보니 <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>
+에는 맘에 드는 스킨이 없어서 <a href="https://hexo.io/ko/index.html" target="_blank" rel="noopener">Hexo</a>
+에 <a href="https://blog.zhangruipeng.me/hexo-theme-icarus/" target="_blank" rel="noopener">Icarus</a>
+라는 테마를 붙여 써보기로 했다.</p>
 <p>근데 정적 사이트 생성기는 소스를 로컬에 보관하고 github.io로 퍼블리시하는 구조라, 모든 컴퓨터에 Hexo 소스를 보관할 필요가 있다. 이건 너무 바보같아서 Hexo 소스는 도커로 웹에 띄우고 이놈으로부터 github.io에 퍼블리싱하는 방법을 쓰기로 했다. 굳이 따지면 웹에 띄운 시점에서 바로 접속이 가능하니 굳이 퍼블리시를 할 필요는 없는거긴 한데 사이트를 매번 변환하는것보다는 당연히 변환된 저장소에 접속하는 편이 빠르고 무엇보다 github.io 주소를 쓰는 편이 더 geek하기 때문에 사용하기로 했다.</p>
 <p>그래서 이 포스트에서는 리눅스 서버에 도커로 Hexo를 띄우고, Hexo-admin 플러그인으로 퍼블리시한 파일을 github.io에 deploy하여 최종적으로는 유저명.github.io로 정적 블로그를 구축하는 법을 설명한다.</p>
 <h1 id="github-repository-생성">github repository 생성</h1>
 <ul>
-<li><a href="https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site">https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site</a></li>
+<li><a href="https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener">https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site</a>
+</li>
 <li>깃헙에 유저명.github.io라는 저장소 생성</li>
 <li>이때 속성은 Public, Initialize this repository with a README를 선택</li>
 <li>생성된 저장소의 settings → GitHub Pages → Theme Chooser 에서 테마를 아무거나 하나 골라주면 블로그가 가동됨</li>
@@ -1746,7 +1752,8 @@ if (!doNotTrack) {
 </ul>
 <h2 id="도커-이미지-선정">도커 이미지 선정</h2>
 <ul>
-<li><a href="https://github.com/spurin/docker-hexo">https://github.com/spurin/docker-hexo</a></li>
+<li><a href="https://github.com/spurin/docker-hexo" target="_blank" rel="noopener">https://github.com/spurin/docker-hexo</a>
+</li>
 <li>Hexo와 관리용 Hexo-admin이 포함되어 있는 이미지</li>
 </ul>
 <h2 id="icarus-테마-셋업">icarus 테마 셋업</h2>
@@ -1779,7 +1786,8 @@ npm install --save bulma-stylus@0.8.0 hexo-renderer-inferno@^0.1.3 hexo-componen
 </ul>
 <h2 id="hexo-admin에서-deploy-설정">hexo-admin에서 deploy 설정</h2>
 <ul>
-<li><a href="https://github.com/jaredly/hexo-admin/issues/70">https://github.com/jaredly/hexo-admin/issues/70</a></li>
+<li><a href="https://github.com/jaredly/hexo-admin/issues/70" target="_blank" rel="noopener">https://github.com/jaredly/hexo-admin/issues/70</a>
+</li>
 <li>sh파일을 만들고 yml 파일을 수정한다</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -1812,8 +1820,10 @@ hexo deploy
   deployCommand: <span class="s1">&#39;./hexo-deploy.sh&#39;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="유용한-플러그인httpshexoioplugins"><a href="https://hexo.io/plugins/">유용한 플러그인</a></h2>
-<h3 id="hexo-deployer-githttpsgithubcomhexojshexo-deployer-git"><a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a></h3>
+</div><h2 id="유용한-플러그인httpshexoioplugins"><a href="https://hexo.io/plugins/" target="_blank" rel="noopener">유용한 플러그인</a>
+</h2>
+<h3 id="hexo-deployer-githttpsgithubcomhexojshexo-deployer-git"><a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deployer-git</a>
+</h3>
 <ul>
 <li>git으로 배포하기 위한 플러그인</li>
 </ul>
@@ -1827,7 +1837,8 @@ hexo deploy
 npm install hexo-deployer-git --save
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed"><a href="https://github.com/hexojs/hexo-generator-feed">hexo-generator-feed</a></h3>
+</div><h3 id="hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed"><a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="noopener">hexo-generator-feed</a>
+</h3>
 <ul>
 <li>atom(url/atom.xml ) 혹은 rss2.0(url/rss2.xml)으로 피드 생성해 줌</li>
 </ul>
@@ -1855,7 +1866,8 @@ feed:
   limit: <span class="m">20</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap"><a href="https://github.com/hexojs/hexo-generator-sitemap">hexo-generator-sitemap</a></h3>
+</div><h3 id="hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap"><a href="https://github.com/hexojs/hexo-generator-sitemap" target="_blank" rel="noopener">hexo-generator-sitemap</a>
+</h3>
 <ul>
 <li>sitemap.xml 파일을 자동생성</li>
 </ul>
@@ -1877,7 +1889,8 @@ sitemap:
   path: sitemap.xml
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="hexo-mathhttpsgithubcomhexojshexo-math"><a href="https://github.com/hexojs/hexo-math">hexo-math</a></h3>
+</div><h3 id="hexo-mathhttpsgithubcomhexojshexo-math"><a href="https://github.com/hexojs/hexo-math" target="_blank" rel="noopener">hexo-math</a>
+</h3>
 <ul>
 <li>KaTeX and MathJax를 활성화 시켜주는 플러그인</li>
 <li>플러그인 설치</li>

@@ -1723,7 +1723,8 @@ if (!doNotTrack) {
       
       <p>이번 포스팅에서는 리사이클러뷰를 사용하는 법에 대해 알아보도록 하겠습니다.</p>
 <h2 id="리사이클러뷰의-특징">리사이클러뷰의 특징</h2>
-<p><a href="https://developer.android.com/jetpack/androidx/releases/recyclerview">리사이클러뷰</a>는 화면에 리스트 형식의 데이터를 표시하기 위해서 사용하는 모듈입니다. 보통 화면에 리스트뷰를 표시할수 있게 하는 리스트뷰는 예를들어 데이터가 10개 있을 경우 데이터를 표시하기 위한 뷰홀더가 10개 필요합니다. 그러나 리사이클러뷰는 뷰홀더를 6개만 만들고 화면에는 5개를 표시한 후 화면 바깥으로 1번 뷰홀더가 빠져나가면 7번 뷰홀더로 변경해서 재사용합니다. 그래서 자원을 더 아낄 수 있게 되는 것이죠.</p>
+<p><a href="https://developer.android.com/jetpack/androidx/releases/recyclerview" target="_blank" rel="noopener">리사이클러뷰</a>
+는 화면에 리스트 형식의 데이터를 표시하기 위해서 사용하는 모듈입니다. 보통 화면에 리스트뷰를 표시할수 있게 하는 리스트뷰는 예를들어 데이터가 10개 있을 경우 데이터를 표시하기 위한 뷰홀더가 10개 필요합니다. 그러나 리사이클러뷰는 뷰홀더를 6개만 만들고 화면에는 5개를 표시한 후 화면 바깥으로 1번 뷰홀더가 빠져나가면 7번 뷰홀더로 변경해서 재사용합니다. 그래서 자원을 더 아낄 수 있게 되는 것이죠.</p>
 <p>또 데이터는 리사이클러뷰 어댑터를 통해 뷰홀더에 들어가게 되는데 뷰홀더에 데이터 1을 넣어서 표현했을 경우, 뷰홀더는 그대로 놔두고 데이터 2를 넣는 식으로 뷰홀더를 재활용해서 사용할 수 있습니다. 그래서 리사이클러뷰라는 이름이 붙게 된 것이죠.</p>
 <h2 id="리사이클러뷰-구현">리사이클러뷰 구현</h2>
 <h3 id="라이브러리-추가">라이브러리 추가</h3>
@@ -1843,8 +1844,10 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="리사이클러뷰-어댑터-작성">리사이클러뷰 어댑터 작성</h3>
-<p>다음은 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter">RecyclerView.Adapter</a> 클래스를 상속받는 리사이클러뷰 어댑터를 작성합니다. 외부에서 전달받을 데이터는 dataSet이라고 정의했습니다.</p>
-<p>그리고 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder">뷰홀더 클래스</a>를 작성합니다. 여기서는 외부에서 전달받은 데이터를 뷰홀더 화면의 텍스트뷰와 연결하는 작업을 bind()함수로 정의합니다.</p>
+<p>다음은 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter" target="_blank" rel="noopener">RecyclerView.Adapter</a>
+ 클래스를 상속받는 리사이클러뷰 어댑터를 작성합니다. 외부에서 전달받을 데이터는 dataSet이라고 정의했습니다.</p>
+<p>그리고 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder" target="_blank" rel="noopener">뷰홀더 클래스</a>
+를 작성합니다. 여기서는 외부에서 전달받은 데이터를 뷰홀더 화면의 텍스트뷰와 연결하는 작업을 bind()함수로 정의합니다.</p>
 <p>onCreateViewHolder에서 ViewHolder클래스에 list_item으로 inflate한 객체를 넘겨준 뷰홀더를 작성하여 반환합니다. onBindViewHolder에서는 뷰홀더 클래스의 bind()함수로 작성된 뷰홀더와 전달받은 개별 데이터를 연결합니다. getItemCount에서는 전달받은 데이터의 전체길이를 넘겨주어 어댑터가 뷰홀더를 얼마나 만들어야 할지를 결정하게 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1947,7 +1950,8 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="리사이클러뷰와-어댑터-연결">리사이클러뷰와 어댑터 연결</h3>
-<p>마지막으로 리사이클러뷰와 어댑터를 연결해줍니다. 리사이클러뷰 안에서 뷰홀더를 어떻게 정렬할지 결정하는 레이아웃매니저 프로퍼티를 정의하는데 여기서는 리니어레이아웃 매니저를 사용하였습니다. 그 외 그리드형태로 정렬할 수도 있는데 구체적인 내용은 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.LayoutManager">개발자 홈페이지</a>를 참고하세요.</p>
+<p>마지막으로 리사이클러뷰와 어댑터를 연결해줍니다. 리사이클러뷰 안에서 뷰홀더를 어떻게 정렬할지 결정하는 레이아웃매니저 프로퍼티를 정의하는데 여기서는 리니어레이아웃 매니저를 사용하였습니다. 그 외 그리드형태로 정렬할 수도 있는데 구체적인 내용은 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.LayoutManager" target="_blank" rel="noopener">개발자 홈페이지</a>
+를 참고하세요.</p>
 <p>그리고 위에서 만들어 준 RecyclerViewAdapter 초기화하여 adapter 프로퍼티에 반영해줍니다.</p>
 <p>addItemDecoration 속성을 정의하면 각 뷰홀더 사이에 선을 표시할 수도 있습니다.</p>
 <div class="highlight"><div class="chroma">

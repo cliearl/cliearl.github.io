@@ -1732,7 +1732,8 @@ if (!doNotTrack) {
 <li>assets folder</li>
 <li>resources/raw folder</li>
 </ul>
-<p><a href="https://stackoverflow.com/questions/5583608/difference-between-res-and-assets-directories">각 폴더의 특징</a>은 다음과 같습니다.</p>
+<p><a href="https://stackoverflow.com/questions/5583608/difference-between-res-and-assets-directories" target="_blank" rel="noopener">각 폴더의 특징</a>
+은 다음과 같습니다.</p>
 <table>
 <thead>
 <tr>
@@ -1777,16 +1778,23 @@ if (!doNotTrack) {
 <p>간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.</p>
 <h2 id="앱-만들어보기">앱 만들어보기</h2>
 <p>그럼 asset폴더를 사용해보기 위해 json 파일을 불러와서 리사이클러뷰에 표시하는 간단한 앱을 만들어 보겠습니다.</p>
-<p>리사이클러뷰는 기존에 <a href="https://youtu.be/cN1UVAeP63c">다른강의</a>에서 작성했던 프로젝트를 참고해서 사용하겠습니다. Json 포맷을 다루어야 하므로 우선 Gson 라이브러리를 추가합니다. Gson에 대한 구체적인 설명에 대해서는 역시 <a href="https://youtu.be/wkOa_-NGhd4">다른강의</a>에서 설명한 내용을 참조하시기 바랍니다.</p>
+<p>리사이클러뷰는 기존에 <a href="https://youtu.be/cN1UVAeP63c" target="_blank" rel="noopener">다른강의</a>
+에서 작성했던 프로젝트를 참고해서 사용하겠습니다. Json 포맷을 다루어야 하므로 우선 Gson 라이브러리를 추가합니다. Gson에 대한 구체적인 설명에 대해서는 역시 <a href="https://youtu.be/wkOa_-NGhd4" target="_blank" rel="noopener">다른강의</a>
+에서 설명한 내용을 참조하시기 바랍니다.</p>
 <h3 id="데이터-준비">데이터 준비</h3>
 <p>New &gt; Folder &gt; Asset Folder로 assets 폴더를 추가합니다.</p>
-<p>데이터는 경기데이터드림에서 제공하는 <a href="https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=461Q599QLK8UTE14E3LW12837248&amp;infSeq=1">코로나바이러스 감염증 선별진료소 운영 의료기관 현황</a>데이터를 사용하겠습니다.</p>
-<p>sheet 탭에서 json을 클릭하여 데이터를 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 값들을 정렬하는게 보기에 좋을 것 같으니 <a href="https://jsonformatter.curiousconcept.com/">Json Formatter</a> 에서 파일을 정렬하고 data.json으로 assets 폴더에 저장합니다.</p>
+<p>데이터는 경기데이터드림에서 제공하는 <a href="https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=461Q599QLK8UTE14E3LW12837248&amp;infSeq=1" target="_blank" rel="noopener">코로나바이러스 감염증 선별진료소 운영 의료기관 현황</a>
+데이터를 사용하겠습니다.</p>
+<p>sheet 탭에서 json을 클릭하여 데이터를 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 값들을 정렬하는게 보기에 좋을 것 같으니 <a href="https://jsonformatter.curiousconcept.com/" target="_blank" rel="noopener">Json Formatter</a>
+ 에서 파일을 정렬하고 data.json으로 assets 폴더에 저장합니다.</p>
 <h3 id="데이터클래스-준비">데이터클래스 준비</h3>
 <p>데이터 파일에는 데이터기준일자, 시군명,	의료기관명,	의료기관 구분,	의료기관 전화번호1,	의료기관 전화번호2,	소재지지번주소,	소재지도로명주소,	WGS84위도,	WGS84경도 등 여러가지 탭이 있습니다.</p>
-<p>각 데이터는 배열 속의 데이터클래스로 관리하기 위해 데이터클래스를 만들어줍니다. 데이터클래스의 특징에 대해서는 <a href="https://youtu.be/opPmxtI4rLQ">다른 강의</a>에서 설명한 내용을 참고하시기 바랍니다.</p>
-<p>안드로이드 스튜디오에 <a href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-">Kotlin data class File from JSON</a> 플러그인을 설치하면 json 파일을 손쉽게 데이터클래스로 변환할 수 있습니다.</p>
-<p>New &gt; <a href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-">Kotlin data class File from JSON</a>을 선택하여 위에서 만든 json 데이터와 클래스명을 입력하면 자동으로 데이터클래스와, 그 클래스를 아이템으로 갖는 배열 클래스가 생성되는데 클래스 이름은 CoronaMed라고 하겠습니다.</p>
+<p>각 데이터는 배열 속의 데이터클래스로 관리하기 위해 데이터클래스를 만들어줍니다. 데이터클래스의 특징에 대해서는 <a href="https://youtu.be/opPmxtI4rLQ" target="_blank" rel="noopener">다른 강의</a>
+에서 설명한 내용을 참고하시기 바랍니다.</p>
+<p>안드로이드 스튜디오에 <a href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-" target="_blank" rel="noopener">Kotlin data class File from JSON</a>
+ 플러그인을 설치하면 json 파일을 손쉽게 데이터클래스로 변환할 수 있습니다.</p>
+<p>New &gt; <a href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-" target="_blank" rel="noopener">Kotlin data class File from JSON</a>
+을 선택하여 위에서 만든 json 데이터와 클래스명을 입력하면 자동으로 데이터클래스와, 그 클래스를 아이템으로 갖는 배열 클래스가 생성되는데 클래스 이름은 CoronaMed라고 하겠습니다.</p>
 <h3 id="리사이클러뷰-구축하기">리사이클러뷰 구축하기</h3>
 <p>다음으로 새로 만들어진 데이터클래스의 형식에 맞게 리사이클러뷰와 뷰홀더의 형태를 정의해줍니다. activity_main.xml에 recyclerview를 추가합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -1994,7 +2002,8 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="assets-폴더속-파일-불러오기">assets 폴더속 파일 불러오기</h3>
-<p>다음은 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 <a href="https://developer.android.com/reference/android/content/res/AssetManager">Asset Manager</a> 인스턴스를 생성하고 bufferedReader()를 이용해 InputStream을 텍스트로 변환합니다.</p>
+<p>다음은 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 <a href="https://developer.android.com/reference/android/content/res/AssetManager" target="_blank" rel="noopener">Asset Manager</a>
+ 인스턴스를 생성하고 bufferedReader()를 이용해 InputStream을 텍스트로 변환합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1

@@ -1727,10 +1727,12 @@ if (!doNotTrack) {
       
       <p>이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.</p>
 <p>SharedPreferences는 키-밸류 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 밸류 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.</p>
-<p>이 때 앱 안의 데이터를 json으로 시리얼라이즈하고 다시 복원하는 디시리얼라이즈를 편하게 실행하게 해 주는 <a href="https://github.com/google/gson">Gson</a>이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.</p>
+<p>이 때 앱 안의 데이터를 json으로 시리얼라이즈하고 다시 복원하는 디시리얼라이즈를 편하게 실행하게 해 주는 <a href="https://github.com/google/gson" target="_blank" rel="noopener">Gson</a>
+이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.</p>
 <h2 id="코딩-타임">코딩 타임</h2>
 <p>포스팅에서는 다른 강의에서 만들었던 리사이클러뷰 프로젝트를 수정하면서 구현해보겠습니다.<br />
-<a href="https://youtu.be/opPmxtI4rLQ">https://youtu.be/opPmxtI4rLQ</a></p>
+<a href="https://youtu.be/opPmxtI4rLQ" target="_blank" rel="noopener">https://youtu.be/opPmxtI4rLQ</a>
+</p>
 <p>우선 Gson을 디펜던시에 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1792,7 +1794,8 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 다른 <a href="https://youtu.be/4rYMfpbpwPA">강의</a>에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. 리사이클러뷰 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.</p>
+</div><p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 다른 <a href="https://youtu.be/4rYMfpbpwPA" target="_blank" rel="noopener">강의</a>
+에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. 리사이클러뷰 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
