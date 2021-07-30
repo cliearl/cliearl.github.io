@@ -1722,15 +1722,17 @@ if (!doNotTrack) {
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
       <p>이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.</p>
-<h2 id="들어가기">들어가기</h2>
+<h2 id="legacy-icon과-adaptive-icon">Legacy Icon과 Adaptive Icon</h2>
 <p>안드로이드 앱에서는 현재 두 가지 종류의 아이콘을 사용할 수 있습니다. 하나는 Legacy Icon이고 또 하나는 Adaptive Icon입니다.</p>
-<p>Adaptive Icon은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.</p>
+<p><a href="https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive" target="_blank" rel="noopener">Adaptive Icon</a>
+은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.</p>
 <p>그래서 구글에서는 어댑티브 아이콘이라는 규격을 제안했습니다. 어댑티브 아이콘은 백그라운드와 포그라운드 두 개의 레이어를 정의한 뒤 기기의 요청에 따라 아이콘을 조합하여 필요한 모양으로 표시를 해 줍니다.</p>
 <p><img src="https://developer.android.com/guide/practices/ui_guidelines/images/NB_Icon_Layers_3D_03_ext.gif" alt="icon" /></p>
 <p>출처: <a href="https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive" target="_blank" rel="noopener">https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive</a>
 </p>
 <p>이 어댑티브 아이콘은 안드로이드 8 오레오 (API Level 26)부터 지원을 하기 때문에 그 전 버전에서는 레가시 아이콘을 사용하여야 합니다.</p>
-<p>구글에서 제안하는 아이콘 <a href="https://developer.android.com/google-play/resources/icon-design-specifications" target="_blank" rel="noopener">가이드라인</a>
+<h2 id="아이콘-디자인-사양">아이콘 디자인 사양</h2>
+<p>구글에서 제안하는 아이콘 디자인시의 <a href="https://developer.android.com/google-play/resources/icon-design-specifications" target="_blank" rel="noopener">가이드라인</a>
 은 다음과 같습니다. 여기서 모양을 정사각형으로 하고 그림자를 넣지 말라고 하는 것은 어댑티브 아이콘을 사용하면 이 효과를 줄 수 있기 때문입니다.</p>
 <ul>
 <li>최종크기 : 512 px * 512 px</li>
@@ -1741,9 +1743,8 @@ if (!doNotTrack) {
 <li>그림자 : 없음</li>
 <li>아이콘 속 뱃지 : 없도록 함</li>
 </ul>
-<h2 id="코드-작성">코드 작성</h2>
-<p>안드로이드 스튜디오에서 기본앱 프로젝트를 만들면 앱 아이콘을 지정하지 않았는데도 안드로이드 머리통 형태의 앱 아이콘이 부여되는 것을 확인할 수 있습니다.</p>
-<p>androidmanifest.xml 을 보시면</p>
+<h2 id="xml-구조-확인">xml 구조 확인</h2>
+<p>안드로이드 스튜디오에서 기본앱 프로젝트를 만들면 앱 아이콘을 지정하지 않았는데도 안드로이드 머리통 형태의 앱 아이콘이 부여되는 것을 확인할 수 있습니다. androidmanifest.xml 을 보시면</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1755,8 +1756,8 @@ android:roundIcon=&#34;@mipmap/ic_launcher_round
 </code></pre></td></tr></table>
 </div>
 </div><p>항목이 있는것을 알 수 있는데 앱 아이콘은 이 항목을 이용해 지정합니다.</p>
-<p>mipmap/ic_launcer 폴더는 res 폴더안에 위치하고 있는대요, 어댑티브 아이콘은 이 안에 xml 형태로 저장되고, 레가시 아이콘은 png형태로 저장되어 있습니다.</p>
-<p>예를들어 ic_launcher.xml 내용을 보면 다음과 같이 되어 있습니다.</p>
+<p><code>mipmap/ic_launcher</code> 폴더는 <code>res</code> 폴더안에 위치하고 있는대요, 어댑티브 아이콘은 이 안에 xml 형태로 저장되고, 레가시 아이콘은 png형태로 저장되어 있습니다.</p>
+<p>예를들어 <code>ic_launcher.xml</code> 의 내용은 다음과 같이 되어 있습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1774,12 +1775,13 @@ android:roundIcon=&#34;@mipmap/ic_launcher_round
 </code></pre></td></tr></table>
 </div>
 </div><p>백그라운드와 포그라운드는 drawable 폴더 안의 파일을 지정하도록 되어 있는데 내용을 보면 백그라운드 xml은 녹색 배경이고, 포그라운드 xml은 안드로이드 머리통인 것을 확인할 수 있습니다.</p>
+<h2 id="아이콘-설정">아이콘 설정</h2>
 <p>그럼 여기서는 이미지를 이용해서 아이콘을 설정해 보도록 하겠습니다. 이미지는 PNGRepo의 빨간색 안드로이드 아이콘을 사용할건데요, 이 아이콘은 512 * 512 크기를 가지고 있기 때문에 그대로 앱에 사용할 수 있습니다.</p>
 <p><img src="https://www.pngrepo.com/png/232464/180/android.png" alt="안드로이드" /></p>
 <p>출처 : <a href="https://www.pngrepo.com/svg/232464/android" target="_blank" rel="noopener">https://www.pngrepo.com/svg/232464/android</a>
 </p>
 <p>res 폴더 New -&gt; Image Asset을 선택하고 Source Asset의 Path에서 그림파일을 선택합니다. 안드로이드가 사각형 안에 들어가도록 Resize에서 대충 조절해 주는데 구글에서는 그림이 70% 크기가 되도록 권장하고 있습니다. 그리고 Color 메뉴를 사용해서 백그라운드는 흰색을 선택해줍니다.</p>
-<p>mipmap 아래에 아이콘이 추가되었으면 AndroidManifest.xml에서 사용할 아이콘을 정해주면 끝입니다.</p>
+<p>mipmap 아래에 아이콘이 추가되었으면 <code>AndroidManifest.xml</code>에서 사용할 아이콘을 정해주면 끝입니다.</p>
 <p>이렇게 해서 앱에 아이콘을 지정하는 법에 대해 알아보았습니다.</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
@@ -2435,8 +2437,10 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="toc " data-dir="ltr" data-folding="false" data-ani="true">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#들어가기">들어가기</a></li>
-    <li><a href="#코드-작성">코드 작성</a></li>
+    <li><a href="#legacy-icon과-adaptive-icon">Legacy Icon과 Adaptive Icon</a></li>
+    <li><a href="#아이콘-디자인-사양">아이콘 디자인 사양</a></li>
+    <li><a href="#xml-구조-확인">xml 구조 확인</a></li>
+    <li><a href="#아이콘-설정">아이콘 설정</a></li>
   </ul>
 </nav>
   </div>
