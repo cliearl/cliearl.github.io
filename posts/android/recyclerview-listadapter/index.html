@@ -1753,8 +1753,8 @@ notifyItemRangeRemoved(int, int)
 <p>DiffUtil은 아이템 개수가 많을 경우 비교연산시간에 필요한 시간이 길어질 수 있기 때문에 백그라운드 스레드에서 처리되어야 합니다. <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer" target="_blank" rel="noopener"><code>AsyncListDiffer</code></a>
 는 DiffUtil을 편하게 쓰기 위해서 만들어진 클래스로, DiffUtil에 대해 자체적으로 스레드 처리를 해 줍니다.</p>
 <p>코드를 사용하기 위해서는 우선 어댑터 내부로 DiffUtil 콜백을 전달받은 AsyncListDiffer 객체를 만들어 줍니다. 그리고 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#getCurrentList%28%29" target="_blank" rel="noopener"><code>currentList</code></a>
-로 데이터를 참조하고 [<code>submitList</code>](<a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#submitList%28java.util.List%3CT%3E,%20java.lang.Runnable%29" target="_blank" rel="noopener">https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#submitList(java.util.List%3CT%3E,%20java.lang.Runnable)</a>
-로 리스트 데이터를 갱신하면 됩니다.</p>
+로 데이터를 참조하고 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#submitList%28java.util.List%3CT%3E%29" target="_blank" rel="noopener"><code>submitList</code></a>
+ 로 리스트 데이터를 갱신하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
