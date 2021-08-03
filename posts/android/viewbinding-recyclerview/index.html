@@ -1349,7 +1349,7 @@
 <meta property="og:type" content="article">
 <meta property="og:description" content="냉동코더의 기술블로그">
 
-<meta name="generator" content="Hugo 0.86.0" />
+<meta name="generator" content="Hugo 0.86.1" />
 <meta name="msapplication-TileColor" content="#fff">
 
 <meta name="theme-color" content="#fff">
@@ -1388,7 +1388,7 @@
     "datePublished": "2021-04-17T22:43:04+09:00",
     "dateModified": "2021-04-17T22:43:04+09:00",
     "url" : "https://cliearl.github.io/posts/android/viewbinding-recyclerview/",
-    "description": "\u003cp\u003e이번 포스팅에서는 리사이클러뷰에 뷰바인딩을 적용하는 법에 대해 알아보도록 하겠습니다.\u003c/p\u003e",
+    "description": "\u003cp\u003e이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.\u003c/p\u003e",
     "keywords": ["RecyclerView","View Binding"],
     "mainEntityOfPage": {
       "@type": "WebPage",
@@ -1763,16 +1763,15 @@ if (!doNotTrack) {
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>이번 포스팅에서는 리사이클러뷰에 뷰바인딩을 적용하는 법에 대해 알아보도록 하겠습니다.</p>
-<p>뷰 바인딩을 사용해야 하는 이유나 그 장점에 대해서는 다른 포스팅을 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.<br />
-<a href="https://youtu.be/1xJmh2QhYTU" target="_blank" rel="noopener">https://youtu.be/1xJmh2QhYTU</a>
-<br />
-이번 포스팅에서 변환에 사용한 프로젝트는 다른 포스팅에서 작성한 것을 사용하도록 할 겁니다.<br />
-<a href="https://youtu.be/z43SZfUa3-A" target="_blank" rel="noopener">https://youtu.be/z43SZfUa3-A</a>
-</p>
+      <p>이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.</p>
+<p>View Binding을 사용해야 하는 이유나 그 장점에 대해서는 <a href="https://cliearl.github.io/posts/android/apply-viewbinding/" target="_blank" rel="noopener">findViewById 대신 View Binding 사용하기</a>
+ 포스팅과 <a href="https://www.youtube.com/watch?v=1xJmh2QhYTU" target="_blank" rel="noopener">유튜브 강의</a>
+를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.<br />
+이번 포스팅에서 변환에 사용한 프로젝트는 <a href="https://cliearl.github.io/posts/android/implement-recyclerview/" target="_blank" rel="noopener">앱에서 RecyclerView 사용하기</a>
+ 포스팅에서 작성한 것을 사용하도록 하겠습니다.</p>
 <h2 id="코드-작성">코드 작성</h2>
-<h3 id="뷰바인딩-활성화">뷰바인딩 활성화</h3>
-<p>우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 뷰 바인딩을 활성화합니다.</p>
+<h3 id="view-binding-활성화">View Binding 활성화</h3>
+<p>우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1794,7 +1793,7 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="메인액티비티-수정">메인액티비티 수정</h3>
-<p>다음은 메인액티비티를 수정해줍니다. 뷰바인딩을 활성화하는 순간 생기는 ActivityMainBinding클래스를 초기화하여 binding이라는 인스턴스로 사용합니다. 기존의 리사이클러뷰의 프로퍼티는 binding.recyclerView로 접근하여 설정합니다.</p>
+<p>다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 ActivityMainBinding클래스를 초기화하여 binding이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 binding.recyclerView로 접근하여 설정합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1908,7 +1907,7 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="뷰홀더-수정">뷰홀더 수정</h3>
-<p>기존의 뷰홀더에서는 뷰를 받아와서 정의하고 그걸 데이터와 연결하는 작업이 필요했는데, 뷰바인딩에서는 binding 인스턴스가 생성되는순간 자동으로 뷰를 binding의 프로퍼티로 접근할 수 있기 때문에 이 코드가 필요없게 됩니다.</p>
+<p>기존의 뷰홀더에서는 뷰를 받아와서 정의하고 그걸 데이터와 연결하는 작업이 필요했는데, View Binding에서는 binding 인스턴스가 생성되는순간 자동으로 뷰를 binding의 프로퍼티로 접근할 수 있기 때문에 이 코드가 필요없게 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1951,7 +1950,7 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>이렇게 해서 리사이클러뷰에 뷰바인딩을 적용하는 방법에 대해 알아보았습니다.</p>
+</div><p>이렇게 해서 RecyclerView에 View Binding을 적용하는 방법에 대해 알아보았습니다.</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/cN1UVAeP63c" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
@@ -2627,7 +2626,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <ul>
     <li><a href="#코드-작성">코드 작성</a>
       <ul>
-        <li><a href="#뷰바인딩-활성화">뷰바인딩 활성화</a></li>
+        <li><a href="#view-binding-활성화">View Binding 활성화</a></li>
         <li><a href="#메인액티비티-수정">메인액티비티 수정</a></li>
         <li><a href="#리사이클러뷰-어댑터-수정">리사이클러뷰 어댑터 수정</a></li>
         <li><a href="#뷰홀더-수정">뷰홀더 수정</a></li>
