@@ -166,24 +166,24 @@ if (!doNotTrack) {
         <span class="k">super</span><span class="p">.</span><span class="n">onCancelled</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>AsyncTask&lt;A, B, C&gt; 안에는 세가지 데이터 타입을 정의하게 됩니다. 내용은 순서대로 다음과 같고, 이 때 값은 가변인자 형태이므로 배열 형태의 값도 사용할 수 있습니다. 또한 데이터를 전달할 필요가 없을 경우 Void로 정의를 생략할 수 있습니다.</p>
+</code></pre></div><p><code>AsyncTask&lt;A, B, C&gt;</code> 안에는 세가지 데이터 타입을 정의하게 됩니다. 내용은 순서대로 다음과 같고, 이 때 값은 가변인자 형태이므로 배열 형태의 값도 사용할 수 있습니다. 또한 데이터를 전달할 필요가 없을 경우 Void로 정의를 생략할 수 있습니다.</p>
 <ul>
 <li>A : doInBackground가 메인스레드 execute()에서 전달받는 값</li>
 <li>B : doInBackground가 실행중일 때 onProgressUpdate()로 전달하는 값</li>
 <li>C : doInBackground가 종료되었을 때 onPostExecute()로 전달하는 값</li>
 </ul>
 <h3 id="asynctask의-동작">AsyncTask의 동작</h3>
-<p>AsyncTask의 동작은 다음과 같이 이루어지게 됩니다.
-<img src="https://images.ctfassets.net/s72atsk5w5jo/1GAPdfN1W82SkQCgmss0Gu/91aaeb2fa1808dd1a7c03ba21552ae7b/android-thread-asynctask.png" alt="asynctask"  />
-<a href="https://academy.realm.io/kr/posts/android-thread-looper-handler/" target="_blank" rel="noopener">출처 : https://academy.realm.io/kr/posts/android-thread-looper-handler/</a>
+<p>AsyncTask의 동작은 다음과 같이 이루어지게 됩니다.</p>
+<p><img src="https://images.ctfassets.net/s72atsk5w5jo/1GAPdfN1W82SkQCgmss0Gu/91aaeb2fa1808dd1a7c03ba21552ae7b/android-thread-asynctask.png" alt="asynctask"  /></p>
+<p>출처 : <a href="https://academy.realm.io/kr/posts/android-thread-looper-handler/" target="_blank" rel="noopener">https://academy.realm.io/kr/posts/android-thread-looper-handler/</a>
 </p>
 <ol>
-<li>메인 스레드에서 AsyncTask의 인스턴스를 생성하고 execute() 로 실행.</li>
-<li>AsyncTask 스레드가 시작되기 직전에 onPreExcuted()가 실행됨. 스레드 실행전 필요한 컴포넌트들을 로딩하는데 사용.</li>
-<li>execute() 호출시 입력된 파라미터가 AsyncTask 스레드로 전달됨.</li>
-<li>doInBackground()에서 AsyncTask 작업을 수행.</li>
-<li>doInBackground()에서 publishProgress()를 호출하면 메인스레드에서 onProgressUpdate()가 호출됨.</li>
-<li>doInBackground()가 끝나면 메인스레드의 onPostExcuted()로 결과값 result를 리턴하면서 AsyncTask 스레드가 종료됨.</li>
+<li>메인 스레드에서 <code>AsyncTask</code>의 인스턴스를 생성하고 <code>execute()</code> 로 실행.</li>
+<li><code>AsyncTask</code> 스레드가 시작되기 직전에 <code>onPreExcuted()</code>가 실행됨. 스레드 실행전 필요한 컴포넌트들을 로딩하는데 사용.</li>
+<li><code>execute()</code> 호출시 입력된 파라미터가 <code>AsyncTask</code> 스레드로 전달됨.</li>
+<li><code>doInBackground()</code>에서 <code>AsyncTask</code> 작업을 수행.</li>
+<li><code>doInBackground()</code>에서 <code>publishProgress()</code>를 호출하면 메인스레드에서 <code>onProgressUpdate()</code>가 호출됨.</li>
+<li><code>doInBackground()</code>가 끝나면 메인스레드의 <code>onPostExcuted()</code>로 결과값 <code>result</code>를 리턴하면서 <code>AsyncTask</code> 스레드가 종료됨.</li>
 </ol>
 <h2 id="코드-작성">코드 작성</h2>
 <h3 id="화면-구성">화면 구성</h3>
@@ -243,7 +243,7 @@ if (!doNotTrack) {
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
 </code></pre></div><h3 id="downloadtask-클래스-준비">DownloadTask 클래스 준비</h3>
-<p>AsyncTask를 상속받는 DownloadTask 클래스를 작성합니다. 이 때 doInBackground()에서는 0.1초 마다 진행률을 max값에 대해10퍼센트씩 증가시킵니다. 키고 이 값을 publishProgress로 메인스레드에 전달하여 onProgressUpdate()로 UI를 변경할 수 있도록 합니다.</p>
+<p>AsyncTask를 상속받는 DownloadTask 클래스를 작성합니다. 이 때 <code>doInBackground()</code>에서는 0.1초 마다 진행률을 <code>max</code>값에 대해 10퍼센트씩 증가시키고 이 값을 <code>publishProgress()</code>로 메인스레드에 전달하여 <code>onProgressUpdate()</code>로 UI를 변경할 수 있도록 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DownloadTask</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
@@ -288,8 +288,8 @@ if (!doNotTrack) {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="작업-중-취소-처리">작업 중 취소 처리</h3>
-<p>doInBackground()에서 작업중인 스레드는 메인스레드에서 cancel()을 호출하여 취소할 수 있습니다. 이 경우 백그라운드 스레드 내부의 isCancelled가 true를 반환하게 되며 doInBackground()가 종료된 후, onPostExecute() 대신 onCancelled()가 호출됩니다.</p>
-<p>이때 스레드 실행중에 중단해도 상관없는 작업이라면 mayInterruptIfRunning 파라메터에 true를, 스레드를 끝까지 처리하고 종료해야 할 경우 false를 전달해줍니다.</p>
+<p>doInBackground()에서 작업중인 스레드는 메인스레드에서 <code>cancel()</code>을 호출하여 취소할 수 있습니다. 이 경우 백그라운드 스레드 내부의 <code>isCancelled</code>가 <code>true</code>를 반환하게 되며 doInBackground()가 종료된 후, onPostExecute() 대신 onCancelled()가 호출됩니다.</p>
+<p>이때 스레드 실행중에 중단해도 상관없는 작업이라면 <code>mayInterruptIfRunning</code> 파라메터에 <code>true</code>를, 스레드를 끝까지 처리하고 종료해야 할 경우 <code>false</code>를 전달해줍니다.</p>
 <p>메인액티비티에서 취소버튼을 클릭하면 AsyncTask 작업을 취소합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// MainActivity
 </span><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -315,7 +315,8 @@ if (!doNotTrack) {
 <p>또한 AsyncTask는 하나의 객체만 생성할 수 있으며 액티비티가 종료되어도 스레드 작업이 끝나지 않았을 경우 종료되지 않는다는 특징이 있습니다.</p>
 <p>그런데 이런 특징때문에 액티비티가 종료되고 재시작되면 스레드 객체가 액티비티 참조를 잃어버리게 되서 액티비티에 영향을 줄 수 없는 스레드만 좀비처럼 살아남아버리는 문제가 발생하게 됩니다.</p>
 <h3 id="weakreference화-하기">Weakreference화 하기</h3>
-<p>이러한 문제를 방지하기 위해 WeakReference를 이용해서 AsyncTask클래스가 액티비티에 대해 약한참조를 가지도록 합니다. 그러면 액티비티가 종료되었을 때 가비지콜렉터가 AsyncTask 인스턴스를 메모리에서 해제할 수 있게 됩니다.</p>
+<p>이러한 문제를 방지하기 위해 <a href="https://developer.android.com/reference/java/lang/ref/WeakReference" target="_blank" rel="noopener"><code>WeakReference</code></a>
+를 이용해서 AsyncTask클래스가 액티비티에 대해 약한참조를 가지도록 합니다. 그러면 액티비티가 종료되었을 때 가비지콜렉터가 AsyncTask 인스턴스를 메모리에서 해제할 수 있게 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DownloadTask</span><span class="p">(</span><span class="n">activity</span><span class="p">:</span> <span class="n">MainActivity</span><span class="p">)</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">weakReference</span><span class="p">:</span> <span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">MainActivity</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">WeakReference</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
 
