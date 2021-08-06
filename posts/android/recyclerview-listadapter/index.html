@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 RecyclerView에 ListAdapter를 적용하는 법에 대해 알아보도록 하겠습니다.
 '><title>DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기">
 <meta name="twitter:description" content="이번 포스팅에서는 RecyclerView에 ListAdapter를 적용하는 법에 대해 알아보도록 하겠습니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -121,7 +123,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    7 min read
+                    6 min read
                 </time>
             </div>
         
@@ -133,8 +135,8 @@ if (!doNotTrack) {
     <section class="article-content">
     <p>이번 포스팅에서는 RecyclerView에 ListAdapter를 적용하는 법에 대해 알아보도록 하겠습니다.</p>
 <h2 id="들어가기">들어가기</h2>
-<p>리사이클러뷰의 데이터가 변하면 리사이클러뷰 어댑터가 제공하는 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter#notifyDataSetChanged%28%29" target="_blank" rel="noopener"><code>notifyItem</code></a>
- 메소드를 사용해서 뷰홀더 내용을 갱신할 수 있습니다.</p>
+<p>리사이클러뷰의 데이터가 변하면 리사이클러뷰 어댑터가 제공하는 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter#notifyDataSetChanged%28%29"  target="_blank" rel="noopener"
+    ><code>notifyItem</code></a> 메소드를 사용해서 뷰홀더 내용을 갱신할 수 있습니다.</p>
 <pre><code>notifyItemChanged(int)
 notifyItemInserted(int)
 notifyItemRemoved(int)
@@ -143,8 +145,8 @@ notifyItemRangeInserted(int, int)
 notifyItemRangeRemoved(int, int)
 </code></pre><p>그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 뷰홀더를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.</p>
 <h2 id="diffutil">DiffUtil</h2>
-<p><a href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil" target="_blank" rel="noopener"><code>DiffUtil</code></a>
-은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 리사이클러뷰에 반영할 수 있습니다.</p>
+<p><a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil"  target="_blank" rel="noopener"
+    ><code>DiffUtil</code></a>은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 리사이클러뷰에 반영할 수 있습니다.</p>
 <p>DiffUtil은 Eugene W. Myers의 difference 알고리즘을 이용해서 O(N + D^2)시간 안에 리스트의 비교를 수행하는데 넥서스 5X에서 테스트를 수행한 결과는 다음과 같았다고 합니다. 이때 N은 추가 및 제거된 항목의 갯수이고, D는 스크립트의 길이입니다.</p>
 <pre><code>100 items and 10 modifications: avg: 0.39 ms, median: 0.35 ms
 100 items and 100 modifications: 3.82 ms, median: 3.75 ms
@@ -153,16 +155,16 @@ notifyItemRangeRemoved(int, int)
 1000 items and 50 modifications without moves: avg: 3.59 ms, median: 3.50 ms
 1000 items and 200 modifications: 27.07 ms, median: 26.92 ms
 1000 items and 200 modifications without moves: 13.54 ms, median: 13.36 ms 
-</code></pre><p>DiffUtil을 사용하기 위해서는 <a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback" target="_blank" rel="noopener"><code>DiffUtil.Callback()</code></a>
-을 상속받아 <a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback#areitemsthesame" target="_blank" rel="noopener"><code>areItemsTheSame</code></a>
-으로 비교대상인 두 객체가 동일한지 확인하고, <a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback#arecontentsthesame" target="_blank" rel="noopener"><code>areContentsTheSame</code></a>
-으로 두 아이템이 동일한 데이터를 가지는지 확인하면 됩니다.</p>
+</code></pre><p>DiffUtil을 사용하기 위해서는 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback"  target="_blank" rel="noopener"
+    ><code>DiffUtil.Callback()</code></a>을 상속받아 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback#areitemsthesame"  target="_blank" rel="noopener"
+    ><code>areItemsTheSame</code></a>으로 비교대상인 두 객체가 동일한지 확인하고, <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback#arecontentsthesame"  target="_blank" rel="noopener"
+    ><code>areContentsTheSame</code></a>으로 두 아이템이 동일한 데이터를 가지는지 확인하면 됩니다.</p>
 <h2 id="asynclistdiffer">AsyncListDiffer</h2>
-<p>DiffUtil은 아이템 개수가 많을 경우 비교연산시간에 필요한 시간이 길어질 수 있기 때문에 백그라운드 스레드에서 처리되어야 합니다. <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer" target="_blank" rel="noopener"><code>AsyncListDiffer</code></a>
-는 DiffUtil을 편하게 쓰기 위해서 만들어진 클래스로, DiffUtil에 대해 자체적으로 스레드 처리를 해 줍니다.</p>
-<p>코드를 사용하기 위해서는 우선 어댑터 내부로 DiffUtil 콜백을 전달받은 AsyncListDiffer 객체를 만들어 줍니다. 그리고 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#getCurrentList%28%29" target="_blank" rel="noopener"><code>currentList</code></a>
-로 데이터를 참조하고 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#submitList%28java.util.List%3CT%3E%29" target="_blank" rel="noopener"><code>submitList</code></a>
- 로 리스트 데이터를 갱신하면 됩니다.</p>
+<p>DiffUtil은 아이템 개수가 많을 경우 비교연산시간에 필요한 시간이 길어질 수 있기 때문에 백그라운드 스레드에서 처리되어야 합니다. <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer"  target="_blank" rel="noopener"
+    ><code>AsyncListDiffer</code></a>는 DiffUtil을 편하게 쓰기 위해서 만들어진 클래스로, DiffUtil에 대해 자체적으로 스레드 처리를 해 줍니다.</p>
+<p>코드를 사용하기 위해서는 우선 어댑터 내부로 DiffUtil 콜백을 전달받은 AsyncListDiffer 객체를 만들어 줍니다. 그리고 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#getCurrentList%28%29"  target="_blank" rel="noopener"
+    ><code>currentList</code></a>로 데이터를 참조하고 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#submitList%28java.util.List%3CT%3E%29"  target="_blank" rel="noopener"
+    ><code>submitList</code></a> 로 리스트 데이터를 갱신하면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Google Developers에서 제공하는 코드
 </span><span class="c1"></span><span class="kd">class</span> <span class="nc">UserAdapter</span> <span class="kd">extends</span> <span class="n">RecyclerView</span><span class="o">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="n">UserViewHolder</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="n">AsyncListDiffer</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">mDiffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AsyncListDiffer</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">DIFF_CALLBACK</span><span class="o">);</span>
@@ -196,10 +198,10 @@ notifyItemRangeRemoved(int, int)
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div><h2 id="listadapter">ListAdapter</h2>
-<p><a href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter" target="_blank" rel="noopener"><code>ListAdapter</code></a>
-는 AsyncListDiffer를 더 쓰기 편하도록 랩핑한 클래스로 리사이클러뷰 어댑터를 만들때 ListAdapter를 상속하도록 하면 됩니다. 초기화할때 DiffUtil 콜백 객체를 받도록 하면 나머지는 AsyncListDiffer와 같이 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter#getCurrentList%28%29" target="_blank" rel="noopener"><code>currentList</code></a>
-로 현재 데이터를 불러올 수 있고, <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter#submitList%28java.util.List%3CT%3E%29" target="_blank" rel="noopener"><code>submitList</code></a>
-로 데이터를 갱신할 수 있습니다.</p>
+<p><a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter"  target="_blank" rel="noopener"
+    ><code>ListAdapter</code></a>는 AsyncListDiffer를 더 쓰기 편하도록 랩핑한 클래스로 리사이클러뷰 어댑터를 만들때 ListAdapter를 상속하도록 하면 됩니다. 초기화할때 DiffUtil 콜백 객체를 받도록 하면 나머지는 AsyncListDiffer와 같이 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter#getCurrentList%28%29"  target="_blank" rel="noopener"
+    ><code>currentList</code></a>로 현재 데이터를 불러올 수 있고, <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter#submitList%28java.util.List%3CT%3E%29"  target="_blank" rel="noopener"
+    ><code>submitList</code></a>로 데이터를 갱신할 수 있습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Google Developers에서 제공하는 코드
 </span><span class="c1"></span><span class="k">class</span> <span class="nc">UserAdapter</span> <span class="n">extends</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">User</span><span class="p">,</span> <span class="n">UserViewHolder</span><span class="p">&gt;</span> <span class="p">{</span>
     <span class="k">public</span> <span class="n">UserAdapter</span><span class="p">()</span> <span class="p">{</span>
@@ -228,8 +230,8 @@ notifyItemRangeRemoved(int, int)
 <span class="p">}</span>
 </code></pre></div><p>다시말해 리사이클러뷰 어댑터를 ListAdapter로 구현하면 데이터가 어떻게 바뀌든간에 submitList로 전체 리스트를 넘겨주기만 하면 어댑터가 알아서 백그라운드 스레드를 사용해 리스트 차이를 계산하여 화면을 갱신시켜주게 됩니다.</p>
 <h2 id="앱-작성">앱 작성</h2>
-<p>기존에 <a href="https://youtu.be/opPmxtI4rLQ" target="_blank" rel="noopener">다른 강의</a>
-에서 작성했던 프로젝트를 고치는 형태로 프로젝트를 만들어 보겠습니다.</p>
+<p>기존에 <a class="link" href="https://youtu.be/opPmxtI4rLQ"  target="_blank" rel="noopener"
+    >다른 강의</a>에서 작성했던 프로젝트를 고치는 형태로 프로젝트를 만들어 보겠습니다.</p>
 <h3 id="monsterkt">Monster.kt</h3>
 <p>우선 리사이클러뷰에 표시할 데이터를 데이터클래스형태로 준비합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
@@ -337,8 +339,8 @@ notifyItemRangeRemoved(int, int)
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="mydiffcallbackkt">MyDiffCallback.kt</h3>
-<p>Monster 클래스가 <a href="https://kotlinlang.org/docs/data-classes.html" target="_blank" rel="noopener">데이터 클래스</a>
-이므로 <code>areItemsTheSame</code>은 자동으로 생성되는 <code>hashCode</code>로 비교하도록 하였습니다. 데이터클래스의 정의에 따라 동일한 두 객체의 hashCode는 동일한 값을 갖게 됩니다. 또한 <code>equals</code>도 데이터클래스의 정의에 의해 자동으로 생성되므로 <code>areContentsTheSame</code> 메소드는 equals를 이용해 구현합니다.</p>
+<p>Monster 클래스가 <a class="link" href="https://kotlinlang.org/docs/data-classes.html"  target="_blank" rel="noopener"
+    >데이터 클래스</a>이므로 <code>areItemsTheSame</code>은 자동으로 생성되는 <code>hashCode</code>로 비교하도록 하였습니다. 데이터클래스의 정의에 따라 동일한 두 객체의 hashCode는 동일한 값을 갖게 됩니다. 또한 <code>equals</code>도 데이터클래스의 정의에 의해 자동으로 생성되므로 <code>areContentsTheSame</code> 메소드는 equals를 이용해 구현합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyDiffCallback</span> <span class="p">:</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;()</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">areItemsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
@@ -350,8 +352,8 @@ notifyItemRangeRemoved(int, int)
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="mylistadapterkt">MyListAdapter.kt</h3>
-<p>ListAdapter를 상속받는 리사이클러뷰 어댑터를 작성합니다. onCreateViewHolder에서 뷰바인딩을 사용하도록 설정합니다. 데이터의 개수는 ListAdapter가 관리하므로 기존의 리사이클러뷰 어댑터에서 정의했던 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter#getItemCount%28%29" target="_blank" rel="noopener"><code>getItemCount</code></a>
-는 오버라이드하지 않아도 됩니다.</p>
+<p>ListAdapter를 상속받는 리사이클러뷰 어댑터를 작성합니다. onCreateViewHolder에서 뷰바인딩을 사용하도록 설정합니다. 데이터의 개수는 ListAdapter가 관리하므로 기존의 리사이클러뷰 어댑터에서 정의했던 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter#getItemCount%28%29"  target="_blank" rel="noopener"
+    ><code>getItemCount</code></a>는 오버라이드하지 않아도 됩니다.</p>
 <p>그리고 아이템을 이동했을때 실행할 <code>moveItem</code>, 지울때 실행할 <code>removeItem</code> 메소드를 작성해줍니다. 이 때 ListAdapter에서는 데이터를 직접 조작할 수 없고 비교만 할수 있기 때문에 변형된 데이터셋은 새로운 객체로 만들어 기존의 데이터셋과 비교도록 submitList를 수행하게 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyListAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">,</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;(</span><span class="n">MyDiffCallback</span><span class="p">())</span> <span class="p">{</span>
 
@@ -388,11 +390,11 @@ notifyItemRangeRemoved(int, int)
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="myitemtouchhelpercallbackkt">MyItemTouchHelperCallback.kt</h3>
-<p>기존 프로젝트에서 터치 콜백을 받기 위해 MainActivity에서 사용했던 <a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.SimpleCallback" target="_blank" rel="noopener"><code>ItemTouchHelper.SimpleCallback</code></a>
- 클래스는 코드의 가독성을 위해 개별 클래스로 분리시키겠습니다.</p>
-<p>그리고 추가로 홀딩중인 뷰홀더의 투명도를 변화시켜 더 인지하기 쉽게 만들겠습니다. 그럴려면 <a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.Callback#onselectedchanged" target="_blank" rel="noopener"><code>onSelectedChanged</code></a>
-에서 투명도를 50%로 낮추었다가 <a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.Callback#clearview" target="_blank" rel="noopener"><code>clearView</code></a>
-에서 다시 100%로 되돌리도록 하면 됩니다.</p>
+<p>기존 프로젝트에서 터치 콜백을 받기 위해 MainActivity에서 사용했던 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.SimpleCallback"  target="_blank" rel="noopener"
+    ><code>ItemTouchHelper.SimpleCallback</code></a> 클래스는 코드의 가독성을 위해 개별 클래스로 분리시키겠습니다.</p>
+<p>그리고 추가로 홀딩중인 뷰홀더의 투명도를 변화시켜 더 인지하기 쉽게 만들겠습니다. 그럴려면 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.Callback#onselectedchanged"  target="_blank" rel="noopener"
+    ><code>onSelectedChanged</code></a>에서 투명도를 50%로 낮추었다가 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.Callback#clearview"  target="_blank" rel="noopener"
+    ><code>clearView</code></a>에서 다시 100%로 되돌리도록 하면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyItemTouchHelperCallback</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span><span class="p">(</span>
         <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">UP</span> <span class="n">or</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">DOWN</span><span class="p">,</span>
@@ -548,7 +550,7 @@ notifyItemRangeRemoved(int, int)
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -672,8 +674,8 @@ notifyItemRangeRemoved(int, int)
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

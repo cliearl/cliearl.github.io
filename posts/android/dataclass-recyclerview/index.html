@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 Data class를 사용하는 법에 대해 알아보도록 하겠습니다.
 '><title>Data class 이해하고 RecyclerView에서 사용하기</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="Data class 이해하고 RecyclerView에서 사용하기">
 <meta name="twitter:description" content="이번 포스팅에서는 Data class를 사용하는 법에 대해 알아보도록 하겠습니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -201,8 +203,8 @@ if (!doNotTrack) {
 <span class="n">println</span><span class="p">(</span><span class="n">person4</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)))</span>  <span class="c1">// true
 </span></code></pre></div><h2 id="recyclerview의-데이터를-data-class로-정의하기">RecyclerView의 데이터를 data class로 정의하기</h2>
 <p>그럼 data class를 RecyclerView에 적용해 보도록 하겠습니다.</p>
-<p>여기서는 몬스터의 이름, 종족, 레벨, 그리고 몬스터의 능력치, 만난적이 있는지에 대한 불린값을 클래스가 가지도록 하고 그것을 리사이클러뷰에서 보여주도록 할 건데요, 기존에 다른 필요로 인해 만들어 두었던 <a href="https://www.youtube.com/watch?v=IaIuKbEyGnY" target="_blank" rel="noopener">터치가능한 RecyclerView</a>
-를 재활용하도록 하겠습니다.</p>
+<p>여기서는 몬스터의 이름, 종족, 레벨, 그리고 몬스터의 능력치, 만난적이 있는지에 대한 불린값을 클래스가 가지도록 하고 그것을 리사이클러뷰에서 보여주도록 할 건데요, 기존에 다른 필요로 인해 만들어 두었던 <a class="link" href="https://www.youtube.com/watch?v=IaIuKbEyGnY"  target="_blank" rel="noopener"
+    >터치가능한 RecyclerView</a>를 재활용하도록 하겠습니다.</p>
 <p>우선은 몬스터 클래스를 하나 만들어 줍니다. 프로퍼티는 가능한 여러가지의 타입을 가지도록 했습니다. 종족은 선택하기 편하도록 enum을 도입했습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
         <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
@@ -384,7 +386,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -508,8 +510,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

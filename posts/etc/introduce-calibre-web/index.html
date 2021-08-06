@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='전자책을 관리해야 할 필요성이 생겨서 셀프호스팅 가능한 오픈소스 앱을 알아봤다.
 '><title>전자책 관리 앱 Calibre-web 도입</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="전자책 관리 앱 Calibre-web 도입">
 <meta name="twitter:description" content="전자책을 관리해야 할 필요성이 생겨서 셀프호스팅 가능한 오픈소스 앱을 알아봤다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -60,7 +62,7 @@ if (!doNotTrack) {
 ">
     
         <aside class="sidebar left-sidebar sticky">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -115,24 +117,6 @@ if (!doNotTrack) {
         
 
         <li >
-            <a href='/search/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
             <a href='/about/'>
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -145,23 +129,6 @@ if (!doNotTrack) {
 
                 
                 <span>About</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/categories/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-grid" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <rect x="4" y="4" width="6" height="6" rx="1" />
-  <rect x="14" y="4" width="6" height="6" rx="1" />
-  <rect x="4" y="14" width="6" height="6" rx="1" />
-  <rect x="14" y="14" width="6" height="6" rx="1" />
-</svg>
-                
-                <span>Categories</span>
             </a>
         </li>
         
@@ -315,20 +282,20 @@ if (!doNotTrack) {
     <p>전자책을 관리해야 할 필요성이 생겨서 셀프호스팅 가능한 오픈소스 앱을 알아봤다.</p>
 <p>전자책 프로젝트 중 현재 활발하게 업데이트 되는 프로젝트는 다음 세개 정도 되는것 같았다.</p>
 <ul>
-<li><a href="https://calibre-ebook.com/" target="_blank" rel="noopener">Calibre</a>
-</li>
-<li><a href="https://vaemendis.net/ubooquity/" target="_blank" rel="noopener">Ubooquity</a>
-</li>
-<li><a href="https://komga.org/" target="_blank" rel="noopener">Komga</a>
-</li>
+<li><a class="link" href="https://calibre-ebook.com/"  target="_blank" rel="noopener"
+    >Calibre</a></li>
+<li><a class="link" href="https://vaemendis.net/ubooquity/"  target="_blank" rel="noopener"
+    >Ubooquity</a></li>
+<li><a class="link" href="https://komga.org/"  target="_blank" rel="noopener"
+    >Komga</a></li>
 </ul>
 <p>그런데 이 중 Ubooquity와 Komga는 일반서적보다는 만화책 관리가 더 메인인 것 같아서 Calibre를 선택했다.</p>
-<p>캘리버를 도커에 띄우기 위한 이미지가 여러가지 있는데 linuxserver.io에서 관리하는 훌륭한 <a href="https://hub.docker.com/r/linuxserver/calibre-web" target="_blank" rel="noopener">linuxserver/calibre-web</a>
- 이미지가 있어서 그걸 사용하기로 했다.</p>
+<p>캘리버를 도커에 띄우기 위한 이미지가 여러가지 있는데 linuxserver.io에서 관리하는 훌륭한 <a class="link" href="https://hub.docker.com/r/linuxserver/calibre-web"  target="_blank" rel="noopener"
+    >linuxserver/calibre-web</a> 이미지가 있어서 그걸 사용하기로 했다.</p>
 <p>캘리버-웹 설치시 문제가 하나 있는데 설치 직후 DB 로케이션 입력이 안된다는 점이다. 캘리버가 실행될려면 DB 폴더 아래에 metadata.db 파일이 있어야 되는데 파일이 없을경우 자동으로 생성되지 않게 되어 있다. 아마도 오프라인 캘리버 앱을 연동해서 쓰는 사람들을 배려해서 DB를 자동으로 초기화하지 않도록 한 것 같다.</p>
 <p>근데 어쨌든 처음 사용자는 metadata.db가 필요하다. 이 파일이 없으면 오프라인 앱에서 생성해서 복사하는 법이 있는데 이것보다는 설치할 때 자동으로 생성되게 하고 퍼미션도 줘버리는게 편하다.</p>
-<p>찾아보니 역시 깃헙에서 <a href="https://github.com/linuxserver/docker-calibre-web/issues/30" target="_blank" rel="noopener">이슈</a>
-가 열렸고 해결책도 있다.</p>
+<p>찾아보니 역시 깃헙에서 <a class="link" href="https://github.com/linuxserver/docker-calibre-web/issues/30"  target="_blank" rel="noopener"
+    >이슈</a>가 열렸고 해결책도 있다.</p>
 <ul>
 <li>우선은 /books 디렉토리 아래에 /custom-cont-init.d 라는 디렉토리를 만든다.</li>
 <li>이 안에 다음과 같은 내용의 metadata_generator.sh 파일을 생성한다.</li>
@@ -355,8 +322,8 @@ if (!doNotTrack) {
 <li>profit!</li>
 </ul>
 <p>부록으로 프로그래밍 관련 서적을 무료로 다운받을 수 있는 사이트를 하나 적어둔다
-<a href="https://ebookfoundation.github.io/free-programming-books/" target="_blank" rel="noopener">free-programming-books</a>
-</p>
+<a class="link" href="https://ebookfoundation.github.io/free-programming-books/"  target="_blank" rel="noopener"
+    >free-programming-books</a></p>
 </section>
 
 
@@ -392,7 +359,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -516,8 +483,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 로또번호를 생성하는 간단한 앱을 만들어보도록 하겠습니다.
 '><title>로또번호 생성기 만들기</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="로또번호 생성기 만들기">
 <meta name="twitter:description" content="이번 포스팅에서는 로또번호를 생성하는 간단한 앱을 만들어보도록 하겠습니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -233,15 +235,15 @@ if (!doNotTrack) {
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
 </code></pre></div><h2 id="로또번호-작성-파트">로또번호 작성 파트</h2>
 <p>로또번호를 만들어내는 방법은 여러가지가 있을 수 있는데, 여기서는 1에서 45까지의 정수배열을 만들고 그걸 랜덤하게 섞은 뒤 앞에서 6개 번호만 잘라내는 방법을 사용하도록 하겠습니다.</p>
-<p>우선 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/" target="_blank" rel="noopener">IntArray</a>
-를 써서 정수배열을 만듭니다. 이 배열을 섞기 위해서 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/shuffle.html" target="_blank" rel="noopener">shuffle</a>
- 메소드를 사용하는데 이 때 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.random/-random/" target="_blank" rel="noopener">Random 클래스</a>
-의 인스턴스를 seed로 사용함으로써 섞을때마다 랜덤성이 달라지게 할 수 있습니다. 이 때 시간을 Ramdom의 소스로 사용하면 매 순간마다 변화하는 시드를 사용할 수 있습니다. 여기서는 <a href="https://developer.android.com/reference/kotlin/java/text/SimpleDateFormat" target="_blank" rel="noopener">SimpleDateFormat</a>
-으로 밀리초까지 반영한 시간을 랜덤소스로 사용하도록 했습니다. 배열을 섞었으면 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/slice.html" target="_blank" rel="noopener">slice()</a>
-로 앞에서 숫자 6개만을 잘라낸 뒤 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/sort.html" target="_blank" rel="noopener">sort()</a>
-로 정렬을 시키면 준비 완료입니다.</p>
-<p>그리고 홀짝의 갯수를 센 뒤, 전체 숫자의 합도 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/sum.html" target="_blank" rel="noopener">sum()</a>
-을 이용하여 배열에 추가하여 줍니다.</p>
+<p>우선 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/"  target="_blank" rel="noopener"
+    >IntArray</a>를 써서 정수배열을 만듭니다. 이 배열을 섞기 위해서 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/shuffle.html"  target="_blank" rel="noopener"
+    >shuffle</a> 메소드를 사용하는데 이 때 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.random/-random/"  target="_blank" rel="noopener"
+    >Random 클래스</a>의 인스턴스를 seed로 사용함으로써 섞을때마다 랜덤성이 달라지게 할 수 있습니다. 이 때 시간을 Ramdom의 소스로 사용하면 매 순간마다 변화하는 시드를 사용할 수 있습니다. 여기서는 <a class="link" href="https://developer.android.com/reference/kotlin/java/text/SimpleDateFormat"  target="_blank" rel="noopener"
+    >SimpleDateFormat</a>으로 밀리초까지 반영한 시간을 랜덤소스로 사용하도록 했습니다. 배열을 섞었으면 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/slice.html"  target="_blank" rel="noopener"
+    >slice()</a>로 앞에서 숫자 6개만을 잘라낸 뒤 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/sort.html"  target="_blank" rel="noopener"
+    >sort()</a>로 정렬을 시키면 준비 완료입니다.</p>
+<p>그리고 홀짝의 갯수를 센 뒤, 전체 숫자의 합도 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/sum.html"  target="_blank" rel="noopener"
+    >sum()</a>을 이용하여 배열에 추가하여 줍니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">createLottoNumbers</span><span class="p">():</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
     <span class="k">val</span> <span class="py">source</span> <span class="p">=</span> <span class="n">IntArray</span><span class="p">(</span><span class="m">45</span><span class="p">){</span><span class="k">it</span> <span class="p">+</span> <span class="m">1</span><span class="p">}</span>
@@ -337,7 +339,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -461,8 +463,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다.
 '><title>앱 빌드속도 빠르게 하기</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="앱 빌드속도 빠르게 하기">
 <meta name="twitter:description" content="이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -132,15 +134,15 @@ if (!doNotTrack) {
 
     <section class="article-content">
     <p>이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다.</p>
-<p>구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 <a href="https://developer.android.com/studio/build/optimize-your-build?hl=ko" target="_blank" rel="noopener">소개</a>
-했고 <a href="https://www.youtube.com/watch?v=7ll-rkLCtyk" target="_blank" rel="noopener">유튜브</a>
-에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다.</p>
+<p>구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 <a class="link" href="https://developer.android.com/studio/build/optimize-your-build?hl=ko"  target="_blank" rel="noopener"
+    >소개</a>했고 <a class="link" href="https://www.youtube.com/watch?v=7ll-rkLCtyk"  target="_blank" rel="noopener"
+    >유튜브</a>에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다.</p>
 <h2 id="최신버전의-gradle-사용">최신버전의 Gradle 사용</h2>
-<p>우선은 최신버전의 <a href="https://developer.android.com/studio/releases/gradle-plugin" target="_blank" rel="noopener">Gradle</a>
-을 사용하는게 중요합니다.
+<p>우선은 최신버전의 <a class="link" href="https://developer.android.com/studio/releases/gradle-plugin"  target="_blank" rel="noopener"
+    >Gradle</a>을 사용하는게 중요합니다.
 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다.
-<a href="https://developer.android.com/studio/releases/gradle-plugin#versioning-update" target="_blank" rel="noopener">버전내역</a>
-을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.</p>
+<a class="link" href="https://developer.android.com/studio/releases/gradle-plugin#versioning-update"  target="_blank" rel="noopener"
+    >버전내역</a>을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.</p>
 <p>Gradle 버전은 안드로이드 스튜디오에서 앱을 생성할 때 최신버전으로 생성이 되기 때문에 새로 생성하는 프로젝트에 대해서는 신경 쓸 필요가 없지만, 과거에 작성한 프로젝트의 경우에는 이 빌드플러그인을 가능한 최신 버전으로 업데이트해서 사용하시는걸 추천합니다.</p>
 <h2 id="개발시-서로-다른-빌드세팅-사용">개발시 서로 다른 빌드세팅 사용</h2>
 <p>다음은 개발할 때 서로 다른 빌드세팅을 사용하는 겁니다.</p>
@@ -149,10 +151,10 @@ if (!doNotTrack) {
 <p>예를들어 릴리즈시에는 코드의 암호화를 설정해야 하는데 디버그에서는 적용할 필요가 없으므로 설정을 구분해서 빌드를 할 수 있습니다.</p>
 <h2 id="multidex-사용하지-않음">multidex 사용하지 않음</h2>
 <p>자바 코드는 실행환경에 의존하지 않는 바이트코드로 컴파일 되어 자바 가상머신(JVM)이 실행되는 환경이라면 어디서나 동일하게 실행할 수 있습니다.
-구글에서는 라이센스 문제를 피하기 위해 JVM 대신 <a href="https://source.android.com/devices/tech/dalvik" target="_blank" rel="noopener">Dalvik VM</a>
-을 만들었고 이 DVM에서 돌리기 위해 자바 바이트코드를 DEX(Dalvik Executable)로 변환하여 사용하도록 했습니다.</p>
-<p>그런데 DVM을 사용하다보니 여러가지 문제가 있어서 새로 개발한 것이 <a href="https://source.android.com/devices/tech/dalvik" target="_blank" rel="noopener">ART VM</a>
-입니다. 차이점을 간단하게 정리해 보면 다음과 같습니다.</p>
+구글에서는 라이센스 문제를 피하기 위해 JVM 대신 <a class="link" href="https://source.android.com/devices/tech/dalvik"  target="_blank" rel="noopener"
+    >Dalvik VM</a>을 만들었고 이 DVM에서 돌리기 위해 자바 바이트코드를 DEX(Dalvik Executable)로 변환하여 사용하도록 했습니다.</p>
+<p>그런데 DVM을 사용하다보니 여러가지 문제가 있어서 새로 개발한 것이 <a class="link" href="https://source.android.com/devices/tech/dalvik"  target="_blank" rel="noopener"
+    >ART VM</a>입니다. 차이점을 간단하게 정리해 보면 다음과 같습니다.</p>
 <h3 id="dalvik-vm">Dalvik VM</h3>
 <ul>
 <li>32비트만 지원.</li>
@@ -164,8 +166,8 @@ if (!doNotTrack) {
 <li>32, 64 비트 지원.</li>
 <li>AOT(Ahead On Time) 컴파일러 사용.</li>
 <li>설치시 모든 컴파일 작업을 수행해 놓으므로 설치파일이 크고 설치가 느리지만 실행중 자원소모량은 JIT보다 적어 배터리 효율이 높다.</li>
-<li><a href="https://developer.android.com/guide/practices/verifying-apps-art#GC_Migration" target="_blank" rel="noopener">GC 효율이 향상됨.</a>
-</li>
+<li><a class="link" href="https://developer.android.com/guide/practices/verifying-apps-art#GC_Migration"  target="_blank" rel="noopener"
+    >GC 효율이 향상됨.</a></li>
 <li>킷캣 KitKat 버전부터 지원이 시작되었으며 롤리팝 Lolipop 버전 이후는 AOT 컴파일러가 기본으로 적용됨</li>
 <li>누가 Nougat 버전 부터  JIT와 AOT를 모두 탑재하여 최초 설치시에는 JIT으로 컴파일 해 설치시간과 용량을 줄이고, 차후 기기를 사용하지 않을 때나 충전 중일 경우 컴파일을 조금씩 하여, 자주 사용되는 앱을 AOT 방식으로 전환하는 방식으로 바뀜.</li>
 </ul>
@@ -188,8 +190,8 @@ if (!doNotTrack) {
 <span class="o">}</span>
 </code></pre></div><p>빌드가 디버그면 설정을 다 없애버리고 한국어만 추가한다는 내용인데요, 참고로 현재 빌드가 디버그인지 릴리즈인지는 화면 왼쪽에 Build Variants 탭을 열어서 확인할 수 있습니다.</p>
 <p>패키징 리소스는 resConfig라는 기능을 이용해 간단하게 구현할 수도 있는데
-그럴려면 productFlavor{} 블럭을 추가로 만들어서 다음과 같이 사용하면 됩니다. resConfig는 buildTypes{} 안에서는 사용할 수 없기 때문입니다. productFlavor의 구체적인 사용방법에 대해서는 <a href="https://developer.android.com/studio/build/optimize-your-build#create_dev_variant" target="_blank" rel="noopener">구글 페이지</a>
-를 참고하세요.</p>
+그럴려면 productFlavor{} 블럭을 추가로 만들어서 다음과 같이 사용하면 됩니다. resConfig는 buildTypes{} 안에서는 사용할 수 없기 때문입니다. productFlavor의 구체적인 사용방법에 대해서는 <a class="link" href="https://developer.android.com/studio/build/optimize-your-build#create_dev_variant"  target="_blank" rel="noopener"
+    >구글 페이지</a>를 참고하세요.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">productFlavors</span><span class="o">{</span>
     <span class="n">dev</span> <span class="o">{</span>
         <span class="n">resConfigs</span> <span class="s2">&#34;ko&#34;</span><span class="o">,</span> <span class="s2">&#34;xxxhdpi&#34;</span>
@@ -260,7 +262,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -384,8 +386,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

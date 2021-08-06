@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='기술블로그 엔진을 Hugo에서 Hexo로 바꾸어 보았다.
 '><title>Hugo Blog</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="Hugo Blog">
 <meta name="twitter:description" content="기술블로그 엔진을 Hugo에서 Hexo로 바꾸어 보았다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -133,11 +135,11 @@ if (!doNotTrack) {
     <section class="article-content">
     <p>기술블로그 엔진을 Hugo에서 Hexo로 바꾸어 보았다.</p>
 <p>Hexo에 Icarus 태그를 씌우고 도커에 올려서 잘 쓰고 있었는데 내가 사용한 도커 이미지는 업뎃이 안된다는 문제가 있었다.
-<a href="https://github.com/spurin/docker-hexo" target="_blank" rel="noopener">https://github.com/spurin/docker-hexo</a>
-</p>
+<a class="link" href="https://github.com/spurin/docker-hexo"  target="_blank" rel="noopener"
+    >https://github.com/spurin/docker-hexo</a></p>
 <p>그래서 비슷한 엔진인 Hugo를 찾아보았는데 Hugo의 도커 이미지는 관리가 잘 되고 있었다.
-<a href="https://hub.docker.com/r/klakegg/hugo/" target="_blank" rel="noopener">https://hub.docker.com/r/klakegg/hugo/</a>
-</p>
+<a class="link" href="https://hub.docker.com/r/klakegg/hugo/"  target="_blank" rel="noopener"
+    >https://hub.docker.com/r/klakegg/hugo/</a></p>
 <p>근데 이상하게도 이 이미지를 비롯한 모든 hugo의 도커 이미지는 내 환경에서 실행이 안됐다. 짜증나기도 하고 이왕 이렇게 된거 로컬에서 실행하기로 했다. 맥북에서 하면 brew를 사용하기 때문에 업뎃도 쉬워서 관리가 편하다. hexo가 brew로 관리가 안된다는 점도 hugo로 온 이유중에 하나. Go를 쓰니까 빠르다는 점은 그렇게까진 다가오지 않았다.</p>
 <h2 id="hugo-초기화">hugo 초기화</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew install hugo  // hugo를 인스톨
@@ -198,8 +200,8 @@ git push origin master
 </code></pre></div><h2 id="검색엔진에-등록">검색엔진에 등록</h2>
 <h3 id="google-search-console">Google Search Console</h3>
 <ul>
-<li><a href="https://www.google.com/webmasters/tools/" target="_blank" rel="noopener">Google Search Console</a>
-에 접속</li>
+<li><a class="link" href="https://www.google.com/webmasters/tools/"  target="_blank" rel="noopener"
+    >Google Search Console</a>에 접속</li>
 <li>속성 추가 후 URL 접두어에서 github.io 주소 입력</li>
 <li>HTML파일로 확인 선택 -&gt; 파일 다운로드</li>
 <li>hugo의 public 폴더에 복사하면 루트에 업로드 됨</li>
@@ -250,7 +252,7 @@ filename = &quot;sitemap.xml&quot;
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -374,8 +376,8 @@ filename = &quot;sitemap.xml&quot;
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

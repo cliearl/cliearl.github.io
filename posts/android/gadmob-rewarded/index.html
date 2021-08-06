@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 보상형 광고를 표시하는 법에 대해 알아보도록 하겠습니다. 보상형 광고란 광고를 본 댓가로 어떤 아이템이나 보상을 주는 형태의 광고를 말합니다.
 '><title>Google Admob으로 보상형 광고 표시하기 </title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="Google Admob으로 보상형 광고 표시하기 ">
 <meta name="twitter:description" content="이번 포스팅에서는 보상형 광고를 표시하는 법에 대해 알아보도록 하겠습니다. 보상형 광고란 광고를 본 댓가로 어떤 아이템이나 보상을 주는 형태의 광고를 말합니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -137,8 +139,8 @@ if (!doNotTrack) {
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;com.google.android.gms:play-services-ads:19.6.0&#39;</span>
 <span class="o">}</span>
-</code></pre></div><p>AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 <a href="https://developers.google.com/admob/android/quick-start" target="_blank" rel="noopener">구글에서 테스트용으로 제공하는 ID</a>
-를 입력하였습니다.</p>
+</code></pre></div><p>AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 <a class="link" href="https://developers.google.com/admob/android/quick-start"  target="_blank" rel="noopener"
+    >구글에서 테스트용으로 제공하는 ID</a>를 입력하였습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;application</span>
@@ -186,8 +188,8 @@ if (!doNotTrack) {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><p>우선은 광고를 불러오는 부분을 작성하겠습니다.</p>
-<p>adUnitId에는 애드몹 사이트에서 제공하는 전면광고 아이디를 기입합니다. 여기서는 <a href="https://developers.google.com/admob/android/rewarded-video" target="_blank" rel="noopener">구글에서 제공하는 테스트 ID</a>
-를 사용했습니다.</p>
+<p>adUnitId에는 애드몹 사이트에서 제공하는 전면광고 아이디를 기입합니다. 여기서는 <a class="link" href="https://developers.google.com/admob/android/rewarded-video"  target="_blank" rel="noopener"
+    >구글에서 제공하는 테스트 ID</a>를 사용했습니다.</p>
 <p>그리고 RewardedAdLoadCallback()의 인스턴스를 만들어서 loadAd에 바로 전달해줍니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadRewardedAd</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">adRequest</span> <span class="p">=</span> <span class="n">AdRequest</span><span class="p">.</span><span class="n">Builder</span><span class="p">().</span><span class="n">build</span><span class="p">()</span>
@@ -327,7 +329,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -451,8 +453,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

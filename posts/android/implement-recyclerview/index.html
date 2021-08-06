@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 리사이클러뷰를 사용하는 법에 대해 알아보도록 하겠습니다.
 '><title>앱에서 RecyclerView 사용하기</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="앱에서 RecyclerView 사용하기">
 <meta name="twitter:description" content="이번 포스팅에서는 리사이클러뷰를 사용하는 법에 대해 알아보도록 하겠습니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -133,8 +135,8 @@ if (!doNotTrack) {
     <section class="article-content">
     <p>이번 포스팅에서는 리사이클러뷰를 사용하는 법에 대해 알아보도록 하겠습니다.</p>
 <h2 id="리사이클러뷰의-특징">리사이클러뷰의 특징</h2>
-<p><a href="https://developer.android.com/jetpack/androidx/releases/recyclerview" target="_blank" rel="noopener">리사이클러뷰</a>
-는 화면에 리스트 형식의 데이터를 표시하기 위해서 사용하는 모듈입니다. 보통 화면에 리스트뷰를 표시할수 있게 하는 리스트뷰는 예를들어 데이터가 10개 있을 경우 데이터를 표시하기 위한 뷰홀더가 10개 필요합니다. 그러나 리사이클러뷰는 뷰홀더를 6개만 만들고 화면에는 5개를 표시한 후 화면 바깥으로 1번 뷰홀더가 빠져나가면 7번 뷰홀더로 변경해서 재사용합니다. 그래서 자원을 더 아낄 수 있게 되는 것이죠.</p>
+<p><a class="link" href="https://developer.android.com/jetpack/androidx/releases/recyclerview"  target="_blank" rel="noopener"
+    >리사이클러뷰</a>는 화면에 리스트 형식의 데이터를 표시하기 위해서 사용하는 모듈입니다. 보통 화면에 리스트뷰를 표시할수 있게 하는 리스트뷰는 예를들어 데이터가 10개 있을 경우 데이터를 표시하기 위한 뷰홀더가 10개 필요합니다. 그러나 리사이클러뷰는 뷰홀더를 6개만 만들고 화면에는 5개를 표시한 후 화면 바깥으로 1번 뷰홀더가 빠져나가면 7번 뷰홀더로 변경해서 재사용합니다. 그래서 자원을 더 아낄 수 있게 되는 것이죠.</p>
 <p>또 데이터는 리사이클러뷰 어댑터를 통해 뷰홀더에 들어가게 되는데 뷰홀더에 데이터 1을 넣어서 표현했을 경우, 뷰홀더는 그대로 놔두고 데이터 2를 넣는 식으로 뷰홀더를 재활용해서 사용할 수 있습니다. 그래서 리사이클러뷰라는 이름이 붙게 된 것이죠.</p>
 <h2 id="리사이클러뷰-구현">리사이클러뷰 구현</h2>
 <h3 id="라이브러리-추가">라이브러리 추가</h3>
@@ -190,10 +192,10 @@ if (!doNotTrack) {
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
 </code></pre></div><h3 id="리사이클러뷰-어댑터-작성">리사이클러뷰 어댑터 작성</h3>
-<p>다음은 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter" target="_blank" rel="noopener">RecyclerView.Adapter</a>
- 클래스를 상속받는 리사이클러뷰 어댑터를 작성합니다. 외부에서 전달받을 데이터는 dataSet이라고 정의했습니다.</p>
-<p>그리고 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder" target="_blank" rel="noopener">뷰홀더 클래스</a>
-를 작성합니다. 여기서는 외부에서 전달받은 데이터를 뷰홀더 화면의 텍스트뷰와 연결하는 작업을 bind()함수로 정의합니다.</p>
+<p>다음은 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter"  target="_blank" rel="noopener"
+    >RecyclerView.Adapter</a> 클래스를 상속받는 리사이클러뷰 어댑터를 작성합니다. 외부에서 전달받을 데이터는 dataSet이라고 정의했습니다.</p>
+<p>그리고 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder"  target="_blank" rel="noopener"
+    >뷰홀더 클래스</a>를 작성합니다. 여기서는 외부에서 전달받은 데이터를 뷰홀더 화면의 텍스트뷰와 연결하는 작업을 bind()함수로 정의합니다.</p>
 <p>onCreateViewHolder에서 ViewHolder클래스에 list_item으로 inflate한 객체를 넘겨준 뷰홀더를 작성하여 반환합니다. onBindViewHolder에서는 뷰홀더 클래스의 bind()함수로 작성된 뷰홀더와 전달받은 개별 데이터를 연결합니다. getItemCount에서는 전달받은 데이터의 전체길이를 넘겨주어 어댑터가 뷰홀더를 얼마나 만들어야 할지를 결정하게 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span>
@@ -241,8 +243,8 @@ if (!doNotTrack) {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="리사이클러뷰와-어댑터-연결">리사이클러뷰와 어댑터 연결</h3>
-<p>마지막으로 리사이클러뷰와 어댑터를 연결해줍니다. 리사이클러뷰 안에서 뷰홀더를 어떻게 정렬할지 결정하는 레이아웃매니저 프로퍼티를 정의하는데 여기서는 리니어레이아웃 매니저를 사용하였습니다. 그 외 그리드형태로 정렬할 수도 있는데 구체적인 내용은 <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.LayoutManager" target="_blank" rel="noopener">개발자 홈페이지</a>
-를 참고하세요.</p>
+<p>마지막으로 리사이클러뷰와 어댑터를 연결해줍니다. 리사이클러뷰 안에서 뷰홀더를 어떻게 정렬할지 결정하는 레이아웃매니저 프로퍼티를 정의하는데 여기서는 리니어레이아웃 매니저를 사용하였습니다. 그 외 그리드형태로 정렬할 수도 있는데 구체적인 내용은 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.LayoutManager"  target="_blank" rel="noopener"
+    >개발자 홈페이지</a>를 참고하세요.</p>
 <p>그리고 위에서 만들어 준 RecyclerViewAdapter 초기화하여 adapter 프로퍼티에 반영해줍니다.</p>
 <p>addItemDecoration 속성을 정의하면 각 뷰홀더 사이에 선을 표시할 수도 있습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
@@ -309,7 +311,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -433,8 +435,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

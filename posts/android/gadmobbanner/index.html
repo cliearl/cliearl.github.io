@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 구글 애드몹 라이브러리를 이용해서 앱에 배너광고를 표시하는 법에 대해 알아보도록 하겠습니다.
 '><title>Google Admob으로 배너광고 표시하기</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="Google Admob으로 배너광고 표시하기">
 <meta name="twitter:description" content="이번 포스팅에서는 구글 애드몹 라이브러리를 이용해서 앱에 배너광고를 표시하는 법에 대해 알아보도록 하겠습니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -60,7 +62,7 @@ if (!doNotTrack) {
 ">
     
         <aside class="sidebar left-sidebar sticky">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -115,24 +117,6 @@ if (!doNotTrack) {
         
 
         <li >
-            <a href='/search/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
             <a href='/about/'>
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -145,23 +129,6 @@ if (!doNotTrack) {
 
                 
                 <span>About</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/categories/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-grid" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <rect x="4" y="4" width="6" height="6" rx="1" />
-  <rect x="14" y="4" width="6" height="6" rx="1" />
-  <rect x="4" y="14" width="6" height="6" rx="1" />
-  <rect x="14" y="14" width="6" height="6" rx="1" />
-</svg>
-                
-                <span>Categories</span>
             </a>
         </li>
         
@@ -317,8 +284,8 @@ if (!doNotTrack) {
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;com.google.android.gms:play-services-ads:19.7.0&#39;</span>
 <span class="o">}</span>
-</code></pre></div><p>다음은 AndroidManifest.xml에 인터넷 접근권한을 부여하고 애드몹 ID 정보를 추가합니다. 애드몹 ID는 구글 애드몹 사이트에 가입하고 자신의 앱을 등록하면 받을 수 있습니다. 여기서는 <a href="https://developers.google.com/admob/android/quick-start" target="_blank" rel="noopener">구글 개발자 사이트</a>
-에서 테스트를 할때 사용하라고 주는 값을 사용하였습니다.</p>
+</code></pre></div><p>다음은 AndroidManifest.xml에 인터넷 접근권한을 부여하고 애드몹 ID 정보를 추가합니다. 애드몹 ID는 구글 애드몹 사이트에 가입하고 자신의 앱을 등록하면 받을 수 있습니다. 여기서는 <a class="link" href="https://developers.google.com/admob/android/quick-start"  target="_blank" rel="noopener"
+    >구글 개발자 사이트</a>에서 테스트를 할때 사용하라고 주는 값을 사용하였습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span><span class="nt">/&gt;</span>
 
 <span class="nt">&lt;application</span>
@@ -327,8 +294,8 @@ if (!doNotTrack) {
         <span class="na">android:value=</span><span class="s">&#34;ca-app-pub-3940256099942544~3347511713&#34;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/application&gt;</span>
 
-</code></pre></div><p>다음은 화면 xml에 광고를 표시하기 위한 AdView를 추가합니다. 배너는 이미 정해진 <a href="https://developers.google.com/admob/android/banner?hl=en#banner_sizes" target="_blank" rel="noopener">리스트</a>
- 중에서 고를 수 있는데 여기서는 SMART_BANNER를 선택했습니다.</p>
+</code></pre></div><p>다음은 화면 xml에 광고를 표시하기 위한 AdView를 추가합니다. 배너는 이미 정해진 <a class="link" href="https://developers.google.com/admob/android/banner?hl=en#banner_sizes"  target="_blank" rel="noopener"
+    >리스트</a> 중에서 고를 수 있는데 여기서는 SMART_BANNER를 선택했습니다.</p>
 <p>그리고 adUnitId는 구글 애드몹 사이트에서 각 앱에 대해 배너광고를 추가했을 때 생기는 ID를 넣으면 됩니다. 여기서는 역시 구글에서 제공하는 테스트 ID를 사용했습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
@@ -438,7 +405,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -562,8 +529,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

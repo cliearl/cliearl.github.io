@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 View Binding을 사용하는 법에 대해 알아보도록 하겠습니다.
 '><title>findViewById 대신 View Binding 사용하기</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="findViewById 대신 View Binding 사용하기">
 <meta name="twitter:description" content="이번 포스팅에서는 View Binding을 사용하는 법에 대해 알아보도록 하겠습니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -133,17 +135,17 @@ if (!doNotTrack) {
     <section class="article-content">
     <p>이번 포스팅에서는 View Binding을 사용하는 법에 대해 알아보도록 하겠습니다.</p>
 <h2 id="kotlin-android-extensions의-지원-중단">Kotlin Android Extensions의 지원 중단</h2>
-<p>안드로이드 스튜디오에서는 뷰를 만들고 그 뷰를 불러오기 위해서 <a href="https://developer.android.com/reference/android/view/View#findViewById%28int%29" target="_blank" rel="noopener">findViewById</a>
-를 사용합니다. 이 때 kotlin-android-extensions 플러그인을 사용하면 이 함수의 사용을 생략하고 간편하게 코드를 작성할 수 있습니다.</p>
-<p>문제는 서로 다른 xml파일을 만들었을 때 Id를 동일하게 사용할 수 있기 때문에 코드에서 헷갈릴 수 있다는 문제가 있습니다. 그래서 구글에서는 안드로이드 스튜디오 4.1부터 kotlin-android-extensions의 <a href="https://developers-kr.googleblog.com/2020/11/the-future-of-kotlin-android-extensions.html" target="_blank" rel="noopener">지원을 중단</a>
-하고 <a href="https://developer.android.com/topic/libraries/view-binding" target="_blank" rel="noopener">View Binding</a>
-을 사용하도록 안내하고 있습니다.</p>
+<p>안드로이드 스튜디오에서는 뷰를 만들고 그 뷰를 불러오기 위해서 <a class="link" href="https://developer.android.com/reference/android/view/View#findViewById%28int%29"  target="_blank" rel="noopener"
+    >findViewById</a>를 사용합니다. 이 때 kotlin-android-extensions 플러그인을 사용하면 이 함수의 사용을 생략하고 간편하게 코드를 작성할 수 있습니다.</p>
+<p>문제는 서로 다른 xml파일을 만들었을 때 Id를 동일하게 사용할 수 있기 때문에 코드에서 헷갈릴 수 있다는 문제가 있습니다. 그래서 구글에서는 안드로이드 스튜디오 4.1부터 kotlin-android-extensions의 <a class="link" href="https://developers-kr.googleblog.com/2020/11/the-future-of-kotlin-android-extensions.html"  target="_blank" rel="noopener"
+    >지원을 중단</a>하고 <a class="link" href="https://developer.android.com/topic/libraries/view-binding"  target="_blank" rel="noopener"
+    >View Binding</a>을 사용하도록 안내하고 있습니다.</p>
 <h2 id="view-binding의-구조">View Binding의 구조</h2>
 <p>View Binding을 프로젝트에서 사용하도록 설정하면 각 레이아웃 xml 파일에 대해 ViewBinding 클래스를 상속받는 개별 binding class가 자동으로 생성됩니다. 이 때 클래스 이름은 레이아웃 파일 이름을 파스칼 표기법으로 변환하고 Binding 접미사를 추가합니다.</p>
 <p>그리고나서 onCreate()안에서 View Binding 클래스에 인스턴스를 생성하면 뷰의 Id를 인스턴스의 프로퍼티로 사용할 수 있게 됩니다.</p>
 <h2 id="view-binding의-장점">View Binding의 장점</h2>
-<p>구글에서 설명하는 View Binding의 <a href="https://developer.android.com/topic/libraries/view-binding#findviewbyid" target="_blank" rel="noopener">장점</a>
-은 두가지가 있습니다. 하나는 Null-safe로, 서로 다른 레이아웃에 대해 같은 ID를 가진 뷰를 정확히 구분할 수 있게 됩니다. 만약 Id를 참조할 수 없을 경우 @Nullable로 만들어 아예 사용할 수 없게 막습니다. 두번째는 Type-safe로, findViewById를 사용할 경우 뷰에 잘못된 타입을 지정할 수 있다는 문제가 있는데, View Binding에서는 그런 문제가 발생하지 않는다는 특징이 있습니다.</p>
+<p>구글에서 설명하는 View Binding의 <a class="link" href="https://developer.android.com/topic/libraries/view-binding#findviewbyid"  target="_blank" rel="noopener"
+    >장점</a>은 두가지가 있습니다. 하나는 Null-safe로, 서로 다른 레이아웃에 대해 같은 ID를 가진 뷰를 정확히 구분할 수 있게 됩니다. 만약 Id를 참조할 수 없을 경우 @Nullable로 만들어 아예 사용할 수 없게 막습니다. 두번째는 Type-safe로, findViewById를 사용할 경우 뷰에 잘못된 타입을 지정할 수 있다는 문제가 있는데, View Binding에서는 그런 문제가 발생하지 않는다는 특징이 있습니다.</p>
 <h2 id="findviewbyid-사용상의-문제">findViewById 사용상의 문제</h2>
 <p>안드로이드 스튜디오의 Create new project에서 Basic Activity를 만들어서 View Binding 환경을 구현해 보겠습니다. 우선은 findViewById를 사용할 때 어떤 문제가 발생하는지 보여드리겠습니다.</p>
 <p>kotlin-android-extensions 플러그인을 적용한 뒤, fragment_first.xml, fragment_second.xml의 텍스트뷰 Id를 동일한 textview라고 변경해줍니다.</p>
@@ -273,7 +275,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -397,8 +399,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

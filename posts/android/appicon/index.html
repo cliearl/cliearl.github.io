@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.
 '><title>App Icon 설정하기</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="App Icon 설정하기">
 <meta name="twitter:description" content="이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -134,16 +136,16 @@ if (!doNotTrack) {
     <p>이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.</p>
 <h2 id="legacy-icon과-adaptive-icon">Legacy Icon과 Adaptive Icon</h2>
 <p>안드로이드 앱에서는 현재 두 가지 종류의 아이콘을 사용할 수 있습니다. 하나는 Legacy Icon이고 또 하나는 Adaptive Icon입니다.</p>
-<p><a href="https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive" target="_blank" rel="noopener">Adaptive Icon</a>
-은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.</p>
+<p><a class="link" href="https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive"  target="_blank" rel="noopener"
+    >Adaptive Icon</a>은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.</p>
 <p>그래서 구글에서는 어댑티브 아이콘이라는 규격을 제안했습니다. 어댑티브 아이콘은 백그라운드와 포그라운드 두 개의 레이어를 정의한 뒤 기기의 요청에 따라 아이콘을 조합하여 필요한 모양으로 표시를 해 줍니다.</p>
 <p><img src="https://developer.android.com/guide/practices/ui_guidelines/images/NB_Icon_Layers_3D_03_ext.gif" alt="icon"  /></p>
-<p>출처: <a href="https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive" target="_blank" rel="noopener">https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive</a>
-</p>
+<p>출처: <a class="link" href="https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive"  target="_blank" rel="noopener"
+    >https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive</a></p>
 <p>이 어댑티브 아이콘은 안드로이드 8 오레오 (API Level 26)부터 지원을 하기 때문에 그 전 버전에서는 레가시 아이콘을 사용하여야 합니다.</p>
 <h2 id="아이콘-디자인-사양">아이콘 디자인 사양</h2>
-<p>구글에서 제안하는 아이콘 디자인시의 <a href="https://developer.android.com/google-play/resources/icon-design-specifications" target="_blank" rel="noopener">가이드라인</a>
-은 다음과 같습니다. 여기서 모양을 정사각형으로 하고 그림자를 넣지 말라고 하는 것은 어댑티브 아이콘을 사용하면 이 효과를 줄 수 있기 때문입니다.</p>
+<p>구글에서 제안하는 아이콘 디자인시의 <a class="link" href="https://developer.android.com/google-play/resources/icon-design-specifications"  target="_blank" rel="noopener"
+    >가이드라인</a>은 다음과 같습니다. 여기서 모양을 정사각형으로 하고 그림자를 넣지 말라고 하는 것은 어댑티브 아이콘을 사용하면 이 효과를 줄 수 있기 때문입니다.</p>
 <ul>
 <li>최종크기 : 512 px * 512 px</li>
 <li>형식 : 32비트 PNG</li>
@@ -169,8 +171,8 @@ android:roundIcon=&#34;@mipmap/ic_launcher_round
 <h2 id="아이콘-설정">아이콘 설정</h2>
 <p>그럼 여기서는 이미지를 이용해서 아이콘을 설정해 보도록 하겠습니다. 이미지는 PNGRepo의 빨간색 안드로이드 아이콘을 사용할건데요, 이 아이콘은 512 * 512 크기를 가지고 있기 때문에 그대로 앱에 사용할 수 있습니다.</p>
 <p><img src="https://www.pngrepo.com/png/232464/180/android.png" alt="안드로이드"  /></p>
-<p>출처 : <a href="https://www.pngrepo.com/svg/232464/android" target="_blank" rel="noopener">https://www.pngrepo.com/svg/232464/android</a>
-</p>
+<p>출처 : <a class="link" href="https://www.pngrepo.com/svg/232464/android"  target="_blank" rel="noopener"
+    >https://www.pngrepo.com/svg/232464/android</a></p>
 <p>res 폴더 New -&gt; Image Asset을 선택하고 Source Asset의 Path에서 그림파일을 선택합니다. 안드로이드가 사각형 안에 들어가도록 Resize에서 대충 조절해 주는데 구글에서는 그림이 70% 크기가 되도록 권장하고 있습니다. 그리고 Color 메뉴를 사용해서 백그라운드는 흰색을 선택해줍니다.</p>
 <p>mipmap 아래에 아이콘이 추가되었으면 <code>AndroidManifest.xml</code>에서 사용할 아이콘을 정해주면 끝입니다.</p>
 <p>이렇게 해서 앱에 아이콘을 지정하는 법에 대해 알아보았습니다.</p>
@@ -215,7 +217,7 @@ android:roundIcon=&#34;@mipmap/ic_launcher_round
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -339,8 +341,8 @@ android:roundIcon=&#34;@mipmap/ic_launcher_round
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

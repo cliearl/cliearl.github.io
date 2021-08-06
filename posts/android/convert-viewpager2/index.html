@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.
 안드로이드 라이브러리가 androidx로 바뀌는 과정에서 뷰페이저 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.
-ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration )은 다음과 같습니다.
+ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다.
  Vertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : 리사이클러뷰의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음  ViewPager2로 변환 기존에 작성했던 ViewPager1 프로젝트를 변환하는 방법으로 보여드리도록 하겠습니다.'><title>ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/convert-viewpager2/'>
@@ -11,7 +11,7 @@ ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://d
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기'>
 <meta property='og:description' content='이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.
 안드로이드 라이브러리가 androidx로 바뀌는 과정에서 뷰페이저 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.
-ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration )은 다음과 같습니다.
+ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다.
  Vertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : 리사이클러뷰의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음  ViewPager2로 변환 기존에 작성했던 ViewPager1 프로젝트를 변환하는 방법으로 보여드리도록 하겠습니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/convert-viewpager2/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -19,8 +19,10 @@ ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://d
 <meta name="twitter:title" content="ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기">
 <meta name="twitter:description" content="이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.
 안드로이드 라이브러리가 androidx로 바뀌는 과정에서 뷰페이저 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.
-ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration )은 다음과 같습니다.
+ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다.
  Vertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : 리사이클러뷰의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음  ViewPager2로 변환 기존에 작성했던 ViewPager1 프로젝트를 변환하는 방법으로 보여드리도록 하겠습니다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -137,13 +139,13 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
-    <p>이번 포스팅에서는 프로젝트 안에 작성된 <a href="https://developer.android.com/training/animation/screen-slide" target="_blank" rel="noopener">ViewPager1</a>
- 모듈을 <a href="https://developer.android.com/guide/navigation/navigation-swipe-view-2" target="_blank" rel="noopener">ViewPager2</a>
- 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.</p>
+    <p>이번 포스팅에서는 프로젝트 안에 작성된 <a class="link" href="https://developer.android.com/training/animation/screen-slide"  target="_blank" rel="noopener"
+    >ViewPager1</a> 모듈을 <a class="link" href="https://developer.android.com/guide/navigation/navigation-swipe-view-2"  target="_blank" rel="noopener"
+    >ViewPager2</a> 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.</p>
 <p>안드로이드 라이브러리가 androidx로 바뀌는 과정에서 뷰페이저 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.</p>
 <h2 id="viewpager2의-특징">ViewPager2의 특징</h2>
-<p>구글에서 설명하는 ViewPager2의 [장점]((<a href="https://developer.android.com/training/animation/vp2-migration" target="_blank" rel="noopener">https://developer.android.com/training/animation/vp2-migration</a>
-)은 다음과 같습니다.</p>
+<p>구글에서 설명하는 ViewPager2의 [장점]((<a class="link" href="https://developer.android.com/training/animation/vp2-migration"  target="_blank" rel="noopener"
+    >https://developer.android.com/training/animation/vp2-migration</a>)은 다음과 같습니다.</p>
 <ul>
 <li>Vertical scrolling : 세로스크롤</li>
 <li>Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬</li>
@@ -153,8 +155,8 @@ if (!doNotTrack) {
 </ul>
 <h2 id="viewpager2로-변환">ViewPager2로 변환</h2>
 <p>기존에 작성했던 ViewPager1 프로젝트를 변환하는 방법으로 보여드리도록 하겠습니다. 기존 프로젝트는 다음 링크를 참조하세요.
-<a href="https://youtu.be/XoZXRnfudzc" target="_blank" rel="noopener">https://youtu.be/XoZXRnfudzc</a>
-</p>
+<a class="link" href="https://youtu.be/XoZXRnfudzc"  target="_blank" rel="noopener"
+    >https://youtu.be/XoZXRnfudzc</a></p>
 <p>가장 먼저 해야할 것은 뷰페이저2 라이브러리를 추가하는 것입니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;androidx.viewpager2:viewpager2:1.0.0&#39;</span>
@@ -263,7 +265,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -387,8 +389,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

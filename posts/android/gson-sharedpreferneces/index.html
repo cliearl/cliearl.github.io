@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.
 '><title>SharedPreferences를 json 포맷으로 관리하기</title>
@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="SharedPreferences를 json 포맷으로 관리하기">
 <meta name="twitter:description" content="이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.
 ">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -133,12 +135,12 @@ if (!doNotTrack) {
     <section class="article-content">
     <p>이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.</p>
 <p>SharedPreferences는 키-밸류 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 밸류 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.</p>
-<p>이 때 앱 안의 데이터를 json으로 시리얼라이즈하고 다시 복원하는 디시리얼라이즈를 편하게 실행하게 해 주는 <a href="https://github.com/google/gson" target="_blank" rel="noopener">Gson</a>
-이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.</p>
+<p>이 때 앱 안의 데이터를 json으로 시리얼라이즈하고 다시 복원하는 디시리얼라이즈를 편하게 실행하게 해 주는 <a class="link" href="https://github.com/google/gson"  target="_blank" rel="noopener"
+    >Gson</a>이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.</p>
 <h2 id="코딩-타임">코딩 타임</h2>
 <p>포스팅에서는 다른 강의에서 만들었던 리사이클러뷰 프로젝트를 수정하면서 구현해보겠습니다.
-<a href="https://youtu.be/opPmxtI4rLQ" target="_blank" rel="noopener">https://youtu.be/opPmxtI4rLQ</a>
-</p>
+<a class="link" href="https://youtu.be/opPmxtI4rLQ"  target="_blank" rel="noopener"
+    >https://youtu.be/opPmxtI4rLQ</a></p>
 <p>우선 Gson을 디펜던시에 추가합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;com.google.code.gson:gson:2.8.6&#39;</span>
@@ -162,8 +164,8 @@ if (!doNotTrack) {
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY_PREFS</span> <span class="p">=</span> <span class="s2">&#34;shared_preferences&#34;</span>
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY_DATA</span> <span class="p">=</span> <span class="s2">&#34;monster_data&#34;</span>
 <span class="p">}</span>
-</code></pre></div><p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 다른 <a href="https://youtu.be/4rYMfpbpwPA" target="_blank" rel="noopener">강의</a>
-에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. 리사이클러뷰 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.</p>
+</code></pre></div><p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 다른 <a class="link" href="https://youtu.be/4rYMfpbpwPA"  target="_blank" rel="noopener"
+    >강의</a>에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. 리사이클러뷰 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">savePref</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
     <span class="k">val</span> <span class="py">editor</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">edit</span><span class="p">()</span>
@@ -247,7 +249,7 @@ if (!doNotTrack) {
     <aside class="related-contents--wrapper">
     
     
-        <h2 class="section-title">관련 글</h2>
+        <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
                 
@@ -371,8 +373,8 @@ if (!doNotTrack) {
     </section>
     
     <section class="powerby">
-        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
-        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> 테마 사용 중
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
