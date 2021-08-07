@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='기술블로그 엔진을 Hugo에서 Hexo로 바꾸어 보았다.
-'><title>Hugo Blog</title>
+'><title>Hexo에서 Hugo로 블로그 엔진 변경</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/etc/hugo-blog/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Hugo Blog'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Hexo에서 Hugo로 블로그 엔진 변경'>
 <meta property='og:description' content='기술블로그 엔진을 Hugo에서 Hexo로 바꾸어 보았다.
 '>
 <meta property='og:url' content='https://cliearl.github.io/posts/etc/hugo-blog/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='hugo' /><meta property='article:tag' content='blog' /><meta property='article:published_time' content='2021-03-04T22:24:02&#43;09:00'/><meta property='article:modified_time' content='2021-03-04T22:24:02&#43;09:00'/>
-<meta name="twitter:title" content="Hugo Blog">
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='hugo' /><meta property='article:tag' content='blog' /><meta property='article:tag' content='hexo' /><meta property='article:published_time' content='2021-03-04T22:24:02&#43;09:00'/><meta property='article:modified_time' content='2021-03-04T22:24:02&#43;09:00'/>
+<meta name="twitter:title" content="Hexo에서 Hugo로 블로그 엔진 변경">
 <meta name="twitter:description" content="기술블로그 엔진을 Hugo에서 Hexo로 바꾸어 보았다.
 ">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
@@ -90,7 +90,7 @@ if (!doNotTrack) {
     
 
     <h2 class="article-title">
-        <a href="/posts/etc/hugo-blog/">Hugo Blog</a>
+        <a href="/posts/etc/hugo-blog/">Hexo에서 Hugo로 블로그 엔진 변경</a>
     </h2>
 
     
@@ -140,7 +140,7 @@ if (!doNotTrack) {
 <p>그래서 비슷한 엔진인 Hugo를 찾아보았는데 Hugo의 도커 이미지는 관리가 잘 되고 있었다.
 <a class="link" href="https://hub.docker.com/r/klakegg/hugo/"  target="_blank" rel="noopener"
     >https://hub.docker.com/r/klakegg/hugo/</a></p>
-<p>근데 이상하게도 이 이미지를 비롯한 모든 hugo의 도커 이미지는 내 환경에서 실행이 안됐다. 짜증나기도 하고 이왕 이렇게 된거 로컬에서 실행하기로 했다. 맥북에서 하면 brew를 사용하기 때문에 업뎃도 쉬워서 관리가 편하다. hexo가 brew로 관리가 안된다는 점도 hugo로 온 이유중에 하나. Go를 쓰니까 빠르다는 점은 그렇게까진 다가오지 않았다.</p>
+<p>근데 이상하게도 이 이미지를 비롯한 모든 hugo의 도커 이미지는 내 시놀로지 환경에서 실행이 안됐다. 짜증나기도 하고 이왕 이렇게 된거 로컬에서 실행하기로 했다. 맥북에서 하면 brew를 사용하기 때문에 업뎃도 쉬워서 관리가 편하다. hexo가 brew로 관리가 안된다는 점도 hugo로 온 이유중에 하나. Go를 쓰니까 빠르다는 점은 그렇게까진 다가오지 않았다.</p>
 <h2 id="hugo-초기화">hugo 초기화</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew install hugo  // hugo를 인스톨
 $ hugo new site <span class="o">[</span>생성할 폴더 이름<span class="o">]</span>
@@ -149,11 +149,11 @@ $ hugo new site <span class="o">[</span>생성할 폴더 이름<span class="o">]
 $ git init
 $ git remote add origin <span class="o">[</span>https://hugo 원본파일을 보관할 저장소<span class="o">]</span>
 $ git submodule add <span class="o">[</span>https://hugo가 생성한 사이트를 업로드할 저장소<span class="o">]</span> public
-$ git submodule add <span class="o">[</span>https://github.com/zzossig/hugo-theme-zzo.git<span class="o">]</span> themes/zzo
+$ git submodule add <span class="o">[</span>테마 깃주소.git<span class="o">]</span> themes/zzo
 $ git submodule update --init --recursive  // 테마가 업데이트 될 경우 반영
 </code></pre></div><h2 id="글-작성-후-확인">글 작성 후 확인</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo new posts/test.md  // 새로운 글 작성
-$ hugo server -D  // localhost:1313에서 만들어진 정적사이트를 확인
+$ hugo server  // 만들어진 정적사이트를 localhost:1313에 띄워줌
 </code></pre></div><h2 id="페이지-작성-후-업로드">페이지 작성 후 업로드</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo -t <span class="o">[</span>테마이름<span class="o">]</span>  // 정적사이트 생성
 $ <span class="nb">cd</span> public
@@ -227,6 +227,8 @@ filename = &quot;sitemap.xml&quot;
             <a href="/tags/hugo/">hugo</a>
         
             <a href="/tags/blog/">blog</a>
+        
+            <a href="/tags/hexo/">hexo</a>
         
     </section>
 
