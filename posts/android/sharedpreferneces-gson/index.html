@@ -4,12 +4,12 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.
 '><title>SharedPreferences를 json 포맷으로 관리하기</title>
 
-<link rel='canonical' href='https://cliearl.github.io/posts/android/gson-sharedpreferneces/'>
+<link rel='canonical' href='https://cliearl.github.io/posts/android/sharedpreferneces-gson/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SharedPreferences를 json 포맷으로 관리하기'>
 <meta property='og:description' content='이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.
 '>
-<meta property='og:url' content='https://cliearl.github.io/posts/android/gson-sharedpreferneces/'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/sharedpreferneces-gson/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='SharedPreferences' /><meta property='article:tag' content='json' /><meta property='article:tag' content='gson' /><meta property='article:published_time' content='2021-04-22T20:33:39&#43;09:00'/><meta property='article:modified_time' content='2021-04-22T20:33:39&#43;09:00'/>
 <meta name="twitter:title" content="SharedPreferences를 json 포맷으로 관리하기">
@@ -90,7 +90,7 @@ if (!doNotTrack) {
     
 
     <h2 class="article-title">
-        <a href="/posts/android/gson-sharedpreferneces/">SharedPreferences를 json 포맷으로 관리하기</a>
+        <a href="/posts/android/sharedpreferneces-gson/">SharedPreferences를 json 포맷으로 관리하기</a>
     </h2>
 
     
@@ -134,18 +134,21 @@ if (!doNotTrack) {
 
     <section class="article-content">
     <p>이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.</p>
-<p>SharedPreferences는 키-밸류 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 밸류 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.</p>
-<p>이 때 앱 안의 데이터를 json으로 시리얼라이즈하고 다시 복원하는 디시리얼라이즈를 편하게 실행하게 해 주는 <a class="link" href="https://github.com/google/gson"  target="_blank" rel="noopener"
+<p><a class="link" href="https://developer.android.com/reference/android/content/SharedPreferences"  target="_blank" rel="noopener"
+    >SharedPreferences</a>는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.</p>
+<p>이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 <a class="link" href="https://github.com/google/gson"  target="_blank" rel="noopener"
     >Gson</a>이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.</p>
-<h2 id="코딩-타임">코딩 타임</h2>
-<p>포스팅에서는 다른 강의에서 만들었던 리사이클러뷰 프로젝트를 수정하면서 구현해보겠습니다.
+<p>포스팅에서는 <a class="link" href="https://youtu.be/opPmxtI4rLQ"  target="_blank" rel="noopener"
+    >Data class 이해하고 RecyclerView에서 사용하기</a> 강의에서 만들었던 RecyclerView 프로젝트를 수정하면서 구현해보겠습니다.
 <a class="link" href="https://youtu.be/opPmxtI4rLQ"  target="_blank" rel="noopener"
     >https://youtu.be/opPmxtI4rLQ</a></p>
+<h2 id="라이브러리-추가">라이브러리 추가</h2>
 <p>우선 Gson을 디펜던시에 추가합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;com.google.code.gson:gson:2.8.6&#39;</span>
 <span class="o">}</span>
-</code></pre></div><p>다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.</p>
+</code></pre></div><h2 id="화면-구성">화면 구성</h2>
+<p>다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
     <span class="err">&lt;com.google.android.material.floatingactionbutton.FloatingActionButton</span>
         <span class="na">android:id=</span><span class="s">&#34;@+id/button_load&#34;</span>
@@ -159,13 +162,15 @@ if (!doNotTrack) {
         <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
         <span class="na">app:srcCompat=</span><span class="s">&#34;@android:drawable/ic_menu_add&#34;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></div><p>SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.</p>
+</code></pre></div><h2 id="key-준비">Key 준비</h2>
+<p>SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY_PREFS</span> <span class="p">=</span> <span class="s2">&#34;shared_preferences&#34;</span>
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY_DATA</span> <span class="p">=</span> <span class="s2">&#34;monster_data&#34;</span>
 <span class="p">}</span>
-</code></pre></div><p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 다른 <a class="link" href="https://youtu.be/4rYMfpbpwPA"  target="_blank" rel="noopener"
-    >강의</a>에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. 리사이클러뷰 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.</p>
+</code></pre></div><h2 id="savepref-작성">savePref() 작성</h2>
+<p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 <a class="link" href="https://youtu.be/4rYMfpbpwPA"  target="_blank" rel="noopener"
+    >SharedPreferences로 앱 설정값 저장하고 불러오기</a>강의에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고, 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. 리사이클러뷰 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">savePref</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
     <span class="k">val</span> <span class="py">editor</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">edit</span><span class="p">()</span>
@@ -175,7 +180,9 @@ if (!doNotTrack) {
     <span class="n">editor</span><span class="p">.</span><span class="n">apply</span><span class="p">()</span>
     <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data saved&#34;</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div><p>이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, 타입토큰을 적용해서 데이터를 복원하는 부분이 추가되었습니다. json으로 SharedPreferences에 저장하는 순간 데이터가 가지고 있는 타입정보가 모두 사라지기 때문에 데이터를 복원하면서 타입정보를 다시 부여하기 위해 타입토큰을 사용합니다. 여기서는 &laquo;ArrayList<!-- raw HTML omitted -->&gt;라는 타입을 만들어서 데이터에 부여해 줍니다. 그리고 리사이클러뷰 어댑터 안의 데이터는 변경가능하도록 var 로 변경해줍니다.</p>
+</code></pre></div><h2 id="loadpref-함수-작성">loadPref() 함수 작성</h2>
+<p>이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, <a class="link" href="https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html"  target="_blank" rel="noopener"
+    >TypeToken</a>을 적용해서 데이터를 복원하는 부분이 추가되었습니다. json으로 SharedPreferences에 저장하는 순간 데이터가 가지고 있는 타입정보가 모두 사라지기 때문에 데이터를 복원하면서 타입정보를 다시 부여하기 위해 타입토큰을 사용합니다. 여기서는 <code>&lt;&lt;ArrayList&lt;Monster&gt;&gt;</code>라는 타입을 만들어서 데이터에 부여해 줍니다. 그리고 리사이클러뷰 어댑터 안의 데이터는 변경가능하도록 var 로 변경해줍니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadPref</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">sharedPreferences</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">))</span> <span class="p">{</span>
@@ -190,7 +197,8 @@ if (!doNotTrack) {
         <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data loaded&#34;</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>다음은 메인액티비티 안에서 savePref()와 loadPref()를 실행시키면 됩니다. loadPref()를 실행하면 어댑터에 데이터 변경을 알려주면 됩니다.</p>
+</code></pre></div><h2 id="함수-실행">함수 실행</h2>
+<p>다음은 메인액티비티 안에서 savePref()와 loadPref()를 실행시키면 됩니다. loadPref()를 실행하고 어댑터에 데이터 변경을 알려주면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
     <span class="n">binding</span><span class="p">.</span><span class="n">buttonLoad</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
         <span class="n">loadPref</span><span class="p">()</span>
@@ -202,7 +210,6 @@ if (!doNotTrack) {
     <span class="k">super</span><span class="p">.</span><span class="n">onStop</span><span class="p">()</span>
     <span class="n">savePref</span><span class="p">()</span>
 <span class="p">}</span>
-
 </code></pre></div><p>이렇게 SharedPrefenrences와 Gson을 이용해서 복잡한 데이터를 json으로 저장하고 불러오는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
@@ -374,7 +381,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.0.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -477,7 +484,12 @@ if (!doNotTrack) {
                 <div class="widget--toc">
                     <nav id="TableOfContents">
   <ol>
-    <li><a href="#코딩-타임">코딩 타임</a></li>
+    <li><a href="#라이브러리-추가">라이브러리 추가</a></li>
+    <li><a href="#화면-구성">화면 구성</a></li>
+    <li><a href="#key-준비">Key 준비</a></li>
+    <li><a href="#savepref-작성">savePref() 작성</a></li>
+    <li><a href="#loadpref-함수-작성">loadPref() 함수 작성</a></li>
+    <li><a href="#함수-실행">함수 실행</a></li>
   </ol>
 </nav>
                 </div>
