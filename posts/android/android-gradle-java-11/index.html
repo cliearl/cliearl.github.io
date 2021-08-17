@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라가면서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔습니다.
-Android Gradle 7.0.0의 사양은 다음과 같습니다.
-    Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.'><title>Android Studio Arctic Fox와 JDK 11 도입</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.
+Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
+    Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.'><title>Android Studio Arctic Fox와 JDK 11 도입</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Android Studio Arctic Fox와 JDK 11 도입'>
-<meta property='og:description' content='Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라가면서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔습니다.
-Android Gradle 7.0.0의 사양은 다음과 같습니다.
-    Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.'>
+<meta property='og:description' content='이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.
+Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
+    Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='JDK' /><meta property='article:published_time' content='2021-08-15T14:23:23&#43;09:00'/><meta property='article:modified_time' content='2021-08-15T14:23:23&#43;09:00'/>
 <meta name="twitter:title" content="Android Studio Arctic Fox와 JDK 11 도입">
-<meta name="twitter:description" content="Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라가면서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔습니다.
-Android Gradle 7.0.0의 사양은 다음과 같습니다.
-    Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.
+Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
+    Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -126,7 +126,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 min read
+                    3 min read
                 </time>
             </div>
         
@@ -136,11 +136,11 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
-    <h2 id="android-gradle-700-도입">Android Gradle 7.0.0 도입</h2>
+    <p>이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.</p>
+<h2 id="android-gradle-700-도입">Android Gradle 7.0.0 도입</h2>
 <p><img src="https://lh5.googleusercontent.com/DYKpGgREctrgtrpbjk_BLuCUQUS0JXGG_HFWxzYyU4h_0A_dFbV6QptLSjT0L57tVCyrb0JBkzm-M8_lY2rn-G_u5r95XHvQPBwNFT-5fFRU44_JXTu_RLACFC0GGoBmmv0QSWbuWPFtQovy0A" alt="arctic fox"  /></p>
-<p>2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라가면서 Android Gradle plugin의 버전도 4.2.0에서 <a class="link" href="https://developer.android.com/studio/releases/gradle-plugin#7-0-0"  target="_blank" rel="noopener"
-    >7.0.0</a>으로 올라갔습니다.</p>
-<p>Android Gradle 7.0.0의 사양은 다음과 같습니다.</p>
+<p>2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 <a class="link" href="https://developer.android.com/studio/releases/gradle-plugin#7-0-0"  target="_blank" rel="noopener"
+    >7.0.0</a>으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.</p>
 <table>
 <thead>
 <tr>
@@ -167,7 +167,7 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-<p>가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.</p>
+<p>이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.</p>
 <h2 id="java-8에서-11로-변경된-이유">Java 8에서 11로 변경된 이유</h2>
 <p>그렇다면 왜 11버전이 선택되었을까요? 11은 2018년 9월 발표된 버전으로 8과 비교하면 기술적으로 많은 발전이 있었습니다. 그 내용에 대해서는 Microsoft의 <a class="link" href="https://docs.microsoft.com/ko-kr/azure/developer/java/fundamentals/reasons-to-move-to-java-11"  target="_blank" rel="noopener"
     >Java 11로 전환해야 하는 이유</a>를 참조하시면 좋을 것 같습니다.</p>
@@ -187,7 +187,8 @@ if (!doNotTrack) {
 <span class="o">}</span>
 </code></pre></div><p>또한 11은 <a class="link" href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html"  target="_blank" rel="noopener"
     >LTS(Long Term Support)</a>가 적용되었으며 <a class="link" href="https://adoptium.net/"  target="_blank" rel="noopener"
-    >ADOPTIUM</a> 으로부터 오픈소스 빌드인 OpenJDK를 제공받을 수 있는 버전이기도 합니다. 그런 이유로 구글에서는 Android Gradle의 디폴트 버전을 11로 채용하게 된 것으로 보입니다. synk의 <a class="link" href="https://snyk.io/wp-content/uploads/jvm_2020.pdf"  target="_blank" rel="noopener"
+    >ADOPTIUM</a> 으로부터 오픈소스 빌드인 OpenJDK를 제공받을 수 있는 버전이기도 합니다. OpenJDK는 Oracle JDK의 기능을 모두 구현하면서도 무료로 사용할 수 있는 JDK라고 생각하시면 됩니다.</p>
+<p>이러한 이유들로 인해 구글에서는 Android Gradle의 JDK 디폴트 버전을 11로 채용하게 된 것으로 보입니다. synk에서 발표한 <a class="link" href="https://snyk.io/wp-content/uploads/jvm_2020.pdf"  target="_blank" rel="noopener"
     >JVM Ecosystem Report 2020</a>에 따르면 현재 Java SE 8 사용자는 64%, 11 사용자는 25%라고 하는데 이번 결정으로 11버전의 사용자가 빠르게 증가할 것 같네요.</p>
 <h2 id="android-studio의-빌드-실패">Android Studio의 빌드 실패</h2>
 <p>현재 Arctic Fox에서 New Project로 생성하는 프로젝트의 Android Gradle은 7.0.0 버전이 적용되도록 되어 있습니다.</p>
