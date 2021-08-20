@@ -33,15 +33,15 @@ if (!doNotTrack) {
     <body class="
     article-page has-toc
 ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "dark");
-            }
-        })();
-    </script><script>
-    (function() {
+<script>
+    (function () {
+        const colorSchemeKey = 'StackColorScheme';
+        if (!localStorage.getItem(colorSchemeKey)) {
+            localStorage.setItem(colorSchemeKey, "dark");
+        }
+    })();
+</script><script>
+    (function () {
         const colorSchemeKey = 'StackColorScheme';
         const colorSchemeItem = localStorage.getItem(colorSchemeKey);
         const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
@@ -54,8 +54,7 @@ if (!doNotTrack) {
             document.documentElement.dataset.scheme = 'light';
         }
     })();
-</script>
-<div class="container main-container flex 
+</script><div class="container main-container flex 
     
         extended
     
@@ -178,7 +177,7 @@ if (!doNotTrack) {
 </span><span class="c1"></span><span class="k">false</span>
 </code></pre></div><p>그래서 hashCode()를 정의하여 동일한 프로퍼티를 가질 경우 동일한 해시값을 갖도록 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">hashCode</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">name</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span> <span class="p">*</span> <span class="m">1234</span> <span class="p">+</span> <span class="n">age</span> <span class="p">-</span> <span class="n">sex</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>  <span class="p">-</span> <span class="m">1234</span> <span class="p">+</span> <span class="n">age</span> <span class="p">-</span> <span class="n">sex</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>
 <span class="p">}</span>
 
 <span class="c1">// 출력값

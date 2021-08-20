@@ -33,15 +33,15 @@ if (!doNotTrack) {
     <body class="
     article-page has-toc
 ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "dark");
-            }
-        })();
-    </script><script>
-    (function() {
+<script>
+    (function () {
+        const colorSchemeKey = 'StackColorScheme';
+        if (!localStorage.getItem(colorSchemeKey)) {
+            localStorage.setItem(colorSchemeKey, "dark");
+        }
+    })();
+</script><script>
+    (function () {
         const colorSchemeKey = 'StackColorScheme';
         const colorSchemeItem = localStorage.getItem(colorSchemeKey);
         const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
@@ -54,8 +54,7 @@ if (!doNotTrack) {
             document.documentElement.dataset.scheme = 'light';
         }
     })();
-</script>
-<div class="container main-container flex 
+</script><div class="container main-container flex 
     
         extended
     
@@ -288,8 +287,8 @@ if (!doNotTrack) {
                 <span class="n">position</span> <span class="o">&lt;=</span> <span class="m">1</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="c1">// [-1,1]
 </span><span class="c1"></span>                    <span class="c1">// Modify the default slide transition to shrink the page as well
 </span><span class="c1"></span>                    <span class="k">val</span> <span class="py">scaleFactor</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">MIN_SCALE</span><span class="p">,</span> <span class="m">1</span> <span class="p">-</span> <span class="n">abs</span><span class="p">(</span><span class="n">position</span><span class="p">))</span>
-                    <span class="k">val</span> <span class="py">vertMargin</span> <span class="p">=</span> <span class="n">pageHeight</span> <span class="p">*</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">scaleFactor</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span>
-                    <span class="k">val</span> <span class="py">horzMargin</span> <span class="p">=</span> <span class="n">pageWidth</span> <span class="p">*</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">scaleFactor</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span>
+                    <span class="k">val</span> <span class="py">vertMargin</span> <span class="p">=</span> <span class="n">pageHeight</span>  <span class="p">-</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">scaleFactor</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span>
+                    <span class="k">val</span> <span class="py">horzMargin</span> <span class="p">=</span> <span class="n">pageWidth</span>  <span class="p">-</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">scaleFactor</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span>
                     <span class="n">translationX</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">position</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
                         <span class="n">horzMargin</span> <span class="p">-</span> <span class="n">vertMargin</span> <span class="p">/</span> <span class="m">2</span>
                     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -302,7 +301,7 @@ if (!doNotTrack) {
 
                     <span class="c1">// Fade the page relative to its size.
 </span><span class="c1"></span>                    <span class="n">alpha</span> <span class="p">=</span> <span class="p">(</span><span class="n">MIN_ALPHA</span> <span class="p">+</span>
-                            <span class="p">(((</span><span class="n">scaleFactor</span> <span class="p">-</span> <span class="n">MIN_SCALE</span><span class="p">)</span> <span class="p">/</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">MIN_SCALE</span><span class="p">))</span> <span class="p">*</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">MIN_ALPHA</span><span class="p">)))</span>
+                            <span class="p">(((</span><span class="n">scaleFactor</span> <span class="p">-</span> <span class="n">MIN_SCALE</span><span class="p">)</span> <span class="p">/</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">MIN_SCALE</span><span class="p">))</span>  <span class="p">-</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">MIN_ALPHA</span><span class="p">)))</span>
                 <span class="p">}</span>
                 <span class="k">else</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="c1">// (1,+Infinity]
 </span><span class="c1"></span>                    <span class="c1">// This page is way off-screen to the right.

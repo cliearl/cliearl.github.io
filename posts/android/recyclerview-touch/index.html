@@ -33,15 +33,15 @@ if (!doNotTrack) {
     <body class="
     article-page has-toc
 ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "dark");
-            }
-        })();
-    </script><script>
-    (function() {
+<script>
+    (function () {
+        const colorSchemeKey = 'StackColorScheme';
+        if (!localStorage.getItem(colorSchemeKey)) {
+            localStorage.setItem(colorSchemeKey, "dark");
+        }
+    })();
+</script><script>
+    (function () {
         const colorSchemeKey = 'StackColorScheme';
         const colorSchemeItem = localStorage.getItem(colorSchemeKey);
         const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
@@ -54,8 +54,7 @@ if (!doNotTrack) {
             document.documentElement.dataset.scheme = 'light';
         }
     })();
-</script>
-<div class="container main-container flex 
+</script><div class="container main-container flex 
     
         extended
     
@@ -289,7 +288,7 @@ if (!doNotTrack) {
                         <span class="c1">// 휴지통 아이콘과 표시될 위치를 지정하고 비트맵을 그려줌
 </span><span class="c1"></span>                        <span class="c1">// 비트맵 이미지는 Image Asset 기능으로 추가하고 drawable 폴더에 위치하도록 함
 </span><span class="c1"></span>                        <span class="n">icon</span> <span class="p">=</span> <span class="n">BitmapFactory</span><span class="p">.</span><span class="n">decodeResource</span><span class="p">(</span><span class="n">resources</span><span class="p">,</span> <span class="n">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">ic_menu_delete</span><span class="p">)</span>
-                        <span class="k">val</span> <span class="py">iconDst</span> <span class="p">=</span> <span class="n">RectF</span><span class="p">(</span><span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="m">3</span> <span class="p">*</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">top</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">+</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">bottom</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="n">width</span><span class="p">)</span>
+                        <span class="k">val</span> <span class="py">iconDst</span> <span class="p">=</span> <span class="n">RectF</span><span class="p">(</span><span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="m">3</span>  <span class="p">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">top</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">+</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">bottom</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="n">width</span><span class="p">)</span>
                         <span class="n">c</span><span class="p">.</span><span class="n">drawBitmap</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">iconDst</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
                     <span class="p">}</span>
                 <span class="p">}</span>
