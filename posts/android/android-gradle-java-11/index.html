@@ -2,21 +2,24 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.
-Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
+Android Gradle 7.0.0 도입  arctic fox 
+2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
     Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.'><title>Android Studio Arctic Fox와 JDK 11의 도입</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Android Studio Arctic Fox와 JDK 11의 도입'>
 <meta property='og:description' content='이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.
-Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
+Android Gradle 7.0.0 도입  arctic fox 
+2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
     Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='JDK' /><meta property='article:published_time' content='2021-08-15T14:23:23&#43;09:00'/><meta property='article:modified_time' content='2021-08-15T14:23:23&#43;09:00'/>
 <meta name="twitter:title" content="Android Studio Arctic Fox와 JDK 11의 도입">
 <meta name="twitter:description" content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.
-Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
+Android Gradle 7.0.0 도입  arctic fox 
+2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
     Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
@@ -126,7 +129,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    3 min read
+                    3 minute read
                 </time>
             </div>
         
@@ -138,7 +141,20 @@ if (!doNotTrack) {
     <section class="article-content">
     <p>이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.</p>
 <h2 id="android-gradle-700-도입">Android Gradle 7.0.0 도입</h2>
-<p><img src="https://lh5.googleusercontent.com/DYKpGgREctrgtrpbjk_BLuCUQUS0JXGG_HFWxzYyU4h_0A_dFbV6QptLSjT0L57tVCyrb0JBkzm-M8_lY2rn-G_u5r95XHvQPBwNFT-5fFRU44_JXTu_RLACFC0GGoBmmv0QSWbuWPFtQovy0A" alt="arctic fox"  /></p>
+<p><figure 
+	>
+	<a href="https://lh5.googleusercontent.com/DYKpGgREctrgtrpbjk_BLuCUQUS0JXGG_HFWxzYyU4h_0A_dFbV6QptLSjT0L57tVCyrb0JBkzm-M8_lY2rn-G_u5r95XHvQPBwNFT-5fFRU44_JXTu_RLACFC0GGoBmmv0QSWbuWPFtQovy0A" >
+		<img src="https://lh5.googleusercontent.com/DYKpGgREctrgtrpbjk_BLuCUQUS0JXGG_HFWxzYyU4h_0A_dFbV6QptLSjT0L57tVCyrb0JBkzm-M8_lY2rn-G_u5r95XHvQPBwNFT-5fFRU44_JXTu_RLACFC0GGoBmmv0QSWbuWPFtQovy0A"
+			
+			
+			
+			loading="lazy"
+			alt="arctic fox">
+	</a>
+	
+	<figcaption>arctic fox</figcaption>
+	
+</figure></p>
 <p>2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 <a class="link" href="https://developer.android.com/studio/releases/gradle-plugin#7-0-0"  target="_blank" rel="noopener"
     >7.0.0</a>으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.</p>
 <table>
@@ -345,7 +361,7 @@ $ <span class="nb">source</span> ~/.zshrc
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.1.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

@@ -3,6 +3,7 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 ProgressDialog와 Thread 사용법에 대해 알아보도록 하겠습니다.
 ProgressDialog란 ProgressDialog는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황과 부가적인 문장을 팝업창으로 보여주는 모듈입니다. 시간이 걸리는 파일 다운로드나 복사를 수행할 때 이런창을 띄워주면 기다리는데 유저의 거부감을 줄일 수 있습니다.
+ screenshot_1616835329.png 
 ProgressDialog는 다이얼로그가 표시되는 동안 유저가 다른 조작을 못하게 된다는 이유로 Android 8.0(API level 26)부터는 deprecated 되고 대신 ProgressBar를 사용하도록 권장하고 있습니다.
 &amp;hellip;만, ProgressDialog는 쓰레드를 설명하는데 좋은 예제이기 때문에 여기서는 ProgressDialog를 구현하면서 쓰레드에 대해 이해해 보도록 하겠습니다'><title>ProgressDialog로 Thread와 Handler 이해하기</title>
 
@@ -11,6 +12,7 @@ ProgressDialog는 다이얼로그가 표시되는 동안 유저가 다른 조작
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='ProgressDialog로 Thread와 Handler 이해하기'>
 <meta property='og:description' content='이번 포스팅에서는 ProgressDialog와 Thread 사용법에 대해 알아보도록 하겠습니다.
 ProgressDialog란 ProgressDialog는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황과 부가적인 문장을 팝업창으로 보여주는 모듈입니다. 시간이 걸리는 파일 다운로드나 복사를 수행할 때 이런창을 띄워주면 기다리는데 유저의 거부감을 줄일 수 있습니다.
+ screenshot_1616835329.png 
 ProgressDialog는 다이얼로그가 표시되는 동안 유저가 다른 조작을 못하게 된다는 이유로 Android 8.0(API level 26)부터는 deprecated 되고 대신 ProgressBar를 사용하도록 권장하고 있습니다.
 &amp;hellip;만, ProgressDialog는 쓰레드를 설명하는데 좋은 예제이기 때문에 여기서는 ProgressDialog를 구현하면서 쓰레드에 대해 이해해 보도록 하겠습니다'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/progressdialog-thread/'>
@@ -19,6 +21,7 @@ ProgressDialog는 다이얼로그가 표시되는 동안 유저가 다른 조작
 <meta name="twitter:title" content="ProgressDialog로 Thread와 Handler 이해하기">
 <meta name="twitter:description" content="이번 포스팅에서는 ProgressDialog와 Thread 사용법에 대해 알아보도록 하겠습니다.
 ProgressDialog란 ProgressDialog는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황과 부가적인 문장을 팝업창으로 보여주는 모듈입니다. 시간이 걸리는 파일 다운로드나 복사를 수행할 때 이런창을 띄워주면 기다리는데 유저의 거부감을 줄일 수 있습니다.
+ screenshot_1616835329.png 
 ProgressDialog는 다이얼로그가 표시되는 동안 유저가 다른 조작을 못하게 된다는 이유로 Android 8.0(API level 26)부터는 deprecated 되고 대신 ProgressBar를 사용하도록 권장하고 있습니다.
 &amp;hellip;만, ProgressDialog는 쓰레드를 설명하는데 좋은 예제이기 때문에 여기서는 ProgressDialog를 구현하면서 쓰레드에 대해 이해해 보도록 하겠습니다">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
@@ -129,7 +132,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    4 min read
+                    4 minute read
                 </time>
             </div>
         
@@ -143,7 +146,20 @@ if (!doNotTrack) {
 <h2 id="progressdialog란">ProgressDialog란</h2>
 <p><a class="link" href="https://developer.android.com/reference/android/app/ProgressDialog"  target="_blank" rel="noopener"
     >ProgressDialog</a>는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황과 부가적인 문장을 팝업창으로 보여주는 모듈입니다. 시간이 걸리는 파일 다운로드나 복사를 수행할 때 이런창을 띄워주면 기다리는데 유저의 거부감을 줄일 수 있습니다.</p>
-<p><img src="/images/posts/screenshot_1616835329.png" alt="screenshot_1616835329.png"  /></p>
+<p><figure 
+	>
+	<a href="/images/posts/screenshot_1616835329.png" >
+		<img src="/images/posts/screenshot_1616835329.png"
+			
+			
+			
+			loading="lazy"
+			alt="screenshot_1616835329.png">
+	</a>
+	
+	<figcaption>screenshot_1616835329.png</figcaption>
+	
+</figure></p>
 <p>ProgressDialog는 다이얼로그가 표시되는 동안 유저가 다른 조작을 못하게 된다는 이유로 Android 8.0(API level 26)부터는 deprecated 되고 대신 <a class="link" href="https://developer.android.com/reference/android/widget/ProgressBar"  target="_blank" rel="noopener"
     >ProgressBar</a>를 사용하도록 권장하고 있습니다.</p>
 <p>&hellip;만, ProgressDialog는 쓰레드를 설명하는데 좋은 예제이기 때문에 여기서는 ProgressDialog를 구현하면서 쓰레드에 대해 이해해 보도록 하겠습니다</p>
@@ -175,7 +191,20 @@ if (!doNotTrack) {
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">setCancelable</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div><h3 id="스레드와-핸들러">스레드와 핸들러</h3>
-<p><img src="/images/posts/android-thread-looper-handler.png" alt="스레드 구조"  /></p>
+<p><figure 
+	>
+	<a href="/images/posts/android-thread-looper-handler.png" >
+		<img src="/images/posts/android-thread-looper-handler.png"
+			
+			
+			
+			loading="lazy"
+			alt="스레드 구조">
+	</a>
+	
+	<figcaption>스레드 구조</figcaption>
+	
+</figure></p>
 <p>이미지 출처 : <a class="link" href="https://academy.realm.io/kr/posts/android-thread-looper-handler/"  target="_blank" rel="noopener"
     >https://academy.realm.io/kr/posts/android-thread-looper-handler/</a></p>
 <p>한 프로세스 안에서 여러개의 스레드를 사용하게 되면 서로다른 스레드가 버튼이나 텍스트뷰 등의 UI 컴포넌트에 동시에 접근하는 문제가 생길 수 있습니다. 안드로이드에서는 이것을 막기 위해 처리흐름 중간에 <a class="link" href="https://developer.android.com/reference/android/os/Looper"  target="_blank" rel="noopener"
@@ -434,7 +463,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.1.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
