@@ -123,7 +123,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    6 minute read
+                    7 minute read
                 </time>
             </div>
         
@@ -339,12 +339,22 @@ notifyItemRangeRemoved(int, int)
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="mydiffcallbackkt">MyDiffCallback.kt</h3>
-<p>Monster 클래스가 <a class="link" href="https://kotlinlang.org/docs/data-classes.html"  target="_blank" rel="noopener"
-    >데이터 클래스</a>이므로 <code>areItemsTheSame</code>은 자동으로 생성되는 <code>hashCode</code>로 비교하도록 하였습니다. 데이터클래스의 정의에 따라 동일한 두 객체의 hashCode는 동일한 값을 갖게 됩니다. 또한 <code>equals</code>도 데이터클래스의 정의에 의해 자동으로 생성되므로 <code>areContentsTheSame</code> 메소드는 equals를 이용해 구현합니다.</p>
+<p>코틀린에서는 <a class="link" href="https://kotlinlang.org/docs/equality.html"  target="_blank" rel="noopener"
+    >Equality</a>를 다음과 같이 두가지 방법으로 판정할 수 있습니다.</p>
+<ul>
+<li>
+<p>Structural equality (==- a check for equals())</p>
+</li>
+<li>
+<p>Referential equality (===- two references point to the same object)</p>
+</li>
+</ul>
+<p><code>areItemsTheSame</code>에서 비교대상인 두 객체가 Referential equality를 갖는지 판정하는데에는 <code>===</code>를 이용하였습니다. 그리고 <code>areContentsTheSame</code> 에서 두 객체의 아이템이 Structural equality를 갖는지 판정하는데에는 <code>equals</code>를 사용합니다. 그런데 <code>Monster</code>가 <a class="link" href="https://kotlinlang.org/docs/data-classes.html"  target="_blank" rel="noopener"
+    >데이터클래스</a>이기 때문에 데이터클래스의 정의에 따라 <code>==</code>을 equals로 사용할 수 있습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyDiffCallback</span> <span class="p">:</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;()</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">areItemsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">oldItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span> <span class="o">==</span> <span class="n">newItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">oldItem</span> <span class="o">===</span> <span class="n">newItem</span>
     <span class="p">}</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">areContentsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
