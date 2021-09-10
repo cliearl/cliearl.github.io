@@ -178,20 +178,18 @@ if (!doNotTrack) {
 <p>AsyncTask의 동작은 다음과 같이 이루어지게 됩니다.</p>
 <p><figure 
 	>
-	<a href="https://images.ctfassets.net/s72atsk5w5jo/1GAPdfN1W82SkQCgmss0Gu/91aaeb2fa1808dd1a7c03ba21552ae7b/android-thread-asynctask.png" >
-		<img src="https://images.ctfassets.net/s72atsk5w5jo/1GAPdfN1W82SkQCgmss0Gu/91aaeb2fa1808dd1a7c03ba21552ae7b/android-thread-asynctask.png"
+	<a href="/images/posts/android-thread-asynctask.png" >
+		<img src="/images/posts/android-thread-asynctask.png"
 			
 			
 			
 			loading="lazy"
-			alt="asynctask">
+			alt="출처 : https://academy.realm.io/kr/posts/android-thread-looper-handler/">
 	</a>
 	
-	<figcaption>asynctask</figcaption>
+	<figcaption>출처 : <a href="https://academy.realm.io/kr/posts/android-thread-looper-handler/">https://academy.realm.io/kr/posts/android-thread-looper-handler/</a></figcaption>
 	
 </figure></p>
-<p>출처 : <a class="link" href="https://academy.realm.io/kr/posts/android-thread-looper-handler/"  target="_blank" rel="noopener"
-    >https://academy.realm.io/kr/posts/android-thread-looper-handler/</a></p>
 <ol>
 <li>메인 스레드에서 <code>AsyncTask</code>의 인스턴스를 생성하고 <code>execute()</code> 로 실행.</li>
 <li><code>AsyncTask</code> 스레드가 시작되기 직전에 <code>onPreExcuted()</code>가 실행됨. 스레드 실행전 필요한 컴포넌트들을 로딩하는데 사용.</li>
@@ -325,7 +323,13 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></div><h2 id="메모리-누수-방어하기">메모리 누수 방어하기</h2>
 <h3 id="asynctask의-특징">AsyncTask의 특징</h3>
-<p>자바에서는 객체간의 관계를 Strong reference, Soft reference, Weak reference, Phantom reference 등으로 구분하는데 메모리 확보를 위해 가비지 컬렉터가 작동하면 강한참조는 무시되고 약한참조를 가진 객체만 삭제되게 됩니다.</p>
+<p>자바에서는 객체간의 관계를 다음과 같이 구분하는데, 메모리 확보를 위해 가비지 컬렉터가 작동하면 강한참조는 무시되고 약한참조를 가진 객체만 삭제되게 됩니다.</p>
+<ul>
+<li>Strong reference</li>
+<li>Soft reference</li>
+<li>Weak reference</li>
+<li>Phantom reference</li>
+</ul>
 <p>여기서 만들어진 AsyncTask 객체가 액티비티를 참조하면 강한 참조를 가지게 됩니다. 그러면 가비지콜렉터가 인스턴스를 제거하지 않게 되어 메모리 누수가 발생하게 되죠.</p>
 <p>또한 AsyncTask는 하나의 객체만 생성할 수 있으며 액티비티가 종료되어도 스레드 작업이 끝나지 않았을 경우 종료되지 않는다는 특징이 있습니다.</p>
 <p>그런데 이런 특징때문에 액티비티가 종료되고 재시작되면 스레드 객체가 액티비티 참조를 잃어버리게 되서 액티비티에 영향을 줄 수 없는 스레드만 좀비처럼 살아남아버리는 문제가 발생하게 됩니다.</p>

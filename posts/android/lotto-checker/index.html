@@ -2,19 +2,25 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.
-'><title>코루틴으로 로또번호 당첨 확인하기</title>
+당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.
+금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.
+그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &amp;ldquo;회차&amp;quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.'><title>코루틴으로 로또번호 당첨 확인하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/lotto-checker/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='코루틴으로 로또번호 당첨 확인하기'>
 <meta property='og:description' content='이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.
-'>
+당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.
+금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.
+그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &amp;ldquo;회차&amp;quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/lotto-checker/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='coroutine' /><meta property='article:tag' content='lotto' /><meta property='article:published_time' content='2021-07-17T16:01:01&#43;09:00'/><meta property='article:modified_time' content='2021-07-17T16:01:01&#43;09:00'/>
 <meta name="twitter:title" content="코루틴으로 로또번호 당첨 확인하기">
 <meta name="twitter:description" content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.
-">
+당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.
+금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.
+그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &amp;ldquo;회차&amp;quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -136,8 +142,8 @@ if (!doNotTrack) {
     <p>이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.</p>
 <h2 id="당첨번호-조회하기">당첨번호 조회하기</h2>
 <p>이전에 <a class="link" href="https://cliearl.github.io/posts/android/lotto-generator/"  target="_blank" rel="noopener"
-    >다른 강의</a>에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명도 <a class="link" href="https://cliearl.github.io/posts/android/coroutine-principle/"  target="_blank" rel="noopener"
-    >다른 강의</a>를 참조하시기 바랍니다.</p>
+    >로또번호 생성기 만들기</a>강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 <a class="link" href="https://cliearl.github.io/posts/android/coroutine-principle/"  target="_blank" rel="noopener"
+    >알기쉬운 코루틴 이론</a> 강의를 참조하시기 바랍니다.</p>
 <p>금주의 로또 당첨번호는 <a class="link" href="https://dhlottery.co.kr/common.do?method=main"  target="_blank" rel="noopener"
     >동행복권 홈페이지</a>에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 <a class="link" href="https://dhlottery.co.kr/gameResult.do?method=byWin&amp;wiselog=C_A_1_2"  target="_blank" rel="noopener"
     >회차별 당첨번호 페이지</a>에서 확인할 수 있게 되어 있습니다.</p>
@@ -146,7 +152,8 @@ if (!doNotTrack) {
 </code></pre></div><p>예를 들면 968회차의 응답은 다음과 같은 json 형식으로 돌아옵니다. totSellamnt는 총 판매액, returnValue는 API응답 성공여부, drwNoDate는 추첨일, firstWinamnt는 1등상금, drwNo는 회차, drwtNo1~6이 당첨번호이고, bnusNo가 보너스번호입니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;totSellamnt&#34;</span><span class="p">:</span><span class="mi">95924229000</span><span class="p">,</span><span class="nt">&#34;returnValue&#34;</span><span class="p">:</span><span class="s2">&#34;success&#34;</span><span class="p">,</span><span class="nt">&#34;drwNoDate&#34;</span><span class="p">:</span><span class="s2">&#34;2021-06-19&#34;</span><span class="p">,</span><span class="nt">&#34;firstWinamnt&#34;</span><span class="p">:</span><span class="mi">1667729683</span><span class="p">,</span><span class="nt">&#34;drwtNo6&#34;</span><span class="p">:</span><span class="mi">39</span><span class="p">,</span><span class="nt">&#34;drwtNo4&#34;</span><span class="p">:</span><span class="mi">14</span><span class="p">,</span><span class="nt">&#34;firstPrzwnerCo&#34;</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="nt">&#34;drwtNo5&#34;</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span><span class="nt">&#34;bnusNo&#34;</span><span class="p">:</span><span class="mi">33</span><span class="p">,</span><span class="nt">&#34;firstAccumamnt&#34;</span><span class="p">:</span><span class="mi">21680485879</span><span class="p">,</span><span class="nt">&#34;drwNo&#34;</span><span class="p">:</span><span class="mi">968</span><span class="p">,</span><span class="nt">&#34;drwtNo2&#34;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="nt">&#34;drwtNo3&#34;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="nt">&#34;drwtNo1&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
 </code></pre></div><h2 id="dependency-확인">Dependency 확인</h2>
-<p>자 그러면 drwtNo1~6, bnusNo의 값을 추출해서 나의 값과 비교하면 되겠네요. 당첨번호는 네트워크에서 백그라운드로 받아와야 하기 때문에 코루틴으로 처리하도록 하면 되겠고, 받아온 json으로부터 값을 추출하는데에는 gson 라이브러리를 사용하면 될 것 같습니다. 코루틴의 이론과 gson에 대해서는 각각 다른 강의에서 다루었으니 그것을 참고하시면 되겠습니다.</p>
+<p>자 그러면 drwtNo1~6, bnusNo의 값을 추출해서 나의 값과 비교하면 되겠네요. 당첨번호는 네트워크에서 백그라운드로 받아와야 하기 때문에 코루틴으로 처리하도록 하면 되겠고, 받아온 json으로부터 값을 추출하는데에는 gson 라이브러리를 사용하면 될 것 같습니다. gson의 사용법에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferneces-gson/"  target="_blank" rel="noopener"
+    >SharedPreferences를 json 포맷으로 관리하기</a> 강의에서 다루었으니 그것을 참고하시면 되겠습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="n">jetbrains</span><span class="p">.</span><span class="n">kotlinx</span><span class="p">:</span><span class="n">kotlinx</span><span class="p">-</span><span class="n">coroutines</span><span class="p">-</span><span class="n">android</span><span class="p">:</span><span class="m">1.4</span><span class="p">.</span><span class="m">1</span><span class="err">&#39;</span>
 <span class="n">implementation</span> <span class="err">&#39;</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">code</span><span class="p">.</span><span class="n">gson</span><span class="p">:</span><span class="n">gson</span><span class="p">:</span><span class="m">2.8</span><span class="p">.</span><span class="m">6</span><span class="err">&#39;</span>
 </code></pre></div><h2 id="네트워크로-당첨번호-받아오기">네트워크로 당첨번호 받아오기</h2>
@@ -267,7 +274,7 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></div><h2 id="코루틴-취소하기">코루틴 취소하기</h2>
 <p>액티비티가 종료되었을 때 실행중인 코루틴이 살아남는것을 방지하기 위해 취소하는 기능을 추가해 보도록 하겠습니다. <a class="link" href="https://cliearl.github.io/posts/android/coroutine-principle/"  target="_blank" rel="noopener"
-    >코루틴 강의</a>에서 설명했던 것처럼 코루틴을 취소하기 위해서는 job에 대해 cancel을 수행하면 됩니다. 그런데 generateButton 안에서 수행된 CoroutineScope에 대해서는 반환되는 job을 오브젝트로 만들지 않았습니다.</p>
+    >알기쉬운 코루틴 이론</a> 강의에서 설명했던 것처럼 코루틴을 취소하기 위해서는 job에 대해 cancel을 수행하면 됩니다. 그런데 generateButton 안에서 수행된 CoroutineScope에 대해서는 반환되는 job을 오브젝트로 만들지 않았습니다.</p>
 <p>이런 경우에는 Job 전역변수를 하나 만들어 주고 디스패처와 결합합니다. 코틀린의 코루틴은 자식 코루틴이 취소되면 연결된 부모 코루틴이 모두 취소되는 특징을 가지고 있으므로 onDestroy에서 job에 대해 cancel을 수행하면 연결시킨 코루틴을 취소할 수 있습니다.</p>
 <p>실제 예제에서는 뷰모델을 이용하게 되므로 lifecycle 모듈과 결합하여 사용하면 좀 더 앱의 라이프사이클과 연동된 생명주기를 가지게 할 수 있습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
@@ -298,6 +305,8 @@ if (!doNotTrack) {
     >
     </iframe>
 </div>
+
+
 </section>
 
 
