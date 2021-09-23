@@ -186,7 +186,7 @@ if (!doNotTrack) {
         <span class="k">private</span> <span class="k">var</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DBHandler</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
 
         <span class="k">fun</span> <span class="nf">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span>
-            <span class="n">instance</span> <span class="o">?:</span> <span class="n">synchronized</span><span class="p">(</span><span class="n">DBHelper</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">instance</span> <span class="o">?:</span> <span class="n">synchronized</span><span class="p">(</span><span class="n">DBHandler</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span> <span class="p">{</span>
                 <span class="n">instance</span> <span class="o">?:</span> <span class="n">DBHandler</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
                     <span class="n">instance</span> <span class="p">=</span> <span class="k">it</span>
                 <span class="p">}</span>
@@ -223,14 +223,14 @@ if (!doNotTrack) {
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div><p>위 코드는 굳이 코틀린으로 <a class="link" href="https://medium.com/swlh/singleton-design-pattern-with-kotlin-2e6c8d42fc11"  target="_blank" rel="noopener"
-    >변환</a>한다면 다음과 같은 코드가 될 것입니다. 다만 내부 클래스가 object가 되어 생성자를 사용할 수 없으므로 이럴거면 그냥 처음부터 DBHelper를 object로 인스턴스화 하는것이 나을것 같네요.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DBHelper</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">()</span> <span class="p">{</span>
+    >변환</a>한다면 다음과 같은 코드가 될 것입니다. 다만 내부 클래스가 object가 되어 생성자를 사용할 수 없으므로 이럴거면 그냥 처음부터 DBHandler를 object로 인스턴스화 하는것이 나을것 같네요.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DBHandler</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DBHelper</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">Holder</span><span class="p">.</span><span class="n">INSTANCE</span> <span class="p">}</span>
+        <span class="k">val</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DBHandler</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">Holder</span><span class="p">.</span><span class="n">INSTANCE</span> <span class="p">}</span>
     <span class="p">}</span>
 
     <span class="k">private</span> <span class="k">object</span> <span class="nc">Holder</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">instance</span> <span class="p">=</span> <span class="n">DBHelper</span><span class="p">()</span>
+        <span class="k">val</span> <span class="py">instance</span> <span class="p">=</span> <span class="n">DBHandler</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><p>이렇게 해서 싱글톤 패턴을 구현하는 방법에 대해 알아보았습니다.</p>
