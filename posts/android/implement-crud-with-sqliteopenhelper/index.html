@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 두 파트에 걸쳐 안드로이드에서 SQLite를 다루는 법에 대해 알아보도록 하겠습니다.
+Part A. 데이터베이스 관계형 데이터베이스 여러 사람들의 연락처 데이터는 다음과 같이 테이블 구조로 관리할 수 있습니다. 이런 식으로 통일된 규칙의 데이터를 관리할 수 있는 테이블을 데이터베이스라고 합니다.
+   순서 이름 전화번호 이메일 주소     0 김철수 010-1111-1111 kim@abc.com 서울   1 이영희 010-2222-2222 lee@abc.com 서울   2 박모모 010-3333-3333 park@abc.com 인천    이 때 1행 2열의 이름을 Key라고 하고 2행 2열의 김철수를 Value라고 합니다.'><title>SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/implement-crud-with-sqliteopenhelper/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기'>
+<meta property='og:description' content='이번 포스팅에서는 두 파트에 걸쳐 안드로이드에서 SQLite를 다루는 법에 대해 알아보도록 하겠습니다.
+Part A. 데이터베이스 관계형 데이터베이스 여러 사람들의 연락처 데이터는 다음과 같이 테이블 구조로 관리할 수 있습니다. 이런 식으로 통일된 규칙의 데이터를 관리할 수 있는 테이블을 데이터베이스라고 합니다.
+   순서 이름 전화번호 이메일 주소     0 김철수 010-1111-1111 kim@abc.com 서울   1 이영희 010-2222-2222 lee@abc.com 서울   2 박모모 010-3333-3333 park@abc.com 인천    이 때 1행 2열의 이름을 Key라고 하고 2행 2열의 김철수를 Value라고 합니다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/implement-crud-with-sqliteopenhelper/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='sqlite' /><meta property='article:tag' content='crud' /><meta property='article:published_time' content='2021-09-25T17:33:35&#43;09:00'/><meta property='article:modified_time' content='2021-09-25T17:33:35&#43;09:00'/>
+<meta name="twitter:title" content="SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기">
+<meta name="twitter:description" content="이번 포스팅에서는 두 파트에 걸쳐 안드로이드에서 SQLite를 다루는 법에 대해 알아보도록 하겠습니다.
+Part A. 데이터베이스 관계형 데이터베이스 여러 사람들의 연락처 데이터는 다음과 같이 테이블 구조로 관리할 수 있습니다. 이런 식으로 통일된 규칙의 데이터를 관리할 수 있는 테이블을 데이터베이스라고 합니다.
+   순서 이름 전화번호 이메일 주소     0 김철수 010-1111-1111 kim@abc.com 서울   1 이영희 010-2222-2222 lee@abc.com 서울   2 박모모 010-3333-3333 park@abc.com 인천    이 때 1행 2열의 이름을 Key라고 하고 2행 2열의 김철수를 Value라고 합니다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://cliearl.github.io" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/android/implement-crud-with-sqliteopenhelper/">SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 25, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    8 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <p>이번 포스팅에서는 두 파트에 걸쳐 안드로이드에서 SQLite를 다루는 법에 대해 알아보도록 하겠습니다.</p>
+<h2 id="part-a-데이터베이스">Part A. 데이터베이스</h2>
+<h3 id="관계형-데이터베이스">관계형 데이터베이스</h3>
+<p>여러 사람들의 연락처 데이터는 다음과 같이 테이블 구조로 관리할 수 있습니다. 이런 식으로 통일된 규칙의 데이터를 관리할 수 있는 테이블을 데이터베이스라고 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>이름</th>
+<th>전화번호</th>
+<th>이메일</th>
+<th>주소</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>김철수</td>
+<td>010-1111-1111</td>
+<td><a class="link" href="mailto:kim@abc.com" >kim@abc.com</a></td>
+<td>서울</td>
+</tr>
+<tr>
+<td>1</td>
+<td>이영희</td>
+<td>010-2222-2222</td>
+<td><a class="link" href="mailto:lee@abc.com" >lee@abc.com</a></td>
+<td>서울</td>
+</tr>
+<tr>
+<td>2</td>
+<td>박모모</td>
+<td>010-3333-3333</td>
+<td><a class="link" href="mailto:park@abc.com" >park@abc.com</a></td>
+<td>인천</td>
+</tr>
+</tbody>
+</table>
+<p>이 때 1행 2열의 <code>이름</code>을 <code>Key</code>라고 하고 2행 2열의 <code>김철수</code>를 <code>Value</code>라고 합니다. 전화번호, 이메일, 주소도 역시 Key이고 그에 대응되는 값들도 역시 Value가 되겠죠. <code>순서</code>라는 Key는 각 데이터에 대해 겹치지 않는 고유한 값이기 때문에 <code>고유키(Primary Key)</code>라고 합니다.</p>
+<p>이렇게 Key와 Value가 1:1이나 1:n 또는 n:n 의 관계를 가지는 데이터베이스를 관계형 데이터베이스(<a class="link" href="https://en.wikipedia.org/wiki/Relational_database"  target="_blank" rel="noopener"
+    >Relational Database</a>)라고 합니다.</p>
+<h3 id="sql과-crud">SQL과 CRUD</h3>
+<p>위에 보여드린 DB에서 박모모의 전화번호를 찾는건 매우 간단합니다. 하지만 만약 행의 길이가 수만줄에 이르고 그 안에 박모모의 동명이인도 수백명이 존재하는 테이블이 있다면 어떨까요? 그 안에서 내가 원하는 박모모의 전화번호를 찾는건 쉽지 않은 일일겁니다. <a class="link" href="https://en.wikipedia.org/wiki/SQL"  target="_blank" rel="noopener"
+    >Structured Query Language (SQL)</a>는 그런 복잡한 DB를 좀 더 용이하게 다루기 위해서 만들어진 언어입니다.</p>
+<p><a class="link" href="https://ko.wikipedia.org/wiki/CRUD"  target="_blank" rel="noopener"
+    >CRUD</a>라는 표현을 들어보신적 있으실 겁니다. CRUD는 기본적인 데이터 처리 기능인 Create(생성), Read(읽기), Update(갱신), Delete(삭제)를 의미하는 말로, 데이터베이스를 다루기 위해 가장 기본이 되는 4가지의 명령을 묶어놓은 단어입니다. SQL은 다음과 같은 명령어를 통해 CRUD를 구현할 수 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>이름</th>
+<th>조작</th>
+<th>SQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create</td>
+<td>생성</td>
+<td>INSERT</td>
+</tr>
+<tr>
+<td>Read(또는 Retrieve)</td>
+<td>읽기(또는 인출)</td>
+<td>SELECT</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>갱신</td>
+<td>UPDATE</td>
+</tr>
+<tr>
+<td>Delete(또는 Destroy)</td>
+<td>삭제(또는 파괴)</td>
+<td>DELETE</td>
+</tr>
+</tbody>
+</table>
+<p>SQL에서 실제 CRUD는 다음과 같이 구현하게 되는데요, 언어의 전체 문법은 <a class="link" href="https://en.wikipedia.org/wiki/SQL_syntax"  target="_blank" rel="noopener"
+    >SQL syntax</a> 페이지에서 확인할 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="o">//</span><span class="w"> </span><span class="err">작성자가</span><span class="w"> </span><span class="err">무명씨</span><span class="p">,</span><span class="w"> </span><span class="err">홍길동인</span><span class="w"> </span><span class="err">문서의</span><span class="w"> </span><span class="err">모든</span><span class="w"> </span><span class="err">항목을</span><span class="w"> </span><span class="err">가져옴</span><span class="w">
+</span><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;김*&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="n">table에</span><span class="w"> </span><span class="n">field1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="err">와</span><span class="w"> </span><span class="err">같은</span><span class="w"> </span><span class="err">속성값을</span><span class="w"> </span><span class="err">가지는</span><span class="w"> </span><span class="err">항목을</span><span class="w"> </span><span class="err">새로</span><span class="w"> </span><span class="err">생성하여</span><span class="w"> </span><span class="err">삽입</span><span class="w">
+</span><span class="w"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table</span><span class="p">(</span><span class="n">field1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터를</span><span class="w"> </span><span class="err">수정하는</span><span class="w"> </span><span class="err">구문으로</span><span class="w"> </span><span class="n">table의</span><span class="w"> </span><span class="n">field1에</span><span class="w"> </span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2에</span><span class="w"> </span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="err">로</span><span class="w"> </span><span class="err">변경</span><span class="w">
+</span><span class="w"></span><span class="k">UPDATE</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">field1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="err">{</span><span class="k">WHERE</span><span class="w"> </span><span class="err">조건}</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터를</span><span class="w"> </span><span class="err">삭제</span><span class="w">
+</span><span class="w"></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">{</span><span class="k">WHERE</span><span class="w"> </span><span class="err">조건}</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터베이스</span><span class="w"> </span><span class="err">내의</span><span class="w"> </span><span class="err">모든</span><span class="w"> </span><span class="err">테이블</span><span class="p">,</span><span class="w"> </span><span class="err">스키마</span><span class="p">,</span><span class="w"> </span><span class="err">관계</span><span class="p">(</span><span class="n">Relation</span><span class="p">)</span><span class="err">를</span><span class="w"> </span><span class="err">전부</span><span class="w"> </span><span class="err">삭제</span><span class="w">
+</span><span class="w"></span><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">database_name</span><span class="p">;</span><span class="w">
+</span></code></pre></div><h3 id="database-management-system">DataBase Management System</h3>
+<p>대량의 데이터를 다루는데 관계형 데이터베이스가 사용되고, SQL이라는 언어를 사용해 데이터베이스의 데이터를 다룬다는 걸 알았습니다. 이런 데이터베이스와 SQL을 결합해서, 사용할 수 있는 형태의 프로그램으로 만든 것을 <a class="link" href="https://en.wikipedia.org/wiki/Database#Database_management_system"  target="_blank" rel="noopener"
+    >Database Management System</a>이라고 합니다. 거기에 관계형 데이터베이스를 사용했다면 RDBMS가 되겠죠.</p>
+<p>여러분이 잘 아시는 Oracle이나 MySQL 등이 대표적인 DBMS입니다. <a class="link" href="https://db-engines.com/en/ranking_trend"  target="_blank" rel="noopener"
+    >DB-Engines Ranking</a>에 따르면 <a class="link" href="https://www.oracle.com/kr/index.html"  target="_blank" rel="noopener"
+    >Oracle</a>, <a class="link" href="https://www.mysql.com/"  target="_blank" rel="noopener"
+    >MySQL</a>, <a class="link" href="https://www.microsoft.com/ko-kr/sql-server/sql-server-downloads"  target="_blank" rel="noopener"
+    >Microsoft SQL Server</a>가 현재 시장에서 제일 인기있는 DBMS라고 하네요.</p>
+<p><figure 
+	>
+	<a href="https://blog.kakaocdn.net/dn/odDxk/btq8sCywILE/joUBPkeuyt1bvnBfbxiElk/img.png" >
+		<img src="https://blog.kakaocdn.net/dn/odDxk/btq8sCywILE/joUBPkeuyt1bvnBfbxiElk/img.png"
+			
+			
+			
+			loading="lazy"
+			alt="출처:DB-Engines Ranking">
+	</a>
+	
+	<figcaption>출처:DB-Engines Ranking</figcaption>
+	
+</figure></p>
+<h2 id="안드로이드의-데이터베이스">안드로이드의 데이터베이스</h2>
+<h3 id="sqlite란">SQLite란</h3>
+<p><figure 
+	>
+	<a href="https://pngpress.com/wp-content/uploads/2020/04/SQLite-logo-300x134.png" >
+		<img src="https://pngpress.com/wp-content/uploads/2020/04/SQLite-logo-300x134.png"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p>그렇게 많고많은 DBMS중에 <a class="link" href="https://www.sqlite.org/index.html"  target="_blank" rel="noopener"
+    >SQLite</a>라는 것이 있습니다. 표준SQL을 지원하는 DB를 파일 하나로 구현한 경량 DBMS인데요, 운용시 리소스사용이 적고 무료로 사용할 수 있는 오픈소스이기 때문에 Android와 iOS에서 DB를 구현하기 위한 기본 라이브러리로 채택되어 있습니다.</p>
+<p>처음엔 미해군의 구축함에서 이용하기 위해 만들어진 프로그램인데 <a class="link" href="https://www.sqlite.org/mostdeployed.html"  target="_blank" rel="noopener"
+    >공식 홈페이지</a>에 따르면 현재는 전세계에서 1조개가 넘는 SQLite가 운용되고 있다고 하네요. SQLite에 대해 더 알고싶으신 분은 <a class="link" href="https://news.hada.io/topic?id=4558"  target="_blank" rel="noopener"
+    >SQLite의 알려지지 않은 이야기</a>를 읽어보시면 좋을 것 같습니다.</p>
+<h3 id="안드로이드의-sqlite-버전">안드로이드의 SQLite 버전</h3>
+<p>상기한 이유로 안드로이드 API에는 SQLite가 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/package-summary"  target="_blank" rel="noopener"
+    >기본 내장</a>되어 있습니다. 복잡한 DB를 다룰 계획이 없다면 SQLite를 이용해 DB를 구축하는 것으로 충분합니다.</p>
+<p>현재까지 개발된 SQLite의 최신 버전은 <a class="link" href="https://www.sqlite.org/draft/changes.html"  target="_blank" rel="noopener"
+    >3.36.0 (2021-06-18)</a>인데 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/package-summary"  target="_blank" rel="noopener"
+    >Android API에 내장되는 SQLite</a>는 안정성을 고려해 다음 표와 같이 좀 더 낮은 버전이 내장되어 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>Android API</th>
+<th>SQLite Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API 31</td>
+<td>3.32</td>
+</tr>
+<tr>
+<td>API 30</td>
+<td>3.28</td>
+</tr>
+<tr>
+<td>API 28</td>
+<td>3.22</td>
+</tr>
+<tr>
+<td>API 27</td>
+<td>3.19</td>
+</tr>
+<tr>
+<td>API 26</td>
+<td>3.18</td>
+</tr>
+</tbody>
+</table>
+<p>코틀린에서는 다음 명령어를 이용해 현재 사용중인 SQLite의 버전을 확인할 수도 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">version</span> <span class="p">=</span> <span class="n">android</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">sqlite</span><span class="p">.</span><span class="n">SQLiteDatabase</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="k">null</span><span class="p">).</span><span class="n">use</span> <span class="p">{</span>
+    <span class="n">DatabaseUtils</span><span class="p">.</span><span class="n">stringForQuery</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;SELECT sqlite_version()&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">println</span><span class="p">(</span><span class="s2">&#34;Framework (API </span><span class="si">${Build.VERSION.SDK_INT}</span><span class="s2">) SQLite version: </span><span class="si">$version</span><span class="s2">&#34;</span><span class="p">)</span>
+</code></pre></div><p><a class="link" href="https://github.com/requery/sqlite-android"  target="_blank" rel="noopener"
+    >외부 라이브러리</a>를 추가하면 안드로이드에서 최신버전의 SQLite를 사용할 수도 있습니다만 가능하면 공식 라이브러리를 사용하는 게 좋겠죠.</p>
+<h3 id="sqlite-사용">SQLite 사용</h3>
+<p>SQLite를 사용하기 위해서는 DB를 만들고 그 DB에 대해 SQL query를 전달하여 CRUD를 수행하면 됩니다. 안드로이드에서는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase"  target="_blank" rel="noopener"
+    >SQLiteDatabase</a> 클래스를 이용해, 작성한 데이터베이스에 대해 CRUD를 수행할 수 있습니다.</p>
+<p>그런데 구글 공식문서인 <a class="link" href="https://developer.android.com/training/data-storage/sqlite"  target="_blank" rel="noopener"
+    >Save data using SQLite</a>에서는 다음과 같은 이유로 이 작업을 직접 수행하는것을 권하지 않고 있습니다.</p>
+<blockquote>
+<p>원시 SQL 쿼리에 관한 컴파일 시간 확인이 없습니다. 따라서 데이터 그래프가 변경됨에 따라 영향을 받는 SQL 쿼리를 수동으로 업데이트해야 합니다. 이 과정은 시간이 오래 걸리고 오류가 쉽게 발생할 수 있습니다.</p>
+<p>SQL 쿼리와 데이터 객체 간에 변환하려면 많은 상용구 코드를 사용해야 합니다.
+{.is-warning}</p>
+</blockquote>
+<p>그 대신 구글에서는 SQLite를 더 안전하게 사용할 수 있는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper"  target="_blank" rel="noopener"
+    >SQLiteOpenHelper</a>라는 헬퍼클래스를 제공하고 있습니다. 다음 파트에서는 이 SQLiteOpenHelper 클래스를 사용해서 CRUD작업을 하는 간단한 앱을 만들어보도록 하겠습니다.</p>
+<h2 id="part-b-샘플-앱-작성">Part B. 샘플 앱 작성</h2>
+<h3 id="메인-레이아웃">메인 레이아웃</h3>
+<p><code>New Project &gt; Empty Activity</code>를 선택해 빈 프로젝트를 하나 만들어줍니다.</p>
+<p>그리고 앱에서 사용할 화면을 만듭니다. 전화번호부 DB를 상정할 것이므로 이름, 전화번호, 이메일 그리고 데이터의 Primary Key로 사용할 ID를 화면에서 입력할 수 있도록 EditText를 배치하겠습니다. 고유키는 데이터를 데이터베이스에 입력할 때 자동으로 부여되기 때문에 입력할 필요가 없지만 삭제, 업데이트를 테스트할 때 필요하기 때문입니다.</p>
+<p>CRUD 테스트를 위해서 데이터를 입력하는 INSERT, 갱신하는 UPDATE, 삭제하는 DELETE 그리고 DB의 모든 내용을 표시하는 VIEW 버튼을 만들겠습니다. 작동에 대한 로그는 화면 아래쪽에 배치한 ScrollView에 표시되도록 하였습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span>
+    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;LinearLayout</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;TextView</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+            <span class="na">android:text=</span><span class="s">&#34;ID: &#34;</span>
+            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;EditText</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/et_id&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
+            <span class="na">android:hint=</span><span class="s">&#34;ID&#34;</span>
+            <span class="na">android:inputType=</span><span class="s">&#34;number&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/LinearLayout&gt;</span>
+
+    <span class="nt">&lt;LinearLayout</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;TextView</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+            <span class="na">android:text=</span><span class="s">&#34;NAME: &#34;</span>
+            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;EditText</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/et_name&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
+            <span class="na">android:hint=</span><span class="s">&#34;NAME&#34;</span>
+            <span class="na">android:inputType=</span><span class="s">&#34;textPersonName&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/LinearLayout&gt;</span>
+
+    <span class="nt">&lt;LinearLayout</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;TextView</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+            <span class="na">android:text=</span><span class="s">&#34;PHONE: &#34;</span>
+            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;EditText</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/et_phone&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
+            <span class="na">android:hint=</span><span class="s">&#34;PHONE&#34;</span>
+            <span class="na">android:inputType=</span><span class="s">&#34;phone&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/LinearLayout&gt;</span>
+
+    <span class="nt">&lt;LinearLayout</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;TextView</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+            <span class="na">android:text=</span><span class="s">&#34;Email: &#34;</span>
+            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;EditText</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/et_email&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
+            <span class="na">android:hint=</span><span class="s">&#34;Email&#34;</span>
+            <span class="na">android:inputType=</span><span class="s">&#34;textEmailAddress&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/LinearLayout&gt;</span>
+
+    <span class="nt">&lt;LinearLayout</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span>
+        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;Button</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_insert&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
+            <span class="na">android:text=</span><span class="s">&#34;INSERT&#34;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;Button</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_update&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
+            <span class="na">android:text=</span><span class="s">&#34;UPDATE&#34;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;Button</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_delete&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
+            <span class="na">android:text=</span><span class="s">&#34;DELETE&#34;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;Button</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_view&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
+            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
+            <span class="na">android:text=</span><span class="s">&#34;VIEW&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;/LinearLayout&gt;</span>
+
+    <span class="nt">&lt;ScrollView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:background=</span><span class="s">&#34;@color/teal_200&#34;</span>
+        <span class="na">android:padding=</span><span class="s">&#34;10dp&#34;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;TextView</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_result&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:textSize=</span><span class="s">&#34;20sp&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;/ScrollView&gt;</span>
+
+<span class="nt">&lt;/LinearLayout&gt;</span>
+</code></pre></div><h3 id="databasehelper-작성">DatabaseHelper 작성</h3>
+<p>다음은 SQLiteOpenHelper 클래스를 상속하는 DatabaseHelper 클래스를 작성합니다. 이 앱에서 사용하게 될 데이터베이스의 프라이머리키는 <code>_id</code>이고 그 외에 <code>name</code>, <code>phone</code>, <code>email</code> 이라는 키를 갖고 있습니다. 데이터베이스의 파일명 및 그외 중복으로 써야하는 상수들을 companion object에 정의하고 상속에 필요한 생성자들을 전달해줍니다.</p>
+<p>DatabaseHelper는 복수개의 인스턴스가 생성되어 DB에 동시접근할수 있는 문제를 방지하기 위해 싱글톤으로 작성합니다. constructor에 직접 접근하지 못하도록 private화 하고, getInstance에서 Double Checked Locking을 통해 인스턴스를 반환하는 싱글톤 구조를 구축합니다. 싱글톤에 대한 더 자세한 설명은 <a class="link" href="https://cliearl.github.io/posts/android/understanding-singleton-pattern/"  target="_blank" rel="noopener"
+    >알기쉬운 Singleton Pattern</a> 강의를 참고하세요.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DatabaseHelper</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">SQLiteOpenHelper</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DATABASE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">DATABASE_VERSION</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE_NAME</span> <span class="p">=</span> <span class="s2">&#34;PhoneBook.db&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE_VERSION</span> <span class="p">=</span> <span class="m">1</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">TABLE_NAME</span> <span class="p">=</span> <span class="s2">&#34;book_table&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">COL1_ID</span> <span class="p">=</span> <span class="s2">&#34;_id&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">COL2_NAME</span> <span class="p">=</span> <span class="s2">&#34;name&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">COL3_PHONE</span> <span class="p">=</span> <span class="s2">&#34;phone&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">COL4_EMAIL</span> <span class="p">=</span> <span class="s2">&#34;email&#34;</span>
+
+        <span class="c1">//SingleTon Pattern(싱글톤 패턴)
+</span><span class="c1"></span>        <span class="nd">@Volatile</span>
+        <span class="k">private</span> <span class="k">var</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DatabaseHelper</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+
+        <span class="k">fun</span> <span class="nf">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span>
+            <span class="n">instance</span> <span class="o">?:</span> <span class="n">synchronized</span><span class="p">(</span><span class="n">DatabaseHelper</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">instance</span> <span class="o">?:</span> <span class="n">DatabaseHelper</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
+                    <span class="n">instance</span> <span class="p">=</span> <span class="k">it</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="oncreate-구현">onCreate 구현</h3>
+<p>테이블을 생성하는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#onCreate%28android.database.sqlite.SQLiteDatabase%29"  target="_blank" rel="noopener"
+    >onCreate</a>함수를 오버라이드 합니다. onCreate는 시스템에 DB가 없을경우에만 실행되기 때문에 쿼리를 <code>CREATE TABLE IF EXIST</code>로 줄 필요가 없습니다.</p>
+<p><code>_id</code>는 데이터가 입력될 때 자동으로 증가시키기 위해 <code>PRIMARY KEY AUTOINCREMENT</code>를 추가해줍니다. 작성한 쿼리는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#execSQL%28java.lang.String%29"  target="_blank" rel="noopener"
+    >execSQL</a>로 실행시키면 됩니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">createQuery</span> <span class="p">=</span> <span class="s2">&#34;CREATE TABLE </span><span class="si">$TABLE_NAME</span><span class="s2"> (&#34;</span> <span class="p">+</span>
+            <span class="s2">&#34;</span><span class="si">$COL1_ID</span><span class="s2"> INTEGER PRIMARY KEY AUTOINCREMENT, &#34;</span> <span class="p">+</span>
+            <span class="s2">&#34;</span><span class="si">$COL2_NAME</span><span class="s2"> TEXT, &#34;</span> <span class="p">+</span>
+            <span class="s2">&#34;</span><span class="si">$COL3_PHONE</span><span class="s2"> TEXT, &#34;</span> <span class="p">+</span>
+            <span class="s2">&#34;</span><span class="si">$COL4_EMAIL</span><span class="s2"> TEXT&#34;</span> <span class="p">+</span>
+            <span class="s2">&#34;)&#34;</span>
+
+    <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="n">createQuery</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="onupgrade-구현">onUpgrade 구현</h3>
+<p>다음은 DB버전이 변경되었을 때 동작하는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#onUpgrade%28android.database.sqlite.SQLiteDatabase,%20int,%20int%29"  target="_blank" rel="noopener"
+    >onUpgrade</a>를 구현합니다. 여기서는 DB버전이 증가되었으면 기존 DB를 삭제하고 새로운 DB를 작성하는 단순한 구조로 정의했습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onUpgrade</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?,</span> <span class="n">oldVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">newVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">oldVersion</span> <span class="o">!=</span> <span class="n">newVersion</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="s2">&#34;DROP TABLE IF EXISTS </span><span class="si">$TABLE_NAME</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="crud-구현">CRUD 구현</h3>
+<h4 id="create">Create</h4>
+<p>우선은 CRUD의 C를 구현하겠습니다. insertData에서는 name, phone, email을 파라메터로 받게 됩니다.  <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getWritableDatabase%28%29"  target="_blank" rel="noopener"
+    >writableDatabase</a>로 데이터베이스를 오픈하고 외부에서 받아온 데이터를 contentValues로 묶어서 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#insert%28java.lang.String,%20java.lang.String,%20android.content.ContentValues%29"  target="_blank" rel="noopener"
+    >insert</a> 명령으로 데이터베이스에 값을 추가합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">insertData</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
+    <span class="k">val</span> <span class="py">contentValues</span> <span class="p">=</span> <span class="n">ContentValues</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
+        <span class="n">put</span><span class="p">(</span><span class="n">COL2_NAME</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">put</span><span class="p">(</span><span class="n">COL3_PHONE</span><span class="p">,</span> <span class="n">phone</span><span class="p">)</span>
+        <span class="n">put</span><span class="p">(</span><span class="n">COL4_EMAIL</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">)</span> <span class="c1">// 값이 없으면 행을 삽입하지않음
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div><h4 id="update">Update</h4>
+<p><a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#update%28java.lang.String,%20android.content.ContentValues,%20java.lang.String,%20java.lang.String[]%29"  target="_blank" rel="noopener"
+    >update</a>에서는 id로 선택해 준 데이터의 내용을 갱신합니다. insert에서처럼 writableDatabase로 데이터베이스를 오픈하고 contentValues를 넘겨주어 데이터를 갱신합니다. 이 때 <code>&quot;$COL1_ID = ?&quot;</code> 쿼리를 사용해 갱신할 데이터를 특정해주면 됩니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">updateData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
+    <span class="k">val</span> <span class="py">contentValues</span> <span class="p">=</span> <span class="n">ContentValues</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
+        <span class="n">put</span><span class="p">(</span><span class="n">COL1_ID</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+        <span class="n">put</span><span class="p">(</span><span class="n">COL2_NAME</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">put</span><span class="p">(</span><span class="n">COL3_PHONE</span><span class="p">,</span> <span class="n">phone</span><span class="p">)</span>
+        <span class="n">put</span><span class="p">(</span><span class="n">COL4_EMAIL</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1_ID</span><span class="s2"> = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div><h4 id="delete">Delete</h4>
+<p>전달받은 id를 프라이머리키로 가진 데이터를 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete%28java.lang.String,%20java.lang.String,%20java.lang.String[]%29"  target="_blank" rel="noopener"
+    >delete</a> 명령으로 삭제합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">deleteData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1_ID</span><span class="s2"> = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div><h4 id="read">Read</h4>
+<p>마지막으로 읽기를 구현합니다. <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getReadableDatabase%28%29"  target="_blank" rel="noopener"
+    >readableDatabase</a>로 데이터베이스를 열고 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#rawQuery%28java.lang.String,%20java.lang.String[],%20android.os.CancellationSignal%29"  target="_blank" rel="noopener"
+    >rawQuery</a> 에 <code>&quot;SELECT * FROM $TABLE_NAME&quot;</code> 을 전달하여 <a class="link" href="https://developer.android.com/reference/android/database/Cursor"  target="_blank" rel="noopener"
+    >Cursor</a> 객체를 받아옵니다.</p>
+<p>객체가 정상적으로 얻어졌으면 try 블록 안에서 <a class="link" href="https://developer.android.com/reference/android/database/Cursor#moveToNext%28%29"  target="_blank" rel="noopener"
+    >moveToNext</a>로 데이터를 순회하면서 값을 확인하고 커서를 다 사용했으면 <a class="link" href="https://developer.android.com/reference/android/database/Cursor#close%28%29"  target="_blank" rel="noopener"
+    >close</a>로 리소스를 반환하도록 합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">getAllData</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">result</span> <span class="p">=</span> <span class="s2">&#34;No data in DB&#34;</span>
+
+    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">readableDatabase</span>
+    <span class="k">val</span> <span class="py">cursor</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="n">rawQuery</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM </span><span class="si">$TABLE_NAME</span><span class="s2">&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cursor</span><span class="p">.</span><span class="n">count</span> <span class="o">!=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">stringBuffer</span> <span class="p">=</span> <span class="n">StringBuffer</span><span class="p">()</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">cursor</span><span class="p">.</span><span class="n">moveToNext</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;ID :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getInt</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">toString</span><span class="p">()</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;NAME :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;PHONE :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;EMAIL :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">3</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n\n</span><span class="s2"> &#34;</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="n">result</span> <span class="p">=</span> <span class="n">stringBuffer</span><span class="p">.</span><span class="n">toString</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cursor</span> <span class="o">!=</span> <span class="k">null</span> <span class="o">&amp;&amp;</span> <span class="p">!</span><span class="n">cursor</span><span class="p">.</span><span class="n">isClosed</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="mainactivity-준비">MainActivity 준비</h3>
+<p>뷰 바인딩을 적용한 메인액티비티를 작성합니다. dbHelper 인스턴스를 생성하고, 사용이 끝나면 onDestroy에서 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#close%28%29"  target="_blank" rel="noopener"
+    >close()</a>로 리소스를 반환하도록 하였습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+        <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">val</span> <span class="py">dbHelper</span><span class="p">:</span> <span class="n">DatabaseHelper</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+        <span class="n">DatabaseHelper</span><span class="p">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroy</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">dbHelper</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onDestroy</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="유틸-메소드-준비">유틸 메소드 준비</h3>
+<p>데이터베이스 조작이 이루어졌을때 처리 결과를 텍스트뷰에 표시하기 위한 showTxt를 작성합니다. 그리고 버튼을 눌렀을 때 에디트텍스트에 입력한 내용을 삭제하는 clearEditTexts 함수도 작성합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showTxt</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">binding</span><span class="p">.</span><span class="n">tvResult</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">clearEditTexts</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">etId</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+        <span class="n">etName</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+        <span class="n">etPhone</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+        <span class="n">etEmail</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="버튼기능-정의">버튼기능 정의</h3>
+<p>각 버튼을 클릭했을 때 부여할 기능을 정의합니다. 값을 입력하는 insertDb, 갱신하는 updateDb, 삭제하는 deleteDb, 그리고 조회하는 getAllDb함수를 만듭니다. 작업은 try 블록 안에서 실행하며 에디트텍스트에 입력한 값을 dbHelper에 정의한 각 함수로 전달합니다. 이 때 입력되는 sql 쿼리에 공백이 있으면 안되기 때문에 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim.html"  target="_blank" rel="noopener"
+    >trim</a>으로 공백을 제거하도록 했습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">insertDb</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">binding</span><span class="p">.</span><span class="n">btnInsert</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">dbHelper</span><span class="p">.</span><span class="n">insertData</span><span class="p">(</span>
+                <span class="n">binding</span><span class="p">.</span><span class="n">etName</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+                <span class="n">binding</span><span class="p">.</span><span class="n">etPhone</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+                <span class="n">binding</span><span class="p">.</span><span class="n">etEmail</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="n">clearEditTexts</span><span class="p">()</span>
+            <span class="n">showTxt</span><span class="p">(</span><span class="s2">&#34;Data inserted&#34;</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">updateDb</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">binding</span><span class="p">.</span><span class="n">btnUpdate</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">dbHelper</span><span class="p">.</span><span class="n">updateData</span><span class="p">(</span>
+                <span class="n">binding</span><span class="p">.</span><span class="n">etId</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+                <span class="n">binding</span><span class="p">.</span><span class="n">etName</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+                <span class="n">binding</span><span class="p">.</span><span class="n">etPhone</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+                <span class="n">binding</span><span class="p">.</span><span class="n">etEmail</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="n">showTxt</span><span class="p">(</span><span class="s2">&#34;Data updated&#34;</span><span class="p">)</span>
+
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">deleteDb</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">binding</span><span class="p">.</span><span class="n">btnDelete</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">dbHelper</span><span class="p">.</span><span class="n">deleteData</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">etId</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">())</span>
+            <span class="n">clearEditTexts</span><span class="p">()</span>
+            <span class="n">showTxt</span><span class="p">(</span><span class="s2">&#34;Data deleted&#34;</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">getAllDb</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">binding</span><span class="p">.</span><span class="n">btnView</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">selectResult</span> <span class="p">=</span> <span class="n">dbHelper</span><span class="p">.</span><span class="n">getAllData</span><span class="p">()</span>
+            <span class="n">showTxt</span><span class="p">(</span><span class="n">selectResult</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="oncreate-정의">onCreate 정의</h3>
+<p>마지막으로 위에서 정의한 버튼기능을 onCreate 안에서 실행하도록 하면 되겠죠.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+    <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+
+    <span class="n">insertDb</span><span class="p">()</span>
+    <span class="n">updateDb</span><span class="p">()</span>
+    <span class="n">deleteDb</span><span class="p">()</span>
+    <span class="n">getAllDb</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div><p>이렇게 해서 SQLiteHelper를 이용해 안드로이드에서 데이터베이스를 다루는 법에 대해 알아보았습니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/sqlite/">sqlite</a>
+        
+            <a href="/tags/crud/">crud</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/android/understanding-singleton-pattern/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">알기쉬운 Singleton Pattern</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/android-gradle-java-11/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Android Studio Arctic Fox와 JDK 11의 도입</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/jsoup-lotto-checker/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">jsoup으로 로또 홈페이지의 당첨번호 파싱하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/recyclerview-listadapter/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/etc/android-studio-plugins/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">내가 Android Studio에서 사용하는 Plugins</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#part-a-데이터베이스">Part A. 데이터베이스</a>
+      <ol>
+        <li><a href="#관계형-데이터베이스">관계형 데이터베이스</a></li>
+        <li><a href="#sql과-crud">SQL과 CRUD</a></li>
+        <li><a href="#database-management-system">DataBase Management System</a></li>
+      </ol>
+    </li>
+    <li><a href="#안드로이드의-데이터베이스">안드로이드의 데이터베이스</a>
+      <ol>
+        <li><a href="#sqlite란">SQLite란</a></li>
+        <li><a href="#안드로이드의-sqlite-버전">안드로이드의 SQLite 버전</a></li>
+        <li><a href="#sqlite-사용">SQLite 사용</a></li>
+      </ol>
+    </li>
+    <li><a href="#part-b-샘플-앱-작성">Part B. 샘플 앱 작성</a>
+      <ol>
+        <li><a href="#메인-레이아웃">메인 레이아웃</a></li>
+        <li><a href="#databasehelper-작성">DatabaseHelper 작성</a></li>
+        <li><a href="#oncreate-구현">onCreate 구현</a></li>
+        <li><a href="#onupgrade-구현">onUpgrade 구현</a></li>
+        <li><a href="#crud-구현">CRUD 구현</a>
+          <ol>
+            <li><a href="#create">Create</a></li>
+            <li><a href="#update">Update</a></li>
+            <li><a href="#delete">Delete</a></li>
+            <li><a href="#read">Read</a></li>
+          </ol>
+        </li>
+        <li><a href="#mainactivity-준비">MainActivity 준비</a></li>
+        <li><a href="#유틸-메소드-준비">유틸 메소드 준비</a></li>
+        <li><a href="#버튼기능-정의">버튼기능 정의</a></li>
+        <li><a href="#oncreate-정의">onCreate 정의</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
