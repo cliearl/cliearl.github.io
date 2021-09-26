@@ -154,7 +154,22 @@ if (!doNotTrack) {
 <h3 id="액티비티-작성">액티비티 작성</h3>
 <p>다음은 이미지를 표시해줄 액티비티를 하나 만들겁니다. 이 액티비티는 스플래시 스크린을 보여주기만 하고 바로 메인액티비티를 불러오는 역할만을 하게 됩니다.</p>
 <p>우선은 스플래시 스크린으로 사용할 splash_screen.xml 파일을 작성합니다. 아까 추가해준 background 이미지를 흰색 바탕화면에 그려주는 단순한 형태입니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;layer-list</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;item</span> <span class="na">android:drawable=</span><span class="s">&#34;@android:color/white&#34;</span> <span class="nt">/&gt;</span>
 
@@ -165,13 +180,38 @@ if (!doNotTrack) {
     <span class="nt">&lt;/item&gt;</span>
 
 <span class="nt">&lt;/layer-list&gt;</span>
-</code></pre></div><p>다음은 액티비티에서 사용할 테마를 추가합니다. res -&gt; values -&gt; themes.xml을 열어 다음과 같이 style을 추가합니다.
+</code></pre></td></tr></table>
+</div>
+</div><p>다음은 액티비티에서 사용할 테마를 추가합니다. res -&gt; values -&gt; themes.xml을 열어 다음과 같이 style을 추가합니다.
 액션바가 표시되지 않아야 하기 때문에 NoActionBar 테마를 상속한 뒤 위에서 작성한 splash_screen drawable을 표시하도록 합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;style</span> <span class="na">name=</span><span class="s">&#34;SplashScreen&#34;</span> <span class="na">parent=</span><span class="s">&#34;Theme.AppCompat.NoActionBar&#34;</span><span class="nt">&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;style</span> <span class="na">name=</span><span class="s">&#34;SplashScreen&#34;</span> <span class="na">parent=</span><span class="s">&#34;Theme.AppCompat.NoActionBar&#34;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;android:windowBackground&#34;</span><span class="nt">&gt;</span>@drawable/splash_screen<span class="nt">&lt;/item&gt;</span>
 <span class="nt">&lt;/style&gt;</span>
-</code></pre></div><p>그리고 SplashActivity.kt를 만들어 줍니다. 이 액티비티는 시작되자마자 메인액티비티를 불러오는 역할만하고 종료됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">SplashActivity</span><span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>그리고 SplashActivity.kt를 만들어 줍니다. 이 액티비티는 시작되자마자 메인액티비티를 불러오는 역할만하고 종료됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">SplashActivity</span><span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
         <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
 
@@ -181,8 +221,25 @@ if (!doNotTrack) {
         <span class="n">finish</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>마지막으로 AndroidManifest.xml에서 시작점을 메인액티비티가 아닌 SplashActivity가 되도록 변경합니다. 이 때 SplashActivity의 테마는 themes.xml에서 추가해 준 SplashScreen으로 지정합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;activity</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>마지막으로 AndroidManifest.xml에서 시작점을 메인액티비티가 아닌 SplashActivity가 되도록 변경합니다. 이 때 SplashActivity의 테마는 themes.xml에서 추가해 준 SplashScreen으로 지정합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;activity</span>
     <span class="na">android:name=</span><span class="s">&#34;.SplashActivity&#34;</span>
     <span class="na">android:theme=</span><span class="s">&#34;@style/SplashScreen&#34;</span> <span class="nt">&gt;</span>
     <span class="nt">&lt;intent-filter&gt;</span>
@@ -193,7 +250,9 @@ if (!doNotTrack) {
 <span class="nt">&lt;/activity&gt;</span>
 
 <span class="nt">&lt;activity</span> <span class="na">android:name=</span><span class="s">&#34;.MainActivity&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></div><p>이렇게 해서 스플래시 스크린을 작성하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 스플래시 스크린을 작성하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/e7U3Coe9G3Q" 
@@ -305,7 +364,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     <script src="https://utteranc.es/client.js" 
         repo="cliearl/cliearl.github.io"

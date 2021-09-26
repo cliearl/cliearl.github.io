@@ -153,14 +153,64 @@ if (!doNotTrack) {
 <p>참조한 뷰가 한개일 때는 import 파트를 보면 출처를 알 수 있지만 사용하는 뷰가 많아지면 어떤 뷰가 어떤 import를 참조한 것인지 한눈에 파악하는 것이 매우 어려워지게 되는 문제가 있습니다.</p>
 <h2 id="activity에-view-binding-적용">Activity에 View Binding 적용</h2>
 <p>다음과 같이 gradle에서 View Binding을 활성화하면 모든 레이아웃 xml 파일에 대해 바인딩클래스가 생성됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
     <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
 <span class="o">}</span>
-</code></pre></div><p>우선은 메인액티비티에 적용해보겠습니다. 자동으로 생성된 ActivityMainBinding 형의 binding 전역변수를 준비하고 onCreate에서 inflate시킵니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>우선은 메인액티비티에 적용해보겠습니다. 자동으로 생성된 ActivityMainBinding 형의 binding 전역변수를 준비하고 onCreate에서 inflate시킵니다.</p>
 <p>그러면 View Binding을 사용할 수 있게 되므로 기존에 R.layout.activity_main를 전달하던 setContentView에 binding.root를 전달합니다. 또 findViewById를 사용하던 setSupportActionBar에 전달하는 값도 binding.toolbar로 변경합니다. 플로팅버튼은 binding.fab로 사용할 수 있습니다.</p>
 <p>참고로 onCreateOptionsMenu, onOptionsItemSelected 안의 내용은 findViewById()가 아니라 <a class="link" href="https://developer.android.com/reference/android/view/Menu#findItem%28int%29"  target="_blank" rel="noopener"
     >findItem()</a>이라는 메소드를 사용하는것이기 때문에 View Binding으로 대체를 할 수 없습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -197,11 +247,48 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h2 id="fragment에-view-binding-적용">Fragment에 View Binding 적용</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="fragment에-view-binding-적용">Fragment에 View Binding 적용</h2>
 <p>다음은 Fragement에 View Binding을 적용해 보겠습니다. Fragement에서 사용할 때는 <code>_binding</code>과 <code>binding</code> 변수 두개를 만들어줍니다. _binding은 Fragement를 사용하지 않을 때 자원을 반환할 수 있도록 Nullable 형태로 준비합니다. 그리고 실제로 사용하는 binding은 _binding이 초기화 되었을 때 get()으로 값을 가져오도록 합니다.</p>
 <p>Fragment의 라이프사이클을 고려해 _binding을 onCreateView 안에서 초기화하면 binding이 자동으로 생성됩니다. 그러면 binding.root를 뷰로 반환하여주고, onViewCreated에서는 binding의 프로퍼티로써 텍스트뷰와 버튼을 사용하면 됩니다.</p>
 <p>마지막으로 onDestroyView에서는 Fragement가 어떠한 이유로 파괴될 때 _binding을 null로 만들어서 자원을 반환하도록 합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">_binding</span> <span class="p">:</span> <span class="n">FragmentFirstBinding</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_binding</span><span class="o">!!</span>
 
@@ -232,7 +319,9 @@ if (!doNotTrack) {
         <span class="n">_binding</span> <span class="p">=</span> <span class="k">null</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>SecondFragment의 내용은 FirstFragment와 동일하므로 생략하겠습니다. 이렇게 해서 프로젝트의 액티비티와 Fragement에 View Binding을 적용하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>SecondFragment의 내용은 FirstFragment와 동일하므로 생략하겠습니다. 이렇게 해서 프로젝트의 액티비티와 Fragement에 View Binding을 적용하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/1xJmh2QhYTU" 
@@ -346,7 +435,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     <script src="https://utteranc.es/client.js" 
         repo="cliearl/cliearl.github.io"

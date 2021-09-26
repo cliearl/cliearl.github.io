@@ -141,7 +141,22 @@ if (!doNotTrack) {
 <a class="link" href="https://maoudamashii.jokersounds.com/archives2/bgm_maoudamashii_orchestra02.html"  target="_blank" rel="noopener"
     >https://maoudamashii.jokersounds.com/archives2/bgm_maoudamashii_orchestra02.html</a></p>
 <p>그러면 메인 액티비티에서 재생을 해보겠습니다</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">mediaPlayer</span><span class="p">:</span> <span class="n">MediaPlayer</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -152,15 +167,73 @@ if (!doNotTrack) {
         <span class="n">mediaPlayer</span><span class="o">?.</span><span class="n">start</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>음악이 실행이 되는데 문제는 앱이 백그라운드로 넘어가도 음악이 계속 실행이 되게 됩니다. 이걸 막기 위해서는 메인액티비티의 onStop()을 오버라이드 하면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onStop</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>음악이 실행이 되는데 문제는 앱이 백그라운드로 넘어가도 음악이 계속 실행이 되게 됩니다. 이걸 막기 위해서는 메인액티비티의 onStop()을 오버라이드 하면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onStop</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">mediaPlayer</span><span class="o">?.</span><span class="n">release</span><span class="p">()</span>
     <span class="n">mediaPlayer</span> <span class="p">=</span> <span class="k">null</span>
     <span class="k">super</span><span class="p">.</span><span class="n">onStop</span><span class="p">()</span>
 <span class="p">}</span>
-</code></pre></div><h2 id="기능버튼-작성">기능버튼 작성</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="기능버튼-작성">기능버튼 작성</h2>
 <p>다음은 플레이, 포즈, 스탑 기능을 하는 버튼을 만들어 보겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -201,9 +274,49 @@ if (!doNotTrack) {
         <span class="na">app:layout_constraintStart_toEndOf=</span><span class="s">&#34;@+id/pauseButton&#34;</span>
         <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></div><h2 id="각-버튼에-기능-부여">각 버튼에 기능 부여</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="각-버튼에-기능-부여">각 버튼에 기능 부여</h2>
 <p>다음은 이 버튼들에 클릭리스너로 동작을 지정해줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">mediaPlayer</span><span class="p">:</span> <span class="n">MediaPlayer</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -237,7 +350,9 @@ if (!doNotTrack) {
         <span class="n">mediaPlayer</span> <span class="p">=</span> <span class="k">null</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>플레이버튼은 미디어플레이어를 초기화하고 재생을 시작합니다. 이때 중복동작을 막기 위해서 객체가 null일때만 초기화하고 재생하도록 하였습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>플레이버튼은 미디어플레이어를 초기화하고 재생을 시작합니다. 이때 중복동작을 막기 위해서 객체가 null일때만 초기화하고 재생하도록 하였습니다.</p>
 <p>포즈버튼은 현재 플레이중인지 확인하고 플레이중이면 pause(), 그렇지 않으면 start()를 실행하도록 합니다.</p>
 <p>마지막으로 스탑버튼은 객체를 해방하고 null로 만들어 다시 재생할수 있게 준비합니다.</p>
 <p>이렇게 MediaPlayer 클래스를 사용해서 음악을 재생하는 법에 대해 알아보았습니다.</p>
@@ -354,7 +469,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     <script src="https://utteranc.es/client.js" 
         repo="cliearl/cliearl.github.io"

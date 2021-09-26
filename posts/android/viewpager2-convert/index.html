@@ -158,11 +158,49 @@ if (!doNotTrack) {
 <a class="link" href="https://youtu.be/XoZXRnfudzc"  target="_blank" rel="noopener"
     >https://youtu.be/XoZXRnfudzc</a></p>
 <p>가장 먼저 해야할 것은 뷰페이저2 라이브러리를 추가하는 것입니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;androidx.viewpager2:viewpager2:1.0.0&#39;</span>
 <span class="o">}</span>
-</code></pre></div><p>다음은 xml에서 viewpager 모듈을 viewpager2로 바꾸면서 orientation 이라는 속성도 추가해주는데요 이 때 값을 vertical로 주면 세로로 스크롤할 수 있게 됩니다. 또 인디케이터도 viewpager2에 대응하는 CircleIndicator3로 변경하여 줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>다음은 xml에서 viewpager 모듈을 viewpager2로 바꾸면서 orientation 이라는 속성도 추가해주는데요 이 때 값을 vertical로 주면 세로로 스크롤할 수 있게 됩니다. 또 인디케이터도 viewpager2에 대응하는 CircleIndicator3로 변경하여 줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -187,8 +225,31 @@ if (!doNotTrack) {
         <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></div><p>다음은 어댑터를 변환하여 줍니다. 뷰페이저2의 어댑터는 FragementStateAdapter를 상속받습니다. 그리고 getCount()라는 함수 이름을 getItemCount()로 변경합니다. 마지막으로 getItem() 함수이름을 createFragment()로 변경합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">CustomPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>다음은 어댑터를 변환하여 줍니다. 뷰페이저2의 어댑터는 FragementStateAdapter를 상속받습니다. 그리고 getCount()라는 함수 이름을 getItemCount()로 변경합니다. 마지막으로 getItem() 함수이름을 createFragment()로 변경합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">CustomPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">PAGENUMBER</span> <span class="p">=</span> <span class="m">4</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
@@ -205,8 +266,27 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>마지막으로 뷰페이저와 어댑터를 다음과 같이 연결하여 줍니다. vpAdapter의 형은 FragmentStateAdapter이고 this로 액티비티를 전달받도록 변경하면 완료입니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>마지막으로 뷰페이저와 어댑터를 다음과 같이 연결하여 줍니다. vpAdapter의 형은 FragmentStateAdapter이고 this로 액티비티를 전달받도록 변경하면 완료입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">vpAdapter</span><span class="p">:</span> <span class="n">FragmentStateAdapter</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -219,7 +299,9 @@ if (!doNotTrack) {
         <span class="n">indicator</span><span class="p">.</span><span class="n">setViewPager</span><span class="p">(</span><span class="n">viewpager</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 ViewPager모듈을 ViewPager2로 전환하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 ViewPager모듈을 ViewPager2로 전환하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/3YE9bGaqVuk" 
@@ -335,7 +417,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     <script src="https://utteranc.es/client.js" 
         repo="cliearl/cliearl.github.io"

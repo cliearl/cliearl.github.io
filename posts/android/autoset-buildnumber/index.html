@@ -123,7 +123,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -146,14 +146,40 @@ if (!doNotTrack) {
 <p>그런데 이 빌드넘버는 빌드를 수행할 때 하나씩 증가를 시켜야 하는데 안드로이드 스튜디오에서는 이걸 자동으로 증가시켜주지 않기 때문에 이 부분을 자동으로 증가시켜주는 기구를 프로젝트에 적용하는 법에 대해 설명하도록 하겠습니다.</p>
 <h2 id="프로그램-작성">프로그램 작성</h2>
 <p>app 레벨의 gradle에서 빌드넘버는 versionCode가 됩니다. 그래서 빌드를 한 번 할 때마다 versionCode는 증가가 되야 하구요, versionName은 기능 추가가 있을때마다 그때그때 개발자가 필요에 의해서 증가를 시켜주면 되겠죠.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
     <span class="n">defaultConfig</span> <span class="o">{</span>
         <span class="n">versionCode</span> <span class="mi">1</span>
         <span class="n">versionName</span> <span class="s2">&#34;1.0&#34;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div><p>이 versionCode와 versionName을 프로그램 안에서 표시를 할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>이 versionCode와 versionName을 프로그램 안에서 표시를 할 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">versionNumber</span> <span class="p">=</span> <span class="n">BuildConfig</span><span class="p">.</span><span class="n">VERSION_NAME</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;&#39;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">versionBuild</span> <span class="p">=</span> <span class="n">BuildConfig</span><span class="p">.</span><span class="n">VERSION_CODE</span>
     
@@ -163,12 +189,75 @@ if (!doNotTrack) {
         <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;App Version: </span><span class="si">$versionNumber</span><span class="s2"> (</span><span class="si">$versionBuild</span><span class="s2">)&#34;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>하지만 verionCode를 빌드할때마다 증가시켜주는건 귀찮기 때문에 이 부분을 자동으로 증가시켜주는 기구를 만들어 볼 겁니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>하지만 verionCode를 빌드할때마다 증가시켜주는건 귀찮기 때문에 이 부분을 자동으로 증가시켜주는 기구를 만들어 볼 겁니다.</p>
 <p>일단은 앱 안에 version.properties라는 파일을 만들고 이 파일 안에서 버전넘버와 빌드넘버를 관리할 겁니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">VERSION_NUMBER</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">VERSION_NUMBER</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span>
 <span class="n">VERSION_BUILD</span><span class="o">=</span><span class="mi">1</span>
-</code></pre></div><p>그다음은 app 레벨의 gradle 파일에서 version.properties에 있는 값을 불러와서 빌드넘버를 1 증가시키고 그걸 저장하는 코드를 작성합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>그다음은 app 레벨의 gradle 파일에서 version.properties에 있는 값을 불러와서 빌드넘버를 1 증가시키고 그걸 저장하는 코드를 작성합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
     <span class="c1">// 저장된 값을 불러오는 부분
 </span><span class="c1"></span>    <span class="kt">def</span> <span class="n">versionPropsFile</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;version.properties&#39;</span><span class="o">)</span>
     <span class="kt">def</span> <span class="n">versionBuild</span>
@@ -217,7 +306,9 @@ if (!doNotTrack) {
         <span class="n">testInstrumentationRunner</span> <span class="s2">&#34;androidx.test.runner.AndroidJUnitRunner&#34;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div><p>이제 빌드를 할때마다 빌드넘버가 자동으로 증가하게 됩니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이제 빌드를 할때마다 빌드넘버가 자동으로 증가하게 됩니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/Tz0I-g-Gd5M" 
@@ -331,7 +422,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     <script src="https://utteranc.es/client.js" 
         repo="cliearl/cliearl.github.io"

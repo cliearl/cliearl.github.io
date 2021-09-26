@@ -138,8 +138,15 @@ if (!doNotTrack) {
 <h2 id="imageview로-이미지-표시">ImageView로 이미지 표시</h2>
 <p>이미지를 표시하기 위해서는 다음과 같이 imageView의 setImageResource 메소드를 사용합니다.</p>
 <p>그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">imageView</span><span class="p">.</span><span class="n">setImageResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">sample00</span><span class="p">)</span>
-</code></pre></div><h2 id="glide-사용">Glide 사용</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">imageView</span><span class="p">.</span><span class="n">setImageResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">sample00</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="glide-사용">Glide 사용</h2>
 <p>하지만 <a class="link" href="https://github.com/bumptech/glide"  target="_blank" rel="noopener"
     >Glide</a>라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.</p>
 <p>이렇게 이미지를 표시하는 라이브러리로는 square의 <a class="link" href="https://github.com/square/picasso"  target="_blank" rel="noopener"
@@ -147,11 +154,21 @@ if (!doNotTrack) {
     >Fresco</a>도 있습니다.</p>
 <p>특징을 간단하게 설명하자면 picasso는 가벼운 대신 비교적 느리고, glide는 빠르고 사용하기 편하며 fresco는 빠르지만 사용법이 좀 복잡하다는 특징이 있습니다.</p>
 <p>아무튼 사용법은 다음과 같이 간단합니다. load 안에는 로컬 파일뿐만 아니라 웹 이미지도 넣을 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">com</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">bumptech</span><span class="p">.</span><span class="n">glide</span><span class="p">:</span><span class="n">glide</span><span class="p">:</span><span class="m">4.11</span><span class="p">.</span><span class="m">0</span><span class="err">&#39;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">com</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">bumptech</span><span class="p">.</span><span class="n">glide</span><span class="p">:</span><span class="n">glide</span><span class="p">:</span><span class="m">4.11</span><span class="p">.</span><span class="m">0</span><span class="err">&#39;</span>
 
 <span class="c1">// 메인액티비티
 </span><span class="c1"></span><span class="n">Glide</span><span class="p">.</span><span class="n">with</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="n">load</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">sample01</span><span class="p">).</span><span class="n">into</span><span class="p">(</span><span class="n">imageView</span><span class="p">)</span>
-</code></pre></div><p>이렇게 해서 Glide를 사용하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 Glide를 사용하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/-S3m2H5X1qY" 
@@ -269,7 +286,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     <script src="https://utteranc.es/client.js" 
         repo="cliearl/cliearl.github.io"

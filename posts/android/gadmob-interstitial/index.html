@@ -123,7 +123,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -136,20 +136,57 @@ if (!doNotTrack) {
     <p>이번 포스팅에서는 구글 애드몹을 이용해서 전면광고를 표시하는 법에 대해 알아보도록 하겠습니다.</p>
 <p>우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 19.7.0인데요, 19.6.0과 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다.</p>
 <h2 id="google-admob-version-1960-이하에서의-구현">Google Admob Version 19.6.0 이하에서의 구현</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;com.google.android.gms:play-services-ads:19.6.0&#39;</span>
 <span class="o">}</span>
-</code></pre></div><p>AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 <a class="link" href="https://developers.google.com/admob/android/quick-start"  target="_blank" rel="noopener"
+</code></pre></td></tr></table>
+</div>
+</div><p>AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 <a class="link" href="https://developers.google.com/admob/android/quick-start"  target="_blank" rel="noopener"
     >구글에서 테스트용으로 제공하는 ID</a>를 입력하였습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;application</span>
         <span class="err">&lt;meta-data</span>
             <span class="na">android:name=</span><span class="s">&#34;com.google.android.gms.ads.APPLICATION_ID&#34;</span>
             <span class="na">android:value=</span><span class="s">&#34;ca-app-pub-3940256099942544~3347511713&#34;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/application&gt;</span>
-</code></pre></div><p>다음은 화면에 광고를 표시하는 버튼을 추가합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>다음은 화면에 광고를 표시하는 버튼을 추가합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
     <span class="err">&lt;Button</span>
         <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
         <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
@@ -160,9 +197,37 @@ if (!doNotTrack) {
         <span class="na">app:layout_constraintRight_toRightOf=</span><span class="s">&#34;parent&#34;</span>
         <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></div><p>뷰바인딩을 설정하고 애드몹 라이브러리를 초기화합니다. setRequestConfiguration()을 사용해서 테스트용으로 사용할 기기에 대해서는 애드몹이 카운트하여 어뷰징으로 판단하지 않도록 제외하여 줍니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>뷰바인딩을 설정하고 애드몹 라이브러리를 초기화합니다. setRequestConfiguration()을 사용해서 테스트용으로 사용할 기기에 대해서는 애드몹이 카운트하여 어뷰징으로 판단하지 않도록 제외하여 줍니다.</p>
 <p>광고를 불러오는 작업은 loadInterstitialAd()에서 수행하고 광고를 표시하는 작업은 showInterstitialad()에서 수행하도록 합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">var</span> <span class="py">mInterstitialAd</span><span class="p">:</span> <span class="n">InterstitialAd</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">var</span> <span class="py">mInterstitialAd</span><span class="p">:</span> <span class="n">InterstitialAd</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
 
 <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
@@ -184,11 +249,38 @@ if (!doNotTrack) {
         <span class="n">showInterstitialad</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>우선은 광고를 불러오는 부분을 작성하겠습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>우선은 광고를 불러오는 부분을 작성하겠습니다.</p>
 <p>adUnitId에는 애드몹 사이트에서 제공하는 전면광고 아이디를 기입합니다. 여기서는 <a class="link" href="https://developers.google.com/admob/android/interstitial"  target="_blank" rel="noopener"
     >구글에서 제공하는 테스트 ID</a>를 사용했습니다.</p>
 <p>그리고 adListener를 붙여주는데 onAdClosed()로 광고를 닫으면 다음광고를 다시 로딩하도록 합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadInterstitialAd</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadInterstitialAd</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">adRequest</span> <span class="p">=</span> <span class="n">AdRequest</span><span class="p">.</span><span class="n">Builder</span><span class="p">().</span><span class="n">build</span><span class="p">()</span>
 
     <span class="n">mInterstitialAd</span> <span class="p">=</span> <span class="n">InterstitialAd</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
@@ -209,16 +301,51 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>다음은 광고를 보여주는 부분입니다. 광고가 잘 불러와졌는지 확인하고 show()로 표시하면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showInterstitialad</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>다음은 광고를 보여주는 부분입니다. 광고가 잘 불러와졌는지 확인하고 show()로 표시하면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showInterstitialad</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">mInterstitialAd</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">mInterstitialAd</span><span class="o">!!</span><span class="p">.</span><span class="n">isLoaded</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">show</span><span class="p">()</span>
         <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h2 id="google-admob-version-1970-이상에서의-구현">Google Admob Version 19.7.0 이상에서의 구현</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="google-admob-version-1970-이상에서의-구현">Google Admob Version 19.7.0 이상에서의 구현</h2>
 <p>구현은 loadInterstitialAd()와 showInterstitialad()의 내용만 변경하면 됩니다. 우선 loadInterstitialAd()는 다음과 같이 변경됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadInterstitialAd</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadInterstitialAd</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">adRequest</span> <span class="p">=</span> <span class="n">AdRequest</span><span class="p">.</span><span class="n">Builder</span><span class="p">().</span><span class="n">build</span><span class="p">()</span>
 
     <span class="n">InterstitialAd</span><span class="p">.</span><span class="n">load</span><span class="p">(</span>
@@ -235,8 +362,38 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div><p>그리고 showInterstitialad()는 다음과 같이 변경합니다. mInterstitialAd에 대해 null체크를 수행한 뒤 fullScreenContentCallback 프로퍼티를 작성해주고 show()로 광고를 보여주면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showInterstitialad</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>그리고 showInterstitialad()는 다음과 같이 변경합니다. mInterstitialAd에 대해 null체크를 수행한 뒤 fullScreenContentCallback 프로퍼티를 작성해주고 show()로 광고를 보여주면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showInterstitialad</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">mInterstitialAd</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="n">mInterstitialAd</span><span class="o">?.</span><span class="n">fullScreenContentCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">FullScreenContentCallback</span><span class="p">()</span> <span class="p">{</span>
@@ -260,7 +417,9 @@ if (!doNotTrack) {
         <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="s2">&#34;The interstitial ad was not ready yet&#34;</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 Google Admob 라이브러리로 앱에 전면광고를 표시하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 Google Admob 라이브러리로 앱에 전면광고를 표시하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/1sBRlX02rak" 
@@ -374,7 +533,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     <script src="https://utteranc.es/client.js" 
         repo="cliearl/cliearl.github.io"

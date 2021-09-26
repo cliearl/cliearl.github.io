@@ -142,16 +142,63 @@ if (!doNotTrack) {
 <h2 id="코드-작성">코드 작성</h2>
 <h3 id="view-binding-활성화">View Binding 활성화</h3>
 <p>우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">plugins</span> <span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">plugins</span> <span class="o">{</span>
 <span class="c1">//    id &#39;kotlin-android-extensions&#39;
 </span><span class="c1"></span><span class="o">}</span>
 
 <span class="n">android</span> <span class="o">{</span>
     <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
 <span class="o">}</span>
-</code></pre></div><h3 id="메인액티비티-수정">메인액티비티 수정</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="메인액티비티-수정">메인액티비티 수정</h3>
 <p>다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 ActivityMainBinding클래스를 초기화하여 binding이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 binding.recyclerView로 접근하여 설정합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">()</span>
 
@@ -181,9 +228,34 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="리사이클러뷰-어댑터-수정">리사이클러뷰 어댑터 수정</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="리사이클러뷰-어댑터-수정">리사이클러뷰 어댑터 수정</h3>
 <p>onCreateViewHolder에서 뷰를 만들 때 ListItemBinding 클래스로 만들어지는 binding 인스턴스를 사용하도록 변경하여줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span>
         <span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span>
         <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span>
@@ -202,9 +274,33 @@ if (!doNotTrack) {
         <span class="k">return</span> <span class="n">dataSet</span><span class="p">.</span><span class="n">size</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="뷰홀더-수정">뷰홀더 수정</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="뷰홀더-수정">뷰홀더 수정</h3>
 <p>기존의 뷰홀더에서는 뷰를 받아와서 정의하고 그걸 데이터와 연결하는 작업이 필요했는데, View Binding에서는 binding 인스턴스가 생성되는순간 자동으로 뷰를 binding의 프로퍼티로 접근할 수 있기 때문에 이 코드가 필요없게 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
 
 <span class="c1">//    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
 </span><span class="c1">//        private val tvMain: TextView = view.tv_main
@@ -222,7 +318,9 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 RecyclerView에 View Binding을 적용하는 방법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 RecyclerView에 View Binding을 적용하는 방법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/cN1UVAeP63c" 
@@ -336,7 +434,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     <script src="https://utteranc.es/client.js" 
         repo="cliearl/cliearl.github.io"
