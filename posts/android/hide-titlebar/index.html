@@ -123,7 +123,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    1 minute read
                 </time>
             </div>
         
@@ -138,83 +138,35 @@ if (!doNotTrack) {
 <h2 id="타이틀바-삭제">타이틀바 삭제</h2>
 <p>타이틀바 표시를 없애는 방법은 몇가지가 있습니다. 우선은 테마를 이용하는 방법입니다. res-&gt;value-&gt;theme.xml 파일을 열어 상속받도록 parent에 설정한 테마 중 NoActionBar가 붙은 테마를 사용하면 액션바가 표시되지 않게 됩니다.</p>
 <p>두번째는 테마 속성을 사용하는 방법입니다. 테마는 편집을 할 수도 있기 때문에 상속받는 테마는 그대로 두고 타이틀바 속성만 다음과 같이 비활성화해 줍니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;resources</span> <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;resources</span> <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;style&gt;</span>
         <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;windowActionBar&#34;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/item&gt;</span>
         <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;windowNoTitle&#34;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/item&gt;</span>
     <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;/resources&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>마지막으로 액티비티에서 타이틀바를 없애는 방법입니다. 액션바의 참조를 가져와서 hide()명령을 실행하기 위해 다음과 같이 코드를 추가하여 줍니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></div><p>마지막으로 액티비티에서 타이틀바를 없애는 방법입니다. 액션바의 참조를 가져와서 hide()명령을 실행하기 위해 다음과 같이 코드를 추가하여 줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
 
         <span class="k">val</span> <span class="py">actionBar</span><span class="p">:</span> <span class="n">ActionBar</span><span class="p">?</span> <span class="p">=</span> <span class="n">supportActionBar</span>
         <span class="n">actionBar</span><span class="o">?.</span><span class="n">hide</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="상태바-삭제">상태바 삭제</h2>
+</code></pre></div><h2 id="상태바-삭제">상태바 삭제</h2>
 <p>상태바는 다음과 같이 themes.xml의 속성을 해제시켜서 표시되지 않게 할 수 있습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;resources</span> <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;resources</span> <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;style&gt;</span>
        <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;android:windowFullscreen&#34;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/item&gt;</span>
     <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;/resources&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>두번째 방법은 액티비티에서 설정하는 방법입니다. theme에서 한 설정을 코드로 해준다고 생각하시면 됩니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></div><p>두번째 방법은 액티비티에서 설정하는 방법입니다. theme에서 한 설정을 코드로 해준다고 생각하시면 됩니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
     <span class="n">window</span><span class="p">.</span><span class="n">setFlags</span><span class="p">(</span><span class="n">WindowManager</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">FLAG_FULLSCREEN</span><span class="p">,</span> <span class="n">WindowManager</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">FLAG_FULLSCREEN</span><span class="p">)</span>
 
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>이렇게 해서 타이틀바와 상태바의 표시를 없애는 방법에 대해 알아보았습니다.</p>
+</code></pre></div><p>이렇게 해서 타이틀바와 상태바의 표시를 없애는 방법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/Vm8RWNjYyD8" 

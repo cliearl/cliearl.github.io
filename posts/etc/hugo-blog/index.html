@@ -148,105 +148,26 @@ if (!doNotTrack) {
     >https://hub.docker.com/r/klakegg/hugo/</a></p>
 <p>근데 이상하게도 이 이미지를 비롯한 모든 hugo의 도커 이미지는 내 시놀로지 환경에서 실행이 안됐다. 짜증나기도 하고 이왕 이렇게 된거 로컬에서 실행하기로 했다. 맥북에서 하면 brew를 사용하기 때문에 업뎃도 쉬워서 관리가 편하다. hexo가 brew로 관리가 안된다는 점도 hugo로 온 이유중에 하나. Go를 쓰니까 빠르다는 점은 그렇게까진 다가오지 않았다.</p>
 <h2 id="hugo-초기화">hugo 초기화</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew install hugo  // hugo를 인스톨
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew install hugo  // hugo를 인스톨
 $ hugo new site <span class="o">[</span>생성할 폴더 이름<span class="o">]</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="깃-준비">깃 준비</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">cd</span> cliearl.github.io
+</code></pre></div><h2 id="깃-준비">깃 준비</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">cd</span> cliearl.github.io
 $ git init
 $ git remote add origin <span class="o">[</span>https://hugo 원본파일을 보관할 저장소<span class="o">]</span>
 $ git submodule add <span class="o">[</span>https://hugo가 생성한 사이트를 업로드할 저장소<span class="o">]</span> public
 $ git submodule add <span class="o">[</span>테마 깃주소.git<span class="o">]</span> themes/zzo
 $ git submodule update --init --recursive  // 테마가 업데이트 될 경우 반영
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="글-작성-후-확인">글 작성 후 확인</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo new posts/test.md  // 새로운 글 작성
+</code></pre></div><h2 id="글-작성-후-확인">글 작성 후 확인</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo new posts/test.md  // 새로운 글 작성
 $ hugo server  // 만들어진 정적사이트를 localhost:1313에 띄워줌
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="페이지-작성-후-업로드">페이지 작성 후 업로드</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo -t <span class="o">[</span>테마이름<span class="o">]</span>  // 정적사이트 생성
+</code></pre></div><h2 id="페이지-작성-후-업로드">페이지 작성 후 업로드</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo -t <span class="o">[</span>테마이름<span class="o">]</span>  // 정적사이트 생성
 $ <span class="nb">cd</span> public
 $ git add .
 $ git commit -m <span class="s2">&#34;deploy updates&#34;</span>
 $ git push origin main
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="커밋-자동화-스크립트">커밋 자동화 스크립트</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</code></pre></div><h2 id="커밋-자동화-스크립트">커밋 자동화 스크립트</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
 <span class="nb">echo</span> -e <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
 
@@ -282,9 +203,7 @@ git add .
 git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
 
 git push origin master
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="검색엔진에-등록">검색엔진에 등록</h2>
+</code></pre></div><h2 id="검색엔진에-등록">검색엔진에 등록</h2>
 <h3 id="google-search-console">Google Search Console</h3>
 <ul>
 <li><a class="link" href="https://www.google.com/webmasters/tools/"  target="_blank" rel="noopener"

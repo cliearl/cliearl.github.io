@@ -186,24 +186,7 @@ if (!doNotTrack) {
 <p>그렇다면 왜 11버전이 선택되었을까요? 11은 2018년 9월 발표된 버전으로 8과 비교하면 기술적으로 많은 발전이 있었습니다. 그 내용에 대해서는 Microsoft의 <a class="link" href="https://docs.microsoft.com/ko-kr/azure/developer/java/fundamentals/reasons-to-move-to-java-11"  target="_blank" rel="noopener"
     >Java 11로 전환해야 하는 이유</a>를 참조하시면 좋을 것 같습니다.</p>
 <p>Android Studio에서 Java 11의 기능을 이용하고 싶다면 build.gradle을 다음과 같이 수정하면 됩니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
     <span class="n">compileSdkVersion</span> <span class="mi">30</span>
 
     <span class="n">compileOptions</span> <span class="o">{</span>
@@ -216,28 +199,17 @@ if (!doNotTrack) {
       <span class="n">jvmTarget</span> <span class="o">=</span> <span class="s2">&#34;11&#34;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>또한 11은 <a class="link" href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html"  target="_blank" rel="noopener"
+</code></pre></div><p>또한 11은 <a class="link" href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html"  target="_blank" rel="noopener"
     >LTS(Long Term Support)</a>가 적용되었으며 <a class="link" href="https://adoptium.net/"  target="_blank" rel="noopener"
     >ADOPTIUM</a> 으로부터 오픈소스 빌드인 OpenJDK를 제공받을 수 있는 버전이기도 합니다. OpenJDK는 Oracle JDK의 기능을 모두 구현하면서도 무료로 사용할 수 있는 JDK라고 생각하시면 됩니다.</p>
 <p>이러한 이유들로 인해 구글에서는 Android Gradle의 JDK 디폴트 버전을 11로 채용하게 된 것으로 보입니다. synk에서 발표한 <a class="link" href="https://snyk.io/wp-content/uploads/jvm_2020.pdf"  target="_blank" rel="noopener"
     >JVM Ecosystem Report 2020</a>에 따르면 현재 Java SE 8 사용자는 64%, 11 사용자는 25%라고 하는데 이번 결정으로 11버전의 사용자가 빠르게 증가할 것 같네요.</p>
 <h2 id="android-studio의-빌드-실패">Android Studio의 빌드 실패</h2>
 <p>현재 Arctic Fox에서 New Project로 생성하는 프로젝트의 Android Gradle은 7.0.0 버전이 적용되도록 되어 있습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">classpath</span> <span class="s2">&#34;com.android.tools.build:gradle:7.0.0&#34;</span>
 <span class="o">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>근데 문제는 프로젝트의 JDK가 1.8로 지정되었을 경우 Gradle의 디폴트 버전과 맞지 않으므로 다음과 같은 메시지를 뿜으며 빌드에 실패하게 됩니다.</p>
+</code></pre></div><p>근데 문제는 프로젝트의 JDK가 1.8로 지정되었을 경우 Gradle의 디폴트 버전과 맞지 않으므로 다음과 같은 메시지를 뿜으며 빌드에 실패하게 됩니다.</p>
 <pre tabindex="0"><code>An exception occurred applying plugin request [id: 'com.android.application']
 &gt; Failed to apply plugin 'com.android.internal.application'.
    &gt; Android Gradle plugin requires Java 11 to run. You are currently using Java 1.8.
@@ -250,35 +222,16 @@ if (!doNotTrack) {
 <p>JDK 11은 안드로이드 스튜디오 4.2에 내장되어 있지만 여기서는 패키지 버전관리가 용이한 brew를 통해 JDK 11을 새로 설치하여 사용하도록 하겠습니다.</p>
 <p>우선 brew로 시스템에 <a class="link" href="https://github.com/AdoptOpenJDK/homebrew-openjdk"  target="_blank" rel="noopener"
     >OpenJDK 11</a>을 설치해 줍니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew tap AdoptOpenJDK/openjdk
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew tap AdoptOpenJDK/openjdk
 $ brew install --cask adoptopenjdk11
-</code></pre></td></tr></table>
-</div>
-</div><p>설치된 JDK의 위치는 <code>/usr/libexec/java_home -V</code> 명령으로 확인할 수 있습니다.</p>
+</code></pre></div><p>설치된 JDK의 위치는 <code>/usr/libexec/java_home -V</code> 명령으로 확인할 수 있습니다.</p>
 <p>다음은 <code>JAVA_HOME</code> 파라미터를 변경하기 위해 <code>~/.zshrc</code>에 다음 행을 추가합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="k">$(</span>/usr/libexec/java_home -v 11<span class="k">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="k">$(</span>/usr/libexec/java_home -v 11<span class="k">)</span>
 <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}</span>:<span class="nv">$JAVA_HOME</span>/bin
 
 // 변경사항 반영
 $ <span class="nb">source</span> ~/.zshrc
-</code></pre></td></tr></table>
-</div>
-</div><p>마지막으로 Android Studio 메뉴에서 <code>Preferences &gt; Build, Execution, Deployment &gt; Build Tools &gt; Gradle</code>로 들어가 <code>Gradle JDK</code> 항목을 <code>Android Studio java home</code>으로 변경해 주면 됩니다.</p>
+</code></pre></div><p>마지막으로 Android Studio 메뉴에서 <code>Preferences &gt; Build, Execution, Deployment &gt; Build Tools &gt; Gradle</code>로 들어가 <code>Gradle JDK</code> 항목을 <code>Android Studio java home</code>으로 변경해 주면 됩니다.</p>
 <p>윈도우의 경우는 brew가 존재하지 않기 때문에 그냥 Android Studio에 내장된 JDK 11으로 설정해주면 됩니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 

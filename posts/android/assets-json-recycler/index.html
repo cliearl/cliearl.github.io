@@ -123,7 +123,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    4 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -205,31 +205,7 @@ if (!doNotTrack) {
     >Kotlin data class File from JSON</a>을 선택하여 위에서 만든 json 데이터와 클래스명을 입력하면 자동으로 데이터클래스와, 그 클래스를 아이템으로 갖는 배열 클래스가 생성되는데 클래스 이름은 CoronaMed라고 하겠습니다.</p>
 <h3 id="리사이클러뷰-구축하기">리사이클러뷰 구축하기</h3>
 <p>다음으로 새로 만들어진 데이터클래스의 형식에 맞게 리사이클러뷰와 뷰홀더의 형태를 정의해줍니다. activity_main.xml에 recyclerview를 추가합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -249,59 +225,8 @@ if (!doNotTrack) {
         <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>list_item.xml 파일을 만들어서 뷰홀더를 구성합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</code></pre></div><p>list_item.xml 파일을 만들어서 뷰홀더를 구성합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span>
     <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -346,41 +271,8 @@ if (!doNotTrack) {
         <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>그리고 마지막으로 리사이클러뷰 어댑터를 작성합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyRecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataset</span><span class="p">:</span> <span class="n">CoronaMed</span><span class="p">)</span> <span class="p">:</span>
+</code></pre></div><p>그리고 마지막으로 리사이클러뷰 어댑터를 작성합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyRecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataset</span><span class="p">:</span> <span class="n">CoronaMed</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">MyRecyclerViewAdapter</span><span class="p">.</span><span class="n">MyViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">MyViewHolder</span> <span class="p">{</span>
         <span class="k">val</span> <span class="py">binding</span> <span class="p">=</span> <span class="n">ListItemBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span> <span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
@@ -407,29 +299,10 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="assets-폴더속-파일-불러오기">assets 폴더속 파일 불러오기</h3>
+</code></pre></div><h3 id="assets-폴더속-파일-불러오기">assets 폴더속 파일 불러오기</h3>
 <p>다음은 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 <a class="link" href="https://developer.android.com/reference/android/content/res/AssetManager"  target="_blank" rel="noopener"
     >Asset Manager</a> 인스턴스를 생성하고 bufferedReader()를 이용해 InputStream을 텍스트로 변환합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getJsonData</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">CoronaMed</span><span class="p">?</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getJsonData</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">CoronaMed</span><span class="p">?</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">assetManager</span> <span class="p">=</span> <span class="n">resources</span><span class="p">.</span><span class="n">assets</span>
     <span class="k">var</span> <span class="py">result</span><span class="p">:</span> <span class="n">CoronaMed</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
     <span class="k">try</span> <span class="p">{</span>
@@ -442,26 +315,8 @@ if (!doNotTrack) {
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">result</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>나머지는 이렇게 얻어온 CoronaMed 객체를 리사이클러뷰 어댑터에 전달해주면 됩니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</code></pre></div><p>나머지는 이렇게 얻어온 CoronaMed 객체를 리사이클러뷰 어댑터에 전달해주면 됩니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
     <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
 
@@ -473,9 +328,7 @@ if (!doNotTrack) {
         <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>이렇게 해서 assets 폴더에서 json 파일을 불러오는 법에 대해 알아보았습니다.</p>
+</code></pre></div><p>이렇게 해서 assets 폴더에서 json 파일을 불러오는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/QmxJS82mnjM" 

@@ -4,7 +4,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 ViewPager2와 TabLayout을 이용한 디자인을 구현해 보도록 하겠습니다.
 ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-1 2 3 4 5 6 7 8 9 10  // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // 뷰페이저2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; }   Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.'><title>ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기</title>
+// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // 뷰페이저2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.'><title>ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewpager2-tablayout/'>
 
@@ -12,7 +12,7 @@ ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝
 <meta property='og:description' content='이번 포스팅에서는 ViewPager2와 TabLayout을 이용한 디자인을 구현해 보도록 하겠습니다.
 ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-1 2 3 4 5 6 7 8 9 10  // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // 뷰페이저2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; }   Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.'>
+// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // 뷰페이저2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/viewpager2-tablayout/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='ViewPager2' /><meta property='article:tag' content='TabLayout' /><meta property='article:published_time' content='2021-05-02T22:44:04&#43;09:00'/><meta property='article:modified_time' content='2021-05-02T22:44:04&#43;09:00'/>
@@ -20,7 +20,7 @@ ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝
 <meta name="twitter:description" content="이번 포스팅에서는 ViewPager2와 TabLayout을 이용한 디자인을 구현해 보도록 하겠습니다.
 ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-1 2 3 4 5 6 7 8 9 10  // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // 뷰페이저2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; }   Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.">
+// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // 뷰페이저2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -129,7 +129,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    4 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -146,21 +146,7 @@ if (!doNotTrack) {
     >ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기</a> 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.</p>
 <h2 id="플러그인-추가">플러그인 추가</h2>
 <p>우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="c1">// 뷰바인딩 사용준비
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="c1">// 뷰바인딩 사용준비
 </span><span class="c1"></span><span class="n">android</span> <span class="o">{</span>
     <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
 <span class="o">}</span>
@@ -170,59 +156,18 @@ if (!doNotTrack) {
     <span class="n">implementation</span> <span class="s1">&#39;androidx.viewpager2:viewpager2:1.0.0&#39;</span>
 <span class="o">}</span>
 
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="fragment의-레이아웃-작성">Fragment의 레이아웃 작성</h2>
+</code></pre></div><h2 id="fragment의-레이아웃-작성">Fragment의 레이아웃 작성</h2>
 <p>다음은 <code>new -&gt; fragment</code> 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;TextView</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;TextView</span>
     <span class="na">android:id=</span><span class="s">&#34;@+id/textview&#34;</span>
     <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
     <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
     <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
     <span class="na">android:text=</span><span class="s">&#34;@string/hello_blank_fragment&#34;</span>
     <span class="na">android:textAppearance=</span><span class="s">&#34;@style/TextAppearance.AppCompat.Large&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="fragment-클래스-작성">Fragment 클래스 작성</h2>
+</code></pre></div><h2 id="fragment-클래스-작성">Fragment 클래스 작성</h2>
 <p>기본 프래그먼트에 뷰 바인딩을 적용하고 텍스트를 표시하도록 변경합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">BlankFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">BlankFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">_binding</span><span class="p">:</span> <span class="n">FragmentBlankBinding</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_binding</span><span class="o">!!</span>
     
@@ -244,28 +189,9 @@ if (!doNotTrack) {
         <span class="n">binding</span><span class="p">.</span><span class="n">textview</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">param1</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="viewpager2의-pageradapter-작성">ViewPager2의 PagerAdapter 작성</h2>
+</code></pre></div><h2 id="viewpager2의-pageradapter-작성">ViewPager2의 PagerAdapter 작성</h2>
 <p>방금 작성한 프래그먼트에 텍스트를 전해주는 ViewPager2 어댑터를 작성합니다. 여기서는 3개의 페이지를 갖도록 하겠습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">NUM_PAGES</span> <span class="p">=</span> <span class="m">3</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">=</span> <span class="n">NUM_PAGES</span>
@@ -278,57 +204,10 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="activity_mainxml">activity_main.xml</h3>
+</code></pre></div><h3 id="activity_mainxml">activity_main.xml</h3>
 <p>메인 액티비티의 화면을 구성합니다. 화면 위쪽에 뷰페이저를 배치하고 나머지 공간에 <a class="link" href="https://developer.android.com/reference/com/google/android/material/appbar/AppBarLayout"  target="_blank" rel="noopener"
     >AppBarLayout</a>을 배치한 뒤 그 내부에 TabLayout을 배치합니다. 그리고 TabLayout의 <code>app::tab~</code> 속성을 사용해서 색을 지정합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
     <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
@@ -369,38 +248,10 @@ if (!doNotTrack) {
     <span class="nt">&lt;/com.google.android.material.appbar.AppBarLayout&gt;</span>
 
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="mainactivity-설정">Mainactivity 설정</h2>
+</code></pre></div><h2 id="mainactivity-설정">Mainactivity 설정</h2>
 <p>뷰페이저 어댑터 클래스의 인스턴스를 만들어 뷰페이저 어댑터 속성에 연결시킵니다. 그리고 <a class="link" href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator"  target="_blank" rel="noopener"
     >TabLayoutMediator</a>를 이용해서 탭레이아웃과 뷰페이저를 연결합니다. 각 탭의 타이틀과 아이콘은 블럭내부에서 지정할 수 있습니다. 탭의 이름은 <code>Title 0</code> 형식으로 지정하고 아이콘은 벡터 이미지를 추가한 뒤 <code>setIcon</code> 에서 불러오도록 하였습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -422,65 +273,12 @@ if (!doNotTrack) {
         <span class="p">}.</span><span class="n">attach</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="pagetransformer-설정">PageTransformer 설정</h2>
+</code></pre></div><h2 id="pagetransformer-설정">PageTransformer 설정</h2>
 <p>ViewPager에서는 페이지를 변경할때 여러가지 효과를 줄 수 있습니다. 구글에서 공개하는 <a class="link" href="https://developer.android.com/training/animation/screen-slide-2#zoom-out"  target="_blank" rel="noopener"
     >ZoomOutPageTransformer</a>를 사용한다면 스크롤할때 페이지가 축소되면서 페이드아웃되고, 페이지가 중앙에 가까워지면 원래 크기로 다시 커지면서 페이드인 되는 효과를 낼 수 있습니다.</p>
 <p>그 외에도 여러가지 페이지 전환효과를 사용하고 싶다면 <a class="link" href="https://medium.com/codex/33-viewpager2-transformers-for-your-android-uis-bbdab801eb2b"  target="_blank" rel="noopener"
     >33 Viewpager2 Transformers for Your Android ui’s</a> 페이지를 참고하세요.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">MIN_SCALE</span> <span class="p">=</span> <span class="m">0.85f</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">MIN_SCALE</span> <span class="p">=</span> <span class="m">0.85f</span>
 <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">MIN_ALPHA</span> <span class="p">=</span> <span class="m">0.5f</span>
 
 <span class="k">class</span> <span class="nc">ZoomOutPageTransformer</span> <span class="p">:</span> <span class="n">ViewPager2</span><span class="p">.</span><span class="n">PageTransformer</span> <span class="p">{</span>
@@ -527,9 +325,7 @@ if (!doNotTrack) {
 </span><span class="c1"></span><span class="n">binding</span><span class="p">.</span><span class="n">viewpager</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
     <span class="n">setPageTransformer</span><span class="p">(</span><span class="n">ZoomOutPageTransformer</span><span class="p">())</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>이렇게 해서 ViewPager2와 TabLayout을 조합한 디자인을 구축하는 법에 대해 알아보았습니다.</p>
+</code></pre></div><p>이렇게 해서 ViewPager2와 TabLayout을 조합한 디자인을 구축하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/3o98y7h9dfE" 

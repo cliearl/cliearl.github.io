@@ -123,7 +123,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    5 minute read
+                    4 minute read
                 </time>
             </div>
         
@@ -139,58 +139,19 @@ if (!doNotTrack) {
     >RecyclerView에 View Binding 적용하기</a> 강의에서 만들었던 리사이클러뷰 앱을 수정하는 방식으로 구현해보겠습니다.</p>
 <h2 id="리팩토링">리팩토링</h2>
 <p>뷰바인딩은 다음과 같이 사용하도록 변경합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
     <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
 <span class="o">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 리사이클러뷰 어댑터 안쪽으로 이동시키고 받아오는 파라미터를 삭제합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+</code></pre></div><p>메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 리사이클러뷰 어댑터 안쪽으로 이동시키고 받아오는 파라미터를 삭제합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;().</span><span class="n">apply</span> <span class="p">{</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">99</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">add</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th main&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th sub&#34;</span><span class="p">))</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>메인액티비티의 리사이클러뷰 프로퍼티를 정하는 부분은 with함수로 묶어줍니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></div><p>메인액티비티의 리사이클러뷰 프로퍼티를 정하는 부분은 with함수로 묶어줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">rvAdapter</span> <span class="p">=</span> <span class="n">RecyclerViewAdapter</span><span class="p">()</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -203,35 +164,9 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="데이터-조작함수-추가">데이터 조작함수 추가</h2>
+</code></pre></div><h2 id="데이터-조작함수-추가">데이터 조작함수 추가</h2>
 <p>데이터를 조작하는 함수를 리사이클러뷰 안에 다음과 같이 추가합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
 
     <span class="c1">// 뷰홀더 포지션을 받아 그 위치의 데이터를 삭제하고 notifyItemRemoved로 어댑터에 갱신명령을 전달
 </span><span class="c1"></span>    <span class="k">fun</span> <span class="nf">removeData</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
@@ -251,35 +186,9 @@ if (!doNotTrack) {
         <span class="n">notifyItemChanged</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="스와이프와-드래그-기능-붙이기">스와이프와 드래그 기능 붙이기</h2>
+</code></pre></div><h2 id="스와이프와-드래그-기능-붙이기">스와이프와 드래그 기능 붙이기</h2>
 <p>안드로이드에서는 리사이클러뷰에 입력되는 스와이프와 드래그 동작을 감지하는 콜백함수가 이미 준비되어 있습니다. 이 콜백함수는 onCreate() 안에 다음과 같이 정의하면 됩니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">itemTouchCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span> <span class="p">(</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">itemTouchCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span> <span class="p">(</span>
     <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">UP</span> <span class="n">or</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">DOWN</span><span class="p">,</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">LEFT</span>
         <span class="p">){</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onMove</span><span class="p">(</span>
@@ -299,9 +208,7 @@ if (!doNotTrack) {
 <span class="p">}</span>
 
 <span class="n">ItemTouchHelper</span><span class="p">(</span><span class="n">itemTouchCallback</span><span class="p">).</span><span class="n">attachToRecyclerView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">recyclerView</span><span class="p">)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>우선 ItemTouchHelper.SimpleCallback()이라는 콜백함수의 인스턴스를 만들어  attachToRecyclerView로 리사이클러뷰와 연결시켜주면 스와이프와 드래그 동작을 인식할 수 있게 됩니다.</p>
+</code></pre></div><p>우선 ItemTouchHelper.SimpleCallback()이라는 콜백함수의 인스턴스를 만들어  attachToRecyclerView로 리사이클러뷰와 연결시켜주면 스와이프와 드래그 동작을 인식할 수 있게 됩니다.</p>
 <p>초기화할때 인식할 드래그 방향을 dragDirs, 스와이프 방향을 swipeDirs로 정해주는데 여기서는 드래그 방향은 위, 아래. 그리고 스와이프 방향은 왼쪽만 인식하도록 하였습니다.</p>
 <p>onSwiped에서는 스와이프가 일어날 때 데이터를 삭제하는 동작을 정의합니다. 터치한 뷰홀더 위치를 어댑터에 전달하여 removeData()를 실행합니다.</p>
 <p>onMove에서는 드래그가 일어날 때 두 뷰홀더의 데이터를 교환하는 동작을 정의합니다. 드래그가 시작되었을 때 뷰홀더의 위치와 이동이 완료된 후의 뷰홀더의 위치를 각각 fromPos, toPos로 정의하고 swapData()에 넘겨주어 데이터를 교환하게 합니다. 이때 스크롤 동작과 헷갈리지 않게 하기 위해서 뷰홀더를 드래그하기 위해서는 롱터치를 해야 합니다.</p>
@@ -309,56 +216,7 @@ if (!doNotTrack) {
 <h2 id="뷰홀더에-드래그-가능-여부를-알리는-이미지-표시">뷰홀더에 드래그 가능 여부를 알리는 이미지 표시</h2>
 <p>현재는 뷰홀더가 데이터만 표시되고 있어서 이 뷰홀더를 드래그 할수 있는지 바로 알수 있는 방법이 없습니다. 그래서 뷰홀더 오른쪽에 햄버거 마크를 넣어서 드래그 할 수 있는 뷰홀더라는 표시를 해 주도록 하겠습니다.</p>
 <p>아이콘은 Vector Asset 메뉴에서 추가하고 리니어 레이아웃과 프레임 레이아웃을 섞어서 뷰홀더 모양을 수정했습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
     <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
     <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
@@ -403,55 +261,9 @@ if (!doNotTrack) {
     <span class="nt">&lt;/FrameLayout&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="스와이프시-백그라운드-설정하기">스와이프시 백그라운드 설정하기</h2>
+</code></pre></div><h2 id="스와이프시-백그라운드-설정하기">스와이프시 백그라운드 설정하기</h2>
 <p>다음으로 스와이프를 할때 미끄러져 나간 뷰홀더 아래에 Canvas클래스를 이용해 작성한 빨간색 비트맵 이미지와 휴지통 아이콘을 표시되도록 하겠습니다. 이것을 위해서는 ItemTouchHelper.SimpleCallback의 onChildDraw()를 사용합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin">            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onChildDraw</span><span class="p">(</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin">            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onChildDraw</span><span class="p">(</span>
                 <span class="n">c</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">,</span>
                 <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
                 <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span>
@@ -491,42 +303,13 @@ if (!doNotTrack) {
                     <span class="n">isCurrentlyActive</span>
                 <span class="p">)</span>
             <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="터치-조작-정의하기">터치 조작 정의하기</h2>
+</code></pre></div><h2 id="터치-조작-정의하기">터치 조작 정의하기</h2>
 <p>리사이클러뷰 어댑터 안에 정의한 뷰홀더 클래스에 클릭 리스너를 붙여주면 뷰홀더의 터치를 인식할 수 있습니다. 그럴려면 뷰홀더가 사용하는 list_item.xml에서 전체 레이아웃에 id를 부여해줘야 합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
     <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span> <span class="nt">&gt;</span>
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>그리고 클릭 리스너를 붙여주고 스낵바로 터치한 위치를 보여주고 setData() 함수가 실행되도록 합니다. 이때 setData는 리사이클러뷰 안의 함수이므로 뷰홀더 클래스에서 접근을 할 수가 없습니다. 그래서 뷰홀더를 inner 클래스로 변경하여줍니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+</code></pre></div><p>그리고 클릭 리스너를 붙여주고 스낵바로 터치한 위치를 보여주고 setData() 함수가 실행되도록 합니다. 이때 setData는 리사이클러뷰 안의 함수이므로 뷰홀더 클래스에서 접근을 할 수가 없습니다. 그래서 뷰홀더를 inner 클래스로 변경하여줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
 
     <span class="k">inner</span> <span class="k">class</span> <span class="nc">ViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ListItemBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
@@ -540,23 +323,12 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="뷰홀더-터치시-애니메이션-추가">뷰홀더 터치시 애니메이션 추가</h2>
+</code></pre></div><h2 id="뷰홀더-터치시-애니메이션-추가">뷰홀더 터치시 애니메이션 추가</h2>
 <p>현재는 뷰홀더를 터치했을 때 내용이 바뀌도록 하긴 했지만 정확히 어떤 뷰홀더를 터치한건지에 대한 표시가 나타나지 않습니다. 하지만 xml에 다음과 같이 속성을 정의하면 터치한 뷰홀더를 주목시키는 효과를 추가할 수 있습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
     <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>이렇게 해서 리사이클러뷰에 스와이프, 드래그, 터치 동작에 대한 응답을 설정하는 법에 대해 알아보았습니다.</p>
+</code></pre></div><p>이렇게 해서 리사이클러뷰에 스와이프, 드래그, 터치 동작에 대한 응답을 설정하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/IaIuKbEyGnY" 

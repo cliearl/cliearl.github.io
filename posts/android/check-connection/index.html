@@ -123,7 +123,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    3 minute read
+                    2 minute read
                 </time>
             </div>
         
@@ -139,40 +139,11 @@ if (!doNotTrack) {
     >ConnectivityManager</a>를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.</p>
 <h2 id="권한추가">권한추가</h2>
 <p>인터넷에 접근하고 네트워크 상태를 가져오기 위해 AndroidManifest.xml에 다음 권한을 추가합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> <span class="nt">/&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="네트워크-타입-확인">네트워크 타입 확인</h2>
+</code></pre></div><h2 id="네트워크-타입-확인">네트워크 타입 확인</h2>
 <p>우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getNetworkType</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getNetworkType</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">connMgr</span> <span class="p">=</span>
         <span class="n">context</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">CONNECTIVITY_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">ConnectivityManager</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">Build</span><span class="p">.</span><span class="n">VERSION</span><span class="p">.</span><span class="n">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="p">.</span><span class="n">VERSION_CODES</span><span class="p">.</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
@@ -189,9 +160,7 @@ if (!doNotTrack) {
         <span class="k">return</span> <span class="n">nwInfo</span><span class="p">.</span><span class="n">typeName</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>기본은 ConnectivityManager 인스턴스를 만들고 그 인스턴스로부터 네트워크 타입을 가져오는 방식입니다. API Level 23 마시멜로우까지는 connMgr.activeNetworkInfo 인스턴스를 만든 뒤 typeName 프로퍼티로 네트워크 타입을 문자열 형태로 확인할 수 있었습니다.</p>
+</code></pre></div><p>기본은 ConnectivityManager 인스턴스를 만들고 그 인스턴스로부터 네트워크 타입을 가져오는 방식입니다. API Level 23 마시멜로우까지는 connMgr.activeNetworkInfo 인스턴스를 만든 뒤 typeName 프로퍼티로 네트워크 타입을 문자열 형태로 확인할 수 있었습니다.</p>
 <p>그러나 마시멜로우 이상에서는 ConnectivityManager의 activeNetwork 프로퍼티로 우선 기본 데이터 네트워크를 받아옵니다. 그리고 TransportInfo로 네트워크 타입을 가져오기 위해 getNetworkCapabilities 인스턴스를 만들어줍니다. 이 시점에서 접속이 확인되지 않을 경우 네트워크에 접속되지 않은 것입니다.</p>
 <h2 id="네트워크-접속여부-확인">네트워크 접속여부 확인</h2>
 <p>NetworkInfo 인스턴스의 isConnected() 메소드를 사용하면 현재 인터넷에 접속되어있는지를 확인할 수 있습니다. 그런데 이 메소드로는 버스나 공항에서 접속할 수 있는 인증이 필요한 와이파이에 대해서는 인증이 되지 않아서 실제로는 와아파이를 사용할 수 없어도 true를 반환하게 됩니다.</p>
@@ -202,31 +171,7 @@ if (!doNotTrack) {
 <p>이 주소로 접속에 성공하면 &lsquo;HTTP 204 No Content&rsquo; 를 반환합니다. 204 응답이 돌아오면 단말이 인터넷을 사용할 수 있는 상태라는 거지요.</p>
 <p>우선은 <a class="link" href="http://clients3.google.com/generate_204"  target="_blank" rel="noopener"
     >http://clients3.google.com/generate_204</a>에 접속하여 response code를 받아오는 함수를 작성합니다. 네트워크에 접속해야 하므로 비동기로 처리하기 위해 Thread 클래스를 상속받도록 합니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">CheckConnection</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">host</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">CheckConnection</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">host</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">isSuccess</span> <span class="p">=</span> <span class="k">false</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
@@ -246,25 +191,8 @@ if (!doNotTrack) {
         <span class="n">urlConnection</span><span class="o">?.</span><span class="n">disconnect</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>다음은 CheckConnection을 실행시켜주면 되겠죠. 스레드를 시작하고 204 응답이 돌아왔다면 true를 반환하는 함수를 만들어줍니다.메인스레드에서 작업이 끝날때까지 대기하도록 하기 위해 join()을 추가로 실행시켜 줍니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isOnline</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>
+</code></pre></div><p>다음은 CheckConnection을 실행시켜주면 되겠죠. 스레드를 시작하고 204 응답이 돌아왔다면 true를 반환하는 함수를 만들어줍니다.메인스레드에서 작업이 끝날때까지 대기하도록 하기 위해 join()을 추가로 실행시켜 줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isOnline</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">cc</span> <span class="p">=</span> <span class="n">CheckConnection</span><span class="p">(</span><span class="s2">&#34;http://clients3.google.com/generate_204&#34;</span><span class="p">)</span>
     <span class="n">cc</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
     <span class="k">try</span> <span class="p">{</span>
@@ -275,9 +203,7 @@ if (!doNotTrack) {
     <span class="p">}</span>
     <span class="k">return</span> <span class="k">false</span>
 <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>이렇게 해서 단말의 네트워크 상태를 체크하는 법에 대해 알아보았습니다.</p>
+</code></pre></div><p>이렇게 해서 단말의 네트워크 상태를 체크하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/9nNrkPQ8tH8" 

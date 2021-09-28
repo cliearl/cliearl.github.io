@@ -163,19 +163,7 @@ if (!doNotTrack) {
 <li>Hexo와 관리용 Hexo-admin이 포함되어 있는 이미지</li>
 </ul>
 <h2 id="icarus-테마-셋업">icarus 테마 셋업</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ssh로 접속</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ssh로 접속</span>
 sudo su -
 docker ps  <span class="c1"># 현재 실행중인 컨테이너 확인</span>
 docker <span class="nb">exec</span> -it xxxxxxxxxxxx /bin/bash  <span class="c1"># 컨테이너에 접속</span>
@@ -183,9 +171,7 @@ git clone https://github.com/ppoffice/hexo-theme-icarus.git themes/icarus
 <span class="c1"># 테마 의존성 패키지 일괄설치</span>
 npm install --save bulma-stylus@0.8.0 hexo-renderer-inferno@^0.1.3 hexo-component-inferno@^0.10.1 inferno@^7.3.3 inferno-create-element@^7.3.3
 <span class="c1"># _config.yml의 theme가 landscape인데 icarus로 수정</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="hexo-admin에-패스워드-설정">hexo-admin에 패스워드 설정</h2>
+</code></pre></div><h2 id="hexo-admin에-패스워드-설정">hexo-admin에 패스워드 설정</h2>
 <ul>
 <li>Settings &gt; Setup authentification에서 YAML을 생성</li>
 <li>_config.yml의 admin: 밑에 붙여넣는다</li>
@@ -196,23 +182,7 @@ npm install --save bulma-stylus@0.8.0 hexo-renderer-inferno@^0.1.3 hexo-componen
     >https://github.com/jaredly/hexo-admin/issues/70</a></li>
 <li>sh파일을 만들고 yml 파일을 수정한다</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">npm install --save hexo-deployer-git  <span class="c1"># git 배포용 플러그인 설치</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">npm install --save hexo-deployer-git  <span class="c1"># git 배포용 플러그인 설치</span>
 touch hexo-deploy.sh<span class="p">;</span> chmod a+x hexo-deploy.sh
 <span class="c1">#!/usr/bin/env sh</span>
 hexo clean
@@ -224,44 +194,21 @@ deploy:
  repo: https://계정:패스워드@github.com/저장소.git
 admin:
  deployCommand: <span class="s1">&#39;./hexo-deploy.sh&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="유용한-플러그인httpshexoioplugins"><a class="link" href="https://hexo.io/plugins/"  target="_blank" rel="noopener"
+</code></pre></div><h2 id="유용한-플러그인httpshexoioplugins"><a class="link" href="https://hexo.io/plugins/"  target="_blank" rel="noopener"
     >유용한 플러그인</a></h2>
 <h3 id="hexo-deployer-githttpsgithubcomhexojshexo-deployer-git"><a class="link" href="https://github.com/hexojs/hexo-deployer-git"  target="_blank" rel="noopener"
     >hexo-deployer-git</a></h3>
 <ul>
 <li>git으로 배포하기 위한 플러그인</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 설치</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 설치</span>
 npm install hexo-deployer-git --save
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed"><a class="link" href="https://github.com/hexojs/hexo-generator-feed"  target="_blank" rel="noopener"
+</code></pre></div><h3 id="hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed"><a class="link" href="https://github.com/hexojs/hexo-generator-feed"  target="_blank" rel="noopener"
     >hexo-generator-feed</a></h3>
 <ul>
 <li>atom(url/atom.xml ) 혹은 rss2.0(url/rss2.xml)으로 피드 생성해 줌</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 설치</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 설치</span>
 npm install hexo-generator-feed --save
 
 <span class="c1"># _config.yml 파일 끝에 다음 행 추가</span>
@@ -270,48 +217,26 @@ feed:
   type: rss2
   path: rss2.xml
   limit: <span class="m">20</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap"><a class="link" href="https://github.com/hexojs/hexo-generator-sitemap"  target="_blank" rel="noopener"
+</code></pre></div><h3 id="hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap"><a class="link" href="https://github.com/hexojs/hexo-generator-sitemap"  target="_blank" rel="noopener"
     >hexo-generator-sitemap</a></h3>
 <ul>
 <li>sitemap.xml 파일을 자동생성</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 설치</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 설치</span>
 npm install hexo-generator-sitemap --save
 
 <span class="c1"># _config.yml 파일 맨 끝에 다음 행 추가</span>
 sitemap:
   path: sitemap.xml
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="hexo-mathhttpsgithubcomhexojshexo-math"><a class="link" href="https://github.com/hexojs/hexo-math"  target="_blank" rel="noopener"
+</code></pre></div><h3 id="hexo-mathhttpsgithubcomhexojshexo-math"><a class="link" href="https://github.com/hexojs/hexo-math"  target="_blank" rel="noopener"
     >hexo-math</a></h3>
 <ul>
 <li>KaTeX and MathJax를 활성화 시켜주는 플러그인</li>
 <li>플러그인 설치</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 설치</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 설치</span>
 npm install hexo-math --save
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+</code></pre></div><ul>
 <li>사용예</li>
 </ul>
 <pre tabindex="0"><code>{% mathjax %}
