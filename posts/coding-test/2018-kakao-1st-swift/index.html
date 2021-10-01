@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='문제해설 http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
+비밀지도 (비트연산) https://www.welcomekakao.com/learn/courses/30/lessons/17681
+func solution(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -&amp;gt; [String] { var answer = [String](repeating: &amp;#34;&amp;#34;, count: n) var bitAdded = Array&amp;lt;Int&amp;gt;() for i in 0..&amp;lt;n { bitAdded.append(arr1[i] | arr2[i]) } for i in 0..&amp;lt;n { for _ in 0..&amp;lt;n { // 2진수로 변환한 값의 맨 뒷자리가 튀어나온다 // 그걸 반환배열의 맨 앞으로 넣어준다 answer[i].insert(bitAdded[i] % 2 == 1 ? &amp;#34;#&amp;#34; : &amp;#34; &amp;#34;, at: answer[i].startIndex) // 비트를 오른쪽으로 하나 옮김 bitAdded[i] &amp;gt;&amp;gt;= 1 } } return answer } 다트 게임 (정규표현식) https://www.'><title>2018 카카오 신입 공채 1차 코딩 테스트 Swift 답안</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/coding-test/2018-kakao-1st-swift/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='2018 카카오 신입 공채 1차 코딩 테스트 Swift 답안'>
+<meta property='og:description' content='문제해설 http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
+비밀지도 (비트연산) https://www.welcomekakao.com/learn/courses/30/lessons/17681
+func solution(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -&amp;gt; [String] { var answer = [String](repeating: &amp;#34;&amp;#34;, count: n) var bitAdded = Array&amp;lt;Int&amp;gt;() for i in 0..&amp;lt;n { bitAdded.append(arr1[i] | arr2[i]) } for i in 0..&amp;lt;n { for _ in 0..&amp;lt;n { // 2진수로 변환한 값의 맨 뒷자리가 튀어나온다 // 그걸 반환배열의 맨 앞으로 넣어준다 answer[i].insert(bitAdded[i] % 2 == 1 ? &amp;#34;#&amp;#34; : &amp;#34; &amp;#34;, at: answer[i].startIndex) // 비트를 오른쪽으로 하나 옮김 bitAdded[i] &amp;gt;&amp;gt;= 1 } } return answer } 다트 게임 (정규표현식) https://www.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/coding-test/2018-kakao-1st-swift/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='swift' /><meta property='article:tag' content='kakao' /><meta property='article:published_time' content='2021-10-02T00:11:53&#43;09:00'/><meta property='article:modified_time' content='2021-10-02T00:11:53&#43;09:00'/>
+<meta name="twitter:title" content="2018 카카오 신입 공채 1차 코딩 테스트 Swift 답안">
+<meta name="twitter:description" content="문제해설 http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
+비밀지도 (비트연산) https://www.welcomekakao.com/learn/courses/30/lessons/17681
+func solution(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -&amp;gt; [String] { var answer = [String](repeating: &amp;#34;&amp;#34;, count: n) var bitAdded = Array&amp;lt;Int&amp;gt;() for i in 0..&amp;lt;n { bitAdded.append(arr1[i] | arr2[i]) } for i in 0..&amp;lt;n { for _ in 0..&amp;lt;n { // 2진수로 변환한 값의 맨 뒷자리가 튀어나온다 // 그걸 반환배열의 맨 앞으로 넣어준다 answer[i].insert(bitAdded[i] % 2 == 1 ? &amp;#34;#&amp;#34; : &amp;#34; &amp;#34;, at: answer[i].startIndex) // 비트를 오른쪽으로 하나 옮김 bitAdded[i] &amp;gt;&amp;gt;= 1 } } return answer } 다트 게임 (정규표현식) https://www.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://cliearl.github.io" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/coding-test/" >
+                coding test
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/coding-test/2018-kakao-1st-swift/">2018 카카오 신입 공채 1차 코딩 테스트 Swift 답안</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 02, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    8 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h1 id="문제해설">문제해설</h1>
+<p><a class="link" href="http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/"  target="_blank" rel="noopener"
+    >http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/</a></p>
+<h2 id="비밀지도-비트연산">비밀지도 (비트연산)</h2>
+<p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17681"  target="_blank" rel="noopener"
+    >https://www.welcomekakao.com/learn/courses/30/lessons/17681</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">n</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">arr1</span><span class="p">:[</span><span class="nb">Int</span><span class="p">],</span> <span class="kc">_</span> <span class="n">arr2</span><span class="p">:[</span><span class="nb">Int</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">](</span><span class="n">repeating</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="n">n</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">bitAdded</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;()</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">n</span> <span class="p">{</span>
+        <span class="n">bitAdded</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">|</span> <span class="n">arr2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="p">}</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">n</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="kc">_</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">n</span> <span class="p">{</span>
+            <span class="c1">// 2진수로 변환한 값의 맨 뒷자리가 튀어나온다</span>
+            <span class="c1">// 그걸 반환배열의 맨 앞으로 넣어준다</span>
+            <span class="n">answer</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="bp">insert</span><span class="p">(</span><span class="n">bitAdded</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="p">==</span> <span class="mi">1</span> <span class="p">?</span> <span class="s">&#34;#&#34;</span> <span class="p">:</span> <span class="s">&#34; &#34;</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">answer</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">startIndex</span><span class="p">)</span>
+            <span class="c1">// 비트를 오른쪽으로 하나 옮김</span>
+            <span class="n">bitAdded</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">answer</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="다트-게임-정규표현식">다트 게임 (정규표현식)</h2>
+<p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17682"  target="_blank" rel="noopener"
+    >https://www.welcomekakao.com/learn/courses/30/lessons/17682</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
+
+<span class="c1">// 정규표현식을 쓸수있도록 스트링 타입을 확장</span>
+<span class="kd">extension</span> <span class="nc">String</span><span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">getAllMatchAfterRegex</span><span class="p">(</span><span class="kc">_</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">{</span>
+        <span class="c1">// 옵셔널을 벗기기 위해 do-catch를 사용</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nv">regex</span> <span class="p">=</span> <span class="k">try</span> <span class="n">NSRegularExpression</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">[])</span>
+            <span class="kd">let</span> <span class="nv">range</span> <span class="p">=</span> <span class="n">NSRange</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">startIndex</span><span class="p">...,</span> <span class="k">in</span><span class="p">:</span> <span class="kc">self</span><span class="p">)</span>
+            <span class="kd">let</span> <span class="nv">matches</span> <span class="p">=</span> <span class="n">regex</span><span class="p">.</span><span class="n">matches</span><span class="p">(</span><span class="k">in</span><span class="p">:</span> <span class="kc">self</span><span class="p">,</span> <span class="n">range</span><span class="p">:</span> <span class="n">range</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">matches</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span>
+                <span class="nb">String</span><span class="p">(</span><span class="kc">self</span><span class="p">[</span><span class="nb">Range</span><span class="p">(</span><span class="nv">$0</span><span class="p">.</span><span class="n">range</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="kc">self</span><span class="p">)</span><span class="o">!</span><span class="p">])</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="kd">let</span> <span class="nv">error</span> <span class="p">{</span>
+            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;invalid regex: </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">dartResult</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+    
+    <span class="c1">// 입력을 정규표현식으로 자르기</span>
+    <span class="kd">let</span> <span class="nv">pointArr</span> <span class="p">=</span> <span class="n">dartResult</span><span class="p">.</span><span class="n">getAllMatchAfterRegex</span><span class="p">(</span><span class="s">&#34;[0-9]+&#34;</span><span class="p">)</span>  <span class="c1">// 두자리수까지 탐색</span>
+    <span class="kd">let</span> <span class="nv">bonusArr</span> <span class="p">=</span> <span class="n">dartResult</span><span class="p">.</span><span class="n">getAllMatchAfterRegex</span><span class="p">(</span><span class="s">&#34;[(S|D|T)]&#34;</span><span class="p">)</span>  <span class="c1">// 고정인 알파벳만 탐색</span>
+    <span class="kd">let</span> <span class="nv">optionArr</span> <span class="p">=</span> <span class="n">dartResult</span><span class="p">.</span><span class="n">getAllMatchAfterRegex</span><span class="p">(</span><span class="s">&#34;(?&lt;=S|D|T)[(*|#)]?&#34;</span><span class="p">)</span>  <span class="c1">// 후방탐색</span>
+    
+    <span class="kd">var</span> <span class="nv">result</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="mi">3</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">newArray</span> <span class="p">=</span> <span class="p">[</span><span class="n">pointArr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">bonusArr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">optionArr</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        
+        <span class="c1">// 점수 결정</span>
+        <span class="kd">let</span> <span class="nv">point</span> <span class="p">=</span> <span class="nb">Double</span><span class="p">(</span><span class="n">newArray</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">!</span>
+        
+        <span class="c1">// 보너스값 결정</span>
+        <span class="kd">var</span> <span class="nv">bonus</span><span class="p">:</span> <span class="nb">Double</span> <span class="p">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">newArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">==</span> <span class="s">&#34;D&#34;</span> <span class="p">{</span>
+            <span class="n">bonus</span> <span class="p">=</span> <span class="mi">2</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">newArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">==</span> <span class="s">&#34;T&#34;</span> <span class="p">{</span>
+            <span class="n">bonus</span> <span class="p">=</span> <span class="mi">3</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// 옵션 결정 후 값 반영</span>
+        <span class="k">if</span> <span class="n">newArray</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">==</span> <span class="s">&#34;*&#34;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+                <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">bonus</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// 바로 앞의 결과값에 2를 곱해줌</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">before</span><span class="p">:</span> <span class="n">result</span><span class="p">.</span><span class="n">endIndex</span><span class="p">)]</span> <span class="o">*=</span> <span class="mi">2</span>
+                <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">bonus</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">newArray</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">==</span> <span class="s">&#34;#&#34;</span> <span class="p">{</span>
+            <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">bonus</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">bonus</span><span class="p">)))</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="p">.</span><span class="bp">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="캐시">캐시</h2>
+<p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17680"  target="_blank" rel="noopener"
+    >https://www.welcomekakao.com/learn/courses/30/lessons/17680</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
+
+<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">cacheSize</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">cities</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">CACHE_HIT</span> <span class="p">=</span> <span class="mi">1</span>
+    <span class="kd">let</span> <span class="nv">CACHE_MISS</span> <span class="p">=</span> <span class="mi">5</span>
+    
+    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="kd">var</span> <span class="nv">cache</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span> <span class="p">:</span> <span class="nb">Int</span><span class="p">]()</span>
+    <span class="kd">var</span> <span class="nv">time</span> <span class="p">=</span> <span class="mi">0</span>
+    
+    <span class="k">if</span> <span class="n">cacheSize</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="n">answer</span> <span class="o">+=</span> <span class="n">cities</span><span class="p">.</span><span class="bp">count</span> <span class="o">*</span> <span class="n">CACHE_MISS</span>
+        <span class="k">return</span> <span class="n">answer</span>
+    <span class="p">}</span>
+    
+    <span class="k">for</span> <span class="n">city</span> <span class="k">in</span> <span class="n">cities</span> <span class="p">{</span>
+        <span class="n">time</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c1">// 대소문자 구분 없앰</span>
+        <span class="kd">let</span> <span class="nv">city</span> <span class="p">=</span> <span class="n">city</span><span class="p">.</span><span class="n">lowercased</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">cache</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+            <span class="c1">// 캐시가 히트하면 인덱스의 타임을 최신값으로 갱신</span>
+            <span class="n">cache</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="p">=</span> <span class="n">time</span>
+            <span class="n">answer</span> <span class="o">+=</span> <span class="n">CACHE_HIT</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// 캐시미스일때 현재 캐시크기가 캐시사이즈보다 작으면 그냥 추가</span>
+            <span class="k">if</span> <span class="n">cache</span><span class="p">.</span><span class="bp">count</span> <span class="o">&lt;</span> <span class="n">cacheSize</span> <span class="p">{</span>
+                <span class="n">cache</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="p">=</span> <span class="n">time</span>
+                <span class="n">answer</span> <span class="o">+=</span> <span class="n">CACHE_MISS</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// 그렇지 않으면 가장 오래된 캐시를 삭제하고 값을 추가</span>
+                <span class="kd">let</span> <span class="nv">oldest</span> <span class="p">=</span> <span class="n">cache</span><span class="p">.</span><span class="bp">min</span> <span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="k">in</span> <span class="n">a</span><span class="p">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">value</span> <span class="p">}</span><span class="o">!</span>
+                <span class="n">cache</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">at</span><span class="p">:</span> <span class="n">cache</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">forKey</span><span class="p">:</span> <span class="n">oldest</span><span class="p">.</span><span class="n">key</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+                <span class="n">cache</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="p">=</span> <span class="n">time</span>
+                <span class="n">answer</span> <span class="o">+=</span> <span class="n">CACHE_MISS</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">answer</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="셔틀버스-문자열-시간변환-딕셔너리">셔틀버스 (문자열 시간변환, 딕셔너리)</h2>
+<p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17678"  target="_blank" rel="noopener"
+    >https://www.welcomekakao.com/learn/courses/30/lessons/17678</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
+
+<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">n</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">t</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">m</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">timetable</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+
+    <span class="c1">// 문자열 타임테이블을 가공하기 용이하게 숫자로 변환</span>
+    <span class="kd">var</span> <span class="nv">cvtTimetable</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]()</span>
+    <span class="c1">// 시간을 네자리 정수로 변환</span>
+    <span class="k">for</span> <span class="n">time</span> <span class="k">in</span> <span class="n">timetable</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">convert</span> <span class="p">=</span> <span class="n">time</span><span class="p">[</span><span class="n">time</span><span class="p">.</span><span class="n">startIndex</span><span class="p">].</span><span class="n">wholeNumberValue</span><span class="p">!</span> <span class="o">*</span> <span class="mi">1000</span>
+                <span class="o">+</span> <span class="n">time</span><span class="p">[</span><span class="n">time</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="mi">1</span><span class="p">)].</span><span class="n">wholeNumberValue</span><span class="p">!</span> <span class="o">*</span> <span class="mi">100</span>
+                <span class="o">+</span> <span class="n">time</span><span class="p">[</span><span class="n">time</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="mi">3</span><span class="p">)].</span><span class="n">wholeNumberValue</span><span class="p">!</span> <span class="o">*</span> <span class="mi">10</span>
+                <span class="o">+</span> <span class="n">time</span><span class="p">[</span><span class="n">time</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="mi">4</span><span class="p">)].</span><span class="n">wholeNumberValue</span><span class="p">!</span>
+        
+        <span class="n">cvtTimetable</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">convert</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// 오름차순으로 소트</span>
+    <span class="n">cvtTimetable</span> <span class="p">=</span> <span class="n">cvtTimetable</span><span class="p">.</span><span class="bp">sorted</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="o">&lt;</span><span class="p">)</span>
+    
+    <span class="c1">// 버스 출발타임을 0900으로 설정</span>
+    <span class="kd">var</span> <span class="nv">busStartTime</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0900</span>
+    <span class="kd">var</span> <span class="nv">answer</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="kd">var</span> <span class="nv">crewIdx</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0</span>
+    
+    <span class="c1">// 각 버스에 대한 체크 시작</span>
+    <span class="k">for</span> <span class="kc">_</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">n</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nv">crewMember</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0</span>
+        <span class="kd">var</span> <span class="nv">arriveTime</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0</span>
+        <span class="c1">// 크루도착시간과 도착순서 관계 컨테이너 초기화</span>
+        <span class="kd">var</span> <span class="nv">watingCue</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Int</span> <span class="p">:</span> <span class="nb">Int</span><span class="p">]()</span>
+        
+        <span class="c1">// 버스 출발시간보다 빨리 온 크루의 도착시간 딕셔너리를 작성</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">crewMember</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">crewIdx</span> <span class="o">&lt;</span> <span class="n">timetable</span><span class="p">.</span><span class="bp">count</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 크루가 버스보다 늦게 왔으면 추가하지 않고 지나감</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cvtTimetable</span><span class="p">[</span><span class="n">crewIdx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">busStartTime</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">break</span>
+            <span class="p">}</span>
+            <span class="c1">// 버스 출발시간보다 빨리 온 크루를 딕셔너리에 순서대로 등록</span>
+            <span class="n">watingCue</span><span class="p">[</span><span class="n">cvtTimetable</span><span class="p">[</span><span class="n">crewIdx</span><span class="p">]]</span> <span class="p">=</span> <span class="n">crewIdx</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">crewIdx</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">crewMember</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// 타려고 대기한 크루의 배열을 소팅함</span>
+        <span class="kd">let</span> <span class="nv">sortedCue</span> <span class="p">=</span> <span class="n">watingCue</span><span class="p">.</span><span class="bp">sorted</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="o">&lt;</span><span class="p">)</span>
+        
+        
+        <span class="c1">// 타려고 대기한 총 인원이 버스의 승차가능인보다 적으면 버스출발시간에 오면 됨</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">crewMember</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">answer</span> <span class="p">=</span> <span class="bp">max</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">busStartTime</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// 대기멤버가 승차가능인보다 많으면 연산시작</span>
+            <span class="kd">var</span> <span class="nv">check</span> <span class="p">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">cue</span> <span class="k">in</span> <span class="n">sortedCue</span> <span class="p">{</span>
+                <span class="c1">// 탑승가능한 맨 마지막 크루에 대해 체크</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">check</span> <span class="o">+</span> <span class="n">cue</span><span class="p">.</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// 그 크루보다 1분 빠르게 도착하도록 함</span>
+                    <span class="n">arriveTime</span> <span class="p">=</span> <span class="n">cue</span><span class="p">.</span><span class="n">key</span> <span class="o">-</span> <span class="mi">1</span>
+                    
+                    <span class="c1">// 08:99를 08:59로 바꿔줌</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">arriveTime</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">&gt;</span> <span class="mi">59</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">arriveTime</span> <span class="o">-=</span> <span class="mi">40</span>
+                    <span class="p">}</span>
+                    <span class="c1">// 00:00 에서 -1 하면 24:00이 되도록 보정</span>
+                    <span class="k">if</span> <span class="n">arriveTime</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
+                        <span class="n">arriveTime</span> <span class="o">+=</span> <span class="mi">2400</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="n">check</span> <span class="o">+=</span> <span class="n">cue</span><span class="p">.</span><span class="n">value</span>
+            <span class="p">}</span>
+            <span class="n">answer</span> <span class="p">=</span> <span class="bp">max</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">arriveTime</span><span class="p">)</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// 시작시간을 버스 다음 도착시간으로 변경</span>
+        <span class="n">busStartTime</span> <span class="o">+=</span> <span class="n">t</span>
+        <span class="c1">// minute가 59보다 커질 경우 1 hour 추가하고 min에서 60을 빼줌</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">busStartTime</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">&gt;</span> <span class="mi">59</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">busStartTime</span> <span class="o">+=</span> <span class="mi">100</span>
+            <span class="n">busStartTime</span> <span class="o">-=</span> <span class="mi">60</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    
+    <span class="c1">// 답 작성</span>
+    <span class="kd">var</span> <span class="nv">hh</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">answer</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">hh</span><span class="p">.</span><span class="bp">count</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="n">hh</span> <span class="p">=</span> <span class="s">&#34;0&#34;</span> <span class="o">+</span> <span class="n">hh</span> <span class="p">}</span>
+
+    <span class="kd">var</span> <span class="nv">mm</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">answer</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mm</span><span class="p">.</span><span class="bp">count</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="n">mm</span> <span class="p">=</span> <span class="s">&#34;0&#34;</span> <span class="o">+</span> <span class="n">mm</span> <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">hh</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="n">mm</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="뉴스-클러스터링-집합-딕셔너리">뉴스 클러스터링 (집합, 딕셔너리)</h2>
+<p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17677"  target="_blank" rel="noopener"
+    >https://www.welcomekakao.com/learn/courses/30/lessons/17677</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
+
+<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">str1</span><span class="p">:</span><span class="nb">String</span><span class="p">,</span> <span class="kc">_</span> <span class="n">str2</span><span class="p">:</span><span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+    
+    <span class="c1">// 분리한 입력문자를 저장할 컨테이너</span>
+    <span class="kd">var</span> <span class="nv">splitstr1</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">]()</span>
+    <span class="kd">var</span> <span class="nv">splitstr2</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">]()</span>
+    
+    <span class="c1">// 각 요소의 개수가 몇 개씩 있는지 기록할 딕셔너리 준비</span>
+    <span class="kd">var</span> <span class="nv">set1</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span> <span class="p">:</span> <span class="nb">Int</span><span class="p">]()</span>
+    <span class="kd">var</span> <span class="nv">set2</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span> <span class="p">:</span> <span class="nb">Int</span><span class="p">]()</span>
+    
+    <span class="kd">var</span> <span class="nv">intersectSet</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0</span>     <span class="c1">// 교집합 개수</span>
+    <span class="kd">var</span> <span class="nv">unionSet</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0</span>     <span class="c1">// 합집합 개수</span>
+    
+    
+    <span class="c1">// 입력문자를 두개씩 분리</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">str1</span><span class="p">.</span><span class="bp">count</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">{</span>
+        <span class="c1">// 대문자로 변환한 스트링을 앞에서부터 두 문자씩 빼옴</span>
+        <span class="kd">let</span> <span class="nv">first</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="n">str1</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">str1</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="n">i</span><span class="p">)]).</span><span class="n">uppercased</span><span class="p">()</span>
+        <span class="kd">let</span> <span class="nv">second</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="n">str1</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">str1</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]).</span><span class="n">uppercased</span><span class="p">()</span>
+        
+        <span class="c1">// 문자가 알파벳일때만 배열에 추가</span>
+        <span class="k">if</span> <span class="s">&#34;A&#34;</span> <span class="o">&lt;=</span> <span class="bp">first</span> <span class="o">&amp;&amp;</span> <span class="bp">first</span> <span class="o">&lt;=</span> <span class="s">&#34;Z&#34;</span>
+            <span class="o">&amp;&amp;</span> <span class="s">&#34;A&#34;</span> <span class="o">&lt;=</span> <span class="n">second</span> <span class="o">&amp;&amp;</span> <span class="n">second</span> <span class="o">&lt;=</span> <span class="s">&#34;Z&#34;</span> <span class="p">{</span>
+            <span class="n">splitstr1</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="bp">first</span> <span class="o">+</span> <span class="n">second</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// set1 작성</span>
+    <span class="k">for</span> <span class="n">elem</span> <span class="k">in</span> <span class="n">splitstr1</span> <span class="p">{</span>
+        <span class="c1">// 각 요소 개수세기</span>
+        <span class="kd">let</span> <span class="nv">count</span> <span class="p">=</span> <span class="n">splitstr1</span><span class="p">.</span><span class="bp">filter</span> <span class="p">{</span> <span class="nv">$0</span> <span class="p">==</span> <span class="n">elem</span> <span class="p">}.</span><span class="bp">count</span>
+        <span class="c1">// 딕셔너리 형태로 저장</span>
+        <span class="n">set1</span><span class="p">[</span><span class="n">elem</span><span class="p">]</span> <span class="p">=</span> <span class="bp">count</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// 입력문자를 두개씩 분리</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">str2</span><span class="p">.</span><span class="bp">count</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">{</span>
+        <span class="c1">// 대문자로 변환한 스트링을 앞에서부터 두 문자씩 빼옴</span>
+        <span class="kd">let</span> <span class="nv">first</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">str2</span><span class="p">[</span><span class="n">str2</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">str2</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="n">i</span><span class="p">)]).</span><span class="n">uppercased</span><span class="p">()</span>
+        <span class="kd">let</span> <span class="nv">second</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">str2</span><span class="p">[</span><span class="n">str2</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">str2</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]).</span><span class="n">uppercased</span><span class="p">()</span>
+        
+        <span class="c1">// 문자가 알파벳이면 추가</span>
+        <span class="k">if</span> <span class="s">&#34;A&#34;</span> <span class="o">&lt;=</span> <span class="bp">first</span> <span class="o">&amp;&amp;</span> <span class="bp">first</span> <span class="o">&lt;=</span> <span class="s">&#34;Z&#34;</span>
+            <span class="o">&amp;&amp;</span> <span class="s">&#34;A&#34;</span> <span class="o">&lt;=</span> <span class="n">second</span> <span class="o">&amp;&amp;</span> <span class="n">second</span> <span class="o">&lt;=</span> <span class="s">&#34;Z&#34;</span> <span class="p">{</span>
+            <span class="n">splitstr2</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="bp">first</span> <span class="o">+</span> <span class="n">second</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// set2 작성</span>
+    <span class="k">for</span> <span class="n">elem</span> <span class="k">in</span> <span class="n">splitstr2</span> <span class="p">{</span>
+        <span class="c1">// 각 요소 개수세기</span>
+        <span class="kd">let</span> <span class="nv">count</span> <span class="p">=</span> <span class="n">splitstr2</span><span class="p">.</span><span class="bp">filter</span> <span class="p">{</span> <span class="nv">$0</span> <span class="p">==</span> <span class="n">elem</span> <span class="p">}.</span><span class="bp">count</span>
+        <span class="c1">// 딕셔너리 형태로 저장</span>
+        <span class="n">set2</span><span class="p">[</span><span class="n">elem</span><span class="p">]</span> <span class="p">=</span> <span class="bp">count</span>
+    <span class="p">}</span>
+    
+    
+    <span class="c1">// set1에 대해 set2를 비교</span>
+    <span class="k">for</span> <span class="n">it</span> <span class="k">in</span> <span class="n">set1</span> <span class="p">{</span>
+        <span class="c1">// set1의 키값이 set2에도 있으면</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">set2</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">key</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 작은값을 교집합에 추가</span>
+            <span class="n">intersectSet</span> <span class="o">+=</span> <span class="bp">min</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">value</span><span class="p">,</span> <span class="n">set2</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">key</span><span class="p">]</span><span class="o">!</span><span class="p">)</span>
+            <span class="c1">// 큰 값을 합집합에 추가</span>
+            <span class="n">unionSet</span> <span class="o">+=</span> <span class="bp">max</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">value</span><span class="p">,</span> <span class="n">set2</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">key</span><span class="p">]</span><span class="o">!</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// 키값이 없으면 합집합에 set1 요소만 추가</span>
+            <span class="n">unionSet</span> <span class="o">+=</span> <span class="n">it</span><span class="p">.</span><span class="n">value</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    
+    <span class="c1">// set2에 대해 set1을 비교</span>
+    <span class="k">for</span> <span class="n">it</span> <span class="k">in</span> <span class="n">set2</span> <span class="p">{</span>
+        <span class="c1">// set1에 대응되는 값이 없으면</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">set1</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">key</span><span class="p">]</span> <span class="p">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 합집합에 set2 요소만 추가</span>
+            <span class="n">unionSet</span> <span class="o">+=</span> <span class="n">it</span><span class="p">.</span><span class="n">value</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// 예외처리</span>
+    <span class="k">if</span> <span class="n">unionSet</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">65536</span> <span class="p">}</span>
+    <span class="c1">// 답안 작성</span>
+    <span class="n">intersectSet</span> <span class="o">*=</span> <span class="mi">65536</span>
+    <span class="k">return</span> <span class="n">intersectSet</span> <span class="o">/</span> <span class="n">unionSet</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="프렌즈-4블록-2차원배열-스왑">프렌즈 4블록 (2차원배열, 스왑)</h2>
+<p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17679"  target="_blank" rel="noopener"
+    >https://www.welcomekakao.com/learn/courses/30/lessons/17679</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
+
+<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">m</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">n</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">board</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nv">isFinished</span> <span class="p">=</span> <span class="kc">false</span>
+    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="mi">0</span>
+    
+    <span class="c1">// 입력받은 문자열배열을 2차원 캐릭터배열로 분리변환</span>
+    <span class="kd">var</span> <span class="nv">newBoard</span> <span class="p">=</span> <span class="p">[[</span><span class="nb">String</span><span class="p">]]()</span>
+    <span class="k">for</span> <span class="n">elem</span> <span class="k">in</span> <span class="n">board</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nv">arr</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">]()</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="k">in</span> <span class="n">elem</span> <span class="p">{</span>
+            <span class="n">arr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="n">newBoard</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    
+    <span class="k">while</span> <span class="kc">true</span> <span class="p">{</span>
+        <span class="n">isFinished</span> <span class="p">=</span> <span class="kc">true</span>
+        <span class="kd">var</span> <span class="nv">judgeBoard</span> <span class="p">=</span> <span class="p">[[</span><span class="nb">Bool</span><span class="p">]](</span><span class="n">repeating</span><span class="p">:</span> <span class="nb">Array</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="n">n</span><span class="p">),</span> <span class="bp">count</span><span class="p">:</span> <span class="n">m</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="k">in</span> <span class="mi">1</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">m</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="k">in</span> <span class="mi">1</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">n</span> <span class="p">{</span>
+                <span class="c1">// 배열을 순회하면서 인접한 사각 요소를 가져옴</span>
+                <span class="kd">let</span> <span class="nv">a</span> <span class="p">=</span> <span class="n">newBoard</span><span class="p">[</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">col</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="kd">let</span> <span class="nv">b</span> <span class="p">=</span> <span class="n">newBoard</span><span class="p">[</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
+                <span class="kd">let</span> <span class="nv">c</span> <span class="p">=</span> <span class="n">newBoard</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="kd">let</span> <span class="nv">d</span> <span class="p">=</span> <span class="n">newBoard</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
+                
+                <span class="c1">// 사각 요소가 모두 일치하는지 확인</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="p">==</span> <span class="n">b</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="p">==</span> <span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="p">==</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="n">a</span> <span class="p">==</span> <span class="s">&#34;-&#34;</span> <span class="p">{</span> <span class="k">continue</span> <span class="p">}</span>
+                    <span class="c1">// 일치하면 다음 요소를 검색</span>
+                    <span class="n">isFinished</span> <span class="p">=</span> <span class="kc">false</span>
+                    <span class="c1">// 판정 보드에 트루라고 기록</span>
+                    <span class="n">judgeBoard</span><span class="p">[</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">col</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+                    <span class="n">judgeBoard</span><span class="p">[</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+                    <span class="n">judgeBoard</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+                    <span class="n">judgeBoard</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        
+        <span class="c1">// 배열을 순회하면서 true이면 newBoard값을 -로 변경</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">m</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">n</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="n">judgeBoard</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="p">{</span>
+                    <span class="n">newBoard</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="p">=</span> <span class="s">&#34;-&#34;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+
+        <span class="c1">// 삭제하고 나서 떠있는 블럭을 밑으로 떨어뜨림</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">n</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="p">(</span><span class="mi">0</span> <span class="p">...</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">reversed</span><span class="p">()</span> <span class="p">{</span>
+<span class="c1">//            for j in stride(from: m - 1, through: 0, by: -1) {</span>
+                <span class="kd">var</span> <span class="nv">col</span> <span class="p">=</span> <span class="n">j</span>
+                <span class="c1">// 한 칸씩 내려보내다가 빈공간(-)이 없어지면 중단한다</span>
+                <span class="k">while</span> <span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">newBoard</span><span class="p">[</span><span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">row</span><span class="p">]</span> <span class="p">==</span> <span class="s">&#34;-&#34;</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// 아래 위 보드 내용을 스왑</span>
+                    <span class="kd">let</span> <span class="nv">temp</span> <span class="p">=</span> <span class="n">newBoard</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">row</span><span class="p">]</span>
+                    <span class="n">newBoard</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">row</span><span class="p">]</span> <span class="p">=</span> <span class="n">newBoard</span><span class="p">[</span><span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">row</span><span class="p">]</span>
+                    <span class="n">newBoard</span><span class="p">[</span><span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">row</span><span class="p">]</span> <span class="p">=</span> <span class="n">temp</span>
+                    
+                    <span class="n">col</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// 처리가 끝났으면 종료한다</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isFinished</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// -의 갯수를 계수한다</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">m</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">n</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">newBoard</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="p">==</span> <span class="s">&#34;-&#34;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">answer</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">answer</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="추석-트래픽-문자열-시간변환">추석 트래픽 (문자열 시간변환)</h2>
+<p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17676"  target="_blank" rel="noopener"
+    >https://www.welcomekakao.com/learn/courses/30/lessons/17676</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
+
+<span class="kd">func</span> <span class="nf">convertTime</span><span class="p">(</span><span class="kc">_</span> <span class="n">input</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="p">[[</span><span class="nb">Double</span><span class="p">]]</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nv">startList</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Double</span><span class="p">]()</span>
+    <span class="kd">var</span> <span class="nv">endList</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Double</span><span class="p">]()</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">input</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="p">(</span><span class="n">timeStr</span><span class="p">,</span> <span class="n">durationStr</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="bp">split</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span> <span class="s">&#34; &#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">.</span><span class="bp">split</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span> <span class="s">&#34; &#34;</span><span class="p">)[</span><span class="mi">2</span><span class="p">])</span>
+        
+        <span class="c1">// 시간 문자열을 sec 스케일의 숫자로 변환</span>
+        <span class="kd">let</span> <span class="nv">timeSplit</span> <span class="p">=</span> <span class="n">timeStr</span><span class="p">.</span><span class="bp">split</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span> <span class="s">&#34;:&#34;</span><span class="p">)</span>
+        <span class="kd">let</span> <span class="nv">hour</span> <span class="p">=</span> <span class="nb">Double</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="n">timeSplit</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">!</span> <span class="o">*</span> <span class="mi">3600</span>
+        <span class="kd">let</span> <span class="nv">min</span> <span class="p">=</span> <span class="nb">Double</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="n">timeSplit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">!</span> <span class="o">*</span> <span class="mi">60</span>
+        <span class="kd">let</span> <span class="nv">sec</span> <span class="p">=</span> <span class="nb">Double</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="n">timeSplit</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">timeSplit</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">startIndex</span><span class="p">...</span><span class="n">timeSplit</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">index</span><span class="p">(</span><span class="n">after</span><span class="p">:</span> <span class="n">timeSplit</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">startIndex</span><span class="p">)]))</span><span class="o">!</span>
+        <span class="kd">let</span> <span class="nv">subsec</span> <span class="p">=</span> <span class="nb">Double</span><span class="p">(</span><span class="s">&#34;0.&#34;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">(</span><span class="n">timeSplit</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">timeSplit</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">index</span><span class="p">(</span><span class="n">timeSplit</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="mi">3</span><span class="p">)..&lt;</span><span class="n">timeSplit</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">endIndex</span><span class="p">]))</span><span class="o">!</span>
+        
+        <span class="c1">// 간격 가져오기</span>
+        <span class="kd">let</span> <span class="nv">duration</span> <span class="p">=</span> <span class="nb">Double</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="n">durationStr</span><span class="p">[</span><span class="n">durationStr</span><span class="p">.</span><span class="n">startIndex</span><span class="p">..&lt;</span><span class="n">durationStr</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">before</span><span class="p">:</span> <span class="n">durationStr</span><span class="p">.</span><span class="n">endIndex</span><span class="p">)]))</span><span class="o">!</span>
+        
+        
+        <span class="c1">// 시작과 종료시간을 각각 배열화</span>
+        <span class="kd">let</span> <span class="nv">endTime</span><span class="p">:</span> <span class="nb">Double</span> <span class="p">=</span> <span class="n">hour</span> <span class="o">+</span> <span class="bp">min</span> <span class="o">+</span> <span class="n">sec</span> <span class="o">+</span> <span class="n">subsec</span>
+        <span class="kd">let</span> <span class="nv">startTime</span><span class="p">:</span> <span class="nb">Double</span> <span class="p">=</span> <span class="n">endTime</span> <span class="o">-</span> <span class="n">duration</span> <span class="o">+</span> <span class="mf">0.001</span>
+        
+        <span class="n">startList</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">startTime</span><span class="p">)</span>
+        <span class="n">endList</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">endTime</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">[</span><span class="n">startList</span><span class="p">,</span> <span class="n">endList</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">lines</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+    
+    <span class="kd">let</span> <span class="nv">converttime</span> <span class="p">=</span> <span class="n">convertTime</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="p">(</span><span class="n">startList</span><span class="p">,</span> <span class="n">endList</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">converttime</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">converttime</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="kd">var</span> <span class="nv">request</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]()</span>
+    
+    <span class="c1">// 각 시작시간과 종료시간의 직전, 직후 윈도우 요청수만을 확인</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="p">(</span><span class="n">startList</span> <span class="o">+</span> <span class="n">endList</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nv">count</span> <span class="p">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">in</span> <span class="n">zip</span><span class="p">(</span><span class="n">startList</span><span class="p">,</span> <span class="n">endList</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">k</span> <span class="p">{</span>
+                <span class="bp">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="bp">count</span> <span class="o">+=</span> <span class="mi">0</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">request</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="bp">count</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">request</span><span class="p">.</span><span class="bp">max</span><span class="p">()</span><span class="o">!</span>
+<span class="p">}</span>
+</code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/swift/">swift</a>
+        
+            <a href="/tags/kakao/">kakao</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/coding-test/2019-kakao-1st-swift/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2019 카카오 신입 공채 1차 코딩 테스트 Swift 풀이</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/coding-test/2018-kakao-3rd-swift/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2018 카카오 신입 공채 3차 코딩 테스트 Swift 풀이</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/coding-test/programmers-mocktest/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">프로그래머스 모의테스트 Swift 풀이</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#비밀지도-비트연산">비밀지도 (비트연산)</a></li>
+    <li><a href="#다트-게임-정규표현식">다트 게임 (정규표현식)</a></li>
+    <li><a href="#캐시">캐시</a></li>
+    <li><a href="#셔틀버스-문자열-시간변환-딕셔너리">셔틀버스 (문자열 시간변환, 딕셔너리)</a></li>
+    <li><a href="#뉴스-클러스터링-집합-딕셔너리">뉴스 클러스터링 (집합, 딕셔너리)</a></li>
+    <li><a href="#프렌즈-4블록-2차원배열-스왑">프렌즈 4블록 (2차원배열, 스왑)</a></li>
+    <li><a href="#추석-트래픽-문자열-시간변환">추석 트래픽 (문자열 시간변환)</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

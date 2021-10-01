@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kakao on 냉동코더의 기술블로그</title>
+    <link>https://cliearl.github.io/tags/kakao/</link>
+    <description>Recent content in kakao on 냉동코더의 기술블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 02 Oct 2021 00:25:28 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/kakao/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2019 카카오 신입 공채 1차 코딩 테스트 Swift 풀이</title>
+      <link>https://cliearl.github.io/posts/coding-test/2019-kakao-1st-swift/</link>
+      <pubDate>Sat, 02 Oct 2021 00:25:28 +0900</pubDate>
+      
+      <guid>https://cliearl.github.io/posts/coding-test/2019-kakao-1st-swift/</guid>
+      <description>문제 해설 http://tech.kakao.com/2018/09/21/kakao-blind-recruitment-for2019-round-1/
+오픈채팅방 https://www.welcomekakao.com/learn/courses/30/lessons/42888
+import Foundation func solution(_ record:[String]) -&amp;gt; [String] { var answer = [String]() var userList = [String : String]() var chatLog = [[String]]() let enterMsg = &amp;#34;님이 들어왔습니다.&amp;#34; let leaveMsg = &amp;#34;님이 나갔습니다.&amp;#34; // chatLog 작성 for info in record { let splitInfo = info.components(separatedBy: &amp;#34; &amp;#34;) if splitInfo[0] == &amp;#34;Enter&amp;#34; { userList[splitInfo[1]] = splitInfo[2] chatLog.append([splitInfo[1], enterMsg]) } else if splitInfo[0] == &amp;#34;Leave&amp;#34; { chatLog.append([splitInfo[1], leaveMsg]) } else if splitInfo[0] == &amp;#34;Change&amp;#34; { userList[splitInfo[1]] = splitInfo[2] } } // 최종 answer 작성 for log in chatLog { answer.</description>
+    </item>
+    
+    <item>
+      <title>2018 카카오 신입 공채 3차 코딩 테스트 Swift 풀이</title>
+      <link>https://cliearl.github.io/posts/coding-test/2018-kakao-3rd-swift/</link>
+      <pubDate>Sat, 02 Oct 2021 00:21:01 +0900</pubDate>
+      
+      <guid>https://cliearl.github.io/posts/coding-test/2018-kakao-3rd-swift/</guid>
+      <description>문제 해설 https://tech.kakao.com/2017/11/14/kakao-blind-recruitment-round-3/
+N진수 게임 https://www.welcomekakao.com/learn/courses/30/lessons/17687
+import Foundation // 진법변환 func convertBase(n: Int, base: Int) -&amp;gt; String { if n == 0 { return &amp;#34;0&amp;#34; } let list = [&amp;#34;0&amp;#34;, &amp;#34;1&amp;#34;, &amp;#34;2&amp;#34;, &amp;#34;3&amp;#34;, &amp;#34;4&amp;#34;, &amp;#34;5&amp;#34;, &amp;#34;6&amp;#34;, &amp;#34;7&amp;#34;, &amp;#34;8&amp;#34;, &amp;#34;9&amp;#34;, &amp;#34;A&amp;#34;, &amp;#34;B&amp;#34;, &amp;#34;C&amp;#34;, &amp;#34;D&amp;#34;, &amp;#34;E&amp;#34;, &amp;#34;F&amp;#34;] var answer = [String]() var quotient = n // 몫 var remainder = 0 // 나머지 // 몫이 0이 될 때까지 n을 base로 계속 나누고 튀어나오는 나머지값을 역순으로 배치 while (quotient &amp;gt; 0) { remainder = quotient % base quotient = quotient / base answer.</description>
+    </item>
+    
+    <item>
+      <title>2018 카카오 신입 공채 1차 코딩 테스트 Swift 답안</title>
+      <link>https://cliearl.github.io/posts/coding-test/2018-kakao-1st-swift/</link>
+      <pubDate>Sat, 02 Oct 2021 00:11:53 +0900</pubDate>
+      
+      <guid>https://cliearl.github.io/posts/coding-test/2018-kakao-1st-swift/</guid>
+      <description>문제해설 http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
+비밀지도 (비트연산) https://www.welcomekakao.com/learn/courses/30/lessons/17681
+func solution(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -&amp;gt; [String] { var answer = [String](repeating: &amp;#34;&amp;#34;, count: n) var bitAdded = Array&amp;lt;Int&amp;gt;() for i in 0..&amp;lt;n { bitAdded.append(arr1[i] | arr2[i]) } for i in 0..&amp;lt;n { for _ in 0..&amp;lt;n { // 2진수로 변환한 값의 맨 뒷자리가 튀어나온다 // 그걸 반환배열의 맨 앞으로 넣어준다 answer[i].insert(bitAdded[i] % 2 == 1 ? &amp;#34;#&amp;#34; : &amp;#34; &amp;#34;, at: answer[i].startIndex) // 비트를 오른쪽으로 하나 옮김 bitAdded[i] &amp;gt;&amp;gt;= 1 } } return answer } 다트 게임 (정규표현식) https://www.</description>
+    </item>
+    
+  </channel>
+</rss>
