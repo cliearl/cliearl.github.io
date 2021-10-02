@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on 냉동코더의 기술블로그</title>
+    <link>https://cliearl.github.io/categories/linux/</link>
+    <description>Recent content in linux on 냉동코더의 기술블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 11 Jun 2021 20:55:40 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>전자책 관리 앱 Calibre-web 도입</title>
+      <link>https://cliearl.github.io/posts/linux/introduce-calibre-web/</link>
+      <pubDate>Fri, 11 Jun 2021 20:55:40 +0900</pubDate>
+      
+      <guid>https://cliearl.github.io/posts/linux/introduce-calibre-web/</guid>
+      <description>전자책을 관리해야 할 필요성이 생겨서 셀프호스팅 가능한 오픈소스 앱을 알아봤다.
+전자책 프로젝트 중 현재 활발하게 업데이트 되는 프로젝트는 다음 세개 정도 되는것 같았다.
+ Calibre Ubooquity Komga  그런데 이 중 Ubooquity와 Komga는 일반서적보다는 만화책 관리가 더 메인인 것 같아서 Calibre를 선택했다.
+캘리버를 도커에 띄우기 위한 이미지가 여러가지 있는데 linuxserver.io에서 관리하는 훌륭한 linuxserver/calibre-web 이미지가 있어서 그걸 사용하기로 했다.
+캘리버-웹 설치시 문제가 하나 있는데 설치 직후 DB 로케이션 입력이 안된다는 점이다. 캘리버가 실행될려면 DB 폴더 아래에 metadata.</description>
+    </item>
+    
+    <item>
+      <title>Hexo에서 Hugo로 블로그 엔진 변경</title>
+      <link>https://cliearl.github.io/posts/linux/hugo-blog/</link>
+      <pubDate>Thu, 04 Mar 2021 22:24:02 +0900</pubDate>
+      
+      <guid>https://cliearl.github.io/posts/linux/hugo-blog/</guid>
+      <description>기술블로그 엔진을 Hugo에서 Hexo로 바꾸어 보았다.
+Hexo에 Icarus 태그를 씌우고 도커에 올려서 잘 쓰고 있었는데 내가 사용한 도커 이미지는 업뎃이 안된다는 문제가 있었다. https://github.com/spurin/docker-hexo
+그래서 비슷한 엔진인 Hugo를 찾아보았는데 Hugo의 도커 이미지는 관리가 잘 되고 있었다. https://hub.docker.com/r/klakegg/hugo/
+근데 이상하게도 이 이미지를 비롯한 모든 hugo의 도커 이미지는 내 시놀로지 환경에서 실행이 안됐다. 짜증나기도 하고 이왕 이렇게 된거 로컬에서 실행하기로 했다. 맥북에서 하면 brew를 사용하기 때문에 업뎃도 쉬워서 관리가 편하다. hexo가 brew로 관리가 안된다는 점도 hugo로 온 이유중에 하나.</description>
+    </item>
+    
+    <item>
+      <title>Synology에서 Docker Image 업데이트하기</title>
+      <link>https://cliearl.github.io/posts/linux/synology-docker-update/</link>
+      <pubDate>Mon, 23 Nov 2020 02:55:00 +0900</pubDate>
+      
+      <guid>https://cliearl.github.io/posts/linux/synology-docker-update/</guid>
+      <description>시놀로지에서 도커 이미지를 업데이트하는 법에 대해 정리하였다.
+  도커패널 &amp;gt; 컨테이너 &amp;gt; 업데이트할 컨테이너 선택후 [작업 -&amp;gt; 중지]
+  도커패널 &amp;gt; 레지스트리 &amp;gt; 업데이트할 이미지 찾아서 [다운로드]
+(이전 다운로드 받은 이미지(image) 삭제 하지 않아도 됨)
+  도커패널 &amp;gt; 업데이트할 컨테이너 선택후 [작업 -&amp;gt; 지우기]
+(이전 설정은 지워지지 않음)
+  도커패널 &amp;gt; 업데이트할 컨테이너 선택후 [작업 -&amp;gt; 시작점]
+  </description>
+    </item>
+    
+    <item>
+      <title>도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</title>
+      <link>https://cliearl.github.io/posts/linux/docker-hexo-blog/</link>
+      <pubDate>Fri, 09 Oct 2020 19:24:00 +0900</pubDate>
+      
+      <guid>https://cliearl.github.io/posts/linux/docker-hexo-blog/</guid>
+      <description>도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다.
+개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다.
+처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기.
+그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다. 그래서 TTXML Importer로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.</description>
+    </item>
+    
+  </channel>
+</rss>
