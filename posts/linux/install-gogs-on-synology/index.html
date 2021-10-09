@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='깃 저장소 관리 서비스 Git repositories 를 관리하는 서비스는 여러가지가 있는데 Github는 프라이빗 저장소에 제한이 있다. Gitlab은 시놀로지에 설치는 되는데 Docker를 지원하는 고가의 기종에서만 가능하다. 도커를 지원하는 시놀로지 모델은 다음과 같다.
+ 19 시리즈 : RS1619xs&#43;, RS1219&#43;, DS1819&#43; 18 시리즈 : FS1018, RS3618xs, RS2818RP&#43;, RS2418RP&#43;, RS2418&#43;, RS818RP&#43;, RS818&#43;, DS3018xs, DS1618&#43;, DS918&#43;, DS718&#43;, DS218&#43; 17 시리즈 : FS3017, FS2017, RS18017xs&#43;, RS4017xs&#43;, RS3617xs&#43;, RS3617RPxs, RS3617xs, DS3617xs, DS1817&#43;, DS1517&#43; 16 시리즈 : RS18016xs&#43;, RS2416RP&#43;, RS2416&#43;, DS916&#43;, DS716&#43;, DS716&#43;II, DS216&#43;, DS216&#43;II 15 시리즈 : RS815RP&#43;, RS815&#43;, RC18015xs&#43;, DS3615xs, DS2415&#43;, DS1815&#43;, DS1515&#43;, DS415&#43; 14 시리즈 : RS3614xs&#43;, RS3614RPxs, RS3614xs, RS2414RP&#43;, RS2414&#43;, RS814RP&#43;, RS814&#43; 13 시리즈 : RS10613xs&#43;, RS3413xs&#43;, DS2413&#43;, DS1813&#43;, DS1513&#43;, DS713&#43; 12 시리즈 : RS3412RPxs, RS3412xs, RS2212RP&#43;, RS2212&#43;, RS812RP&#43;, RS812&#43;, DS3612xs, DS1812&#43;, DS1512&#43;, DS712&#43;, DS412&#43; 11 시리즈 : RS3411RPxs, RS3411xs, RS2211RP&#43;, RS2211&#43;, DS3611xs, DS2411&#43;, DS1511&#43;, DS411&#43;, DS411&#43;II 10 시리즈 : RS810RP&#43;, RS810&#43;, DS1010&#43;, DS710&#43;  Gogs 선정 어쨌든 프라이빗 소스를 서비스회사에 맡기고 싶진 않아 개인서버에 git을 설치하고 웹에서 매니징을 할수 있게 해 주는 서비스를 찾아보니 Gogs와 Gogs에서 파생되어 나온 Gitea가 있다.'><title>Synology에 Gogs 설치하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/linux/install-gogs-on-synology/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Synology에 Gogs 설치하기'>
+<meta property='og:description' content='깃 저장소 관리 서비스 Git repositories 를 관리하는 서비스는 여러가지가 있는데 Github는 프라이빗 저장소에 제한이 있다. Gitlab은 시놀로지에 설치는 되는데 Docker를 지원하는 고가의 기종에서만 가능하다. 도커를 지원하는 시놀로지 모델은 다음과 같다.
+ 19 시리즈 : RS1619xs&#43;, RS1219&#43;, DS1819&#43; 18 시리즈 : FS1018, RS3618xs, RS2818RP&#43;, RS2418RP&#43;, RS2418&#43;, RS818RP&#43;, RS818&#43;, DS3018xs, DS1618&#43;, DS918&#43;, DS718&#43;, DS218&#43; 17 시리즈 : FS3017, FS2017, RS18017xs&#43;, RS4017xs&#43;, RS3617xs&#43;, RS3617RPxs, RS3617xs, DS3617xs, DS1817&#43;, DS1517&#43; 16 시리즈 : RS18016xs&#43;, RS2416RP&#43;, RS2416&#43;, DS916&#43;, DS716&#43;, DS716&#43;II, DS216&#43;, DS216&#43;II 15 시리즈 : RS815RP&#43;, RS815&#43;, RC18015xs&#43;, DS3615xs, DS2415&#43;, DS1815&#43;, DS1515&#43;, DS415&#43; 14 시리즈 : RS3614xs&#43;, RS3614RPxs, RS3614xs, RS2414RP&#43;, RS2414&#43;, RS814RP&#43;, RS814&#43; 13 시리즈 : RS10613xs&#43;, RS3413xs&#43;, DS2413&#43;, DS1813&#43;, DS1513&#43;, DS713&#43; 12 시리즈 : RS3412RPxs, RS3412xs, RS2212RP&#43;, RS2212&#43;, RS812RP&#43;, RS812&#43;, DS3612xs, DS1812&#43;, DS1512&#43;, DS712&#43;, DS412&#43; 11 시리즈 : RS3411RPxs, RS3411xs, RS2211RP&#43;, RS2211&#43;, DS3611xs, DS2411&#43;, DS1511&#43;, DS411&#43;, DS411&#43;II 10 시리즈 : RS810RP&#43;, RS810&#43;, DS1010&#43;, DS710&#43;  Gogs 선정 어쨌든 프라이빗 소스를 서비스회사에 맡기고 싶진 않아 개인서버에 git을 설치하고 웹에서 매니징을 할수 있게 해 주는 서비스를 찾아보니 Gogs와 Gogs에서 파생되어 나온 Gitea가 있다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/linux/install-gogs-on-synology/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Synology' /><meta property='article:tag' content='Gogs' /><meta property='article:published_time' content='2019-02-08T00:54:25&#43;09:00'/><meta property='article:modified_time' content='2019-02-08T00:54:25&#43;09:00'/>
+<meta name="twitter:title" content="Synology에 Gogs 설치하기">
+<meta name="twitter:description" content="깃 저장소 관리 서비스 Git repositories 를 관리하는 서비스는 여러가지가 있는데 Github는 프라이빗 저장소에 제한이 있다. Gitlab은 시놀로지에 설치는 되는데 Docker를 지원하는 고가의 기종에서만 가능하다. 도커를 지원하는 시놀로지 모델은 다음과 같다.
+ 19 시리즈 : RS1619xs&#43;, RS1219&#43;, DS1819&#43; 18 시리즈 : FS1018, RS3618xs, RS2818RP&#43;, RS2418RP&#43;, RS2418&#43;, RS818RP&#43;, RS818&#43;, DS3018xs, DS1618&#43;, DS918&#43;, DS718&#43;, DS218&#43; 17 시리즈 : FS3017, FS2017, RS18017xs&#43;, RS4017xs&#43;, RS3617xs&#43;, RS3617RPxs, RS3617xs, DS3617xs, DS1817&#43;, DS1517&#43; 16 시리즈 : RS18016xs&#43;, RS2416RP&#43;, RS2416&#43;, DS916&#43;, DS716&#43;, DS716&#43;II, DS216&#43;, DS216&#43;II 15 시리즈 : RS815RP&#43;, RS815&#43;, RC18015xs&#43;, DS3615xs, DS2415&#43;, DS1815&#43;, DS1515&#43;, DS415&#43; 14 시리즈 : RS3614xs&#43;, RS3614RPxs, RS3614xs, RS2414RP&#43;, RS2414&#43;, RS814RP&#43;, RS814&#43; 13 시리즈 : RS10613xs&#43;, RS3413xs&#43;, DS2413&#43;, DS1813&#43;, DS1513&#43;, DS713&#43; 12 시리즈 : RS3412RPxs, RS3412xs, RS2212RP&#43;, RS2212&#43;, RS812RP&#43;, RS812&#43;, DS3612xs, DS1812&#43;, DS1512&#43;, DS712&#43;, DS412&#43; 11 시리즈 : RS3411RPxs, RS3411xs, RS2211RP&#43;, RS2211&#43;, DS3611xs, DS2411&#43;, DS1511&#43;, DS411&#43;, DS411&#43;II 10 시리즈 : RS810RP&#43;, RS810&#43;, DS1010&#43;, DS710&#43;  Gogs 선정 어쨌든 프라이빗 소스를 서비스회사에 맡기고 싶진 않아 개인서버에 git을 설치하고 웹에서 매니징을 할수 있게 해 주는 서비스를 찾아보니 Gogs와 Gogs에서 파생되어 나온 Gitea가 있다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://cliearl.github.io" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" >
+                linux
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/linux/install-gogs-on-synology/">Synology에 Gogs 설치하기</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 08, 2019</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="깃-저장소-관리-서비스">깃 저장소 관리 서비스</h2>
+<p>Git repositories 를 관리하는 서비스는 여러가지가 있는데 Github는 프라이빗 저장소에 제한이 있다. Gitlab은 시놀로지에 설치는 되는데 Docker를 지원하는 고가의 기종에서만 가능하다. 도커를 지원하는 시놀로지 모델은 <a class="link" href="https://www.synology.com/ko-kr/dsm/packages/Docker-GitLab"  target="_blank" rel="noopener"
+    >다음</a>과 같다.</p>
+<ul>
+<li>19 시리즈 : RS1619xs+, RS1219+, DS1819+</li>
+<li>18 시리즈 : FS1018, RS3618xs, RS2818RP+, RS2418RP+, RS2418+, RS818RP+, RS818+, DS3018xs, DS1618+, DS918+, DS718+, DS218+</li>
+<li>17 시리즈 : FS3017, FS2017, RS18017xs+, RS4017xs+, RS3617xs+, RS3617RPxs, RS3617xs, DS3617xs, DS1817+, DS1517+</li>
+<li>16 시리즈 : RS18016xs+, RS2416RP+, RS2416+, DS916+, DS716+, DS716+II, DS216+, DS216+II</li>
+<li>15 시리즈 : RS815RP+, RS815+, RC18015xs+, DS3615xs, DS2415+, DS1815+, DS1515+, DS415+</li>
+<li>14 시리즈 : RS3614xs+, RS3614RPxs, RS3614xs, RS2414RP+, RS2414+, RS814RP+, RS814+</li>
+<li>13 시리즈 : RS10613xs+, RS3413xs+, DS2413+, DS1813+, DS1513+, DS713+</li>
+<li>12 시리즈 : RS3412RPxs, RS3412xs, RS2212RP+, RS2212+, RS812RP+, RS812+, DS3612xs, DS1812+, DS1512+, DS712+, DS412+</li>
+<li>11 시리즈 : RS3411RPxs, RS3411xs, RS2211RP+, RS2211+, DS3611xs, DS2411+, DS1511+, DS411+, DS411+II</li>
+<li>10 시리즈 : RS810RP+, RS810+, DS1010+, DS710+</li>
+</ul>
+<h2 id="gogs-선정">Gogs 선정</h2>
+<p>어쨌든 프라이빗 소스를 서비스회사에 맡기고 싶진 않아 개인서버에 git을 설치하고 웹에서 매니징을 할수 있게 해 주는 서비스를 찾아보니 Gogs와 Gogs에서 파생되어 나온 Gitea가 있다. 두 서비스의 차이점은 <a class="link" href="https://www.slant.co/versus/1395/19087/~gogs_vs_gitea"  target="_blank" rel="noopener"
+    >Slant</a>에서 비교했는데 Gogs는 시놀로지 서버에 설치되므로 Gogs를 사용하기로 했다.</p>
+<p><a class="link" href="https://gitbucket.github.io/gitbucket-news/gitbucket/2017/03/29/benchmark-of-gitbucket.html"  target="_blank" rel="noopener"
+    >Benchmark of GitBucket / Gogs / Gitea / GitLab on Raspberry Pi 3</a> 를 보면 속도도 다른 서비스들에 비해 충분히 빠른 것 같다.</p>
+<h2 id="gogs-설치">Gogs 설치</h2>
+<h3 id="git-server-설치">git server 설치</h3>
+<p>시놀로지에서 git을 사용하기 위해 <a class="link" href="https://www.synology.com/ko-kr/knowledgebase/DSM/help/Git/git"  target="_blank" rel="noopener"
+    >git server</a>를 설치한다. 유저는 생성하지 않아도 된다.</p>
+<h3 id="gogs-설치하기">gogs 설치하기</h3>
+<p><a class="link" href="https://kimcblog.com/2018/08/28/%EC%8B%9C%EB%86%80%EB%A1%9C%EC%A7%80synology-nas%EC%97%90-github%EC%B2%98%EB%9F%BC-%EC%9A%B4%EC%9A%A9%ED%95%98%EA%B8%B0-feat-gogs-1-2/"  target="_blank" rel="noopener"
+    >https://kimcblog.com/2018/08/28/%EC%8B%9C%EB%86%80%EB%A1%9C%EC%A7%80synology-nas%EC%97%90-github%EC%B2%98%EB%9F%BC-%EC%9A%B4%EC%9A%A9%ED%95%98%EA%B8%B0-feat-gogs-1-2/</a></p>
+<p><a class="link" href="https://kimcblog.com/2018/08/28/%ec%8b%9c%eb%86%80%eb%a1%9c%ec%a7%80synology-nas%ec%97%90-github%ec%b2%98%eb%9f%bc-%ec%9a%b4%ec%9a%a9%ed%95%98%ea%b8%b0-feat-gogs-2-2/"  target="_blank" rel="noopener"
+    >https://kimcblog.com/2018/08/28/%ec%8b%9c%eb%86%80%eb%a1%9c%ec%a7%80synology-nas%ec%97%90-github%ec%b2%98%eb%9f%bc-%ec%9a%b4%ec%9a%a9%ed%95%98%ea%b8%b0-feat-gogs-2-2/</a></p>
+<h3 id="패키지-다운로드">패키지 다운로드</h3>
+<p><a class="link" href="https://gogs.io/docs/installation/install_from_binary"  target="_blank" rel="noopener"
+    >Gogs 홈페이지</a>에서 바이너리를 다운받아 설치한다.</p>
+<ul>
+<li>
+<p>gogs_0.11.86_linux_armv5를 풀어서 1_create_package 안에다 넣는다.</p>
+</li>
+<li>
+<p>인증서에 git.주소 추가후, 역방향프록시를 설정한다.</p>
+</li>
+<li>
+<p>시놀로지에서 데몬 사용자 계정은 무조건 root 이다.</p>
+</li>
+</ul>
+<h3 id="파일업로드-제한-풀기">파일업로드 제한 풀기</h3>
+<p>파일업로드 크기에 제한이 걸려있으니 다음 <a class="link" href="https://dymaxionkim.github.io/beautiful-jekyll/2017-02-06-GOGS/"  target="_blank" rel="noopener"
+    >포스팅</a>을 참고해 풀어준다. 참고로 시놀로지에서 app.ini 파일의 경로는 <code>/volumeX/@appstore/Gogs/gogs/custom/conf/app.ini</code> 이다.</p>
+<h3 id="windows에서의-git-테스트를-위한-bash-설치">Windows에서의 git 테스트를 위한 bash 설치</h3>
+<ul>
+<li>
+<p>프로그램 및 기능 -&gt; windows 기능 켜기/끄기 -&gt; Linux용 Windows 하위 시스템 설치 -&gt; window store에서 win10용 ubuntu 설치.</p>
+</li>
+<li>
+<p>각 폴더에서 바로 실행하기 위해 <a class="link" href="https://github.com/mintty/wsltty/releases"  target="_blank" rel="noopener"
+    >wsltty</a> 를 설치.</p>
+</li>
+</ul>
+<h3 id="설치후-알게된-문제">설치후 알게된 문제</h3>
+<ul>
+<li>
+<p>Gogs는 시놀로지에서 root 계정으로밖에 설치할수 없다</p>
+</li>
+<li>
+<p>시놀로지는 DSM 6.0이후로 root의 ssh접속을 금한다</p>
+</li>
+<li>
+<p>Gogs의 ssh 주소는 루트를 기준으로 만들어지는데 시놀로지에서 유저계정을 만들어서 ssh에 접속해도 결국 루트에 액세스할수 없어 ssh를 사용할 수가 없다. 할수없이 https 주소를 써야한다.</p>
+</li>
+<li>
+<p>Gogs의 remote주소를 https://도메인:포트/git주소 로 설정한뒤 로그인하는 방식으로는 인증에 실패한다. https://계정:패스워드@도메인:포트/git주소 로 설정하면 인증을 통과할 수 있다. 이때 계정은 @마크를 쓰는 이메일이 아닌 평문으로 해야 한다.</p>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/synology/">synology</a>
+        
+            <a href="/tags/gogs/">Gogs</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/linux/postgresql-docker-upgrade/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Postgresql Docker Image의 메이저 버전 업그레이드</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/linux/introduce-calibre-web/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">전자책 관리 앱 Calibre-web 도입</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/linux/hugo-blog/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hexo에서 Hugo로 블로그 엔진 변경</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/linux/synology-docker-update/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Synology에서 Docker Image 업데이트하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/linux/docker-hexo-blog/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2021 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#깃-저장소-관리-서비스">깃 저장소 관리 서비스</a></li>
+    <li><a href="#gogs-선정">Gogs 선정</a></li>
+    <li><a href="#gogs-설치">Gogs 설치</a>
+      <ol>
+        <li><a href="#git-server-설치">git server 설치</a></li>
+        <li><a href="#gogs-설치하기">gogs 설치하기</a></li>
+        <li><a href="#패키지-다운로드">패키지 다운로드</a></li>
+        <li><a href="#파일업로드-제한-풀기">파일업로드 제한 풀기</a></li>
+        <li><a href="#windows에서의-git-테스트를-위한-bash-설치">Windows에서의 git 테스트를 위한 bash 설치</a></li>
+        <li><a href="#설치후-알게된-문제">설치후 알게된 문제</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
