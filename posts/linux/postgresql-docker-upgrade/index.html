@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.
+Postgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다.
+   Release First release Latest minor version Latest release End of life Milestones     11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions   12 2019-10-03 12.'><title>Postgresql Docker Image의 메이저 버전 업그레이드</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Postgresql Docker Image의 메이저 버전 업그레이드'>
+<meta property='og:description' content='Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.
+Postgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다.
+   Release First release Latest minor version Latest release End of life Milestones     11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions   12 2019-10-03 12.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Postgresql' /><meta property='article:tag' content='Docker' /><meta property='article:published_time' content='2021-10-09T17:45:11&#43;09:00'/><meta property='article:modified_time' content='2021-10-09T17:45:11&#43;09:00'/>
+<meta name="twitter:title" content="Postgresql Docker Image의 메이저 버전 업그레이드">
+<meta name="twitter:description" content="Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.
+Postgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다.
+   Release First release Latest minor version Latest release End of life Milestones     11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions   12 2019-10-03 12.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://cliearl.github.io" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" >
+                linux
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/linux/postgresql-docker-upgrade/">Postgresql Docker Image의 메이저 버전 업그레이드</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 09, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <p>Docker로 <a class="link" href="https://www.postgresql.org/"  target="_blank" rel="noopener"
+    >Postgresql</a>의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.</p>
+<h2 id="postgresql-version">Postgresql Version</h2>
+<p>Postgresql 메이저 버전은 최근것만 <a class="link" href="https://en.wikipedia.org/wiki/PostgreSQL#Release_history"  target="_blank" rel="noopener"
+    >정리</a>하면 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>Release</th>
+<th>First release</th>
+<th>Latest minor version</th>
+<th>Latest release</th>
+<th>End of life</th>
+<th>Milestones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11</td>
+<td>2018-10-18</td>
+<td>11.13</td>
+<td>2021-08-12</td>
+<td>2023-11-09</td>
+<td>Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions</td>
+</tr>
+<tr>
+<td>12</td>
+<td>2019-10-03</td>
+<td>12.8</td>
+<td>2021-08-12</td>
+<td>2024-11-14</td>
+<td>Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>2020-09-24</td>
+<td>13.4</td>
+<td>2021-08-12</td>
+<td>2025-11-13</td>
+<td>Space savings and performance gains from de-duplication of B-tree index entries, improved performance for queries that use aggregates or partitioned tables, better query planning when using extended statistics, parallelized vacuuming of indexes, incremental sorting</td>
+</tr>
+<tr>
+<td>14</td>
+<td>2021-09-30</td>
+<td>14.0</td>
+<td>2021-09-30</td>
+<td>2026-11-12</td>
+<td>Added SQL-standard SEARCH and CYCLE clauses for common table expressions, allow DISTINCT to be added to GROUP BY</td>
+</tr>
+</tbody>
+</table>
+<h2 id="whats-new-in-postgresql-13">What’s New in PostgreSQL 13?</h2>
+<p>12버전도 지원기간은 많이 남았긴 한데.. 새 버전을 써보고 싶으니 업그레이드하기로 했다. 13의 특징은 다음과 같은 게 있다고 하는데 좀 더 구체적인 설명은 <a class="link" href="https://www.enterprisedb.com/blog/whats-new-postgresql-13"  target="_blank" rel="noopener"
+    >What’s New in PostgreSQL 13?</a> 을 참고하자.</p>
+<ul>
+<li>Space savings and performance gains from de-duplication of B-tree index entries</li>
+<li>Improved performance for queries that use aggregates or partitioned tables</li>
+<li>Better query planning when using extended statistics</li>
+<li>Parallelized vacuuming of indexes</li>
+<li>Incremental sorting</li>
+</ul>
+<h2 id="docker-image">Docker Image</h2>
+<p>Postgresql의 공식 도커이미지는 <a class="link" href="https://hub.docker.com/_/postgres"  target="_blank" rel="noopener"
+    >Docker Hub</a>에서 제공하고 있고, 이미지는 다음과 같은 형식으로 제공되고 있다.</p>
+<ul>
+<li>14.0, 14, latest, 14.0-bullseye, 14-bullseye, bullseye</li>
+<li>14.0-alpine, 14-alpine, alpine, 14.0-alpine3.14, 14-alpine3.14, alpine3.14</li>
+</ul>
+<p><code>14.0</code>은 마이너 버전까지 고정시켜 만든 것이고 <code>14</code>는 14 릴리즈의 최신버전을 의미한다. <code>latest</code>는 모든 버전중 최신버전을 의미하는데 안정성을 위해 사용은 추천하지 않는다. <code>bullseye</code>는 최신 데비안인 11.0을 기반으로 만들어진 이미지이고, <code>alpine</code>은 용량을 최적화한 알파인 리눅스를 기반으로 만들어진 이미지이다. 개인적으로는 <code>14</code> 형식의 이미지를 사용한다.</p>
+<p>각 이미지의 디테일은 <a class="link" href="https://github.com/docker-library/repo-info/tree/master/repos/postgres"  target="_blank" rel="noopener"
+    >깃헙 저장소</a>에서 확인할 수 있다.</p>
+<h2 id="version-upgrade">Version upgrade</h2>
+<h3 id="pg_upgrade-이용"><code>pg_upgrade</code> 이용</h3>
+<p>Postgresql은 <code>pg_upgrade</code>와 <code>pg_upgradecluster</code>라는 명령어를 제공해주는데 이걸 사용하면 업그레이드를 비교적 간단하게 수행할 수 있다. 문제는 이 명령어를 사용하기 위해서는 OS에 현재버전과 업그레이드할 버전이 모두 설치되어 있어야 하기 때문에 도커에서는 사용할 수 없다는 점이다.</p>
+<p>다만 이걸 또 도커에서 사용할 수 있게 만들어놓은 <a class="link" href="https://github.com/tianon/docker-postgres-upgrade"  target="_blank" rel="noopener"
+    >사람</a>이 있긴 하다&hellip;</p>
+<p><figure 
+	>
+	<a href="https://storage.googleapis.com/jjalbot-jjals/2021/02/tA3zuU8x8o/2Q8oFzDjC.gif" >
+		<img src="https://storage.googleapis.com/jjalbot-jjals/2021/02/tA3zuU8x8o/2Q8oFzDjC.gif"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<h3 id="백업파일-이용">백업파일 이용</h3>
+<p>하지만 내생각에 가장 속편한 것은 그냥 이전버전에서 전체 데이터를 덤프받아 다음버전에 올려버리는 것이다. 우선 이전버전과 다음버전 컨테이너를 동시에 띄우고 다음 내용을 따라한다.</p>
+<ul>
+<li>도커 컨테이너의 ID 확인</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker ps -a
+</code></pre></div><ul>
+<li>이전버전 컨테이너에서 파일 덤프</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker <span class="nb">exec</span> -it <span class="o">[</span>이전버전 container ID<span class="o">]</span> /usr/bin/pg_dumpall -U <span class="o">[</span>username<span class="o">]</span> &gt; dumpfile.sql
+</code></pre></div><ul>
+<li>다음버전 컨테이너에 파일 복원</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker <span class="nb">exec</span> -it <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql &lt; dumpfile.sql
+</code></pre></div><p>이 때 <code>the input device is not a TTY</code> 라고 뜨면서 입력이 안되면 다음 명령어로 직접 집어넣으면 된다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat dumpfile.sql <span class="p">|</span> docker <span class="nb">exec</span> -i <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql -U gitea
+</code></pre></div><p>끗.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/postgresql/">Postgresql</a>
+        
+            <a href="/tags/docker/">docker</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/linux/introduce-calibre-web/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">전자책 관리 앱 Calibre-web 도입</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/linux/hugo-blog/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hexo에서 Hugo로 블로그 엔진 변경</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/linux/synology-docker-update/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Synology에서 Docker Image 업데이트하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/linux/docker-hexo-blog/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#postgresql-version">Postgresql Version</a></li>
+    <li><a href="#whats-new-in-postgresql-13">What’s New in PostgreSQL 13?</a></li>
+    <li><a href="#docker-image">Docker Image</a></li>
+    <li><a href="#version-upgrade">Version upgrade</a>
+      <ol>
+        <li><a href="#pg_upgrade-이용"><code>pg_upgrade</code> 이용</a></li>
+        <li><a href="#백업파일-이용">백업파일 이용</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
