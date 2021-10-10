@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='들어가기  애플의 약관에 따라 앱스토어에서 발생한 매출액이 50달러를 넘으면 총 매출의 30%를 제한 금액(카드사 16%, 애플 13%, 운영설비 1%)을 그 다음달에 개발자에게 지급한다. 이때 각 나라의 정책에 따라 수익금에 대해 소득세가 과세되는데, 적절한 서류를 제출함으로써 이 금액을 면제받을 수 있다.  미국   미국에서 판매한 금액에 대해서는 70% 수익에 대해 미국 국세청(IRS)에 의해 30%의 원천징수를 당하게 되므로 결과적으로 수익은 49%가 된다
+  미국과 한국 사이에는 이중과세방지협약이 체결되어 있어, 미국에서의 원천징수액을 완전히 면제받을 수 있다.'><title>Apple Appstore 개인개발자 소득세 면제 받기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/ios/apple-appstore-tax-related/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Apple Appstore 개인개발자 소득세 면제 받기'>
+<meta property='og:description' content='들어가기  애플의 약관에 따라 앱스토어에서 발생한 매출액이 50달러를 넘으면 총 매출의 30%를 제한 금액(카드사 16%, 애플 13%, 운영설비 1%)을 그 다음달에 개발자에게 지급한다. 이때 각 나라의 정책에 따라 수익금에 대해 소득세가 과세되는데, 적절한 서류를 제출함으로써 이 금액을 면제받을 수 있다.  미국   미국에서 판매한 금액에 대해서는 70% 수익에 대해 미국 국세청(IRS)에 의해 30%의 원천징수를 당하게 되므로 결과적으로 수익은 49%가 된다
+  미국과 한국 사이에는 이중과세방지협약이 체결되어 있어, 미국에서의 원천징수액을 완전히 면제받을 수 있다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/ios/apple-appstore-tax-related/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Appstore' /><meta property='article:tag' content='Tax' /><meta property='article:published_time' content='2019-05-01T16:16:09&#43;09:00'/><meta property='article:modified_time' content='2019-05-01T16:16:09&#43;09:00'/>
+<meta name="twitter:title" content="Apple Appstore 개인개발자 소득세 면제 받기">
+<meta name="twitter:description" content="들어가기  애플의 약관에 따라 앱스토어에서 발생한 매출액이 50달러를 넘으면 총 매출의 30%를 제한 금액(카드사 16%, 애플 13%, 운영설비 1%)을 그 다음달에 개발자에게 지급한다. 이때 각 나라의 정책에 따라 수익금에 대해 소득세가 과세되는데, 적절한 서류를 제출함으로써 이 금액을 면제받을 수 있다.  미국   미국에서 판매한 금액에 대해서는 70% 수익에 대해 미국 국세청(IRS)에 의해 30%의 원천징수를 당하게 되므로 결과적으로 수익은 49%가 된다
+  미국과 한국 사이에는 이중과세방지협약이 체결되어 있어, 미국에서의 원천징수액을 완전히 면제받을 수 있다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://cliearl.github.io" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ios/" >
+                iOS
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/ios/apple-appstore-tax-related/">Apple Appstore 개인개발자 소득세 면제 받기</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 01, 2019</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="들어가기">들어가기</h2>
+<ul>
+<li>애플의 <a class="link" href="https://itunespartner.apple.com/en/music/faq/Banking%20and%20Tax_Tax"  target="_blank" rel="noopener"
+    >약관</a>에 따라 앱스토어에서 발생한 매출액이 50달러를 넘으면 총 매출의 30%를 제한 금액(카드사 16%, 애플 13%, 운영설비 1%)을 그 다음달에 개발자에게 지급한다. 이때 각 나라의 정책에 따라 수익금에 대해 소득세가 과세되는데, 적절한 서류를 제출함으로써 이 금액을 면제받을 수 있다.</li>
+</ul>
+<h2 id="미국">미국</h2>
+<ul>
+<li>
+<p>미국에서 판매한 금액에 대해서는 70% 수익에 대해 미국 국세청(IRS)에 의해 30%의 원천징수를 당하게 되므로 결과적으로 수익은 49%가 된다</p>
+</li>
+<li>
+<p>미국과 한국 사이에는 이중과세방지협약이 체결되어 있어, 미국에서의 원천징수액을 완전히 면제받을 수 있다.</p>
+</li>
+<li>
+<p>미국 원천세 감면신청을 위한 서류는 <a class="link" href="https://www.irs.gov/forms-pubs/about-form-w-8-ben"  target="_blank" rel="noopener"
+    >W8-BEN</a>인데 이 서류를 작성하기 위해서는 EIN(Employer Identification Number)이 필요하다.</p>
+</li>
+<li>
+<p>EIN 발급을 위해서는 <a class="link" href="https://www.irs.gov/forms-pubs/about-form-ss-4"  target="_blank" rel="noopener"
+    >SS-4</a> 서류를 제출해야 한다.</p>
+</li>
+<li>
+<p>해외에서의 EIN 발급은 <a class="link" href="https://www.irs.gov/ko/businesses/small-businesses-self-employed/how-to-apply-for-an-ein"  target="_blank" rel="noopener"
+    >IRS</a>에 팩스를 보내거나 전화하면 된다.</p>
+</li>
+<li>
+<p>개인개발자의 SS-4 Form 기재사항은 다음과 같다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>1. 자신의 이름.
+4a. 자신의 주소지 (상세)
+4b. 자신의 주소지 , 도시 , 구 우편번호
+8a. 법인이 아닌 개인개발자라면 소속회사는 없는것으로 간주한다. No에 체크
+9a. sole proprier 를 체크
+10. Compliance with IRS withholding rate 를 체크
+18. 이전에 EIN 받은적이 있느냐는 항목: 자신에 맞게 체크
+</code></pre><p>맨밑에 친필서명, 날짜, 전화번호및 팩스번호 기입후 <a class="link" href="https://www.irs.gov/filing/where-to-file-your-taxes-for-form-ss-4"  target="_blank" rel="noopener"
+    >IRS 사무소</a>인 미국 (304)-707-9471로 전송한다.</p>
+<ul>
+<li>
+<p>전화에 의한 신청
+팩스는 왔다갔다 하는 시간이 많이 걸려서 싫다는 사람은 전화로 신청한다. 001-1-267-941-1099에 전화해서 1번(영어)-&gt;1번(외국에서 신청)을 눌러 상담원과 연결한다. 위에서 설명한 SS-4 Form 기재사항을 영어로 대답해주고 그 외 필요한 사항을 정확히 전달해주면 그자리에서 바로 EIN을 발급해준다. EIN이 발급되면 확인증을 팩스로 보내주고 우편으로도 발송해준다. 혹시 스펠링을 틀릴까 걱정되면 <a class="link" href="https://en.wikipedia.org/wiki/File:FAA_Phonetic_and_Morse_Chart2.svg"  target="_blank" rel="noopener"
+    >Phonetic 차트</a>를 이용하자.</p>
+</li>
+<li>
+<p>EIN을 받았으면 Appstore Connect의 <code>계약, 세금 및 금융거래 -&gt; 유료 앱</code> 메뉴에서 W8-BEN 서류를 온라인으로 제출한다.</p>
+</li>
+</ul>
+<h2 id="일본">일본</h2>
+<ul>
+<li>
+<p>동일한 프로세스가 일본시장에 대해서도 이루어진다. 일본에서 앱 판매시 원천징수율은 20%인데 일본도 역시 우리나라와 이중과세방지협약을 맺고 있으므로 소득세 경감신청을 할 수 있다.</p>
+</li>
+<li>
+<p>이를 위해서는 <a class="link" href="https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/joyaku/annai/1648_41.htm"  target="_blank" rel="noopener"
+    >租税条約に関する届出（使用料に対する所得税及び復興特別所得税の軽減・免除）［様式3］</a>을 작성해야 한다.</p>
+</li>
+<li>
+<p>이 서류는 수작업으로 작성하는게 아니라 Appstore Connect의 <code>계약, 세금 및 금융거래 -&gt; 유료 앱</code> 메뉴에서 필요사항을 기입하면 자동으로 작성된 PDF 서류가 다운로드 된다.</p>
+</li>
+<li>
+<p>자동기입된 서류를 프린트후 서명하여 다음 주소로 보내면 완료이다. 처리는 약 90일 정도까지 걸릴 수 있다고 한다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>Apple Inc. MS 198-2RA, 12545 Riata Vista Circle, Austin, TX 78727, USA
+</code></pre>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/appstore/">Appstore</a>
+        
+            <a href="/tags/tax/">Tax</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/ios/register-app-to-appstore/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Apple Appstore에 앱 등록하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/ios/documentation-using-jazzy/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Jazzy를 이용한 코드 문서화</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2021 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#들어가기">들어가기</a></li>
+    <li><a href="#미국">미국</a></li>
+    <li><a href="#일본">일본</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

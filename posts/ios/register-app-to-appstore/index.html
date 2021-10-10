@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Xcode 프로젝트 설정  프로젝트 생성시 Product Name은 스페이스 없는 연속된 글자로 설정한다. Camelcase를 쓰면 알아보기 좋다. Version은 기본값인 1.0 보다는 1.0.0 으로 쓴다.  Apple Developer 설정   developer.apple.com -&amp;gt; Certificates, Identifiers &amp;amp; Profiles -&amp;gt; Identifiers -&amp;gt; App IDs 에서 와일드카드가 아닌 프로젝트의 고유한 App ID를 작성해야 한다. 이때 입력하는 번들ID는 프로젝트의 번들ID와 일치해야 한다.
+  App ID 는 Xcode -&amp;gt; Capabilities 에서 메뉴 중 아무거나 하나를 ON으로 해 주면 자동으로 등록되므로 문제없이 하고 싶다면 이 방법을 추천한다.'><title>Apple Appstore에 앱 등록하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/ios/register-app-to-appstore/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Apple Appstore에 앱 등록하기'>
+<meta property='og:description' content='Xcode 프로젝트 설정  프로젝트 생성시 Product Name은 스페이스 없는 연속된 글자로 설정한다. Camelcase를 쓰면 알아보기 좋다. Version은 기본값인 1.0 보다는 1.0.0 으로 쓴다.  Apple Developer 설정   developer.apple.com -&amp;gt; Certificates, Identifiers &amp;amp; Profiles -&amp;gt; Identifiers -&amp;gt; App IDs 에서 와일드카드가 아닌 프로젝트의 고유한 App ID를 작성해야 한다. 이때 입력하는 번들ID는 프로젝트의 번들ID와 일치해야 한다.
+  App ID 는 Xcode -&amp;gt; Capabilities 에서 메뉴 중 아무거나 하나를 ON으로 해 주면 자동으로 등록되므로 문제없이 하고 싶다면 이 방법을 추천한다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/ios/register-app-to-appstore/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Appstore' /><meta property='article:published_time' content='2019-05-01T15:46:54&#43;09:00'/><meta property='article:modified_time' content='2019-05-01T15:46:54&#43;09:00'/>
+<meta name="twitter:title" content="Apple Appstore에 앱 등록하기">
+<meta name="twitter:description" content="Xcode 프로젝트 설정  프로젝트 생성시 Product Name은 스페이스 없는 연속된 글자로 설정한다. Camelcase를 쓰면 알아보기 좋다. Version은 기본값인 1.0 보다는 1.0.0 으로 쓴다.  Apple Developer 설정   developer.apple.com -&amp;gt; Certificates, Identifiers &amp;amp; Profiles -&amp;gt; Identifiers -&amp;gt; App IDs 에서 와일드카드가 아닌 프로젝트의 고유한 App ID를 작성해야 한다. 이때 입력하는 번들ID는 프로젝트의 번들ID와 일치해야 한다.
+  App ID 는 Xcode -&amp;gt; Capabilities 에서 메뉴 중 아무거나 하나를 ON으로 해 주면 자동으로 등록되므로 문제없이 하고 싶다면 이 방법을 추천한다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://cliearl.github.io" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ios/" >
+                iOS
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/ios/register-app-to-appstore/">Apple Appstore에 앱 등록하기</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 01, 2019</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="xcode-프로젝트-설정">Xcode 프로젝트 설정</h2>
+<ul>
+<li>프로젝트 생성시 <code>Product Name</code>은 스페이스 없는 연속된 글자로 설정한다. Camelcase를 쓰면 알아보기 좋다.</li>
+<li>Version은 기본값인 1.0 보다는 1.0.0 으로 쓴다.</li>
+</ul>
+<h2 id="apple-developer-설정">Apple Developer 설정</h2>
+<ul>
+<li>
+<p><code>developer.apple.com -&gt; Certificates, Identifiers &amp; Profiles -&gt; Identifiers -&gt; App IDs</code> 에서 와일드카드가 아닌 프로젝트의 고유한 App ID를 작성해야 한다. 이때 입력하는 번들ID는 프로젝트의 번들ID와 일치해야 한다.</p>
+</li>
+<li>
+<p>App ID 는 <code>Xcode -&gt; Capabilities</code> 에서 메뉴 중 아무거나 하나를 ON으로 해 주면 자동으로 등록되므로 문제없이 하고 싶다면 이 방법을 추천한다.</p>
+</li>
+<li>
+<p>iOS Distribution용 Certificate가 없다면 생성해 주어야 한다. 이 때 CSR 파일이 요구된다</p>
+</li>
+<li>
+<p>CSR(Certificate Signing Request)파일은 실제 개발에 사용하는 맥북의 고유한 키 파일이다.</p>
+</li>
+<li>
+<p><code>런처패드 -&gt; 기타 -&gt; 키체인 접근 -&gt; 인증서 지원 -&gt; 인증 기관에서 인증서 요청 -&gt; 디스크에 저장됨</code> 으로 CSR파일을 생성 및 저장한다. 도큐먼트 폴더에 일괄적으로 모아두면 파악하기 좋다.</p>
+</li>
+<li>
+<p>developer.apple.com의 <code>Provisioning Profiles -&gt; Distribution -&gt; +버튼으로 추가 -&gt; App store 선택 -&gt; App ID 선택 -&gt; Download</code> 후 실행하면 키체인에 등록된다.</p>
+</li>
+<li>
+<p>맥북에 있는 Provisioning Profile이 충돌할 경우 파일을 다 지우고 다시 설치하면 된다.</p>
+</li>
+<li>
+<p>Provisioning Profile 파일은 Finder -&gt; 이동 메뉴에서 Option키 클릭 -&gt; 라이브러리 -&gt; MobileDevice에 자동으로 저장된다.</p>
+</li>
+</ul>
+<h2 id="app-store-connect-설정-1">App Store Connect 설정 1</h2>
+<ul>
+<li>appstoreconnect.apple.com에서 <code>My Apps (나의 앱) -&gt; New iOS App</code> 을 선택했을때 번들ID가 뜨면 Apple Developer에서 생성한 App ID가 iTunes Connect에 연동된 것이다. SKU는 아무렇게나 넣어도 되는데 번들ID를 그대로 넣어주는게 편하다.</li>
+</ul>
+<h2 id="xcode에서-appstore에-업로드">Xcode에서 Appstore에 업로드</h2>
+<ul>
+<li>Xcode에서 실행을 시뮬레이터가 아닌 디바이스를 선택</li>
+<li>메뉴의 <code>Product -&gt; Archive  -&gt; Validate</code> 로 앱스토어에 업로드 할 패키지를 생성</li>
+<li>Submit 과정에서 Validate가 이루어지기 때문에 Validate는 미리 안해도 되지만 만일을 위해서 수행한다</li>
+<li>패키지가 생성되면 <code>Archive -&gt; Submit</code> 으로 업로드.</li>
+<li>업로드시 동일한 빌드넘버를 가진 빌드를 중복해서 올릴 수 없으므로 작업시 빌드넘버는 자동으로 증가하도록 설정하면 편리하다.</li>
+</ul>
+<h2 id="app-store-connect-설정-2">App Store Connect 설정 2</h2>
+<ul>
+<li>appstoreconnect.apple.com에서 <code>My Apps(나의 앱) -&gt; Activity(활동 내역)</code> 에서 업로드한 ipa 빌드를 확인할 수 있다.</li>
+<li>Processing 중이라면 끝나기를 기다려야 하는데 길어도 수십분 정도면 종료된다.</li>
+<li>5.5인치 화면(iPhone 8+)와, 12.9인치 화면(iPad 프로)에 대한 스크린샷을 업로드해야 하므로 시뮬레이터로 준비한다.</li>
+<li>Appstore용 아이콘은 1024x1024, Copyright는 회사이름</li>
+<li>게임센터가 필요하면 <code>나의 앱 -&gt; 앱 내 추가 기능 -&gt; Game Center</code> 에서 순위표와 목표달성 테이블을 작성하고 App store 메뉴에서 Game Center를 활성화한다.</li>
+<li><code>Build</code> 에서 Xcode로 제출한 Archive를 선택</li>
+<li><code>Pricing</code> 에서 가격설정후 <code>Submit for Review</code></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/appstore/">Appstore</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/ios/apple-appstore-tax-related/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Apple Appstore 개인개발자 소득세 면제 받기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/ios/documentation-using-jazzy/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Jazzy를 이용한 코드 문서화</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2021 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#xcode-프로젝트-설정">Xcode 프로젝트 설정</a></li>
+    <li><a href="#apple-developer-설정">Apple Developer 설정</a></li>
+    <li><a href="#app-store-connect-설정-1">App Store Connect 설정 1</a></li>
+    <li><a href="#xcode에서-appstore에-업로드">Xcode에서 Appstore에 업로드</a></li>
+    <li><a href="#app-store-connect-설정-2">App Store Connect 설정 2</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
