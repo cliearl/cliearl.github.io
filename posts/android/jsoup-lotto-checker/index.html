@@ -129,7 +129,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -222,19 +222,27 @@ if (!doNotTrack) {
     >get</a>을 수행해 html을 Document 객체로 만들어 줍니다.</p>
 <p>Document 객체에서 데이터를 뽑아낼때는 select명령을 사용하는데 괄호 안에는 CSS or jquery-like selector syntax를 넣습니다. <a class="link" href="https://jsoup.org/cookbook/extracting-data/selector-syntax"  target="_blank" rel="noopener"
     >주요한 셀렉터</a>들은 다음과 같습니다.</p>
-<ul>
-<li>tagname: find elements by tag, e.g. a</li>
-<li>ns|tag: find elements by tag in a namespace, e.g. fb|name finds <a class="link" href="fb:name" >fb:name</a> elements</li>
-<li>#id: find elements by ID, e.g. #logo</li>
-<li>.class: find elements by class name, e.g. .masthead</li>
-<li>[attribute]: elements with attribute, e.g. [href]</li>
-<li></li>
-<li>[attr=value]: elements with attribute value, e.g. [width=500] (also quotable, like [data-name=&lsquo;launch sequence&rsquo;])</li>
-<li>[attr^=value], [attr$=value], [attr*=value]: elements with attributes that start with, end with, or contain the value, e.g. [href*=/path/]</li>
-<li>[attr~=regex]: elements with attribute values that match the regular expression; e.g. img[src~=(?i).(png|jpe?g)]</li>
-<li>*: all elements, e.g. *</li>
-</ul>
-<p>당첨번호와 회차정보는 id로 정의되어 있기 때문에 select 함수에 #id 쿼리를 전달해주면 됩니다. 추출한 정보가 String이니까 Int로 변환하여 lottoNumbers에 추가하면 되겠네요.</p>
+<pre tabindex="0"><code>
+tagname: find elements by tag, e.g. a
+
+ns|tag: find elements by tag in a namespace, e.g. fb|name finds &lt;fb:name&gt; elements
+
+#id: find elements by ID, e.g. #logo
+
+.class: find elements by class name, e.g. .masthead
+
+[attribute]: elements with attribute, e.g. [href]
+
+[^attr]: elements with an attribute name prefix, e.g. [^data-] finds elements with HTML5 dataset attributes
+
+[attr=value]: elements with attribute value, e.g. [width=500] (also quotable, like [data-name='launch sequence'])
+
+[attr^=value], [attr$=value], [attr*=value]: elements with attributes that start with, end with, or contain the value, e.g. [href*=/path/]
+
+[attr~=regex]: elements with attribute values that match the regular expression; e.g. img[src~=(?i)\.(png|jpe?g)]
+
+*: all elements, e.g. *
+</code></pre><p>당첨번호와 회차정보는 id로 정의되어 있기 때문에 select 함수에 #id 쿼리를 전달해주면 됩니다. 추출한 정보가 String이니까 Int로 변환하여 lottoNumbers에 추가하면 되겠네요.</p>
 <p>이렇게 해서 jsoup으로 html을 다운받고 파싱하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
