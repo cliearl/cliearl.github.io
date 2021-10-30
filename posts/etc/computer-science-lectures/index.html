@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='컴퓨터과학 개론 CS50 Lectures 2020 https://www.youtube.com/playlist?list=PLhQjrBD2T382_R182iC2gNZI9HzWFMC_8
+MITx: Introduction to Computer Science and Programming - 6.00x https://www.youtube.com/playlist?list=PL2fCZiDqOYYVeUQ47xSkwnioVf_xQoQm2
+MIT 6.0001 Introduction to Computer Science and Programming in Python, Fall 2016 https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA
+MIT 6.00SC Introduction to Computer Science and Programming, Spring 2011 https://www.youtube.com/playlist?list=PLB2BE3D6CA77BB8F7
+프로그래밍 개론 Programming Methodology (Stanford) https://www.youtube.com/playlist?list=PL84A56BC7F4A1F852
+Lecture Collection | Programming Abstractions https://www.youtube.com/playlist?list=PLFE6E58F856038C69
+자료구조 &amp;amp; 알고리즘 MIT 6.006 Introduction to Algorithms, Fall 2011 https://www.youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb
+MIT 6.006 Introduction to Algorithms, Spring 2020 https://www.'><title>컴퓨터공학 온라인 대학강의</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/etc/computer-science-lectures/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='컴퓨터공학 온라인 대학강의'>
+<meta property='og:description' content='컴퓨터과학 개론 CS50 Lectures 2020 https://www.youtube.com/playlist?list=PLhQjrBD2T382_R182iC2gNZI9HzWFMC_8
+MITx: Introduction to Computer Science and Programming - 6.00x https://www.youtube.com/playlist?list=PL2fCZiDqOYYVeUQ47xSkwnioVf_xQoQm2
+MIT 6.0001 Introduction to Computer Science and Programming in Python, Fall 2016 https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA
+MIT 6.00SC Introduction to Computer Science and Programming, Spring 2011 https://www.youtube.com/playlist?list=PLB2BE3D6CA77BB8F7
+프로그래밍 개론 Programming Methodology (Stanford) https://www.youtube.com/playlist?list=PL84A56BC7F4A1F852
+Lecture Collection | Programming Abstractions https://www.youtube.com/playlist?list=PLFE6E58F856038C69
+자료구조 &amp;amp; 알고리즘 MIT 6.006 Introduction to Algorithms, Fall 2011 https://www.youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb
+MIT 6.006 Introduction to Algorithms, Spring 2020 https://www.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/etc/computer-science-lectures/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Computer science' /><meta property='article:tag' content='Lecture' /><meta property='article:published_time' content='2021-10-30T19:12:43&#43;09:00'/><meta property='article:modified_time' content='2021-10-30T19:12:43&#43;09:00'/>
+<meta name="twitter:title" content="컴퓨터공학 온라인 대학강의">
+<meta name="twitter:description" content="컴퓨터과학 개론 CS50 Lectures 2020 https://www.youtube.com/playlist?list=PLhQjrBD2T382_R182iC2gNZI9HzWFMC_8
+MITx: Introduction to Computer Science and Programming - 6.00x https://www.youtube.com/playlist?list=PL2fCZiDqOYYVeUQ47xSkwnioVf_xQoQm2
+MIT 6.0001 Introduction to Computer Science and Programming in Python, Fall 2016 https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA
+MIT 6.00SC Introduction to Computer Science and Programming, Spring 2011 https://www.youtube.com/playlist?list=PLB2BE3D6CA77BB8F7
+프로그래밍 개론 Programming Methodology (Stanford) https://www.youtube.com/playlist?list=PL84A56BC7F4A1F852
+Lecture Collection | Programming Abstractions https://www.youtube.com/playlist?list=PLFE6E58F856038C69
+자료구조 &amp;amp; 알고리즘 MIT 6.006 Introduction to Algorithms, Fall 2011 https://www.youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb
+MIT 6.006 Introduction to Algorithms, Spring 2020 https://www.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/etc/" >
+                etc
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/etc/computer-science-lectures/">컴퓨터공학 온라인 대학강의</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 30, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="컴퓨터과학-개론">컴퓨터과학 개론</h2>
+<h3 id="cs50-lectures-2020">CS50 Lectures 2020</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLhQjrBD2T382_R182iC2gNZI9HzWFMC_8"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLhQjrBD2T382_R182iC2gNZI9HzWFMC_8</a></p>
+<h3 id="mitx-introduction-to-computer-science-and-programming---600x">MITx: Introduction to Computer Science and Programming - 6.00x</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PL2fCZiDqOYYVeUQ47xSkwnioVf_xQoQm2"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PL2fCZiDqOYYVeUQ47xSkwnioVf_xQoQm2</a></p>
+<h3 id="mit-60001-introduction-to-computer-science-and-programming-in-python-fall-2016">MIT 6.0001 Introduction to Computer Science and Programming in Python, Fall 2016</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA</a></p>
+<h3 id="mit-600sc-introduction-to-computer-science-and-programming-spring-2011">MIT 6.00SC Introduction to Computer Science and Programming, Spring 2011</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLB2BE3D6CA77BB8F7"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLB2BE3D6CA77BB8F7</a></p>
+<h2 id="프로그래밍-개론">프로그래밍 개론</h2>
+<h3 id="programming-methodology-stanford">Programming Methodology (Stanford)</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PL84A56BC7F4A1F852"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PL84A56BC7F4A1F852</a></p>
+<h3 id="lecture-collection--programming-abstractions">Lecture Collection | Programming Abstractions</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLFE6E58F856038C69"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLFE6E58F856038C69</a></p>
+<h2 id="자료구조--알고리즘">자료구조 &amp; 알고리즘</h2>
+<h3 id="mit-6006-introduction-to-algorithms-fall-2011">MIT 6.006 Introduction to Algorithms, Fall 2011</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb</a></p>
+<h3 id="mit-6006-introduction-to-algorithms-spring-2020">MIT 6.006 Introduction to Algorithms, Spring 2020</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY</a></p>
+<h3 id="mit-6046j-design-and-analysis-of-algorithms-spring-2015">MIT 6.046J Design and Analysis of Algorithms, Spring 2015</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLUl4u3cNGP6317WaSNfmCvGym2ucw3oGp"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLUl4u3cNGP6317WaSNfmCvGym2ucw3oGp</a></p>
+<h3 id="mit-6046j--18410j-introduction-to-algorithms-sma-5503">MIT 6.046J / 18.410J Introduction to Algorithms (SMA 5503)</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PL8B24C31197EC371C"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PL8B24C31197EC371C</a></p>
+<h3 id="mit-6851-advanced-data-structures-spring-2012">MIT 6.851 Advanced Data Structures, Spring 2012</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLUl4u3cNGP61hsJNdULdudlRL493b-XZf"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLUl4u3cNGP61hsJNdULdudlRL493b-XZf</a></p>
+<h2 id="이산수학">이산수학</h2>
+<h3 id="mit-6042j-mathematics-for-computer-science-fall-2010">MIT 6.042J Mathematics for Computer Science, Fall 2010</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLB7540DEDD482705B"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLB7540DEDD482705B</a></p>
+<h3 id="mit-6042j-mathematics-for-computer-science-spring-2015">MIT 6.042J Mathematics for Computer Science, Spring 2015</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLUl4u3cNGP60UlabZBeeqOuoLuj_KNphQ"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLUl4u3cNGP60UlabZBeeqOuoLuj_KNphQ</a></p>
+<h3 id="mit-18085-computational-science-and-engineering-i-fall-2008">MIT 18.085 Computational Science and Engineering I, Fall 2008</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLF706B428FB7BD52C"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLF706B428FB7BD52C</a></p>
+<h2 id="아키텍쳐">아키텍쳐</h2>
+<h3 id="mit-6035-computer-language-engineering-fall-2005">MIT 6.035 Computer Language Engineering, Fall 2005</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PL0300FE43396456C1"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PL0300FE43396456C1</a></p>
+<h3 id="mit-6189-multicore-programming-primer-iap-2007">MIT 6.189 Multicore Programming Primer, IAP 2007</h3>
+<p><a class="link" href="https://www.youtube.com/playlist?list=PLE638294EA3288272"  target="_blank" rel="noopener"
+    >https://www.youtube.com/playlist?list=PLE638294EA3288272</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/computer-science/">Computer science</a>
+        
+            <a href="/tags/lecture/">Lecture</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/etc/customize-github-profile/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Github Profile Page 꾸미기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/etc/fonts-for-work/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">작업용 폰트 정보 정리</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/etc/introduce-inflearn/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">인프런에서 iOS 게임만들기 강의공개를 시작하였습니다</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/etc/password-manager/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">패스워드 매니저 교체기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/etc/changemic/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">녹음용 마이크 교체기</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2021 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.4.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#컴퓨터과학-개론">컴퓨터과학 개론</a>
+      <ol>
+        <li><a href="#cs50-lectures-2020">CS50 Lectures 2020</a></li>
+        <li><a href="#mitx-introduction-to-computer-science-and-programming---600x">MITx: Introduction to Computer Science and Programming - 6.00x</a></li>
+        <li><a href="#mit-60001-introduction-to-computer-science-and-programming-in-python-fall-2016">MIT 6.0001 Introduction to Computer Science and Programming in Python, Fall 2016</a></li>
+        <li><a href="#mit-600sc-introduction-to-computer-science-and-programming-spring-2011">MIT 6.00SC Introduction to Computer Science and Programming, Spring 2011</a></li>
+      </ol>
+    </li>
+    <li><a href="#프로그래밍-개론">프로그래밍 개론</a>
+      <ol>
+        <li><a href="#programming-methodology-stanford">Programming Methodology (Stanford)</a></li>
+        <li><a href="#lecture-collection--programming-abstractions">Lecture Collection | Programming Abstractions</a></li>
+      </ol>
+    </li>
+    <li><a href="#자료구조--알고리즘">자료구조 &amp; 알고리즘</a>
+      <ol>
+        <li><a href="#mit-6006-introduction-to-algorithms-fall-2011">MIT 6.006 Introduction to Algorithms, Fall 2011</a></li>
+        <li><a href="#mit-6006-introduction-to-algorithms-spring-2020">MIT 6.006 Introduction to Algorithms, Spring 2020</a></li>
+        <li><a href="#mit-6046j-design-and-analysis-of-algorithms-spring-2015">MIT 6.046J Design and Analysis of Algorithms, Spring 2015</a></li>
+        <li><a href="#mit-6046j--18410j-introduction-to-algorithms-sma-5503">MIT 6.046J / 18.410J Introduction to Algorithms (SMA 5503)</a></li>
+        <li><a href="#mit-6851-advanced-data-structures-spring-2012">MIT 6.851 Advanced Data Structures, Spring 2012</a></li>
+      </ol>
+    </li>
+    <li><a href="#이산수학">이산수학</a>
+      <ol>
+        <li><a href="#mit-6042j-mathematics-for-computer-science-fall-2010">MIT 6.042J Mathematics for Computer Science, Fall 2010</a></li>
+        <li><a href="#mit-6042j-mathematics-for-computer-science-spring-2015">MIT 6.042J Mathematics for Computer Science, Spring 2015</a></li>
+        <li><a href="#mit-18085-computational-science-and-engineering-i-fall-2008">MIT 18.085 Computational Science and Engineering I, Fall 2008</a></li>
+      </ol>
+    </li>
+    <li><a href="#아키텍쳐">아키텍쳐</a>
+      <ol>
+        <li><a href="#mit-6035-computer-language-engineering-fall-2005">MIT 6.035 Computer Language Engineering, Fall 2005</a></li>
+        <li><a href="#mit-6189-multicore-programming-primer-iap-2007">MIT 6.189 Multicore Programming Primer, IAP 2007</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
