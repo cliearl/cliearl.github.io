@@ -2,19 +2,22 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 ProgressBar와 AsyncTask의 사용방법에 대해 알아보도록 하겠습니다.
-'><title>ProgressBar로 AsyncTask 이해하기</title>
+들어가기 ProgressBar는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황을 보여주는 모듈입니다. 시간이 걸리는 처리가 필요할 때 표시해주면 기다리는 유저의 거부감을 줄일 수 있습니다. 이 기능은 기존에는 ProgressDialog를 이용해서 구현했는데 다이얼로그가 표시될 때 유저의 조작을 제한한다는 문제가 있어 deprecated 되고 ProgressBar로 대체되는 추세입니다.
+메인 스레드의 관점에서 보면 ProgressBar는 처리에 긴 시간이 걸리기 때문에 메인 스레드와는 별개의 스레드에서 처리를 수행해야 할 필요가 있습니다. 별개의 스레드에서 처리를 수행하는데는 여러가지 방법이 있을 수 있는데 여기서는 AsyncTask 클래스를 이용해서 ProgressBar를 구현해 보도록 하겠습니다.'><title>ProgressBar로 AsyncTask 이해하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/progressbar-asynctask/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='ProgressBar로 AsyncTask 이해하기'>
 <meta property='og:description' content='이번 포스팅에서는 ProgressBar와 AsyncTask의 사용방법에 대해 알아보도록 하겠습니다.
-'>
+들어가기 ProgressBar는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황을 보여주는 모듈입니다. 시간이 걸리는 처리가 필요할 때 표시해주면 기다리는 유저의 거부감을 줄일 수 있습니다. 이 기능은 기존에는 ProgressDialog를 이용해서 구현했는데 다이얼로그가 표시될 때 유저의 조작을 제한한다는 문제가 있어 deprecated 되고 ProgressBar로 대체되는 추세입니다.
+메인 스레드의 관점에서 보면 ProgressBar는 처리에 긴 시간이 걸리기 때문에 메인 스레드와는 별개의 스레드에서 처리를 수행해야 할 필요가 있습니다. 별개의 스레드에서 처리를 수행하는데는 여러가지 방법이 있을 수 있는데 여기서는 AsyncTask 클래스를 이용해서 ProgressBar를 구현해 보도록 하겠습니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/progressbar-asynctask/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='ProgressBar' /><meta property='article:tag' content='AsyncTask' /><meta property='article:tag' content='Thread' /><meta property='article:published_time' content='2021-04-25T15:35:18&#43;09:00'/><meta property='article:modified_time' content='2021-04-25T15:35:18&#43;09:00'/>
 <meta name="twitter:title" content="ProgressBar로 AsyncTask 이해하기">
 <meta name="twitter:description" content="이번 포스팅에서는 ProgressBar와 AsyncTask의 사용방법에 대해 알아보도록 하겠습니다.
-">
+들어가기 ProgressBar는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황을 보여주는 모듈입니다. 시간이 걸리는 처리가 필요할 때 표시해주면 기다리는 유저의 거부감을 줄일 수 있습니다. 이 기능은 기존에는 ProgressDialog를 이용해서 구현했는데 다이얼로그가 표시될 때 유저의 조작을 제한한다는 문제가 있어 deprecated 되고 ProgressBar로 대체되는 추세입니다.
+메인 스레드의 관점에서 보면 ProgressBar는 처리에 긴 시간이 걸리기 때문에 메인 스레드와는 별개의 스레드에서 처리를 수행해야 할 필요가 있습니다. 별개의 스레드에서 처리를 수행하는데는 여러가지 방법이 있을 수 있는데 여기서는 AsyncTask 클래스를 이용해서 ProgressBar를 구현해 보도록 하겠습니다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -379,6 +382,9 @@ if (!doNotTrack) {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><p>이렇게 해서 AsyncTask를 사용하는 법에 대해 알아보았습니다.</p>
+<figure><a href="https://github.com/cliearl/android-tutorial/tree/master/ProgressBarAsyncTask"><img src="/images/posts/sourcecode.png"/></a>
+</figure>
+
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/mqVcJvtW9TQ" 
@@ -387,6 +393,8 @@ if (!doNotTrack) {
     >
     </iframe>
 </div>
+
+
 </section>
 
 
