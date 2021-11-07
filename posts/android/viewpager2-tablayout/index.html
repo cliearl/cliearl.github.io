@@ -192,7 +192,7 @@ if (!doNotTrack) {
 </code></pre></div><h2 id="viewpager2의-pageradapter-작성">ViewPager2의 PagerAdapter 작성</h2>
 <p>방금 작성한 프래그먼트에 텍스트를 전해주는 ViewPager2 어댑터를 작성합니다. 여기서는 3개의 페이지를 갖도록 하겠습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">NUM_PAGES</span> <span class="p">=</span> <span class="m">3</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">NUM</span><span class="n">_PAGES</span> <span class="p">=</span> <span class="m">3</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">=</span> <span class="n">NUM_PAGES</span>
 
@@ -278,8 +278,8 @@ if (!doNotTrack) {
     >ZoomOutPageTransformer</a>를 사용한다면 스크롤할때 페이지가 축소되면서 페이드아웃되고, 페이지가 중앙에 가까워지면 원래 크기로 다시 커지면서 페이드인 되는 효과를 낼 수 있습니다.</p>
 <p>그 외에도 여러가지 페이지 전환효과를 사용하고 싶다면 <a class="link" href="https://medium.com/codex/33-viewpager2-transformers-for-your-android-uis-bbdab801eb2b"  target="_blank" rel="noopener"
     >33 Viewpager2 Transformers for Your Android ui’s</a> 페이지를 참고하세요.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">MIN_SCALE</span> <span class="p">=</span> <span class="m">0.85f</span>
-<span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">MIN_ALPHA</span> <span class="p">=</span> <span class="m">0.5f</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">MIN</span><span class="n">_SCALE</span> <span class="p">=</span> <span class="m">0.85f</span>
+<span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">MIN</span><span class="n">_ALPHA</span> <span class="p">=</span> <span class="m">0.5f</span>
 
 <span class="k">class</span> <span class="nc">ZoomOutPageTransformer</span> <span class="p">:</span> <span class="n">ViewPager2</span><span class="p">.</span><span class="n">PageTransformer</span> <span class="p">{</span>
 
@@ -392,6 +392,18 @@ if (!doNotTrack) {
                 
                     
 <article class="">
+    <a href="/posts/android/download-json-data-using-retrofit/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
     <a href="/posts/android/android-http-library-review/">
         
         
@@ -422,18 +434,6 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="">
-    <a href="/posts/android/understanding-singleton-pattern/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">알기쉬운 Singleton Pattern</h2>
         </div>
     </a>
 </article>

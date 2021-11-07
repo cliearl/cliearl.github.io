@@ -491,13 +491,13 @@ if (!doNotTrack) {
     <span class="n">SQLiteOpenHelper</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DATABASE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">DATABASE_VERSION</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE_NAME</span> <span class="p">=</span> <span class="s2">&#34;PhoneBook.db&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE_VERSION</span> <span class="p">=</span> <span class="m">1</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">TABLE_NAME</span> <span class="p">=</span> <span class="s2">&#34;book_table&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">COL1_ID</span> <span class="p">=</span> <span class="s2">&#34;_id&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">COL2_NAME</span> <span class="p">=</span> <span class="s2">&#34;name&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">COL3_PHONE</span> <span class="p">=</span> <span class="s2">&#34;phone&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">COL4_EMAIL</span> <span class="p">=</span> <span class="s2">&#34;email&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;PhoneBook.db&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE</span><span class="n">_VERSION</span> <span class="p">=</span> <span class="m">1</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">TABLE</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;book_table&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">COL1</span><span class="n">_ID</span> <span class="p">=</span> <span class="s2">&#34;_id&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">COL2</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;name&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">COL3</span><span class="n">_PHONE</span> <span class="p">=</span> <span class="s2">&#34;phone&#34;</span>
+        <span class="k">const</span> <span class="k">val</span> <span class="py">COL4</span><span class="n">_EMAIL</span> <span class="p">=</span> <span class="s2">&#34;email&#34;</span>
 
         <span class="c1">//SingleTon Pattern(싱글톤 패턴)
 </span><span class="c1"></span>        <span class="nd">@Volatile</span>
@@ -517,11 +517,11 @@ if (!doNotTrack) {
 <p><code>_id</code>는 데이터가 입력될 때 자동으로 증가시키기 위해 <code>PRIMARY KEY AUTOINCREMENT</code>를 추가해줍니다. 작성한 쿼리는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#execSQL%28java.lang.String%29"  target="_blank" rel="noopener"
     >execSQL</a>로 실행시키면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?)</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">createQuery</span> <span class="p">=</span> <span class="s2">&#34;CREATE TABLE </span><span class="si">$TABLE_NAME</span><span class="s2"> (&#34;</span> <span class="p">+</span>
-            <span class="s2">&#34;</span><span class="si">$COL1_ID</span><span class="s2"> INTEGER PRIMARY KEY AUTOINCREMENT, &#34;</span> <span class="p">+</span>
-            <span class="s2">&#34;</span><span class="si">$COL2_NAME</span><span class="s2"> TEXT, &#34;</span> <span class="p">+</span>
-            <span class="s2">&#34;</span><span class="si">$COL3_PHONE</span><span class="s2"> TEXT, &#34;</span> <span class="p">+</span>
-            <span class="s2">&#34;</span><span class="si">$COL4_EMAIL</span><span class="s2"> TEXT&#34;</span> <span class="p">+</span>
+    <span class="k">val</span> <span class="py">createQuery</span> <span class="p">=</span> <span class="s2">&#34;CREATE TABLE </span><span class="si">$TABLE</span><span class="s2">_NAME (&#34;</span> <span class="p">+</span>
+            <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID INTEGER PRIMARY KEY AUTOINCREMENT, &#34;</span> <span class="p">+</span>
+            <span class="s2">&#34;</span><span class="si">$COL2</span><span class="s2">_NAME TEXT, &#34;</span> <span class="p">+</span>
+            <span class="s2">&#34;</span><span class="si">$COL3</span><span class="s2">_PHONE TEXT, &#34;</span> <span class="p">+</span>
+            <span class="s2">&#34;</span><span class="si">$COL4</span><span class="s2">_EMAIL TEXT&#34;</span> <span class="p">+</span>
             <span class="s2">&#34;)&#34;</span>
 
     <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="n">createQuery</span><span class="p">)</span>
@@ -531,7 +531,7 @@ if (!doNotTrack) {
     >onUpgrade</a>를 구현합니다. 여기서는 DB버전이 증가되었으면 기존 DB를 삭제하고 새로운 DB를 작성하는 단순한 구조로 정의했습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onUpgrade</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?,</span> <span class="n">oldVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">newVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">oldVersion</span> <span class="o">!=</span> <span class="n">newVersion</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="s2">&#34;DROP TABLE IF EXISTS </span><span class="si">$TABLE_NAME</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="s2">&#34;DROP TABLE IF EXISTS </span><span class="si">$TABLE</span><span class="s2">_NAME&#34;</span><span class="p">)</span>
         <span class="n">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -560,14 +560,14 @@ if (!doNotTrack) {
         <span class="n">put</span><span class="p">(</span><span class="n">COL3_PHONE</span><span class="p">,</span> <span class="n">phone</span><span class="p">)</span>
         <span class="n">put</span><span class="p">(</span><span class="n">COL4_EMAIL</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
     <span class="p">}</span>
-    <span class="n">db</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1_ID</span><span class="s2"> = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div><h4 id="delete">Delete</h4>
 <p>전달받은 id를 프라이머리키로 가진 데이터를 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete%28java.lang.String,%20java.lang.String,%20java.lang.String[]%29"  target="_blank" rel="noopener"
     >delete</a> 명령으로 삭제합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">deleteData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
-    <span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1_ID</span><span class="s2"> = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
+    <span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div><h4 id="read">Read</h4>
 <p>마지막으로 읽기를 구현합니다. <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getReadableDatabase%28%29"  target="_blank" rel="noopener"
@@ -581,7 +581,7 @@ if (!doNotTrack) {
     <span class="k">var</span> <span class="py">result</span> <span class="p">=</span> <span class="s2">&#34;No data in DB&#34;</span>
 
     <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">readableDatabase</span>
-    <span class="k">val</span> <span class="py">cursor</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="n">rawQuery</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM </span><span class="si">$TABLE_NAME</span><span class="s2">&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">cursor</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="n">rawQuery</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM </span><span class="si">$TABLE</span><span class="s2">_NAME&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
 
     <span class="k">try</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">cursor</span><span class="p">.</span><span class="n">count</span> <span class="o">!=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
@@ -763,6 +763,18 @@ if (!doNotTrack) {
                 
                     
 <article class="">
+    <a href="/posts/android/download-json-data-using-retrofit/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
     <a href="/posts/android/android-http-library-review/">
         
         
@@ -805,18 +817,6 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">Android Studio Arctic Fox와 JDK 11의 도입</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="">
-    <a href="/posts/android/jsoup-lotto-checker/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">jsoup으로 로또 홈페이지의 당첨번호 파싱하기</h2>
         </div>
     </a>
 </article>
