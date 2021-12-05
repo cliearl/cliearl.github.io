@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.
+ 출처 : https://www.youtube.com/watch?v=Qxj2eBmXLHg 
+Fragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.
+ 출처: https://developer.android.com/guide/fragments/lifecycle'><title>View Binding 사용시 Fragment의 메모리 누수 대응하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/prevent-fragment-memory-leak-during-viewbinding/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='View Binding 사용시 Fragment의 메모리 누수 대응하기'>
+<meta property='og:description' content='들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.
+ 출처 : https://www.youtube.com/watch?v=Qxj2eBmXLHg 
+Fragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.
+ 출처: https://developer.android.com/guide/fragments/lifecycle'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/prevent-fragment-memory-leak-during-viewbinding/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='View Binding' /><meta property='article:tag' content='Memory Leak' /><meta property='article:published_time' content='2021-12-05T10:20:46&#43;09:00'/><meta property='article:modified_time' content='2021-12-05T10:20:46&#43;09:00'/>
+<meta name="twitter:title" content="View Binding 사용시 Fragment의 메모리 누수 대응하기">
+<meta name="twitter:description" content="들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.
+ 출처 : https://www.youtube.com/watch?v=Qxj2eBmXLHg 
+Fragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.
+ 출처: https://developer.android.com/guide/fragments/lifecycle">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/android/prevent-fragment-memory-leak-during-viewbinding/">View Binding 사용시 Fragment의 메모리 누수 대응하기</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 05, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="들어가기">들어가기</h2>
+<p><a class="link" href="https://cliearl.github.io/posts/android/apply-viewbinding/"  target="_blank" rel="noopener"
+    >findViewById 대신 View Binding 사용하기</a> 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.</p>
+<p><figure 
+	>
+	<a href="https://miro.medium.com/max/1400/1*lZsHEB7MOcgSd5dE64Nu8Q.png" >
+		<img src="https://miro.medium.com/max/1400/1*lZsHEB7MOcgSd5dE64Nu8Q.png"
+			
+			
+			
+			loading="lazy"
+			alt="출처 : https://www.youtube.com/watch?v=Qxj2eBmXLHg">
+	</a>
+	
+	<figcaption>출처 : <a href="https://www.youtube.com/watch?v=Qxj2eBmXLHg">https://www.youtube.com/watch?v=Qxj2eBmXLHg</a></figcaption>
+	
+</figure></p>
+<h2 id="fragment에서의-메모리-누수">Fragment에서의 메모리 누수</h2>
+<p>그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 <code>onDestroyView</code>에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.</p>
+<p><figure 
+	>
+	<a href="https://developer.android.com/images/guide/fragments/fragment-view-lifecycle.png" >
+		<img src="https://developer.android.com/images/guide/fragments/fragment-view-lifecycle.png"
+			
+			
+			
+			loading="lazy"
+			alt="출처: https://developer.android.com/guide/fragments/lifecycle">
+	</a>
+	
+	<figcaption>출처: <a href="https://developer.android.com/guide/fragments/lifecycle">https://developer.android.com/guide/fragments/lifecycle</a></figcaption>
+	
+</figure></p>
+<h2 id="메모리-누수-대응법">메모리 누수 대응법</h2>
+<h3 id="_binding의-직접-해제"><code>_binding</code>의 직접 해제</h3>
+<p>그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 <code>_binding</code> 변수를 만들어 사용한 뒤 <code>onDestroyView</code>에서 해제해주는 구조를 <a class="link" href="https://developer.android.com/topic/libraries/view-binding#fragments"  target="_blank" rel="noopener"
+    >공식 문서</a> 에서 제안하고 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">var</span> <span class="py">_binding</span> <span class="p">:</span> <span class="n">FragmentFirstBinding</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_binding</span><span class="o">!!</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
+            <span class="n">inflater</span><span class="p">:</span> <span class="n">LayoutInflater</span><span class="p">,</span> <span class="n">container</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">?,</span>
+            <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?</span>
+    <span class="p">):</span> <span class="n">View</span><span class="p">?</span> <span class="p">{</span>
+        <span class="n">_binding</span> <span class="p">=</span> <span class="n">FragmentFirstBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">binding</span><span class="p">.</span><span class="n">root</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">View</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">)</span>
+				<span class="o">..</span><span class="p">.</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroyView</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onDestroyView</span><span class="p">()</span>
+        <span class="n">_binding</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="autoclearedvalue-사용하기">AutoClearedValue 사용하기</h3>
+<p>그런데 Fragment마다 <code>_binding</code>을 사용하면 보일러플레이트 코드가 너무 많아지고, 리소스를 해제하는 걸 깜박할 수도 있습니다. 그래서 구글에서는 binding의 초기화를 위임하는 <a class="link" href="https://github.com/android/architecture-components-samples/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/util/AutoClearedValue.kt"  target="_blank" rel="noopener"
+    >AutoClearedValue</a>라는 개념을 제안했습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="cm">/*
+</span><span class="cm"> * Copyright (C) 2018 The Android Open Source Project
+</span><span class="cm"> *
+</span><span class="cm"> * Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+</span><span class="cm"> * you may not use this file except in compliance with the License.
+</span><span class="cm"> * You may obtain a copy of the License at
+</span><span class="cm"> *
+</span><span class="cm"> *      http://www.apache.org/licenses/LICENSE-2.0
+</span><span class="cm"> *
+</span><span class="cm"> * Unless required by applicable law or agreed to in writing, software
+</span><span class="cm"> * distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+</span><span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+</span><span class="cm"> * See the License for the specific language governing permissions and
+</span><span class="cm"> * limitations under the License.
+</span><span class="cm"> */</span>
+
+<span class="k">package</span> <span class="nn">com.android.example.github.util</span>
+
+<span class="k">import</span> <span class="nn">androidx.fragment.app.Fragment</span>
+<span class="k">import</span> <span class="nn">androidx.lifecycle.DefaultLifecycleObserver</span>
+<span class="k">import</span> <span class="nn">androidx.lifecycle.LifecycleOwner</span>
+<span class="k">import</span> <span class="nn">androidx.lifecycle.observe</span>
+<span class="k">import</span> <span class="nn">kotlin.properties.ReadWriteProperty</span>
+<span class="k">import</span> <span class="nn">kotlin.reflect.KProperty</span>
+
+<span class="cm">/**
+</span><span class="cm"> * A lazy property that gets cleaned up when the fragment&#39;s view is destroyed.
+</span><span class="cm"> *
+</span><span class="cm"> * Accessing this variable while the fragment&#39;s view is destroyed will throw NPE.
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">AutoClearedValue</span><span class="p">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="n">Any</span><span class="p">&gt;(</span><span class="k">val</span> <span class="py">fragment</span><span class="p">:</span> <span class="n">Fragment</span><span class="p">)</span> <span class="p">:</span> <span class="n">ReadWriteProperty</span><span class="p">&lt;</span><span class="n">Fragment</span><span class="p">,</span> <span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">var</span> <span class="py">_value</span><span class="p">:</span> <span class="n">T</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+
+    <span class="k">init</span> <span class="p">{</span>
+        <span class="n">fragment</span><span class="p">.</span><span class="n">lifecycle</span><span class="p">.</span><span class="n">addObserver</span><span class="p">(</span><span class="k">object</span><span class="p">:</span> <span class="n">DefaultLifecycleObserver</span> <span class="p">{</span>
+            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">owner</span><span class="p">:</span> <span class="n">LifecycleOwner</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">fragment</span><span class="p">.</span><span class="n">viewLifecycleOwnerLiveData</span><span class="p">.</span><span class="n">observe</span><span class="p">(</span><span class="n">fragment</span><span class="p">)</span> <span class="p">{</span> <span class="n">viewLifecycleOwner</span> <span class="o">-&gt;</span>
+                    <span class="n">viewLifecycleOwner</span><span class="o">?.</span><span class="n">lifecycle</span><span class="o">?.</span><span class="n">addObserver</span><span class="p">(</span><span class="k">object</span><span class="p">:</span> <span class="n">DefaultLifecycleObserver</span> <span class="p">{</span>
+                        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroy</span><span class="p">(</span><span class="n">owner</span><span class="p">:</span> <span class="n">LifecycleOwner</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">_value</span> <span class="p">=</span> <span class="k">null</span>
+                        <span class="p">}</span>
+                    <span class="p">})</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getValue</span><span class="p">(</span><span class="n">thisRef</span><span class="p">:</span> <span class="n">Fragment</span><span class="p">,</span> <span class="k">property</span><span class="p">:</span> <span class="n">KProperty</span><span class="p">&lt;*&gt;):</span> <span class="n">T</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">_value</span> <span class="o">?:</span> <span class="k">throw</span> <span class="n">IllegalStateException</span><span class="p">(</span>
+            <span class="s2">&#34;should never call auto-cleared-value get when it might not be available&#34;</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">setValue</span><span class="p">(</span><span class="n">thisRef</span><span class="p">:</span> <span class="n">Fragment</span><span class="p">,</span> <span class="k">property</span><span class="p">:</span> <span class="n">KProperty</span><span class="p">&lt;*&gt;,</span> <span class="n">value</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_value</span> <span class="p">=</span> <span class="n">value</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+</span><span class="cm"> * Creates an [AutoClearedValue] associated with this fragment.
+</span><span class="cm"> */</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span> <span class="p">:</span> <span class="nc">Any</span><span class="p">&gt;</span> <span class="nf">Fragment</span><span class="p">.</span><span class="n">autoCleared</span><span class="p">()</span> <span class="p">=</span> <span class="n">AutoClearedValue</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span><span class="p">)</span>
+</code></pre></div><p>구조를 보면 AutoclearedValue는 <code>viewLifecycleOwnerLiveData</code>를 구독하고 있습니다. 따라서 <code>onDestroyView</code>의 타이밍에 바인딩을 자동으로 해방시켜 줍니다. 그러면 <code>_binding</code>을 사용하던 위의 코드는 AutoclearedValue를 적용해서 다음과 같이 다시 쓸 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">var</span> <span class="py">binding</span> <span class="k">by</span> <span class="n">autoCleared</span><span class="p">&lt;</span><span class="n">FragmentFirstBinding</span><span class="p">&gt;()</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
+            <span class="n">inflater</span><span class="p">:</span> <span class="n">LayoutInflater</span><span class="p">,</span> <span class="n">container</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">?,</span>
+            <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?</span>
+    <span class="p">):</span> <span class="n">View</span><span class="p">?</span> <span class="p">{</span>
+        <span class="n">binding</span> <span class="p">=</span> <span class="n">FragmentFirstBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">binding</span><span class="p">.</span><span class="n">root</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">View</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">)</span>
+        <span class="o">..</span><span class="p">.</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="viewbindingpropertydelegate-사용">ViewBindingPropertyDelegate 사용</h3>
+<p>AutoclearedValue는 어디까지나 코드 스니펫일 뿐이므로 업데이트가 있을 경우 관리가 쉽지 않습니다. 그래서 이 작업을 하기위해 만들어진 <a class="link" href="https://github.com/androidbroadcast/ViewBindingPropertyDelegate"  target="_blank" rel="noopener"
+    >ViewBindingPropertyDelegate</a>라는 라이브러리를 사용하는 방법이 있습니다.</p>
+<p>Dependency를 추가한 뒤 Fragment를 다음과 같이 초기화하여 사용하면 됩니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">ProfileFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">profile</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">viewBinding</span> <span class="k">by</span> <span class="n">viewBinding</span><span class="p">(</span><span class="n">ProfileBinding</span><span class="o">::</span><span class="n">bind</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><p>이렇게 해서 View Binding을 사용할 때 발생할 수 있는 Fragment의 메모리 누수를 방어하는 법에 대해 알아보았습니다.</p>
+<p>{{ youtube 7bEr7c2fGRs }}</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/view-binding/">View Binding</a>
+        
+            <a href="/tags/memory-leak/">Memory Leak</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/android/viewbinding-recyclerview/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">RecyclerView에 View Binding 적용하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/apply-viewbinding/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">findViewById 대신 View Binding 사용하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/download-json-data-using-retrofit/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/android-http-library-review/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">안드로이드의 HTTP 통신 라이브러리 고찰</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/android-studio-plugins/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">내가 Android Studio에서 사용하는 Plugins</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2021 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#들어가기">들어가기</a></li>
+    <li><a href="#fragment에서의-메모리-누수">Fragment에서의 메모리 누수</a></li>
+    <li><a href="#메모리-누수-대응법">메모리 누수 대응법</a>
+      <ol>
+        <li><a href="#_binding의-직접-해제"><code>_binding</code>의 직접 해제</a></li>
+        <li><a href="#autoclearedvalue-사용하기">AutoClearedValue 사용하기</a></li>
+        <li><a href="#viewbindingpropertydelegate-사용">ViewBindingPropertyDelegate 사용</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
