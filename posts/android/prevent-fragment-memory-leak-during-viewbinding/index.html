@@ -264,7 +264,7 @@ if (!doNotTrack) {
 </span><span class="cm"> * Creates an [AutoClearedValue] associated with this fragment.
 </span><span class="cm"> */</span>
 <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span> <span class="p">:</span> <span class="nc">Any</span><span class="p">&gt;</span> <span class="nf">Fragment</span><span class="p">.</span><span class="n">autoCleared</span><span class="p">()</span> <span class="p">=</span> <span class="n">AutoClearedValue</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span><span class="p">)</span>
-</code></pre></div><p>구조를 보면 AutoclearedValue는 <code>viewLifecycleOwnerLiveData</code>를 구독하고 있습니다. 따라서 <code>onDestroyView</code>의 타이밍에 바인딩을 자동으로 해방시켜 줍니다. 그러면 <code>_binding</code>을 사용하던 위의 코드는 AutoclearedValue를 적용해서 다음과 같이 다시 쓸 수 있습니다.</p>
+</code></pre></div><p>구조를 보면 AutoclearedValue는 <code>viewLifecycleOwnerLiveData</code>를 구독하고 있습니다. 따라서 <code>onDestroy</code>의 타이밍에 바인딩을 자동으로 해방시켜 줍니다. 그러면 <code>_binding</code>을 사용하던 위의 코드는 AutoclearedValue를 적용해서 다음과 같이 다시 쓸 수 있습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">binding</span> <span class="k">by</span> <span class="n">autoCleared</span><span class="p">&lt;</span><span class="n">FragmentFirstBinding</span><span class="p">&gt;()</span>
 
