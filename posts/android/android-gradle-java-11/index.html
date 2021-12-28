@@ -153,7 +153,7 @@ if (!doNotTrack) {
 	</a>
 	
 </figure></p>
-<p>2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 <a class="link" href="https://developer.android.com/studio/releases/gradle-plugin#7-0-0"  target="_blank" rel="noopener"
+<p>2021년 7월 말에 Android Studio의 버전이 <code>Arctic Fox|2020.3.1</code> 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 <a class="link" href="https://developer.android.com/studio/releases/gradle-plugin#7-0-0"  target="_blank" rel="noopener"
     >7.0.0</a>으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.</p>
 <table>
 <thead>
@@ -219,7 +219,7 @@ if (!doNotTrack) {
        - changing `org.gradle.java.home` in `gradle.properties`.
 </code></pre><h2 id="jdk-버전-변경">JDK 버전 변경</h2>
 <p>이 문제를 해결하기 위해서는 프로젝트가 사용하는 JDK 버전을 변경해주면 됩니다.</p>
-<p>JDK 11은 안드로이드 스튜디오 4.2에 내장되어 있지만 여기서는 패키지 버전관리가 용이한 brew를 통해 JDK 11을 새로 설치하여 사용하도록 하겠습니다.</p>
+<p>안드로이드 스튜디오 4.2에는 이미 JDK 11이 내장되어 있지만 여기서는 패키지 버전관리가 용이한 brew를 통해 JDK 11을 새로 설치하여 사용하는 법을 소개하겠습니다.</p>
 <p>우선 brew로 시스템에 <a class="link" href="https://github.com/AdoptOpenJDK/homebrew-openjdk"  target="_blank" rel="noopener"
     >OpenJDK 11</a>을 설치해 줍니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew tap AdoptOpenJDK/openjdk
@@ -232,7 +232,6 @@ $ brew install --cask adoptopenjdk11
 // 변경사항 반영
 $ <span class="nb">source</span> ~/.zshrc
 </code></pre></div><p>마지막으로 Android Studio 메뉴에서 <code>Preferences &gt; Build, Execution, Deployment &gt; Build Tools &gt; Gradle</code>로 들어가 <code>Gradle JDK</code> 항목을 <code>Android Studio java home</code>으로 변경해 주면 됩니다.</p>
-<p>윈도우의 경우는 brew가 존재하지 않기 때문에 그냥 Android Studio에 내장된 JDK 11으로 설정해주면 됩니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/TdinzSmyado" 
