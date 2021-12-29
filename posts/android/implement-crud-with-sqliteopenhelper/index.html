@@ -326,8 +326,10 @@ if (!doNotTrack) {
 <h2 id="part-b-샘플-앱-작성">Part B. 샘플 앱 작성</h2>
 <h3 id="메인-레이아웃">메인 레이아웃</h3>
 <p><code>New Project &gt; Empty Activity</code>를 선택해 빈 프로젝트를 하나 만들어줍니다.</p>
-<p>그리고 앱에서 사용할 화면을 만듭니다. 전화번호부 DB를 상정할 것이므로 이름, 전화번호, 이메일 그리고 데이터의 Primary Key로 사용할 ID를 화면에서 입력할 수 있도록 EditText를 배치하겠습니다. 고유키는 데이터를 데이터베이스에 입력할 때 자동으로 부여되기 때문에 입력할 필요가 없지만 삭제, 업데이트를 테스트할 때 필요하기 때문입니다.</p>
-<p>CRUD 테스트를 위해서 데이터를 입력하는 INSERT, 갱신하는 UPDATE, 삭제하는 DELETE 그리고 DB의 모든 내용을 표시하는 VIEW 버튼을 만들겠습니다. 작동에 대한 로그는 화면 아래쪽에 배치한 ScrollView에 표시되도록 하였습니다.</p>
+<p>그리고 앱에서 사용할 화면을 만듭니다. 전화번호부 DB를 상정할 것이므로 이름, 전화번호, 이메일 그리고 데이터의 Primary Key로 사용할 ID를 화면에서 입력할 수 있도록 <a class="link" href="https://developer.android.com/reference/android/widget/EditText"  target="_blank" rel="noopener"
+    >EditText</a>를 배치하겠습니다. 고유키는 데이터를 데이터베이스에 입력할 때 자동으로 부여되기 때문에 입력할 필요가 없지만 삭제, 업데이트를 테스트할 때 필요하기 때문입니다.</p>
+<p>CRUD 테스트를 위해서 데이터를 입력하는 INSERT, 갱신하는 UPDATE, 삭제하는 DELETE 그리고 DB의 모든 내용을 표시하는 VIEW 버튼을 만들겠습니다. 작동에 대한 로그는 화면 아래쪽에 배치한 <a class="link" href="https://developer.android.com/reference/android/widget/ScrollView"  target="_blank" rel="noopener"
+    >ScrollView</a>에 표시되도록 하였습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -484,8 +486,8 @@ if (!doNotTrack) {
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
 </code></pre></div><h3 id="databasehelper-작성">DatabaseHelper 작성</h3>
-<p>다음은 SQLiteOpenHelper 클래스를 상속하는 DatabaseHelper 클래스를 작성합니다. 이 앱에서 사용하게 될 데이터베이스의 프라이머리키는 <code>_id</code>이고 그 외에 <code>name</code>, <code>phone</code>, <code>email</code> 이라는 키를 갖고 있습니다. 데이터베이스의 파일명 및 그외 중복으로 써야하는 상수들을 companion object에 정의하고 상속에 필요한 생성자들을 전달해줍니다.</p>
-<p>DatabaseHelper는 복수개의 인스턴스가 생성되어 DB에 동시접근할수 있는 문제를 방지하기 위해 싱글톤으로 작성합니다. constructor에 직접 접근하지 못하도록 private화 하고, getInstance에서 Double Checked Locking을 통해 인스턴스를 반환하는 싱글톤 구조를 구축합니다. 싱글톤에 대한 더 자세한 설명은 <a class="link" href="https://cliearl.github.io/posts/android/understanding-singleton-pattern/"  target="_blank" rel="noopener"
+<p>다음은 <code>SQLiteOpenHelper</code> 클래스를 상속하는 <code>DatabaseHelper</code> 클래스를 작성합니다. 이 앱에서 사용하게 될 데이터베이스의 프라이머리키는 <code>_id</code>이고 그 외에 <code>name</code>, <code>phone</code>, <code>email</code> 이라는 키를 갖고 있습니다. 데이터베이스의 파일명 및 그외 중복으로 써야하는 상수들을 <code>companion object</code>에 정의하고 상속에 필요한 생성자들을 전달해줍니다.</p>
+<p><code>DatabaseHelper</code>는 복수개의 인스턴스가 생성되어 DB에 동시접근할수 있는 문제를 방지하기 위해 싱글톤으로 작성합니다. constructor에 직접 접근하지 못하도록 private화 하고, <code>getInstance</code>에서 Double Checked Locking을 통해 인스턴스를 반환하는 싱글톤 구조를 구축합니다. 싱글톤에 대한 더 자세한 설명은 <a class="link" href="https://cliearl.github.io/posts/android/understanding-singleton-pattern/"  target="_blank" rel="noopener"
     >알기쉬운 Singleton Pattern</a> 강의를 참고하세요.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DatabaseHelper</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">SQLiteOpenHelper</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DATABASE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">DATABASE_VERSION</span><span class="p">)</span> <span class="p">{</span>
@@ -513,7 +515,7 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></div><h3 id="oncreate-구현">onCreate 구현</h3>
 <p>테이블을 생성하는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#onCreate%28android.database.sqlite.SQLiteDatabase%29"  target="_blank" rel="noopener"
-    >onCreate</a>함수를 오버라이드 합니다. onCreate는 시스템에 DB가 없을경우에만 실행되기 때문에 쿼리를 <code>CREATE TABLE IF EXIST</code>로 줄 필요가 없습니다.</p>
+    >onCreate</a>함수를 오버라이드 합니다. <code>onCreate</code>는 시스템에 DB가 없을경우에만 실행되기 때문에 쿼리를 <code>CREATE TABLE IF EXIST</code>로 줄 필요가 없습니다.</p>
 <p><code>_id</code>는 데이터가 입력될 때 자동으로 증가시키기 위해 <code>PRIMARY KEY AUTOINCREMENT</code>를 추가해줍니다. 작성한 쿼리는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#execSQL%28java.lang.String%29"  target="_blank" rel="noopener"
     >execSQL</a>로 실행시키면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?)</span> <span class="p">{</span>
@@ -537,8 +539,9 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></div><h3 id="crud-구현">CRUD 구현</h3>
 <h4 id="create">Create</h4>
-<p>우선은 CRUD의 C를 구현하겠습니다. insertData에서는 name, phone, email을 파라메터로 받게 됩니다.  <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getWritableDatabase%28%29"  target="_blank" rel="noopener"
-    >writableDatabase</a>로 데이터베이스를 오픈하고 외부에서 받아온 데이터를 contentValues로 묶어서 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#insert%28java.lang.String,%20java.lang.String,%20android.content.ContentValues%29"  target="_blank" rel="noopener"
+<p>우선은 CRUD의 C를 구현하겠습니다. <code>insertData</code>에서는 <code>name</code>, <code>phone</code>, <code>email</code>을 파라메터로 받게 됩니다.  <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getWritableDatabase%28%29"  target="_blank" rel="noopener"
+    >writableDatabase</a>로 데이터베이스를 오픈하고 외부에서 받아온 데이터를 <a class="link" href="https://developer.android.com/reference/android/content/ContentValues"  target="_blank" rel="noopener"
+    >contentValues</a>로 묶어서 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#insert%28java.lang.String,%20java.lang.String,%20android.content.ContentValues%29"  target="_blank" rel="noopener"
     >insert</a> 명령으로 데이터베이스에 값을 추가합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">insertData</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
@@ -551,7 +554,7 @@ if (!doNotTrack) {
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></div><h4 id="update">Update</h4>
 <p><a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#update%28java.lang.String,%20android.content.ContentValues,%20java.lang.String,%20java.lang.String[]%29"  target="_blank" rel="noopener"
-    >update</a>에서는 id로 선택해 준 데이터의 내용을 갱신합니다. insert에서처럼 writableDatabase로 데이터베이스를 오픈하고 contentValues를 넘겨주어 데이터를 갱신합니다. 이 때 <code>&quot;$COL1_ID = ?&quot;</code> 쿼리를 사용해 갱신할 데이터를 특정해주면 됩니다.</p>
+    >update</a>에서는 id로 선택해 준 데이터의 내용을 갱신합니다. insert에서처럼 <code>writableDatabase</code>로 데이터베이스를 오픈하고 <code>contentValues</code>를 넘겨주어 데이터를 갱신합니다. 이 때 <code>&quot;$COL1_ID = ?&quot;</code> 쿼리를 사용해 갱신할 데이터를 특정해주면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">updateData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
     <span class="k">val</span> <span class="py">contentValues</span> <span class="p">=</span> <span class="n">ContentValues</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
@@ -574,7 +577,7 @@ if (!doNotTrack) {
     >readableDatabase</a>로 데이터베이스를 열고 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#rawQuery%28java.lang.String,%20java.lang.String[],%20android.os.CancellationSignal%29"  target="_blank" rel="noopener"
     >rawQuery</a> 에 <code>&quot;SELECT * FROM $TABLE_NAME&quot;</code> 을 전달하여 <a class="link" href="https://developer.android.com/reference/android/database/Cursor"  target="_blank" rel="noopener"
     >Cursor</a> 객체를 받아옵니다.</p>
-<p>객체가 정상적으로 얻어졌으면 try 블록 안에서 <a class="link" href="https://developer.android.com/reference/android/database/Cursor#moveToNext%28%29"  target="_blank" rel="noopener"
+<p>객체가 정상적으로 얻어졌으면 <code>try</code> 블록 안에서 <a class="link" href="https://developer.android.com/reference/android/database/Cursor#moveToNext%28%29"  target="_blank" rel="noopener"
     >moveToNext</a>로 데이터를 순회하면서 값을 확인하고 커서를 다 사용했으면 <a class="link" href="https://developer.android.com/reference/android/database/Cursor#close%28%29"  target="_blank" rel="noopener"
     >close</a>로 리소스를 반환하도록 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">getAllData</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
@@ -604,7 +607,7 @@ if (!doNotTrack) {
     <span class="k">return</span> <span class="n">result</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="mainactivity-준비">MainActivity 준비</h3>
-<p>뷰 바인딩을 적용한 메인액티비티를 작성합니다. dbHelper 인스턴스를 생성하고, 사용이 끝나면 onDestroy에서 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#close%28%29"  target="_blank" rel="noopener"
+<p>뷰 바인딩을 적용한 메인액티비티를 작성합니다. <code>dbHelper</code> 인스턴스를 생성하고, 사용이 끝나면 <code>onDestroy</code>에서 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#close%28%29"  target="_blank" rel="noopener"
     >close()</a>로 리소스를 반환하도록 하였습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
@@ -626,7 +629,7 @@ if (!doNotTrack) {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="유틸-메소드-준비">유틸 메소드 준비</h3>
-<p>데이터베이스 조작이 이루어졌을때 처리 결과를 텍스트뷰에 표시하기 위한 showTxt를 작성합니다. 그리고 버튼을 눌렀을 때 에디트텍스트에 입력한 내용을 삭제하는 clearEditTexts 함수도 작성합니다.</p>
+<p>데이터베이스 조작이 이루어졌을때 처리 결과를 텍스트뷰에 표시하기 위한 <code>showTxt</code>를 작성합니다. 그리고 버튼을 눌렀을 때 에디트텍스트에 입력한 내용을 삭제하는 <code>clearEditTexts</code> 함수도 작성합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showTxt</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">binding</span><span class="p">.</span><span class="n">tvResult</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="p">}</span>
@@ -640,7 +643,7 @@ if (!doNotTrack) {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="버튼기능-정의">버튼기능 정의</h3>
-<p>각 버튼을 클릭했을 때 부여할 기능을 정의합니다. 값을 입력하는 insertDb, 갱신하는 updateDb, 삭제하는 deleteDb, 그리고 조회하는 getAllDb함수를 만듭니다. 작업은 try 블록 안에서 실행하며 에디트텍스트에 입력한 값을 dbHelper에 정의한 각 함수로 전달합니다. 이 때 입력되는 sql 쿼리에 공백이 있으면 안되기 때문에 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim.html"  target="_blank" rel="noopener"
+<p>각 버튼을 클릭했을 때 부여할 기능을 정의합니다. 값을 입력하는 <code>insertDb</code>, 갱신하는 <code>updateDb</code>, 삭제하는 <code>deleteDb</code>, 그리고 조회하는 <code>getAllDb</code>함수를 만듭니다. 작업은 <code>try</code> 블록 안에서 실행하며 에디트텍스트에 입력한 값을 <code>dbHelper</code>에 정의한 각 함수로 전달합니다. 이 때 입력되는 sql 쿼리에 공백이 있으면 안되기 때문에 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim.html"  target="_blank" rel="noopener"
     >trim</a>으로 공백을 제거하도록 했습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">insertDb</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">binding</span><span class="p">.</span><span class="n">btnInsert</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
@@ -698,7 +701,7 @@ if (!doNotTrack) {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="oncreate-정의">onCreate 정의</h3>
-<p>마지막으로 위에서 정의한 버튼기능을 onCreate 안에서 실행하도록 하면 되겠죠.</p>
+<p>마지막으로 위에서 정의한 버튼기능을 <code>onCreate</code> 안에서 실행하도록 하면 되겠죠.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
     <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
@@ -708,7 +711,7 @@ if (!doNotTrack) {
     <span class="n">deleteDb</span><span class="p">()</span>
     <span class="n">getAllDb</span><span class="p">()</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 SQLiteHelper를 이용해 안드로이드에서 데이터베이스를 다루는 법에 대해 알아보았습니다.</p>
+</code></pre></div><p>이렇게 해서 SQLite의 개념과, <code>SQLiteHelper</code>를 이용해 안드로이드에서 데이터베이스를 다루는 법에 대해 알아보았습니다.</p>
 <figure><a href="https://github.com/cliearl/android-tutorial/tree/master/ImplementCrudSqliteopenhelper"><img src="/images/common/sourcecode.png"/></a>
 </figure>
 

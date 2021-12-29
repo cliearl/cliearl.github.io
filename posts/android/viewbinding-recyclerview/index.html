@@ -2,25 +2,28 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.
-View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다. 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
+View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
+이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
 코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-plugins { // id &amp;#39;kotlin-android-extensions&amp;#39; } android { buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.'><title>RecyclerView에 View Binding 적용하기</title>
+plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.'><title>RecyclerView에 View Binding 적용하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewbinding-recyclerview/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='RecyclerView에 View Binding 적용하기'>
 <meta property='og:description' content='이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.
-View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다. 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
+View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
+이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
 코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-plugins { // id &amp;#39;kotlin-android-extensions&amp;#39; } android { buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.'>
+plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/viewbinding-recyclerview/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='RecyclerView' /><meta property='article:tag' content='View Binding' /><meta property='article:published_time' content='2021-04-17T22:43:04&#43;09:00'/><meta property='article:modified_time' content='2021-04-17T22:43:04&#43;09:00'/>
 <meta name="twitter:title" content="RecyclerView에 View Binding 적용하기">
 <meta name="twitter:description" content="이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.
-View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다. 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
+View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
+이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
 코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-plugins { // id &amp;#39;kotlin-android-extensions&amp;#39; } android { buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.">
+plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -142,92 +145,92 @@ if (!doNotTrack) {
     <p>이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.</p>
 <p>View Binding을 사용해야 하는 이유나 그 장점에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/apply-viewbinding/"  target="_blank" rel="noopener"
     >findViewById 대신 View Binding 사용하기</a> 포스팅과 <a class="link" href="https://www.youtube.com/watch?v=1xJmh2QhYTU"  target="_blank" rel="noopener"
-    >유튜브 강의</a>를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
-이번 포스팅에서 변환에 사용한 프로젝트는 <a class="link" href="https://cliearl.github.io/posts/android/implement-recyclerview/"  target="_blank" rel="noopener"
+    >유튜브 강의</a>를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.</p>
+<p>이번 포스팅에서 변환에 사용한 프로젝트는 <a class="link" href="https://cliearl.github.io/posts/android/implement-recyclerview/"  target="_blank" rel="noopener"
     >앱에서 RecyclerView 사용하기</a> 포스팅에서 작성한 것을 사용하도록 하겠습니다.</p>
 <h2 id="코드-작성">코드 작성</h2>
 <h3 id="view-binding-활성화">View Binding 활성화</h3>
-<p>우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">plugins</span> <span class="o">{</span>
-<span class="c1">//    id &#39;kotlin-android-extensions&#39;
-</span><span class="c1"></span><span class="o">}</span>
+<p>우선은 gradle에서 <code>kotlin-android-extensions</code> 플러그인을 삭제하고 View Binding을 활성화합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">plugins {
+<span class="gd">-    id &#39;kotlin-android-extensions&#39;
+</span><span class="gd"></span>}
 
-<span class="n">android</span> <span class="o">{</span>
-    <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
-<span class="o">}</span>
+android {
+<span class="gi">+    buildFeatures.viewBinding true
+</span><span class="gi"></span>}
 </code></pre></div><h3 id="메인액티비티-수정">메인액티비티 수정</h3>
-<p>다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 ActivityMainBinding클래스를 초기화하여 binding이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 binding.recyclerView로 접근하여 설정합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">()</span>
+<p>다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 <code>ActivityMainBinding</code> 클래스를 초기화하여 <code>binding</code>이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 <code>binding.recyclerView</code>로 접근하여 설정합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private val dataSet: ArrayList&lt;List&lt;String&gt;&gt; = arrayListOf()
 
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-<span class="c1">//        setContentView(R.layout.activity_main)
-</span><span class="c1">//
-</span><span class="c1">//        addData()
-</span><span class="c1">//
-</span><span class="c1">//        recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-</span><span class="c1">////        recycler_view.layoutManager = GridLayoutManager(this, 2)
-</span><span class="c1">//
-</span><span class="c1">//        recycler_view.adapter = RecyclerViewAdapter(dataSet)
-</span><span class="c1">//        recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
-</span><span class="c1"></span>
-        <span class="n">binding</span> <span class="p">=</span> <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
-        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
-        <span class="n">addData</span><span class="p">()</span>
-        <span class="n">binding</span><span class="p">.</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">layoutManager</span> <span class="p">=</span> <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
-        <span class="n">binding</span><span class="p">.</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">adapter</span> <span class="p">=</span> <span class="n">RecyclerViewAdapter</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
-        <span class="n">binding</span><span class="p">.</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
-    <span class="p">}</span>
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+<span class="gd">-        setContentView(R.layout.activity_main)
+</span><span class="gd"></span>
+<span class="gd">-        addData()
+</span><span class="gd">-
+</span><span class="gd">-        recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+</span><span class="gd">-//        recycler_view.layoutManager = GridLayoutManager(this, 2)
+</span><span class="gd">-
+</span><span class="gd">-        recycler_view.adapter = RecyclerViewAdapter(dataSet)
+</span><span class="gd">-        recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
+</span><span class="gd"></span>
+<span class="gi">+        binding = ActivityMainBinding.inflate(layoutInflater)
+</span><span class="gi">+        setContentView(binding.root)
+</span><span class="gi">+        addData()
+</span><span class="gi">+        binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+</span><span class="gi">+        binding.recyclerView.adapter = RecyclerViewAdapter(dataSet)
+</span><span class="gi">+        binding.recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+</span><span class="gi"></span>    }
 
-    <span class="k">private</span> <span class="k">fun</span> <span class="nf">addData</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">99</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">dataSet</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th main&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th sub&#34;</span><span class="p">))</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="리사이클러뷰-어댑터-수정">리사이클러뷰 어댑터 수정</h3>
-<p>onCreateViewHolder에서 뷰를 만들 때 ListItemBinding 클래스로 만들어지는 binding 인스턴스를 사용하도록 변경하여줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span>
-        <span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span>
-        <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span>
-    <span class="p">):</span> <span class="n">ViewHolder</span> <span class="p">{</span>
-<span class="c1">//        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-</span><span class="c1">//        return ViewHolder(view)
-</span><span class="c1"></span>        <span class="k">val</span> <span class="py">binding</span> <span class="p">=</span> <span class="n">ListItemBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span> <span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span>
-    <span class="p">}</span>
+    private fun addData() {
+        for (i in 0..99) {
+            dataSet.add(listOf(&#34;$i th main&#34;, &#34;$i th sub&#34;))
+        }
+    }
+}
+</code></pre></div><h3 id="recyclerview-어댑터-수정">Recyclerview 어댑터 수정</h3>
+<p><code>onCreateViewHolder</code>에서 뷰를 만들 때 <code>ListItemBinding</code> 클래스로 만들어지는 <code>binding</code> 인스턴스를 사용하도록 변경하여줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">class RecyclerViewAdapter(private val dataSet: ArrayList&lt;List&lt;String&gt;&gt;): RecyclerView.Adapter&lt;RecyclerViewAdapter.ViewHolder&gt;() {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+<span class="gd">-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+</span><span class="gd">-        return ViewHolder(view)
+</span><span class="gd"></span><span class="gi">+        val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+</span><span class="gi">+        return ViewHolder(binding)
+</span><span class="gi"></span>    }
 
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBindViewHolder</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span> <span class="n">ViewHolder</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">holder</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">dataSet</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
-    <span class="p">}</span>
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(dataSet[position])
+    }
 
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">dataSet</span><span class="p">.</span><span class="n">size</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="뷰홀더-수정">뷰홀더 수정</h3>
-<p>기존의 뷰홀더에서는 뷰를 받아와서 정의하고 그걸 데이터와 연결하는 작업이 필요했는데, View Binding에서는 binding 인스턴스가 생성되는순간 자동으로 뷰를 binding의 프로퍼티로 접근할 수 있기 때문에 이 코드가 필요없게 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+    override fun getItemCount(): Int {
+        return dataSet.size
+    }
+}
+</code></pre></div><h3 id="viewholder-수정">ViewHolder 수정</h3>
+<p>기존의 ViewHolder에서는 뷰를 받아와서 정의하고 그걸 데이터와 연결하는 작업이 필요했는데, View Binding에서는 binding 인스턴스가 생성되는순간 자동으로 뷰를 binding의 프로퍼티로 접근할 수 있기 때문에 이 코드가 필요없게 됩니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">class RecyclerViewAdapter(private val dataSet: ArrayList&lt;List&lt;String&gt;&gt;): RecyclerView.Adapter&lt;RecyclerViewAdapter.ViewHolder&gt;() {
 
-<span class="c1">//    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-</span><span class="c1">//        private val tvMain: TextView = view.tv_main
-</span><span class="c1">//        private val tvSub: TextView = view.tv_sub
-</span><span class="c1">//
-</span><span class="c1">//        fun bind(data:List&lt;String&gt;) {
-</span><span class="c1">//            tvMain.text = data[0]
-</span><span class="c1">//            tvSub.text = data[1]
-</span><span class="c1">//        }
-</span><span class="c1">//    }
-</span><span class="c1"></span>    <span class="k">class</span> <span class="nc">ViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ListItemBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvMain</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvSub</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="gd">-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+</span><span class="gd">-        private val tvMain: TextView = view.tv_main
+</span><span class="gd">-        private val tvSub: TextView = view.tv_sub
+</span><span class="gd">-
+</span><span class="gd">-        fun bind(data:List&lt;String&gt;) {
+</span><span class="gd">-            tvMain.text = data[0]
+</span><span class="gd">-            tvSub.text = data[1]
+</span><span class="gd">-        }
+</span><span class="gd">-    }
+</span><span class="gd"></span><span class="gi">+    class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+</span><span class="gi">+        fun bind(data:List&lt;String&gt;) {
+</span><span class="gi">+            binding.tvMain.text = data[0]
+</span><span class="gi">+            binding.tvSub.text = data[1]
+</span><span class="gi">+        }
+</span><span class="gi"></span>    }
+}
 </code></pre></div><p>이렇게 해서 RecyclerView에 View Binding을 적용하는 방법에 대해 알아보았습니다.</p>
 <figure><a href="https://github.com/cliearl/android-tutorial/tree/master/ViewBindingRecyclerView"><img src="/images/common/sourcecode.png"/></a>
 </figure>
@@ -512,8 +515,8 @@ if (!doNotTrack) {
       <ol>
         <li><a href="#view-binding-활성화">View Binding 활성화</a></li>
         <li><a href="#메인액티비티-수정">메인액티비티 수정</a></li>
-        <li><a href="#리사이클러뷰-어댑터-수정">리사이클러뷰 어댑터 수정</a></li>
-        <li><a href="#뷰홀더-수정">뷰홀더 수정</a></li>
+        <li><a href="#recyclerview-어댑터-수정">Recyclerview 어댑터 수정</a></li>
+        <li><a href="#viewholder-수정">ViewHolder 수정</a></li>
       </ol>
     </li>
   </ol>

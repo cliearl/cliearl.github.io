@@ -2,19 +2,25 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.
-'><title>Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기</title>
+안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.
+ assets folder resources/raw folder  각 폴더의 특징은 다음과 같습니다.
+   값 assets res/raw     파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능   서브폴더 사용가능 사용불가   파일 리스팅 list()로 가능 불가능   컴파일타임 파일체크 없음 있음   XML에서 접근 불가능 가능   환경별 설정 분리 불가능 가능    간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.'><title>Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/assets-json-recycler/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기'>
 <meta property='og:description' content='이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.
-'>
+안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.
+ assets folder resources/raw folder  각 폴더의 특징은 다음과 같습니다.
+   값 assets res/raw     파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능   서브폴더 사용가능 사용불가   파일 리스팅 list()로 가능 불가능   컴파일타임 파일체크 없음 있음   XML에서 접근 불가능 가능   환경별 설정 분리 불가능 가능    간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/assets-json-recycler/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='assets' /><meta property='article:tag' content='json' /><meta property='article:tag' content='recyclerview' /><meta property='article:published_time' content='2021-05-05T23:05:14&#43;09:00'/><meta property='article:modified_time' content='2021-05-05T23:05:14&#43;09:00'/>
 <meta name="twitter:title" content="Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기">
 <meta name="twitter:description" content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.
-">
+안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.
+ assets folder resources/raw folder  각 폴더의 특징은 다음과 같습니다.
+   값 assets res/raw     파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능   서브폴더 사용가능 사용불가   파일 리스팅 list()로 가능 불가능   컴파일타임 파일체크 없음 있음   XML에서 접근 불가능 가능   환경별 설정 분리 불가능 가능    간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -183,28 +189,28 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-<p>간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.</p>
+<p>간단히 정리하면 XML과 연계하여 다루어야 할 때는 <code>res/raw</code> 폴더를 사용하고, 그렇지 않을 경우 <code>assets</code> 폴더를 사용하면 될 것 같네요.</p>
 <h2 id="앱-만들어보기">앱 만들어보기</h2>
-<p>그럼 asset폴더를 사용해보기 위해 json 파일을 불러와서 리사이클러뷰에 표시하는 간단한 앱을 만들어 보겠습니다.</p>
-<p>리사이클러뷰는 기존에 <a class="link" href="https://youtu.be/cN1UVAeP63c"  target="_blank" rel="noopener"
-    >다른강의</a>에서 작성했던 프로젝트를 참고해서 사용하겠습니다. Json 포맷을 다루어야 하므로 우선 Gson 라이브러리를 추가합니다. Gson에 대한 구체적인 설명에 대해서는 역시 <a class="link" href="https://youtu.be/wkOa_-NGhd4"  target="_blank" rel="noopener"
-    >다른강의</a>에서 설명한 내용을 참조하시기 바랍니다.</p>
+<p>그럼 asset폴더를 사용해보기 위해 json 파일을 불러와서 Recyclerview에 표시하는 간단한 앱을 만들어 보겠습니다.</p>
+<p>Recyclerview는 <a class="link" href="https://cliearl.github.io/posts/android/viewbinding-recyclerview/"  target="_blank" rel="noopener"
+    >RecyclerView에 View Binding 적용하기</a>에서 작성했던 프로젝트를 참고해서 사용하겠습니다. Json 포맷을 다루어야 하므로 우선 <a class="link" href="https://github.com/google/gson"  target="_blank" rel="noopener"
+    >Gson</a> 라이브러리를 추가합니다. Gson에 대한 구체적인 설명에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferneces-gson/"  target="_blank" rel="noopener"
+    >SharedPreferences를 json 포맷으로 관리하기</a>에서 설명한 내용을 참조하시기 바랍니다.</p>
 <h3 id="데이터-준비">데이터 준비</h3>
-<p>New &gt; Folder &gt; Asset Folder로 assets 폴더를 추가합니다.</p>
+<p><code>New &gt; Folder &gt; Asset Folder</code>를 선택하여 assets 폴더를 추가합니다.</p>
 <p>데이터는 경기데이터드림에서 제공하는 <a class="link" href="https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=461Q599QLK8UTE14E3LW12837248&amp;infSeq=1"  target="_blank" rel="noopener"
     >코로나바이러스 감염증 선별진료소 운영 의료기관 현황</a>데이터를 사용하겠습니다.</p>
-<p>sheet 탭에서 json을 클릭하여 데이터를 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 값들을 정렬하는게 보기에 좋을 것 같으니 <a class="link" href="https://jsonformatter.curiousconcept.com/"  target="_blank" rel="noopener"
-    >Json Formatter</a> 에서 파일을 정렬하고 data.json으로 assets 폴더에 저장합니다.</p>
+<p><code>sheet</code> 탭에서 <code>json</code>을 클릭하여 데이터를 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 값들을 정렬하는게 보기에 좋을 것 같으니 <a class="link" href="https://jsonformatter.curiousconcept.com/"  target="_blank" rel="noopener"
+    >Json Formatter</a> 에서 파일을 정렬하고 <code>data.json</code>이라는 파일명을 붙여 assets 폴더에 저장합니다.</p>
 <h3 id="데이터클래스-준비">데이터클래스 준비</h3>
 <p>데이터 파일에는 데이터기준일자, 시군명,	의료기관명,	의료기관 구분,	의료기관 전화번호1,	의료기관 전화번호2,	소재지지번주소,	소재지도로명주소,	WGS84위도,	WGS84경도 등 여러가지 탭이 있습니다.</p>
-<p>각 데이터는 배열 속의 데이터클래스로 관리하기 위해 데이터클래스를 만들어줍니다. 데이터클래스의 특징에 대해서는 <a class="link" href="https://youtu.be/opPmxtI4rLQ"  target="_blank" rel="noopener"
-    >다른 강의</a>에서 설명한 내용을 참고하시기 바랍니다.</p>
+<p>각 데이터는 배열 속의 데이터클래스로 관리하기 위해 데이터클래스를 만들어줍니다. 데이터클래스의 특징에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/dataclass-recyclerview/"  target="_blank" rel="noopener"
+    >Data class 이해하고 RecyclerView에서 사용하기</a>강의에서 설명한 내용을 참고하시기 바랍니다.</p>
 <p>안드로이드 스튜디오에 <a class="link" href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-"  target="_blank" rel="noopener"
-    >Kotlin data class File from JSON</a> 플러그인을 설치하면 json 파일을 손쉽게 데이터클래스로 변환할 수 있습니다.</p>
-<p>New &gt; <a class="link" href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-"  target="_blank" rel="noopener"
-    >Kotlin data class File from JSON</a>을 선택하여 위에서 만든 json 데이터와 클래스명을 입력하면 자동으로 데이터클래스와, 그 클래스를 아이템으로 갖는 배열 클래스가 생성되는데 클래스 이름은 CoronaMed라고 하겠습니다.</p>
-<h3 id="리사이클러뷰-구축하기">리사이클러뷰 구축하기</h3>
-<p>다음으로 새로 만들어진 데이터클래스의 형식에 맞게 리사이클러뷰와 뷰홀더의 형태를 정의해줍니다. activity_main.xml에 recyclerview를 추가합니다.</p>
+    >Kotlin data class File from JSON</a> 플러그인을 설치하면 json 파일을 손쉽게 데이터클래스로 변환할 수 있습니다. 플러그인을 설치한 뒤 New &gt; <a class="link" href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-"  target="_blank" rel="noopener"
+    >Kotlin data class File from JSON</a>을 선택하여 위에서 만든 json 데이터와 클래스명을 입력하면 자동으로 데이터클래스와, 그 클래스를 아이템으로 갖는 배열 클래스가 생성되는데 클래스 이름은 <code>CoronaMed</code>라고 하겠습니다.</p>
+<h3 id="recyclerview-구축하기">Recyclerview 구축하기</h3>
+<p>다음으로 새로 만들어진 데이터클래스의 형식에 맞게 Recyclerview와 ViewHolder의 형태를 정의해줍니다. <code>activity_main.xml</code>에 RecyclerView를 추가합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
@@ -225,7 +231,7 @@ if (!doNotTrack) {
         <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></div><p>list_item.xml 파일을 만들어서 뷰홀더를 구성합니다.</p>
+</code></pre></div><p><code>list_item.xml</code> 파일을 만들어서 ViewHolder를 구성합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span>
     <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
@@ -271,7 +277,7 @@ if (!doNotTrack) {
         <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></div><p>그리고 마지막으로 리사이클러뷰 어댑터를 작성합니다.</p>
+</code></pre></div><p>그리고 마지막으로 Recyclerview 어댑터를 작성합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyRecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataset</span><span class="p">:</span> <span class="n">CoronaMed</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">MyRecyclerViewAdapter</span><span class="p">.</span><span class="n">MyViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">MyViewHolder</span> <span class="p">{</span>
@@ -301,7 +307,9 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></div><h3 id="assets-폴더속-파일-불러오기">assets 폴더속 파일 불러오기</h3>
 <p>다음은 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 <a class="link" href="https://developer.android.com/reference/android/content/res/AssetManager"  target="_blank" rel="noopener"
-    >Asset Manager</a> 인스턴스를 생성하고 bufferedReader()를 이용해 InputStream을 텍스트로 변환합니다.</p>
+    >Asset Manager</a> 인스턴스를 생성하고 <a class="link" href="https://developer.android.com/reference/android/content/res/AssetManager#open%28java.lang.String%29"  target="_blank" rel="noopener"
+    >open</a> 메소드로 파일을 오픈합니다.그리고 <a class="link" href="https://developer.android.com/reference/java/io/BufferedReader"  target="_blank" rel="noopener"
+    >bufferedReader</a>를 이용해 InputStream을 텍스트로 변환합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getJsonData</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">CoronaMed</span><span class="p">?</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">assetManager</span> <span class="p">=</span> <span class="n">resources</span><span class="p">.</span><span class="n">assets</span>
     <span class="k">var</span> <span class="py">result</span><span class="p">:</span> <span class="n">CoronaMed</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
@@ -315,7 +323,7 @@ if (!doNotTrack) {
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">result</span>
 <span class="p">}</span>
-</code></pre></div><p>나머지는 이렇게 얻어온 CoronaMed 객체를 리사이클러뷰 어댑터에 전달해주면 됩니다.</p>
+</code></pre></div><p>나머지는 이렇게 얻어온 <code>CoronaMed</code> 객체를 Recyclerview 어댑터에 전달해주면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
     <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
@@ -340,6 +348,8 @@ if (!doNotTrack) {
     >
     </iframe>
 </div>
+
+
 </section>
 
 
@@ -613,7 +623,7 @@ if (!doNotTrack) {
       <ol>
         <li><a href="#데이터-준비">데이터 준비</a></li>
         <li><a href="#데이터클래스-준비">데이터클래스 준비</a></li>
-        <li><a href="#리사이클러뷰-구축하기">리사이클러뷰 구축하기</a></li>
+        <li><a href="#recyclerview-구축하기">Recyclerview 구축하기</a></li>
         <li><a href="#assets-폴더속-파일-불러오기">assets 폴더속 파일 불러오기</a></li>
       </ol>
     </li>

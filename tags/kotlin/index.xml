@@ -13,7 +13,9 @@
       <pubDate>Mon, 28 Jun 2021 22:01:50 +0900</pubDate>
       
       <guid>https://cliearl.github.io/posts/android/coroutine-principle/</guid>
-      <description>&lt;p&gt;이번 포스팅에서는 코틀린의 코루틴(Coroutine)에 대해 알아보도록 하겠습니다.&lt;/p&gt;</description>
+      <description>이번 포스팅에서는 코틀린의 코루틴(Coroutine)에 대해 알아보도록 하겠습니다.
+코루틴의 개념 안드로이드에서는 AsyncTask를 이용해서 손쉽게 비동기 프로그래밍을 구현했었지만 구글이 다음과 같이 밝힌 것처럼 메모리 누수등 여러가지 문제가 있었습니다. 그래서 API 30부터는 AsyncTask를 deprecate 시키고 코루틴을 사용하도록 권장하고 있습니다.
+ AsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes.</description>
     </item>
     
     <item>
@@ -22,7 +24,11 @@
       <pubDate>Tue, 06 Apr 2021 19:24:59 +0900</pubDate>
       
       <guid>https://cliearl.github.io/posts/android/autoset-buildnumber/</guid>
-      <description>&lt;p&gt;이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다.&lt;/p&gt;</description>
+      <description>이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다.
+버전넘버와 빌드넘버 버전넘버 소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 1.0.0 과 같이 세자리로 결정을 합니다.
+첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다.
+그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다.
+다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.</description>
     </item>
     
     <item>
@@ -35,7 +41,7 @@
 ProgressDialog란 ProgressDialog는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황과 부가적인 문장을 팝업창으로 보여주는 모듈입니다. 시간이 걸리는 파일 다운로드나 복사를 수행할 때 이런창을 띄워주면 기다리는데 유저의 거부감을 줄일 수 있습니다.
  
 ProgressDialog는 다이얼로그가 표시되는 동안 유저가 다른 조작을 못하게 된다는 이유로 Android 8.0(API level 26)부터는 deprecated 되고 대신 ProgressBar를 사용하도록 권장하고 있습니다.
-&amp;hellip;만, ProgressDialog는 쓰레드를 설명하는데 좋은 예제이기 때문에 여기서는 ProgressDialog를 구현하면서 쓰레드에 대해 이해해 보도록 하겠습니다</description>
+&amp;hellip;만, ProgressDialog는 Thread를 설명하는데 좋은 예제이기 때문에 여기서는 ProgressDialog를 구현하면서 Thread에 대해 이해해 보도록 하겠습니다</description>
     </item>
     
     <item>

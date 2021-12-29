@@ -159,15 +159,16 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<p>SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다. 그래서  이번에는 <a class="link" href="https://developer.android.com/reference/android/content/SharedPreferences"  target="_blank" rel="noopener"
-    >SharedPreferences</a>를 사용해서 게임설정값을 저장하고 복원하는 앱을 만들어보도록 하겠습니다.</p>
+<p><a class="link" href="https://developer.android.com/reference/android/content/SharedPreferences"  target="_blank" rel="noopener"
+    >SharedPreferences</a>는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다. 그래서 이번에는 <code>SharedPreferences</code>를 사용해서 게임설정값을 저장하고 복원하는 앱을 만들어보도록 하겠습니다.</p>
 <h2 id="sharedpreferences-사용법">SharedPreferences 사용법</h2>
 <ul>
 <li><a class="link" href="https://developer.android.com/reference/android/content/Context#getSharedPreferences%28java.lang.String,%20int%29"  target="_blank" rel="noopener"
     >getSharedPreferences(KEY, MODE)</a>로 핸들러를 받아옴
 <ul>
-<li>MODE에는 MODE_PRIVATE,MODE_WORLD_READABLE, MODE_WORLD_WRITABLE, MODE_MULTI_PROCESS 가 있다</li>
-<li>작성한 앱에서만 접근 가능하게 하는 MODE_PRIVATE 를 사용</li>
+<li>MODE에는 MODE_PRIVATE, MODE_WORLD_READABLE, MODE_WORLD_WRITABLE, MODE_MULTI_PROCESS 가 있다</li>
+<li>작성한 앱에서만 접근 가능하게 하는 <a class="link" href="https://developer.android.com/reference/android/content/Context#MODE_PRIVATE"  target="_blank" rel="noopener"
+    >MODE_PRIVATE</a> 를 사용</li>
 </ul>
 </li>
 <li>데이터 기록
@@ -373,7 +374,7 @@ if (!doNotTrack) {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h2 id="접근키-작성">접근키 작성</h2>
-<p>SharedPreferences는 키-밸류 형태로 값을 저장하고 불러오기 때문에 이 때 사용할 키 값을 companion object로 준비해서 편하게 사용할 수 있도록 준비합니다.</p>
+<p>SharedPreferences는 Key-Value 형태로 값을 저장하고 불러오기 때문에 이 때 사용할 Key 값을 <code>companion object</code>로 준비해서 편하게 사용할 수 있도록 준비합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY</span><span class="n">_PREFS</span> <span class="p">=</span> <span class="s2">&#34;game_settings&#34;</span>
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY</span><span class="n">_GRAPHIC</span> <span class="p">=</span> <span class="s2">&#34;graphic_quality&#34;</span>
@@ -381,8 +382,9 @@ if (!doNotTrack) {
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY</span><span class="n">_SFX</span> <span class="p">=</span> <span class="s2">&#34;sfx_volume&#34;</span>
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY</span><span class="n">_VSYNC</span> <span class="p">=</span> <span class="s2">&#34;vertical_sync&#34;</span>
 <span class="p">}</span>
-</code></pre></div><h2 id="savepref-작성">savePref() 작성</h2>
-<p>데이터를 저장하는 부분을 작성합니다. 핸들러를 만들고 에디터 객체를 만들어서 <code>editor.put</code>함수로 Key-Value 쌍을 저장하도록 했습니다. 버튼의 값은 개체가 가진 프로퍼티로 가져올 수 있습니다.</p>
+</code></pre></div><h2 id="savepref-작성">savePref 작성</h2>
+<p>데이터를 저장하는 부분을 작성합니다. 핸들러를 만들고 <a class="link" href="https://developer.android.com/reference/android/content/SharedPreferences.Editor"  target="_blank" rel="noopener"
+    >Editor</a> 객체를 만들어서 <code>put</code> 함수로 Key-Value 쌍을 저장하도록 했습니다. 버튼의 값은 개체가 가진 프로퍼티로 가져올 수 있습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">savePref</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
     <span class="k">val</span> <span class="py">editor</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">edit</span><span class="p">()</span>
@@ -396,7 +398,8 @@ if (!doNotTrack) {
     <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="s2">&#34;Game settings has saved&#34;</span><span class="p">,</span> <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre></div><h2 id="loadpref-작성">loadPref() 작성</h2>
-<p>저장된 데이터를 불러오는 부분을 작성합니다. 저장할때와 마찬가지로 핸들러를 만들고 저장할때 사용한 키와 동일한 키를 사용해서 <code>get</code>함수로 값을 불러온 뒤 그 값을 버튼에 반영합니다. 이 때 <code>contains</code>를 사용해서 SharedPreferences 데이터가 존재하는지를 우선 확인하고 작업을 수행하도록 했습니다.</p>
+<p>저장된 데이터를 불러오는 부분을 작성합니다. 저장할때와 마찬가지로 핸들러를 만들고 저장할때 사용한 키와 동일한 키를 사용해서 <code>get</code>함수로 값을 불러온 뒤 그 값을 버튼에 반영합니다. 이 때 <a class="link" href="https://developer.android.com/reference/android/content/SharedPreferences#contains%28java.lang.String%29"  target="_blank" rel="noopener"
+    >contains</a>를 사용해서 SharedPreferences 데이터가 존재하는지를 우선 확인하고 작업을 수행하도록 했습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadPref</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">sharedPreferences</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">KEY_GRAPHIC</span><span class="p">))</span> <span class="p">{</span>
@@ -695,7 +698,7 @@ if (!doNotTrack) {
     <li><a href="#화면-구성">화면 구성</a></li>
     <li><a href="#버튼에-클릭리스너-설정">버튼에 클릭리스너 설정</a></li>
     <li><a href="#접근키-작성">접근키 작성</a></li>
-    <li><a href="#savepref-작성">savePref() 작성</a></li>
+    <li><a href="#savepref-작성">savePref 작성</a></li>
     <li><a href="#loadpref-작성">loadPref() 작성</a></li>
   </ol>
 </nav>

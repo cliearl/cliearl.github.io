@@ -142,8 +142,7 @@ if (!doNotTrack) {
 <p>코틀린에서 클래스를 만들 때는 자바의 클래스 스펙에 따라서 <a class="link" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--"  target="_blank" rel="noopener"
     >toString</a>, <a class="link" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-"  target="_blank" rel="noopener"
     >equals</a>, <a class="link" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--"  target="_blank" rel="noopener"
-    >hashCode</a>라는 메소드를 구현해주어야 합니다.
-우선 <code>Person</code>이라는 클래스를 만들고 그 인스턴스를 출력해 보겠습니다. 그러면 Person@랜덤 이라는 값이 출력이 되게 됩니다.</p>
+    >hashCode</a>라는 메소드를 구현해주어야 합니다. 우선 <code>Person</code>이라는 클래스를 만들고 그 인스턴스를 출력해 보겠습니다. 그러면 <code>Person@랜덤</code> 이라는 값이 출력이 되게 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="k">var</span> <span class="py">age</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="k">var</span> <span class="py">sex</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
 
 <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)</span>
@@ -196,7 +195,7 @@ if (!doNotTrack) {
 <span class="k">val</span> <span class="py">person6</span> <span class="p">=</span> <span class="n">person5</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;Alice&#34;</span><span class="p">)</span>  <span class="c1">// Person(name=Alice, age=22, sex=Male)
 </span></code></pre></div><h3 id="data-class">data class</h3>
 <p>그런데 그냥 프로퍼티만을 가지는 단순한 클래스의 경우 이런 것들을 다 정의해주는 행위가 번거로운 일이기 때문에, 코틀린에서는 <a class="link" href="https://kotlinlang.org/docs/data-classes.html"  target="_blank" rel="noopener"
-    >Data class</a>라고 하는 새로운 클래스를 만들었습니다. Data class를 사용하면 위에 언급한 메소드를 자동으로 정의하여 주기 때문에 다음과 같이 간단하게 클래스를 만들수 있게 됩니다.</p>
+    >Data class</a>라고 하는 새로운 클래스를 준비했습니다. Data class를 사용하면 위에 언급한 메소드를 자동으로 정의하여 주기 때문에 다음과 같이 간단하게 클래스를 만들수 있게 됩니다.</p>
 <p>사용하는 법은 매우 간단한데요, class 앞에 data라는 접두어를 붙여주기만 하면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="k">var</span> <span class="py">age</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="k">var</span> <span class="py">sex</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
 
@@ -211,7 +210,7 @@ if (!doNotTrack) {
 <span class="n">println</span><span class="p">(</span><span class="n">person4</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)))</span>  <span class="c1">// true
 </span></code></pre></div><h2 id="recyclerview의-데이터를-data-class로-정의하기">RecyclerView의 데이터를 data class로 정의하기</h2>
 <p>그럼 data class를 RecyclerView에 적용해 보도록 하겠습니다.</p>
-<p>여기서는 몬스터의 이름, 종족, 레벨, 그리고 몬스터의 능력치, 만난적이 있는지에 대한 불린값을 클래스가 가지도록 하고 그것을 리사이클러뷰에서 보여주도록 할 건데요, 기존에 다른 필요로 인해 만들어 두었던 <a class="link" href="https://cliearl.github.io/posts/android/recyclerview-touch/"  target="_blank" rel="noopener"
+<p>여기서는 몬스터의 이름, 종족, 레벨, 그리고 몬스터의 능력치, 만난적이 있는지에 대한 Boolean값을 클래스가 가지도록 하고 그것을 Recyclerview에서 보여주도록 할 건데요, 기존에 다른 필요로 인해 만들어 두었던 <a class="link" href="https://cliearl.github.io/posts/android/recyclerview-touch/"  target="_blank" rel="noopener"
     >RecyclerView를 Swipe, Drag, Touch하기</a> 강의에서 작성했던 앱을 수정하면서 구현해보도록 하겠습니다.</p>
 <p>우선은 몬스터 클래스를 하나 만들어 줍니다. 프로퍼티는 가능한 여러가지의 타입을 가지도록 했습니다. 종족은 선택하기 편하도록 <code>enum</code>을 도입했습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
@@ -225,7 +224,7 @@ if (!doNotTrack) {
 <span class="k">enum</span> <span class="k">class</span> <span class="nc">Race</span> <span class="p">{</span>
     <span class="n">Zombie</span><span class="p">,</span> <span class="n">Human</span><span class="p">,</span> <span class="n">Goblin</span><span class="p">,</span> <span class="n">Dragon</span>
 <span class="p">}</span>
-</code></pre></div><p>그리고 기존의 list_item.xml에서 두 개였던 텍스트뷰의 개수를 늘려줍니다. 위에서부터 순서대로 몬스터 클래스의 프로퍼티를 보여주도록 합니다.</p>
+</code></pre></div><p>그리고 기존의 <code>list_item.xml</code>에서 두 개였던 텍스트뷰의 개수를 늘려줍니다. 위에서부터 순서대로 몬스터 클래스의 프로퍼티를 보여주도록 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span>
     <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
@@ -294,7 +293,7 @@ if (!doNotTrack) {
 
     <span class="nt">&lt;/FrameLayout&gt;</span>
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></div><p>다음은 RecyclerView　Adapter에서 사용하는 데이터셋의 타입을 바꾸고 다른 메소드들도 변화시킵니다. 기존의 <code>setData</code>는 필요없어졌기 때문에 삭제하고, 뷰홀더에서 데이터와 텍스트뷰를 바인딩하는 부분도 바뀐 타입에 맞도록 수정해 줍니다. 그리고 데이터를 추가하는 기능을 가진 <code>addData</code> 메소드를 추가해줍니다.</p>
+</code></pre></div><p>다음은 RecyclerView Adapter에서 사용하는 데이터셋의 타입을 바꾸고 다른 메소드들도 변화시킵니다. 기존의 <code>setData</code>는 필요없어졌기 때문에 삭제하고, ViewHolder에서 데이터와 텍스트뷰를 바인딩하는 부분도 바뀐 타입에 맞도록 수정해 줍니다. 그리고 데이터를 추가하는 기능을 가진 <code>addData</code> 메소드를 추가해줍니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">()</span>
 
@@ -340,7 +339,7 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>마지막으로 <code>addData</code> 메소드로 메인액티비티에서 데이터값을 만들어주면 됩니다.</p>
+</code></pre></div><p>마지막으로 <code>addData</code> 메소드로 MainActivity에서 데이터값을 만들어주면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
 <span class="o">..</span><span class="p">.</span>
         <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;타일런트&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Zombie</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">50</span><span class="p">),</span> <span class="k">false</span><span class="p">)</span>

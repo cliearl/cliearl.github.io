@@ -277,14 +277,15 @@ if (!doNotTrack) {
     >제작</a>한 라이브러리입니다. 안드로이드 초기에 주로 사용되었으며 실제로는 HttpClient를 래핑한 <a class="link" href="https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/org/apache/http/impl/client/DefaultHttpClient.html"  target="_blank" rel="noopener"
     >DefaultHttpClient</a>나, 안드로이드에 맞게 개수한 <a class="link" href="https://docs.microsoft.com/en-us/dotnet/api/android.net.http.androidhttpclient?view=xamarin-android-sdk-9"  target="_blank" rel="noopener"
     >AndroidHttpClient</a>가 사용되었습니다.</p>
-<p>HttpClient는 안드로이드와 독립적으로 개발되는 라이브러리인지라 변경점을 안드로이드 SDK에 일괄적으로 즉시 반영할 수 없었습니다. 결국 버전이 뒤쳐지면서 버그가 계속 발생하게 되었고, HttpClient는 Android 5.1에서 Deprecated 되며 6.0에서는 아예 <a class="link" href="https://developer.android.com/about/versions/pie/android-9.0-changes-28?hl=zh-tw#apache-p"  target="_blank" rel="noopener"
+<p><code>HttpClient</code>는 안드로이드와 독립적으로 개발되는 라이브러리인지라 변경점을 안드로이드 SDK에 일괄적으로 즉시 반영할 수 없었습니다. 결국 버전이 뒤쳐지면서 버그가 계속 발생하게 되었고, HttpClient는 Android 5.1에서 Deprecated 되며 6.0에서는 아예 <a class="link" href="https://developer.android.com/about/versions/pie/android-9.0-changes-28?hl=zh-tw#apache-p"  target="_blank" rel="noopener"
     >삭제</a>되었습니다. 이 시기 클라이언트의 버그는 네이버 D2 블로그의 <a class="link" href="https://d2.naver.com/helloworld/377316"  target="_blank" rel="noopener"
     >Android의 HTTP 클라이언트 라이브러리</a>에 잘 정리되어 있으니 참고하시기 바랍니다.</p>
 <h3 id="httpurlconnection">HttpUrlConnection</h3>
 <p>HttpClient를 삭제하면서 구글에서 제시한 대안이 <a class="link" href="https://developer.android.com/reference/java/net/HttpURLConnection"  target="_blank" rel="noopener"
     >HttpUrlConnection</a>인데요, 기존의 <a class="link" href="https://developer.android.com/reference/java/net/URLConnection"  target="_blank" rel="noopener"
     >URLConnection</a>에 HTTP를 다루는데 필요한 메서드를 추가한 클래스입니다.</p>
-<p><code>URL.openConnection()</code>으로 얻어진 URLConnection 객체를 HttpURLConnection으로 캐스팅하여 데이터 송수신을 행하고 disconnect로 접속을 종료하는 방식으로 사용합니다.</p>
+<p><code>URL.openConnection()</code>으로 얻어진 <code>URLConnection</code> 객체를 <code>HttpURLConnection</code>으로 캐스팅하여 데이터 송수신을 행하고 <a class="link" href="https://developer.android.com/reference/java/net/HttpURLConnection?hl=en#disconnect%28%29"  target="_blank" rel="noopener"
+    >disconnect</a>로 접속을 종료하는 방식으로 사용합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">   <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&#34;http://www.android.com/&#34;</span><span class="o">);</span>
    <span class="n">HttpURLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
    <span class="k">try</span> <span class="o">{</span>
@@ -294,7 +295,7 @@ if (!doNotTrack) {
      <span class="n">urlConnection</span><span class="o">.</span><span class="na">disconnect</span><span class="o">();</span>
    <span class="o">}</span>
 </code></pre></div><h3 id="volley">Volley</h3>
-<p>HttpUrlConnection을 사용할 때는 Application Not Responding(ANR)을 피하기 위해 백그라운드 스레드도 만들어야하고, 버퍼를 통한 입출력도 준비해야 하고, 캐시나 예외처리도 한땀한땀 다 처리해 주어야 하는 불편함이 있었습니다.</p>
+<p><code>HttpUrlConnection</code>을 사용할 때는 Application Not Responding(ANR)을 피하기 위해 백그라운드 스레드도 만들어야하고, 버퍼를 통한 입출력도 준비해야 하고, 캐시나 예외처리도 한땀한땀 다 처리해 주어야 하는 불편함이 있었습니다.</p>
 <p>그래서 구글에서는 HTTP 연결을 만들때마다 이런 귀찮은 일을 안해도 되는 라이브러리인 <a class="link" href="https://developer.android.com/training/volley"  target="_blank" rel="noopener"
     >Volley</a>를 2013년 Google I/O에서 <a class="link" href="https://www.youtube.com/watch?v=yhv8l9F44qo"  target="_blank" rel="noopener"
     >발표</a>했습니다. Volley는 다음과 같은 특징이 있다고 하네요.</p>
@@ -367,8 +368,9 @@ if (!doNotTrack) {
 <p>Jetbrains에서 개발한 <a class="link" href="https://ktor.io/"  target="_blank" rel="noopener"
     >Ktor</a>는 코틀린을 이용해 비동기 서버와 클라이언트를 구축할수 있게 해주는 라이브러리입니다. <a class="link" href="https://github.com/ktorio/ktor"  target="_blank" rel="noopener"
     >1.6.3</a> 버전까지 발표되어 있으며 현재도 활발한 업데이트가 이루어지고 있습니다</p>
-<p>안드로이드에서의 사용법은 다음과 같습니다. 코루틴 스코프 안에서 <a class="link" href="https://api.ktor.io/ktor-client/ktor-client-core/ktor-client-core/io.ktor.client.engine/-http-client-engine-config/index.html"  target="_blank" rel="noopener"
-    >Http 클라이언트</a>를 만들어서 request를 보내고 response를 확인한  뒤, 클라이언트의 리소스를 close로 반환하면 됩니다.</p>
+<p>안드로이드에서의 사용법은 다음과 같습니다. 코루틴 스코프 안에서 <a class="link" href="https://api.ktor.io/ktor-client/ktor-client-core/io.ktor.client/-http-client/index.html"  target="_blank" rel="noopener"
+    >Http 클라이언트</a>를 만들어서 request를 보내고 response를 확인한 뒤, 클라이언트의 리소스를 <a class="link" href="https://api.ktor.io/ktor-client/ktor-client-core/io.ktor.client/-http-client/index.html#2010942551%2FFunctions%2F-1897681819"  target="_blank" rel="noopener"
+    >close</a>로 반환하면 됩니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
   <span class="k">val</span> <span class="py">client</span> <span class="p">=</span> <span class="n">HttpClient</span><span class="p">()</span>
   <span class="k">val</span> <span class="py">response</span><span class="p">:</span> <span class="n">HttpResponse</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s2">&#34;https://ktor.io/&#34;</span><span class="p">)</span>

@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 ViewPager2와 TabLayout을 이용한 디자인을 구현해 보도록 하겠습니다.
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다.
 ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // 뷰페이저2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.'><title>ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기</title>
+// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.'><title>ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewpager2-tablayout/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기'>
-<meta property='og:description' content='이번 포스팅에서는 ViewPager2와 TabLayout을 이용한 디자인을 구현해 보도록 하겠습니다.
+<meta property='og:description' content='이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다.
 ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // 뷰페이저2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.'>
+// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/viewpager2-tablayout/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='ViewPager2' /><meta property='article:tag' content='TabLayout' /><meta property='article:published_time' content='2021-05-02T22:44:04&#43;09:00'/><meta property='article:modified_time' content='2021-05-02T22:44:04&#43;09:00'/>
 <meta name="twitter:title" content="ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기">
-<meta name="twitter:description" content="이번 포스팅에서는 ViewPager2와 TabLayout을 이용한 디자인을 구현해 보도록 하겠습니다.
+<meta name="twitter:description" content="이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다.
 ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // 뷰페이저2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.">
+// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -141,7 +141,7 @@ if (!doNotTrack) {
     <section class="article-content">
     <p>이번 포스팅에서는 <a class="link" href="https://developer.android.com/jetpack/androidx/releases/viewpager2"  target="_blank" rel="noopener"
     >ViewPager2</a>와 <a class="link" href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayout"  target="_blank" rel="noopener"
-    >TabLayout</a>을 이용한 디자인을 구현해 보도록 하겠습니다.</p>
+    >TabLayout</a>을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다.</p>
 <p>ViewPager2를 사용하는 이유나 장점에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/viewpager2-convert/"  target="_blank" rel="noopener"
     >ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기</a> 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.</p>
 <h2 id="플러그인-추가">플러그인 추가</h2>
@@ -151,11 +151,10 @@ if (!doNotTrack) {
     <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
 <span class="o">}</span>
 
-<span class="c1">// 뷰페이저2 라이브러리 추가
+<span class="c1">// ViewPager2 라이브러리 추가
 </span><span class="c1"></span><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;androidx.viewpager2:viewpager2:1.0.0&#39;</span>
 <span class="o">}</span>
-
 </code></pre></div><h2 id="fragment의-레이아웃-작성">Fragment의 레이아웃 작성</h2>
 <p>다음은 <code>new -&gt; fragment</code> 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;TextView</span>
@@ -205,7 +204,7 @@ if (!doNotTrack) {
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="activity_mainxml">activity_main.xml</h3>
-<p>메인 액티비티의 화면을 구성합니다. 화면 위쪽에 뷰페이저를 배치하고 나머지 공간에 <a class="link" href="https://developer.android.com/reference/com/google/android/material/appbar/AppBarLayout"  target="_blank" rel="noopener"
+<p>메인 액티비티의 화면을 구성합니다. 화면 위쪽에 ViewPager를 배치하고 나머지 공간에 <a class="link" href="https://developer.android.com/reference/com/google/android/material/appbar/AppBarLayout"  target="_blank" rel="noopener"
     >AppBarLayout</a>을 배치한 뒤 그 내부에 TabLayout을 배치합니다. 그리고 TabLayout의 <code>app::tab~</code> 속성을 사용해서 색을 지정합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
@@ -249,8 +248,8 @@ if (!doNotTrack) {
 
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
 </code></pre></div><h2 id="mainactivity-설정">Mainactivity 설정</h2>
-<p>뷰페이저 어댑터 클래스의 인스턴스를 만들어 뷰페이저 어댑터 속성에 연결시킵니다. 그리고 <a class="link" href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator"  target="_blank" rel="noopener"
-    >TabLayoutMediator</a>를 이용해서 탭레이아웃과 뷰페이저를 연결합니다. 각 탭의 타이틀과 아이콘은 블럭내부에서 지정할 수 있습니다. 탭의 이름은 <code>Title 0</code> 형식으로 지정하고 아이콘은 벡터 이미지를 추가한 뒤 <code>setIcon</code> 에서 불러오도록 하였습니다.</p>
+<p>ViewPager 어댑터 클래스의 인스턴스를 만들어 ViewPager 어댑터 속성에 연결시킵니다. 그리고 <a class="link" href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator"  target="_blank" rel="noopener"
+    >TabLayoutMediator</a>를 이용해서 TabLayout과 ViewPager를 연결합니다. 각 탭의 타이틀과 아이콘은 블럭내부에서 지정할 수 있습니다. 탭의 이름은 <code>Title 0</code> 형식으로 지정하고 아이콘은 벡터 이미지를 추가한 뒤 <code>setIcon</code> 에서 불러오도록 하였습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
 
