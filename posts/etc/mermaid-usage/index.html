@@ -126,7 +126,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -155,7 +155,7 @@ if (!doNotTrack) {
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div><h2 id="mermaid로-그릴-수-있는-차트-종류">Mermaid로 그릴 수 있는 차트 종류</h2>
 <p>더 구체적인 사용방법은 <a class="link" href="https://mermaid-js.github.io/mermaid/"  target="_blank" rel="noopener"
-    >홈페이지</a> 에서 확인 가능하다.</p>
+    >mermaid 홈페이지</a> 에서 확인 가능하다.</p>
 <h3 id="flow">Flow</h3>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
     var config = {
@@ -175,7 +175,12 @@ graph TD
     C -->|Two| E[Result 2]
 
 </div>
-<h3 id="sequence">Sequence</h3>
+<pre tabindex="0"><code>graph TD
+    A[Hard] --&gt;|Text| B(Round)
+    B --&gt; C{Decision}
+    C --&gt;|One| D[Result 1]
+    C --&gt;|Two| E[Result 2]
+</code></pre><h3 id="sequence">Sequence</h3>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
     var config = {
         startOnLoad: true,
@@ -198,7 +203,16 @@ sequenceDiagram
     Bob-->>John: Jolly good!
 
 </div>
-<h3 id="gantt">Gantt</h3>
+<pre tabindex="0"><code>sequenceDiagram
+    Alice-&gt;&gt;John: Hello John, how are you?
+    loop Healthcheck
+        John-&gt;&gt;John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts!
+    John--&gt;&gt;Alice: Great!
+    John-&gt;&gt;Bob: How about you?
+    Bob--&gt;&gt;John: Jolly good!
+</code></pre><h3 id="gantt">Gantt</h3>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
     var config = {
         startOnLoad: true,
@@ -220,7 +234,15 @@ gantt
     Parallel 4   :         des6, after des4, 1d
 
 </div>
-<h3 id="class">Class</h3>
+<pre tabindex="0"><code>gantt
+    section Section
+    Completed :done,    des1, 2014-01-06,2014-01-08
+    Active        :active,  des2, 2014-01-07, 3d
+    Parallel 1   :         des3, after des1, 1d
+    Parallel 2   :         des4, after des1, 1d
+    Parallel 3   :         des5, after des3, 1d
+    Parallel 4   :         des6, after des4, 1d
+</code></pre><h3 id="class">Class</h3>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
     var config = {
         startOnLoad: true,
@@ -244,7 +266,17 @@ classDiagram
     Class01 : int gorilla
 
 </div>
-<h3 id="state">State</h3>
+<pre tabindex="0"><code>classDiagram
+    Class01 &lt;|-- AveryLongClass : Cool
+    Class09 --&gt; C2 : Where am i?
+    Class09 --* C3
+    Class09 --|&gt; Class07
+    Class07 : equals()
+    Class07 : Object[] elementData
+    Class01 : size()
+    Class01 : int chimp
+    Class01 : int gorilla
+</code></pre><h3 id="state">State</h3>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
     var config = {
         startOnLoad: true,
@@ -265,7 +297,14 @@ stateDiagram-v2
     Crash --> [*]
 
 </div>
-<h3 id="pie">Pie</h3>
+<pre tabindex="0"><code>stateDiagram-v2
+    [*] --&gt; Still
+    Still --&gt; [*]
+    Still --&gt; Moving
+    Moving --&gt; Still
+    Moving --&gt; Crash
+    Crash --&gt; [*]
+</code></pre><h3 id="pie">Pie</h3>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
     var config = {
         startOnLoad: true,
@@ -283,7 +322,11 @@ pie
     "Rats" : 15
 
 </div>
-<h2 id="user-journey">User Journey</h2>
+<pre tabindex="0"><code>pie
+    &quot;Dogs&quot; : 386
+    &quot;Cats&quot; : 85
+    &quot;Rats&quot; : 15
+</code></pre><h2 id="user-journey">User Journey</h2>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
     var config = {
         startOnLoad: true,
@@ -306,7 +349,16 @@ journey
       Sit down: 3: Me
 
 </div>
-
+<pre tabindex="0"><code>journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 3: Me
+</code></pre>
 </section>
 
 
@@ -462,7 +514,7 @@ journey
         
             2019 - 
         
-        2021 냉동코더의 기술블로그
+        2022 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">
