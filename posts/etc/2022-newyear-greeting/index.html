@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='내가 사용하는 VS Code의 settings.json 내용
-{ &amp;#34;files.autoSave&amp;#34;: &amp;#34;afterDelay&amp;#34;, &amp;#34;editor.fontSize&amp;#34;: 18, &amp;#34;editor.fontFamily&amp;#34;: &amp;#34;&amp;#39;Fira Code&amp;#39;, &amp;#39;Noto Sans CJK KR&amp;#39;&amp;#34;, &amp;#34;editor.fontLigatures&amp;#34;: false, &amp;#34;editor.renderWhitespace&amp;#34;: &amp;#34;boundary&amp;#34;, &amp;#34;editor.wordWrap&amp;#34;: &amp;#34;on&amp;#34;, &amp;#34;editor.wrappingIndent&amp;#34;: &amp;#34;indent&amp;#34;, &amp;#34;editor.rulers&amp;#34;: [ 100, 120 ], &amp;#34;editor.formatOnSave&amp;#34;: true, &amp;#34;git.autofetch&amp;#34;: true, &amp;#34;git.confirmSync&amp;#34;: false, &amp;#34;git.postCommitCommand&amp;#34;: &amp;#34;none&amp;#34;, &amp;#34;python.formatting.provider&amp;#34;: &amp;#34;black&amp;#34;, &amp;#34;python.languageServer&amp;#34;: &amp;#34;Microsoft&amp;#34;, &amp;#34;python.linting.pylintEnabled&amp;#34;: false, &amp;#34;python.linting.pylintPath&amp;#34;: &amp;#34;pylint&amp;#34;, &amp;#34;terminal.integrated.shell.windows&amp;#34;: &amp;#34;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&amp;#34;, &amp;#34;code-runner.runInTerminal&amp;#34;: true, &amp;#34;code-runner.executorMap&amp;#34;: { &amp;#34;javascript&amp;#34;: &amp;#34;node&amp;#34;, &amp;#34;php&amp;#34;: &amp;#34;php&amp;#34;, &amp;#34;python&amp;#34;: &amp;#34;$pythonPath -u $fullFileName&amp;#34;, &amp;#34;perl&amp;#34;: &amp;#34;perl&amp;#34;, &amp;#34;ruby&amp;#34;: &amp;#34;ruby&amp;#34;, &amp;#34;go&amp;#34;: &amp;#34;go run&amp;#34;, &amp;#34;html&amp;#34;: &amp;#34;\&amp;#34;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.'><title>내가 사용하는 VS Code settings.json</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='안녕하세요 냉동코더입니다. 다사다난했던 2021년도 어느새 마지막을 향해 가고 있네요.
+이 채널은 딱히 정해진 주제가 있는 것은 아닙니다. 처음에는 게임을 개발하는 영상을 올렸지만, 금년은 코틀린으로 안드로이드 앱을 개발할 때 알아두면 좋을, 코드 스니펫이나 기초이론을 설명하는 영상을 업로드 하였습니다.
+‘안드로이드 스튜디오에서 코틀린으로’ 시리즈는 제가 안드로이드 앱을 만들면서 찾아보고 정리한 내용을 같이 공유하면 좋겠다는 생각에서 만들기 시작한 영상입니다. 많은 분들이 영상을 찾아봐 주시고 구독과 좋아요도 눌러주셔서 영상을 준비하는데 많은 힘이 되었습니다.
+냉동코더 채널은 지난 1년간 1.'><title>2021년 잘 마무리하시고 새해 복 많이 받으세요</title>
 
-<link rel='canonical' href='https://cliearl.github.io/posts/etc/vscode-settings-json/'>
+<link rel='canonical' href='https://cliearl.github.io/posts/etc/2022-newyear-greeting/'>
 
-<link rel="stylesheet" href="/scss/style.min.775dbd4fd34fda61c5273b4bc3415f7c9666414fb6c40aab164a7ded4397da98.css"><meta property='og:title' content='내가 사용하는 VS Code settings.json'>
-<meta property='og:description' content='내가 사용하는 VS Code의 settings.json 내용
-{ &amp;#34;files.autoSave&amp;#34;: &amp;#34;afterDelay&amp;#34;, &amp;#34;editor.fontSize&amp;#34;: 18, &amp;#34;editor.fontFamily&amp;#34;: &amp;#34;&amp;#39;Fira Code&amp;#39;, &amp;#39;Noto Sans CJK KR&amp;#39;&amp;#34;, &amp;#34;editor.fontLigatures&amp;#34;: false, &amp;#34;editor.renderWhitespace&amp;#34;: &amp;#34;boundary&amp;#34;, &amp;#34;editor.wordWrap&amp;#34;: &amp;#34;on&amp;#34;, &amp;#34;editor.wrappingIndent&amp;#34;: &amp;#34;indent&amp;#34;, &amp;#34;editor.rulers&amp;#34;: [ 100, 120 ], &amp;#34;editor.formatOnSave&amp;#34;: true, &amp;#34;git.autofetch&amp;#34;: true, &amp;#34;git.confirmSync&amp;#34;: false, &amp;#34;git.postCommitCommand&amp;#34;: &amp;#34;none&amp;#34;, &amp;#34;python.formatting.provider&amp;#34;: &amp;#34;black&amp;#34;, &amp;#34;python.languageServer&amp;#34;: &amp;#34;Microsoft&amp;#34;, &amp;#34;python.linting.pylintEnabled&amp;#34;: false, &amp;#34;python.linting.pylintPath&amp;#34;: &amp;#34;pylint&amp;#34;, &amp;#34;terminal.integrated.shell.windows&amp;#34;: &amp;#34;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&amp;#34;, &amp;#34;code-runner.runInTerminal&amp;#34;: true, &amp;#34;code-runner.executorMap&amp;#34;: { &amp;#34;javascript&amp;#34;: &amp;#34;node&amp;#34;, &amp;#34;php&amp;#34;: &amp;#34;php&amp;#34;, &amp;#34;python&amp;#34;: &amp;#34;$pythonPath -u $fullFileName&amp;#34;, &amp;#34;perl&amp;#34;: &amp;#34;perl&amp;#34;, &amp;#34;ruby&amp;#34;: &amp;#34;ruby&amp;#34;, &amp;#34;go&amp;#34;: &amp;#34;go run&amp;#34;, &amp;#34;html&amp;#34;: &amp;#34;\&amp;#34;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.'>
-<meta property='og:url' content='https://cliearl.github.io/posts/etc/vscode-settings-json/'>
+<link rel="stylesheet" href="/scss/style.min.775dbd4fd34fda61c5273b4bc3415f7c9666414fb6c40aab164a7ded4397da98.css"><meta property='og:title' content='2021년 잘 마무리하시고 새해 복 많이 받으세요'>
+<meta property='og:description' content='안녕하세요 냉동코더입니다. 다사다난했던 2021년도 어느새 마지막을 향해 가고 있네요.
+이 채널은 딱히 정해진 주제가 있는 것은 아닙니다. 처음에는 게임을 개발하는 영상을 올렸지만, 금년은 코틀린으로 안드로이드 앱을 개발할 때 알아두면 좋을, 코드 스니펫이나 기초이론을 설명하는 영상을 업로드 하였습니다.
+‘안드로이드 스튜디오에서 코틀린으로’ 시리즈는 제가 안드로이드 앱을 만들면서 찾아보고 정리한 내용을 같이 공유하면 좋겠다는 생각에서 만들기 시작한 영상입니다. 많은 분들이 영상을 찾아봐 주시고 구독과 좋아요도 눌러주셔서 영상을 준비하는데 많은 힘이 되었습니다.
+냉동코더 채널은 지난 1년간 1.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/etc/2022-newyear-greeting/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='VS Code' /><meta property='article:tag' content='settings.json' /><meta property='article:published_time' content='2020-12-14T15:21:53&#43;09:00'/><meta property='article:modified_time' content='2020-12-14T15:21:53&#43;09:00'/>
-<meta name="twitter:title" content="내가 사용하는 VS Code settings.json">
-<meta name="twitter:description" content="내가 사용하는 VS Code의 settings.json 내용
-{ &amp;#34;files.autoSave&amp;#34;: &amp;#34;afterDelay&amp;#34;, &amp;#34;editor.fontSize&amp;#34;: 18, &amp;#34;editor.fontFamily&amp;#34;: &amp;#34;&amp;#39;Fira Code&amp;#39;, &amp;#39;Noto Sans CJK KR&amp;#39;&amp;#34;, &amp;#34;editor.fontLigatures&amp;#34;: false, &amp;#34;editor.renderWhitespace&amp;#34;: &amp;#34;boundary&amp;#34;, &amp;#34;editor.wordWrap&amp;#34;: &amp;#34;on&amp;#34;, &amp;#34;editor.wrappingIndent&amp;#34;: &amp;#34;indent&amp;#34;, &amp;#34;editor.rulers&amp;#34;: [ 100, 120 ], &amp;#34;editor.formatOnSave&amp;#34;: true, &amp;#34;git.autofetch&amp;#34;: true, &amp;#34;git.confirmSync&amp;#34;: false, &amp;#34;git.postCommitCommand&amp;#34;: &amp;#34;none&amp;#34;, &amp;#34;python.formatting.provider&amp;#34;: &amp;#34;black&amp;#34;, &amp;#34;python.languageServer&amp;#34;: &amp;#34;Microsoft&amp;#34;, &amp;#34;python.linting.pylintEnabled&amp;#34;: false, &amp;#34;python.linting.pylintPath&amp;#34;: &amp;#34;pylint&amp;#34;, &amp;#34;terminal.integrated.shell.windows&amp;#34;: &amp;#34;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&amp;#34;, &amp;#34;code-runner.runInTerminal&amp;#34;: true, &amp;#34;code-runner.executorMap&amp;#34;: { &amp;#34;javascript&amp;#34;: &amp;#34;node&amp;#34;, &amp;#34;php&amp;#34;: &amp;#34;php&amp;#34;, &amp;#34;python&amp;#34;: &amp;#34;$pythonPath -u $fullFileName&amp;#34;, &amp;#34;perl&amp;#34;: &amp;#34;perl&amp;#34;, &amp;#34;ruby&amp;#34;: &amp;#34;ruby&amp;#34;, &amp;#34;go&amp;#34;: &amp;#34;go run&amp;#34;, &amp;#34;html&amp;#34;: &amp;#34;\&amp;#34;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.">
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2021-12-31T19:08:17&#43;09:00'/><meta property='article:modified_time' content='2021-12-31T19:08:17&#43;09:00'/>
+<meta name="twitter:title" content="2021년 잘 마무리하시고 새해 복 많이 받으세요">
+<meta name="twitter:description" content="안녕하세요 냉동코더입니다. 다사다난했던 2021년도 어느새 마지막을 향해 가고 있네요.
+이 채널은 딱히 정해진 주제가 있는 것은 아닙니다. 처음에는 게임을 개발하는 영상을 올렸지만, 금년은 코틀린으로 안드로이드 앱을 개발할 때 알아두면 좋을, 코드 스니펫이나 기초이론을 설명하는 영상을 업로드 하였습니다.
+‘안드로이드 스튜디오에서 코틀린으로’ 시리즈는 제가 안드로이드 앱을 만들면서 찾아보고 정리한 내용을 같이 공유하면 좋겠다는 생각에서 만들기 시작한 영상입니다. 많은 분들이 영상을 찾아봐 주시고 구독과 좋아요도 눌러주셔서 영상을 준비하는데 많은 힘이 되었습니다.
+냉동코더 채널은 지난 1년간 1.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -297,7 +303,7 @@ if (!doNotTrack) {
     
 
     <h2 class="article-title">
-        <a href="/posts/etc/vscode-settings-json/">내가 사용하는 VS Code settings.json</a>
+        <a href="/posts/etc/2022-newyear-greeting/">2021년 잘 마무리하시고 새해 복 많이 받으세요</a>
     </h2>
 
     
@@ -315,7 +321,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Dec 14, 2020</time>
+                <time class="article-time--published">Dec 31, 2021</time>
             </div>
         
 
@@ -340,58 +346,32 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
-    <p>내가 사용하는 VS Code의 settings.json 내용</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;files.autoSave&#34;</span><span class="p">:</span> <span class="s2">&#34;afterDelay&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;editor.fontSize&#34;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-    <span class="nt">&#34;editor.fontFamily&#34;</span><span class="p">:</span> <span class="s2">&#34;&#39;Fira Code&#39;, &#39;Noto Sans CJK KR&#39;&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;editor.fontLigatures&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nt">&#34;editor.renderWhitespace&#34;</span><span class="p">:</span> <span class="s2">&#34;boundary&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;editor.wordWrap&#34;</span><span class="p">:</span> <span class="s2">&#34;on&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;editor.wrappingIndent&#34;</span><span class="p">:</span> <span class="s2">&#34;indent&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;editor.rulers&#34;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mi">100</span><span class="p">,</span>
-        <span class="mi">120</span>
-    <span class="p">],</span>
-    <span class="nt">&#34;editor.formatOnSave&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;git.autofetch&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;git.confirmSync&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nt">&#34;git.postCommitCommand&#34;</span><span class="p">:</span> <span class="s2">&#34;none&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;python.formatting.provider&#34;</span><span class="p">:</span> <span class="s2">&#34;black&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;python.languageServer&#34;</span><span class="p">:</span> <span class="s2">&#34;Microsoft&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;python.linting.pylintEnabled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nt">&#34;python.linting.pylintPath&#34;</span><span class="p">:</span> <span class="s2">&#34;pylint&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;terminal.integrated.shell.windows&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;code-runner.runInTerminal&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nt">&#34;code-runner.executorMap&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&#34;javascript&#34;</span><span class="p">:</span> <span class="s2">&#34;node&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;php&#34;</span><span class="p">:</span> <span class="s2">&#34;php&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;python&#34;</span><span class="p">:</span> <span class="s2">&#34;$pythonPath -u $fullFileName&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;perl&#34;</span><span class="p">:</span> <span class="s2">&#34;perl&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;ruby&#34;</span><span class="p">:</span> <span class="s2">&#34;ruby&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;go&#34;</span><span class="p">:</span> <span class="s2">&#34;go run&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;html&#34;</span><span class="p">:</span> <span class="s2">&#34;\&#34;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\&#34;&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;java&#34;</span><span class="p">:</span> <span class="s2">&#34;cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;c&#34;</span><span class="p">:</span> <span class="s2">&#34;cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;cpp&#34;</span><span class="p">:</span> <span class="s2">&#34;cd $dir &amp;&amp; g++ -std=c++14 $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&#34;</span>
-    <span class="p">},</span>
-    <span class="nt">&#34;editor.suggestSelection&#34;</span><span class="p">:</span> <span class="s2">&#34;first&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;vsintellicode.modify.editor.suggestSelection&#34;</span><span class="p">:</span> <span class="s2">&#34;automaticallyOverrodeDefaultValue&#34;</span><span class="p">,</span>
-<span class="p">}</span>
-</code></pre></div>
+    <p>안녕하세요 냉동코더입니다. 다사다난했던 2021년도 어느새 마지막을 향해 가고 있네요.</p>
+<p>이 채널은 딱히 정해진 주제가 있는 것은 아닙니다. 처음에는 게임을 개발하는 영상을 올렸지만, 금년은 코틀린으로 안드로이드 앱을 개발할 때 알아두면 좋을, 코드 스니펫이나 기초이론을 설명하는 영상을 업로드 하였습니다.</p>
+<p>‘안드로이드 스튜디오에서 코틀린으로’ 시리즈는 제가 안드로이드 앱을 만들면서 찾아보고 정리한 내용을 같이 공유하면 좋겠다는 생각에서 만들기 시작한 영상입니다. 많은 분들이 영상을 찾아봐 주시고 구독과 좋아요도 눌러주셔서 영상을 준비하는데 많은 힘이 되었습니다.</p>
+<p>냉동코더 채널은 지난 1년간 1.4만회의 조회수가 나왔고 230여 분의 새로운 구독자 분들이 채널을 구독해 주셨습니다. 이렇다 할 재밌는 편집점도 없는 평범한 영상을 꾸준히 봐주셔서 감사합니다. 다음은 구독자 천명을 목표로 달려보려고 합니다.</p>
+<p>저의 내년 키워드는 <a class="link" href="https://developer.android.com/modern-android-development"  target="_blank" rel="noopener"
+    >Modern Android Development</a>입니다. 앱 아키텍처 가이드와 제트팩이 발표된 이후로 라이브러리의 수많은 수정과 갱신이 있었는데, 이제는 어느정도 안정궤도에 올랐다고 생각했는지 구글에서는 금년 12월에 새로운 앱 아키텍처 가이드를 발표했습니다.</p>
+<p>마침 좋은 기회다 싶어서 내년에는 제트팩 라이브러리와 MVVM구조를 잘 이해하고 사용하는 법에 대한 유료강의를 만들어 볼 계획입니다. 돈을 주고 봐도 아깝지 않은 강의가 되도록 잘 만들어보겠습니다. 목표는 여름휴가가 오기 전에 제작을 완료하는 것인데, 일정이라는것은 항상 안맞는 것이라 확실한 약속을 드리지는 못하는 점 양해부탁드립니다.</p>
+<p><figure 
+	>
+	<a href="/images/2022-newyear-greeting/dr-nitro.jpg" >
+		<img src="/images/2022-newyear-greeting/dr-nitro.jpg"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p>코로나로 인해 여러가지로 불편하고 어려운 날들이 이어지고 있습니다. 그래도 인류 역사속에서 늘 그래왔듯이 인간의 지혜가 코로나에 대한 답을 찾을 것이라 믿으며 내년을 맞이하려고 합니다. 아무쪼록 구독자 여러분들도 따뜻한 연말연시 보내시고 건강하시길 빕니다.</p>
+
 </section>
 
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/vs-code/">VS Code</a>
-        
-            <a href="/tags/settings.json/">settings.json</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">
@@ -419,30 +399,6 @@ if (!doNotTrack) {
         <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
-                
-                    
-<article class="">
-    <a href="/posts/etc/vscode-extensions/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">내가 사용하는 VS Code Extensions</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="">
-    <a href="/posts/etc/2022-newyear-greeting/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">2021년 잘 마무리하시고 새해 복 많이 받으세요</h2>
-        </div>
-    </a>
-</article>
                 
                     
 <article class="">
@@ -476,6 +432,30 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">Github Profile Page 꾸미기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/etc/fonts-for-work/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">작업용 폰트 정보 정리</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/etc/introduce-inflearn/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">인프런에서 iOS 게임만들기 강의공개를 시작하였습니다</h2>
         </div>
     </a>
 </article>
