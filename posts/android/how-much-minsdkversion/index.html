@@ -8,7 +8,7 @@ API 버전별 특징 그걸 판단하기 위해서 API별로 어떤 기능이 �
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/how-much-minsdkversion/'>
 
-<link rel="stylesheet" href="/scss/style.min.775dbd4fd34fda61c5273b4bc3415f7c9666414fb6c40aab164a7ded4397da98.css"><meta property='og:title' content='2021년 7월 현재, minSdkVersion 몇으로 해야 할까?'>
+<link rel="stylesheet" href="/scss/style.min.8f4416a35036b6471a6978873128b5652464226c8db8a9620ed1b94bc11bd353.css"><meta property='og:title' content='2021년 7월 현재, minSdkVersion 몇으로 해야 할까?'>
 <meta property='og:description' content='minSdkVersion 과연 몇으로 해야할지 정해드립니다.
 다음 코드는 build.gradle의 코드 일부입니다. build.gradle의 minsdkversion은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.
 android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.0&amp;#34; testInstrumentationRunner &amp;#34;androidx.test.runner.AndroidJUnitRunner&amp;#34; } 그렇다면 2021년 7월 현재, 앱의 minSdkVersion은 몇으로 하는게 적당할까요?
@@ -139,6 +139,8 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
+    
+    
     <p><code>minSdkVersion</code> 과연 몇으로 해야할지 정해드립니다.</p>
 <p>다음 코드는 <code>build.gradle</code>의 코드 일부입니다. <code>build.gradle</code>의 <code>minsdkversion</code>은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
@@ -204,7 +206,7 @@ if (!doNotTrack) {
     >statcounter</a> 와 <a class="link" href="https://www.appbrain.com/stats/top-android-sdk-versions"  target="_blank" rel="noopener"
     >AppBrain</a>이 제공하는 2021년 7월 현재 전세계 안드로이드 API 점유율은 다음 표와 같습니다. 킷캣은 1%대 점유율을 가지고 있네요. 일본내 점유율만을 보여주는 <a class="link" href="http://smatabinfo.jp/os/android/index.html"  target="_blank" rel="noopener"
     >smatabinfo</a>에 따르면 이젠 롤리팝조차 1% 점유율이 안된다고 하네요.</p>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>OS Version</th>
@@ -272,7 +274,7 @@ if (!doNotTrack) {
 <td style="text-align:right">0.317%</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="결론">결론</h2>
 <p>롤리팝(21)에서는 성능이 향상될 수 있는 여러가지 획기적인 기술도입이 있었으므로 킷캣(19)은 이제는 버리는게 맞아 보입니다. 다만 롤리팝은 설치시 퍼미션을 다 줘버리는 한계가 있으므로, 런타임 퍼미션을 사용할 수 있는 마시멜로(23)를 <code>minsdkversion</code>으로 설정하는 것을 추천합니다. 여기까지만 해도 95%의 기기를 커버할 수 있습니다.</p>
 <p>더 강력한 이유로는 <a class="link" href="https://twitter.com/minsdkversion"  target="_blank" rel="noopener"
@@ -453,7 +455,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.6.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.7.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

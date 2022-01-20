@@ -8,7 +8,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/android-http-library-review/'>
 
-<link rel="stylesheet" href="/scss/style.min.775dbd4fd34fda61c5273b4bc3415f7c9666414fb6c40aab164a7ded4397da98.css"><meta property='og:title' content='안드로이드의 HTTP 통신 라이브러리 고찰'>
+<link rel="stylesheet" href="/scss/style.min.8f4416a35036b6471a6978873128b5652464226c8db8a9620ed1b94bc11bd353.css"><meta property='og:title' content='안드로이드의 HTTP 통신 라이브러리 고찰'>
 <meta property='og:description' content='이번 포스팅에서는 안드로이드의 HTTP 통신에 대해 알아보도록 하겠습니다.
 안드로이드에서의 통신 앱에서 가장 많이 수행하는 처리중 하나는 서버에 데이터를 요청하고 받아온 데이터를 단말-다시말해 클라이언트의 화면에 표시하는 것입니다. 이 때 클라이언트와 서버가 통신하는 방식은 크게 소켓연결과 HTTP연결 두 가지로 나눌 수 있습니다.
 소켓 연결 소켓은 네트워크 상의 두 프로그램 사이에서 일어나는 양방향 통신중 한 쪽의 엔드 포인트를 의미합니다. 여기서 엔드포인트란 IP와 포트의 조합을 뜻합니다.
@@ -139,6 +139,8 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
+    
+    
     <p>이번 포스팅에서는 안드로이드의 HTTP 통신에 대해 알아보도록 하겠습니다.</p>
 <h2 id="안드로이드에서의-통신">안드로이드에서의 통신</h2>
 <p>앱에서 가장 많이 수행하는 처리중 하나는 서버에 데이터를 요청하고 받아온 데이터를 단말-다시말해 클라이언트의 화면에 표시하는 것입니다. 이 때 클라이언트와 서버가 통신하는 방식은 크게 소켓연결과 HTTP연결 두 가지로 나눌 수 있습니다.</p>
@@ -164,7 +166,7 @@ if (!doNotTrack) {
 <h3 id="http-method">HTTP Method</h3>
 <p><a class="link" href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html"  target="_blank" rel="noopener"
     >HTTP Method</a>란 클라이언트가 서버에 메시지를 보낼 때 어떠한 목적을 가졌는지 밝히는 것으로, 다음과 같은 것들이 있습니다. 일반적으로 많이 사용되는 GET, POST, PUT, DELETE 이외에도 여러가지 명령어들이 있습니다.</p>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>Method</th>
@@ -209,7 +211,7 @@ if (!doNotTrack) {
 <td>PUT은 리소스 전체를 수정하나, PATCH는 해당 리소스의 일부만을 수정.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="restful-api">RESTful API</h3>
 <p><a class="link" href="https://cloud.google.com/apis/docs/overview"  target="_blank" rel="noopener"
     >구글</a>, <a class="link" href="https://developers.facebook.com/docs/graph-api"  target="_blank" rel="noopener"
@@ -228,7 +230,7 @@ if (!doNotTrack) {
 </ul>
 <p>Http Method와 RESTful API의 대응은 다음 <a class="link" href="https://www.restapitutorial.com/lessons/httpmethods.html"  target="_blank" rel="noopener"
     >표</a>와 같이 정리할 수 있습니다.</p>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>HTTP Method</th>
@@ -269,7 +271,7 @@ if (!doNotTrack) {
 <td>200 (OK). 404 (Not Found), if ID not found or invalid.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="android-http-통신-라이브러리">Android HTTP 통신 라이브러리</h2>
 <p>안드로이드에는 HTTP 통신을 구현하는 여러가지 라이브러리가 있는데요, 여기서는 주요하게 사용된 몇 가지 라이브러리를 시간순으로 다루어보도록 하겠습니다.</p>
 <h3 id="httpclient">HttpClient</h3>
@@ -382,7 +384,7 @@ if (!doNotTrack) {
 <p><a class="link" href="https://github.com/google/volley"  target="_blank" rel="noopener"
     >Volley</a>와 <a class="link" href="https://github.com/square/retrofit"  target="_blank" rel="noopener"
     >Retrofit</a>은 지금도 꾸준히 갱신되고 있는 라이브러리인데요, 두 라이브러리의 기능차이는 다음과 같이 정리할 수 있을 것 같습니다.</p>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th style="text-align:center">Function</th>
@@ -417,7 +419,7 @@ if (!doNotTrack) {
 <td style="text-align:center">No</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>속도에 있어서는 Volley가 빠르다는 사람도 있고 Retrofit이 빠르다는 사람도 있습니다만 결국 밀리세컨드 스케일의 차이라 속도만으로 어느 한쪽을 선택하는건 어려울 것 같네요. 코드 가독성은 대부분 Retrofit이 더 좋다는 평가인 것 같습니다. 사용법을 보시고 더 편한 쪽을 선택하시면 될 것 같습니다.</p>
 <p>개인적으로는 API 콜을 인터페이스로 정의해서 사용하는 Retrofit이 전체 구조를 파악하기 더 좋은것 같아 이쪽을 선호합니다. 한가지 재밌는 것은 구글의 <a class="link" href="https://developer.android.com/jetpack/guide#recommended-app-arch"  target="_blank" rel="noopener"
     >권장 앱 아키텍처</a>에서는 HTTP 통신에 Volley가 아닌 Retrofit을 추천하고 있다는 점입니다.</p>
@@ -608,7 +610,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.6.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.7.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

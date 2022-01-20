@@ -7,7 +7,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/coroutine-principle/'>
 
-<link rel="stylesheet" href="/scss/style.min.775dbd4fd34fda61c5273b4bc3415f7c9666414fb6c40aab164a7ded4397da98.css"><meta property='og:title' content='알기쉬운 코루틴 이론'>
+<link rel="stylesheet" href="/scss/style.min.8f4416a35036b6471a6978873128b5652464226c8db8a9620ed1b94bc11bd353.css"><meta property='og:title' content='알기쉬운 코루틴 이론'>
 <meta property='og:description' content='이번 포스팅에서는 코틀린의 코루틴(Coroutine)에 대해 알아보도록 하겠습니다.
 코루틴의 개념 안드로이드에서는 AsyncTask를 이용해서 손쉽게 비동기 프로그래밍을 구현했었지만 구글이 다음과 같이 밝힌 것처럼 메모리 누수등 여러가지 문제가 있었습니다. 그래서 API 30부터는 AsyncTask를 deprecate 시키고 코루틴을 사용하도록 권장하고 있습니다.
  AsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes.'>
@@ -136,6 +136,8 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
+    
+    
     <p>이번 포스팅에서는 코틀린의 코루틴(Coroutine)에 대해 알아보도록 하겠습니다.</p>
 <h2 id="코루틴의-개념">코루틴의 개념</h2>
 <p>안드로이드에서는 <a class="link" href="https://developer.android.com/reference/android/os/AsyncTask"  target="_blank" rel="noopener"
@@ -230,7 +232,7 @@ if (!doNotTrack) {
     <span class="c1">// New coroutine
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></div><p>코루틴은 일시정지될수 있는 작업의 흐름이기 때문에 Job은 코루틴의 여러가지 상태를 반영할 수 있도록 다음과 같이 설계되었습니다.</p>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>State</th>
@@ -277,7 +279,7 @@ if (!doNotTrack) {
 <td>false</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>그리고 각 상태는 다음과 같이 전환되죠.</p>
 <pre tabindex="0"><code>Job states cycle
                                           wait children
@@ -521,7 +523,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.6.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.7.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

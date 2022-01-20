@@ -7,7 +7,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/download-json-data-using-retrofit/'>
 
-<link rel="stylesheet" href="/scss/style.min.775dbd4fd34fda61c5273b4bc3415f7c9666414fb6c40aab164a7ded4397da98.css"><meta property='og:title' content='Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기'>
+<link rel="stylesheet" href="/scss/style.min.8f4416a35036b6471a6978873128b5652464226c8db8a9620ed1b94bc11bd353.css"><meta property='og:title' content='Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기'>
 <meta property='og:description' content='이번 포스팅에서는 Retrofit 라이브러리로 HTTP 통신을 수행하는 법에 대해 알아보도록 하겠습니다.
 안드로이드에서의 HTTP 통신에 대한 개괄적 설명과 Retrofit을 사용해야 하는 이유에 대해서는 안드로이드의 HTTP 통신 라이브러리 고찰에서 다루었으니 그것을 참조하시면 좋을 것 같습니다. 또한 Retrofit의 기술적 특징에 대해서는 라이브러리 제작자가 설명해 둔 Retrofit 2과 함께하는 정말 쉬운 HTTP 를 보는것이 가장 정확할 것 같습니다.
 이 강의에서는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황 API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.'>
@@ -136,6 +136,8 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
+    
+    
     <p>이번 포스팅에서는 <a class="link" href="https://square.github.io/retrofit/"  target="_blank" rel="noopener"
     >Retrofit</a> 라이브러리로 HTTP 통신을 수행하는 법에 대해 알아보도록 하겠습니다.</p>
 <p>안드로이드에서의 HTTP 통신에 대한 개괄적 설명과 Retrofit을 사용해야 하는 이유에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/android-http-library-review/"  target="_blank" rel="noopener"
@@ -468,7 +470,7 @@ if (!doNotTrack) {
 <p>Retrofit은 HTTP API의 request를 <a class="link" href="https://kotlinlang.org/docs/interfaces.html"  target="_blank" rel="noopener"
     >인터페이스</a>로 정의하여 사용합니다. 이 강의에서 사용할 선별진료소 API는 다음과 같은 <a class="link" href="https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&amp;rows=10&amp;sortColumn=&amp;sortDirection=&amp;infId=461Q599QLK8UTE14E3LW12837248&amp;infSeq=3&amp;order=&amp;loc=&amp;searchWord=%EC%BD%94%EB%A1%9C%EB%82%98"  target="_blank" rel="noopener"
     >인자</a>를 받을 수 있게 만들어져 있습니다.</p>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>변수명</th>
@@ -503,7 +505,7 @@ if (!doNotTrack) {
 <td>기본값 : 100(sample key는 5 고정)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>그러면 이중 KEY와 Type 인자를 전달받아 GET 요청을 수행하는 Retrofit 서비스를 하나 만들어보겠습니다. API 요청주소가 <code>https://openapi.gg.go.kr/EmgMedInfo</code> 이므로 고정주소인 Base url은 <code>https://openapi.gg.go.kr/</code> 이고, <code>@GET</code>요청시 인자는 Base url 뒤의 <code>EmgMedInfo</code> 입니다. KEY와 Type 인자는 <code>@Query</code> 어노테이션을 써서 전달해줍니다.</p>
 <p>인터페이스의 메소드인 <code>getEmgMedData</code>는 <a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Call.html"  target="_blank" rel="noopener"
     >Call</a> 객체를 반환하도록 정의되었습니다. Call 은 서버에 request를 보내고 그 응답을 반환하는 1회용 객체입니다.</p>
@@ -816,7 +818,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.6.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.7.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

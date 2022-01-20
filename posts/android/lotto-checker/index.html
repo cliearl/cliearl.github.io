@@ -8,7 +8,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/lotto-checker/'>
 
-<link rel="stylesheet" href="/scss/style.min.775dbd4fd34fda61c5273b4bc3415f7c9666414fb6c40aab164a7ded4397da98.css"><meta property='og:title' content='코루틴으로 로또번호 당첨 확인하기'>
+<link rel="stylesheet" href="/scss/style.min.8f4416a35036b6471a6978873128b5652464226c8db8a9620ed1b94bc11bd353.css"><meta property='og:title' content='코루틴으로 로또번호 당첨 확인하기'>
 <meta property='og:description' content='이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.
 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.
 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.
@@ -139,6 +139,8 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
+    
+    
     <p>이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.</p>
 <h2 id="당첨번호-조회하기">당첨번호 조회하기</h2>
 <p>이전에 <a class="link" href="https://cliearl.github.io/posts/android/lotto-generator/"  target="_blank" rel="noopener"
@@ -189,7 +191,7 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></div><h2 id="내-번호와-당첨번호-비교하기">내 번호와 당첨번호 비교하기</h2>
 <p>다음은 내 번호와 당첨번호를 비교하는 함수를 만듭니다. 로또의 규칙은 표의 내용과 같이 되어 있습니다. 그래서 <code>whatIsRank</code>에서는 내 로또번호와 당첨번호를 전달받아 처음 6개까지의 숫자를 비교해 일치한 갯수를 세고, 일치한 번호의 갯수가 5개이면 추가로 보너스번호인 7번째 번호가 일치하는지 확인하도록 하면 됩니다.</p>
-<table>
+<div class="table-wrapper"><table>
 <thead>
 <tr>
 <th style="text-align:center">순위</th>
@@ -218,7 +220,7 @@ if (!doNotTrack) {
 <td style="text-align:center">3개 번호 일치</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">whatIsRank</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;,</span> <span class="n">winningNumbers</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;):</span> <span class="n">String</span> <span class="p">{</span>
     <span class="c1">// https://namu.wiki/w/%EB%A1%9C%EB%98%90%206/45#s-4
 </span><span class="c1"></span>    <span class="k">var</span> <span class="py">matchCount</span> <span class="p">=</span> <span class="m">0</span>
@@ -503,7 +505,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.6.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.7.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
