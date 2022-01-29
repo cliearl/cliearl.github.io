@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 런타임 퍼미션에 대해 알아보도록 하겠습니다.
+들어가기 안드로이드는 카메라나 저장소, 위치 이용와 같이 시스템에 큰 영향을 미칠 수 있는 기능에 대해서는 위험한 권한으로 분류하여 다음과 같이 관리하고 있습니다.
+ 출처 : https://ieeexplore.ieee.org/document/9272963 
+과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 Runtime Permission 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.'><title>Runtime Permission 이해하고 요청 구현하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/request-runtime-permission/'>
+
+<link rel="stylesheet" href="/scss/style.min.1b3ac667198cb83edcc9c45e606a6f4dd6910b8ada6b74d7fd988f1b2dfd0c7c.css"><meta property='og:title' content='Runtime Permission 이해하고 요청 구현하기'>
+<meta property='og:description' content='이번 포스팅에서는 런타임 퍼미션에 대해 알아보도록 하겠습니다.
+들어가기 안드로이드는 카메라나 저장소, 위치 이용와 같이 시스템에 큰 영향을 미칠 수 있는 기능에 대해서는 위험한 권한으로 분류하여 다음과 같이 관리하고 있습니다.
+ 출처 : https://ieeexplore.ieee.org/document/9272963 
+과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 Runtime Permission 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/request-runtime-permission/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Runtime Permission' /><meta property='article:published_time' content='2022-01-29T15:10:31&#43;09:00'/><meta property='article:modified_time' content='2022-01-29T15:10:31&#43;09:00'/>
+<meta name="twitter:title" content="Runtime Permission 이해하고 요청 구현하기">
+<meta name="twitter:description" content="이번 포스팅에서는 런타임 퍼미션에 대해 알아보도록 하겠습니다.
+들어가기 안드로이드는 카메라나 저장소, 위치 이용와 같이 시스템에 큰 영향을 미칠 수 있는 기능에 대해서는 위험한 권한으로 분류하여 다음과 같이 관리하고 있습니다.
+ 출처 : https://ieeexplore.ieee.org/document/9272963 
+과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 Runtime Permission 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/android/request-runtime-permission/">Runtime Permission 이해하고 요청 구현하기</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 29, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 포스팅에서는 런타임 퍼미션에 대해 알아보도록 하겠습니다.</p>
+<h2 id="들어가기">들어가기</h2>
+<p>안드로이드는 카메라나 저장소, 위치 이용와 같이 시스템에 큰 영향을 미칠 수 있는 기능에 대해서는 위험한 권한으로 분류하여 다음과 같이 관리하고 있습니다.</p>
+<p><figure 
+	>
+	<a href="/images/request-runtime-permission/almom5-3041432-large.gif" >
+		<img src="/images/request-runtime-permission/almom5-3041432-large.gif"
+			
+			
+			
+			loading="lazy"
+			alt="출처 : https://ieeexplore.ieee.org/document/9272963">
+	</a>
+	
+	<figcaption>출처 : <a href="https://ieeexplore.ieee.org/document/9272963">https://ieeexplore.ieee.org/document/9272963</a></figcaption>
+	
+</figure></p>
+<p>과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 <a class="link" href="https://developer.android.com/training/permissions/requesting"  target="_blank" rel="noopener"
+    >Runtime Permission</a> 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.</p>
+<h2 id="필요한-권한-정의">필요한 권한 정의</h2>
+<p>우선은 <code>AndroidManifest.xml</code>에서 앱에 필요한 위험한 권한을 추가합니다. 위치에 관련된 권한은 두가지가 있는데 하나는 네트워크만을 이용해서 약 1.6km 이내로 위치를 파악하는 <code>ACCESS_COARSE_LOCATION</code>과, GPS도 같이 써서 위치를 약 50m 이내로 더 정확하게 파악하는 <code>ACCESS_FINE_LOCATION</code>이 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_COARSE_LOCATION&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_FINE_LOCATION&#34;</span> <span class="nt">/&gt;</span>
+</code></pre></div><p>요청하는 권한은 한 묶음으로 만들어 다루기 위해 <code>REQUIRED_PERMISSIONS</code>로 정의합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">REQUIRED</span><span class="n">_PERMISSIONS</span> <span class="p">=</span> <span class="n">arrayOf</span><span class="p">(</span>
+        <span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_COARSE_LOCATION</span><span class="p">,</span>  <span class="c1">// 도시 블록 단위
+</span><span class="c1"></span>        <span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_FINE_LOCATION</span><span class="p">,</span>  <span class="c1">// 더 정밀한 단위
+</span><span class="c1"></span>    <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="권한-확인">권한 확인</h2>
+<p>권한을 확인하는 함수를 작성합니다. <a class="link" href="https://developer.android.com/reference/androidx/core/content/ContextCompat#checkSelfPermission%28android.content.Context,%20java.lang.String%29"  target="_blank" rel="noopener"
+    >ContextCompat.checkSelfPermission</a>으로 해당 권한이 부여되었는지 확인할 수 있는데요, <code>REQUIRED_PERMISSIONS</code>에 대해 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/all.html"  target="_blank" rel="noopener"
+    >all</a>을 수행하여 이중 하나라도 권한이 부여되지 않은 경우 <code>isAllPermissionsGranted</code>가 <code>false</code>를 반환하도록 했습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isAllPermissionsGranted</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="n">REQUIRED_PERMISSIONS</span><span class="p">.</span><span class="n">all</span> <span class="p">{</span> <span class="n">permission</span> <span class="o">-&gt;</span>
+    <span class="n">ContextCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">permission</span><span class="p">)</span> <span class="o">==</span>
+            <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="화면-디자인">화면 디자인</h2>
+<p>화면에 퍼미션을 체크하는 버튼을 하나 만듭니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;ImageView</span> <span class="na">android:id=</span><span class="s">&#34;@+id/location_icon&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;48dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;48dp&#34;</span>
+        <span class="na">android:layout_marginEnd=</span><span class="s">&#34;12dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_my_location_24&#34;</span>
+        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintEnd_toStartOf=</span><span class="s">&#34;@+id/location_text&#34;</span>
+        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintHorizontal_chainStyle=</span><span class="s">&#34;packed&#34;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;TextView</span> <span class="na">android:id=</span><span class="s">&#34;@+id/location_text&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;Location&#34;</span>
+        <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span>
+        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintStart_toEndOf=</span><span class="s">&#34;@+id/location_icon&#34;</span>
+        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</code></pre></div><h2 id="callback을-이용한-권한-획득">Callback을 이용한 권한 획득</h2>
+<h3 id="requestdangerouspermissions-작성">requestDangerousPermissions 작성</h3>
+<p>버튼에 클릭리스너를 하나 만들어 권한이 부여되어있지 않으면 권한을 요청하는 로직을 구성합니다. 권한 요청에는 <a class="link" href="https://developer.android.com/reference/androidx/core/app/ActivityCompat#requestPermissions%28android.app.Activity,%20java.lang.String[],%20int%29"  target="_blank" rel="noopener"
+    >ActivityCompat.requestPermissions</a>를 사용하는데, 이 때 request code가 필요하므로 companion object 안에 <code>REQUEST_CODE_PERMISSIONS</code>도 정의해 줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">binding</span><span class="p">.</span><span class="n">locationIcon</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isAllPermissionsGranted</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">requestDangerousPermissions</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">requestDangerousPermissions</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ActivityCompat</span><span class="p">.</span><span class="n">requestPermissions</span><span class="p">(</span>
+        <span class="k">this</span><span class="p">,</span> <span class="n">REQUIRED_PERMISSIONS</span><span class="p">,</span> <span class="n">REQUEST_CODE_PERMISSIONS</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// companion object
+</span><span class="c1"></span><span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">REQUEST</span><span class="n">_CODE_PERMISSIONS</span> <span class="p">=</span> <span class="m">1001</span>
+</code></pre></div><h3 id="onrequestpermissionsresult">onRequestPermissionsResult</h3>
+<p><code>requestDangerousPermissions</code>에서 권한을 요청한 뒤 유저의 조작이 행해지면 그 결과는 <a class="link" href="https://developer.android.com/reference/androidx/core/app/ActivityCompat.OnRequestPermissionsResultCallback?hl=ko#onRequestPermissionsResult%28int,%20java.lang.String%5B%5D,%20int%5B%5D%29"  target="_blank" rel="noopener"
+    >onRequestPermissionsResult</a> 콜백으로 받게 됩니다. onRequestPermissionsResult에서는 requestCode를 확인한 뒤 모든 권한이 취득된 경우, 확인 결과 권한이 취득되지 않았을 경우 <a class="link" href="https://developer.android.com/reference/androidx/core/app/ActivityCompat#shouldShowRequestPermissionRationale%28android.app.Activity,%20java.lang.String%29"  target="_blank" rel="noopener"
+    >shouldShowRequestPermissionRationale</a>를 써서 권한을 재요청할 수 있습니다. 그럼에도 요청을 거부하면 앱은 더이상 권한을 요청할 수 없습니다. 다음 그림에 권한 요청의 순서를 나타내었습니다.</p>
+<p><figure 
+	>
+	<a href="/images/request-runtime-permission/workflow-runtime.svg" >
+		<img src="/images/request-runtime-permission/workflow-runtime.svg"
+			
+			
+			
+			loading="lazy"
+			alt="출처 : https://developer.android.com/training/permissions/requesting">
+	</a>
+	
+	<figcaption>출처 : <a href="https://developer.android.com/training/permissions/requesting">https://developer.android.com/training/permissions/requesting</a></figcaption>
+	
+</figure></p>
+<p>여기에서는 사용자가 모든 권한을 취득했으면 &ldquo;Permission granted&quot;를 보여주고, 요청을 거부하면 &ldquo;Permission required to use app!&ldquo;을 띄운뒤 권한을 다시 요구하도록 했습니다. 여기에서도 요청을 거부하면 마지막으로 Intent를 사용해 유저를 설정화면으로 직접 보내는 openSettings가 실행되도록 했습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onRequestPermissionsResult</span><span class="p">(</span>
+    <span class="n">requestCode</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
+    <span class="n">permissions</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="k">out</span> <span class="n">String</span><span class="p">&gt;,</span>
+    <span class="n">grantResults</span><span class="p">:</span> <span class="n">IntArray</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">.</span><span class="n">onRequestPermissionsResult</span><span class="p">(</span><span class="n">requestCode</span><span class="p">,</span> <span class="n">permissions</span><span class="p">,</span> <span class="n">grantResults</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">requestCode</span> <span class="o">==</span> <span class="n">REQUEST_CODE_PERMISSIONS</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">grantResults</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">grantResults</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 모든 권한을 취득함
+</span><span class="c1"></span>            <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">shouldShowRequestPermissionRationale</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">[</span><span class="m">0</span><span class="p">]))</span> <span class="p">{</span>
+                <span class="c1">// 권한을 다시 요구함
+</span><span class="c1"></span>                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span>
+                    <span class="s2">&#34;Permission required to use app!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+                <span class="n">requestDangerousPermissions</span><span class="p">()</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// Settings로 들어가서 설정할 수 있도록 함
+</span><span class="c1"></span>                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission denied&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+<span class="c1">//                        openSettings()
+</span><span class="c1"></span>            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">openSettings</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Intent</span><span class="p">(</span><span class="n">Settings</span><span class="p">.</span><span class="n">ACTION_APPLICATION_DETAILS_SETTINGS</span><span class="p">).</span><span class="n">apply</span> <span class="p">{</span>
+        <span class="n">addFlags</span><span class="p">(</span><span class="n">Intent</span><span class="p">.</span><span class="n">FLAG_ACTIVITY_NEW_TASK</span><span class="p">)</span>
+        <span class="k">data</span> <span class="p">=</span> <span class="n">Uri</span><span class="p">.</span><span class="n">fromParts</span><span class="p">(</span><span class="s2">&#34;package&#34;</span><span class="p">,</span> <span class="n">packageName</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">}.</span><span class="n">run</span><span class="p">(</span><span class="o">::</span><span class="n">startActivity</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="activity120-이후의-권한-획득-방법">activity:1.2.0 이후의 권한 획득 방법</h2>
+<h3 id="activityresultcontract">ActivityResultContract</h3>
+<p>그런데 구글은 <code>onRequestPermissionsResult</code>를 <code>androidx.activity:activity:1.2.0-alpha04</code>부터 <a class="link" href="https://developer.android.com/jetpack/androidx/releases/activity#1.2.0-alpha04"  target="_blank" rel="noopener"
+    >deprecated</a> 시키고, 시스템에서 전달된 결과를 처리하기 위해 <a class="link" href="https://developer.android.com/training/basics/intents/result"  target="_blank" rel="noopener"
+    >ActivityResultContract</a>를 새로 만들었습니다. ActivityResultContract를 사용하면 다음과 같이 미리 정의된 <a class="link" href="https://developer.android.com/reference/androidx/activity/result/contract/package-summary"  target="_blank" rel="noopener"
+    >계약서</a>를 전달하는것만으로 액티비티에서 결과를 손쉽게 가져올 수 있습니다.</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Nested types</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CaptureVideo</td>
+<td>An ActivityResultContract to take a video saving it into the provided content-Uri.</td>
+</tr>
+<tr>
+<td>CreateDocument</td>
+<td>An ActivityResultContract to prompt the user to select a path for creating a new document, returning the content:Uri of the item that was create.</td>
+</tr>
+<tr>
+<td>GetContent</td>
+<td>An ActivityResultContract to prompt the user to pick a piece of content, receiving a content://Uri for that content that allows you to use android.content.ContentResolver.openInputStream to access the raw data.</td>
+</tr>
+<tr>
+<td>GetMultipleContents</td>
+<td>An ActivityResultContract to prompt the user to pick one or more a pieces of content, receiving a content://Uri for each piece of content that allows you to use android.content.ContentResolver.openInputStream to access the raw data.</td>
+</tr>
+<tr>
+<td>OpenDocument</td>
+<td>An ActivityResultContract to prompt the user to open a document, receiving its contents as a file:/http:/content:Uri.</td>
+</tr>
+<tr>
+<td>OpenDocumentTree</td>
+<td>An ActivityResultContract to prompt the user to select a directory, returning the user selection as a Uri.</td>
+</tr>
+<tr>
+<td>OpenMultipleDocuments</td>
+<td>An ActivityResultContract to prompt the user to open (possibly multiple) documents, receiving their contents as file:/http:/content:Uris.</td>
+</tr>
+<tr>
+<td>PickContact</td>
+<td>An ActivityResultContract to request the user to pick a contact from the contacts app.</td>
+</tr>
+<tr>
+<td>RequestMultiplePermissions</td>
+<td>An ActivityResultContract to request permissions</td>
+</tr>
+<tr>
+<td>RequestPermission</td>
+<td>An ActivityResultContract to request a permission</td>
+</tr>
+<tr>
+<td>StartActivityForResult</td>
+<td>An ActivityResultContract that doesn&rsquo;t do any type conversion, taking raw Intent as an input and ActivityResult as an output.</td>
+</tr>
+<tr>
+<td>StartIntentSenderForResult</td>
+<td>An ActivityResultContract that calls Activity.startIntentSender.</td>
+</tr>
+<tr>
+<td>TakePicture</td>
+<td>An ActivityResultContract to take a picture saving it into the provided content-Uri.</td>
+</tr>
+<tr>
+<td>TakePicturePreview</td>
+<td>An ActivityResultContract to take small a picture preview, returning it as a Bitmap.</td>
+</tr>
+<tr>
+<td>TakeVideo</td>
+<td>An ActivityResultContract to take a video saving it into the provided content-Uri.</td>
+</tr>
+</tbody>
+</table></div>
+<p>그럼 계약서 기능을 이용하기 위해 gradle에 Dependency를 추가합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">implementation</span> <span class="s2">&#34;androidx.activity:activity-ktx:1.4.0&#34;</span>
+</code></pre></div><h3 id="requestmultiplepermissions-작성">requestMultiplePermissions 작성</h3>
+<p>여기서는 복수의 권한을 한번에 요청하기 위해 <a class="link" href="https://developer.android.com/training/basics/intents/result"  target="_blank" rel="noopener"
+    >registerForActivityResult</a> 에 <a class="link" href="https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts.RequestMultiplePermissions"  target="_blank" rel="noopener"
+    >RequestMultiplePermissions</a> 계약서를 전달하고 <a class="link" href="https://developer.android.com/reference/androidx/activity/result/ActivityResultLauncher"  target="_blank" rel="noopener"
+    >ActivityResultLauncher</a>를 반환받도록 했습니다. 한 개의 권한만을 요청할 경우에는 <a class="link" href="https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts.RequestPermission"  target="_blank" rel="noopener"
+    >RequestPermission</a> 을 전달하면 됩니다. 그리고 권한을 승인하였을때, 승인하지 않았을 때, 완전히 거부하였을 때에 대한 분기도 정의하여 줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">val</span> <span class="py">requestPermissionLauncher</span> <span class="p">=</span>
+    <span class="n">registerForActivityResult</span><span class="p">(</span><span class="n">ActivityResultContracts</span><span class="p">.</span><span class="n">RequestMultiplePermissions</span><span class="p">())</span> <span class="p">{</span> <span class="n">permissions</span> <span class="o">-&gt;</span>
+        <span class="n">permissions</span><span class="p">.</span><span class="n">entries</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="n">permission</span> <span class="o">-&gt;</span>
+            <span class="k">when</span> <span class="p">{</span>
+                <span class="n">permission</span><span class="p">.</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="p">{</span>
+                    <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+                <span class="p">}</span>
+                <span class="n">shouldShowRequestPermissionRationale</span><span class="p">(</span><span class="n">permission</span><span class="p">.</span><span class="n">key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span>
+                    <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span>
+                        <span class="s2">&#34;Permission required to use app!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+                <span class="p">}</span>
+                <span class="k">else</span> <span class="o">-&gt;</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission denied&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div><p>마지막으로 이미 정의된 <code>requestPermissions</code> 는 주석처리하고 <code>requestPermissionLauncher</code> 를 <a class="link" href="https://developer.android.com/reference/androidx/activity/result/ActivityResultLauncher#launch%28I,androidx.core.app.ActivityOptionsCompat%29"  target="_blank" rel="noopener"
+    >launch</a>로 실행시키면 됩니다. <code>RequestMultiplePermissions</code> 및 <code>RequestPermission</code> 내부의 <code>getSynchronousResult</code> 에는 권한을 체크하는 로직도 <a class="link" href="https://modelmaker.tistory.com/18"  target="_blank" rel="noopener"
+    >포함</a>되어있기 때문에 사용방식에 따라서는 <code>isAllPermissionsGranted</code> 를 생략할 수도 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">binding</span><span class="p">.</span><span class="n">locationIcon</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isAllPermissionsGranted</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="c1">//                requestPermissions()
+</span><span class="c1"></span>        <span class="n">requestPermissionLauncher</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>이렇게 해서 런타임 퍼미션에 대해 알아보았습니다.</p>
+<div class="video-wrapper">
+    <iframe loading="lazy" 
+            src="https://www.youtube.com/embed/ItbTV_SQ7hI" 
+            allowfullscreen 
+            title="YouTube Video"
+    >
+    </iframe>
+</div>
+
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/runtime-permission/">Runtime Permission</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+        <div class="article-list--compact links">
+    
+        <article>
+            <a href="https://github.com/cliearl/android-tutorial/tree/master/RequestRuntimePermission" target="_blank" rel="noopener">
+                <div class="article-details">
+                    <h2 class="article-title">GitHub/cliearl</h2>
+                    <footer class="article-time">
+                        
+                            Find and download source code of the article from this link.
+                        
+                    </footer>
+                </div>
+        
+                
+                    <div class="article-image">
+                        <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
+                    </div>
+                
+            </a>
+        </article>
+    
+</div>
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/android/prevent-fragment-memory-leak-during-viewbinding/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">View Binding 사용시 Fragment의 메모리 누수 대응하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/download-json-data-using-retrofit/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/android-http-library-review/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">안드로이드의 HTTP 통신 라이브러리 고찰</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/android-studio-plugins/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">내가 Android Studio에서 사용하는 Plugins</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/implement-crud-with-sqliteopenhelper/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2022 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.7.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#들어가기">들어가기</a></li>
+    <li><a href="#필요한-권한-정의">필요한 권한 정의</a></li>
+    <li><a href="#권한-확인">권한 확인</a></li>
+    <li><a href="#화면-디자인">화면 디자인</a></li>
+    <li><a href="#callback을-이용한-권한-획득">Callback을 이용한 권한 획득</a>
+      <ol>
+        <li><a href="#requestdangerouspermissions-작성">requestDangerousPermissions 작성</a></li>
+        <li><a href="#onrequestpermissionsresult">onRequestPermissionsResult</a></li>
+      </ol>
+    </li>
+    <li><a href="#activity120-이후의-권한-획득-방법">activity:1.2.0 이후의 권한 획득 방법</a>
+      <ol>
+        <li><a href="#activityresultcontract">ActivityResultContract</a></li>
+        <li><a href="#requestmultiplepermissions-작성">requestMultiplePermissions 작성</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
