@@ -7,7 +7,7 @@ import Foundation func solution(_ record:[String]) -&amp;gt; [String] { var answ
 
 <link rel='canonical' href='https://cliearl.github.io/posts/coding-test/2019-kakao-1st-swift/'>
 
-<link rel="stylesheet" href="/scss/style.min.1b3ac667198cb83edcc9c45e606a6f4dd6910b8ada6b74d7fd988f1b2dfd0c7c.css"><meta property='og:title' content='2019 카카오 신입 공채 1차 코딩 테스트 Swift 풀이'>
+<link rel="stylesheet" href="/scss/style.min.5f343aefda6021d7c99a35d0d8a06abdad13d86982967b5b28f1008e404a346d.css"><meta property='og:title' content='2019 카카오 신입 공채 1차 코딩 테스트 Swift 풀이'>
 <meta property='og:description' content='문제 해설 http://tech.kakao.com/2018/09/21/kakao-blind-recruitment-for2019-round-1/
 오픈채팅방 https://www.welcomekakao.com/learn/courses/30/lessons/42888
 import Foundation func solution(_ record:[String]) -&amp;gt; [String] { var answer = [String]() var userList = [String : String]() var chatLog = [[String]]() let enterMsg = &amp;#34;님이 들어왔습니다.&amp;#34; let leaveMsg = &amp;#34;님이 나갔습니다.&amp;#34; // chatLog 작성 for info in record { let splitInfo = info.components(separatedBy: &amp;#34; &amp;#34;) if splitInfo[0] == &amp;#34;Enter&amp;#34; { userList[splitInfo[1]] = splitInfo[2] chatLog.append([splitInfo[1], enterMsg]) } else if splitInfo[0] == &amp;#34;Leave&amp;#34; { chatLog.append([splitInfo[1], leaveMsg]) } else if splitInfo[0] == &amp;#34;Change&amp;#34; { userList[splitInfo[1]] = splitInfo[2] } } // 최종 answer 작성 for log in chatLog { answer.'>
