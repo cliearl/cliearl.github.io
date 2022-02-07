@@ -7,7 +7,7 @@ Postgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다�
 
 <link rel='canonical' href='https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/'>
 
-<link rel="stylesheet" href="/scss/style.min.5f343aefda6021d7c99a35d0d8a06abdad13d86982967b5b28f1008e404a346d.css"><meta property='og:title' content='Postgresql Docker Image의 메이저 버전 업그레이드'>
+<link rel="stylesheet" href="/scss/style.min.bbcfef3c56489f1f37b552146da519e6b6a74a4c92792bcc512c78e2f55f25e1.css"><meta property='og:title' content='Postgresql Docker Image의 메이저 버전 업그레이드'>
 <meta property='og:description' content='Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.
 Postgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다.
    Release First release Latest minor version Latest release End of life Milestones     11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions   12 2019-10-03 12.'>
@@ -214,18 +214,14 @@ if (!doNotTrack) {
 <p>Postgresql은 <code>pg_upgrade</code>와 <code>pg_upgradecluster</code>라는 명령어를 제공해주는데 이걸 사용하면 업그레이드를 비교적 간단하게 수행할 수 있다. 문제는 이 명령어를 사용하기 위해서는 OS에 현재버전과 업그레이드할 버전이 모두 설치되어 있어야 하기 때문에 도커에서는 사용할 수 없다는 점이다.</p>
 <p>다만 이걸 또 도커에서 사용할 수 있게 만들어놓은 <a class="link" href="https://github.com/tianon/docker-postgres-upgrade"  target="_blank" rel="noopener"
     >사람</a>이 있긴 하다&hellip;</p>
-<p><figure 
-	>
-	<a href="https://storage.googleapis.com/jjalbot-jjals/2021/02/tA3zuU8x8o/2Q8oFzDjC.gif" >
-		<img src="https://storage.googleapis.com/jjalbot-jjals/2021/02/tA3zuU8x8o/2Q8oFzDjC.gif"
-			
-			
-			
-			loading="lazy"
-			>
-	</a>
+<p><img src="https://storage.googleapis.com/jjalbot-jjals/2021/02/tA3zuU8x8o/2Q8oFzDjC.gif"
 	
-</figure></p>
+	
+	
+	loading="lazy"
+	
+	
+></p>
 <h3 id="백업파일-이용">백업파일 이용</h3>
 <p>하지만 내생각에 가장 속편한 것은 그냥 이전버전에서 전체 데이터를 덤프받아 다음버전에 올려버리는 것이다. 우선 이전버전과 다음버전 컨테이너를 동시에 띄우고 다음 내용을 따라한다.</p>
 <ul>
@@ -406,7 +402,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.7.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

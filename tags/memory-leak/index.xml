@@ -14,9 +14,8 @@
       
       <guid>https://cliearl.github.io/posts/android/prevent-fragment-memory-leak-during-viewbinding/</guid>
       <description>들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.
- 출처 : https://www.youtube.com/watch?v=Qxj2eBmXLHg 
 Fragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.
- 출처: https://developer.android.com/guide/fragments/lifecycle</description>
+메모리 누수 대응법 _binding의 직접 해제 그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 _binding 변수를 만들어 사용한 뒤 onDestroyView에서 해제해주는 구조를 공식 문서 에서 제안하고 있습니다.</description>
     </item>
     
   </channel>
