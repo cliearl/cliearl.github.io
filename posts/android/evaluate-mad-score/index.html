@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 내 앱의 MAD score를 평가하는 방법에 대해 알아보도록 하겠습니다.
+MAD score란 구글에서는 안드로이드 앱의 안정성을 향상시키기 위해 여러가지 기술을 도입해 왔는데요, 대표적인 것이 Kotlin 언어와 Jetpack 라이브러리라고 할 수 있을 것 같습니다.
+그 외에도 수많은 선진적인 기술을 도입하고 있습니다만, 그러한 기술을 단순히 도입하는데 그치지 않고 실제 개발자들이 기술을 더 잘 이해하고 사용할 수 있도록 Modern Android Development (MAD) Skills 라는 제목으로 블로그 포스팅도 하고, 유튜브에서 강의 영상도 제공하고 있습니다.'><title>내 앱의 MAD score 평가하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/evaluate-mad-score/'>
+
+<link rel="stylesheet" href="/scss/style.min.bbcfef3c56489f1f37b552146da519e6b6a74a4c92792bcc512c78e2f55f25e1.css"><meta property='og:title' content='내 앱의 MAD score 평가하기'>
+<meta property='og:description' content='이번 포스팅에서는 내 앱의 MAD score를 평가하는 방법에 대해 알아보도록 하겠습니다.
+MAD score란 구글에서는 안드로이드 앱의 안정성을 향상시키기 위해 여러가지 기술을 도입해 왔는데요, 대표적인 것이 Kotlin 언어와 Jetpack 라이브러리라고 할 수 있을 것 같습니다.
+그 외에도 수많은 선진적인 기술을 도입하고 있습니다만, 그러한 기술을 단순히 도입하는데 그치지 않고 실제 개발자들이 기술을 더 잘 이해하고 사용할 수 있도록 Modern Android Development (MAD) Skills 라는 제목으로 블로그 포스팅도 하고, 유튜브에서 강의 영상도 제공하고 있습니다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/evaluate-mad-score/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='MAD score' /><meta property='article:published_time' content='2022-02-12T10:24:38&#43;09:00'/><meta property='article:modified_time' content='2022-02-12T10:24:38&#43;09:00'/>
+<meta name="twitter:title" content="내 앱의 MAD score 평가하기">
+<meta name="twitter:description" content="이번 포스팅에서는 내 앱의 MAD score를 평가하는 방법에 대해 알아보도록 하겠습니다.
+MAD score란 구글에서는 안드로이드 앱의 안정성을 향상시키기 위해 여러가지 기술을 도입해 왔는데요, 대표적인 것이 Kotlin 언어와 Jetpack 라이브러리라고 할 수 있을 것 같습니다.
+그 외에도 수많은 선진적인 기술을 도입하고 있습니다만, 그러한 기술을 단순히 도입하는데 그치지 않고 실제 개발자들이 기술을 더 잘 이해하고 사용할 수 있도록 Modern Android Development (MAD) Skills 라는 제목으로 블로그 포스팅도 하고, 유튜브에서 강의 영상도 제공하고 있습니다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/android/evaluate-mad-score/">내 앱의 MAD score 평가하기</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 12, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 포스팅에서는 내 앱의 MAD score를 평가하는 방법에 대해 알아보도록 하겠습니다.</p>
+<h2 id="mad-score란">MAD score란</h2>
+<p>구글에서는 안드로이드 앱의 안정성을 향상시키기 위해 여러가지 기술을 도입해 왔는데요, 대표적인 것이 Kotlin 언어와 Jetpack 라이브러리라고 할 수 있을 것 같습니다.</p>
+<p>그 외에도 수많은 선진적인 기술을 도입하고 있습니다만, 그러한 기술을 단순히 도입하는데 그치지 않고 실제 개발자들이 기술을 더 잘 이해하고 사용할 수 있도록 Modern Android Development (MAD) Skills 라는 제목으로 <a class="link" href="https://medium.com/androiddevelopers/tagged/mad-skills"  target="_blank" rel="noopener"
+    >블로그 포스팅</a>도 하고, 유튜브에서 <a class="link" href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc91i2QT8qfrfKgLNlJiG1z7"  target="_blank" rel="noopener"
+    >강의 영상</a>도 제공하고 있습니다.</p>
+<p>그런데 구글은 여기에 한술 더 떠 내 앱에서 안드로이드의 MAD 기술을 얼마나 적극적으로 사용하고 있는지를 점수로 환산해주는 <a class="link" href="https://developer.android.com/modern-android-development/scorecard"  target="_blank" rel="noopener"
+    >MAD score</a> 시스템을 발표합니다. 점수에 따른 이익이나 불이익이 있는 것은 아니고, 그냥 높은 숫자를 추구하는 개발자들을 노린 MAD 포교활동이라 하면 맞을 것 같습니다.</p>
+<h2 id="mad-score-확인하기">MAD score 확인하기</h2>
+<p>여기서는 구글의 Sunflower 프로젝트의 스코어를 확인해보기로 하죠. Sunflower 프로젝트는 구글에서 Jetpack 사용방법 설명을 위해 만든 예제 앱입니다. 다음 Github 주소에서 프로젝트를 다운받습니다.</p>
+<p><a class="link" href="https://github.com/android/sunflower"  target="_blank" rel="noopener"
+    >https://github.com/android/sunflower</a></p>
+<h3 id="플러그인-설치">플러그인 설치</h3>
+<p>Android Studio에 <a class="link" href="https://plugins.jetbrains.com/plugin/15549-mad-scorecard"  target="_blank" rel="noopener"
+    >MAD Scorecard</a> 플러그인을 설치합니다. 2020년 12월 이후로 업데이트가 없는 점은 아쉽네요.</p>
+<h3 id="플러그인-실행">플러그인 실행</h3>
+<p><code>Anaylyze -&gt; Create MAD Scorecard</code>를 선택해 스코어카드를 작성합니다. 앱 번들 유무를 체크하는데 없어도 스코어카드는 정상적으로 만들어집니다.</p>
+<h3 id="결과-공유">결과 공유</h3>
+<p>스코어가 다음과 같이 매겨졌습니다. 100% 코틀린에 35개의 Jetpack 라이브러리를 사용했다고 나오네요. 역대 최고의 안드로이드 개발자인 MAD 레전드 칭호를 얻었습니다.</p>
+<p><img src="/images/evaluate-mad-score/summary.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>전체 결과는 구글에 업로드 되며 다음 주소에서 확인할 수 있습니다.</p>
+<p><a class="link" href="https://madscorecard.withgoogle.com/scorecards/3218056070/"  target="_blank" rel="noopener"
+    >https://madscorecard.withgoogle.com/scorecards/3218056070/</a></p>
+<p>이렇게 해서 MAD score에 대해 알아보았습니다.</p>
+<div class="video-wrapper">
+    <iframe loading="lazy" 
+            src="https://www.youtube.com/embed/7gtAvgSENSQ" 
+            allowfullscreen 
+            title="YouTube Video"
+    >
+    </iframe>
+</div>
+
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/mad-score/">MAD score</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/android/request-runtime-permission/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Runtime Permission 이해하고 요청 구현하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/prevent-fragment-memory-leak-during-viewbinding/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">View Binding 사용시 Fragment의 메모리 누수 대응하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/download-json-data-using-retrofit/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/android-http-library-review/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">안드로이드의 HTTP 통신 라이브러리 고찰</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/android-studio-plugins/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">내가 Android Studio에서 사용하는 Plugins</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2022 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#mad-score란">MAD score란</a></li>
+    <li><a href="#mad-score-확인하기">MAD score 확인하기</a>
+      <ol>
+        <li><a href="#플러그인-설치">플러그인 설치</a></li>
+        <li><a href="#플러그인-실행">플러그인 실행</a></li>
+        <li><a href="#결과-공유">결과 공유</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
