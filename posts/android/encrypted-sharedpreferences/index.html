@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 SharedPreference의 암호화에 대해 알아보도록 하겠습니다.
+SharedPreferences의 저장방식 SharedPreference에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
+/data/data/{package_name}/shared_prefs/{filename}.xml Android Studio의 Device File Explorer를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요. 키와 값이 앱에서 지정한대로 기입되어있는 것을 확인할 수 있습니다.'><title>EncryptedSharedPreferences로 데이터 암호화하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/encrypted-sharedpreferences/'>
+
+<link rel="stylesheet" href="/scss/style.min.b949db8bead9abdc40291b93383b8da6abc3aa62e74f5580356c06ddbb792dab.css"><meta property='og:title' content='EncryptedSharedPreferences로 데이터 암호화하기'>
+<meta property='og:description' content='이번 포스팅에서는 SharedPreference의 암호화에 대해 알아보도록 하겠습니다.
+SharedPreferences의 저장방식 SharedPreference에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
+/data/data/{package_name}/shared_prefs/{filename}.xml Android Studio의 Device File Explorer를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요. 키와 값이 앱에서 지정한대로 기입되어있는 것을 확인할 수 있습니다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/encrypted-sharedpreferences/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='EncryptedSharedPreferences' /><meta property='article:published_time' content='2022-02-26T13:39:27&#43;09:00'/><meta property='article:modified_time' content='2022-02-26T13:39:27&#43;09:00'/>
+<meta name="twitter:title" content="EncryptedSharedPreferences로 데이터 암호화하기">
+<meta name="twitter:description" content="이번 포스팅에서는 SharedPreference의 암호화에 대해 알아보도록 하겠습니다.
+SharedPreferences의 저장방식 SharedPreference에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
+/data/data/{package_name}/shared_prefs/{filename}.xml Android Studio의 Device File Explorer를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요. 키와 값이 앱에서 지정한대로 기입되어있는 것을 확인할 수 있습니다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/android/encrypted-sharedpreferences/">EncryptedSharedPreferences로 데이터 암호화하기</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 26, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 포스팅에서는 <code>SharedPreference</code>의 암호화에 대해 알아보도록 하겠습니다.</p>
+<h2 id="sharedpreferences의-저장방식">SharedPreferences의 저장방식</h2>
+<p><code>SharedPreference</code>에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferences-basic/"  target="_blank" rel="noopener"
+    >SharedPreferences로 앱 설정값 저장하고 불러오기</a>에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.</p>
+<pre tabindex="0"><code>/data/data/{package_name}/shared_prefs/{filename}.xml
+</code></pre><p>Android Studio의 <a class="link" href="https://developer.android.com/studio/debug/device-file-explorer"  target="_blank" rel="noopener"
+    >Device File Explorer</a>를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요. 키와 값이 앱에서 지정한대로 기입되어있는 것을 확인할 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39; standalone=&#39;yes&#39; ?&gt;</span>
+<span class="nt">&lt;map&gt;</span>
+    <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&#34;graphic_quality&#34;</span> <span class="na">value=</span><span class="s">&#34;2131231054&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&#34;music_volume&#34;</span> <span class="na">value=</span><span class="s">&#34;42&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;boolean</span> <span class="na">name=</span><span class="s">&#34;vertical_sync&#34;</span> <span class="na">value=</span><span class="s">&#34;true&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&#34;sfx_volume&#34;</span> <span class="na">value=</span><span class="s">&#34;17&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/map&gt;</span>
+</code></pre></div><h2 id="security-library">Security Library</h2>
+<p>하지만 앱의 데이터를 이렇게 쉽게 열어볼 수 있게 하는건 좋은 생각이 아닌 것 같습니다. 그래서 구글에서는 <code>SharedPreferences</code>를 암호화 하여 사용할 수 있게 하는 <a class="link" href="https://developer.android.com/jetpack/androidx/releases/security"  target="_blank" rel="noopener"
+    >Security</a> 라이브러리를 제공하고 있습니다.</p>
+<p><code>Security</code>는 Android 6.0 (API level 23) 이상부터 사용 가능한데, 이 라이브러리를 사용하면 암호화에 사용할 마스터키를 만들고 그 키로 <code>SharedPreferences</code>의 내용을 암호화/복호화 할 수 있습니다.</p>
+<p>데이터를 암호화하는데에는 키가 필요한데요, 이 키를 앱 내부에 저장하면 어떤 형태로 숨겨도 결국은 유출이 가능하다고 생각하시면 됩니다. 그래서 <code>Security</code> 라이브러리는 <a class="link" href="https://developer.android.com/training/articles/keystore"  target="_blank" rel="noopener"
+    >Android keystore system</a>을 사용해 키를 앱 내부가 아닌, 시스템만이 접근 가능한 컨테이너에 저장하도록 하였습니다.</p>
+<p>Android keystore system을 이용해 마스터키를 만들었으면 <a class="link" href="https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences"  target="_blank" rel="noopener"
+    >EncryptedSharedPreferences</a>를 써서 <code>SharedPreferences</code>를 암호화/복호화할 수 있습니다.</p>
+<h2 id="앱에-적용해보기">앱에 적용해보기</h2>
+<p>우선 <code>Security</code> 라이브러리를 추가합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">implementation</span> <span class="s2">&#34;androidx.security:security-crypto-ktx:1.1.0-alpha03&#34;</span>
+</code></pre></div><p>다음은 읽기/쓰기에 사용하던 <code>sharedPreferences</code> 객체를 <code>SharedPreferences</code>가 아닌 <code>EncryptedSharedPreferences</code> 로부터 작성하면 됩니다. 기존의 인스턴스는 주석처리하고 다음과 같은 인스턴스를 만들어줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">val</span> <span class="py">sharedPreferences</span><span class="p">:</span> <span class="n">SharedPreferences</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+
+    <span class="k">val</span> <span class="py">masterKeyAlias</span> <span class="p">=</span> <span class="n">MasterKey</span>
+        <span class="p">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="n">MasterKey</span><span class="p">.</span><span class="n">DEFAULT_MASTER_KEY_ALIAS</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">setKeyScheme</span><span class="p">(</span><span class="n">MasterKey</span><span class="p">.</span><span class="n">KeyScheme</span><span class="p">.</span><span class="n">AES256_GCM</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+
+
+    <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">applicationContext</span><span class="p">,</span>
+        <span class="n">FILE_NAME</span><span class="p">,</span>
+        <span class="n">masterKeyAlias</span><span class="p">,</span>
+        <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">PrefKeyEncryptionScheme</span><span class="p">.</span><span class="n">AES256_SIV</span><span class="p">,</span>
+        <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">PrefValueEncryptionScheme</span><span class="p">.</span><span class="n">AES256_GCM</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+    <span class="o">..</span><span class="p">.</span>
+    <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">FILE</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;encrypted_settings&#34;</span>
+<span class="p">}</span>
+</code></pre></div><p>우선은 <a class="link" href="https://developer.android.com/reference/androidx/security/crypto/MasterKey"  target="_blank" rel="noopener"
+    >MasterKey</a> 클래스로 암호화에 사용할 마스터키를 생성합니다. 키를 작성하는 알고리즘은 커스텀하여 사용할 수도 있게 되어있지만 여기서는 이미 잘 정의되어있는 <a class="link" href="https://datatracker.ietf.org/doc/html/rfc5116#section-5.2"  target="_blank" rel="noopener"
+    >AES-256 GCM</a> 알고리즘을 사용하도록 하겠습니다.</p>
+<p>다음은 <code>EncryptedSharedPreferences</code>를 이용해 읽고쓰기에 사용할 <code>sharedPreferences</code> 인스턴스를 만들어줍니다. 초기화를 할 때에는 위에서 만든 마스터키와 xml 파일에 적용할 파일 이름, 그리고 데이터를 암호화할 방식을 전달해주면 됩니다. 여기서는 Key의 암호화에 <a class="link" href="https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences.PrefKeyEncryptionScheme#AES256_SIV"  target="_blank" rel="noopener"
+    >AES256_SIV</a>, 그리고 Value의 암호화에는 <a class="link" href="https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences.PrefValueEncryptionScheme#AES256_GCM"  target="_blank" rel="noopener"
+    >AES256_GCM</a>을 사용하도록 했습니다.</p>
+<p>그리고 나머지는 <code>SharedPreferences</code>와 동일하게 사용하면 됩니다. 설정을 다시 저장한 뒤 <code>encrypted_settings.xml</code>의 내용을 확인해보면 다음과 같이 암호화가 되어 있는 것을 알 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39; standalone=&#39;yes&#39; ?&gt;</span>
+<span class="nt">&lt;map&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;__androidx_security_crypto_encrypted_prefs_key_keyset__&#34;</span><span class="nt">&gt;</span>12a901d15f8baa24b9e88a9e68f3eb32ad1136cb4af22776b91caea9459bdd5a76d6992b57e268408944152c70171556e4fa065b13160a6951b75a32dc8172d6ee9cbf8b9828f7cc80d68c23794340221ad89ac94306ec5848af9d9c6e6372fdfd42d745be4b4a6d532adc365491e249e92503b64743defab475808f196b90842cabb874cce6a934d0f646f9d9f285814ded11f3d081a72abeb09d6a1849b7768b9e9899601c59797868b0a71a4408beb9cea707123c0a30747970652e676f6f676c65617069732e636f6d2f676f6f676c652e63727970746f2e74696e6b2e4165735369764b6579100118beb9cea7072001<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL5begfyWVUl+GcGajk7xoVmW0h2DCtZudxTAghw8BjV&#34;</span><span class="nt">&gt;</span>ARdDw2jfHocuzA3PXT73sMwCNATF/f+ZNWWcG6mgY0mhuMvLz9hGLys=<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL6Ev8dJ1E4Ws4dwJfyeDUQgK077hhUwLNnCt+3opw==&#34;</span><span class="nt">&gt;</span>ARdDw2g859mf9i8UgWzWHvbZbBQytmCdcaXBVQgfy6+Qq/eIAs4=<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;__androidx_security_crypto_encrypted_prefs_value_keyset__&#34;</span><span class="nt">&gt;</span>128801aa5d8f25163f993b8f95a2a874a1353f227ffca6f2e5ee1dad9243b8b3a1ea16531bfa8a10da864655c9b33e865bf072eafcdad659912a5198bf32218f186c02ff3efff27338a50617f194c3fd8b06ebfad829c3a53dbfd8b221fa7f9103ad8e8ad1583250b5c1779b20b618e46a3edb0b50d3a3bdc8c7ace84c21a69f36d4996f9e7fe81e8bf01b1a4408e8868fba01123c0a30747970652e676f6f676c65617069732e636f6d2f676f6f676c652e63727970746f2e74696e6b2e41657347636d4b6579100118e8868fba012001<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL4uW8pTacv6rnmZqMoGZHNWTJqwuD8q0XFlWnvw&#34;</span><span class="nt">&gt;</span>ARdDw2gTVJYJ3PCEaYgwoZjKMCEAFAv7aLRACnmcKGyjRaHYgeBJZJE=<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL5AE+UHfloGh5ZBZ+3iZL2hplrdIffsC3I/qA==&#34;</span><span class="nt">&gt;</span>ARdDw2gRmqy+haYjIRDGML/ai32T5alKEQKaqlJDRhfQHcUIzthVAQo=<span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/map&gt;</span>
+
+</code></pre></div><p>이렇게 해서 <code>SharedPreference</code>를 암호화하여 사용하는 법에 대해 알아보았습니다.</p>
+<div class="video-wrapper">
+    <iframe loading="lazy" 
+            src="https://www.youtube.com/embed/KB0_QpcrWnA" 
+            allowfullscreen 
+            title="YouTube Video"
+    >
+    </iframe>
+</div>
+
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/encryptedsharedpreferences/">EncryptedSharedPreferences</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+        <div class="article-list--compact links">
+    
+        <article>
+            <a href="https://github.com/cliearl/android-tutorial/tree/master/EncryptedSharedPreferences/" target="_blank" rel="noopener">
+                <div class="article-details">
+                    <h2 class="article-title">GitHub/cliearl</h2>
+                    <footer class="article-time">
+                        
+                            Find and download source code of the article from this link.
+                        
+                    </footer>
+                </div>
+        
+                
+                    <div class="article-image">
+                        <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
+                    </div>
+                
+            </a>
+        </article>
+    
+</div>
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/posts/android/evaluate-mad-score/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">내 앱의 MAD score 평가하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/request-runtime-permission/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Runtime Permission 이해하고 요청 구현하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/prevent-fragment-memory-leak-during-viewbinding/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">View Binding 사용시 Fragment의 메모리 누수 대응하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/download-json-data-using-retrofit/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/posts/android/android-http-library-review/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">안드로이드의 HTTP 통신 라이브러리 고찰</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2022 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#sharedpreferences의-저장방식">SharedPreferences의 저장방식</a></li>
+    <li><a href="#security-library">Security Library</a></li>
+    <li><a href="#앱에-적용해보기">앱에 적용해보기</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
