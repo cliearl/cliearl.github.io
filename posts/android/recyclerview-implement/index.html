@@ -58,7 +58,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -354,12 +354,44 @@ if (!doNotTrack) {
 <h2 id="recyclerview-구현">Recyclerview 구현</h2>
 <h3 id="라이브러리-추가">라이브러리 추가</h3>
 <p>우선은 Recyclerview를 사용하기 위한 라이브러리를 추가합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;androidx.recyclerview:recyclerview:1.1.0&#39;</span>
 <span class="o">}</span>
-</code></pre></div><h3 id="화면-구성">화면 구성</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="화면-구성">화면 구성</h3>
 <p>다음은 화면에 Recyclerview 모듈을 추가합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -378,11 +410,41 @@ if (!doNotTrack) {
         <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></div><h3 id="viewholder-화면구성">ViewHolder 화면구성</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="viewholder-화면구성">ViewHolder 화면구성</h3>
 <p>다음으로 ViewHolder의 화면을 구성합니다. ViewHolder는 <a class="link" href="https://developer.android.com/reference/android/widget/LinearLayout"  target="_blank" rel="noopener"
     >LinearLayout</a>에 <a class="link" href="https://developer.android.com/reference/android/widget/TextView"  target="_blank" rel="noopener"
     >TextView</a> 2개를 쌓은 단순한 구조로 정의했습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span>
     <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
@@ -406,13 +468,46 @@ if (!doNotTrack) {
         <span class="na">android:padding=</span><span class="s">&#34;5dp&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></div><h3 id="recyclerview-어댑터-작성">Recyclerview 어댑터 작성</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="recyclerview-어댑터-작성">Recyclerview 어댑터 작성</h3>
 <p>다음은 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter"  target="_blank" rel="noopener"
     >RecyclerView.Adapter</a> 클래스를 상속받는 <code>Recyclerview Adapter</code>를 작성합니다. 외부에서 전달받을 데이터는 <code>dataSet</code>이라고 정의했습니다.</p>
 <p>그리고 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder"  target="_blank" rel="noopener"
     >ViewHolder 클래스</a>를 작성합니다. 여기서는 외부에서 전달받은 데이터를 ViewHolder 화면의 텍스트뷰와 연결하는 작업을 <code>bind</code>함수로 정의합니다.</p>
 <p><code>onCreateViewHolder</code>에서 ViewHolder클래스에 <code>list_item</code>으로 inflate한 객체를 넘겨준 ViewHolder를 작성하여 반환합니다. <code>onBindViewHolder</code>에서는 ViewHolder 클래스의 <code>bind</code>함수로 작성된 ViewHolder와 전달받은 개별 데이터를 연결합니다. <code>getItemCount</code>에서는 전달받은 데이터의 전체길이를 넘겨주어 어댑터가 ViewHolder를 얼마나 만들어야 할지를 결정하게 합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span>
         <span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span>
         <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span>
@@ -439,9 +534,31 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="데이터셋-준비">데이터셋 준비</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="데이터셋-준비">데이터셋 준비</h3>
 <p>다음으로 메인액티비티에서 Recyclerview로 넘겨줄 데이터셋을 만듭니다. <code>String</code>을 두개 포함한 배열을 100개 가지는 리스트의 리스트 형식으로 작성하였습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">()</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -457,7 +574,9 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="recyclerview와-adapter-연결">Recyclerview와 Adapter 연결</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="recyclerview와-adapter-연결">Recyclerview와 Adapter 연결</h3>
 <p>마지막으로 Recyclerview와 Adapter를 연결해줍니다. Recyclerview 안에서 ViewHolder를 어떻게 정렬할지 결정하는 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.LayoutManager"  target="_blank" rel="noopener"
     >LayoutManager</a> 프로퍼티를 정의하는데 여기서는 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/LinearLayoutManager"  target="_blank" rel="noopener"
     >LinearLayoutManager</a>를 사용하였습니다. 그 외로 <a class="link" href="https://developer.android.com/reference/androidx/leanback/widget/GridLayoutManager"  target="_blank" rel="noopener"
@@ -467,7 +586,33 @@ if (!doNotTrack) {
 <p><a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ItemDecoration"  target="_blank" rel="noopener"
     >addItemDecoration</a> 속성에 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/DividerItemDecoration#HORIZONTAL"  target="_blank" rel="noopener"
     >DividerItemDecoration.HORIZONTAL</a>을 전달하면 각 ViewHolder 사이에 구분선을 표시할 수도 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">()</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -489,7 +634,9 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 Recyclerview를 사용하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 Recyclerview를 사용하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/z43SZfUa3-A" 
@@ -767,7 +914,48 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#recyclerview의-특징">Recyclerview의 특징</a></li>
+    <li><a href="#recyclerview-구현">Recyclerview 구현</a>
+      <ol>
+        <li><a href="#라이브러리-추가">라이브러리 추가</a></li>
+        <li><a href="#화면-구성">화면 구성</a></li>
+        <li><a href="#viewholder-화면구성">ViewHolder 화면구성</a></li>
+        <li><a href="#recyclerview-어댑터-작성">Recyclerview 어댑터 작성</a></li>
+        <li><a href="#데이터셋-준비">데이터셋 준비</a></li>
+        <li><a href="#recyclerview와-adapter-연결">Recyclerview와 Adapter 연결</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

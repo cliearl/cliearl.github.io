@@ -4,7 +4,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 단말의 인터넷 연결상태를 체크하는 법에 대해 알아보도록 하겠습니다.
 앱을 만들다보면 WIFI를 사용할 수 있는 환경에서 대용량 데이터를 다운로드하도록 하는 등의 처리를 위해 단말의 인터넷 연결상태를 체크해야 할 일이 있습니다. 이때 ConnectivityManager를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.
 권한추가 인터넷에 접근하고 네트워크 상태를 가져오기 위해 AndroidManifest.xml에 다음 권한을 추가합니다.
-&amp;lt;uses-permission android:name=&amp;#34;android.permission.ACCESS_NETWORK_STATE&amp;#34; /&amp;gt; &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt; 네트워크 타입 확인 우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.'><title>단말의 인터넷 연결상태 체크하기</title>
+1 2  &amp;lt;uses-permission android:name=&amp;#34;android.permission.ACCESS_NETWORK_STATE&amp;#34; /&amp;gt; &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt;   네트워크 타입 확인 우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.'><title>단말의 인터넷 연결상태 체크하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/check-connection/'>
 
@@ -12,7 +12,7 @@
 <meta property='og:description' content='이번 포스팅에서는 단말의 인터넷 연결상태를 체크하는 법에 대해 알아보도록 하겠습니다.
 앱을 만들다보면 WIFI를 사용할 수 있는 환경에서 대용량 데이터를 다운로드하도록 하는 등의 처리를 위해 단말의 인터넷 연결상태를 체크해야 할 일이 있습니다. 이때 ConnectivityManager를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.
 권한추가 인터넷에 접근하고 네트워크 상태를 가져오기 위해 AndroidManifest.xml에 다음 권한을 추가합니다.
-&amp;lt;uses-permission android:name=&amp;#34;android.permission.ACCESS_NETWORK_STATE&amp;#34; /&amp;gt; &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt; 네트워크 타입 확인 우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.'>
+1 2  &amp;lt;uses-permission android:name=&amp;#34;android.permission.ACCESS_NETWORK_STATE&amp;#34; /&amp;gt; &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt;   네트워크 타입 확인 우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/check-connection/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='WIFI' /><meta property='article:tag' content='ConnectivityManager' /><meta property='article:published_time' content='2021-06-13T21:51:49&#43;09:00'/><meta property='article:modified_time' content='2021-06-13T21:51:49&#43;09:00'/>
@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="이번 포스팅에서는 단말의 인터넷 연결상태를 체크하는 법에 대해 알아보도록 하겠습니다.
 앱을 만들다보면 WIFI를 사용할 수 있는 환경에서 대용량 데이터를 다운로드하도록 하는 등의 처리를 위해 단말의 인터넷 연결상태를 체크해야 할 일이 있습니다. 이때 ConnectivityManager를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.
 권한추가 인터넷에 접근하고 네트워크 상태를 가져오기 위해 AndroidManifest.xml에 다음 권한을 추가합니다.
-&amp;lt;uses-permission android:name=&amp;#34;android.permission.ACCESS_NETWORK_STATE&amp;#34; /&amp;gt; &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt; 네트워크 타입 확인 우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.">
+1 2  &amp;lt;uses-permission android:name=&amp;#34;android.permission.ACCESS_NETWORK_STATE&amp;#34; /&amp;gt; &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt;   네트워크 타입 확인 우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -61,7 +61,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -332,7 +332,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -352,11 +352,40 @@ if (!doNotTrack) {
     >ConnectivityManager</a>를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.</p>
 <h2 id="권한추가">권한추가</h2>
 <p>인터넷에 접근하고 네트워크 상태를 가져오기 위해 <code>AndroidManifest.xml</code>에 다음 권한을 추가합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> <span class="nt">/&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></div><h2 id="네트워크-타입-확인">네트워크 타입 확인</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="네트워크-타입-확인">네트워크 타입 확인</h2>
 <p>우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getNetworkType</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getNetworkType</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">connMgr</span> <span class="p">=</span>
         <span class="n">context</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">CONNECTIVITY_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">ConnectivityManager</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">Build</span><span class="p">.</span><span class="n">VERSION</span><span class="p">.</span><span class="n">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="p">.</span><span class="n">VERSION_CODES</span><span class="p">.</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
@@ -373,7 +402,9 @@ if (!doNotTrack) {
         <span class="k">return</span> <span class="n">nwInfo</span><span class="p">.</span><span class="n">typeName</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>기본은 <code>ConnectivityManager</code> 인스턴스를 만들고 그 인스턴스로부터 네트워크 타입을 가져오는 방식입니다. API Level 23 마시멜로우까지는 <a class="link" href="https://developer.android.com/reference/android/net/ConnectivityManager#getActiveNetworkInfo%28%29"  target="_blank" rel="noopener"
+</code></pre></td></tr></table>
+</div>
+</div><p>기본은 <code>ConnectivityManager</code> 인스턴스를 만들고 그 인스턴스로부터 네트워크 타입을 가져오는 방식입니다. API Level 23 마시멜로우까지는 <a class="link" href="https://developer.android.com/reference/android/net/ConnectivityManager#getActiveNetworkInfo%28%29"  target="_blank" rel="noopener"
     >connMgr.activeNetworkInfo</a>를 통해 <a class="link" href="https://developer.android.com/reference/android/net/NetworkInfo"  target="_blank" rel="noopener"
     >NetworkInfo</a> 인스턴스를 만든 뒤 <a class="link" href="https://developer.android.com/reference/android/net/NetworkInfo#getTypeName%28%29"  target="_blank" rel="noopener"
     >typeName</a> 프로퍼티로 네트워크 타입을 문자열 형태로 확인할 수 있었습니다.</p>
@@ -395,7 +426,31 @@ if (!doNotTrack) {
 <p>우선은 <a class="link" href="http://clients3.google.com/generate_204"  target="_blank" rel="noopener"
     >http://clients3.google.com/generate_204</a> 에 접속하여 response code를 받아오는 함수를 작성합니다. 네트워크에 접속해야 하므로 비동기로 처리하기 위해 <a class="link" href="https://developer.android.com/reference/java/lang/Thread"  target="_blank" rel="noopener"
     >Thread</a> 를 상속받도록 합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">CheckConnection</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">host</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">CheckConnection</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">host</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">isSuccess</span> <span class="p">=</span> <span class="k">false</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
@@ -415,9 +470,26 @@ if (!doNotTrack) {
         <span class="n">urlConnection</span><span class="o">?.</span><span class="n">disconnect</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>다음은 <code>CheckConnection</code>을 실행시켜주면 되겠죠. 스레드를 시작하고 204 응답이 돌아왔다면 true를 반환하는 함수를 만들어줍니다. 메인스레드에서 작업이 끝날때까지 대기하도록 하기 위해 <a class="link" href="https://developer.android.com/reference/java/lang/Thread#join%28%29"  target="_blank" rel="noopener"
+</code></pre></td></tr></table>
+</div>
+</div><p>다음은 <code>CheckConnection</code>을 실행시켜주면 되겠죠. 스레드를 시작하고 204 응답이 돌아왔다면 true를 반환하는 함수를 만들어줍니다. 메인스레드에서 작업이 끝날때까지 대기하도록 하기 위해 <a class="link" href="https://developer.android.com/reference/java/lang/Thread#join%28%29"  target="_blank" rel="noopener"
     >join</a>을 추가로 실행시켜 줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isOnline</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isOnline</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">cc</span> <span class="p">=</span> <span class="n">CheckConnection</span><span class="p">(</span><span class="s2">&#34;http://clients3.google.com/generate_204&#34;</span><span class="p">)</span>
     <span class="n">cc</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
     <span class="k">try</span> <span class="p">{</span>
@@ -428,7 +500,9 @@ if (!doNotTrack) {
     <span class="p">}</span>
     <span class="k">return</span> <span class="k">false</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 단말의 네트워크 상태를 체크하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 단말의 네트워크 상태를 체크하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/9nNrkPQ8tH8" 
@@ -708,7 +782,40 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#권한추가">권한추가</a></li>
+    <li><a href="#네트워크-타입-확인">네트워크 타입 확인</a></li>
+    <li><a href="#네트워크-접속여부-확인">네트워크 접속여부 확인</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

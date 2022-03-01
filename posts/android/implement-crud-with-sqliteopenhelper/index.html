@@ -58,7 +58,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -329,7 +329,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    8 minute read
+                    10 minute read
                 </time>
             </div>
         
@@ -422,7 +422,25 @@ if (!doNotTrack) {
 </table></div>
 <p>SQL에서 실제 CRUD는 다음과 같이 구현하게 되는데요, 언어의 전체 문법은 <a class="link" href="https://en.wikipedia.org/wiki/SQL_syntax"  target="_blank" rel="noopener"
     >SQL syntax</a> 페이지에서 확인할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="o">//</span><span class="w"> </span><span class="err">작성자가</span><span class="w"> </span><span class="err">무명씨</span><span class="p">,</span><span class="w"> </span><span class="err">홍길동인</span><span class="w"> </span><span class="err">문서의</span><span class="w"> </span><span class="err">모든</span><span class="w"> </span><span class="err">항목을</span><span class="w"> </span><span class="err">가져옴</span><span class="w">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="o">//</span><span class="w"> </span><span class="err">작성자가</span><span class="w"> </span><span class="err">무명씨</span><span class="p">,</span><span class="w"> </span><span class="err">홍길동인</span><span class="w"> </span><span class="err">문서의</span><span class="w"> </span><span class="err">모든</span><span class="w"> </span><span class="err">항목을</span><span class="w"> </span><span class="err">가져옴</span><span class="w">
 </span><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;김*&#39;</span><span class="p">;</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="n">table에</span><span class="w"> </span><span class="n">field1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="err">와</span><span class="w"> </span><span class="err">같은</span><span class="w"> </span><span class="err">속성값을</span><span class="w"> </span><span class="err">가지는</span><span class="w"> </span><span class="err">항목을</span><span class="w"> </span><span class="err">새로</span><span class="w"> </span><span class="err">생성하여</span><span class="w"> </span><span class="err">삽입</span><span class="w">
@@ -436,7 +454,9 @@ if (!doNotTrack) {
 </span><span class="w">
 </span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터베이스</span><span class="w"> </span><span class="err">내의</span><span class="w"> </span><span class="err">모든</span><span class="w"> </span><span class="err">테이블</span><span class="p">,</span><span class="w"> </span><span class="err">스키마</span><span class="p">,</span><span class="w"> </span><span class="err">관계</span><span class="p">(</span><span class="n">Relation</span><span class="p">)</span><span class="err">를</span><span class="w"> </span><span class="err">전부</span><span class="w"> </span><span class="err">삭제</span><span class="w">
 </span><span class="w"></span><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">database_name</span><span class="p">;</span><span class="w">
-</span></code></pre></div><h3 id="database-management-system">DataBase Management System</h3>
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="database-management-system">DataBase Management System</h3>
 <p>대량의 데이터를 다루는데 관계형 데이터베이스가 사용되고, SQL이라는 언어를 사용해 데이터베이스의 데이터를 다룬다는 걸 알았습니다. 이런 데이터베이스와 SQL을 결합해서, 사용할 수 있는 형태의 프로그램으로 만든 것을 <a class="link" href="https://en.wikipedia.org/wiki/Database#Database_management_system"  target="_blank" rel="noopener"
     >Database Management System</a>이라고 합니다. 거기에 관계형 데이터베이스를 사용했다면 RDBMS가 되겠죠.</p>
 <p>여러분이 잘 아시는 Oracle이나 MySQL 등이 대표적인 DBMS입니다. <a class="link" href="https://db-engines.com/en/ranking_trend"  target="_blank" rel="noopener"
@@ -505,11 +525,21 @@ if (!doNotTrack) {
 </tbody>
 </table></div>
 <p>코틀린에서는 다음 명령어를 이용해 현재 사용중인 SQLite의 버전을 확인할 수도 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">version</span> <span class="p">=</span> <span class="n">android</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">sqlite</span><span class="p">.</span><span class="n">SQLiteDatabase</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="k">null</span><span class="p">).</span><span class="n">use</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">version</span> <span class="p">=</span> <span class="n">android</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">sqlite</span><span class="p">.</span><span class="n">SQLiteDatabase</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="k">null</span><span class="p">).</span><span class="n">use</span> <span class="p">{</span>
     <span class="n">DatabaseUtils</span><span class="p">.</span><span class="n">stringForQuery</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;SELECT sqlite_version()&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Framework (API </span><span class="si">${Build.VERSION.SDK_INT}</span><span class="s2">) SQLite version: </span><span class="si">$version</span><span class="s2">&#34;</span><span class="p">)</span>
-</code></pre></div><p><a class="link" href="https://github.com/requery/sqlite-android"  target="_blank" rel="noopener"
+</code></pre></td></tr></table>
+</div>
+</div><p><a class="link" href="https://github.com/requery/sqlite-android"  target="_blank" rel="noopener"
     >외부 라이브러리</a>를 추가하면 안드로이드에서 최신버전의 SQLite를 사용할 수도 있습니다만 가능하면 공식 라이브러리를 사용하는 게 좋겠죠.</p>
 <h3 id="안드로이드에서의-sqlite-사용">안드로이드에서의 SQLite 사용</h3>
 <p>SQLite를 사용하기 위해서는 DB를 만들고 그 DB에 대해 SQL query를 전달하여 CRUD를 수행하면 됩니다. 안드로이드에서는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase"  target="_blank" rel="noopener"
@@ -529,7 +559,166 @@ if (!doNotTrack) {
     >EditText</a>를 배치하겠습니다. 고유키는 데이터를 데이터베이스에 입력할 때 자동으로 부여되기 때문에 입력할 필요가 없지만 삭제, 업데이트를 테스트할 때 필요하기 때문입니다.</p>
 <p>CRUD 테스트를 위해서 데이터를 입력하는 INSERT, 갱신하는 UPDATE, 삭제하는 DELETE 그리고 DB의 모든 내용을 표시하는 VIEW 버튼을 만들겠습니다. 작동에 대한 로그는 화면 아래쪽에 배치한 <a class="link" href="https://developer.android.com/reference/android/widget/ScrollView"  target="_blank" rel="noopener"
     >ScrollView</a>에 표시되도록 하였습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
     <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
@@ -684,11 +873,41 @@ if (!doNotTrack) {
     <span class="nt">&lt;/ScrollView&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></div><h3 id="databasehelper-작성">DatabaseHelper 작성</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="databasehelper-작성">DatabaseHelper 작성</h3>
 <p>다음은 <code>SQLiteOpenHelper</code> 클래스를 상속하는 <code>DatabaseHelper</code> 클래스를 작성합니다. 이 앱에서 사용하게 될 데이터베이스의 프라이머리키는 <code>_id</code>이고 그 외에 <code>name</code>, <code>phone</code>, <code>email</code> 이라는 키를 갖고 있습니다. 데이터베이스의 파일명 및 그외 중복으로 써야하는 상수들을 <code>companion object</code>에 정의하고 상속에 필요한 생성자들을 전달해줍니다.</p>
 <p><code>DatabaseHelper</code>는 복수개의 인스턴스가 생성되어 DB에 동시접근할수 있는 문제를 방지하기 위해 싱글톤으로 작성합니다. constructor에 직접 접근하지 못하도록 private화 하고, <code>getInstance</code>에서 Double Checked Locking을 통해 인스턴스를 반환하는 싱글톤 구조를 구축합니다. 싱글톤에 대한 더 자세한 설명은 <a class="link" href="https://cliearl.github.io/posts/android/understanding-singleton-pattern/"  target="_blank" rel="noopener"
     >알기쉬운 Singleton Pattern</a> 강의를 참고하세요.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DatabaseHelper</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">:</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DatabaseHelper</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">SQLiteOpenHelper</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DATABASE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">DATABASE_VERSION</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
@@ -712,12 +931,28 @@ if (!doNotTrack) {
             <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="oncreate-구현">onCreate 구현</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="oncreate-구현">onCreate 구현</h3>
 <p>테이블을 생성하는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#onCreate%28android.database.sqlite.SQLiteDatabase%29"  target="_blank" rel="noopener"
     >onCreate</a>함수를 오버라이드 합니다. <code>onCreate</code>는 시스템에 DB가 없을경우에만 실행되기 때문에 쿼리를 <code>CREATE TABLE IF EXIST</code>로 줄 필요가 없습니다.</p>
 <p><code>_id</code>는 데이터가 입력될 때 자동으로 증가시키기 위해 <code>PRIMARY KEY AUTOINCREMENT</code>를 추가해줍니다. 작성한 쿼리는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#execSQL%28java.lang.String%29"  target="_blank" rel="noopener"
     >execSQL</a>로 실행시키면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?)</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">createQuery</span> <span class="p">=</span> <span class="s2">&#34;CREATE TABLE </span><span class="si">$TABLE</span><span class="s2">_NAME (&#34;</span> <span class="p">+</span>
             <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID INTEGER PRIMARY KEY AUTOINCREMENT, &#34;</span> <span class="p">+</span>
             <span class="s2">&#34;</span><span class="si">$COL2</span><span class="s2">_NAME TEXT, &#34;</span> <span class="p">+</span>
@@ -727,22 +962,49 @@ if (!doNotTrack) {
 
     <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="n">createQuery</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="onupgrade-구현">onUpgrade 구현</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="onupgrade-구현">onUpgrade 구현</h3>
 <p>다음은 DB버전이 변경되었을 때 동작하는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#onUpgrade%28android.database.sqlite.SQLiteDatabase,%20int,%20int%29"  target="_blank" rel="noopener"
     >onUpgrade</a>를 구현합니다. 여기서는 DB버전이 증가되었으면 기존 DB를 삭제하고 새로운 DB를 작성하는 단순한 구조로 정의했습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onUpgrade</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?,</span> <span class="n">oldVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">newVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onUpgrade</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?,</span> <span class="n">oldVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">newVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">oldVersion</span> <span class="o">!=</span> <span class="n">newVersion</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="s2">&#34;DROP TABLE IF EXISTS </span><span class="si">$TABLE</span><span class="s2">_NAME&#34;</span><span class="p">)</span>
         <span class="n">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="crud-구현">CRUD 구현</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="crud-구현">CRUD 구현</h3>
 <h4 id="create">Create</h4>
 <p>우선은 CRUD의 C를 구현하겠습니다. <code>insertData</code>에서는 <code>name</code>, <code>phone</code>, <code>email</code>을 파라메터로 받게 됩니다.  <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getWritableDatabase%28%29"  target="_blank" rel="noopener"
     >writableDatabase</a>로 데이터베이스를 오픈하고 외부에서 받아온 데이터를 <a class="link" href="https://developer.android.com/reference/android/content/ContentValues"  target="_blank" rel="noopener"
     >contentValues</a>로 묶어서 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#insert%28java.lang.String,%20java.lang.String,%20android.content.ContentValues%29"  target="_blank" rel="noopener"
     >insert</a> 명령으로 데이터베이스에 값을 추가합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">insertData</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">insertData</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
     <span class="k">val</span> <span class="py">contentValues</span> <span class="p">=</span> <span class="n">ContentValues</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
         <span class="n">put</span><span class="p">(</span><span class="n">COL2_NAME</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
@@ -751,10 +1013,26 @@ if (!doNotTrack) {
     <span class="p">}</span>
     <span class="n">db</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">)</span> <span class="c1">// 값이 없으면 행을 삽입하지않음
 </span><span class="c1"></span><span class="p">}</span>
-</code></pre></div><h4 id="update">Update</h4>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="update">Update</h4>
 <p><a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#update%28java.lang.String,%20android.content.ContentValues,%20java.lang.String,%20java.lang.String[]%29"  target="_blank" rel="noopener"
     >update</a>에서는 id로 선택해 준 데이터의 내용을 갱신합니다. insert에서처럼 <code>writableDatabase</code>로 데이터베이스를 오픈하고 <code>contentValues</code>를 넘겨주어 데이터를 갱신합니다. 이 때 <code>&quot;$COL1_ID = ?&quot;</code> 쿼리를 사용해 갱신할 데이터를 특정해주면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">updateData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">updateData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
     <span class="k">val</span> <span class="py">contentValues</span> <span class="p">=</span> <span class="n">ContentValues</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
         <span class="n">put</span><span class="p">(</span><span class="n">COL1_ID</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
@@ -764,14 +1042,26 @@ if (!doNotTrack) {
     <span class="p">}</span>
     <span class="n">db</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
 <span class="p">}</span>
-</code></pre></div><h4 id="delete">Delete</h4>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="delete">Delete</h4>
 <p>전달받은 id를 프라이머리키로 가진 데이터를 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete%28java.lang.String,%20java.lang.String,%20java.lang.String[]%29"  target="_blank" rel="noopener"
     >delete</a> 명령으로 삭제합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">deleteData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">deleteData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
     <span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
 <span class="p">}</span>
-</code></pre></div><h4 id="read">Read</h4>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="read">Read</h4>
 <p>마지막으로 읽기를 구현합니다. <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getReadableDatabase%28%29"  target="_blank" rel="noopener"
     >readableDatabase</a>로 데이터베이스를 열고 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#rawQuery%28java.lang.String,%20java.lang.String[],%20android.os.CancellationSignal%29"  target="_blank" rel="noopener"
     >rawQuery</a> 에 <code>&quot;SELECT * FROM $TABLE_NAME&quot;</code> 을 전달하여 <a class="link" href="https://developer.android.com/reference/android/database/Cursor"  target="_blank" rel="noopener"
@@ -779,7 +1069,37 @@ if (!doNotTrack) {
 <p>객체가 정상적으로 얻어졌으면 <code>try</code> 블록 안에서 <a class="link" href="https://developer.android.com/reference/android/database/Cursor#moveToNext%28%29"  target="_blank" rel="noopener"
     >moveToNext</a>로 데이터를 순회하면서 값을 확인하고 커서를 다 사용했으면 <a class="link" href="https://developer.android.com/reference/android/database/Cursor#close%28%29"  target="_blank" rel="noopener"
     >close</a>로 리소스를 반환하도록 합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">getAllData</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">getAllData</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">result</span> <span class="p">=</span> <span class="s2">&#34;No data in DB&#34;</span>
 
     <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">readableDatabase</span>
@@ -805,10 +1125,35 @@ if (!doNotTrack) {
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">result</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="mainactivity-준비">MainActivity 준비</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mainactivity-준비">MainActivity 준비</h3>
 <p>뷰 바인딩을 적용한 메인액티비티를 작성합니다. <code>dbHelper</code> 인스턴스를 생성하고, 사용이 끝나면 <code>onDestroy</code>에서 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#close%28%29"  target="_blank" rel="noopener"
     >close()</a>로 리소스를 반환하도록 하였습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
         <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
     <span class="p">}</span>
@@ -827,9 +1172,27 @@ if (!doNotTrack) {
         <span class="k">super</span><span class="p">.</span><span class="n">onDestroy</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="유틸-메소드-준비">유틸 메소드 준비</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="유틸-메소드-준비">유틸 메소드 준비</h3>
 <p>데이터베이스 조작이 이루어졌을때 처리 결과를 텍스트뷰에 표시하기 위한 <code>showTxt</code>를 작성합니다. 그리고 버튼을 눌렀을 때 에디트텍스트에 입력한 내용을 삭제하는 <code>clearEditTexts</code> 함수도 작성합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showTxt</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showTxt</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">binding</span><span class="p">.</span><span class="n">tvResult</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -841,10 +1204,71 @@ if (!doNotTrack) {
         <span class="n">etEmail</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="버튼기능-정의">버튼기능 정의</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="버튼기능-정의">버튼기능 정의</h3>
 <p>각 버튼을 클릭했을 때 부여할 기능을 정의합니다. 값을 입력하는 <code>insertDb</code>, 갱신하는 <code>updateDb</code>, 삭제하는 <code>deleteDb</code>, 그리고 조회하는 <code>getAllDb</code>함수를 만듭니다. 작업은 <code>try</code> 블록 안에서 실행하며 에디트텍스트에 입력한 값을 <code>dbHelper</code>에 정의한 각 함수로 전달합니다. 이 때 입력되는 sql 쿼리에 공백이 있으면 안되기 때문에 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim.html"  target="_blank" rel="noopener"
     >trim</a>으로 공백을 제거하도록 했습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">insertDb</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">insertDb</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">binding</span><span class="p">.</span><span class="n">btnInsert</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
         <span class="k">try</span> <span class="p">{</span>
             <span class="n">dbHelper</span><span class="p">.</span><span class="n">insertData</span><span class="p">(</span>
@@ -899,9 +1323,24 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="oncreate-정의">onCreate 정의</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="oncreate-정의">onCreate 정의</h3>
 <p>마지막으로 위에서 정의한 버튼기능을 <code>onCreate</code> 안에서 실행하도록 하면 되겠죠.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
     <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
 
@@ -910,7 +1349,9 @@ if (!doNotTrack) {
     <span class="n">deleteDb</span><span class="p">()</span>
     <span class="n">getAllDb</span><span class="p">()</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 SQLite의 개념과, <code>SQLiteHelper</code>를 이용해 안드로이드에서 데이터베이스를 다루는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 SQLite의 개념과, <code>SQLiteHelper</code>를 이용해 안드로이드에서 데이터베이스를 다루는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/OwQ8gChq9AU" 
@@ -1190,7 +1631,67 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#part-a-데이터베이스">Part A. 데이터베이스</a>
+      <ol>
+        <li><a href="#관계형-데이터베이스">관계형 데이터베이스</a></li>
+        <li><a href="#sql과-crud">SQL과 CRUD</a></li>
+        <li><a href="#database-management-system">DataBase Management System</a></li>
+        <li><a href="#sqlite란">SQLite란</a></li>
+        <li><a href="#안드로이드의-sqlite-버전">안드로이드의 SQLite 버전</a></li>
+        <li><a href="#안드로이드에서의-sqlite-사용">안드로이드에서의 SQLite 사용</a></li>
+      </ol>
+    </li>
+    <li><a href="#part-b-샘플-앱-작성">Part B. 샘플 앱 작성</a>
+      <ol>
+        <li><a href="#메인-레이아웃">메인 레이아웃</a></li>
+        <li><a href="#databasehelper-작성">DatabaseHelper 작성</a></li>
+        <li><a href="#oncreate-구현">onCreate 구현</a></li>
+        <li><a href="#onupgrade-구현">onUpgrade 구현</a></li>
+        <li><a href="#crud-구현">CRUD 구현</a>
+          <ol>
+            <li><a href="#create">Create</a></li>
+            <li><a href="#update">Update</a></li>
+            <li><a href="#delete">Delete</a></li>
+            <li><a href="#read">Read</a></li>
+          </ol>
+        </li>
+        <li><a href="#mainactivity-준비">MainActivity 준비</a></li>
+        <li><a href="#유틸-메소드-준비">유틸 메소드 준비</a></li>
+        <li><a href="#버튼기능-정의">버튼기능 정의</a></li>
+        <li><a href="#oncreate-정의">onCreate 정의</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

@@ -58,7 +58,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -432,18 +432,46 @@ if (!doNotTrack) {
 <ul>
 <li>도커 컨테이너의 ID 확인</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker ps -a
-</code></pre></div><ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker ps -a
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>이전버전 컨테이너에서 파일 덤프</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker <span class="nb">exec</span> -it <span class="o">[</span>이전버전 container ID<span class="o">]</span> /usr/bin/pg_dumpall -U <span class="o">[</span>username<span class="o">]</span> &gt; dumpfile.sql
-</code></pre></div><ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker <span class="nb">exec</span> -it <span class="o">[</span>이전버전 container ID<span class="o">]</span> /usr/bin/pg_dumpall -U <span class="o">[</span>username<span class="o">]</span> &gt; dumpfile.sql
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>다음버전 컨테이너에 파일 복원</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker <span class="nb">exec</span> -it <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql &lt; dumpfile.sql
-</code></pre></div><p>이 때 <code>the input device is not a TTY</code> 라고 뜨면서 입력이 안되면 다음 명령어로 직접 집어넣으면 된다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat dumpfile.sql <span class="p">|</span> docker <span class="nb">exec</span> -i <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql -U gitea
-</code></pre></div><p>끗.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker <span class="nb">exec</span> -it <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql &lt; dumpfile.sql
+</code></pre></td></tr></table>
+</div>
+</div><p>이 때 <code>the input device is not a TTY</code> 라고 뜨면서 입력이 안되면 다음 명령어로 직접 집어넣으면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat dumpfile.sql <span class="p">|</span> docker <span class="nb">exec</span> -i <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql -U gitea
+</code></pre></td></tr></table>
+</div>
+</div><p>끗.</p>
 
 </section>
 
@@ -691,7 +719,46 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#postgresql-version">Postgresql Version</a></li>
+    <li><a href="#whats-new-in-postgresql-13">What’s New in PostgreSQL 13?</a></li>
+    <li><a href="#docker-image">Docker Image</a></li>
+    <li><a href="#version-upgrade">Version upgrade</a>
+      <ol>
+        <li><a href="#pg_upgrade-이용"><code>pg_upgrade</code> 이용</a></li>
+        <li><a href="#백업파일-이용">백업파일 이용</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

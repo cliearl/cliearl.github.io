@@ -5,7 +5,7 @@
 View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
 코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.'><title>RecyclerView에 View Binding 적용하기</title>
+1 2 3 4 5 6 7  plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.'><title>RecyclerView에 View Binding 적용하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewbinding-recyclerview/'>
 
@@ -14,7 +14,7 @@ plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; bui
 View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
 코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.'>
+1 2 3 4 5 6 7  plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/viewbinding-recyclerview/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='RecyclerView' /><meta property='article:tag' content='View Binding' /><meta property='article:published_time' content='2021-04-17T22:43:04&#43;09:00'/><meta property='article:modified_time' content='2021-04-17T22:43:04&#43;09:00'/>
@@ -23,7 +23,7 @@ plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; bui
 View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
 코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.">
+1 2 3 4 5 6 7  plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -64,7 +64,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -335,7 +335,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -358,16 +358,63 @@ if (!doNotTrack) {
 <h2 id="코드-작성">코드 작성</h2>
 <h3 id="view-binding-활성화">View Binding 활성화</h3>
 <p>우선은 gradle에서 <code>kotlin-android-extensions</code> 플러그인을 삭제하고 View Binding을 활성화합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">plugins {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">plugins {
 <span class="gd">-    id &#39;kotlin-android-extensions&#39;
 </span><span class="gd"></span>}
 
 android {
 <span class="gi">+    buildFeatures.viewBinding true
 </span><span class="gi"></span>}
-</code></pre></div><h3 id="메인액티비티-수정">메인액티비티 수정</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="메인액티비티-수정">메인액티비티 수정</h3>
 <p>다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 <code>ActivityMainBinding</code> 클래스를 초기화하여 <code>binding</code>이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 <code>binding.recyclerView</code>로 접근하여 설정합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">class MainActivity : AppCompatActivity() {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val dataSet: ArrayList&lt;List&lt;String&gt;&gt; = arrayListOf()
 
@@ -397,9 +444,34 @@ android {
         }
     }
 }
-</code></pre></div><h3 id="recyclerview-어댑터-수정">Recyclerview 어댑터 수정</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="recyclerview-어댑터-수정">Recyclerview 어댑터 수정</h3>
 <p><code>onCreateViewHolder</code>에서 뷰를 만들 때 <code>ListItemBinding</code> 클래스로 만들어지는 <code>binding</code> 인스턴스를 사용하도록 변경하여줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">class RecyclerViewAdapter(private val dataSet: ArrayList&lt;List&lt;String&gt;&gt;): RecyclerView.Adapter&lt;RecyclerViewAdapter.ViewHolder&gt;() {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">class RecyclerViewAdapter(private val dataSet: ArrayList&lt;List&lt;String&gt;&gt;): RecyclerView.Adapter&lt;RecyclerViewAdapter.ViewHolder&gt;() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -418,9 +490,33 @@ android {
         return dataSet.size
     }
 }
-</code></pre></div><h3 id="viewholder-수정">ViewHolder 수정</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="viewholder-수정">ViewHolder 수정</h3>
 <p>기존의 ViewHolder에서는 뷰를 받아와서 정의하고 그걸 데이터와 연결하는 작업이 필요했는데, View Binding에서는 binding 인스턴스가 생성되는순간 자동으로 뷰를 binding의 프로퍼티로 접근할 수 있기 때문에 이 코드가 필요없게 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">class RecyclerViewAdapter(private val dataSet: ArrayList&lt;List&lt;String&gt;&gt;): RecyclerView.Adapter&lt;RecyclerViewAdapter.ViewHolder&gt;() {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff">class RecyclerViewAdapter(private val dataSet: ArrayList&lt;List&lt;String&gt;&gt;): RecyclerView.Adapter&lt;RecyclerViewAdapter.ViewHolder&gt;() {
 
 <span class="gd">-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
 </span><span class="gd">-        private val tvMain: TextView = view.tv_main
@@ -438,7 +534,9 @@ android {
 </span><span class="gi">+        }
 </span><span class="gi"></span>    }
 }
-</code></pre></div><p>이렇게 해서 RecyclerView에 View Binding을 적용하는 방법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 RecyclerView에 View Binding을 적용하는 방법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/cN1UVAeP63c" 
@@ -718,7 +816,45 @@ android {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#코드-작성">코드 작성</a>
+      <ol>
+        <li><a href="#view-binding-활성화">View Binding 활성화</a></li>
+        <li><a href="#메인액티비티-수정">메인액티비티 수정</a></li>
+        <li><a href="#recyclerview-어댑터-수정">Recyclerview 어댑터 수정</a></li>
+        <li><a href="#viewholder-수정">ViewHolder 수정</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

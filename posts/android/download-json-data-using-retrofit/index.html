@@ -58,7 +58,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -329,7 +329,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    8 minute read
+                    9 minute read
                 </time>
             </div>
         
@@ -355,21 +355,134 @@ if (!doNotTrack) {
     >Retrofit</a>과 JSON을 다루기 위한 <a class="link" href="https://github.com/square/moshi/"  target="_blank" rel="noopener"
     >Moshi</a> 컨버터, 그리고 로그를 찍기위한 <a class="link" href="https://github.com/square/okhttp"  target="_blank" rel="noopener"
     >OkHttp</a> 라이브러리를 추가해 줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="c1">// Retrofit
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="c1">// Retrofit
 </span><span class="c1"></span><span class="n">implementation</span> <span class="s1">&#39;com.squareup.retrofit2:retrofit:2.9.0&#39;</span>
 <span class="n">implementation</span> <span class="s1">&#39;com.squareup.retrofit2:converter-moshi:2.9.0&#39;</span>
 
 <span class="c1">// OkHttp
 </span><span class="c1"></span><span class="n">implementation</span> <span class="s1">&#39;com.squareup.okhttp3:okhttp:4.9.1&#39;</span>
 <span class="n">implementation</span> <span class="s1">&#39;com.squareup.okhttp3:logging-interceptor:4.9.1&#39;</span>
-</code></pre></div><h2 id="권한-추가">권한 추가</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="권한-추가">권한 추가</h2>
 <p>HTTP 통신에 인터넷을 사용해야 하니 <code>AndroidManefest.xml</code>에서 권한을 추가해줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></div><h2 id="data-transfer-object-준비">Data Transfer Object 준비</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="data-transfer-object-준비">Data Transfer Object 준비</h2>
 <h3 id="데이터-형식-확인">데이터 형식 확인</h3>
 <p>API의 주소인 <a class="link" href="https://openapi.gg.go.kr/EmgMedInfo?type=json"  target="_blank" rel="noopener"
     >https://openapi.gg.go.kr/EmgMedInfo?type=json</a> 에 웹브라우저로 접속해보면 다음과 같은 값을 반환받게 됩니다. <code>&quot;head&quot;</code>안의 항목은 필요하지 않은 메타정보이고, <code>&quot;row&quot;</code> 안의 내용이 Recyclerview로 표시해야 하는 것들입니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&#34;EmgMedInfo&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
             <span class="nt">&#34;head&#34;</span><span class="p">:</span> <span class="p">[</span>
@@ -458,13 +571,69 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="dto-클래스-작성">DTO 클래스 작성</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="dto-클래스-작성">DTO 클래스 작성</h3>
 <p>JSON 형식으로 받아온 텍스트는 앱에서 사용할 수 있는 데이터 객체로 변환하게 되는데 이 때 그 객체의 틀이 되는것이 <a class="link" href="https://en.wikipedia.org/wiki/Data_transfer_object"  target="_blank" rel="noopener"
     >Data Transfer Object (DTO)</a>입니다.</p>
 <p>그럼 이 JSON에 대응하는 DTO를 작성합니다. <a class="link" href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-"  target="_blank" rel="noopener"
     >JSON To Kotlin Class</a> 플러그인에 위의 JSON을 붙여넣고 EmgMedResponse라는 이름으로 변환하면 다음과 같이 5개의 데이터 클래스가 생성됩니다. 이 때 옵션은 <code>Val</code>, <code>Nullable</code>, <code>MoShi (Reflect)</code>를 선택해줍니다.</p>
 <p>JSON은 객체를 중괄호<code>{}</code> 로 감싸서 표시하는데 이걸 DTO로 변환할 때에는 객체 하나를 데이터 클래스 하나로 대응시킵니다. Moshi로 객체 안의 Key-Value 쌍을 변환할 때는 <code>@field:Json(name = &quot;&quot;)</code> 어노테이션을 사용합니다. name에 Key 값을 지정하면, 대응하는 Value를 val 프로퍼티에 매칭해 줍니다. 각 클래스의 내용이 짧기 때문에 여기서는 관리상 편의를 위해 <code>EmgMedResponse.kt</code> 안에 다른 클래스 내용을 다 붙여넣도록 하겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">EmgMedResponse</span><span class="p">(</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">EmgMedResponse</span><span class="p">(</span>
     <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
     <span class="k">val</span> <span class="py">emgMedInfo</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">EmgMedInfo</span><span class="p">&gt;?</span>
 <span class="p">)</span>
@@ -514,9 +683,83 @@ if (!doNotTrack) {
 </span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SUM_DE&#34;</span><span class="p">)</span>
     <span class="k">val</span> <span class="py">sUMDE</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="c1">// 2021-06-09
 </span><span class="c1"></span><span class="p">)</span>
-</code></pre></div><h2 id="아이템-디자인">아이템 디자인</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="아이템-디자인">아이템 디자인</h2>
 <p>Recyclerview에서 사용할 아이템의 디자인을 만들어줍니다. LinearLayout을 써서 API 응답중 Row의 내용을 표시하는 화면을 만들어줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span>
     <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">android:id=</span><span class="s">&#34;@+id/layout_viewholder&#34;</span>
@@ -584,9 +827,46 @@ if (!doNotTrack) {
         <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></div><h2 id="레이아웃-작성">레이아웃 작성</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="레이아웃-작성">레이아웃 작성</h2>
 <p>다음은 <code>activity_main.xml</code>을 작성합니다. JSON 응답결과를 표시할 Recyclerview를 하나 배치하고 네트워크 연결을 시작하는데 사용할 플로팅버튼을 하나 달아줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -617,10 +897,54 @@ if (!doNotTrack) {
         <span class="na">app:srcCompat=</span><span class="s">&#34;@android:drawable/ic_menu_add&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></div><h2 id="recyclerview-어댑터-작성">Recyclerview 어댑터 작성</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="recyclerview-어댑터-작성">Recyclerview 어댑터 작성</h2>
 <p>DTO 중 Row 클래스의 내용을 받아 ViewHolder에 표시하는 Recyclerview 어댑터를 작성합니다. 데이터의 갱신은 ListAdapter를 사용하여 수행합니다. ListAdapter의 구체적인 설명에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/recyclerview-listadapter/"  target="_blank" rel="noopener"
     >DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기</a> 강의를 참조하시기 바랍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">EmgMedAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">,</span> <span class="n">EmgMedAdapter</span><span class="p">.</span><span class="n">EmgMedViewHolder</span><span class="p">&gt;(</span><span class="n">DiffCallback</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">EmgMedAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">,</span> <span class="n">EmgMedAdapter</span><span class="p">.</span><span class="n">EmgMedViewHolder</span><span class="p">&gt;(</span><span class="n">DiffCallback</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">EmgMedViewHolder</span> <span class="p">{</span>
         <span class="k">val</span> <span class="py">binding</span> <span class="p">=</span> <span class="n">ItemEmgmedBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span> <span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
@@ -658,8 +982,26 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>그리고 MainActivity의 <code>onCreate</code>에서 Recyclerview를 설정합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">val</span> <span class="py">myRecyclerViewAdapter</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">EmgMedAdapter</span><span class="p">()</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>그리고 MainActivity의 <code>onCreate</code>에서 Recyclerview를 설정합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">val</span> <span class="py">myRecyclerViewAdapter</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">EmgMedAdapter</span><span class="p">()</span> <span class="p">}</span>
 
 <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
@@ -671,7 +1013,9 @@ if (!doNotTrack) {
         <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h2 id="서비스-작성">서비스 작성</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="서비스-작성">서비스 작성</h2>
 <p>Retrofit은 HTTP API의 request를 <a class="link" href="https://kotlinlang.org/docs/interfaces.html"  target="_blank" rel="noopener"
     >인터페이스</a>로 정의하여 사용합니다. 이 강의에서 사용할 선별진료소 API는 다음과 같은 <a class="link" href="https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&amp;rows=10&amp;sortColumn=&amp;sortDirection=&amp;infId=461Q599QLK8UTE14E3LW12837248&amp;infSeq=3&amp;order=&amp;loc=&amp;searchWord=%EC%BD%94%EB%A1%9C%EB%82%98"  target="_blank" rel="noopener"
     >인자</a>를 받을 수 있게 만들어져 있습니다.</p>
@@ -714,17 +1058,55 @@ if (!doNotTrack) {
 <p>그러면 이중 KEY와 Type 인자를 전달받아 GET 요청을 수행하는 Retrofit 서비스를 하나 만들어보겠습니다. API 요청주소가 <code>https://openapi.gg.go.kr/EmgMedInfo</code> 이므로 고정주소인 Base url은 <code>https://openapi.gg.go.kr/</code> 이고, <code>@GET</code>요청시 인자는 Base url 뒤의 <code>EmgMedInfo</code> 입니다. KEY와 Type 인자는 <code>@Query</code> 어노테이션을 써서 전달해줍니다.</p>
 <p>인터페이스의 메소드인 <code>getEmgMedData</code>는 <a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Call.html"  target="_blank" rel="noopener"
     >Call</a> 객체를 반환하도록 정의되었습니다. Call 은 서버에 request를 보내고 그 응답을 반환하는 1회용 객체입니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">interface</span> <span class="nc">EmgMedService</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">interface</span> <span class="nc">EmgMedService</span> <span class="p">{</span>
     <span class="nd">@GET</span><span class="p">(</span><span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
     <span class="k">fun</span> <span class="nf">getEmgMedData</span><span class="p">(</span><span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;KEY&#34;</span><span class="p">)</span> <span class="n">KEY</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
                       <span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;Type&#34;</span><span class="p">)</span> <span class="n">Type</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span>
 <span class="p">}</span>
-</code></pre></div><p>코드를 해석하면 <code>getEmgMedData</code> 는 <code>BASE_URL/EmgMedInfo?KEY=&quot;KEY&quot;&amp;Type=&quot;Type&quot;</code>이라는 GET 요청을 보내고 <code>Call&lt;EmgMedResponse&gt;</code> 객체를 반환받는 동작을 하는 함수라는 뜻이 됩니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>코드를 해석하면 <code>getEmgMedData</code> 는 <code>BASE_URL/EmgMedInfo?KEY=&quot;KEY&quot;&amp;Type=&quot;Type&quot;</code>이라는 GET 요청을 보내고 <code>Call&lt;EmgMedResponse&gt;</code> 객체를 반환받는 동작을 하는 함수라는 뜻이 됩니다.</p>
 <h2 id="retrofit-객체-준비">Retrofit 객체 준비</h2>
 <h3 id="retrofitapi-작성">RetrofitApi 작성</h3>
 <p>Retrofit을 사용하기 위해서는 우선 객체를 만들어주어야 합니다. 이 때 여러개의 객체가 만들어지면 자원도 낭비되고 통신에 혼선도 발생할 수 있으므로 <code>object</code> 키워드를 써서 싱글톤으로 만들어지도록 합니다. 이 때 각 변수에는 <code>lazy</code>를 적용함으로써 실제 사용되는 순간이 와야 비로소 만들어지게 되고, 단 하나의 인스턴스만이 만들어지도록 하였습니다. 싱글톤에 대한 구체적인 설명은 <a class="link" href="https://cliearl.github.io/posts/android/understanding-singleton-pattern/"  target="_blank" rel="noopener"
     >알기쉬운 Singleton Pattern</a> 강의를 참고하시기 바랍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">object</span> <span class="nc">RetrofitApi</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">object</span> <span class="nc">RetrofitApi</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">BASE</span><span class="n">_URL</span> <span class="p">=</span> <span class="s2">&#34;https://openapi.gg.go.kr/&#34;</span>
 
     <span class="k">private</span> <span class="k">val</span> <span class="py">okHttpClient</span><span class="p">:</span> <span class="n">OkHttpClient</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
@@ -747,7 +1129,9 @@ if (!doNotTrack) {
         <span class="n">retrofit</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">EmgMedService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p><a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Retrofit.Builder.html"  target="_blank" rel="noopener"
+</code></pre></td></tr></table>
+</div>
+</div><p><a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Retrofit.Builder.html"  target="_blank" rel="noopener"
     >빌더 패턴</a>을 통해 retrofit 객체를 만들어줍니다. <code>addConverterFactory</code>에서 DTO 변환에 사용할 JSON 컨버터를 Moshi로 지정하고, <code>baseUrl</code> 을 전달한 뒤 <code>build()</code>로 객체를 생성합니다. 그리고나서 retrofit 인스턴스의 <code>create</code> 명령을 이용해서 emgMedService의 인스턴스를 만들어줍니다.</p>
 <h3 id="전송패킷-모니터링">전송패킷 모니터링</h3>
 <p>retrofit 객체를 생성할때 <code>client</code> 속성에 <code>okHttpClient</code>를 넘겨주면 로그캣에서 패킷내용을 모니터링할 수 있습니다. okHttpClient는 다음과 같이 서버와 코어 사이에서 데이터를 가로채는 <a class="link" href="https://square.github.io/okhttp/interceptors/"  target="_blank" rel="noopener"
@@ -764,7 +1148,33 @@ if (!doNotTrack) {
 ></p>
 <h2 id="retrofit-구동">Retrofit 구동</h2>
 <p>그럼 MainActivity에서 Retrofit을 사용해보겠습니다. 플로팅 버튼에 대해 다음 내용의 <code>retrofitWork()</code>를 실행하는 클릭리스너를 구성합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">retrofitWork</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">retrofitWork</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">service</span> <span class="p">=</span> <span class="n">RetrofitApi</span><span class="p">.</span><span class="n">emgMedService</span>
 
     <span class="n">service</span><span class="p">.</span><span class="n">getEmgMedData</span><span class="p">(</span><span class="n">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">api_key</span><span class="p">),</span> <span class="s2">&#34;json&#34;</span><span class="p">)</span>
@@ -786,7 +1196,9 @@ if (!doNotTrack) {
             <span class="p">}</span>
         <span class="p">})</span>
 <span class="p">}</span>
-</code></pre></div><p>싱글톤 Retrofit으로 서비스 인스턴스를 생성하고 <code>getEmgMedData</code>를 실행해서 Call 객체를 획득합니다. 인증키는 <code>R.string.api_key</code> 를 이용해 입력했고 서버로부터 json 데이터를 반환받도록 하였습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>싱글톤 Retrofit으로 서비스 인스턴스를 생성하고 <code>getEmgMedData</code>를 실행해서 Call 객체를 획득합니다. 인증키는 <code>R.string.api_key</code> 를 이용해 입력했고 서버로부터 json 데이터를 반환받도록 하였습니다.</p>
 <p>Call 작업은 두가지 방법으로 실행시킬 수 있습니다. <a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Call.html#execute--"  target="_blank" rel="noopener"
     >execute</a>를 사용하면 request를 보내고 response를 받는 행위를 동기적으로 행합니다. 그리고 <a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Call.html#enqueue-retrofit2.Callback-"  target="_blank" rel="noopener"
     >enqueue</a> 작업을 실행하면 request는 비동기적으로 보내고, response는 콜백으로 받게 됩니다. 여기서는 네트워크 작업을 안정적으로 수행하기 위해 enqueue로 실행하도록 하였습니다.</p>
@@ -796,16 +1208,52 @@ if (!doNotTrack) {
     >사양</a>에 따르면 <code>enqueue</code>는 request를 백그라운드 스레드에서, response 콜백은 메인스레드에서 처리하게 됩니다. 그런데 코루틴을 사용하면 콜백을 쓰지 않아도 동일한 처리를 할 수 있습니다. 그래서 이번엔 코루틴 안에서 retrofit 처리를 수행하도록 해 보겠습니다. 코루틴에 대한 구체적인 설명에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/coroutine-principle/"  target="_blank" rel="noopener"
     >알기쉬운 코루틴 이론</a>을 참조하시기 바랍니다.</p>
 <p>우선은 <code>build.gradle</code>에 플러그인을 추가합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">implementation</span> <span class="s1">&#39;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1&#39;</span>
-</code></pre></div><p>다음으로 코루틴으로 작동하는 서비스를 인터페이스에 추가해 줍니다. 서비스가 코루틴 안에서 수행되어야 하므로 <code>suspend</code> 키워드를 붙여주고, 반환값은 <code>Call</code> 객체가 아니라 <a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Response.html"  target="_blank" rel="noopener"
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">implementation</span> <span class="s1">&#39;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>다음으로 코루틴으로 작동하는 서비스를 인터페이스에 추가해 줍니다. 서비스가 코루틴 안에서 수행되어야 하므로 <code>suspend</code> 키워드를 붙여주고, 반환값은 <code>Call</code> 객체가 아니라 <a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Response.html"  target="_blank" rel="noopener"
     >Response</a> 객체로 받도록 변경하였습니다. 코루틴 자체적으로 비동기적인 처리를 수행하기 때문에, Call이 제공하는 흐름처리 기능은 더이상 필요가 없습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="nd">@GET</span><span class="p">(</span><span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="nd">@GET</span><span class="p">(</span><span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
 <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getDataCoroutine</span><span class="p">(</span>
     <span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;KEY&#34;</span><span class="p">)</span> <span class="n">KEY</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
     <span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;Type&#34;</span><span class="p">)</span> <span class="n">Type</span><span class="p">:</span> <span class="n">String</span>
 <span class="p">):</span> <span class="n">Response</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span>
-</code></pre></div><p>다음은 retrofitWork()에서 <code>enqueue</code> 처리를 주석처리하고 다음 코드를 추가합니다. 네트워크 작업이므로 IO 디스패처에서 <code>Response</code> 반환을 획득합니다. 그리고 반환값을 RecylerView에 표시할 때만 컨텍스트를 메인 스레드로 스위치하면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>다음은 retrofitWork()에서 <code>enqueue</code> 처리를 주석처리하고 다음 코드를 추가합니다. 네트워크 작업이므로 IO 디스패처에서 <code>Response</code> 반환을 획득합니다. 그리고 반환값을 RecylerView에 표시할 때만 컨텍스트를 메인 스레드로 스위치하면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">response</span> <span class="p">=</span> <span class="n">service</span><span class="p">.</span><span class="n">getDataCoroutine</span><span class="p">(</span><span class="n">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">api_key</span><span class="p">),</span> <span class="s2">&#34;json&#34;</span><span class="p">)</span>
 
     <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">Main</span><span class="p">)</span> <span class="p">{</span>
@@ -819,7 +1267,9 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 Retrofit으로 HTTP 통신을 수행하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 Retrofit으로 HTTP 통신을 수행하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/Dnmifx4BSQc" 
@@ -1103,7 +1553,57 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#라이브러리-추가">라이브러리 추가</a></li>
+    <li><a href="#권한-추가">권한 추가</a></li>
+    <li><a href="#data-transfer-object-준비">Data Transfer Object 준비</a>
+      <ol>
+        <li><a href="#데이터-형식-확인">데이터 형식 확인</a></li>
+        <li><a href="#dto-클래스-작성">DTO 클래스 작성</a></li>
+      </ol>
+    </li>
+    <li><a href="#아이템-디자인">아이템 디자인</a></li>
+    <li><a href="#레이아웃-작성">레이아웃 작성</a></li>
+    <li><a href="#recyclerview-어댑터-작성">Recyclerview 어댑터 작성</a></li>
+    <li><a href="#서비스-작성">서비스 작성</a></li>
+    <li><a href="#retrofit-객체-준비">Retrofit 객체 준비</a>
+      <ol>
+        <li><a href="#retrofitapi-작성">RetrofitApi 작성</a></li>
+        <li><a href="#전송패킷-모니터링">전송패킷 모니터링</a></li>
+      </ol>
+    </li>
+    <li><a href="#retrofit-구동">Retrofit 구동</a></li>
+    <li><a href="#코루틴에서-사용하기">코루틴에서 사용하기</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

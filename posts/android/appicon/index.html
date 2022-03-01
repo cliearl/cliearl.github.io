@@ -61,7 +61,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -377,17 +377,36 @@ if (!doNotTrack) {
 </ul>
 <h2 id="xml-구조-확인">xml 구조 확인</h2>
 <p>안드로이드 스튜디오에서 기본앱 프로젝트를 만들면 앱 아이콘을 지정하지 않았는데도 안드로이드 머리통 형태의 앱 아이콘이 부여되는 것을 확인할 수 있습니다. <code>AndroidManifest.xml</code> 을 보시면</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml">android:icon=&#34;@mipmap/ic_launcher
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml">android:icon=&#34;@mipmap/ic_launcher
 android:roundIcon=&#34;@mipmap/ic_launcher_round
-</code></pre></div><p>항목이 있는것을 알 수 있는데 앱 아이콘은 이 항목을 이용해 지정합니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>항목이 있는것을 알 수 있는데 앱 아이콘은 이 항목을 이용해 지정합니다.</p>
 <p><code>mipmap/ic_launcher</code> 폴더는 <code>res</code> 폴더안에 위치하고 있는대요, Adaptive Icon은 이 안에 xml 형태로 저장되고, Legacy Icon은 png형태로 저장되어 있습니다.</p>
 <p>예를들어 <code>ic_launcher.xml</code> 의 내용은 다음과 같이 되어 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;adaptive-icon</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;background</span> <span class="na">android:drawable=</span><span class="s">&#34;@drawable/ic_launcher_background&#34;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;foreground</span> <span class="na">android:drawable=</span><span class="s">&#34;@drawable/ic_launcher_foreground&#34;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/adaptive-icon&gt;</span>
-</code></pre></div><p>백그라운드와 포그라운드는 drawable 폴더 안의 파일을 지정하도록 되어 있는데 내용을 보면 백그라운드 xml은 녹색 배경이고, 포그라운드 xml은 안드로이드 머리통인 것을 확인할 수 있습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>백그라운드와 포그라운드는 drawable 폴더 안의 파일을 지정하도록 되어 있는데 내용을 보면 백그라운드 xml은 녹색 배경이고, 포그라운드 xml은 안드로이드 머리통인 것을 확인할 수 있습니다.</p>
 <h2 id="아이콘-설정">아이콘 설정</h2>
 <p>그럼 여기서는 이미지를 이용해서 아이콘을 설정해 보도록 하겠습니다. 이미지는 PNGRepo의 빨간색 안드로이드 아이콘을 사용할건데요, 이 아이콘은 512x512 크기를 가지고 있기 때문에 그대로 앱에 사용할 수 있습니다.</p>
 <p><img src="https://www.pngrepo.com/png/232464/180/android.png"
@@ -680,7 +699,41 @@ android:roundIcon=&#34;@mipmap/ic_launcher_round
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#legacy-icon과-adaptive-icon">Legacy Icon과 Adaptive Icon</a></li>
+    <li><a href="#아이콘-디자인-사양">아이콘 디자인 사양</a></li>
+    <li><a href="#xml-구조-확인">xml 구조 확인</a></li>
+    <li><a href="#아이콘-설정">아이콘 설정</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

@@ -61,7 +61,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -373,23 +373,54 @@ if (!doNotTrack) {
 <p>그럼 버튼을 터치하면 진행율이 0.2초당 10%씩 증가하는 ProgressDialog를 만들어 보면서 Thread를 구현해 보겠습니다.</p>
 <h3 id="view-binding-처리">View binding 처리</h3>
 <p>View Binding 처리를 해 줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">build</span><span class="o">.</span><span class="na">gradle</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">build</span><span class="o">.</span><span class="na">gradle</span>
 
 <span class="n">android</span> <span class="o">{</span>
     <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
 <span class="o">}</span>
-</code></pre></div><h3 id="progressdialog-준비">ProgressDialog 준비</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="progressdialog-준비">ProgressDialog 준비</h3>
 <p>메인액티비티 안에 ProgressDialog용 전역변수를 만들어줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">progressDialog</span><span class="p">:</span> <span class="n">ProgressDialog</span>
-</code></pre></div><p>버튼을 터치했을때 다이얼로그가 표시되게 할 것이므로 버튼의 클릭리스너 안에서 ProgressDialog를 설정합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">progressDialog</span> <span class="p">=</span> <span class="n">ProgressDialog</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">progressDialog</span><span class="p">:</span> <span class="n">ProgressDialog</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>버튼을 터치했을때 다이얼로그가 표시되게 할 것이므로 버튼의 클릭리스너 안에서 ProgressDialog를 설정합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">progressDialog</span> <span class="p">=</span> <span class="n">ProgressDialog</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">max</span> <span class="p">=</span> <span class="m">100</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">setProgressStyle</span><span class="p">(</span><span class="n">ProgressDialog</span><span class="p">.</span><span class="n">STYLE_HORIZONTAL</span><span class="p">)</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&#34;Download Task&#34;</span><span class="p">)</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">setMessage</span><span class="p">(</span><span class="s2">&#34;Please wait, we are downloading your files...&#34;</span><span class="p">)</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">setCancelable</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 <span class="n">progressDialog</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div><h3 id="스레드와-핸들러">스레드와 핸들러</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="스레드와-핸들러">스레드와 핸들러</h3>
 <p><img src="/images/progressdialog-thread/android-thread-looper-handler.png"
 	
 	
@@ -410,15 +441,44 @@ if (!doNotTrack) {
 <h3 id="핸들러-구현">핸들러 구현</h3>
 <p>스레드에서 사용할 핸들러 객체는 다음과 같이 만들어 줍니다. <a class="link" href="https://developer.android.com/reference/android/os/Handler#handleMessage%28android.os.Message%29"  target="_blank" rel="noopener"
     >handleMessage</a> 메소드를 오버라이드하여 그 안에 수행할 UI작업을 작성하면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span><span class="p">:</span> <span class="n">Handler</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">Handler</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span><span class="p">:</span> <span class="n">Handler</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">Handler</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">super</span><span class="p">.</span><span class="n">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">progressDialog</span><span class="p">.</span><span class="n">incrementProgressBy</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="코틀린에서-스레드-사용">코틀린에서 스레드 사용</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="코틀린에서-스레드-사용">코틀린에서 스레드 사용</h3>
 <p>코틀린에서 스레드를 사용하는 방법은 <a class="link" href="%28https://developer.android.com/reference/java/lang/Thread%29" >Thread</a> 클래스를 상속받아 스레드를 직접 구현하는 법, 그리고 <code>Runnable</code> 인터페이스로 구현하는 법이 있습니다. 여기서는 스레드 클래스를 변경할 필요가 없기 때문에 간편하게 구현할 수 있는 <code>Runnable</code> 인터페이스를 사용하겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">Thread</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">Thread</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
         <span class="k">while</span> <span class="p">(</span><span class="n">progressDialog</span><span class="p">.</span><span class="n">progress</span> <span class="o">&lt;=</span> <span class="n">progressDialog</span><span class="p">.</span><span class="n">max</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">200</span><span class="p">)</span>
@@ -431,19 +491,33 @@ if (!doNotTrack) {
         <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}.</span><span class="n">start</span><span class="p">()</span>
-</code></pre></div><p>쓰레드에서는 매 루프마다 현재 progress 값을 체크하고 그 값이 최대값보다 작으면 핸들러에 메시지를 보냅니다. 이 때 <a class="link" href="https://developer.android.com/reference/java/lang/Thread#sleep%28long,%20int%29"  target="_blank" rel="noopener"
+</code></pre></td></tr></table>
+</div>
+</div><p>쓰레드에서는 매 루프마다 현재 progress 값을 체크하고 그 값이 최대값보다 작으면 핸들러에 메시지를 보냅니다. 이 때 <a class="link" href="https://developer.android.com/reference/java/lang/Thread#sleep%28long,%20int%29"  target="_blank" rel="noopener"
     >Thread.sleep</a>을 이용해 0.2초 간격으로 스레드를 정지시킵니다.</p>
 <h2 id="메모리-리크-방어하기">메모리 리크 방어하기</h2>
 <h3 id="메인-루퍼-이용하기">메인 루퍼 이용하기</h3>
 <p>이렇게 해서 프로그레스다이얼로그를 구현하였습니다. 그런데 핸들러 객체에 하이라이트 된 부분을 보면 <code>This Handler class should be static or leaks might occur</code> 라는 경고가 표시됩니다. 앞에서 설명했듯이 모든 스레드는 각자의 개별 <code>Looper</code>를 가지게 됩니다. 그런데 핸들러가 백그라운드 스레드에 의해 만들어진 루퍼를 사용할 경우, 메시지큐에 메시지가 남아있으면 액티비티가 종료되도 죽지않고 살아있게 됩니다. 그래서 메모리누수가 일어날 수 있다는 경고가 발생하는 것입니다.</p>
 <p>그래서 핸들러가 백그라운드 스레드의 <code>Looper</code>가 아닌 메인 스레드의 <code>Looper</code>를 사용하게 하면 핸들러의 수명은 액티비티가 종료될 때 같이 종료되게 되므로 경고메시지가 사라지게 됩니다. 그렇게 하기 위해서는 핸들러를 만들 때 메인 스레드의 루퍼를 전달해주면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span><span class="p">:</span> <span class="n">Handler</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">Handler</span><span class="p">(</span><span class="n">Looper</span><span class="p">.</span><span class="n">getMainLooper</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span><span class="p">:</span> <span class="n">Handler</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">Handler</span><span class="p">(</span><span class="n">Looper</span><span class="p">.</span><span class="n">getMainLooper</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">super</span><span class="p">.</span><span class="n">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">progressDialog</span><span class="p">.</span><span class="n">incrementProgressBy</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>그러면 메모리 리크 경고가 사라진 것을 알 수 있습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>그러면 메모리 리크 경고가 사라진 것을 알 수 있습니다.</p>
 <h3 id="약한참조-이용하기">약한참조 이용하기</h3>
 <p>메모리 리크는 핸들러 클래스를 새로 만들어 주는 방식을 통해 방지할 수도 있습니다.</p>
 <p>자바에서는 객체간의 관계를 다음과 같이 구분하는데, 메모리 확보를 위해 가비지 컬렉터가 작동하면 강한참조는 무시되고 약한참조를 가진 객체만 삭제되게 됩니다.</p>
@@ -457,17 +531,45 @@ if (!doNotTrack) {
 <p>따라서 메모리 리크를 방지하기 위해서는 핸들러를 메인 액티비티에 대한 참조를 가지지 않는 정적 클래스로 만들면 됩니다.</p>
 <h3 id="핸들러-정적-클래스화">핸들러 정적 클래스화</h3>
 <p>코틀린에서 만들어지는 클래스는 기본적으로 <code>static</code> 이므로 핸들러 클래스를 다음과 같이 만들어서 사용하면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span> <span class="p">=</span> <span class="n">MyHandler</span><span class="p">()</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">handler</span> <span class="p">=</span> <span class="n">MyHandler</span><span class="p">()</span>
 
 <span class="k">private</span> <span class="k">class</span> <span class="nc">MyHandler</span><span class="p">()</span> <span class="p">:</span> <span class="n">Handler</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">handleMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="p">{</span>
    
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="클래스-약한참조화하기">클래스 약한참조화하기</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="클래스-약한참조화하기">클래스 약한참조화하기</h3>
 <p>그런데 정적인 핸들러 클래스를 만들었지만 우리가 사용할 핸들러는 액티비티의 <code>progressDialog</code>를 참조하여야 하므로 다시 참조가 생기게 됩니다, 따라서 <a class="link" href="https://developer.android.com/reference/java/lang/ref/WeakReference"  target="_blank" rel="noopener"
     >WeakReference</a> 를 이용해서 이를 약한참조로 만들어 줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">MyHandler</span><span class="p">(</span><span class="n">activity</span><span class="p">:</span> <span class="n">MainActivity</span><span class="p">?)</span> <span class="p">:</span> <span class="n">Handler</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">MyHandler</span><span class="p">(</span><span class="n">activity</span><span class="p">:</span> <span class="n">MainActivity</span><span class="p">?)</span> <span class="p">:</span> <span class="n">Handler</span><span class="p">()</span> <span class="p">{</span>
 
     <span class="k">private</span> <span class="k">val</span> <span class="py">weakReference</span><span class="p">:</span> <span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">MainActivity</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">WeakReference</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
 
@@ -478,7 +580,9 @@ if (!doNotTrack) {
         <span class="n">activity</span><span class="p">.</span><span class="n">progressDialog</span><span class="p">.</span><span class="n">incrementProgressBy</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 하면 핸들러를 약한 참조로 하면서 액티비티의 참조를 가져올 수 있습니다. 이렇게 <code>ProgressDialog</code>를 구현해 보면서 <code>Thread</code>에 대해 이해해 보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 하면 핸들러를 약한 참조로 하면서 액티비티의 참조를 가져올 수 있습니다. 이렇게 <code>ProgressDialog</code>를 구현해 보면서 <code>Thread</code>에 대해 이해해 보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/fPiL4IsmXgc" 
@@ -762,7 +866,56 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#progressdialog란">ProgressDialog란</a></li>
+    <li><a href="#스레드란">스레드란</a></li>
+    <li><a href="#프로그램-작성">프로그램 작성</a>
+      <ol>
+        <li><a href="#view-binding-처리">View binding 처리</a></li>
+        <li><a href="#progressdialog-준비">ProgressDialog 준비</a></li>
+        <li><a href="#스레드와-핸들러">스레드와 핸들러</a></li>
+        <li><a href="#핸들러-구현">핸들러 구현</a></li>
+        <li><a href="#코틀린에서-스레드-사용">코틀린에서 스레드 사용</a></li>
+      </ol>
+    </li>
+    <li><a href="#메모리-리크-방어하기">메모리 리크 방어하기</a>
+      <ol>
+        <li><a href="#메인-루퍼-이용하기">메인 루퍼 이용하기</a></li>
+        <li><a href="#약한참조-이용하기">약한참조 이용하기</a></li>
+        <li><a href="#핸들러-정적-클래스화">핸들러 정적 클래스화</a></li>
+        <li><a href="#클래스-약한참조화하기">클래스 약한참조화하기</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

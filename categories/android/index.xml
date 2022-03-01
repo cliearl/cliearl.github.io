@@ -15,7 +15,7 @@
       <guid>https://cliearl.github.io/posts/android/encrypted-sharedpreferences/</guid>
       <description>이번 포스팅에서는 SharedPreference의 암호화에 대해 알아보도록 하겠습니다.
 SharedPreferences의 저장방식 SharedPreference에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
-/data/data/{package_name}/shared_prefs/{filename}.xml Android Studio의 Device File Explorer를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요. 키와 값이 앱에서 지정한대로 기입되어있는 것을 확인할 수 있습니다.</description>
+1  /data/data/{package_name}/shared_prefs/{filename}.xml   Android Studio의 Device File Explorer를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요.</description>
     </item>
     
     <item>
@@ -138,8 +138,8 @@ jsoup에는 여러가지 클래스가 있는데 그 중 제 생각에 중요한 
       <guid>https://cliearl.github.io/posts/android/recyclerview-listadapter/</guid>
       <description>이번 포스팅에서는 RecyclerView에 ListAdapter를 적용하는 법에 대해 알아보도록 하겠습니다.
 들어가기 Recyclerview의 데이터가 변하면 Recyclerview Adapter가 제공하는 notifyItem 메소드를 사용해서 ViewHolder 내용을 갱신할 수 있습니다.
-notifyItemChanged(int) notifyItemInserted(int) notifyItemRemoved(int) notifyItemRangeChanged(int, int) notifyItemRangeInserted(int, int) notifyItemRangeRemoved(int, int) 그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.
-DiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 Recyclerview에 반영할 수 있습니다.</description>
+1 2 3 4 5 6  notifyItemChanged(int) notifyItemInserted(int) notifyItemRemoved(int) notifyItemRangeChanged(int, int) notifyItemRangeInserted(int, int) notifyItemRangeRemoved(int, int)   그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.
+DiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다.</description>
     </item>
     
     <item>
@@ -150,8 +150,7 @@ DiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는
       <guid>https://cliearl.github.io/posts/android/how-much-minsdkversion/</guid>
       <description>minSdkVersion 과연 몇으로 해야할지 정해드립니다.
 다음 코드는 build.gradle의 코드 일부입니다. build.gradle의 minsdkversion은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.
-android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.0&amp;#34; testInstrumentationRunner &amp;#34;androidx.test.runner.AndroidJUnitRunner&amp;#34; } 그렇다면 2021년 7월 현재, 앱의 minSdkVersion은 몇으로 하는게 적당할까요?
-API 버전별 특징 그걸 판단하기 위해서 API별로 어떤 기능이 추가되었는지를 확인하는게 좋을 것 같습니다.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13  android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.</description>
     </item>
     
     <item>
@@ -186,7 +185,7 @@ API 버전별 특징 그걸 판단하기 위해서 API별로 어떤 기능이 �
       <description>이번 포스팅에서는 로또번호를 생성하는 간단한 앱을 만들어보도록 하겠습니다.
 사양 정의 버튼을 누르면 1~45 사이에서 랜덤하게 6개의 번호를 추출하고 번호에 대응하는 이미지를 화면에 표시하도록 합니다. 재미를 위해서 전체 번호의 합과, 홀짝 비율이 어떻게 되는지도 같이 화면에 표시해 주도록 하겠습니다.
 화면 디자인 drawable 폴더에는 번호순서대로 숫자와 색깔을 반영시킨 로또 공 이미지를 저장합니다. 화면에 ImageView 그룹을 추가하여 로또 공 이미지를 표시하고, TextView에는 번호합과 홀짝비율을 표시하도록 하겠습니다.
-&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt; &amp;lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&amp;#34;http://schemas.android.com/apk/res/android&amp;#34; xmlns:app=&amp;#34;http://schemas.android.com/apk/res-auto&amp;#34; xmlns:tools=&amp;#34;http://schemas.android.com/tools&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; tools:context=&amp;#34;.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93  &amp;lt;?</description>
     </item>
     
     <item>
@@ -198,7 +197,7 @@ API 버전별 특징 그걸 판단하기 위해서 API별로 어떤 기능이 �
       <description>이번 포스팅에서는 단말의 인터넷 연결상태를 체크하는 법에 대해 알아보도록 하겠습니다.
 앱을 만들다보면 WIFI를 사용할 수 있는 환경에서 대용량 데이터를 다운로드하도록 하는 등의 처리를 위해 단말의 인터넷 연결상태를 체크해야 할 일이 있습니다. 이때 ConnectivityManager를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.
 권한추가 인터넷에 접근하고 네트워크 상태를 가져오기 위해 AndroidManifest.xml에 다음 권한을 추가합니다.
-&amp;lt;uses-permission android:name=&amp;#34;android.permission.ACCESS_NETWORK_STATE&amp;#34; /&amp;gt; &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt; 네트워크 타입 확인 우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.</description>
+1 2  &amp;lt;uses-permission android:name=&amp;#34;android.permission.ACCESS_NETWORK_STATE&amp;#34; /&amp;gt; &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt;   네트워크 타입 확인 우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.</description>
     </item>
     
     <item>
@@ -222,7 +221,7 @@ API 버전별 특징 그걸 판단하기 위해서 API별로 어떤 기능이 �
       <description>이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다.
 ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-// 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.</description>
+1 2 3 4 5 6 7 8 9  // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; }   Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.</description>
     </item>
     
     <item>
@@ -268,8 +267,7 @@ Adaptive Icon은 다양화된 기기의 해상도와 UI 디자인에 대응하�
       <guid>https://cliearl.github.io/posts/android/gadmob-rewarded/</guid>
       <description>이번 포스팅에서는 보상형 광고를 표시하는 법에 대해 알아보도록 하겠습니다. 보상형 광고란 광고를 본 댓가로 어떤 아이템이나 보상을 주는 형태의 광고를 말합니다.
 우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 19.7.0인데요, 19.6.0과 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다.
-Google Admob Version 19.6.0 이하에서의 구현 dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:19.6.0&amp;#39; } AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다.
-&amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt; &amp;lt;application &amp;lt;meta-data android:name=&amp;#34;com.</description>
+Google Admob Version 19.6.0 이하에서의 구현 1 2 3  dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:19.6.0&amp;#39; }   AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다.</description>
     </item>
     
     <item>
@@ -280,8 +278,8 @@ Google Admob Version 19.6.0 이하에서의 구현 dependencies { implementation
       <guid>https://cliearl.github.io/posts/android/gadmob-interstitial/</guid>
       <description>이번 포스팅에서는 구글 애드몹을 이용해서 전면광고를 표시하는 법에 대해 알아보도록 하겠습니다.
 우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 19.7.0인데요, 19.6.0 버전과는 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다.
-Google Admob Version 19.6.0 이하에서의 구현 dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:19.6.0&amp;#39; } AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다.
-&amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt; &amp;lt;application &amp;lt;meta-data android:name=&amp;#34;com.google.android.gms.ads.APPLICATION_ID&amp;#34; android:value=&amp;#34;ca-app-pub-3940256099942544~3347511713&amp;#34; /&amp;gt; &amp;lt;/application&amp;gt; 다음은 화면에 광고를 표시하는 버튼을 추가합니다.</description>
+Google Admob Version 19.6.0 이하에서의 구현 1 2 3  dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:19.6.0&amp;#39; }   AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다.
+1 2 3 4 5 6 7  &amp;lt;uses-permission android:name=&amp;#34;android.</description>
     </item>
     
     <item>
@@ -304,8 +302,8 @@ SharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하�
       <guid>https://cliearl.github.io/posts/android/gadmob-banner/</guid>
       <description>이번 포스팅에서는 구글 애드몹 라이브러리를 이용해서 앱에 배너광고를 표시하는 법에 대해 알아보도록 하겠습니다.
 우선은 build.gradle에 애드몹 라이브러를 추가해줍니다.
-dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:19.7.0&amp;#39; } 다음은 AndroidManifest.xml에 인터넷 접근권한을 부여하고 애드몹 ID 정보를 추가합니다. 애드몹 ID는 구글 애드몹 사이트에 가입하고 자신의 앱을 등록하면 받을 수 있습니다. 여기서는 Mobile Ads SDK (Android)에서 테스트를 할때 사용하라고 주는 값을 사용하였습니다.
-&amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34;/&amp;gt; &amp;lt;application &amp;lt;meta-data android:name=&amp;#34;com.google.android.gms.ads.APPLICATION_ID&amp;#34; android:value=&amp;#34;ca-app-pub-3940256099942544~3347511713&amp;#34; /&amp;gt; &amp;lt;/application&amp;gt; 다음은 화면 xml에 광고를 표시하기 위한 AdView를 추가합니다.</description>
+1 2 3  dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:19.7.0&amp;#39; }   다음은 AndroidManifest.xml에 인터넷 접근권한을 부여하고 애드몹 ID 정보를 추가합니다. 애드몹 ID는 구글 애드몹 사이트에 가입하고 자신의 앱을 등록하면 받을 수 있습니다. 여기서는 Mobile Ads SDK (Android)에서 테스트를 할때 사용하라고 주는 값을 사용하였습니다.
+1 2 3 4 5 6 7 8  &amp;lt;uses-permission android:name=&amp;#34;android.</description>
     </item>
     
     <item>
@@ -329,7 +327,7 @@ dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:
 이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다.
 여기서는 제가 RecyclerView에 View Binding 적용하기 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다.
 리팩토링 우선 View Binding을 사용하도록 설정을 추가합니다.
-android { buildFeatures.viewBinding true } 메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.</description>
+1 2 3  android { buildFeatures.viewBinding true }   메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.</description>
     </item>
     
     <item>
@@ -353,7 +351,7 @@ Recyclerview의 특징 Recyclerview는 화면에 리스트 형식의 데이터�
 View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
 코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { + buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다.</description>
+1 2 3 4 5 6 7  plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { + buildFeatures.</description>
     </item>
     
     <item>
@@ -409,7 +407,7 @@ ActionBar 삭제 ActionBar 표시를 없애는 방법은 몇가지가 있습니�
 여기서는 MediaPlayer 클래스를 이용하여 음악을 재생하는 앱을 만들어 볼 건데요, 플레이버튼을 누르면 음악이 재생되고, 포즈를 누르면 일시정지가 되며, 다시 누르면 음악이 시작이 되게 됩니다. 그리고 스탑버튼을 누르면 정지가 되고 플레이버튼을 누르면 음악이 처음부터 시작되게 됩니다.
 음악파일 단순재생 프로젝트에서 실행할 음악파일은 res -&amp;gt; raw 폴더 안에 복사해줍니다. 저는 다음 사이트에서 다운받은 파일을 사용하겠습니다. https://maoudamashii.jokersounds.com/archives2/bgm_maoudamashii_orchestra02.html
 그러면 메인 액티비티에서 재생을 해보겠습니다
-class MainActivity : AppCompatActivity() { private var mediaPlayer: MediaPlayer?</description>
+1 2 3 4 5 6 7 8 9 10 11  class MainActivity : AppCompatActivity() { private var mediaPlayer: MediaPlayer?</description>
     </item>
     
     <item>
@@ -432,7 +430,7 @@ class MainActivity : AppCompatActivity() { private var mediaPlayer: MediaPlayer?
       <description>이번 포스팅에서는 앱에서 움직이는 GIF를 표시하는 법에 대해 알아보도록 하겠습니다.
 안드로이드에서 이미지를 보여줄때는 화면을 구성하는 xml파일에 ImageView를 올리고 그 이미지뷰에 그림파일을 삽입해주면 됩니다. 이 때 그림파일은 drawable 폴더에 넣어주며 파일이름은 영문소문자 + 언더바로만 구성합니다.
 ImageView로 이미지 표시 이미지를 표시하기 위해서는 다음과 같이 imageView의 setImageResource 메소드를 사용합니다. 그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다.
-imageView.setImageResource(R.drawable.sample00) Glide 사용 하지만 Glide라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.</description>
+1  imageView.setImageResource(R.drawable.sample00)   Glide 사용 하지만 Glide라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.</description>
     </item>
     
     <item>
@@ -454,7 +452,7 @@ imageView.setImageResource(R.drawable.sample00) Glide 사용 하지만 Glide라�
       <guid>https://cliearl.github.io/posts/android/dataclass-recyclerview/</guid>
       <description>이번 포스팅에서는 Data class를 사용하는 법에 대해 알아보도록 하겠습니다.
 Data class의 특징 toString 코틀린에서 클래스를 만들 때는 자바의 클래스 스펙에 따라서 toString, equals, hashCode라는 메소드를 구현해주어야 합니다. 우선 Person이라는 클래스를 만들고 그 인스턴스를 출력해 보겠습니다. 그러면 Person@랜덤 이라는 값이 출력이 되게 됩니다.
-class Person(var name: String, var age: Int, var sex: String) val person1 = Person(&amp;#34;Alice&amp;#34;, 20, &amp;#34;Female&amp;#34;) println(person1) // 출력값 org.jetbrains.kotlin.idea.scratch.generated.ScratchFileRunnerGenerated$ScratchFileRunnerGenerated$Person@b6587368 이제 클래스의 toString을 다음과 같이 오버라이드 해주면 랜덤값이 아니라 클래스가 가진 프로퍼티값을 보여주게 됩니다.</description>
+1 2 3 4 5 6 7  class Person(var name: String, var age: Int, var sex: String) val person1 = Person(&amp;#34;Alice&amp;#34;, 20, &amp;#34;Female&amp;#34;) println(person1) // 출력값 org.jetbrains.kotlin.idea.scratch.generated.ScratchFileRunnerGenerated$ScratchFileRunnerGenerated$Person@b6587368   이제 클래스의 toString을 다음과 같이 오버라이드 해주면 랜덤값이 아니라 클래스가 가진 프로퍼티값을 보여주게 됩니다.</description>
     </item>
     
     <item>
@@ -491,8 +489,7 @@ ProgressDialog는 다이얼로그가 표시되는 동안 유저가 다른 조작
       <description>이번 포스트에서는 작성된 코드의 교열을 보는 방법에 대해 알아보도록 하겠습니다.
 들어가기 우리가 작성하는 코드는 기본적으로는 컴퓨터에게 명령을 내리기 위한 것이고 그 명령은 각 언어의 문법에 따라 작성되어져야 합니다.
 코틀린에서 상수 두 개를 만들고 그 상수를 더하는 명령은 다음과 같이 쓸 수 있습니다.
-val a = 3 val b = 4 val c = a + b println(c) 자 그럼 이번엔 코드 안에서 띄어쓰기의 방식을 다르게 해보겠습니다.
-val a= 3 val b = 4 val c= a+ b println(c) 각 줄마다 띄어쓰기의 방식이 다르다고 해도 컴퓨터는 코드를 문제없이 컴파일 할 수 있습니다.</description>
+1 2 3 4  val a = 3 val b = 4 val c = a + b println(c)   자 그럼 이번엔 코드 안에서 띄어쓰기의 방식을 다르게 해보겠습니다.</description>
     </item>
     
   </channel>

@@ -58,7 +58,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -386,11 +386,31 @@ if (!doNotTrack) {
 <h2 id="복수의-apk-생성기능-비활성화">복수의 APK 생성기능 비활성화</h2>
 <p>안드로이드 앱은 화면 해상도에 따라 서로 다른 앱이 각각 만들어지게 됩니다. 그래서 APK 파일이 크다면 abi/화면 해상도별로 APK 파일을 나누어 앱 용량을 줄일수가 있습니다.</p>
 <p>어차피 테스트를 하는 과정에서는 기능을 확인하는게 중요하기 때문에 다른 해상도에 대해 빌드를 생략해서 속도를 빠르게 할 수 있습니다. gradle에서 다음과 같이 코드를 쓰면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">splits</span><span class="o">.</span><span class="na">abi</span><span class="o">.</span><span class="na">enable</span> <span class="o">=</span> <span class="kc">false</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">splits</span><span class="o">.</span><span class="na">abi</span><span class="o">.</span><span class="na">enable</span> <span class="o">=</span> <span class="kc">false</span>
 <span class="n">splits</span><span class="o">.</span><span class="na">density</span><span class="o">.</span><span class="na">enable</span> <span class="o">=</span> <span class="kc">false</span>
-</code></pre></div><h2 id="패키징-리소스-최소화">패키징 리소스 최소화</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="패키징-리소스-최소화">패키징 리소스 최소화</h2>
 <p>앞에서는 특정 해상도에 대해서만 빌드하도록 설정을 했는데, 앱에 보시면 언어별로도 각각 앱이 만들어지게 되어 있습니다. 그래서 테스트 해야하는 언어 이외에는 빌드를 안하도록 설정을 할 수 있는데요, 예를들어 영어, 일본어, 독일어, 한국어에 대응하도록 만들었다면 기능확인을 위해 한국어 앱만 빌드를 하게 할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">defaultConfig</span><span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">defaultConfig</span><span class="o">{</span>
     <span class="n">applicationVariants</span><span class="o">.</span><span class="na">all</span> <span class="o">{</span> <span class="n">variant</span> <span class="o">-&gt;</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">variant</span><span class="o">.</span><span class="na">buildType</span><span class="o">.</span><span class="na">name</span> <span class="o">==</span> <span class="s2">&#34;debug&#34;</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">variant</span><span class="o">.</span><span class="na">mergedFlavor</span><span class="o">.</span><span class="na">resourceConfiguration</span><span class="o">.</span><span class="na">clear</span><span class="o">()</span>
@@ -398,36 +418,79 @@ if (!doNotTrack) {
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div><p>빌드가 디버그면 설정을 다 없애버리고 한국어만 추가한다는 내용인데요, 참고로 현재 빌드가 디버그인지 릴리즈인지는 화면 왼쪽에 <code>Build Variants</code> 탭을 열어서 확인할 수 있습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>빌드가 디버그면 설정을 다 없애버리고 한국어만 추가한다는 내용인데요, 참고로 현재 빌드가 디버그인지 릴리즈인지는 화면 왼쪽에 <code>Build Variants</code> 탭을 열어서 확인할 수 있습니다.</p>
 <p>패키징 리소스는 <code>resConfig</code>라는 기능을 이용해 간단하게 구현할 수도 있는데 그럴려면 <code>productFlavor</code> 블럭을 추가로 만들어서 다음과 같이 사용하면 됩니다. <code>resConfig</code>는 <code>buildTypes</code> 안에서는 사용할 수 없기 때문입니다. <code>productFlavor</code>의 구체적인 사용방법에 대해서는 <a class="link" href="https://developer.android.com/studio/build/optimize-your-build#create_dev_variant"  target="_blank" rel="noopener"
     >Create a build variant for development</a>를 참고하세요.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">productFlavors</span><span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">productFlavors</span><span class="o">{</span>
     <span class="n">dev</span> <span class="o">{</span>
         <span class="n">resConfigs</span> <span class="s2">&#34;ko&#34;</span><span class="o">,</span> <span class="s2">&#34;xxxhdpi&#34;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div><h2 id="png-크런칭-비활성화">PNG 크런칭 비활성화</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="png-크런칭-비활성화">PNG 크런칭 비활성화</h2>
 <p>안드로이드에서 PNG 파일이 포함되면 PNG 파일을 압축하는 기능이 실행되는데요, 이 기능은 <code>debug</code> 빌드에서는 기본적으로 사용이 중지되기 때문에 신경 쓸 필요가 없습니다. 다만 <code>release</code> 빌드에서도 기능사용을 중지시키고 싶다면 코드를 다음과 같이 쓰면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">buildTypes</span><span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">buildTypes</span><span class="o">{</span>
     <span class="n">release</span> <span class="o">{</span>
         <span class="n">crunchPngs</span> <span class="kc">false</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div><h2 id="필요없는-변경하지-않기">필요없는 변경하지 않기</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="필요없는-변경하지-않기">필요없는 변경하지 않기</h2>
 <p>앱이 처음 실행되는 시작점의 역할을 하는 manifest 파일이 있습니다. 그런데 manifest를 변경하면 빌드가 처음부터 다시 이루어지게 됩니다.</p>
 <p>그런데 버전넘버와 버전코드를 변경하면 마니페스트 파일도 변경되어 앱이 처음부터 다시 빌드가 되기 때문에 테스트 시에는 이 값을 숫자로 고정하여 사용하는 것도 빌드를 빠르게 할 수 있는 방법이 될 수 있습니다.</p>
 <h2 id="오류리포팅-기능-사용안함">오류리포팅 기능 사용안함</h2>
 <p>안드로이드 앱에서는 <code>Crashlytics</code> 보고서를 자동으로 작성하도록 되어있습니다. 이 기능을 다음과 같이 비활성화 시켜 줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">debug</span><span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">debug</span><span class="o">{</span>
     <span class="n">ext</span><span class="o">.</span><span class="na">enableCrashlytics</span> <span class="kc">false</span>
 <span class="o">}</span>
-</code></pre></div><h2 id="라이브러리-버전">라이브러리 버전</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="라이브러리-버전">라이브러리 버전</h2>
 <p>라이브러리를 사용할 때 버전을 x.x+ 형식으로 지정할 경우 x.x대의 최신버전을 사용하라는 뜻입니다. 그런데 이 경우 24시간마다 최신버전을 웹에서 확인하게 되기 때문에 빌드시간이 증가하게 됩니다. 따라서 라이브러리의 버전을 정확히 정해주면 빌드시간을 줄일 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="o">-</span><span class="n">compile</span> <span class="s1">&#39;com.android.support:appcompat-v7:26.+&#39;</span>
     <span class="o">+</span><span class="n">compile</span> <span class="s1">&#39;com.android.support:appcompat-v7:26.0.0-alpha1&#39;</span>
 <span class="o">}</span>
-</code></pre></div><p>이렇게 해서 안드로이드 스튜디오에서 빌드속도를 빠르게하는 여러가지 방법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 안드로이드 스튜디오에서 빌드속도를 빠르게하는 여러가지 방법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/EYZho7q47GQ" 
@@ -707,7 +770,51 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#최신버전의-gradle-사용">최신버전의 Gradle 사용</a></li>
+    <li><a href="#개발시-서로-다른-빌드세팅-사용">개발시 서로 다른 빌드세팅 사용</a></li>
+    <li><a href="#multidex-사용하지-않음">multidex 사용하지 않음</a>
+      <ol>
+        <li><a href="#dalvik-vm">Dalvik VM</a></li>
+        <li><a href="#android-runtimeart-vm">Android RunTime(ART) VM</a></li>
+      </ol>
+    </li>
+    <li><a href="#복수의-apk-생성기능-비활성화">복수의 APK 생성기능 비활성화</a></li>
+    <li><a href="#패키징-리소스-최소화">패키징 리소스 최소화</a></li>
+    <li><a href="#png-크런칭-비활성화">PNG 크런칭 비활성화</a></li>
+    <li><a href="#필요없는-변경하지-않기">필요없는 변경하지 않기</a></li>
+    <li><a href="#오류리포팅-기능-사용안함">오류리포팅 기능 사용안함</a></li>
+    <li><a href="#라이브러리-버전">라이브러리 버전</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

@@ -3,24 +3,24 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 RecyclerView에 ListAdapter를 적용하는 법에 대해 알아보도록 하겠습니다.
 들어가기 Recyclerview의 데이터가 변하면 Recyclerview Adapter가 제공하는 notifyItem 메소드를 사용해서 ViewHolder 내용을 갱신할 수 있습니다.
-notifyItemChanged(int) notifyItemInserted(int) notifyItemRemoved(int) notifyItemRangeChanged(int, int) notifyItemRangeInserted(int, int) notifyItemRangeRemoved(int, int) 그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.
-DiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 Recyclerview에 반영할 수 있습니다.'><title>DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기</title>
+1 2 3 4 5 6  notifyItemChanged(int) notifyItemInserted(int) notifyItemRemoved(int) notifyItemRangeChanged(int, int) notifyItemRangeInserted(int, int) notifyItemRangeRemoved(int, int)   그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.
+DiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다.'><title>DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/recyclerview-listadapter/'>
 
 <link rel="stylesheet" href="/scss/style.min.1b167e2cb0123f4ab756c1f7b38280839833cb553987f96fa7aaeacb7f4f71de.css"><meta property='og:title' content='DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기'>
 <meta property='og:description' content='이번 포스팅에서는 RecyclerView에 ListAdapter를 적용하는 법에 대해 알아보도록 하겠습니다.
 들어가기 Recyclerview의 데이터가 변하면 Recyclerview Adapter가 제공하는 notifyItem 메소드를 사용해서 ViewHolder 내용을 갱신할 수 있습니다.
-notifyItemChanged(int) notifyItemInserted(int) notifyItemRemoved(int) notifyItemRangeChanged(int, int) notifyItemRangeInserted(int, int) notifyItemRangeRemoved(int, int) 그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.
-DiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 Recyclerview에 반영할 수 있습니다.'>
+1 2 3 4 5 6  notifyItemChanged(int) notifyItemInserted(int) notifyItemRemoved(int) notifyItemRangeChanged(int, int) notifyItemRangeInserted(int, int) notifyItemRangeRemoved(int, int)   그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.
+DiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/recyclerview-listadapter/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='RecyclerView' /><meta property='article:tag' content='ListAdapter' /><meta property='article:published_time' content='2021-07-31T21:22:17&#43;09:00'/><meta property='article:modified_time' content='2021-07-31T21:22:17&#43;09:00'/>
 <meta name="twitter:title" content="DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기">
 <meta name="twitter:description" content="이번 포스팅에서는 RecyclerView에 ListAdapter를 적용하는 법에 대해 알아보도록 하겠습니다.
 들어가기 Recyclerview의 데이터가 변하면 Recyclerview Adapter가 제공하는 notifyItem 메소드를 사용해서 ViewHolder 내용을 갱신할 수 있습니다.
-notifyItemChanged(int) notifyItemInserted(int) notifyItemRemoved(int) notifyItemRangeChanged(int, int) notifyItemRangeInserted(int, int) notifyItemRangeRemoved(int, int) 그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.
-DiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 Recyclerview에 반영할 수 있습니다.">
+1 2 3 4 5 6  notifyItemChanged(int) notifyItemInserted(int) notifyItemRemoved(int) notifyItemRangeChanged(int, int) notifyItemRangeInserted(int, int) notifyItemRangeRemoved(int, int)   그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.
+DiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -61,7 +61,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -332,7 +332,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    7 minute read
+                    8 minute read
                 </time>
             </div>
         
@@ -350,25 +350,50 @@ if (!doNotTrack) {
 <h2 id="들어가기">들어가기</h2>
 <p>Recyclerview의 데이터가 변하면 Recyclerview Adapter가 제공하는 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter#notifyDataSetChanged%28%29"  target="_blank" rel="noopener"
     ><code>notifyItem</code></a> 메소드를 사용해서 ViewHolder 내용을 갱신할 수 있습니다.</p>
-<pre tabindex="0"><code>notifyItemChanged(int)
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">notifyItemChanged(int)
 notifyItemInserted(int)
 notifyItemRemoved(int)
 notifyItemRangeChanged(int, int)
 notifyItemRangeInserted(int, int)
 notifyItemRangeRemoved(int, int)
-</code></pre><p>그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.</p>
 <h2 id="diffutil">DiffUtil</h2>
 <p><a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil"  target="_blank" rel="noopener"
     ><code>DiffUtil</code></a>은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 Recyclerview에 반영할 수 있습니다.</p>
 <p>DiffUtil은 Eugene W. Myers의 difference 알고리즘을 이용해서 <code>O(N + D^2)</code>시간 안에 리스트의 비교를 수행하는데 넥서스 5X에서 테스트를 수행한 결과는 다음과 같았다고 합니다. 이때 <code>N</code>은 추가 및 제거된 항목의 갯수이고, <code>D</code>는 스크립트의 길이입니다.</p>
-<pre tabindex="0"><code>100 items and 10 modifications: avg: 0.39 ms, median: 0.35 ms
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">100 items and 10 modifications: avg: 0.39 ms, median: 0.35 ms
 100 items and 100 modifications: 3.82 ms, median: 3.75 ms
 100 items and 100 modifications without moves: 2.09 ms, median: 2.06 ms
 1000 items and 50 modifications: avg: 4.67 ms, median: 4.59 ms
 1000 items and 50 modifications without moves: avg: 3.59 ms, median: 3.50 ms
 1000 items and 200 modifications: 27.07 ms, median: 26.92 ms
 1000 items and 200 modifications without moves: 13.54 ms, median: 13.36 ms 
-</code></pre><p>DiffUtil을 사용하기 위해서는 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback"  target="_blank" rel="noopener"
+</code></pre></td></tr></table>
+</div>
+</div><p>DiffUtil을 사용하기 위해서는 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback"  target="_blank" rel="noopener"
     ><code>DiffUtil.Callback()</code></a>을 상속받아 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback#areitemsthesame"  target="_blank" rel="noopener"
     ><code>areItemsTheSame</code></a>으로 비교대상인 두 객체가 동일한지 확인하고, <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback#arecontentsthesame"  target="_blank" rel="noopener"
     ><code>areContentsTheSame</code></a>으로 두 아이템이 동일한 데이터를 가지는지 확인하면 됩니다.</p>
@@ -378,7 +403,43 @@ notifyItemRangeRemoved(int, int)
 <p>코드를 사용하기 위해서는 우선 어댑터 내부로 DiffUtil 콜백을 전달받은 AsyncListDiffer 객체를 만들어 줍니다. 그리고 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#getCurrentList%28%29"  target="_blank" rel="noopener"
     ><code>currentList</code></a>로 데이터를 참조하고 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/AsyncListDiffer#submitList%28java.util.List%3CT%3E%29"  target="_blank" rel="noopener"
     ><code>submitList</code></a> 로 리스트 데이터를 갱신하면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Google Developers에서 제공하는 코드
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Google Developers에서 제공하는 코드
 </span><span class="c1"></span><span class="kd">class</span> <span class="nc">UserAdapter</span> <span class="kd">extends</span> <span class="n">RecyclerView</span><span class="o">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="n">UserViewHolder</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="n">AsyncListDiffer</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">mDiffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AsyncListDiffer</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">DIFF_CALLBACK</span><span class="o">);</span>
     <span class="nd">@Override</span>
@@ -410,12 +471,44 @@ notifyItemRangeRemoved(int, int)
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div><h2 id="listadapter">ListAdapter</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="listadapter">ListAdapter</h2>
 <p><a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter"  target="_blank" rel="noopener"
     ><code>ListAdapter</code></a>는 AsyncListDiffer를 더 쓰기 편하도록 랩핑한 클래스로 Recyclerview 어댑터를 만들때 ListAdapter를 상속하도록 하면 됩니다. 초기화할때 DiffUtil 콜백 객체를 받도록 하면 나머지는 AsyncListDiffer와 같이 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter#getCurrentList%28%29"  target="_blank" rel="noopener"
     ><code>currentList</code></a>로 현재 데이터를 불러올 수 있고, <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter#submitList%28java.util.List%3CT%3E%29"  target="_blank" rel="noopener"
     ><code>submitList</code></a>로 데이터를 갱신할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Google Developers에서 제공하는 코드
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Google Developers에서 제공하는 코드
 </span><span class="c1"></span><span class="k">class</span> <span class="nc">UserAdapter</span> <span class="n">extends</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">User</span><span class="p">,</span> <span class="n">UserViewHolder</span><span class="p">&gt;</span> <span class="p">{</span>
     <span class="k">public</span> <span class="n">UserAdapter</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">super</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="n">DIFF_CALLBACK</span><span class="p">);</span>
@@ -441,13 +534,30 @@ notifyItemRangeRemoved(int, int)
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>다시말해 Recyclerview 어댑터를 ListAdapter로 구현하면 데이터가 어떻게 바뀌든간에 submitList로 전체 리스트를 넘겨주기만 하면 어댑터가 알아서 백그라운드 스레드를 사용해 리스트 차이를 계산하여 화면을 갱신시켜주게 됩니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>다시말해 Recyclerview 어댑터를 ListAdapter로 구현하면 데이터가 어떻게 바뀌든간에 submitList로 전체 리스트를 넘겨주기만 하면 어댑터가 알아서 백그라운드 스레드를 사용해 리스트 차이를 계산하여 화면을 갱신시켜주게 됩니다.</p>
 <h2 id="앱-작성">앱 작성</h2>
 <p>여기서는 <a class="link" href="https://cliearl.github.io/posts/android/dataclass-recyclerview/"  target="_blank" rel="noopener"
     >Data class 이해하고 RecyclerView에서 사용하기</a>에서 작성했던 프로젝트를 고치면서 ListAdapter를 구현해 보도록 하겠습니다.</p>
 <h3 id="monsterkt">Monster.kt</h3>
 <p>우선 Recyclerview에 표시할 데이터를 <code>Data class</code> 형태로 준비합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
     <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
     <span class="k">val</span> <span class="py">race</span><span class="p">:</span> <span class="n">Race</span><span class="p">,</span>
     <span class="k">val</span> <span class="py">level</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
@@ -458,9 +568,77 @@ notifyItemRangeRemoved(int, int)
 <span class="k">enum</span> <span class="k">class</span> <span class="nc">Race</span> <span class="p">{</span>
     <span class="n">Zombie</span><span class="p">,</span> <span class="n">Human</span><span class="p">,</span> <span class="n">Goblin</span><span class="p">,</span> <span class="n">Dragon</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="view_itemlistxml">view_itemlist.xml</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="view_itemlistxml">view_itemlist.xml</h3>
 <p>Recyclerview의 ViewHolder 레이아웃을 만들어줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span>
     <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
@@ -522,9 +700,42 @@ notifyItemRangeRemoved(int, int)
         <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></div><h3 id="myviewholderkt">MyViewHolder.kt</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="myviewholderkt">MyViewHolder.kt</h3>
 <p>Recyclerview의 ViewHolder 클래스를 만들어줍니다. View Binding을 사용하도록 세팅하고 나중에 투명도를 바꾸는데 사용하도록 <code>setAlpha</code> 함수를 만들어줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ViewItemlistBinding</span><span class="p">)</span> <span class="p">:</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ViewItemlistBinding</span><span class="p">)</span> <span class="p">:</span>
 
     <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span> <span class="n">Monster</span><span class="p">)</span> <span class="p">{</span>
@@ -551,7 +762,9 @@ notifyItemRangeRemoved(int, int)
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="mydiffcallbackkt">MyDiffCallback.kt</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mydiffcallbackkt">MyDiffCallback.kt</h3>
 <p>코틀린에서는 <a class="link" href="https://kotlinlang.org/docs/equality.html"  target="_blank" rel="noopener"
     >Equality</a>를 다음과 같이 두가지 방법으로 판정할 수 있습니다.</p>
 <ul>
@@ -564,7 +777,21 @@ notifyItemRangeRemoved(int, int)
 </ul>
 <p><code>areItemsTheSame</code>에서 비교대상인 두 객체가 Referential equality를 갖는지 판정하는데에는 <code>===</code>를 이용하였습니다. 그리고 <code>areContentsTheSame</code> 에서 두 객체의 아이템이 Structural equality를 갖는지 판정하는데에는 <code>equals</code>를 사용했습니다. <code>Monster</code>가 <a class="link" href="https://kotlinlang.org/docs/data-classes.html"  target="_blank" rel="noopener"
     >데이터클래스</a>이기 때문에 데이터클래스의 정의에 따라 <code>==</code>을 equals 대신 사용할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyDiffCallback</span> <span class="p">:</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyDiffCallback</span> <span class="p">:</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;()</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">areItemsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">oldItem</span> <span class="o">===</span> <span class="n">newItem</span>
@@ -574,11 +801,51 @@ notifyItemRangeRemoved(int, int)
         <span class="k">return</span> <span class="n">oldItem</span> <span class="o">==</span> <span class="n">newItem</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="mylistadapterkt">MyListAdapter.kt</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mylistadapterkt">MyListAdapter.kt</h3>
 <p>ListAdapter를 상속받는 Recyclerview Adapter를 작성합니다. <code>onCreateViewHolder</code>에서 뷰바인딩을 사용하도록 설정합니다. 데이터의 개수는 ListAdapter가 관리하므로 기존의 Recyclerview 어댑터에서 정의했던 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter#getItemCount%28%29"  target="_blank" rel="noopener"
     ><code>getItemCount</code></a>는 오버라이드하지 않아도 됩니다.</p>
 <p>그리고 아이템을 이동했을때 실행할 <code>moveItem</code>, 지울때 실행할 <code>removeItem</code> 메소드를 작성해줍니다. 이 때 ListAdapter에서는 데이터를 직접 조작할 수 없고 비교만 할수 있기 때문에 변형된 데이터셋은 새로운 객체로 만들어 기존의 데이터셋과 비교도록 <code>submitList</code>를 수행하게 합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyListAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">,</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;(</span><span class="n">MyDiffCallback</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyListAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">,</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;(</span><span class="n">MyDiffCallback</span><span class="p">())</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span> <span class="p">{</span>
         <span class="k">val</span> <span class="py">viewHolder</span> <span class="p">=</span> <span class="n">MyViewHolder</span><span class="p">(</span>
@@ -612,13 +879,59 @@ notifyItemRangeRemoved(int, int)
         <span class="n">submitList</span><span class="p">(</span><span class="n">newList</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="myitemtouchhelpercallbackkt">MyItemTouchHelperCallback.kt</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="myitemtouchhelpercallbackkt">MyItemTouchHelperCallback.kt</h3>
 <p>기존 프로젝트에서 터치 콜백을 받기 위해 MainActivity에서 사용했던 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.SimpleCallback"  target="_blank" rel="noopener"
     ><code>ItemTouchHelper.SimpleCallback</code></a> 클래스는 코드의 가독성을 위해 개별 클래스로 분리시키겠습니다.</p>
 <p>그리고 홀딩중인 ViewHolder는 투명하게 변화시켜 더 인지하기 쉽게 만들겠습니다. 그럴려면 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.Callback#onselectedchanged"  target="_blank" rel="noopener"
     ><code>onSelectedChanged</code></a>에서 투명도를 50%로 낮추었다가 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.Callback#clearview"  target="_blank" rel="noopener"
     ><code>clearView</code></a>에서 다시 100%로 되돌리도록 하면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyItemTouchHelperCallback</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">)</span> <span class="p">:</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyItemTouchHelperCallback</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span><span class="p">(</span>
         <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">UP</span> <span class="n">or</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">DOWN</span><span class="p">,</span>
         <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">LEFT</span>
@@ -658,10 +971,45 @@ notifyItemRangeRemoved(int, int)
         <span class="p">(</span><span class="n">viewHolder</span> <span class="k">as</span> <span class="n">MyViewHolder</span><span class="p">).</span><span class="n">setAlpha</span><span class="p">(</span><span class="m">1.0f</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="activity_mainxml">activity_main.xml</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="activity_mainxml">activity_main.xml</h3>
 <p>Recyclerview와 <a class="link" href="https://material.io/components/buttons-floating-action-button"  target="_blank" rel="noopener"
     >floating action button</a>을 배치해줍니다. DiffUtil 처리를 테스트하기 위해 플로팅버튼을 누르면 데이터가 랜덤하게 뒤섞이는 기능이 수행되도록 하겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -690,9 +1038,53 @@ notifyItemRangeRemoved(int, int)
         <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></div><h3 id="mainactivitykt">MainActivity.kt</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mainactivitykt">MainActivity.kt</h3>
 <p>데이터셋에 초기값을 넣어주고, 어댑터 인스턴스를 생성하여 Recyclerview와 연동시킵니다. 그리고 터치헬퍼를 달아 스와이프와 드래그를 했을때 데이터가 잘 갱신되는지 확인합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
         <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
     <span class="p">}</span>
@@ -730,7 +1122,9 @@ notifyItemRangeRemoved(int, int)
         <span class="n">itemTouchHelper</span><span class="p">.</span><span class="n">attachToRecyclerView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게해서 ListAdapter를 RecyclerView에 적용하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게해서 ListAdapter를 RecyclerView에 적용하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/zNGVicOZ2ew" 
@@ -1010,7 +1404,53 @@ notifyItemRangeRemoved(int, int)
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#들어가기">들어가기</a></li>
+    <li><a href="#diffutil">DiffUtil</a></li>
+    <li><a href="#asynclistdiffer">AsyncListDiffer</a></li>
+    <li><a href="#listadapter">ListAdapter</a></li>
+    <li><a href="#앱-작성">앱 작성</a>
+      <ol>
+        <li><a href="#monsterkt">Monster.kt</a></li>
+        <li><a href="#view_itemlistxml">view_itemlist.xml</a></li>
+        <li><a href="#myviewholderkt">MyViewHolder.kt</a></li>
+        <li><a href="#mydiffcallbackkt">MyDiffCallback.kt</a></li>
+        <li><a href="#mylistadapterkt">MyListAdapter.kt</a></li>
+        <li><a href="#myitemtouchhelpercallbackkt">MyItemTouchHelperCallback.kt</a></li>
+        <li><a href="#activity_mainxml">activity_main.xml</a></li>
+        <li><a href="#mainactivitykt">MainActivity.kt</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

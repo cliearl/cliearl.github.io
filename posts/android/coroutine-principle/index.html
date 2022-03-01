@@ -58,7 +58,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -329,7 +329,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    6 minute read
+                    7 minute read
                 </time>
             </div>
         
@@ -381,10 +381,19 @@ if (!doNotTrack) {
 <p>코루틴의 동작하는 범위를 규정합니다. 스코프 내에서 실행되는 코루틴의 실행을 감시하거나 취소할 수 있습니다.</p>
 <h4 id="coroutinescope">CoroutineScope</h4>
 <p>다음과 같은 인터페이스로 정의되며 특정한 dispatcher를 지정하여 동작이 실행될 스코프를 제한할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">public</span> <span class="k">interface</span> <span class="nc">CoroutineScope</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">public</span> <span class="k">interface</span> <span class="nc">CoroutineScope</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">val</span> <span class="py">coroutineContext</span><span class="p">:</span> <span class="n">CoroutineContext</span>
 <span class="p">}</span>
-</code></pre></div><h4 id="globalscope">GlobalScope</h4>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="globalscope">GlobalScope</h4>
 <p>GlobalScope는 CoroutineScope의 한 종류입니다. 안드로이드에서 어플리케이션 라이프사이클을 따르며, 싱글톤으로 최상위 레벨에서 코루틴을 시작하기 때문에 필요할때 만들어 쓰고 버린다는 사용법이 불가능합니다. 일반적으로는 <a class="link" href="https://medium.com/harrythegreat/%EB%B2%88%EC%97%AD-%EC%BD%94%ED%8B%80%EB%A6%B0-%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%9D%98-%ED%8C%A8%ED%84%B4%EA%B3%BC-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-6e97f852ea2d"  target="_blank" rel="noopener"
     >사용 자체를 추천하지 않습니다</a>.</p>
 <h3 id="coroutine-context">Coroutine Context</h3>
@@ -433,10 +442,19 @@ if (!doNotTrack) {
     >Job</a> 혹은 <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/"  target="_blank" rel="noopener"
     >Deferred</a>라는 오브젝트로 만들어 다룹니다. Deferred는 결과값을 가지는 Job이므로 실제로는 둘 다 Job이라고 볼 수 있습니다.</p>
 <p>코루틴이라는 것은 프로그램의 흐름이라고 하는 추상적인 개념인데요, 코루틴 한 덩어리를 한 개의 Job이라는 오브젝트로 만들게 되면 그 오브젝트에 대해 취소나 예외처리를 함으로써 용이하게 코루틴의 흐름제어를 할 수 있게 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
     <span class="c1">// New coroutine
 </span><span class="c1"></span><span class="p">}</span>
-</code></pre></div><p>코루틴은 일시정지될수 있는 작업의 흐름이기 때문에 Job은 코루틴의 여러가지 상태를 반영할 수 있도록 다음과 같이 설계되었습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>코루틴은 일시정지될수 있는 작업의 흐름이기 때문에 Job은 코루틴의 여러가지 상태를 반영할 수 있도록 다음과 같이 설계되었습니다.</p>
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -486,7 +504,23 @@ if (!doNotTrack) {
 </tbody>
 </table></div>
 <p>그리고 각 상태는 다음과 같이 전환되죠.</p>
-<pre tabindex="0"><code>Job states cycle
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Job states cycle
                                           wait children
     +-----+ start  +--------+ complete   +-------------+  finish  +-----------+
     | New | -----&gt; | Active | ---------&gt; | Completing  | -------&gt; | Completed |
@@ -498,7 +532,9 @@ if (!doNotTrack) {
                  +------------+                           finish  +-----------+
                  | Cancelling | --------------------------------&gt; | Cancelled |
                  +------------+                                   +-----------+
-</code></pre><p>Job 객체에 대해서는 <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html#-1323829921%2FFunctions%2F1975948010"  target="_blank" rel="noopener"
+</code></pre></td></tr></table>
+</div>
+</div><p>Job 객체에 대해서는 <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html#-1323829921%2FFunctions%2F1975948010"  target="_blank" rel="noopener"
     >cancel</a>, <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html#86493028%2FFunctions%2F1975948010"  target="_blank" rel="noopener"
     >join</a>, <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html#845358634%2FFunctions%2F1975948010"  target="_blank" rel="noopener"
     >start</a> 등의 메소드가 정의되어 있습니다. <code>cancel</code>과 <code>start</code>는 위의 다이어그램에서 표시되는 cancel과 start 동작을 구현하는 메소드입니다. <code>join</code>은 코루틴을 병렬처리하지 않고 현재 job에 정의된 작업을 수행하는동안 기다리도록 하는 메소드입니다.</p>
@@ -513,7 +549,21 @@ if (!doNotTrack) {
     >withContext</a>를 사용하면 Dispatchers를 간편하게 스위치할 수 있습니다. <a class="link" href="https://developer.android.com/kotlin/coroutines/coroutines-adv#main-safety"  target="_blank" rel="noopener"
     >withContext를 이용한 스코프 전환은 OS에서 관리되므로 오버헤드가 적다</a>고 알려져 있습니다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">fetchDocs</span><span class="p">()</span> <span class="p">{</span>                      <span class="c1">// Dispatchers.Main
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">fetchDocs</span><span class="p">()</span> <span class="p">{</span>                      <span class="c1">// Dispatchers.Main
 </span><span class="c1"></span>    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="k">get</span><span class="p">(</span><span class="s2">&#34;developer.android.com&#34;</span><span class="p">)</span>  <span class="c1">// Dispatchers.Main
 </span><span class="c1"></span>    <span class="n">show</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>                               <span class="c1">// Dispatchers.Main
 </span><span class="c1"></span><span class="p">}</span>
@@ -523,7 +573,9 @@ if (!doNotTrack) {
 </span><span class="c1"></span>        <span class="cm">/* perform network IO here */</span>          <span class="c1">// Dispatchers.IO (main-safety block)
 </span><span class="c1"></span>    <span class="p">}</span>                                          <span class="c1">// Dispatchers.Main
 </span><span class="c1"></span><span class="p">}</span>
-</code></pre></div><h2 id="코루틴-지연">코루틴 지연</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="코루틴-지연">코루틴 지연</h2>
 <ul>
 <li>delay : milisecond단위로 루틴을 잠시 대기시킵니다. <a class="link" href="https://developer.android.com/reference/java/lang/Thread#sleep%28long,%20int%29"  target="_blank" rel="noopener"
     >Thread.sleep</a>은 스레드 자체를 정지시키는데 반해, delay는 코루틴이 멈추지 않고 대기상태에 들어간다는 점이 다릅니다.</li>
@@ -812,7 +864,67 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#코루틴의-개념">코루틴의 개념</a></li>
+    <li><a href="#코루틴과-스레드">코루틴과 스레드</a>
+      <ol>
+        <li><a href="#메모리-구조의-차이">메모리 구조의 차이</a></li>
+        <li><a href="#수행방식의-차이">수행방식의 차이</a></li>
+        <li><a href="#코루틴의-장점">코루틴의 장점</a></li>
+        <li><a href="#코틀린에서의-사용">코틀린에서의 사용</a></li>
+      </ol>
+    </li>
+    <li><a href="#코루틴-구조">코루틴 구조</a>
+      <ol>
+        <li><a href="#coroutine-scope">Coroutine Scope</a>
+          <ol>
+            <li><a href="#coroutinescope">CoroutineScope</a></li>
+            <li><a href="#globalscope">GlobalScope</a></li>
+          </ol>
+        </li>
+        <li><a href="#coroutine-context">Coroutine Context</a>
+          <ol>
+            <li><a href="#dispatchers">Dispatchers</a></li>
+            <li><a href="#job--deferred">Job &amp; Deferred</a></li>
+          </ol>
+        </li>
+        <li><a href="#coroutine-builder">Coroutine Builder</a></li>
+      </ol>
+    </li>
+    <li><a href="#코루틴-지연">코루틴 지연</a></li>
+    <li><a href="#코루틴-취소">코루틴 취소</a></li>
+    <li><a href="#예외-처리">예외 처리</a></li>
+    <li><a href="#코루틴-사용">코루틴 사용</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

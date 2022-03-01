@@ -58,7 +58,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -329,7 +329,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    3 minute read
+                    4 minute read
                 </time>
             </div>
         
@@ -372,7 +372,34 @@ if (!doNotTrack) {
 <h3 id="_binding의-직접-해제"><code>_binding</code>의 직접 해제</h3>
 <p>그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 <code>_binding</code> 변수를 만들어 사용한 뒤 <code>onDestroyView</code>에서 해제해주는 구조를 <a class="link" href="https://developer.android.com/topic/libraries/view-binding#fragments"  target="_blank" rel="noopener"
     >공식 문서</a> 에서 제안하고 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">_binding</span> <span class="p">:</span> <span class="n">FragmentFirstBinding</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_binding</span><span class="o">!!</span>
 
@@ -395,10 +422,78 @@ if (!doNotTrack) {
         <span class="n">_binding</span> <span class="p">=</span> <span class="k">null</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="autoclearedvalue-사용하기">AutoClearedValue 사용하기</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="autoclearedvalue-사용하기">AutoClearedValue 사용하기</h3>
 <p>그런데 Fragment마다 <code>_binding</code>을 사용하면 보일러플레이트 코드가 너무 많아지고, 리소스를 해제하는 걸 깜박할 수도 있습니다. 그래서 구글에서는 binding의 초기화를 위임하는 <a class="link" href="https://github.com/android/architecture-components-samples/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/util/AutoClearedValue.kt"  target="_blank" rel="noopener"
     >AutoClearedValue</a>라는 개념을 제안했습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="cm">/*
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="cm">/*
 </span><span class="cm"> * Copyright (C) 2018 The Android Open Source Project
 </span><span class="cm"> *
 </span><span class="cm"> * Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
@@ -460,8 +555,31 @@ if (!doNotTrack) {
 </span><span class="cm"> * Creates an [AutoClearedValue] associated with this fragment.
 </span><span class="cm"> */</span>
 <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span> <span class="p">:</span> <span class="nc">Any</span><span class="p">&gt;</span> <span class="nf">Fragment</span><span class="p">.</span><span class="n">autoCleared</span><span class="p">()</span> <span class="p">=</span> <span class="n">AutoClearedValue</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span><span class="p">)</span>
-</code></pre></div><p>구조를 보면 AutoclearedValue는 <code>viewLifecycleOwnerLiveData</code>를 구독하고 있습니다. 따라서 <code>onDestroy</code>의 타이밍에 바인딩을 자동으로 해방시켜 줍니다. 그러면 <code>_binding</code>을 사용하던 위의 코드는 AutoclearedValue를 적용해서 다음과 같이 다시 쓸 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>구조를 보면 AutoclearedValue는 <code>viewLifecycleOwnerLiveData</code>를 구독하고 있습니다. 따라서 <code>onDestroy</code>의 타이밍에 바인딩을 자동으로 해방시켜 줍니다. 그러면 <code>_binding</code>을 사용하던 위의 코드는 AutoclearedValue를 적용해서 다음과 같이 다시 쓸 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">binding</span> <span class="k">by</span> <span class="n">autoCleared</span><span class="p">&lt;</span><span class="n">FragmentFirstBinding</span><span class="p">&gt;()</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
@@ -478,14 +596,25 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="viewbindingpropertydelegate-사용">ViewBindingPropertyDelegate 사용</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="viewbindingpropertydelegate-사용">ViewBindingPropertyDelegate 사용</h3>
 <p>AutoclearedValue는 어디까지나 코드 스니펫일 뿐이므로 업데이트가 있을 경우 관리가 쉽지 않습니다. 그래서 이 작업을 하기위해 만들어진 <a class="link" href="https://github.com/androidbroadcast/ViewBindingPropertyDelegate"  target="_blank" rel="noopener"
     >ViewBindingPropertyDelegate</a>라는 라이브러리를 사용하는 방법이 있습니다.</p>
 <p>Dependency를 추가한 뒤 Fragment를 다음과 같이 초기화하여 사용하면 됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">ProfileFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">profile</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">ProfileFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">profile</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">viewBinding</span> <span class="k">by</span> <span class="n">viewBinding</span><span class="p">(</span><span class="n">ProfileBinding</span><span class="o">::</span><span class="n">bind</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 View Binding을 사용할 때 발생할 수 있는 Fragment의 메모리 누수를 방어하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 View Binding을 사용할 때 발생할 수 있는 Fragment의 메모리 누수를 방어하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/7bEr7c2fGRs" 
@@ -742,7 +871,46 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#들어가기">들어가기</a></li>
+    <li><a href="#fragment에서의-메모리-누수">Fragment에서의 메모리 누수</a></li>
+    <li><a href="#메모리-누수-대응법">메모리 누수 대응법</a>
+      <ol>
+        <li><a href="#_binding의-직접-해제"><code>_binding</code>의 직접 해제</a></li>
+        <li><a href="#autoclearedvalue-사용하기">AutoClearedValue 사용하기</a></li>
+        <li><a href="#viewbindingpropertydelegate-사용">ViewBindingPropertyDelegate 사용</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 

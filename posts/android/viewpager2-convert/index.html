@@ -61,7 +61,7 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -364,11 +364,49 @@ if (!doNotTrack) {
 <p>여기서는 기존에 <a class="link" href="https://cliearl.github.io/posts/android/viewpager-swipe/"  target="_blank" rel="noopener"
     >ViewPager를 써서 좌우로 스와이프되는 화면 만들기</a> 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.</p>
 <p>우선은 ViewPager2 라이브러리를 추가합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">implementation</span> <span class="s1">&#39;androidx.viewpager2:viewpager2:1.0.0&#39;</span>
 <span class="o">}</span>
-</code></pre></div><p>다음은 xml에서 viewpager 모듈을 viewpager2로 바꾸면서 <code>orientation</code> 이라는 속성도 추가해주는데요 이 때 값을 <code>vertical</code>로 주면 세로로 스크롤할 수 있게 됩니다. 또 인디케이터도 viewpager2에 대응하는 <code>CircleIndicator3</code>로 변경하여 줍니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>다음은 xml에서 viewpager 모듈을 viewpager2로 바꾸면서 <code>orientation</code> 이라는 속성도 추가해주는데요 이 때 값을 <code>vertical</code>로 주면 세로로 스크롤할 수 있게 됩니다. 또 인디케이터도 viewpager2에 대응하는 <code>CircleIndicator3</code>로 변경하여 줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
@@ -393,9 +431,32 @@ if (!doNotTrack) {
         <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></div><p>다음은 어댑터를 변환하여 줍니다. ViewPager2의 어댑터는 <a class="link" href="https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentStateAdapter"  target="_blank" rel="noopener"
+</code></pre></td></tr></table>
+</div>
+</div><p>다음은 어댑터를 변환하여 줍니다. ViewPager2의 어댑터는 <a class="link" href="https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentStateAdapter"  target="_blank" rel="noopener"
     >FragementStateAdapter</a>를 상속받습니다. 그리고 <code>getCount</code>라는 함수 이름을 <code>getItemCount</code>로 변경합니다. 마지막으로 <code>getItem</code> 함수이름은 <code>createFragment</code>로 변경합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">CustomPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">CustomPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">PAGENUMBER</span> <span class="p">=</span> <span class="m">4</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
@@ -412,8 +473,27 @@ if (!doNotTrack) {
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>마지막으로 ViewPager와 어댑터를 다음과 같이 연결하여 줍니다. <code>vpAdapter</code>의 형은 <code>FragmentStateAdapter</code>이고 <code>this</code>로 액티비티를 전달받도록 변경하면 완료입니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>마지막으로 ViewPager와 어댑터를 다음과 같이 연결하여 줍니다. <code>vpAdapter</code>의 형은 <code>FragmentStateAdapter</code>이고 <code>this</code>로 액티비티를 전달받도록 변경하면 완료입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">private</span> <span class="k">var</span> <span class="py">vpAdapter</span><span class="p">:</span> <span class="n">FragmentStateAdapter</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -426,7 +506,9 @@ if (!doNotTrack) {
         <span class="n">indicator</span><span class="p">.</span><span class="n">setViewPager</span><span class="p">(</span><span class="n">viewpager</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>이렇게 해서 ViewPager모듈을 ViewPager2로 전환하는 법에 대해 알아보았습니다.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 ViewPager모듈을 ViewPager2로 전환하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
             src="https://www.youtube.com/embed/3YE9bGaqVuk" 
@@ -706,7 +788,39 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#viewpager2의-특징">ViewPager2의 특징</a></li>
+    <li><a href="#viewpager2로-변환">ViewPager2로 변환</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 
