@@ -371,10 +371,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">implementation</span> <span class="s1">&#39;androidx.viewpager2:viewpager2:1.0.0&#39;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s1">&#39;androidx.viewpager2:viewpager2:1.0.0&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음은 xml에서 viewpager 모듈을 viewpager2로 바꾸면서 <code>orientation</code> 이라는 속성도 추가해주는데요 이 때 값을 <code>vertical</code>로 주면 세로로 스크롤할 수 있게 됩니다. 또 인디케이터도 viewpager2에 대응하는 <code>CircleIndicator3</code>로 변경하여 줍니다.</p>
 <div class="highlight"><div class="chroma">
@@ -406,32 +406,32 @@ if (!doNotTrack) {
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
-    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span>
-    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;me.relex.circleindicator.CircleIndicator3</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/indicator&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;48dp&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">app:ci_drawable=</span><span class="s">&#34;@drawable/black_radius&#34;</span>
-        <span class="na">app:ci_height=</span><span class="s">&#34;7dp&#34;</span>
-        <span class="na">app:ci_width=</span><span class="s">&#34;7dp&#34;</span>
-        <span class="na">app:ci_margin=</span><span class="s">&#34;4dp&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;androidx.viewpager2.widget.ViewPager2</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/viewpager&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span> <span class="nt">/&gt;</span>
-
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;me.relex.circleindicator.CircleIndicator3</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/indicator&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;48dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:ci_drawable=</span><span class="s">&#34;@drawable/black_radius&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:ci_height=</span><span class="s">&#34;7dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:ci_width=</span><span class="s">&#34;7dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:ci_margin=</span><span class="s">&#34;4dp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;androidx.viewpager2.widget.ViewPager2</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/viewpager&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음은 어댑터를 변환하여 줍니다. ViewPager2의 어댑터는 <a class="link" href="https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentStateAdapter"  target="_blank" rel="noopener"
     >FragementStateAdapter</a>를 상속받습니다. 그리고 <code>getCount</code>라는 함수 이름을 <code>getItemCount</code>로 변경합니다. 마지막으로 <code>getItem</code> 함수이름은 <code>createFragment</code>로 변경합니다.</p>
@@ -456,24 +456,24 @@ if (!doNotTrack) {
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">CustomPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">PAGENUMBER</span> <span class="p">=</span> <span class="m">4</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">PAGENUMBER</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">createFragment</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Fragment</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="p">{</span>
-            <span class="m">0</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img00</span><span class="p">,</span> <span class="s2">&#34;test 00&#34;</span><span class="p">)</span>
-            <span class="m">1</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img01</span><span class="p">,</span> <span class="s2">&#34;test 01&#34;</span><span class="p">)</span>
-            <span class="m">2</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img02</span><span class="p">,</span> <span class="s2">&#34;test 02&#34;</span><span class="p">)</span>
-            <span class="m">3</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img03</span><span class="p">,</span> <span class="s2">&#34;test 03&#34;</span><span class="p">)</span>
-            <span class="k">else</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img00</span><span class="p">,</span> <span class="s2">&#34;page00&#34;</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CustomPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">PAGENUMBER</span> <span class="p">=</span> <span class="m">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PAGENUMBER</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">createFragment</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Fragment</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="m">0</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img00</span><span class="p">,</span> <span class="s2">&#34;test 00&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="m">1</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img01</span><span class="p">,</span> <span class="s2">&#34;test 01&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="m">2</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img02</span><span class="p">,</span> <span class="s2">&#34;test 02&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="m">3</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img03</span><span class="p">,</span> <span class="s2">&#34;test 03&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="o">-&gt;</span> <span class="n">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img00</span><span class="p">,</span> <span class="s2">&#34;page00&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>마지막으로 ViewPager와 어댑터를 다음과 같이 연결하여 줍니다. <code>vpAdapter</code>의 형은 <code>FragmentStateAdapter</code>이고 <code>this</code>로 액티비티를 전달받도록 변경하면 완료입니다.</p>
 <div class="highlight"><div class="chroma">
@@ -493,20 +493,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">var</span> <span class="py">vpAdapter</span><span class="p">:</span> <span class="n">FragmentStateAdapter</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_main</span><span class="p">)</span>
-        
-        <span class="n">vpAdapter</span> <span class="p">=</span> <span class="n">CustomPagerAdapter</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
-        <span class="n">viewpager</span><span class="p">.</span><span class="n">adapter</span> <span class="p">=</span> <span class="n">vpAdapter</span>
-
-        <span class="n">indicator</span><span class="p">.</span><span class="n">setViewPager</span><span class="p">(</span><span class="n">viewpager</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">vpAdapter</span><span class="p">:</span> <span class="n">FragmentStateAdapter</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_main</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">vpAdapter</span> <span class="p">=</span> <span class="n">CustomPagerAdapter</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">viewpager</span><span class="p">.</span><span class="n">adapter</span> <span class="p">=</span> <span class="n">vpAdapter</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">indicator</span><span class="p">.</span><span class="n">setViewPager</span><span class="p">(</span><span class="n">viewpager</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 ViewPager모듈을 ViewPager2로 전환하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

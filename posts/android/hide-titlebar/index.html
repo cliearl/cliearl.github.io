@@ -359,13 +359,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;resources</span> <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;style&gt;</span>
-        <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;windowActionBar&#34;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/item&gt;</span>
-        <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;windowNoTitle&#34;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/item&gt;</span>
-    <span class="nt">&lt;/style&gt;</span>
-<span class="nt">&lt;/resources&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;resources</span> <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;style&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;windowActionBar&#34;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;windowNoTitle&#34;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/style&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/resources&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>마지막으로 액티비티에서 ActionBar를 없애는 방법입니다. ActionBar의 참조를 가져와서 <a class="link" href="https://developer.android.com/reference/android/app/ActionBar#hide%28%29"  target="_blank" rel="noopener"
     >hide</a>명령을 실행하기 위해 다음과 같이 코드를 추가하여 줍니다.</p>
@@ -380,14 +380,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-
-        <span class="k">val</span> <span class="py">actionBar</span><span class="p">:</span> <span class="n">ActionBar</span><span class="p">?</span> <span class="p">=</span> <span class="n">supportActionBar</span>
-        <span class="n">actionBar</span><span class="o">?.</span><span class="n">hide</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">actionBar</span><span class="p">:</span> <span class="n">ActionBar</span><span class="p">?</span> <span class="p">=</span> <span class="n">supportActionBar</span>
+</span></span><span class="line"><span class="cl">        <span class="n">actionBar</span><span class="o">?.</span><span class="n">hide</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="statusbar-삭제">StatusBar 삭제</h2>
 <p>StatusBar는 다음과 같이 <code>themes.xml</code>의 속성을 해제시켜서 표시되지 않게 할 수 있습니다.</p>
@@ -400,12 +400,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;resources</span> <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;style&gt;</span>
-       <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;android:windowFullscreen&#34;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/item&gt;</span>
-    <span class="nt">&lt;/style&gt;</span>
-<span class="nt">&lt;/resources&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;resources</span> <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;style&gt;</span>
+</span></span><span class="line"><span class="cl">       <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;android:windowFullscreen&#34;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/style&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/resources&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>두번째 방법은 액티비티에서 설정하는 방법입니다. theme에서 한 설정을 코드로 해준다고 생각하시면 됩니다.</p>
 <div class="highlight"><div class="chroma">
@@ -418,13 +418,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-    <span class="n">window</span><span class="p">.</span><span class="n">setFlags</span><span class="p">(</span><span class="n">WindowManager</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">FLAG_FULLSCREEN</span><span class="p">,</span> <span class="n">WindowManager</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">FLAG_FULLSCREEN</span><span class="p">)</span>
-
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">window</span><span class="p">.</span><span class="n">setFlags</span><span class="p">(</span><span class="n">WindowManager</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">FLAG_FULLSCREEN</span><span class="p">,</span> <span class="n">WindowManager</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">FLAG_FULLSCREEN</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 ActionBar와 StatusBar의 표시를 없애는 방법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

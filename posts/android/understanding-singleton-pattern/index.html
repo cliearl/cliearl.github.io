@@ -366,20 +366,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBHandler</span> <span class="o">{</span> 
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">DBHandler</span> <span class="n">instance</span><span class="o">;</span>
-    
-    <span class="c1">// 생성자 접근 차단
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="nf">DBHandler</span><span class="o">(){}</span>
-    
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">DBHandler</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span> 
-        <span class="k">if</span><span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> 
-            <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DBHandler</span><span class="o">();</span>
-        <span class="o">}</span> 
-        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span> 
-    <span class="o">}</span> 
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBHandler</span> <span class="o">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">DBHandler</span> <span class="n">instance</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 생성자 접근 차단
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="nf">DBHandler</span><span class="o">(){}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">DBHandler</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DBHandler</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> 
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="코틀린에서-구현하기">코틀린에서 구현하기</h2>
 <p>그런데 코틀린에서는 <a class="link" href="https://kotlinlang.org/docs/object-declarations.html#object-declarations"  target="_blank" rel="noopener"
@@ -390,9 +390,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">object</span> <span class="nc">DBHandler</span> <span class="p">{</span><span class="o">..</span><span class="p">.}</span>
-<span class="k">val</span> <span class="py">dbHandler</span> <span class="p">=</span> <span class="n">DBHandler</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">object</span> <span class="nc">DBHandler</span> <span class="p">{</span><span class="o">..</span><span class="p">.}</span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">dbHandler</span> <span class="p">=</span> <span class="n">DBHandler</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="클래스로-구현하기">클래스로 구현하기</h2>
 <p>다만 <code>object</code>를 사용하면 인스턴스를 생성할 때 파라미터를 전달할 수가 없다는 한계가 있습니다. 파라미터를 전달하기 위해서는 결국 다음과 같이 클래스를 구성해서, 자바의 static을 <a class="link" href="https://kotlinlang.org/docs/object-declarations.html#companion-objects"  target="_blank" rel="noopener"
@@ -413,17 +413,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DBHandler</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-        <span class="k">private</span> <span class="k">var</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DBHandler</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
-
-        <span class="k">fun</span> <span class="nf">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span>
-            <span class="n">instance</span> <span class="o">?:</span> <span class="n">DBHandler</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
-                <span class="n">instance</span> <span class="p">=</span> <span class="k">it</span>
-            <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DBHandler</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">var</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DBHandler</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">fun</span> <span class="nf">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">instance</span> <span class="o">?:</span> <span class="n">DBHandler</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">instance</span> <span class="p">=</span> <span class="k">it</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="double-checked-locking">Double Checked Locking</h2>
 <p>앞에서 설명한 구조라면 한 개의 스레드안에서는 싱글톤이 구현됩니다. 하지만 두 개의 스레드가 동시에 인스턴스를 만들려고 접근할 경우를 생각해보겠습니다.</p>
@@ -447,20 +447,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DBHandler</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-        <span class="nd">@Volatile</span>
-        <span class="k">private</span> <span class="k">var</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DBHandler</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
-
-        <span class="k">fun</span> <span class="nf">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span>
-            <span class="n">instance</span> <span class="o">?:</span> <span class="n">synchronized</span><span class="p">(</span><span class="n">DBHandler</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">instance</span> <span class="o">?:</span> <span class="n">DBHandler</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
-                    <span class="n">instance</span> <span class="p">=</span> <span class="k">it</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DBHandler</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nd">@Volatile</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">var</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DBHandler</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">fun</span> <span class="nf">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">instance</span> <span class="o">?:</span> <span class="n">synchronized</span><span class="p">(</span><span class="n">DBHandler</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">instance</span> <span class="o">?:</span> <span class="n">DBHandler</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">instance</span> <span class="p">=</span> <span class="k">it</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>8번 라인에서 인스턴스를 생성하기 전에 7번 라인에서 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/synchronized.html"  target="_blank" rel="noopener"
     >synchronized</a>를 써서 스레드가 동시에 경합하지 않도록 막아줍니다. 7번 라인에서는 <code>synchronized</code>를 실행하기 전에 instance의 null을 한 번 더 체크합니다. 이 체크가 없으면 각 스레드에서 <code>getInstance</code>에 접근할 때 인스턴스가 이미 존재하더라도 <code>synchronized</code>에 의해 일단 <code>lock</code>이 걸리게 되어 성능저하가 발생할 수 있습니다. 그래서 우선 널체크를 하고 인스턴스가 없을때만 <code>synchronized</code> 이하 블록을 실행하도록 한 것입니다. 이렇게 두번에 걸쳐 인스턴스를 체크하기 때문에 Double Checked Locking 이라는 이름이 붙었습니다.</p>
@@ -495,19 +495,19 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBHandler</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="nf">DBHandler</span><span class="o">()</span> <span class="o">{}</span>
-    
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Holder</span><span class="o">{</span>
-        <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">DBHandler</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DBHandler</span><span class="o">();</span>
-    <span class="o">}</span>
-    
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">DBHandler</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Holder</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBHandler</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="nf">DBHandler</span><span class="o">()</span> <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Holder</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">DBHandler</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DBHandler</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">DBHandler</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Holder</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>위 코드는 굳이 코틀린으로 <a class="link" href="https://medium.com/swlh/singleton-design-pattern-with-kotlin-2e6c8d42fc11"  target="_blank" rel="noopener"
     >변환</a>한다면 다음과 같은 코드가 될 것입니다. 다만 내부 클래스가 object가 되어 생성자를 사용할 수 없으므로 이럴거면 그냥 처음부터 <code>DBHandler</code>를 <code>object</code>로 인스턴스화 하는것이 나을것 같네요.</p>
@@ -524,16 +524,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DBHandler</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DBHandler</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">Holder</span><span class="p">.</span><span class="n">INSTANCE</span> <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">private</span> <span class="k">object</span> <span class="nc">Holder</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">instance</span> <span class="p">=</span> <span class="n">DBHandler</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DBHandler</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DBHandler</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">Holder</span><span class="p">.</span><span class="n">INSTANCE</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">object</span> <span class="nc">Holder</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">instance</span> <span class="p">=</span> <span class="n">DBHandler</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 싱글톤 패턴을 구현하는 방법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

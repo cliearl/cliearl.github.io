@@ -358,11 +358,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">a</span> <span class="p">=</span> <span class="m">3</span>
-<span class="k">val</span> <span class="py">b</span> <span class="p">=</span> <span class="m">4</span>
-<span class="k">val</span> <span class="py">c</span> <span class="p">=</span> <span class="n">a</span> <span class="p">+</span> <span class="n">b</span>
-<span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">a</span> <span class="p">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">b</span> <span class="p">=</span> <span class="m">4</span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">c</span> <span class="p">=</span> <span class="n">a</span> <span class="p">+</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>자 그럼 이번엔 코드 안에서 띄어쓰기의 방식을 다르게 해보겠습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -373,11 +373,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">a</span><span class="p">=</span> <span class="m">3</span>
-<span class="k">val</span> <span class="py">b</span> <span class="p">=</span>    <span class="m">4</span>
-<span class="k">val</span> <span class="py">c</span><span class="p">=</span> <span class="n">a</span><span class="p">+</span>      <span class="n">b</span>
-<span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">a</span><span class="p">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">b</span> <span class="p">=</span>    <span class="m">4</span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">c</span><span class="p">=</span> <span class="n">a</span><span class="p">+</span>      <span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>각 줄마다 띄어쓰기의 방식이 다르다고 해도 컴퓨터는 코드를 문제없이 컴파일 할 수 있습니다. 그럼 코드를 이렇게 써도 문제없이 작동하니 괜찮은걸까요?</p>
 <p>내가 작성한 코드를 내 동료가 검토할 수도 있고, 몇 년후 내가 더 이상 코드를 관리하지 않게 되었을 때 내 후임이 코드를 읽어야 할 일이 생길 수 있습니다.  또 다음주쯤에 내 스스로가 내가 작성한 코드를 다시 읽어야 할 일도 생길 수 있죠.</p>
@@ -425,18 +425,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">buildscript</span> <span class="o">{...}</span>
-
-<span class="n">plugins</span> <span class="o">{</span>
-    <span class="n">id</span> <span class="s2">&#34;org.jlleitschuh.gradle.ktlint&#34;</span> <span class="n">version</span> <span class="s2">&#34;10.0.0&#34;</span>
-<span class="o">}</span>
-
-<span class="n">allProjects</span> <span class="o">{...}</span>
-
-<span class="n">subprojects</span> <span class="o">{</span>
-    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&#34;org.jlleitschuh.gradle.ktlint&#34;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">buildscript</span> <span class="o">{...}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plugins</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">id</span> <span class="s2">&#34;org.jlleitschuh.gradle.ktlint&#34;</span> <span class="n">version</span> <span class="s2">&#34;10.0.0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">allProjects</span> <span class="o">{...}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">subprojects</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">&#34;org.jlleitschuh.gradle.ktlint&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 설정하면 모든 프로젝트의 task에 다음과 같은 작업이 추가됩니다. 추가된 task들은 오른쪽 메뉴의 gradle에서 확인가능하며 그 외 모든 task의 리스트는 <a class="link" href="https://github.com/JLLeitschuh/ktlint-gradle#tasks-added"  target="_blank" rel="noopener"
     >링크</a>에서 확인 가능합니다.</p>
@@ -456,9 +456,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="p">./</span><span class="n">gradlew</span> <span class="n">ktlintCheck</span>  <span class="c1">// 로 틀린부분을 체크받고
-</span><span class="c1"></span><span class="p">./</span><span class="n">gradlew</span> <span class="n">ktlintFormat</span>  <span class="c1">// 로 자동수정을 할 수 있습니다.
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="p">./</span><span class="n">gradlew</span> <span class="n">ktlintCheck</span>  <span class="c1">// 로 틀린부분을 체크받고
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">./</span><span class="n">gradlew</span> <span class="n">ktlintFormat</span>  <span class="c1">// 로 자동수정을 할 수 있습니다.
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>ktlintcheck를 수동으로 수행하는 것이 귀찮다면 다음 명령으로 커밋할때마다 <code>ktlintcheck</code>가 실행되게 할 수 있습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -466,8 +466,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="o">./</span><span class="n">gradlew</span> <span class="n">addKtlintCheckGitPreCommitHook</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="o">./</span><span class="n">gradlew</span> <span class="n">addKtlintCheckGitPreCommitHook</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ktlint를 이용해서 코드 컨벤션에 맞는 코드를 생산하는 법에 대해 알아보았습니다. 중요한 것은 코드 컨벤션을 지키지 않아도 컴파일은 정상적으로 수행되지만, 이 코드를 언젠가 다시 읽게 될 나와 다른 사람을 위해 코드 컨벤션을 지켜야 한다는 점입니다.</p>
 <div class="video-wrapper">

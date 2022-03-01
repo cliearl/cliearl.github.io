@@ -360,13 +360,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">notifyItemChanged(int)
-notifyItemInserted(int)
-notifyItemRemoved(int)
-notifyItemRangeChanged(int, int)
-notifyItemRangeInserted(int, int)
-notifyItemRangeRemoved(int, int)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">notifyItemChanged(int)
+</span></span><span class="line"><span class="cl">notifyItemInserted(int)
+</span></span><span class="line"><span class="cl">notifyItemRemoved(int)
+</span></span><span class="line"><span class="cl">notifyItemRangeChanged(int, int)
+</span></span><span class="line"><span class="cl">notifyItemRangeInserted(int, int)
+</span></span><span class="line"><span class="cl">notifyItemRangeRemoved(int, int)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.</p>
 <h2 id="diffutil">DiffUtil</h2>
@@ -384,14 +384,14 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">100 items and 10 modifications: avg: 0.39 ms, median: 0.35 ms
-100 items and 100 modifications: 3.82 ms, median: 3.75 ms
-100 items and 100 modifications without moves: 2.09 ms, median: 2.06 ms
-1000 items and 50 modifications: avg: 4.67 ms, median: 4.59 ms
-1000 items and 50 modifications without moves: avg: 3.59 ms, median: 3.50 ms
-1000 items and 200 modifications: 27.07 ms, median: 26.92 ms
-1000 items and 200 modifications without moves: 13.54 ms, median: 13.36 ms 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">100 items and 10 modifications: avg: 0.39 ms, median: 0.35 ms
+</span></span><span class="line"><span class="cl">100 items and 100 modifications: 3.82 ms, median: 3.75 ms
+</span></span><span class="line"><span class="cl">100 items and 100 modifications without moves: 2.09 ms, median: 2.06 ms
+</span></span><span class="line"><span class="cl">1000 items and 50 modifications: avg: 4.67 ms, median: 4.59 ms
+</span></span><span class="line"><span class="cl">1000 items and 50 modifications without moves: avg: 3.59 ms, median: 3.50 ms
+</span></span><span class="line"><span class="cl">1000 items and 200 modifications: 27.07 ms, median: 26.92 ms
+</span></span><span class="line"><span class="cl">1000 items and 200 modifications without moves: 13.54 ms, median: 13.36 ms 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>DiffUtil을 사용하기 위해서는 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback"  target="_blank" rel="noopener"
     ><code>DiffUtil.Callback()</code></a>을 상속받아 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/DiffUtil.Callback#areitemsthesame"  target="_blank" rel="noopener"
@@ -439,39 +439,39 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Google Developers에서 제공하는 코드
-</span><span class="c1"></span><span class="kd">class</span> <span class="nc">UserAdapter</span> <span class="kd">extends</span> <span class="n">RecyclerView</span><span class="o">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="n">UserViewHolder</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">AsyncListDiffer</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">mDiffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AsyncListDiffer</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">DIFF_CALLBACK</span><span class="o">);</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemCount</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">mDiffer</span><span class="o">.</span><span class="na">getCurrentList</span><span class="o">().</span><span class="na">size</span><span class="o">();</span>
-    <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">submitList</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">mDiffer</span><span class="o">.</span><span class="na">submitList</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBindViewHolder</span><span class="o">(</span><span class="n">UserViewHolder</span> <span class="n">holder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">mDiffer</span><span class="o">.</span><span class="na">getCurrentList</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
-        <span class="n">holder</span><span class="o">.</span><span class="na">bindTo</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">DiffUtil</span><span class="o">.</span><span class="na">ItemCallback</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">DIFF_CALLBACK</span>
-            <span class="o">=</span> <span class="k">new</span> <span class="n">DiffUtil</span><span class="o">.</span><span class="na">ItemCallback</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;()</span> <span class="o">{</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">areItemsTheSame</span><span class="o">(</span>
-                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="o">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// User properties may have changed if reloaded from the DB, but ID is fixed
-</span><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">==</span> <span class="n">newUser</span><span class="o">.</span><span class="na">getId</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">areContentsTheSame</span><span class="o">(</span>
-                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="o">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// NOTE: if you use equals, your object must properly override Object#equals()
-</span><span class="c1"></span>            <span class="c1">// Incorrectly returning false here will result in too many animations.
-</span><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">newUser</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// Google Developers에서 제공하는 코드
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">class</span> <span class="nc">UserAdapter</span> <span class="kd">extends</span> <span class="n">RecyclerView</span><span class="o">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="n">UserViewHolder</span><span class="o">&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">AsyncListDiffer</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">mDiffer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AsyncListDiffer</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">DIFF_CALLBACK</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemCount</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mDiffer</span><span class="o">.</span><span class="na">getCurrentList</span><span class="o">().</span><span class="na">size</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">submitList</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mDiffer</span><span class="o">.</span><span class="na">submitList</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBindViewHolder</span><span class="o">(</span><span class="n">UserViewHolder</span> <span class="n">holder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">mDiffer</span><span class="o">.</span><span class="na">getCurrentList</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">holder</span><span class="o">.</span><span class="na">bindTo</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">DiffUtil</span><span class="o">.</span><span class="na">ItemCallback</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">DIFF_CALLBACK</span>
+</span></span><span class="line"><span class="cl">            <span class="o">=</span> <span class="k">new</span> <span class="n">DiffUtil</span><span class="o">.</span><span class="na">ItemCallback</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">areItemsTheSame</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="o">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// User properties may have changed if reloaded from the DB, but ID is fixed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">==</span> <span class="n">newUser</span><span class="o">.</span><span class="na">getId</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">areContentsTheSame</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="o">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// NOTE: if you use equals, your object must properly override Object#equals()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// Incorrectly returning false here will result in too many animations.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">newUser</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="listadapter">ListAdapter</h2>
 <p><a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter"  target="_blank" rel="noopener"
@@ -508,33 +508,33 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Google Developers에서 제공하는 코드
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">UserAdapter</span> <span class="n">extends</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">User</span><span class="p">,</span> <span class="n">UserViewHolder</span><span class="p">&gt;</span> <span class="p">{</span>
-    <span class="k">public</span> <span class="n">UserAdapter</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="n">DIFF_CALLBACK</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nd">@Override</span>
-    <span class="k">public</span> <span class="n">void</span> <span class="n">onBindViewHolder</span><span class="p">(</span><span class="n">UserViewHolder</span> <span class="n">holder</span><span class="p">,</span> <span class="n">int</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">holder</span><span class="p">.</span><span class="n">bindTo</span><span class="p">(</span><span class="n">getItem</span><span class="p">(</span><span class="n">position</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="k">public</span> <span class="n">static</span> <span class="k">final</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">DIFF_CALLBACK</span> <span class="p">=</span>
-            <span class="n">new</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;()</span> <span class="p">{</span>
-        <span class="nd">@Override</span>
-        <span class="k">public</span> <span class="n">boolean</span> <span class="n">areItemsTheSame</span><span class="p">(</span>
-                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="p">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// User properties may have changed if reloaded from the DB, but ID is fixed
-</span><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">getId</span><span class="p">()</span> <span class="o">==</span> <span class="n">newUser</span><span class="p">.</span><span class="n">getId</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="nd">@Override</span>
-        <span class="k">public</span> <span class="n">boolean</span> <span class="n">areContentsTheSame</span><span class="p">(</span>
-                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="p">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// NOTE: if you use equals, your object must properly override Object#equals()
-</span><span class="c1"></span>            <span class="c1">// Incorrectly returning false here will result in too many animations.
-</span><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">newUser</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="c1">// Google Developers에서 제공하는 코드
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">UserAdapter</span> <span class="n">extends</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">User</span><span class="p">,</span> <span class="n">UserViewHolder</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">UserAdapter</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="n">DIFF_CALLBACK</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">void</span> <span class="n">onBindViewHolder</span><span class="p">(</span><span class="n">UserViewHolder</span> <span class="n">holder</span><span class="p">,</span> <span class="n">int</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">holder</span><span class="p">.</span><span class="n">bindTo</span><span class="p">(</span><span class="n">getItem</span><span class="p">(</span><span class="n">position</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">static</span> <span class="k">final</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">DIFF_CALLBACK</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">boolean</span> <span class="n">areItemsTheSame</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="p">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// User properties may have changed if reloaded from the DB, but ID is fixed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">getId</span><span class="p">()</span> <span class="o">==</span> <span class="n">newUser</span><span class="p">.</span><span class="n">getId</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">boolean</span> <span class="n">areContentsTheSame</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="p">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// NOTE: if you use equals, your object must properly override Object#equals()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// Incorrectly returning false here will result in too many animations.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">newUser</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다시말해 Recyclerview 어댑터를 ListAdapter로 구현하면 데이터가 어떻게 바뀌든간에 submitList로 전체 리스트를 넘겨주기만 하면 어댑터가 알아서 백그라운드 스레드를 사용해 리스트 차이를 계산하여 화면을 갱신시켜주게 됩니다.</p>
 <h2 id="앱-작성">앱 작성</h2>
@@ -557,18 +557,18 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
-    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">race</span><span class="p">:</span> <span class="n">Race</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">level</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">stats</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;,</span>
-    <span class="k">val</span> <span class="py">encount</span><span class="p">:</span> <span class="n">Boolean</span>
-<span class="p">)</span>
-
-<span class="k">enum</span> <span class="k">class</span> <span class="nc">Race</span> <span class="p">{</span>
-    <span class="n">Zombie</span><span class="p">,</span> <span class="n">Human</span><span class="p">,</span> <span class="n">Goblin</span><span class="p">,</span> <span class="n">Dragon</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">race</span><span class="p">:</span> <span class="n">Race</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">level</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">stats</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">encount</span><span class="p">:</span> <span class="n">Boolean</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">enum</span> <span class="k">class</span> <span class="nc">Race</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Zombie</span><span class="p">,</span> <span class="n">Human</span><span class="p">,</span> <span class="n">Goblin</span><span class="p">,</span> <span class="n">Dragon</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="view_itemlistxml">view_itemlist.xml</h3>
 <p>Recyclerview의 ViewHolder 레이아웃을 만들어줍니다.</p>
@@ -638,69 +638,69 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-    <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span>
-    <span class="na">android:baselineAligned=</span><span class="s">&#34;false&#34;</span>
-    <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span>
-    <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
-    <span class="na">android:padding=</span><span class="s">&#34;10dp&#34;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_weight=</span><span class="s">&#34;9&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_name&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:padding=</span><span class="s">&#34;3dp&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Monster name&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_race&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Race&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_level&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Level&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_stats&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Stats&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_encount&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Encount&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-    <span class="nt">&lt;ImageView</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
-        <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
-        <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
-
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:baselineAligned=</span><span class="s">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:padding=</span><span class="s">&#34;10dp&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_weight=</span><span class="s">&#34;9&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_name&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:padding=</span><span class="s">&#34;3dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Monster name&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_race&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Race&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_level&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Level&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_stats&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Stats&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_encount&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Encount&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;ImageView</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="myviewholderkt">MyViewHolder.kt</h3>
 <p>Recyclerview의 ViewHolder 클래스를 만들어줍니다. View Binding을 사용하도록 세팅하고 나중에 투명도를 바꾸는데 사용하도록 <code>setAlpha</code> 함수를 만들어줍니다.</p>
@@ -735,34 +735,34 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ViewItemlistBinding</span><span class="p">)</span> <span class="p">:</span>
-
-    <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span> <span class="n">Monster</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">tvName</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Name: </span><span class="si">${data.name}</span><span class="s2">&#34;</span>
-            <span class="n">tvRace</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Race: </span><span class="si">${data.race}</span><span class="s2">&#34;</span>
-            <span class="n">tvLevel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Level: </span><span class="si">${data.level}</span><span class="s2">&#34;</span>
-            <span class="n">tvStats</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;HP: </span><span class="si">${data.stats[0]}</span><span class="s2"> / MP: </span><span class="si">${data.stats[1]}</span><span class="s2"> / Exp: </span><span class="si">${data.stats[2]}</span><span class="s2">&#34;</span>
-            <span class="n">tvEncount</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Encounted: </span><span class="si">${data.encount}</span><span class="s2">&#34;</span>
-
-            <span class="n">vhLayout</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;Item </span><span class="si">$layoutPosition</span><span class="s2"> touched!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">fun</span> <span class="nf">setAlpha</span><span class="p">(</span><span class="n">alpha</span><span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">tvName</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
-            <span class="n">tvRace</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
-            <span class="n">tvLevel</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
-            <span class="n">tvStats</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
-            <span class="n">tvEncount</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ViewItemlistBinding</span><span class="p">)</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span> <span class="n">Monster</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvName</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Name: </span><span class="si">${data.name}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvRace</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Race: </span><span class="si">${data.race}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvLevel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Level: </span><span class="si">${data.level}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvStats</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;HP: </span><span class="si">${data.stats[0]}</span><span class="s2"> / MP: </span><span class="si">${data.stats[1]}</span><span class="s2"> / Exp: </span><span class="si">${data.stats[2]}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvEncount</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Encounted: </span><span class="si">${data.encount}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">vhLayout</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;Item </span><span class="si">$layoutPosition</span><span class="s2"> touched!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">setAlpha</span><span class="p">(</span><span class="n">alpha</span><span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvName</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvRace</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvLevel</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvStats</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvEncount</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="n">alpha</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="mydiffcallbackkt">MyDiffCallback.kt</h3>
 <p>코틀린에서는 <a class="link" href="https://kotlinlang.org/docs/equality.html"  target="_blank" rel="noopener"
@@ -791,17 +791,17 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyDiffCallback</span> <span class="p">:</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;()</span> <span class="p">{</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">areItemsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">oldItem</span> <span class="o">===</span> <span class="n">newItem</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">areContentsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">oldItem</span> <span class="o">==</span> <span class="n">newItem</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyDiffCallback</span> <span class="p">:</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">areItemsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">oldItem</span> <span class="o">===</span> <span class="n">newItem</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">areContentsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Monster</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">oldItem</span> <span class="o">==</span> <span class="n">newItem</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="mylistadapterkt">MyListAdapter.kt</h3>
 <p>ListAdapter를 상속받는 Recyclerview Adapter를 작성합니다. <code>onCreateViewHolder</code>에서 뷰바인딩을 사용하도록 설정합니다. 데이터의 개수는 ListAdapter가 관리하므로 기존의 Recyclerview 어댑터에서 정의했던 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter#getItemCount%28%29"  target="_blank" rel="noopener"
@@ -845,41 +845,41 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyListAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">,</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;(</span><span class="n">MyDiffCallback</span><span class="p">())</span> <span class="p">{</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">viewHolder</span> <span class="p">=</span> <span class="n">MyViewHolder</span><span class="p">(</span>
-            <span class="n">ViewItemlistBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span>
-                <span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span>
-                <span class="n">parent</span><span class="p">,</span>
-                <span class="k">false</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">viewHolder</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBindViewHolder</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">holder</span> <span class="k">is</span> <span class="n">MyViewHolder</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">val</span> <span class="py">monster</span> <span class="p">=</span> <span class="n">getItem</span><span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="k">as</span> <span class="n">Monster</span>
-            <span class="n">holder</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">monster</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">fun</span> <span class="nf">moveItem</span><span class="p">(</span><span class="n">fromPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">toPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">newList</span> <span class="p">=</span> <span class="n">currentList</span><span class="p">.</span><span class="n">toMutableList</span><span class="p">()</span>
-        <span class="c1">// val item = newList.removeAt(fromPosition)
-</span><span class="c1"></span>        <span class="c1">// newList.add(toPosition, item)
-</span><span class="c1"></span>        <span class="n">Collections</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">newList</span><span class="p">,</span> <span class="n">fromPosition</span><span class="p">,</span> <span class="n">toPosition</span><span class="p">)</span>
-        <span class="n">submitList</span><span class="p">(</span><span class="n">newList</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">fun</span> <span class="nf">removeItem</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">newList</span> <span class="p">=</span> <span class="n">currentList</span><span class="p">.</span><span class="n">toMutableList</span><span class="p">()</span>
-        <span class="n">newList</span><span class="p">.</span><span class="n">removeAt</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
-        <span class="n">submitList</span><span class="p">(</span><span class="n">newList</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyListAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">,</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;(</span><span class="n">MyDiffCallback</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">viewHolder</span> <span class="p">=</span> <span class="n">MyViewHolder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ViewItemlistBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">parent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="k">false</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">viewHolder</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBindViewHolder</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">holder</span> <span class="k">is</span> <span class="n">MyViewHolder</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">monster</span> <span class="p">=</span> <span class="n">getItem</span><span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="k">as</span> <span class="n">Monster</span>
+</span></span><span class="line"><span class="cl">            <span class="n">holder</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">monster</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">moveItem</span><span class="p">(</span><span class="n">fromPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">toPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">newList</span> <span class="p">=</span> <span class="n">currentList</span><span class="p">.</span><span class="n">toMutableList</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// val item = newList.removeAt(fromPosition)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// newList.add(toPosition, item)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Collections</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">newList</span><span class="p">,</span> <span class="n">fromPosition</span><span class="p">,</span> <span class="n">toPosition</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">submitList</span><span class="p">(</span><span class="n">newList</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">removeItem</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">newList</span> <span class="p">=</span> <span class="n">currentList</span><span class="p">.</span><span class="n">toMutableList</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">newList</span><span class="p">.</span><span class="n">removeAt</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">submitList</span><span class="p">(</span><span class="n">newList</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="myitemtouchhelpercallbackkt">MyItemTouchHelperCallback.kt</h3>
 <p>기존 프로젝트에서 터치 콜백을 받기 위해 MainActivity에서 사용했던 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.SimpleCallback"  target="_blank" rel="noopener"
@@ -931,47 +931,47 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyItemTouchHelperCallback</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">)</span> <span class="p">:</span>
-    <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span><span class="p">(</span>
-        <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">UP</span> <span class="n">or</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">DOWN</span><span class="p">,</span>
-        <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">LEFT</span>
-    <span class="p">)</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onMove</span><span class="p">(</span>
-        <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
-        <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span>
-        <span class="n">target</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span>
-    <span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
-        <span class="p">(</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">adapter</span> <span class="k">as</span> <span class="n">MyListAdapter</span><span class="p">).</span><span class="n">moveItem</span><span class="p">(</span>
-            <span class="n">viewHolder</span><span class="p">.</span><span class="n">absoluteAdapterPosition</span><span class="p">,</span>
-            <span class="n">target</span><span class="p">.</span><span class="n">absoluteAdapterPosition</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="k">true</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSwiped</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="p">(</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">adapter</span> <span class="k">as</span> <span class="n">MyListAdapter</span><span class="p">).</span><span class="n">removeItem</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">.</span><span class="n">layoutPosition</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 홀딩중인 ViewHolder 투명도를 변경
-</span><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSelectedChanged</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">?,</span> <span class="n">actionState</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onSelectedChanged</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">,</span> <span class="n">actionState</span><span class="p">)</span>
-        <span class="k">when</span> <span class="p">(</span><span class="n">actionState</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">ACTION_STATE_DRAG</span><span class="p">,</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">ACTION_STATE_SWIPE</span> <span class="o">-&gt;</span> <span class="p">{</span>
-                <span class="p">(</span><span class="n">viewHolder</span> <span class="k">as</span> <span class="n">MyViewHolder</span><span class="p">).</span><span class="n">setAlpha</span><span class="p">(</span><span class="m">0.5f</span><span class="p">)</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 홀딩중인 ViewHolder 투명도를 되돌림
-</span><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">clearView</span><span class="p">(</span>
-        <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
-        <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span>
-    <span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">clearView</span><span class="p">(</span><span class="n">recyclerView</span><span class="p">,</span> <span class="n">viewHolder</span><span class="p">)</span>
-        <span class="p">(</span><span class="n">viewHolder</span> <span class="k">as</span> <span class="n">MyViewHolder</span><span class="p">).</span><span class="n">setAlpha</span><span class="p">(</span><span class="m">1.0f</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyItemTouchHelperCallback</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">)</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">UP</span> <span class="n">or</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">DOWN</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">LEFT</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onMove</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">target</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">adapter</span> <span class="k">as</span> <span class="n">MyListAdapter</span><span class="p">).</span><span class="n">moveItem</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">viewHolder</span><span class="p">.</span><span class="n">absoluteAdapterPosition</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">target</span><span class="p">.</span><span class="n">absoluteAdapterPosition</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSwiped</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">adapter</span> <span class="k">as</span> <span class="n">MyListAdapter</span><span class="p">).</span><span class="n">removeItem</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">.</span><span class="n">layoutPosition</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 홀딩중인 ViewHolder 투명도를 변경
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSelectedChanged</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">?,</span> <span class="n">actionState</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onSelectedChanged</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">,</span> <span class="n">actionState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">when</span> <span class="p">(</span><span class="n">actionState</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">ACTION_STATE_DRAG</span><span class="p">,</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">ACTION_STATE_SWIPE</span> <span class="o">-&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="n">viewHolder</span> <span class="k">as</span> <span class="n">MyViewHolder</span><span class="p">).</span><span class="n">setAlpha</span><span class="p">(</span><span class="m">0.5f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 홀딩중인 ViewHolder 투명도를 되돌림
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">clearView</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">clearView</span><span class="p">(</span><span class="n">recyclerView</span><span class="p">,</span> <span class="n">viewHolder</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="n">viewHolder</span> <span class="k">as</span> <span class="n">MyViewHolder</span><span class="p">).</span><span class="n">setAlpha</span><span class="p">(</span><span class="m">1.0f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="activity_mainxml">activity_main.xml</h3>
 <p>Recyclerview와 <a class="link" href="https://material.io/components/buttons-floating-action-button"  target="_blank" rel="noopener"
@@ -1009,36 +1009,36 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
-    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;androidx.recyclerview.widget.RecyclerView</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/recyclerview&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;0dp&#34;</span>
-        <span class="na">android:scrollbars=</span><span class="s">&#34;vertical&#34;</span>
-        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">tools:listitem=</span><span class="s">&#34;@layout/view_itemlist&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;com.google.android.material.floatingactionbutton.FloatingActionButton</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/fab&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_margin=</span><span class="s">&#34;20dp&#34;</span>
-        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_add_24&#34;</span>
-        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
-
-<span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;androidx.recyclerview.widget.RecyclerView</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/recyclerview&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:scrollbars=</span><span class="s">&#34;vertical&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">tools:listitem=</span><span class="s">&#34;@layout/view_itemlist&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;com.google.android.material.floatingactionbutton.FloatingActionButton</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/fab&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_margin=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_add_24&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="mainactivitykt">MainActivity.kt</h3>
 <p>데이터셋에 초기값을 넣어주고, 어댑터 인스턴스를 생성하여 Recyclerview와 연동시킵니다. 그리고 터치헬퍼를 달아 스와이프와 드래그를 했을때 데이터가 잘 갱신되는지 확인합니다.</p>
@@ -1084,45 +1084,45 @@ notifyItemRangeRemoved(int, int)
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
-        <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">myListAdapter</span><span class="p">:</span> <span class="n">MyListAdapter</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
-        <span class="n">MyListAdapter</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;().</span><span class="n">apply</span> <span class="p">{</span>
-        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;타일런트&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Zombie</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">50</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
-        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;조커&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">23</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">200</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
-        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;그렘린&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Goblin</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">5</span><span class="p">),</span> <span class="k">true</span><span class="p">))</span>
-        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;리오레우스&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">2500</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10000</span><span class="p">,</span> <span class="m">1000</span><span class="p">,</span> <span class="m">50000</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
-        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;사우론&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="m">200</span><span class="p">,</span> <span class="m">1000</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
-        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;리바이어던&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span> <span class="m">250</span><span class="p">,</span> <span class="m">10000</span><span class="p">),</span> <span class="k">true</span><span class="p">))</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
-
-
-        <span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
-            <span class="n">layoutManager</span> <span class="p">=</span>
-                <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
-            <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
-            <span class="n">adapter</span> <span class="p">=</span> <span class="n">myListAdapter</span>
-        <span class="p">}</span>
-        <span class="n">myListAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
-
-        <span class="n">binding</span><span class="p">.</span><span class="n">fab</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="n">myListAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">.</span><span class="n">shuffled</span><span class="p">())</span>
-        <span class="p">}</span>
-
-        <span class="k">val</span> <span class="py">itemTouchHelper</span> <span class="p">=</span> <span class="n">ItemTouchHelper</span><span class="p">(</span><span class="n">MyItemTouchHelperCallback</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">))</span>
-        <span class="n">itemTouchHelper</span><span class="p">.</span><span class="n">attachToRecyclerView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">myListAdapter</span><span class="p">:</span> <span class="n">MyListAdapter</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MyListAdapter</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;().</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;타일런트&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Zombie</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">50</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;조커&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">23</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">200</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;그렘린&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Goblin</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">5</span><span class="p">),</span> <span class="k">true</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;리오레우스&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">2500</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10000</span><span class="p">,</span> <span class="m">1000</span><span class="p">,</span> <span class="m">50000</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;사우론&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="m">200</span><span class="p">,</span> <span class="m">1000</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;리바이어던&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span> <span class="m">250</span><span class="p">,</span> <span class="m">10000</span><span class="p">),</span> <span class="k">true</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">layoutManager</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">                <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">adapter</span> <span class="p">=</span> <span class="n">myListAdapter</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">myListAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">fab</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">myListAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">dataSet</span><span class="p">.</span><span class="n">shuffled</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">itemTouchHelper</span> <span class="p">=</span> <span class="n">ItemTouchHelper</span><span class="p">(</span><span class="n">MyItemTouchHelperCallback</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">itemTouchHelper</span><span class="p">.</span><span class="n">attachToRecyclerView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">recyclerview</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게해서 ListAdapter를 RecyclerView에 적용하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

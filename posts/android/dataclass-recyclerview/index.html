@@ -361,14 +361,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="k">var</span> <span class="py">age</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="k">var</span> <span class="py">sex</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
-
-<span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">)</span>
-
-<span class="c1">// 출력값
-</span><span class="c1"></span><span class="n">org</span><span class="p">.</span><span class="n">jetbrains</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="n">idea</span><span class="p">.</span><span class="n">scratch</span><span class="p">.</span><span class="n">generated</span><span class="p">.</span><span class="n">ScratchFileRunnerGenerated</span><span class="err">$</span><span class="n">ScratchFileRunnerGenerated</span><span class="err">$</span><span class="n">Person</span><span class="nd">@b6587368</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="k">var</span> <span class="py">age</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="k">var</span> <span class="py">sex</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 출력값
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">org</span><span class="p">.</span><span class="n">jetbrains</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="n">idea</span><span class="p">.</span><span class="n">scratch</span><span class="p">.</span><span class="n">generated</span><span class="p">.</span><span class="n">ScratchFileRunnerGenerated</span><span class="err">$</span><span class="n">ScratchFileRunnerGenerated</span><span class="err">$</span><span class="n">Person</span><span class="nd">@b6587368</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이제 클래스의 <code>toString</code>을 다음과 같이 오버라이드 해주면 랜덤값이 아니라 클래스가 가진 프로퍼티값을 보여주게 됩니다.</p>
 <div class="highlight"><div class="chroma">
@@ -381,13 +381,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="s2">&#34;Person(name=</span><span class="si">$name</span><span class="s2">, age=</span><span class="si">$age</span><span class="s2">, sex=</span><span class="si">$sex</span><span class="s2">)&#34;</span>
-<span class="p">}</span>
-
-<span class="c1">// 출력값
-</span><span class="c1"></span><span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">=</span><span class="n">Alice</span><span class="p">,</span> <span class="n">age</span><span class="p">=</span><span class="m">20</span><span class="p">,</span> <span class="n">sex</span><span class="p">=</span><span class="n">Female</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;Person(name=</span><span class="si">$name</span><span class="s2">, age=</span><span class="si">$age</span><span class="s2">, sex=</span><span class="si">$sex</span><span class="s2">)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 출력값
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">=</span><span class="n">Alice</span><span class="p">,</span> <span class="n">age</span><span class="p">=</span><span class="m">20</span><span class="p">,</span> <span class="n">sex</span><span class="p">=</span><span class="n">Female</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="equals">equals</h3>
 <p><code>equals</code>는 같은 클래스로부터 인스턴스를 만들었을 때, 클래스 내부의 프로퍼티가 일치하면 같은 인스턴스로 취급할지를 판정하는 메소드입니다. 예를 들어 다음과 같은 인스턴스를 만들어 보면, 두 인스턴스는 동일하지 않다는 판정이 나오게 됩니다.</p>
@@ -401,13 +401,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
-<span class="k">val</span> <span class="py">person3</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="n">person2</span> <span class="o">==</span> <span class="n">person3</span><span class="p">)</span>
-
-<span class="c1">// 출력값
-</span><span class="c1"></span><span class="k">false</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person3</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">person2</span> <span class="o">==</span> <span class="n">person3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 출력값
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">false</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이제 equals를 다음과 같이 오버라이드 해줍니다. 비교대상이 되는 인스턴스를 받아서 그게 <code>null</code>이거나 <code>Person</code> 클래스가 아닐 경우엔 <code>false</code>를 반환하지만, 인스턴스의 프로퍼티가 일치하게 되면 동일한 객체라는 판정을 받게 됩니다.</p>
 <div class="highlight"><div class="chroma">
@@ -422,15 +422,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">equals</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">?):</span> <span class="n">Boolean</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">other</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">other</span> <span class="o">!is</span> <span class="n">Person</span><span class="p">)</span>
-        <span class="k">return</span> <span class="k">false</span>
-    <span class="k">return</span> <span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">name</span> <span class="o">&amp;&amp;</span> <span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">age</span> <span class="o">&amp;&amp;</span> <span class="n">sex</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">sex</span>
-<span class="p">}</span>
-
-<span class="c1">// 출력값
-</span><span class="c1"></span><span class="k">true</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">equals</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">?):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">other</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">other</span> <span class="o">!is</span> <span class="n">Person</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">false</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">name</span> <span class="o">&amp;&amp;</span> <span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">age</span> <span class="o">&amp;&amp;</span> <span class="n">sex</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">sex</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 출력값
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">true</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="hashcode">hashCode</h3>
 <p><code>hashCode</code>는 인스턴스의 해시값을 정의하는 메소드입니다. 이 부분을 정의하지 않으면 <code>equals</code>의 값이 동일하더라도 서로 다른 객체가 되어버립니다.</p>
@@ -443,12 +443,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">person4</span> <span class="p">=</span> <span class="n">hashSetOf</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">))</span>
-<span class="n">println</span><span class="p">(</span><span class="n">person4</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)))</span>
-
-<span class="c1">// 출력값
-</span><span class="c1"></span><span class="k">false</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person4</span> <span class="p">=</span> <span class="n">hashSetOf</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">person4</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 출력값
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">false</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그래서 hashCode를 정의하여 동일한 프로퍼티를 가질 경우 동일한 해시값을 갖도록 합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -461,13 +461,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">hashCode</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">name</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>  <span class="p">-</span> <span class="m">1234</span> <span class="p">+</span> <span class="n">age</span> <span class="p">-</span> <span class="n">sex</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="c1">// 출력값
-</span><span class="c1"></span><span class="k">true</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">hashCode</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">name</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>  <span class="p">-</span> <span class="m">1234</span> <span class="p">+</span> <span class="n">age</span> <span class="p">-</span> <span class="n">sex</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 출력값
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">true</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="copy">copy</h3>
 <p><a class="link" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--"  target="_blank" rel="noopener"
@@ -478,9 +478,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">person5</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
-<span class="k">val</span> <span class="py">person6</span> <span class="p">=</span> <span class="n">person5</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;Alice&#34;</span><span class="p">)</span>  <span class="c1">// Person(name=Alice, age=22, sex=Male)
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person5</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person6</span> <span class="p">=</span> <span class="n">person5</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;Alice&#34;</span><span class="p">)</span>  <span class="c1">// Person(name=Alice, age=22, sex=Male)
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="data-class">data class</h3>
 <p>그런데 그냥 프로퍼티만을 가지는 단순한 클래스의 경우 이런 것들을 다 정의해주는 행위가 번거로운 일이기 때문에, 코틀린에서는 <a class="link" href="https://kotlinlang.org/docs/data-classes.html"  target="_blank" rel="noopener"
@@ -501,18 +501,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="k">var</span> <span class="py">age</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="k">var</span> <span class="py">sex</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
-
-<span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">)</span>  <span class="c1">// Person(name=Alice, age=20, sex=Female)
-</span><span class="c1"></span>
-<span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
-<span class="k">val</span> <span class="py">person3</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="n">person2</span> <span class="o">==</span> <span class="n">person3</span><span class="p">)</span>  <span class="c1">// true
-</span><span class="c1"></span>
-<span class="k">val</span> <span class="py">person4</span> <span class="p">=</span> <span class="n">hashSetOf</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">))</span>
-<span class="n">println</span><span class="p">(</span><span class="n">person4</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)))</span>  <span class="c1">// true
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="k">var</span> <span class="py">age</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="k">var</span> <span class="py">sex</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">)</span>  <span class="c1">// Person(name=Alice, age=20, sex=Female)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person3</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="s2">&#34;Male&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">person2</span> <span class="o">==</span> <span class="n">person3</span><span class="p">)</span>  <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">person4</span> <span class="p">=</span> <span class="n">hashSetOf</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">person4</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="s2">&#34;Female&#34;</span><span class="p">)))</span>  <span class="c1">// true
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="recyclerview의-데이터를-data-class로-정의하기">RecyclerView의 데이터를 data class로 정의하기</h2>
 <p>그럼 data class를 RecyclerView에 적용해 보도록 하겠습니다.</p>
@@ -534,18 +534,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
-        <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-        <span class="k">val</span> <span class="py">race</span><span class="p">:</span> <span class="n">Race</span><span class="p">,</span>
-        <span class="k">val</span> <span class="py">level</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
-        <span class="k">val</span> <span class="py">stats</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;,</span>
-        <span class="k">val</span> <span class="py">encount</span><span class="p">:</span> <span class="n">Boolean</span>
-<span class="p">)</span>
-
-<span class="k">enum</span> <span class="k">class</span> <span class="nc">Race</span> <span class="p">{</span>
-    <span class="n">Zombie</span><span class="p">,</span> <span class="n">Human</span><span class="p">,</span> <span class="n">Goblin</span><span class="p">,</span> <span class="n">Dragon</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">Monster</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">race</span><span class="p">:</span> <span class="n">Race</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">level</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">stats</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;,</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">encount</span><span class="p">:</span> <span class="n">Boolean</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">enum</span> <span class="k">class</span> <span class="nc">Race</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Zombie</span><span class="p">,</span> <span class="n">Human</span><span class="p">,</span> <span class="n">Goblin</span><span class="p">,</span> <span class="n">Dragon</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 기존의 <code>list_item.xml</code>에서 두 개였던 텍스트뷰의 개수를 늘려줍니다. 위에서부터 순서대로 몬스터 클래스의 프로퍼티를 보여주도록 합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -620,75 +620,75 @@ if (!doNotTrack) {
 </span><span class="lnt">68
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class="nt">&lt;LinearLayout</span>
-    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-    <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
-    <span class="na">android:paddingStart=</span><span class="s">&#34;20dp&#34;</span>
-    <span class="na">android:paddingEnd=</span><span class="s">&#34;20dp&#34;</span>
-    <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span>
-    <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span>
-    <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_weight=</span><span class="s">&#34;9&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_name&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Monster name&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span>
-            <span class="na">android:padding=</span><span class="s">&#34;3dp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_race&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Race&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_level&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Level&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_stats&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Stats&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_encount&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Encount&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-    <span class="nt">&lt;FrameLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;ImageView</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
-            <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
-            <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;/FrameLayout&gt;</span>
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:paddingStart=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:paddingEnd=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_weight=</span><span class="s">&#34;9&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_name&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Monster name&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:padding=</span><span class="s">&#34;3dp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_race&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Race&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_level&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Level&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_stats&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Stats&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_encount&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Encount&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;FrameLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;ImageView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/FrameLayout&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음은 RecyclerView Adapter에서 사용하는 데이터셋의 타입을 바꾸고 다른 메소드들도 변화시킵니다. 기존의 <code>setData</code>는 필요없어졌기 때문에 삭제하고, ViewHolder에서 데이터와 텍스트뷰를 바인딩하는 부분도 바뀐 타입에 맞도록 수정해 줍니다. 그리고 데이터를 추가하는 기능을 가진 <code>addData</code> 메소드를 추가해줍니다.</p>
 <div class="highlight"><div class="chroma">
@@ -740,52 +740,52 @@ if (!doNotTrack) {
 </span><span class="lnt">45
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">()</span>
-
-    <span class="k">fun</span> <span class="nf">removeData</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dataSet</span><span class="p">.</span><span class="n">removeAt</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
-        <span class="n">notifyItemRemoved</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">fun</span> <span class="nf">swapData</span><span class="p">(</span><span class="n">fromPos</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">toPos</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Collections</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">dataSet</span><span class="p">,</span> <span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
-        <span class="n">notifyItemMoved</span><span class="p">(</span><span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">fun</span> <span class="nf">addData</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">race</span><span class="p">:</span> <span class="n">Race</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">stats</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;,</span> <span class="n">encount</span><span class="p">:</span> <span class="n">Boolean</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dataSet</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="n">encount</span><span class="p">))</span>
-        <span class="n">notifyItemInserted</span><span class="p">(</span><span class="n">dataSet</span><span class="p">.</span><span class="n">size</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">ViewHolder</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">binding</span> <span class="p">=</span> <span class="n">ListItemBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span> <span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBindViewHolder</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span> <span class="n">ViewHolder</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">holder</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">dataSet</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">dataSet</span><span class="p">.</span><span class="n">size</span>
-    <span class="p">}</span>
-
-    <span class="k">inner</span> <span class="k">class</span> <span class="nc">ViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ListItemBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span><span class="n">Monster</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvName</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Name: </span><span class="si">${data.name}</span><span class="s2">&#34;</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvRace</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Race: </span><span class="si">${data.race}</span><span class="s2">&#34;</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvLevel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Level: </span><span class="si">${data.level}</span><span class="s2">&#34;</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvStats</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;HP: </span><span class="si">${data.stats[0]}</span><span class="s2"> / MP: </span><span class="si">${data.stats[1]}</span><span class="s2"> / Exp: </span><span class="si">${data.stats[2]}</span><span class="s2">&#34;</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvEncount</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Encounted: </span><span class="si">${data.encount}</span><span class="s2">&#34;</span>
-
-            <span class="n">binding</span><span class="p">.</span><span class="n">vhLayout</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;Item </span><span class="si">$layoutPosition</span><span class="s2"> touched!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">removeData</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dataSet</span><span class="p">.</span><span class="n">removeAt</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">notifyItemRemoved</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">swapData</span><span class="p">(</span><span class="n">fromPos</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">toPos</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Collections</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">dataSet</span><span class="p">,</span> <span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">notifyItemMoved</span><span class="p">(</span><span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">addData</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">race</span><span class="p">:</span> <span class="n">Race</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">stats</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;,</span> <span class="n">encount</span><span class="p">:</span> <span class="n">Boolean</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dataSet</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="n">encount</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">notifyItemInserted</span><span class="p">(</span><span class="n">dataSet</span><span class="p">.</span><span class="n">size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">ViewHolder</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">binding</span> <span class="p">=</span> <span class="n">ListItemBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span> <span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBindViewHolder</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span> <span class="n">ViewHolder</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">holder</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">dataSet</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dataSet</span><span class="p">.</span><span class="n">size</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">inner</span> <span class="k">class</span> <span class="nc">ViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ListItemBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span><span class="n">Monster</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvName</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Name: </span><span class="si">${data.name}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvRace</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Race: </span><span class="si">${data.race}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvLevel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Level: </span><span class="si">${data.level}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvStats</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;HP: </span><span class="si">${data.stats[0]}</span><span class="s2"> / MP: </span><span class="si">${data.stats[1]}</span><span class="s2"> / Exp: </span><span class="si">${data.stats[2]}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvEncount</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Encounted: </span><span class="si">${data.encount}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">vhLayout</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;Item </span><span class="si">$layoutPosition</span><span class="s2"> touched!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>마지막으로 <code>addData</code> 메소드로 MainActivity에서 데이터값을 만들어주면 됩니다.</p>
 <div class="highlight"><div class="chroma">
@@ -801,16 +801,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-<span class="o">..</span><span class="p">.</span>
-        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;타일런트&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Zombie</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">50</span><span class="p">),</span> <span class="k">false</span><span class="p">)</span>
-        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;조커&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">23</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">200</span><span class="p">,</span><span class="m">20</span><span class="p">,</span><span class="m">100</span><span class="p">),</span> <span class="k">false</span><span class="p">)</span>
-        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;그렘린&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Goblin</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">),</span> <span class="k">true</span><span class="p">)</span>
-        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;리오레우스&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">2500</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10000</span><span class="p">,</span><span class="m">1000</span><span class="p">,</span><span class="m">50000</span><span class="p">),</span> <span class="k">false</span><span class="p">)</span>
-        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;사우론&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">200</span><span class="p">,</span><span class="m">1000</span><span class="p">),</span><span class="k">false</span><span class="p">)</span>
-        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;리바이어던&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span><span class="m">250</span><span class="p">,</span><span class="m">10000</span><span class="p">),</span> <span class="k">true</span><span class="p">)</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;타일런트&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Zombie</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">50</span><span class="p">),</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;조커&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">23</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">200</span><span class="p">,</span><span class="m">20</span><span class="p">,</span><span class="m">100</span><span class="p">),</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;그렘린&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Goblin</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">),</span> <span class="k">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;리오레우스&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">2500</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10000</span><span class="p">,</span><span class="m">1000</span><span class="p">,</span><span class="m">50000</span><span class="p">),</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;사우론&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">200</span><span class="p">,</span><span class="m">1000</span><span class="p">),</span><span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">addData</span><span class="p">(</span><span class="s2">&#34;리바이어던&#34;</span><span class="p">,</span> <span class="n">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span><span class="m">250</span><span class="p">,</span><span class="m">10000</span><span class="p">),</span> <span class="k">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 data class의 특징을 이해하고, RecyclerView에서 활용하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

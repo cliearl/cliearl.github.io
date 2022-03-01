@@ -440,21 +440,21 @@ if (!doNotTrack) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="o">//</span><span class="w"> </span><span class="err">작성자가</span><span class="w"> </span><span class="err">무명씨</span><span class="p">,</span><span class="w"> </span><span class="err">홍길동인</span><span class="w"> </span><span class="err">문서의</span><span class="w"> </span><span class="err">모든</span><span class="w"> </span><span class="err">항목을</span><span class="w"> </span><span class="err">가져옴</span><span class="w">
-</span><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;김*&#39;</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="n">table에</span><span class="w"> </span><span class="n">field1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="err">와</span><span class="w"> </span><span class="err">같은</span><span class="w"> </span><span class="err">속성값을</span><span class="w"> </span><span class="err">가지는</span><span class="w"> </span><span class="err">항목을</span><span class="w"> </span><span class="err">새로</span><span class="w"> </span><span class="err">생성하여</span><span class="w"> </span><span class="err">삽입</span><span class="w">
-</span><span class="w"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table</span><span class="p">(</span><span class="n">field1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터를</span><span class="w"> </span><span class="err">수정하는</span><span class="w"> </span><span class="err">구문으로</span><span class="w"> </span><span class="n">table의</span><span class="w"> </span><span class="n">field1에</span><span class="w"> </span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2에</span><span class="w"> </span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="err">로</span><span class="w"> </span><span class="err">변경</span><span class="w">
-</span><span class="w"></span><span class="k">UPDATE</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">field1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="err">{</span><span class="k">WHERE</span><span class="w"> </span><span class="err">조건}</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터를</span><span class="w"> </span><span class="err">삭제</span><span class="w">
-</span><span class="w"></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">{</span><span class="k">WHERE</span><span class="w"> </span><span class="err">조건}</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터베이스</span><span class="w"> </span><span class="err">내의</span><span class="w"> </span><span class="err">모든</span><span class="w"> </span><span class="err">테이블</span><span class="p">,</span><span class="w"> </span><span class="err">스키마</span><span class="p">,</span><span class="w"> </span><span class="err">관계</span><span class="p">(</span><span class="n">Relation</span><span class="p">)</span><span class="err">를</span><span class="w"> </span><span class="err">전부</span><span class="w"> </span><span class="err">삭제</span><span class="w">
-</span><span class="w"></span><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">database_name</span><span class="p">;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">//</span><span class="w"> </span><span class="err">작성자가</span><span class="w"> </span><span class="err">무명씨</span><span class="p">,</span><span class="w"> </span><span class="err">홍길동인</span><span class="w"> </span><span class="err">문서의</span><span class="w"> </span><span class="err">모든</span><span class="w"> </span><span class="err">항목을</span><span class="w"> </span><span class="err">가져옴</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;김*&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="n">table에</span><span class="w"> </span><span class="n">field1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="err">와</span><span class="w"> </span><span class="err">같은</span><span class="w"> </span><span class="err">속성값을</span><span class="w"> </span><span class="err">가지는</span><span class="w"> </span><span class="err">항목을</span><span class="w"> </span><span class="err">새로</span><span class="w"> </span><span class="err">생성하여</span><span class="w"> </span><span class="err">삽입</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table</span><span class="p">(</span><span class="n">field1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터를</span><span class="w"> </span><span class="err">수정하는</span><span class="w"> </span><span class="err">구문으로</span><span class="w"> </span><span class="n">table의</span><span class="w"> </span><span class="n">field1에</span><span class="w"> </span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2에</span><span class="w"> </span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="err">로</span><span class="w"> </span><span class="err">변경</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UPDATE</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">field1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">field2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="err">{</span><span class="k">WHERE</span><span class="w"> </span><span class="err">조건}</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터를</span><span class="w"> </span><span class="err">삭제</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">{</span><span class="k">WHERE</span><span class="w"> </span><span class="err">조건}</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">데이터베이스</span><span class="w"> </span><span class="err">내의</span><span class="w"> </span><span class="err">모든</span><span class="w"> </span><span class="err">테이블</span><span class="p">,</span><span class="w"> </span><span class="err">스키마</span><span class="p">,</span><span class="w"> </span><span class="err">관계</span><span class="p">(</span><span class="n">Relation</span><span class="p">)</span><span class="err">를</span><span class="w"> </span><span class="err">전부</span><span class="w"> </span><span class="err">삭제</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">database_name</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="database-management-system">DataBase Management System</h3>
 <p>대량의 데이터를 다루는데 관계형 데이터베이스가 사용되고, SQL이라는 언어를 사용해 데이터베이스의 데이터를 다룬다는 걸 알았습니다. 이런 데이터베이스와 SQL을 결합해서, 사용할 수 있는 형태의 프로그램으로 만든 것을 <a class="link" href="https://en.wikipedia.org/wiki/Database#Database_management_system"  target="_blank" rel="noopener"
@@ -533,11 +533,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">version</span> <span class="p">=</span> <span class="n">android</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">sqlite</span><span class="p">.</span><span class="n">SQLiteDatabase</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="k">null</span><span class="p">).</span><span class="n">use</span> <span class="p">{</span>
-    <span class="n">DatabaseUtils</span><span class="p">.</span><span class="n">stringForQuery</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;SELECT sqlite_version()&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
-<span class="p">}</span>
-<span class="n">println</span><span class="p">(</span><span class="s2">&#34;Framework (API </span><span class="si">${Build.VERSION.SDK_INT}</span><span class="s2">) SQLite version: </span><span class="si">$version</span><span class="s2">&#34;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">version</span> <span class="p">=</span> <span class="n">android</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">sqlite</span><span class="p">.</span><span class="n">SQLiteDatabase</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="k">null</span><span class="p">).</span><span class="n">use</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DatabaseUtils</span><span class="p">.</span><span class="n">stringForQuery</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;SELECT sqlite_version()&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="s2">&#34;Framework (API </span><span class="si">${Build.VERSION.SDK_INT}</span><span class="s2">) SQLite version: </span><span class="si">$version</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><a class="link" href="https://github.com/requery/sqlite-android"  target="_blank" rel="noopener"
     >외부 라이브러리</a>를 추가하면 안드로이드에서 최신버전의 SQLite를 사용할 수도 있습니다만 가능하면 공식 라이브러리를 사용하는 게 좋겠죠.</p>
@@ -718,162 +718,162 @@ if (!doNotTrack) {
 </span><span class="lnt">155
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span>
-    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;ID: &#34;</span>
-            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;EditText</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/et_id&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
-            <span class="na">android:hint=</span><span class="s">&#34;ID&#34;</span>
-            <span class="na">android:inputType=</span><span class="s">&#34;number&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;NAME: &#34;</span>
-            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;EditText</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/et_name&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
-            <span class="na">android:hint=</span><span class="s">&#34;NAME&#34;</span>
-            <span class="na">android:inputType=</span><span class="s">&#34;textPersonName&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;PHONE: &#34;</span>
-            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;EditText</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/et_phone&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
-            <span class="na">android:hint=</span><span class="s">&#34;PHONE&#34;</span>
-            <span class="na">android:inputType=</span><span class="s">&#34;phone&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Email: &#34;</span>
-            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;EditText</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/et_email&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
-            <span class="na">android:hint=</span><span class="s">&#34;Email&#34;</span>
-            <span class="na">android:inputType=</span><span class="s">&#34;textEmailAddress&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;Button</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_insert&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;INSERT&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;Button</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_update&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;UPDATE&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;Button</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_delete&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;DELETE&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;Button</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_view&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;VIEW&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-    <span class="nt">&lt;ScrollView</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:background=</span><span class="s">&#34;@color/teal_200&#34;</span>
-        <span class="na">android:padding=</span><span class="s">&#34;10dp&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_result&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;20sp&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;/ScrollView&gt;</span>
-
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;ID: &#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;EditText</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/et_id&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:hint=</span><span class="s">&#34;ID&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:inputType=</span><span class="s">&#34;number&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;NAME: &#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;EditText</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/et_name&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:hint=</span><span class="s">&#34;NAME&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:inputType=</span><span class="s">&#34;textPersonName&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;PHONE: &#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;EditText</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/et_phone&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:hint=</span><span class="s">&#34;PHONE&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:inputType=</span><span class="s">&#34;phone&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Email: &#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;EditText</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/et_email&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:hint=</span><span class="s">&#34;Email&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:inputType=</span><span class="s">&#34;textEmailAddress&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;Button</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_insert&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;INSERT&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;Button</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_update&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;UPDATE&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;Button</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_delete&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;DELETE&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;Button</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/btn_view&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_margin=</span><span class="s">&#34;1dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;12dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;VIEW&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;ScrollView</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:background=</span><span class="s">&#34;@color/teal_200&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:padding=</span><span class="s">&#34;10dp&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_result&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;20sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/ScrollView&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="databasehelper-작성">DatabaseHelper 작성</h3>
 <p>다음은 <code>SQLiteOpenHelper</code> 클래스를 상속하는 <code>DatabaseHelper</code> 클래스를 작성합니다. 이 앱에서 사용하게 될 데이터베이스의 프라이머리키는 <code>_id</code>이고 그 외에 <code>name</code>, <code>phone</code>, <code>email</code> 이라는 키를 갖고 있습니다. 데이터베이스의 파일명 및 그외 중복으로 써야하는 상수들을 <code>companion object</code>에 정의하고 상속에 필요한 생성자들을 전달해줍니다.</p>
@@ -907,31 +907,31 @@ if (!doNotTrack) {
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DatabaseHelper</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">:</span>
-    <span class="n">SQLiteOpenHelper</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DATABASE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">DATABASE_VERSION</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;PhoneBook.db&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE</span><span class="n">_VERSION</span> <span class="p">=</span> <span class="m">1</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">TABLE</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;book_table&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">COL1</span><span class="n">_ID</span> <span class="p">=</span> <span class="s2">&#34;_id&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">COL2</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;name&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">COL3</span><span class="n">_PHONE</span> <span class="p">=</span> <span class="s2">&#34;phone&#34;</span>
-        <span class="k">const</span> <span class="k">val</span> <span class="py">COL4</span><span class="n">_EMAIL</span> <span class="p">=</span> <span class="s2">&#34;email&#34;</span>
-
-        <span class="c1">//SingleTon Pattern(싱글톤 패턴)
-</span><span class="c1"></span>        <span class="nd">@Volatile</span>
-        <span class="k">private</span> <span class="k">var</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DatabaseHelper</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
-
-        <span class="k">fun</span> <span class="nf">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span>
-            <span class="n">instance</span> <span class="o">?:</span> <span class="n">synchronized</span><span class="p">(</span><span class="n">DatabaseHelper</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">instance</span> <span class="o">?:</span> <span class="n">DatabaseHelper</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
-                    <span class="n">instance</span> <span class="p">=</span> <span class="k">it</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DatabaseHelper</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SQLiteOpenHelper</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DATABASE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">DATABASE_VERSION</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;PhoneBook.db&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="k">val</span> <span class="py">DATABASE</span><span class="n">_VERSION</span> <span class="p">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="k">val</span> <span class="py">TABLE</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;book_table&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="k">val</span> <span class="py">COL1</span><span class="n">_ID</span> <span class="p">=</span> <span class="s2">&#34;_id&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="k">val</span> <span class="py">COL2</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;name&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="k">val</span> <span class="py">COL3</span><span class="n">_PHONE</span> <span class="p">=</span> <span class="s2">&#34;phone&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="k">val</span> <span class="py">COL4</span><span class="n">_EMAIL</span> <span class="p">=</span> <span class="s2">&#34;email&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">//SingleTon Pattern(싱글톤 패턴)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nd">@Volatile</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">var</span> <span class="py">instance</span><span class="p">:</span> <span class="n">DatabaseHelper</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">fun</span> <span class="nf">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">instance</span> <span class="o">?:</span> <span class="n">synchronized</span><span class="p">(</span><span class="n">DatabaseHelper</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">instance</span> <span class="o">?:</span> <span class="n">DatabaseHelper</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">instance</span> <span class="p">=</span> <span class="k">it</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="oncreate-구현">onCreate 구현</h3>
 <p>테이블을 생성하는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#onCreate%28android.database.sqlite.SQLiteDatabase%29"  target="_blank" rel="noopener"
@@ -952,17 +952,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?)</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">createQuery</span> <span class="p">=</span> <span class="s2">&#34;CREATE TABLE </span><span class="si">$TABLE</span><span class="s2">_NAME (&#34;</span> <span class="p">+</span>
-            <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID INTEGER PRIMARY KEY AUTOINCREMENT, &#34;</span> <span class="p">+</span>
-            <span class="s2">&#34;</span><span class="si">$COL2</span><span class="s2">_NAME TEXT, &#34;</span> <span class="p">+</span>
-            <span class="s2">&#34;</span><span class="si">$COL3</span><span class="s2">_PHONE TEXT, &#34;</span> <span class="p">+</span>
-            <span class="s2">&#34;</span><span class="si">$COL4</span><span class="s2">_EMAIL TEXT&#34;</span> <span class="p">+</span>
-            <span class="s2">&#34;)&#34;</span>
-
-    <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="n">createQuery</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">createQuery</span> <span class="p">=</span> <span class="s2">&#34;CREATE TABLE </span><span class="si">$TABLE</span><span class="s2">_NAME (&#34;</span> <span class="p">+</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID INTEGER PRIMARY KEY AUTOINCREMENT, &#34;</span> <span class="p">+</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;</span><span class="si">$COL2</span><span class="s2">_NAME TEXT, &#34;</span> <span class="p">+</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;</span><span class="si">$COL3</span><span class="s2">_PHONE TEXT, &#34;</span> <span class="p">+</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;</span><span class="si">$COL4</span><span class="s2">_EMAIL TEXT&#34;</span> <span class="p">+</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="n">createQuery</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="onupgrade-구현">onUpgrade 구현</h3>
 <p>다음은 DB버전이 변경되었을 때 동작하는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#onUpgrade%28android.database.sqlite.SQLiteDatabase,%20int,%20int%29"  target="_blank" rel="noopener"
@@ -977,13 +977,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onUpgrade</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?,</span> <span class="n">oldVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">newVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">oldVersion</span> <span class="o">!=</span> <span class="n">newVersion</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="s2">&#34;DROP TABLE IF EXISTS </span><span class="si">$TABLE</span><span class="s2">_NAME&#34;</span><span class="p">)</span>
-        <span class="n">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onUpgrade</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">SQLiteDatabase</span><span class="p">?,</span> <span class="n">oldVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">newVersion</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">oldVersion</span> <span class="o">!=</span> <span class="n">newVersion</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">db</span><span class="o">?.</span><span class="n">execSQL</span><span class="p">(</span><span class="s2">&#34;DROP TABLE IF EXISTS </span><span class="si">$TABLE</span><span class="s2">_NAME&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">onCreate</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="crud-구현">CRUD 구현</h3>
 <h4 id="create">Create</h4>
@@ -1004,16 +1004,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">insertData</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
-    <span class="k">val</span> <span class="py">contentValues</span> <span class="p">=</span> <span class="n">ContentValues</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
-        <span class="n">put</span><span class="p">(</span><span class="n">COL2_NAME</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="n">put</span><span class="p">(</span><span class="n">COL3_PHONE</span><span class="p">,</span> <span class="n">phone</span><span class="p">)</span>
-        <span class="n">put</span><span class="p">(</span><span class="n">COL4_EMAIL</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="n">db</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">)</span> <span class="c1">// 값이 없으면 행을 삽입하지않음
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">insertData</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">contentValues</span> <span class="p">=</span> <span class="n">ContentValues</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">put</span><span class="p">(</span><span class="n">COL2_NAME</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">put</span><span class="p">(</span><span class="n">COL3_PHONE</span><span class="p">,</span> <span class="n">phone</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">put</span><span class="p">(</span><span class="n">COL4_EMAIL</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">db</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">)</span> <span class="c1">// 값이 없으면 행을 삽입하지않음
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="update">Update</h4>
 <p><a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#update%28java.lang.String,%20android.content.ContentValues,%20java.lang.String,%20java.lang.String[]%29"  target="_blank" rel="noopener"
@@ -1032,17 +1032,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">updateData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
-    <span class="k">val</span> <span class="py">contentValues</span> <span class="p">=</span> <span class="n">ContentValues</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
-        <span class="n">put</span><span class="p">(</span><span class="n">COL1_ID</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
-        <span class="n">put</span><span class="p">(</span><span class="n">COL2_NAME</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="n">put</span><span class="p">(</span><span class="n">COL3_PHONE</span><span class="p">,</span> <span class="n">phone</span><span class="p">)</span>
-        <span class="n">put</span><span class="p">(</span><span class="n">COL4_EMAIL</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="n">db</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">updateData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">phone</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">contentValues</span> <span class="p">=</span> <span class="n">ContentValues</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">put</span><span class="p">(</span><span class="n">COL1_ID</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">put</span><span class="p">(</span><span class="n">COL2_NAME</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">put</span><span class="p">(</span><span class="n">COL3_PHONE</span><span class="p">,</span> <span class="n">phone</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">put</span><span class="p">(</span><span class="n">COL4_EMAIL</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">db</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="n">contentValues</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="delete">Delete</h4>
 <p>전달받은 id를 프라이머리키로 가진 데이터를 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete%28java.lang.String,%20java.lang.String,%20java.lang.String[]%29"  target="_blank" rel="noopener"
@@ -1055,11 +1055,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">deleteData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
-    <span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">deleteData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">writableDatabase</span>
+</span></span><span class="line"><span class="cl">    <span class="n">db</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">TABLE_NAME</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$COL1</span><span class="s2">_ID = ?&#34;</span><span class="p">,</span> <span class="n">arrayOf</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="read">Read</h4>
 <p>마지막으로 읽기를 구현합니다. <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getReadableDatabase%28%29"  target="_blank" rel="noopener"
@@ -1099,33 +1099,33 @@ if (!doNotTrack) {
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">getAllData</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">result</span> <span class="p">=</span> <span class="s2">&#34;No data in DB&#34;</span>
-
-    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">readableDatabase</span>
-    <span class="k">val</span> <span class="py">cursor</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="n">rawQuery</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM </span><span class="si">$TABLE</span><span class="s2">_NAME&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
-
-    <span class="k">try</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">cursor</span><span class="p">.</span><span class="n">count</span> <span class="o">!=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">val</span> <span class="py">stringBuffer</span> <span class="p">=</span> <span class="n">StringBuffer</span><span class="p">()</span>
-            <span class="k">while</span> <span class="p">(</span><span class="n">cursor</span><span class="p">.</span><span class="n">moveToNext</span><span class="p">())</span> <span class="p">{</span>
-                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;ID :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getInt</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">toString</span><span class="p">()</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
-                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;NAME :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
-                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;PHONE :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
-                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;EMAIL :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">3</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n\n</span><span class="s2"> &#34;</span><span class="p">)</span>
-            <span class="p">}</span>
-            <span class="n">result</span> <span class="p">=</span> <span class="n">stringBuffer</span><span class="p">.</span><span class="n">toString</span><span class="p">()</span>
-        <span class="p">}</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">cursor</span> <span class="o">!=</span> <span class="k">null</span> <span class="o">&amp;&amp;</span> <span class="p">!</span><span class="n">cursor</span><span class="p">.</span><span class="n">isClosed</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">result</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">getAllData</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="py">result</span> <span class="p">=</span> <span class="s2">&#34;No data in DB&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">db</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">readableDatabase</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">cursor</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="n">rawQuery</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM </span><span class="si">$TABLE</span><span class="s2">_NAME&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">cursor</span><span class="p">.</span><span class="n">count</span> <span class="o">!=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">stringBuffer</span> <span class="p">=</span> <span class="n">StringBuffer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">cursor</span><span class="p">.</span><span class="n">moveToNext</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;ID :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getInt</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">toString</span><span class="p">()</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;NAME :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;PHONE :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stringBuffer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;EMAIL :&#34;</span> <span class="p">+</span> <span class="n">cursor</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="m">3</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n\n</span><span class="s2"> &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="p">=</span> <span class="n">stringBuffer</span><span class="p">.</span><span class="n">toString</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">cursor</span> <span class="o">!=</span> <span class="k">null</span> <span class="o">&amp;&amp;</span> <span class="p">!</span><span class="n">cursor</span><span class="p">.</span><span class="n">isClosed</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="mainactivity-준비">MainActivity 준비</h3>
 <p>뷰 바인딩을 적용한 메인액티비티를 작성합니다. <code>dbHelper</code> 인스턴스를 생성하고, 사용이 끝나면 <code>onDestroy</code>에서 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#close%28%29"  target="_blank" rel="noopener"
@@ -1153,26 +1153,26 @@ if (!doNotTrack) {
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
-        <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">private</span> <span class="k">val</span> <span class="py">dbHelper</span><span class="p">:</span> <span class="n">DatabaseHelper</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
-        <span class="n">DatabaseHelper</span><span class="p">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroy</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">dbHelper</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onDestroy</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">dbHelper</span><span class="p">:</span> <span class="n">DatabaseHelper</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DatabaseHelper</span><span class="p">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroy</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dbHelper</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onDestroy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="유틸-메소드-준비">유틸 메소드 준비</h3>
 <p>데이터베이스 조작이 이루어졌을때 처리 결과를 텍스트뷰에 표시하기 위한 <code>showTxt</code>를 작성합니다. 그리고 버튼을 눌렀을 때 에디트텍스트에 입력한 내용을 삭제하는 <code>clearEditTexts</code> 함수도 작성합니다.</p>
@@ -1192,19 +1192,19 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showTxt</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">tvResult</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">clearEditTexts</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">etId</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
-        <span class="n">etName</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
-        <span class="n">etPhone</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
-        <span class="n">etEmail</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">showTxt</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">tvResult</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span> <span class="p">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">clearEditTexts</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">etId</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">etName</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">etPhone</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">etEmail</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="버튼기능-정의">버튼기능 정의</h3>
 <p>각 버튼을 클릭했을 때 부여할 기능을 정의합니다. 값을 입력하는 <code>insertDb</code>, 갱신하는 <code>updateDb</code>, 삭제하는 <code>deleteDb</code>, 그리고 조회하는 <code>getAllDb</code>함수를 만듭니다. 작업은 <code>try</code> 블록 안에서 실행하며 에디트텍스트에 입력한 값을 <code>dbHelper</code>에 정의한 각 함수로 전달합니다. 이 때 입력되는 sql 쿼리에 공백이 있으면 안되기 때문에 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim.html"  target="_blank" rel="noopener"
@@ -1268,62 +1268,62 @@ if (!doNotTrack) {
 </span><span class="lnt">55
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">insertDb</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">btnInsert</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">dbHelper</span><span class="p">.</span><span class="n">insertData</span><span class="p">(</span>
-                <span class="n">binding</span><span class="p">.</span><span class="n">etName</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
-                <span class="n">binding</span><span class="p">.</span><span class="n">etPhone</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
-                <span class="n">binding</span><span class="p">.</span><span class="n">etEmail</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
-            <span class="p">)</span>
-            <span class="n">clearEditTexts</span><span class="p">()</span>
-            <span class="n">showTxt</span><span class="p">(</span><span class="s2">&#34;Data inserted&#34;</span><span class="p">)</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">updateDb</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">btnUpdate</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">dbHelper</span><span class="p">.</span><span class="n">updateData</span><span class="p">(</span>
-                <span class="n">binding</span><span class="p">.</span><span class="n">etId</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
-                <span class="n">binding</span><span class="p">.</span><span class="n">etName</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
-                <span class="n">binding</span><span class="p">.</span><span class="n">etPhone</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
-                <span class="n">binding</span><span class="p">.</span><span class="n">etEmail</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
-            <span class="p">)</span>
-            <span class="n">showTxt</span><span class="p">(</span><span class="s2">&#34;Data updated&#34;</span><span class="p">)</span>
-
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">deleteDb</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">btnDelete</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">dbHelper</span><span class="p">.</span><span class="n">deleteData</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">etId</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">())</span>
-            <span class="n">clearEditTexts</span><span class="p">()</span>
-            <span class="n">showTxt</span><span class="p">(</span><span class="s2">&#34;Data deleted&#34;</span><span class="p">)</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">getAllDb</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">btnView</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="k">val</span> <span class="py">selectResult</span> <span class="p">=</span> <span class="n">dbHelper</span><span class="p">.</span><span class="n">getAllData</span><span class="p">()</span>
-            <span class="n">showTxt</span><span class="p">(</span><span class="n">selectResult</span><span class="p">)</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">insertDb</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">btnInsert</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dbHelper</span><span class="p">.</span><span class="n">insertData</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">binding</span><span class="p">.</span><span class="n">etName</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">binding</span><span class="p">.</span><span class="n">etPhone</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">binding</span><span class="p">.</span><span class="n">etEmail</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clearEditTexts</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">showTxt</span><span class="p">(</span><span class="s2">&#34;Data inserted&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">updateDb</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">btnUpdate</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dbHelper</span><span class="p">.</span><span class="n">updateData</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">binding</span><span class="p">.</span><span class="n">etId</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">binding</span><span class="p">.</span><span class="n">etName</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">binding</span><span class="p">.</span><span class="n">etPhone</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">binding</span><span class="p">.</span><span class="n">etEmail</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">showTxt</span><span class="p">(</span><span class="s2">&#34;Data updated&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">deleteDb</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">btnDelete</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dbHelper</span><span class="p">.</span><span class="n">deleteData</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">etId</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">trim</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clearEditTexts</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">showTxt</span><span class="p">(</span><span class="s2">&#34;Data deleted&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getAllDb</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">btnView</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">selectResult</span> <span class="p">=</span> <span class="n">dbHelper</span><span class="p">.</span><span class="n">getAllData</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">showTxt</span><span class="p">(</span><span class="n">selectResult</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="oncreate-정의">onCreate 정의</h3>
 <p>마지막으로 위에서 정의한 버튼기능을 <code>onCreate</code> 안에서 실행하도록 하면 되겠죠.</p>
@@ -1340,16 +1340,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-    <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
-
-    <span class="n">insertDb</span><span class="p">()</span>
-    <span class="n">updateDb</span><span class="p">()</span>
-    <span class="n">deleteDb</span><span class="p">()</span>
-    <span class="n">getAllDb</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">insertDb</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">updateDb</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">deleteDb</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">getAllDb</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 SQLite의 개념과, <code>SQLiteHelper</code>를 이용해 안드로이드에서 데이터베이스를 다루는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

@@ -362,10 +362,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
-    <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">android</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>메인액티비티에서 만들어주던 <code>dataSet</code>은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -379,14 +379,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;().</span><span class="n">apply</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">99</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">add</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th main&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th sub&#34;</span><span class="p">))</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;().</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">99</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">add</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th main&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th sub&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>메인액티비티의 Recyclerview 프로퍼티를 정하는 부분은 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/with.html"  target="_blank" rel="noopener"
     >with</a>로 묶어줍니다.</p>
@@ -407,20 +407,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">rvAdapter</span> <span class="p">=</span> <span class="n">RecyclerViewAdapter</span><span class="p">()</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">with</span><span class="p">(</span><span class="n">recyclerView</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">layoutManager</span> <span class="p">=</span> <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
-                <span class="n">adapter</span> <span class="p">=</span> <span class="n">rvAdapter</span>
-                <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">rvAdapter</span> <span class="p">=</span> <span class="n">RecyclerViewAdapter</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">with</span><span class="p">(</span><span class="n">recyclerView</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">layoutManager</span> <span class="p">=</span> <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">adapter</span> <span class="p">=</span> <span class="n">rvAdapter</span>
+</span></span><span class="line"><span class="cl">                <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="데이터-조작함수-추가">데이터 조작함수 추가</h2>
 <p>데이터를 조작하는 함수를 Recyclerview 안에 다음과 같이 추가합니다.</p>
@@ -448,27 +448,27 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
-
-    <span class="c1">// ViewHolder 포지션을 받아 그 위치의 데이터를 삭제하고 notifyItemRemoved로 어댑터에 갱신명령을 전달
-</span><span class="c1"></span>    <span class="k">fun</span> <span class="nf">removeData</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dataSet</span><span class="p">.</span><span class="n">removeAt</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
-        <span class="n">notifyItemRemoved</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 두 개의 ViewHolder 포지션을 받아 Collections.swap으로 첫번째 위치와 두번째 위치의 데이터를 교환
-</span><span class="c1"></span>    <span class="k">fun</span> <span class="nf">swapData</span><span class="p">(</span><span class="n">fromPos</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">toPos</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Collections</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">dataSet</span><span class="p">,</span> <span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
-        <span class="n">notifyItemMoved</span><span class="p">(</span><span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="c1">// 선택한 ViewHolder 포지션의 데이터 내용을 바꾸도록 함
-</span><span class="c1"></span>    <span class="k">fun</span> <span class="nf">setData</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dataSet</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;main viewholder touched!&#34;</span><span class="p">,</span> <span class="s2">&#34;sub viewholder touched!&#34;</span><span class="p">)</span>
-        <span class="n">notifyItemChanged</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// ViewHolder 포지션을 받아 그 위치의 데이터를 삭제하고 notifyItemRemoved로 어댑터에 갱신명령을 전달
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">fun</span> <span class="nf">removeData</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dataSet</span><span class="p">.</span><span class="n">removeAt</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">notifyItemRemoved</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 두 개의 ViewHolder 포지션을 받아 Collections.swap으로 첫번째 위치와 두번째 위치의 데이터를 교환
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">fun</span> <span class="nf">swapData</span><span class="p">(</span><span class="n">fromPos</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">toPos</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Collections</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">dataSet</span><span class="p">,</span> <span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">notifyItemMoved</span><span class="p">(</span><span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 선택한 ViewHolder 포지션의 데이터 내용을 바꾸도록 함
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">fun</span> <span class="nf">setData</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dataSet</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;main viewholder touched!&#34;</span><span class="p">,</span> <span class="s2">&#34;sub viewholder touched!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">notifyItemChanged</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="스와이프와-드래그-기능-붙이기">스와이프와 드래그 기능 붙이기</h2>
 <p>안드로이드에서는 Recyclerview에 입력되는 스와이프와 드래그 동작을 감지하는 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.SimpleCallback"  target="_blank" rel="noopener"
@@ -497,27 +497,27 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">itemTouchCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span> <span class="p">(</span>
-    <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">UP</span> <span class="n">or</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">DOWN</span><span class="p">,</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">LEFT</span>
-        <span class="p">){</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onMove</span><span class="p">(</span>
-        <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
-        <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span>
-        <span class="n">target</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span>
-    <span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">fromPos</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="n">viewHolder</span><span class="p">.</span><span class="n">adapterPosition</span>
-        <span class="k">val</span> <span class="py">toPos</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">adapterPosition</span>
-        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">swapData</span><span class="p">(</span><span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
-        <span class="k">return</span> <span class="k">true</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSwiped</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">removeData</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">.</span><span class="n">layoutPosition</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="n">ItemTouchHelper</span><span class="p">(</span><span class="n">itemTouchCallback</span><span class="p">).</span><span class="n">attachToRecyclerView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">recyclerView</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">itemTouchCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">ItemTouchHelper</span><span class="p">.</span><span class="n">SimpleCallback</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">UP</span> <span class="n">or</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">DOWN</span><span class="p">,</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">LEFT</span>
+</span></span><span class="line"><span class="cl">        <span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onMove</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">target</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">fromPos</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="n">viewHolder</span><span class="p">.</span><span class="n">adapterPosition</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">toPos</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">adapterPosition</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">swapData</span><span class="p">(</span><span class="n">fromPos</span><span class="p">,</span> <span class="n">toPos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSwiped</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">removeData</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">.</span><span class="n">layoutPosition</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ItemTouchHelper</span><span class="p">(</span><span class="n">itemTouchCallback</span><span class="p">).</span><span class="n">attachToRecyclerView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">recyclerView</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>우선 <code>ItemTouchHelper.SimpleCallback</code>의 인스턴스를 만들어 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/ItemTouchHelper"  target="_blank" rel="noopener"
     >ItemTouchHelper</a>의 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/ItemTouchHelper#attachToRecyclerView%28androidx.recyclerview.widget.RecyclerView%29"  target="_blank" rel="noopener"
@@ -582,52 +582,52 @@ if (!doNotTrack) {
 </span><span class="lnt">45
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
-    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-    <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
-    <span class="na">android:paddingStart=</span><span class="s">&#34;20dp&#34;</span>
-    <span class="na">android:paddingEnd=</span><span class="s">&#34;20dp&#34;</span>
-    <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_weight=</span><span class="s">&#34;9&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_main&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Main TextView&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span>
-            <span class="na">android:padding=</span><span class="s">&#34;5dp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_sub&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;Sub TextView&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span>
-            <span class="na">android:padding=</span><span class="s">&#34;5dp&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-    <span class="nt">&lt;FrameLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;ImageView</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
-            <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
-            <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/FrameLayout&gt;</span>
-
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:paddingStart=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:paddingEnd=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_weight=</span><span class="s">&#34;9&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_main&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Main TextView&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:padding=</span><span class="s">&#34;5dp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_sub&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;Sub TextView&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:padding=</span><span class="s">&#34;5dp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;FrameLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;ImageView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/FrameLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="스와이프시-백그라운드-설정하기">스와이프시 백그라운드 설정하기</h2>
 <p>다음으로 스와이프를 할때 미끄러져 나간 ViewHolder 아래에 <a class="link" href="https://developer.android.com/reference/android/graphics/Canvas"  target="_blank" rel="noopener"
@@ -676,47 +676,47 @@ if (!doNotTrack) {
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onChildDraw</span><span class="p">(</span>
-    <span class="n">c</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">,</span>
-    <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
-    <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span>
-    <span class="n">dX</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
-    <span class="n">dY</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
-    <span class="n">actionState</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
-    <span class="n">isCurrentlyActive</span><span class="p">:</span> <span class="n">Boolean</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">icon</span><span class="p">:</span> <span class="n">Bitmap</span>
-    <span class="c1">// actionState가 SWIPE 동작일 때 배경을 빨간색으로 칠하는 작업을 수행하도록 함
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">actionState</span> <span class="o">==</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">ACTION_STATE_SWIPE</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">itemView</span> <span class="p">=</span> <span class="n">viewHolder</span><span class="p">.</span><span class="n">itemView</span>
-        <span class="k">val</span> <span class="py">height</span> <span class="p">=</span> <span class="p">(</span><span class="n">itemView</span><span class="p">.</span><span class="n">bottom</span> <span class="p">-</span> <span class="n">itemView</span><span class="p">.</span><span class="n">top</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
-        <span class="k">val</span> <span class="py">width</span> <span class="p">=</span> <span class="n">height</span> <span class="p">/</span> <span class="m">4</span>
-        <span class="k">val</span> <span class="py">paint</span> <span class="p">=</span> <span class="n">Paint</span><span class="p">()</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">dX</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 왼쪽으로 스와이프하는지 확인
-</span><span class="c1"></span>            <span class="c1">// ViewHolder의 백그라운드에 깔아줄 사각형의 크기와 색상을 지정
-</span><span class="c1"></span>            <span class="n">paint</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">parseColor</span><span class="p">(</span><span class="s2">&#34;#ff0000&#34;</span><span class="p">)</span>
-            <span class="k">val</span> <span class="py">background</span> <span class="p">=</span> <span class="n">RectF</span><span class="p">(</span><span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">+</span> <span class="n">dX</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">top</span><span class="p">.</span><span class="n">toFloat</span><span class="p">(),</span> <span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">(),</span> <span class="n">itemView</span><span class="p">.</span><span class="n">bottom</span><span class="p">.</span><span class="n">toFloat</span><span class="p">())</span>
-            <span class="n">c</span><span class="p">.</span><span class="n">drawRect</span><span class="p">(</span><span class="n">background</span><span class="p">,</span> <span class="n">paint</span><span class="p">)</span>
-
-            <span class="c1">// 휴지통 아이콘과 표시될 위치를 지정하고 비트맵을 그려줌
-</span><span class="c1"></span>            <span class="c1">// 비트맵 이미지는 Image Asset 기능으로 추가하고 drawable 폴더에 위치하도록 함
-</span><span class="c1"></span>            <span class="n">icon</span> <span class="p">=</span> <span class="n">BitmapFactory</span><span class="p">.</span><span class="n">decodeResource</span><span class="p">(</span><span class="n">resources</span><span class="p">,</span> <span class="n">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">ic_menu_delete</span><span class="p">)</span>
-            <span class="k">val</span> <span class="py">iconDst</span> <span class="p">=</span> <span class="n">RectF</span><span class="p">(</span><span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="m">3</span>  <span class="p">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">top</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">+</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">bottom</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="n">width</span><span class="p">)</span>
-            <span class="n">c</span><span class="p">.</span><span class="n">drawBitmap</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">iconDst</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">super</span><span class="p">.</span><span class="n">onChildDraw</span><span class="p">(</span>
-        <span class="n">c</span><span class="p">,</span>
-        <span class="n">recyclerView</span><span class="p">,</span>
-        <span class="n">viewHolder</span><span class="p">,</span>
-        <span class="n">dX</span><span class="p">,</span>
-        <span class="n">dY</span><span class="p">,</span>
-        <span class="n">actionState</span><span class="p">,</span>
-        <span class="n">isCurrentlyActive</span>
-    <span class="p">)</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onChildDraw</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">viewHolder</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dX</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dY</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">actionState</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">isCurrentlyActive</span><span class="p">:</span> <span class="n">Boolean</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">icon</span><span class="p">:</span> <span class="n">Bitmap</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// actionState가 SWIPE 동작일 때 배경을 빨간색으로 칠하는 작업을 수행하도록 함
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">actionState</span> <span class="o">==</span> <span class="n">ItemTouchHelper</span><span class="p">.</span><span class="n">ACTION_STATE_SWIPE</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">itemView</span> <span class="p">=</span> <span class="n">viewHolder</span><span class="p">.</span><span class="n">itemView</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">height</span> <span class="p">=</span> <span class="p">(</span><span class="n">itemView</span><span class="p">.</span><span class="n">bottom</span> <span class="p">-</span> <span class="n">itemView</span><span class="p">.</span><span class="n">top</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">width</span> <span class="p">=</span> <span class="n">height</span> <span class="p">/</span> <span class="m">4</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">paint</span> <span class="p">=</span> <span class="n">Paint</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">dX</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 왼쪽으로 스와이프하는지 확인
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// ViewHolder의 백그라운드에 깔아줄 사각형의 크기와 색상을 지정
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">paint</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">parseColor</span><span class="p">(</span><span class="s2">&#34;#ff0000&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">background</span> <span class="p">=</span> <span class="n">RectF</span><span class="p">(</span><span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">+</span> <span class="n">dX</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">top</span><span class="p">.</span><span class="n">toFloat</span><span class="p">(),</span> <span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">(),</span> <span class="n">itemView</span><span class="p">.</span><span class="n">bottom</span><span class="p">.</span><span class="n">toFloat</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c</span><span class="p">.</span><span class="n">drawRect</span><span class="p">(</span><span class="n">background</span><span class="p">,</span> <span class="n">paint</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 휴지통 아이콘과 표시될 위치를 지정하고 비트맵을 그려줌
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 비트맵 이미지는 Image Asset 기능으로 추가하고 drawable 폴더에 위치하도록 함
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">icon</span> <span class="p">=</span> <span class="n">BitmapFactory</span><span class="p">.</span><span class="n">decodeResource</span><span class="p">(</span><span class="n">resources</span><span class="p">,</span> <span class="n">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">ic_menu_delete</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">iconDst</span> <span class="p">=</span> <span class="n">RectF</span><span class="p">(</span><span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="m">3</span>  <span class="p">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">top</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">+</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">itemView</span><span class="p">.</span><span class="n">bottom</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">-</span> <span class="n">width</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c</span><span class="p">.</span><span class="n">drawBitmap</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">iconDst</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">onChildDraw</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">recyclerView</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">viewHolder</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dX</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">actionState</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">isCurrentlyActive</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="터치-조작-정의하기">터치 조작 정의하기</h2>
 <p>Recyclerview 어댑터 안에 정의한 ViewHolder 클래스에 클릭 리스너를 붙여주면 ViewHolder의 터치를 인식할 수 있습니다. 그럴려면 ViewHolder가 사용하는 <code>list_item.xml</code>에서 레이아웃에 id를 부여해줘야 합니다.</p>
@@ -727,10 +727,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
-    <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span> <span class="nt">&gt;</span>
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:id=</span><span class="s">&#34;@+id/vhLayout&#34;</span> <span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 클릭 리스너를 붙여서 <a class="link" href="https://developer.android.com/reference/com/google/android/material/snackbar/Snackbar"  target="_blank" rel="noopener"
     >Snackbar</a>로 터치한 위치를 보여주고 <code>setData</code> 함수가 실행되도록 합니다. 이때 setData는 Recyclerview 안의 함수이므로 ViewHolder 클래스에서 접근을 할 수가 없습니다. 그래서 ViewHolder를 <code>inner classs</code>로 변경하여줍니다.</p>
@@ -752,21 +752,21 @@ if (!doNotTrack) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
-
-    <span class="k">inner</span> <span class="k">class</span> <span class="nc">ViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ListItemBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvMain</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvSub</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
-
-            <span class="n">binding</span><span class="p">.</span><span class="n">vhLayout</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;Item </span><span class="si">$layoutPosition</span><span class="s2"> touched!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-                <span class="n">setData</span><span class="p">(</span><span class="n">layoutPosition</span><span class="p">)</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RecyclerViewAdapter</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">Adapter</span><span class="p">&lt;</span><span class="n">RecyclerViewAdapter</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">inner</span> <span class="k">class</span> <span class="nc">ViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ListItemBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvMain</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvSub</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">vhLayout</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="s2">&#34;Item </span><span class="si">$layoutPosition</span><span class="s2"> touched!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="n">setData</span><span class="p">(</span><span class="n">layoutPosition</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="viewholder-터치시-애니메이션-추가">ViewHolder 터치시 애니메이션 추가</h2>
 <p>현재는 ViewHolder를 터치했을 때 내용이 바뀌도록 하긴 했지만 정확히 어떤 ViewHolder를 터치한건지에 대한 표시가 나타나지 않습니다. 하지만 xml에 <a class="link" href="https://developer.android.com/training/material/animations#Touch"  target="_blank" rel="noopener"
@@ -778,10 +778,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
-    <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 Recyclerview에 스와이프, 드래그, 터치 동작에 대한 응답을 설정하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

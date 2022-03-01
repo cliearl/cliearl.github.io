@@ -362,10 +362,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">implementation</span> <span class="s1">&#39;com.google.code.gson:gson:2.8.6&#39;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s1">&#39;com.google.code.gson:gson:2.8.6&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="화면-구성">화면 구성</h2>
 <p>다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.</p>
@@ -386,20 +386,20 @@ if (!doNotTrack) {
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
-    <span class="err">&lt;com.google.android.material.floatingactionbutton.FloatingActionButton</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/button_load&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_marginEnd=</span><span class="s">&#34;20dp&#34;</span>
-        <span class="na">android:layout_marginBottom=</span><span class="s">&#34;20dp&#34;</span>
-        <span class="na">android:clickable=</span><span class="s">&#34;true&#34;</span>
-        <span class="na">android:focusable=</span><span class="s">&#34;true&#34;</span>
-        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:srcCompat=</span><span class="s">&#34;@android:drawable/ic_menu_add&#34;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span>
+</span></span><span class="line"><span class="cl">    <span class="err">&lt;com.google.android.material.floatingactionbutton.FloatingActionButton</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/button_load&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_marginEnd=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_marginBottom=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:clickable=</span><span class="s">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:focusable=</span><span class="s">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:srcCompat=</span><span class="s">&#34;@android:drawable/ic_menu_add&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="key-준비">Key 준비</h2>
 <p>SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.</p>
@@ -411,11 +411,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY</span><span class="n">_PREFS</span> <span class="p">=</span> <span class="s2">&#34;shared_preferences&#34;</span>
-    <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY</span><span class="n">_DATA</span> <span class="p">=</span> <span class="s2">&#34;monster_data&#34;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY</span><span class="n">_PREFS</span> <span class="p">=</span> <span class="s2">&#34;shared_preferences&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">KEY</span><span class="n">_DATA</span> <span class="p">=</span> <span class="s2">&#34;monster_data&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="savepref-작성">savePref() 작성</h2>
 <p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferences-basic/"  target="_blank" rel="noopener"
@@ -433,16 +433,16 @@ if (!doNotTrack) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">savePref</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">editor</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">edit</span><span class="p">()</span>
-    <span class="k">val</span> <span class="py">gson</span> <span class="p">=</span> <span class="n">Gson</span><span class="p">()</span>
-    <span class="k">val</span> <span class="py">json</span> <span class="p">=</span> <span class="n">gson</span><span class="p">.</span><span class="n">toJson</span><span class="p">(</span><span class="n">rvAdapter</span><span class="p">.</span><span class="n">dataSet</span><span class="p">)</span>
-    <span class="n">editor</span><span class="p">.</span><span class="n">putString</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">,</span> <span class="n">json</span><span class="p">)</span>
-    <span class="n">editor</span><span class="p">.</span><span class="n">apply</span><span class="p">()</span>
-    <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data saved&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">savePref</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">editor</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">edit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">gson</span> <span class="p">=</span> <span class="n">Gson</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">json</span> <span class="p">=</span> <span class="n">gson</span><span class="p">.</span><span class="n">toJson</span><span class="p">(</span><span class="n">rvAdapter</span><span class="p">.</span><span class="n">dataSet</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">editor</span><span class="p">.</span><span class="n">putString</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">,</span> <span class="n">json</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">editor</span><span class="p">.</span><span class="n">apply</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data saved&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="loadpref-함수-작성">loadPref() 함수 작성</h2>
 <p>이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, <a class="link" href="https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html"  target="_blank" rel="noopener"
@@ -465,21 +465,21 @@ if (!doNotTrack) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadPref</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">sharedPreferences</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">))</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">gson</span> <span class="p">=</span> <span class="n">Gson</span><span class="p">()</span>
-        <span class="k">val</span> <span class="py">json</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="k">val</span> <span class="py">typeToken</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">TypeToken</span><span class="p">&lt;</span><span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;&gt;()</span> <span class="p">{}.</span><span class="n">type</span>
-            <span class="n">rvAdapter</span><span class="p">.</span><span class="n">dataSet</span> <span class="p">=</span> <span class="n">gson</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">typeToken</span><span class="p">)</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">JsonParseException</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-        <span class="p">}</span>
-        <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data loaded&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadPref</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">sharedPreferences</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">gson</span> <span class="p">=</span> <span class="n">Gson</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">json</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">typeToken</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">TypeToken</span><span class="p">&lt;</span><span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;&gt;()</span> <span class="p">{}.</span><span class="n">type</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rvAdapter</span><span class="p">.</span><span class="n">dataSet</span> <span class="p">=</span> <span class="n">gson</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">typeToken</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">JsonParseException</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data loaded&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="함수-실행">함수 실행</h2>
 <p>다음은 메인액티비티 안에서 <code>savePref</code>와 <code>loadPref</code>를 실행시키면 됩니다. <code>loadPref</code>를 실행하고 어댑터에 데이터 변경을 알려주면 됩니다.</p>
@@ -498,18 +498,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">buttonLoad</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-        <span class="n">loadPref</span><span class="p">()</span>
-        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">notifyItemChanged</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">rvAdapter</span><span class="p">.</span><span class="n">dataSet</span><span class="p">.</span><span class="n">size</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">override</span> <span class="k">fun</span> <span class="nf">onStop</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">super</span><span class="p">.</span><span class="n">onStop</span><span class="p">()</span>
-    <span class="n">savePref</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">buttonLoad</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">loadPref</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rvAdapter</span><span class="p">.</span><span class="n">notifyItemChanged</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">rvAdapter</span><span class="p">.</span><span class="n">dataSet</span><span class="p">.</span><span class="n">size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onStop</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">onStop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">savePref</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 SharedPrefenrences와 Gson을 이용해서 복잡한 데이터를 json으로 저장하고 불러오는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

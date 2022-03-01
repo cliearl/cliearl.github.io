@@ -360,8 +360,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">https://dhlottery.co.kr/common.do?method=getLottoNumber<span class="err">&amp;</span>drwNo=&#34;회차&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">https://dhlottery.co.kr/common.do?method=getLottoNumber<span class="err">&amp;</span>drwNo=&#34;회차&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>예를 들면 968회차의 응답은 다음과 같은 json 형식으로 돌아옵니다. <code>totSellamnt</code>는 총 판매액, <code>returnValue</code>는 API응답 성공여부, <code>drwNoDate</code>는 추첨일, <code>firstWinamnt</code>는 1등상금, <code>drwNo</code>는 회차, <code>drwtNo1~6</code>이 당첨번호이고, <code>bnusNo</code>가 보너스번호입니다.</p>
 <div class="highlight"><div class="chroma">
@@ -369,8 +369,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;totSellamnt&#34;</span><span class="p">:</span><span class="mi">95924229000</span><span class="p">,</span><span class="nt">&#34;returnValue&#34;</span><span class="p">:</span><span class="s2">&#34;success&#34;</span><span class="p">,</span><span class="nt">&#34;drwNoDate&#34;</span><span class="p">:</span><span class="s2">&#34;2021-06-19&#34;</span><span class="p">,</span><span class="nt">&#34;firstWinamnt&#34;</span><span class="p">:</span><span class="mi">1667729683</span><span class="p">,</span><span class="nt">&#34;drwtNo6&#34;</span><span class="p">:</span><span class="mi">39</span><span class="p">,</span><span class="nt">&#34;drwtNo4&#34;</span><span class="p">:</span><span class="mi">14</span><span class="p">,</span><span class="nt">&#34;firstPrzwnerCo&#34;</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="nt">&#34;drwtNo5&#34;</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span><span class="nt">&#34;bnusNo&#34;</span><span class="p">:</span><span class="mi">33</span><span class="p">,</span><span class="nt">&#34;firstAccumamnt&#34;</span><span class="p">:</span><span class="mi">21680485879</span><span class="p">,</span><span class="nt">&#34;drwNo&#34;</span><span class="p">:</span><span class="mi">968</span><span class="p">,</span><span class="nt">&#34;drwtNo2&#34;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="nt">&#34;drwtNo3&#34;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="nt">&#34;drwtNo1&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;totSellamnt&#34;</span><span class="p">:</span><span class="mi">95924229000</span><span class="p">,</span><span class="nt">&#34;returnValue&#34;</span><span class="p">:</span><span class="s2">&#34;success&#34;</span><span class="p">,</span><span class="nt">&#34;drwNoDate&#34;</span><span class="p">:</span><span class="s2">&#34;2021-06-19&#34;</span><span class="p">,</span><span class="nt">&#34;firstWinamnt&#34;</span><span class="p">:</span><span class="mi">1667729683</span><span class="p">,</span><span class="nt">&#34;drwtNo6&#34;</span><span class="p">:</span><span class="mi">39</span><span class="p">,</span><span class="nt">&#34;drwtNo4&#34;</span><span class="p">:</span><span class="mi">14</span><span class="p">,</span><span class="nt">&#34;firstPrzwnerCo&#34;</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="nt">&#34;drwtNo5&#34;</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span><span class="nt">&#34;bnusNo&#34;</span><span class="p">:</span><span class="mi">33</span><span class="p">,</span><span class="nt">&#34;firstAccumamnt&#34;</span><span class="p">:</span><span class="mi">21680485879</span><span class="p">,</span><span class="nt">&#34;drwNo&#34;</span><span class="p">:</span><span class="mi">968</span><span class="p">,</span><span class="nt">&#34;drwtNo2&#34;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="nt">&#34;drwtNo3&#34;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="nt">&#34;drwtNo1&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="dependency-확인">Dependency 확인</h2>
 <p>자 그러면 <code>drwtNo1~6</code>, <code>bnusNo</code>의 값을 추출해서 나의 값과 비교하면 되겠네요. 당첨번호는 네트워크에서 백그라운드로 받아와야 하기 때문에 코루틴으로 처리하도록 하면 되겠고, 받아온 json으로부터 값을 추출하는데에는 gson 라이브러리를 사용하면 될 것 같습니다. gson의 사용법에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferneces-gson/"  target="_blank" rel="noopener"
@@ -381,9 +381,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="n">jetbrains</span><span class="p">.</span><span class="n">kotlinx</span><span class="p">:</span><span class="n">kotlinx</span><span class="p">-</span><span class="n">coroutines</span><span class="p">-</span><span class="n">android</span><span class="p">:</span><span class="m">1.4</span><span class="p">.</span><span class="m">1</span><span class="err">&#39;</span>
-<span class="n">implementation</span> <span class="err">&#39;</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">code</span><span class="p">.</span><span class="n">gson</span><span class="p">:</span><span class="n">gson</span><span class="p">:</span><span class="m">2.8</span><span class="p">.</span><span class="m">6</span><span class="err">&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="n">jetbrains</span><span class="p">.</span><span class="n">kotlinx</span><span class="p">:</span><span class="n">kotlinx</span><span class="p">-</span><span class="n">coroutines</span><span class="p">-</span><span class="n">android</span><span class="p">:</span><span class="m">1.4</span><span class="p">.</span><span class="m">1</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">code</span><span class="p">.</span><span class="n">gson</span><span class="p">:</span><span class="n">gson</span><span class="p">:</span><span class="m">2.8</span><span class="p">.</span><span class="m">6</span><span class="err">&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="네트워크로-당첨번호-받아오기">네트워크로 당첨번호 받아오기</h2>
 <p>그럼 네트워크로 당첨번호를 받아오는 <code>getLottoNumbers</code> 함수와, 두 값을 비교하는 <code>whatIsRank</code> 함수를 만들도록 하겠습니다.</p>
@@ -420,32 +420,32 @@ if (!doNotTrack) {
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getLottoNumbers</span><span class="p">():</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">round</span> <span class="p">=</span> <span class="s2">&#34;968&#34;</span>
-    <span class="k">val</span> <span class="py">url</span> <span class="p">=</span> <span class="s2">&#34;https://dhlottery.co.kr/common.do?method=getLottoNumber&amp;drwNo=</span><span class="si">$round</span><span class="s2">&#34;</span>
-
-    <span class="k">val</span> <span class="py">lottoNumbers</span> <span class="p">=</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
-    <span class="k">try</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">response</span> <span class="p">=</span> <span class="n">URL</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="n">readText</span><span class="p">()</span>
-        <span class="k">val</span> <span class="py">jsonObject</span> <span class="p">=</span> <span class="n">JsonParser</span><span class="p">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">response</span><span class="p">).</span><span class="n">asJsonObject</span>
-        <span class="k">val</span> <span class="py">returnValue</span> <span class="p">=</span> <span class="n">jsonObject</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s2">&#34;returnValue&#34;</span><span class="p">).</span><span class="n">asString</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">returnValue</span> <span class="o">==</span> <span class="s2">&#34;success&#34;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="m">6</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">val</span> <span class="py">lottoNumber</span> <span class="p">=</span> <span class="n">jsonObject</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s2">&#34;drwtNo</span><span class="si">$i</span><span class="s2">&#34;</span><span class="p">).</span><span class="n">asInt</span>
-                <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">lottoNumber</span><span class="p">)</span>
-            <span class="p">}</span>
-            <span class="k">val</span> <span class="py">bonusNumber</span> <span class="p">=</span> <span class="n">jsonObject</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s2">&#34;bnusNo&#34;</span><span class="p">).</span><span class="n">asInt</span>
-            <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">bonusNumber</span><span class="p">)</span>
-            <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">round</span><span class="p">.</span><span class="n">toInt</span><span class="p">())</span>
-        <span class="p">}</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">lottoNumbers</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getLottoNumbers</span><span class="p">():</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">round</span> <span class="p">=</span> <span class="s2">&#34;968&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">url</span> <span class="p">=</span> <span class="s2">&#34;https://dhlottery.co.kr/common.do?method=getLottoNumber&amp;drwNo=</span><span class="si">$round</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">lottoNumbers</span> <span class="p">=</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">response</span> <span class="p">=</span> <span class="n">URL</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="n">readText</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">jsonObject</span> <span class="p">=</span> <span class="n">JsonParser</span><span class="p">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">response</span><span class="p">).</span><span class="n">asJsonObject</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">returnValue</span> <span class="p">=</span> <span class="n">jsonObject</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s2">&#34;returnValue&#34;</span><span class="p">).</span><span class="n">asString</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">returnValue</span> <span class="o">==</span> <span class="s2">&#34;success&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="m">6</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">val</span> <span class="py">lottoNumber</span> <span class="p">=</span> <span class="n">jsonObject</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s2">&#34;drwtNo</span><span class="si">$i</span><span class="s2">&#34;</span><span class="p">).</span><span class="n">asInt</span>
+</span></span><span class="line"><span class="cl">                <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">lottoNumber</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">bonusNumber</span> <span class="p">=</span> <span class="n">jsonObject</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s2">&#34;bnusNo&#34;</span><span class="p">).</span><span class="n">asInt</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">bonusNumber</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">round</span><span class="p">.</span><span class="n">toInt</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">lottoNumbers</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="내-번호와-당첨번호-비교하기">내 번호와 당첨번호 비교하기</h2>
 <p>다음은 내 번호와 당첨번호를 비교하는 함수를 만듭니다. 로또의 규칙은 표의 내용과 같이 되어 있습니다. 그래서 <code>whatIsRank</code>에서는 내 로또번호와 당첨번호를 전달받아 처음 6개까지의 숫자를 비교해 일치한 갯수를 세고, 일치한 번호의 갯수가 5개이면 추가로 보너스번호인 7번째 번호가 일치하는지 확인하도록 하면 됩니다.</p>
@@ -508,32 +508,32 @@ if (!doNotTrack) {
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">whatIsRank</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;,</span> <span class="n">winningNumbers</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;):</span> <span class="n">String</span> <span class="p">{</span>
-    <span class="c1">// https://namu.wiki/w/%EB%A1%9C%EB%98%90%206/45#s-4
-</span><span class="c1"></span>    <span class="k">var</span> <span class="py">matchCount</span> <span class="p">=</span> <span class="m">0</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">5</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">lottoNumbers</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">winningNumbers</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
-            <span class="n">matchCount</span> <span class="o">+=</span> <span class="m">1</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="k">if</span> <span class="p">(</span><span class="n">matchCount</span> <span class="o">==</span> <span class="m">6</span><span class="p">)</span> <span class="p">{</span>
-        <span class="s2">&#34;1등&#34;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">matchCount</span> <span class="o">==</span> <span class="m">5</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">lottoNumbers</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">winningNumbers</span><span class="p">[</span><span class="m">6</span><span class="p">]))</span> <span class="p">{</span>
-            <span class="s2">&#34;2등&#34;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="s2">&#34;3등&#34;</span>
-        <span class="p">}</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">matchCount</span> <span class="o">==</span> <span class="m">4</span><span class="p">)</span> <span class="p">{</span>
-        <span class="s2">&#34;4등&#34;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">matchCount</span> <span class="o">==</span> <span class="m">3</span><span class="p">)</span> <span class="p">{</span>
-        <span class="s2">&#34;5등&#34;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="s2">&#34;낙첨&#34;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">whatIsRank</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;,</span> <span class="n">winningNumbers</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;):</span> <span class="n">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// https://namu.wiki/w/%EB%A1%9C%EB%98%90%206/45#s-4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">var</span> <span class="py">matchCount</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">5</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">lottoNumbers</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">winningNumbers</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">matchCount</span> <span class="o">+=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">if</span> <span class="p">(</span><span class="n">matchCount</span> <span class="o">==</span> <span class="m">6</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;1등&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">matchCount</span> <span class="o">==</span> <span class="m">5</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">lottoNumbers</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">winningNumbers</span><span class="p">[</span><span class="m">6</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;2등&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;3등&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">matchCount</span> <span class="o">==</span> <span class="m">4</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;4등&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">matchCount</span> <span class="o">==</span> <span class="m">3</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;5등&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;낙첨&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>xml에는 비교결과를 보여주는 텍스트뷰 하나를 추가하도록 하겠습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -548,15 +548,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;TextView</span>
-    <span class="na">android:id=</span><span class="s">&#34;@+id/tv_winning&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-    <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
-    <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
-    <span class="na">android:text=</span><span class="s">&#34;당첨결과&#34;</span>
-    <span class="na">android:textAppearance=</span><span class="s">&#34;@style/TextAppearance.AppCompat.Large&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:id=</span><span class="s">&#34;@+id/tv_winning&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:text=</span><span class="s">&#34;당첨결과&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:textAppearance=</span><span class="s">&#34;@style/TextAppearance.AppCompat.Large&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="코루틴으로-작업-처리하기">코루틴으로 작업 처리하기</h2>
 <p>그러면 번호생성버튼을 눌렀을 때 생성된 번호를 당첨번호와 비교하는 코루틴을 추가하겠습니다. <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/"  target="_blank" rel="noopener"
@@ -590,22 +590,22 @@ if (!doNotTrack) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">binding</span><span class="p">.</span><span class="n">generateButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">lottoNumbers</span> <span class="p">=</span> <span class="n">createLottoNumbers</span><span class="p">()</span>
-    <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">toString</span><span class="p">())</span>
-    <span class="n">updateLottoBallImage</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">)</span>
-
-    <span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span> <span class="p">+</span> <span class="n">job</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">winningNumbers</span> <span class="p">=</span> <span class="n">async</span> <span class="p">{</span> <span class="n">getLottoNumbers</span><span class="p">()</span> <span class="p">}</span>
-        <span class="k">val</span> <span class="py">rank</span> <span class="p">=</span> <span class="n">whatIsRank</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">,</span> <span class="n">winningNumbers</span><span class="p">.</span><span class="n">await</span><span class="p">())</span>
-        <span class="k">val</span> <span class="py">text</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="si">${winningNumbers.await()}</span><span class="s2"> : </span><span class="si">$rank</span><span class="s2">&#34;</span>
-
-        <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">Main</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">binding</span><span class="p">.</span><span class="n">tvWinning</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">text</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">binding</span><span class="p">.</span><span class="n">generateButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">lottoNumbers</span> <span class="p">=</span> <span class="n">createLottoNumbers</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">toString</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">updateLottoBallImage</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span> <span class="p">+</span> <span class="n">job</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">winningNumbers</span> <span class="p">=</span> <span class="n">async</span> <span class="p">{</span> <span class="n">getLottoNumbers</span><span class="p">()</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">rank</span> <span class="p">=</span> <span class="n">whatIsRank</span><span class="p">(</span><span class="n">lottoNumbers</span><span class="p">,</span> <span class="n">winningNumbers</span><span class="p">.</span><span class="n">await</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">text</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="si">${winningNumbers.await()}</span><span class="s2"> : </span><span class="si">$rank</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">Main</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvWinning</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">text</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="코루틴-취소하기">코루틴 취소하기</h2>
 <p>액티비티가 종료되었을 때 실행중인 코루틴이 살아남는것을 방지하기 위해 취소하는 기능을 추가해 보도록 하겠습니다. <a class="link" href="https://cliearl.github.io/posts/android/coroutine-principle/"  target="_blank" rel="noopener"
@@ -637,26 +637,26 @@ if (!doNotTrack) {
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="o">..</span><span class="p">.</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">Job</span><span class="p">()</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="o">..</span><span class="p">.</span>
-        <span class="n">binding</span><span class="p">.</span><span class="n">generateButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="o">..</span><span class="p">.</span>
-            <span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span> <span class="p">+</span> <span class="n">job</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
-                <span class="o">..</span><span class="p">.</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroy</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">job</span><span class="p">.</span><span class="n">cancel</span><span class="p">()</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onDestroy</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">Job</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">generateButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">            <span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span> <span class="p">+</span> <span class="n">job</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroy</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">job</span><span class="p">.</span><span class="n">cancel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onDestroy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 코루틴을 이용해서 나의 로또번호를 인터넷의 당첨결과와 비교하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

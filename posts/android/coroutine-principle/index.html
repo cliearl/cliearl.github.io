@@ -388,10 +388,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">public</span> <span class="k">interface</span> <span class="nc">CoroutineScope</span> <span class="p">{</span>
-    <span class="k">public</span> <span class="k">val</span> <span class="py">coroutineContext</span><span class="p">:</span> <span class="n">CoroutineContext</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">interface</span> <span class="nc">CoroutineScope</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">val</span> <span class="py">coroutineContext</span><span class="p">:</span> <span class="n">CoroutineContext</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="globalscope">GlobalScope</h4>
 <p>GlobalScope는 CoroutineScope의 한 종류입니다. 안드로이드에서 어플리케이션 라이프사이클을 따르며, 싱글톤으로 최상위 레벨에서 코루틴을 시작하기 때문에 필요할때 만들어 쓰고 버린다는 사용법이 불가능합니다. 일반적으로는 <a class="link" href="https://medium.com/harrythegreat/%EB%B2%88%EC%97%AD-%EC%BD%94%ED%8B%80%EB%A6%B0-%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%9D%98-%ED%8C%A8%ED%84%B4%EA%B3%BC-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-6e97f852ea2d"  target="_blank" rel="noopener"
@@ -449,10 +449,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
-    <span class="c1">// New coroutine
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// New coroutine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>코루틴은 일시정지될수 있는 작업의 흐름이기 때문에 Job은 코루틴의 여러가지 상태를 반영할 수 있도록 다음과 같이 설계되었습니다.</p>
 <div class="table-wrapper"><table>
@@ -520,19 +520,19 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Job states cycle
-                                          wait children
-    +-----+ start  +--------+ complete   +-------------+  finish  +-----------+
-    | New | -----&gt; | Active | ---------&gt; | Completing  | -------&gt; | Completed |
-    +-----+        +--------+            +-------------+          +-----------+
-                     |  cancel / fail       |
-                     |     +----------------+
-                     |     |
-                     V     V
-                 +------------+                           finish  +-----------+
-                 | Cancelling | --------------------------------&gt; | Cancelled |
-                 +------------+                                   +-----------+
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Job states cycle
+</span></span><span class="line"><span class="cl">                                          wait children
+</span></span><span class="line"><span class="cl">    +-----+ start  +--------+ complete   +-------------+  finish  +-----------+
+</span></span><span class="line"><span class="cl">    | New | -----&gt; | Active | ---------&gt; | Completing  | -------&gt; | Completed |
+</span></span><span class="line"><span class="cl">    +-----+        +--------+            +-------------+          +-----------+
+</span></span><span class="line"><span class="cl">                     |  cancel / fail       |
+</span></span><span class="line"><span class="cl">                     |     +----------------+
+</span></span><span class="line"><span class="cl">                     |     |
+</span></span><span class="line"><span class="cl">                     V     V
+</span></span><span class="line"><span class="cl">                 +------------+                           finish  +-----------+
+</span></span><span class="line"><span class="cl">                 | Cancelling | --------------------------------&gt; | Cancelled |
+</span></span><span class="line"><span class="cl">                 +------------+                                   +-----------+
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Job 객체에 대해서는 <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html#-1323829921%2FFunctions%2F1975948010"  target="_blank" rel="noopener"
     >cancel</a>, <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html#86493028%2FFunctions%2F1975948010"  target="_blank" rel="noopener"
@@ -563,17 +563,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">fetchDocs</span><span class="p">()</span> <span class="p">{</span>                      <span class="c1">// Dispatchers.Main
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="k">get</span><span class="p">(</span><span class="s2">&#34;developer.android.com&#34;</span><span class="p">)</span>  <span class="c1">// Dispatchers.Main
-</span><span class="c1"></span>    <span class="n">show</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>                               <span class="c1">// Dispatchers.Main
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="k">suspend</span> <span class="k">fun</span> <span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span>                 <span class="c1">// Dispatchers.Main
-</span><span class="c1"></span>    <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>              <span class="c1">// Dispatchers.IO (main-safety block)
-</span><span class="c1"></span>        <span class="cm">/* perform network IO here */</span>          <span class="c1">// Dispatchers.IO (main-safety block)
-</span><span class="c1"></span>    <span class="p">}</span>                                          <span class="c1">// Dispatchers.Main
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">fetchDocs</span><span class="p">()</span> <span class="p">{</span>                      <span class="c1">// Dispatchers.Main
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="k">get</span><span class="p">(</span><span class="s2">&#34;developer.android.com&#34;</span><span class="p">)</span>  <span class="c1">// Dispatchers.Main
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">show</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>                               <span class="c1">// Dispatchers.Main
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span>                 <span class="c1">// Dispatchers.Main
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>              <span class="c1">// Dispatchers.IO (main-safety block)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="cm">/* perform network IO here */</span>          <span class="c1">// Dispatchers.IO (main-safety block)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>                                          <span class="c1">// Dispatchers.Main
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="코루틴-지연">코루틴 지연</h2>
 <ul>

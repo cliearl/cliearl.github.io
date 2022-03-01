@@ -381,18 +381,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class="nt">&lt;layer-list</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;item</span> <span class="na">android:drawable=</span><span class="s">&#34;@android:color/white&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;item&gt;</span>
-        <span class="nt">&lt;bitmap</span>
-            <span class="na">android:src=</span><span class="s">&#34;@drawable/background&#34;</span>
-            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/item&gt;</span>
-
-<span class="nt">&lt;/layer-list&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;layer-list</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;item</span> <span class="na">android:drawable=</span><span class="s">&#34;@android:color/white&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;item&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;bitmap</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:src=</span><span class="s">&#34;@drawable/background&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/layer-list&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음은 액티비티에서 사용할 테마를 추가합니다. <code>res -&gt; values -&gt; themes.xml</code>을 열어 다음과 같이 <code>style</code>을 추가합니다.
 액션바가 표시되지 않아야 하기 때문에 <code>NoActionBar</code> 테마를 상속한 뒤 위에서 작성한 <code>splash_screen</code>을 표시하도록 합니다.</p>
@@ -403,10 +403,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;style</span> <span class="na">name=</span><span class="s">&#34;SplashScreen&#34;</span> <span class="na">parent=</span><span class="s">&#34;Theme.AppCompat.NoActionBar&#34;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;android:windowBackground&#34;</span><span class="nt">&gt;</span>@drawable/splash_screen<span class="nt">&lt;/item&gt;</span>
-<span class="nt">&lt;/style&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;style</span> <span class="na">name=</span><span class="s">&#34;SplashScreen&#34;</span> <span class="na">parent=</span><span class="s">&#34;Theme.AppCompat.NoActionBar&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;android:windowBackground&#34;</span><span class="nt">&gt;</span>@drawable/splash_screen<span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/style&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 <code>SplashActivity.kt</code>를 만들어 줍니다. 이 액티비티는 시작되자마자 메인액티비티를 불러오는 역할만하고 종료됩니다.</p>
 <div class="highlight"><div class="chroma">
@@ -423,17 +423,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">SplashActivity</span><span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-
-        <span class="k">val</span> <span class="py">intent</span> <span class="p">=</span> <span class="n">Intent</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">MainActivity</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
-        <span class="n">startActivity</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
-
-        <span class="n">finish</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SplashActivity</span><span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">intent</span> <span class="p">=</span> <span class="n">Intent</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">MainActivity</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">startActivity</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">finish</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>마지막으로 <code>AndroidManifest.xml</code>에서 시작점을 <code>MainActivity</code>가 아닌 <code>SplashActivity</code>가 되도록 변경합니다. 이 때 <code>SplashActivity</code>의 테마는 <code>themes.xml</code>에서 추가해 준 <code>SplashScreen</code>으로 지정합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -451,18 +451,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;activity</span>
-    <span class="na">android:name=</span><span class="s">&#34;.SplashActivity&#34;</span>
-    <span class="na">android:theme=</span><span class="s">&#34;@style/SplashScreen&#34;</span> <span class="nt">&gt;</span>
-    <span class="nt">&lt;intent-filter&gt;</span>
-        <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&#34;android.intent.action.MAIN&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&#34;android.intent.category.LAUNCHER&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/intent-filter&gt;</span>
-<span class="nt">&lt;/activity&gt;</span>
-
-<span class="nt">&lt;activity</span> <span class="na">android:name=</span><span class="s">&#34;.MainActivity&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;activity</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:name=</span><span class="s">&#34;.SplashActivity&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:theme=</span><span class="s">&#34;@style/SplashScreen&#34;</span> <span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;intent-filter&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&#34;android.intent.action.MAIN&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&#34;android.intent.category.LAUNCHER&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/intent-filter&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/activity&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;activity</span> <span class="na">android:name=</span><span class="s">&#34;.MainActivity&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 스플래시 스크린을 작성하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

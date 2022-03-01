@@ -352,8 +352,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/data/data/{package_name}/shared_prefs/{filename}.xml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/data/data/{package_name}/shared_prefs/{filename}.xml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Android Studio의 <a class="link" href="https://developer.android.com/studio/debug/device-file-explorer"  target="_blank" rel="noopener"
     >Device File Explorer</a>를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요. 키와 값이 앱에서 지정한대로 기입되어있는 것을 확인할 수 있습니다.</p>
@@ -368,14 +368,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39; standalone=&#39;yes&#39; ?&gt;</span>
-<span class="nt">&lt;map&gt;</span>
-    <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&#34;graphic_quality&#34;</span> <span class="na">value=</span><span class="s">&#34;2131231054&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&#34;music_volume&#34;</span> <span class="na">value=</span><span class="s">&#34;42&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;boolean</span> <span class="na">name=</span><span class="s">&#34;vertical_sync&#34;</span> <span class="na">value=</span><span class="s">&#34;true&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&#34;sfx_volume&#34;</span> <span class="na">value=</span><span class="s">&#34;17&#34;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/map&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39; standalone=&#39;yes&#39; ?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;map&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&#34;graphic_quality&#34;</span> <span class="na">value=</span><span class="s">&#34;2131231054&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&#34;music_volume&#34;</span> <span class="na">value=</span><span class="s">&#34;42&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;boolean</span> <span class="na">name=</span><span class="s">&#34;vertical_sync&#34;</span> <span class="na">value=</span><span class="s">&#34;true&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;int</span> <span class="na">name=</span><span class="s">&#34;sfx_volume&#34;</span> <span class="na">value=</span><span class="s">&#34;17&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/map&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="security-library">Security Library</h2>
 <p>하지만 앱의 데이터를 이렇게 쉽게 열어볼 수 있게 하는건 좋은 생각이 아닌 것 같습니다. 그래서 구글에서는 <code>SharedPreferences</code>를 암호화 하여 사용할 수 있게 하는 <a class="link" href="https://developer.android.com/jetpack/androidx/releases/security"  target="_blank" rel="noopener"
@@ -392,8 +392,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">implementation</span> <span class="s2">&#34;androidx.security:security-crypto-ktx:1.1.0-alpha03&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s2">&#34;androidx.security:security-crypto-ktx:1.1.0-alpha03&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음은 읽기/쓰기에 사용하던 <code>sharedPreferences</code> 객체를 <code>SharedPreferences</code>가 아닌 <code>EncryptedSharedPreferences</code> 로부터 작성하면 됩니다. 기존의 인스턴스는 주석처리하고 다음과 같은 인스턴스를 만들어줍니다.</p>
 <div class="highlight"><div class="chroma">
@@ -421,28 +421,28 @@ if (!doNotTrack) {
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">val</span> <span class="py">sharedPreferences</span><span class="p">:</span> <span class="n">SharedPreferences</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
-
-    <span class="k">val</span> <span class="py">masterKeyAlias</span> <span class="p">=</span> <span class="n">MasterKey</span>
-        <span class="p">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="n">MasterKey</span><span class="p">.</span><span class="n">DEFAULT_MASTER_KEY_ALIAS</span><span class="p">)</span>
-        <span class="p">.</span><span class="n">setKeyScheme</span><span class="p">(</span><span class="n">MasterKey</span><span class="p">.</span><span class="n">KeyScheme</span><span class="p">.</span><span class="n">AES256_GCM</span><span class="p">)</span>
-        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
-
-
-    <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
-        <span class="n">applicationContext</span><span class="p">,</span>
-        <span class="n">FILE_NAME</span><span class="p">,</span>
-        <span class="n">masterKeyAlias</span><span class="p">,</span>
-        <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">PrefKeyEncryptionScheme</span><span class="p">.</span><span class="n">AES256_SIV</span><span class="p">,</span>
-        <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">PrefValueEncryptionScheme</span><span class="p">.</span><span class="n">AES256_GCM</span>
-    <span class="p">)</span>
-<span class="p">}</span>
-
-<span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-    <span class="o">..</span><span class="p">.</span>
-    <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">FILE</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;encrypted_settings&#34;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">val</span> <span class="py">sharedPreferences</span><span class="p">:</span> <span class="n">SharedPreferences</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">masterKeyAlias</span> <span class="p">=</span> <span class="n">MasterKey</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="n">MasterKey</span><span class="p">.</span><span class="n">DEFAULT_MASTER_KEY_ALIAS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">setKeyScheme</span><span class="p">(</span><span class="n">MasterKey</span><span class="p">.</span><span class="n">KeyScheme</span><span class="p">.</span><span class="n">AES256_GCM</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">applicationContext</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">FILE_NAME</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">masterKeyAlias</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">PrefKeyEncryptionScheme</span><span class="p">.</span><span class="n">AES256_SIV</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">PrefValueEncryptionScheme</span><span class="p">.</span><span class="n">AES256_GCM</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">FILE</span><span class="n">_NAME</span> <span class="p">=</span> <span class="s2">&#34;encrypted_settings&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>우선은 <a class="link" href="https://developer.android.com/reference/androidx/security/crypto/MasterKey"  target="_blank" rel="noopener"
     >MasterKey</a> 클래스로 암호화에 사용할 마스터키를 생성합니다. 키를 작성하는 알고리즘은 커스텀하여 사용할 수도 있게 되어있지만 여기서는 이미 잘 정의되어있는 <a class="link" href="https://datatracker.ietf.org/doc/html/rfc5116#section-5.2"  target="_blank" rel="noopener"
@@ -453,29 +453,27 @@ if (!doNotTrack) {
 <p>그리고 나머지는 <code>SharedPreferences</code>와 동일하게 사용하면 됩니다. 설정을 다시 저장한 뒤 <code>encrypted_settings.xml</code>의 내용을 확인해보면 다음과 같이 암호화가 되어 있는 것을 알 수 있습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39; standalone=&#39;yes&#39; ?&gt;</span>
-<span class="nt">&lt;map&gt;</span>
-    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;__androidx_security_crypto_encrypted_prefs_key_keyset__&#34;</span><span class="nt">&gt;</span>12a901d15f8baa24b9e88a9e68f3eb32ad1136cb4af22776b91caea9459bdd5a76d6992b57e268408944152c70171556e4fa065b13160a6951b75a32dc8172d6ee9cbf8b9828f7cc80d68c23794340221ad89ac94306ec5848af9d9c6e6372fdfd42d745be4b4a6d532adc365491e249e92503b64743defab475808f196b90842cabb874cce6a934d0f646f9d9f285814ded11f3d081a72abeb09d6a1849b7768b9e9899601c59797868b0a71a4408beb9cea707123c0a30747970652e676f6f676c65617069732e636f6d2f676f6f676c652e63727970746f2e74696e6b2e4165735369764b6579100118beb9cea7072001<span class="nt">&lt;/string&gt;</span>
-    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL5begfyWVUl+GcGajk7xoVmW0h2DCtZudxTAghw8BjV&#34;</span><span class="nt">&gt;</span>ARdDw2jfHocuzA3PXT73sMwCNATF/f+ZNWWcG6mgY0mhuMvLz9hGLys=<span class="nt">&lt;/string&gt;</span>
-    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL6Ev8dJ1E4Ws4dwJfyeDUQgK077hhUwLNnCt+3opw==&#34;</span><span class="nt">&gt;</span>ARdDw2g859mf9i8UgWzWHvbZbBQytmCdcaXBVQgfy6+Qq/eIAs4=<span class="nt">&lt;/string&gt;</span>
-    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;__androidx_security_crypto_encrypted_prefs_value_keyset__&#34;</span><span class="nt">&gt;</span>128801aa5d8f25163f993b8f95a2a874a1353f227ffca6f2e5ee1dad9243b8b3a1ea16531bfa8a10da864655c9b33e865bf072eafcdad659912a5198bf32218f186c02ff3efff27338a50617f194c3fd8b06ebfad829c3a53dbfd8b221fa7f9103ad8e8ad1583250b5c1779b20b618e46a3edb0b50d3a3bdc8c7ace84c21a69f36d4996f9e7fe81e8bf01b1a4408e8868fba01123c0a30747970652e676f6f676c65617069732e636f6d2f676f6f676c652e63727970746f2e74696e6b2e41657347636d4b6579100118e8868fba012001<span class="nt">&lt;/string&gt;</span>
-    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL4uW8pTacv6rnmZqMoGZHNWTJqwuD8q0XFlWnvw&#34;</span><span class="nt">&gt;</span>ARdDw2gTVJYJ3PCEaYgwoZjKMCEAFAv7aLRACnmcKGyjRaHYgeBJZJE=<span class="nt">&lt;/string&gt;</span>
-    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL5AE+UHfloGh5ZBZ+3iZL2hplrdIffsC3I/qA==&#34;</span><span class="nt">&gt;</span>ARdDw2gRmqy+haYjIRDGML/ai32T5alKEQKaqlJDRhfQHcUIzthVAQo=<span class="nt">&lt;/string&gt;</span>
-<span class="nt">&lt;/map&gt;</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39; standalone=&#39;yes&#39; ?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;map&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;__androidx_security_crypto_encrypted_prefs_key_keyset__&#34;</span><span class="nt">&gt;</span>12a901d15f8baa24b9e88a9e68f3eb32ad1136cb4af22776b91caea9459bdd5a76d6992b57e268408944152c70171556e4fa065b13160a6951b75a32dc8172d6ee9cbf8b9828f7cc80d68c23794340221ad89ac94306ec5848af9d9c6e6372fdfd42d745be4b4a6d532adc365491e249e92503b64743defab475808f196b90842cabb874cce6a934d0f646f9d9f285814ded11f3d081a72abeb09d6a1849b7768b9e9899601c59797868b0a71a4408beb9cea707123c0a30747970652e676f6f676c65617069732e636f6d2f676f6f676c652e63727970746f2e74696e6b2e4165735369764b6579100118beb9cea7072001<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL5begfyWVUl+GcGajk7xoVmW0h2DCtZudxTAghw8BjV&#34;</span><span class="nt">&gt;</span>ARdDw2jfHocuzA3PXT73sMwCNATF/f+ZNWWcG6mgY0mhuMvLz9hGLys=<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL6Ev8dJ1E4Ws4dwJfyeDUQgK077hhUwLNnCt+3opw==&#34;</span><span class="nt">&gt;</span>ARdDw2g859mf9i8UgWzWHvbZbBQytmCdcaXBVQgfy6+Qq/eIAs4=<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;__androidx_security_crypto_encrypted_prefs_value_keyset__&#34;</span><span class="nt">&gt;</span>128801aa5d8f25163f993b8f95a2a874a1353f227ffca6f2e5ee1dad9243b8b3a1ea16531bfa8a10da864655c9b33e865bf072eafcdad659912a5198bf32218f186c02ff3efff27338a50617f194c3fd8b06ebfad829c3a53dbfd8b221fa7f9103ad8e8ad1583250b5c1779b20b618e46a3edb0b50d3a3bdc8c7ace84c21a69f36d4996f9e7fe81e8bf01b1a4408e8868fba01123c0a30747970652e676f6f676c65617069732e636f6d2f676f6f676c652e63727970746f2e74696e6b2e41657347636d4b6579100118e8868fba012001<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL4uW8pTacv6rnmZqMoGZHNWTJqwuD8q0XFlWnvw&#34;</span><span class="nt">&gt;</span>ARdDw2gTVJYJ3PCEaYgwoZjKMCEAFAv7aLRACnmcKGyjRaHYgeBJZJE=<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&#34;AXTznL5AE+UHfloGh5ZBZ+3iZL2hplrdIffsC3I/qA==&#34;</span><span class="nt">&gt;</span>ARdDw2gRmqy+haYjIRDGML/ai32T5alKEQKaqlJDRhfQHcUIzthVAQo=<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/map&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 <code>SharedPreference</code>를 암호화하여 사용하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

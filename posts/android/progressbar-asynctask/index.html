@@ -381,28 +381,28 @@ if (!doNotTrack) {
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyAsyncTask</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">&gt;()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPreExecute</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onPreExecute</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">p0</span><span class="p">:</span> <span class="n">String</span><span class="p">?):</span> <span class="n">Boolean</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">true</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onProgressUpdate</span><span class="p">(</span><span class="k">vararg</span> <span class="n">values</span><span class="p">:</span> <span class="n">Int</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onProgressUpdate</span><span class="p">(*</span><span class="n">values</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">Boolean</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCancelled</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyAsyncTask</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPreExecute</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onPreExecute</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">p0</span><span class="p">:</span> <span class="n">String</span><span class="p">?):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onProgressUpdate</span><span class="p">(</span><span class="k">vararg</span> <span class="n">values</span><span class="p">:</span> <span class="n">Int</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onProgressUpdate</span><span class="p">(*</span><span class="n">values</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">Boolean</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCancelled</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>AsyncTask&lt;A, B, C&gt;</code> 안에는 세가지 데이터 타입을 정의하게 됩니다. 내용은 순서대로 다음과 같고, 이 때 값은 가변인자 형태이므로 배열 형태의 값도 사용할 수 있습니다. 또한 데이터를 전달할 필요가 없을 경우 Void로 정의를 생략할 수 있습니다.</p>
 <ul>
@@ -499,61 +499,61 @@ if (!doNotTrack) {
 </span><span class="lnt">54
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout</span>
-    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:paddingStart=</span><span class="s">&#34;30dp&#34;</span>
-    <span class="na">android:paddingEnd=</span><span class="s">&#34;30dp&#34;</span>
-    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span> <span class="nt">&gt;</span>
-
-    <span class="nt">&lt;TextView</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/textView&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
-        <span class="na">android:text=</span><span class="s">&#34;Progress : 0&#34;</span>
-        <span class="na">android:textSize=</span><span class="s">&#34;20sp&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;ProgressBar</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/progressBar&#34;</span>
-        <span class="na">style=</span><span class="s">&#34;?android:attr/progressBarStyleHorizontal&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
-        <span class="na">android:scaleY=</span><span class="s">&#34;1&#34;</span>
-        <span class="na">android:progressBackgroundTint=</span><span class="s">&#34;@color/design_default_color_primary_dark&#34;</span>
-        <span class="na">android:progressTint=</span><span class="s">&#34;@color/design_default_color_primary&#34;</span>
-        <span class="na">android:indeterminate=</span><span class="s">&#34;false&#34;</span>
-        <span class="na">android:progress=</span><span class="s">&#34;0&#34;</span>
-        <span class="na">android:max=</span><span class="s">&#34;100&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span> <span class="nt">&gt;</span>
-
-        <span class="nt">&lt;Button</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/downloadButton&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
-            <span class="na">android:layout_marginEnd=</span><span class="s">&#34;20dp&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;다운로드&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;16sp&#34;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;Button</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/cancelButton&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
-            <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;취소&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;16sp&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:paddingStart=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:paddingEnd=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span> <span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/textView&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:text=</span><span class="s">&#34;Progress : 0&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:textSize=</span><span class="s">&#34;20sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;ProgressBar</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/progressBar&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">style=</span><span class="s">&#34;?android:attr/progressBarStyleHorizontal&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:scaleY=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:progressBackgroundTint=</span><span class="s">&#34;@color/design_default_color_primary_dark&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:progressTint=</span><span class="s">&#34;@color/design_default_color_primary&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:indeterminate=</span><span class="s">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:progress=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:max=</span><span class="s">&#34;100&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span> <span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;Button</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/downloadButton&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_marginEnd=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;다운로드&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;16sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;Button</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/cancelButton&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_weight=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_marginTop=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;취소&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;16sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="downloadtask-클래스-준비">DownloadTask 클래스 준비</h3>
 <p>AsyncTask를 상속받는 <code>DownloadTask</code> 클래스를 작성합니다. 이 때 <code>doInBackground</code>에서는 0.1초 마다 진행률을 <code>max</code>값에 대해 10퍼센트씩 증가시키고 이 값을 <code>publishProgress</code>로 메인스레드에 전달하여 <code>onProgressUpdate</code>로 UI를 변경할 수 있도록 합니다.</p>
@@ -587,33 +587,33 @@ if (!doNotTrack) {
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DownloadTask</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span> <span class="p">{</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">count</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="n">size</span>
-
-        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">InterruptedException</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-            <span class="p">}</span>
-            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>  <span class="p">-</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">isCancelled</span><span class="p">)</span> <span class="k">break</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="s2">&#34;Download Completed&#34;</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onProgressUpdate</span><span class="p">(</span><span class="k">vararg</span> <span class="n">values</span><span class="p">:</span> <span class="n">Int</span><span class="p">?)</span> <span class="p">{</span>
-
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">String</span><span class="p">?)</span> <span class="p">{</span>
-
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DownloadTask</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span><span class="p">)</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">count</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="n">size</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">InterruptedException</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>  <span class="p">-</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">isCancelled</span><span class="p">)</span> <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;Download Completed&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onProgressUpdate</span><span class="p">(</span><span class="k">vararg</span> <span class="n">values</span><span class="p">:</span> <span class="n">Int</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">String</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="액티비티-처리">액티비티 처리</h3>
 <p>작성한 <code>DownloadTask</code>를 메인액티비티에서 사용하기 위한 코드를 작성해 줍니다. 다운로드 버튼을 클릭하면 AsyncTask 인스턴스를 만들어 실행하는데 <code>excute</code>에서는 <code>vararg</code> 입력 확인을 위해 굳이 10개의 스트링으로 이루어진 값을 전달해 주었습니다.</p>
@@ -636,22 +636,22 @@ if (!doNotTrack) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
-    <span class="k">private</span> <span class="k">var</span> <span class="py">downloadTask</span><span class="p">:</span> <span class="n">DownloadTask</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-        <span class="n">binding</span> <span class="p">=</span> <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
-        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
-
-        <span class="n">binding</span><span class="p">.</span><span class="n">downloadButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="n">downloadTask</span> <span class="p">=</span> <span class="n">DownloadTask</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
-            <span class="n">downloadTask</span><span class="o">?.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span> <span class="s2">&#34;4&#34;</span><span class="p">,</span> <span class="s2">&#34;5&#34;</span><span class="p">,</span> <span class="s2">&#34;6&#34;</span><span class="p">,</span> <span class="s2">&#34;7&#34;</span><span class="p">,</span> <span class="s2">&#34;8&#34;</span><span class="p">,</span> <span class="s2">&#34;9&#34;</span><span class="p">,</span> <span class="s2">&#34;10&#34;</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">downloadTask</span><span class="p">:</span> <span class="n">DownloadTask</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span> <span class="p">=</span> <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">downloadButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">downloadTask</span> <span class="p">=</span> <span class="n">DownloadTask</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">downloadTask</span><span class="o">?.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span> <span class="s2">&#34;4&#34;</span><span class="p">,</span> <span class="s2">&#34;5&#34;</span><span class="p">,</span> <span class="s2">&#34;6&#34;</span><span class="p">,</span> <span class="s2">&#34;7&#34;</span><span class="p">,</span> <span class="s2">&#34;8&#34;</span><span class="p">,</span> <span class="s2">&#34;9&#34;</span><span class="p">,</span> <span class="s2">&#34;10&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="작업-중-취소-처리">작업 중 취소 처리</h3>
 <p>[doInBackground]에서 작업중인 스레드는 메인스레드에서 <code>cancel</code>을 호출하여 취소할 수 있습니다. 이 경우 백그라운드 스레드 내부의 <code>isCancelled</code>가 <code>true</code>를 반환하게 되며 <code>doInBackground</code>가 종료된 후, <code>onPostExecute</code> 대신 <code>onCancelled</code>가 호출됩니다.</p>
@@ -679,24 +679,24 @@ if (!doNotTrack) {
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// MainActivity
-</span><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="n">binding</span><span class="p">.</span><span class="n">cancelButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="n">downloadTask</span><span class="o">?.</span><span class="n">cancel</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPause</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onPause</span><span class="p">()</span>
-        <span class="n">downloadTask</span><span class="o">?.</span><span class="n">cancel</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-<span class="c1">// DownloadTask
-</span><span class="c1"></span><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : 0&#34;</span>
-    <span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="m">0</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="c1">// MainActivity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">cancelButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">downloadTask</span><span class="o">?.</span><span class="n">cancel</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPause</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onPause</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">downloadTask</span><span class="o">?.</span><span class="n">cancel</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1">// DownloadTask
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : 0&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="메모리-누수-방어하기">메모리 누수 방어하기</h2>
 <h3 id="asynctask의-특징">AsyncTask의 특징</h3>
@@ -759,49 +759,49 @@ if (!doNotTrack) {
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">DownloadTask</span><span class="p">(</span><span class="n">activity</span><span class="p">:</span> <span class="n">MainActivity</span><span class="p">)</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">weakReference</span><span class="p">:</span> <span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">MainActivity</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">WeakReference</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">count</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="n">size</span>
-
-        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">InterruptedException</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-            <span class="p">}</span>
-            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>  <span class="p">-</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">isCancelled</span><span class="p">)</span> <span class="k">break</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="s2">&#34;Download Completed&#34;</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onProgressUpdate</span><span class="p">(</span><span class="k">vararg</span> <span class="n">values</span><span class="p">:</span> <span class="n">Int</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">weakReference</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
-
-        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : </span><span class="si">${values[0]}</span><span class="s2">&#34;</span>
-        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="n">values</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">!!</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">String</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">weakReference</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
-
-        <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">weakReference</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
-
-        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : 0&#34;</span>
-        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="m">0</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DownloadTask</span><span class="p">(</span><span class="n">activity</span><span class="p">:</span> <span class="n">MainActivity</span><span class="p">)</span> <span class="p">:</span> <span class="n">AsyncTask</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">weakReference</span><span class="p">:</span> <span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">MainActivity</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">WeakReference</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">count</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="n">size</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">InterruptedException</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>  <span class="p">-</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">isCancelled</span><span class="p">)</span> <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;Download Completed&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onProgressUpdate</span><span class="p">(</span><span class="k">vararg</span> <span class="n">values</span><span class="p">:</span> <span class="n">Int</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">weakReference</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : </span><span class="si">${values[0]}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="n">values</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">!!</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">String</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">weakReference</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span><span class="n">activity</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">weakReference</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : 0&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 AsyncTask를 사용하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

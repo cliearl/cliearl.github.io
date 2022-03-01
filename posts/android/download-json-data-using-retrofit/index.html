@@ -366,14 +366,14 @@ if (!doNotTrack) {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="c1">// Retrofit
-</span><span class="c1"></span><span class="n">implementation</span> <span class="s1">&#39;com.squareup.retrofit2:retrofit:2.9.0&#39;</span>
-<span class="n">implementation</span> <span class="s1">&#39;com.squareup.retrofit2:converter-moshi:2.9.0&#39;</span>
-
-<span class="c1">// OkHttp
-</span><span class="c1"></span><span class="n">implementation</span> <span class="s1">&#39;com.squareup.okhttp3:okhttp:4.9.1&#39;</span>
-<span class="n">implementation</span> <span class="s1">&#39;com.squareup.okhttp3:logging-interceptor:4.9.1&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="c1">// Retrofit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">implementation</span> <span class="s1">&#39;com.squareup.retrofit2:retrofit:2.9.0&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.squareup.retrofit2:converter-moshi:2.9.0&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// OkHttp
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">implementation</span> <span class="s1">&#39;com.squareup.okhttp3:okhttp:4.9.1&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.squareup.okhttp3:logging-interceptor:4.9.1&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="권한-추가">권한 추가</h2>
 <p>HTTP 통신에 인터넷을 사용해야 하니 <code>AndroidManefest.xml</code>에서 권한을 추가해줍니다.</p>
@@ -382,8 +382,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="data-transfer-object-준비">Data Transfer Object 준비</h2>
 <h3 id="데이터-형식-확인">데이터 형식 확인</h3>
@@ -482,96 +482,96 @@ if (!doNotTrack) {
 </span><span class="lnt">89
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;EmgMedInfo&#34;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;head&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="p">{</span>
-                    <span class="nt">&#34;list_total_count&#34;</span><span class="p">:</span> <span class="mi">172</span>
-                <span class="p">},</span>
-                <span class="p">{</span>
-                    <span class="nt">&#34;RESULT&#34;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="nt">&#34;CODE&#34;</span><span class="p">:</span> <span class="s2">&#34;INFO-000&#34;</span><span class="p">,</span>
-                        <span class="nt">&#34;MESSAGE&#34;</span><span class="p">:</span> <span class="s2">&#34;정상 처리되었습니다.&#34;</span>
-                    <span class="p">}</span>
-                <span class="p">},</span>
-                <span class="p">{</span>
-                    <span class="nt">&#34;api_version&#34;</span><span class="p">:</span> <span class="s2">&#34;1.0&#34;</span>
-                <span class="p">}</span>
-            <span class="p">]</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;row&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="p">{</span>
-                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-09&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;화성시&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41590&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;센트럴아동병원&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;국민안심병원+호흡기전담클리닉&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-8060-5000&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 화성시 반송동 93-1번지 동탄위버폴리스&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;127.0720402235&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.2046139805&#34;</span>
-                <span class="p">},</span>
-                <span class="p">{</span>
-                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-14&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;화성시&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41590&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;한림대학교 동탄성심병원&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;선별진료소+국민안심병원&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-8086-3000&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;1522-2500&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 화성시 석우동 40번지&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 화성시 큰재봉길 7&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;127.0799416615&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.2164957291&#34;</span>
-                <span class="p">},</span>
-                <span class="p">{</span>
-                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-09&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;구리시&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41310&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;장스365의원&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;호흡기전담클리닉&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-550-3105&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 구리시 수택동 853번지&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;127.1426473636&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.5912595849&#34;</span>
-                <span class="p">},</span>
-                <span class="p">{</span>
-                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-09&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;김포시&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41570&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;김포아이제일병원&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;호흡기전담클리닉&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-8083-7575&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 김포시 구래동 6885-2번지&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 김포시 김포한강8로 382&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;126.6266409118&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.6435680201&#34;</span>
-                <span class="p">},</span>
-                <span class="p">{</span>
-                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-09&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;성남시&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41130&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;분당성모이비인후과의원&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;호흡기전담클리닉&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-712-9075&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 성남시 분당구 야탑동 352-4번지&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 성남시 분당구 성남대로925번길 11&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;127.1272733859&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.4120484252&#34;</span>
-                <span class="p">}</span>
-            <span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;EmgMedInfo&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;head&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;list_total_count&#34;</span><span class="p">:</span> <span class="mi">172</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;RESULT&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&#34;CODE&#34;</span><span class="p">:</span> <span class="s2">&#34;INFO-000&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nt">&#34;MESSAGE&#34;</span><span class="p">:</span> <span class="s2">&#34;정상 처리되었습니다.&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;api_version&#34;</span><span class="p">:</span> <span class="s2">&#34;1.0&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;row&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-09&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;화성시&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41590&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;센트럴아동병원&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;국민안심병원+호흡기전담클리닉&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-8060-5000&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 화성시 반송동 93-1번지 동탄위버폴리스&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;127.0720402235&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.2046139805&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-14&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;화성시&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41590&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;한림대학교 동탄성심병원&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;선별진료소+국민안심병원&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-8086-3000&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;1522-2500&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 화성시 석우동 40번지&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 화성시 큰재봉길 7&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;127.0799416615&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.2164957291&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-09&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;구리시&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41310&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;장스365의원&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;호흡기전담클리닉&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-550-3105&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 구리시 수택동 853번지&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;127.1426473636&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.5912595849&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-09&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;김포시&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41570&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;김포아이제일병원&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;호흡기전담클리닉&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-8083-7575&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 김포시 구래동 6885-2번지&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 김포시 김포한강8로 382&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;126.6266409118&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.6435680201&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SUM_DE&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-06-09&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;성남시&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;SIGUN_CD&#34;</span><span class="p">:</span> <span class="s2">&#34;41130&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;MEDCARE_INST_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;분당성모이비인후과의원&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">:</span> <span class="s2">&#34;호흡기전담클리닉&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REPRSNT_TELNO&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">:</span> <span class="s2">&#34;031-712-9075&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 성남시 분당구 야탑동 352-4번지&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">:</span> <span class="s2">&#34;경기도 성남시 분당구 성남대로925번길 11&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">:</span> <span class="s2">&#34;127.1272733859&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">:</span> <span class="s2">&#34;37.4120484252&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="dto-클래스-작성">DTO 클래스 작성</h3>
 <p>JSON 형식으로 받아온 텍스트는 앱에서 사용할 수 있는 데이터 객체로 변환하게 되는데 이 때 그 객체의 틀이 되는것이 <a class="link" href="https://en.wikipedia.org/wiki/Data_transfer_object"  target="_blank" rel="noopener"
@@ -633,57 +633,57 @@ if (!doNotTrack) {
 </span><span class="lnt">50
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">data</span> <span class="k">class</span> <span class="nc">EmgMedResponse</span><span class="p">(</span>
-    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">emgMedInfo</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">EmgMedInfo</span><span class="p">&gt;?</span>
-<span class="p">)</span>
-
-<span class="k">data</span> <span class="k">class</span> <span class="nc">EmgMedInfo</span><span class="p">(</span>
-    <span class="k">val</span> <span class="py">head</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Head</span><span class="p">&gt;?,</span>
-    <span class="k">val</span> <span class="py">row</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">&gt;?</span>
-<span class="p">)</span>
-
-<span class="k">data</span> <span class="k">class</span> <span class="nc">Head</span><span class="p">(</span>
-    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;api_version&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">apiVersion</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 1.0
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;list_total_count&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">listTotalCount</span><span class="p">:</span> <span class="n">Int</span><span class="p">?,</span> <span class="c1">// 172
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;RESULT&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">rESULT</span><span class="p">:</span> <span class="n">RESULT</span><span class="p">?</span>
-<span class="p">)</span>
-
-<span class="k">data</span> <span class="k">class</span> <span class="nc">RESULT</span><span class="p">(</span>
-    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;CODE&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">cODE</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// INFO-000
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;MESSAGE&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">mESSAGE</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="c1">// 정상 처리되었습니다.
-</span><span class="c1"></span><span class="p">)</span>
-
-<span class="k">data</span> <span class="k">class</span> <span class="nc">Row</span><span class="p">(</span>
-    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">dISTRCTDIVNM</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 국민안심병원+호흡기전담클리닉
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">eMGNCYCENTERTELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 031-8060-5000
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;MEDCARE_INST_NM&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">mEDCAREINSTNM</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 센트럴아동병원
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">rEFINELOTNOADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 경기도 화성시 반송동 93-1번지 동탄위버폴리스
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">rEFINEROADNMADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// null
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">rEFINEWGS84LAT</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 37.2046139805
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">rEFINEWGS84LOGT</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 127.0720402235
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REPRSNT_TELNO&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">rEPRSNTTELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// null
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SIGUN_CD&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">sIGUNCD</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 41590
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SIGUN_NM&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">sIGUNNM</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 화성시
-</span><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SUM_DE&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">sUMDE</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="c1">// 2021-06-09
-</span><span class="c1"></span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">EmgMedResponse</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">emgMedInfo</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">EmgMedInfo</span><span class="p">&gt;?</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">EmgMedInfo</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">head</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Head</span><span class="p">&gt;?,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">row</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">&gt;?</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">Head</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;api_version&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">apiVersion</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 1.0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;list_total_count&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">listTotalCount</span><span class="p">:</span> <span class="n">Int</span><span class="p">?,</span> <span class="c1">// 172
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;RESULT&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rESULT</span><span class="p">:</span> <span class="n">RESULT</span><span class="p">?</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">RESULT</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;CODE&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">cODE</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// INFO-000
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;MESSAGE&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">mESSAGE</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="c1">// 정상 처리되었습니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">Row</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">dISTRCTDIVNM</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 국민안심병원+호흡기전담클리닉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">eMGNCYCENTERTELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 031-8060-5000
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;MEDCARE_INST_NM&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">mEDCAREINSTNM</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 센트럴아동병원
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEFINELOTNOADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 경기도 화성시 반송동 93-1번지 동탄위버폴리스
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEFINEROADNMADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEFINEWGS84LAT</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 37.2046139805
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEFINEWGS84LOGT</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 127.0720402235
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REPRSNT_TELNO&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEPRSNTTELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SIGUN_CD&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sIGUNCD</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 41590
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SIGUN_NM&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sIGUNNM</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 화성시
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SUM_DE&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sUMDE</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="c1">// 2021-06-09
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="아이템-디자인">아이템 디자인</h2>
 <p>Recyclerview에서 사용할 아이템의 디자인을 만들어줍니다. LinearLayout을 써서 API 응답중 Row의 내용을 표시하는 화면을 만들어줍니다.</p>
@@ -759,75 +759,75 @@ if (!doNotTrack) {
 </span><span class="lnt">68
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class="nt">&lt;LinearLayout</span>
-    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">android:id=</span><span class="s">&#34;@+id/layout_viewholder&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-    <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span>
-    <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span>
-    <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
-    <span class="na">android:padding=</span><span class="s">&#34;10dp&#34;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;LinearLayout</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_weight=</span><span class="s">&#34;9&#34;</span>
-        <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_name&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;의료기관명&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span>
-            <span class="na">android:padding=</span><span class="s">&#34;3dp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_type&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;구분&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_phone&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;전화번호&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_addr&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;주소&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_wgs84lat&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;위도&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;TextView</span>
-            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_wgs84lon&#34;</span>
-            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-            <span class="na">android:text=</span><span class="s">&#34;경도&#34;</span>
-            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/LinearLayout&gt;</span>
-
-    <span class="nt">&lt;ImageView</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
-        <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
-        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
-
-<span class="nt">&lt;/LinearLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:id=</span><span class="s">&#34;@+id/layout_viewholder&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:background=</span><span class="s">&#34;?attr/selectableItemBackground&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:gravity=</span><span class="s">&#34;center_vertical&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:padding=</span><span class="s">&#34;10dp&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_weight=</span><span class="s">&#34;9&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_name&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;의료기관명&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:padding=</span><span class="s">&#34;3dp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_type&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;구분&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_phone&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;전화번호&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_addr&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;주소&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_wgs84lat&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;위도&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_wgs84lon&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:text=</span><span class="s">&#34;경도&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;ImageView</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;30dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_reorder_24&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="레이아웃-작성">레이아웃 작성</h2>
 <p>다음은 <code>activity_main.xml</code>을 작성합니다. JSON 응답결과를 표시할 Recyclerview를 하나 배치하고 네트워크 연결을 시작하는데 사용할 플로팅버튼을 하나 달아줍니다.</p>
@@ -866,38 +866,38 @@ if (!doNotTrack) {
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
-    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;androidx.recyclerview.widget.RecyclerView</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/recycler_view&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;0dp&#34;</span>
-        <span class="na">android:scrollbars=</span><span class="s">&#34;vertical&#34;</span>
-        <span class="na">tools:listitem=</span><span class="s">&#34;@layout/item_emgmed&#34;</span>
-        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;com.google.android.material.floatingactionbutton.FloatingActionButton</span>
-        <span class="na">android:id=</span><span class="s">&#34;@+id/btn_get&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_margin=</span><span class="s">&#34;20dp&#34;</span>
-        <span class="na">android:clickable=</span><span class="s">&#34;true&#34;</span>
-        <span class="na">android:focusable=</span><span class="s">&#34;true&#34;</span>
-        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:srcCompat=</span><span class="s">&#34;@android:drawable/ic_menu_add&#34;</span> <span class="nt">/&gt;</span>
-
-<span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;androidx.recyclerview.widget.RecyclerView</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/recycler_view&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:scrollbars=</span><span class="s">&#34;vertical&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">tools:listitem=</span><span class="s">&#34;@layout/item_emgmed&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;com.google.android.material.floatingactionbutton.FloatingActionButton</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/btn_get&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_margin=</span><span class="s">&#34;20dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:clickable=</span><span class="s">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:focusable=</span><span class="s">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:srcCompat=</span><span class="s">&#34;@android:drawable/ic_menu_add&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="recyclerview-어댑터-작성">Recyclerview 어댑터 작성</h2>
 <p>DTO 중 Row 클래스의 내용을 받아 ViewHolder에 표시하는 Recyclerview 어댑터를 작성합니다. 데이터의 갱신은 ListAdapter를 사용하여 수행합니다. ListAdapter의 구체적인 설명에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/recyclerview-listadapter/"  target="_blank" rel="noopener"
@@ -944,45 +944,45 @@ if (!doNotTrack) {
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">EmgMedAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">,</span> <span class="n">EmgMedAdapter</span><span class="p">.</span><span class="n">EmgMedViewHolder</span><span class="p">&gt;(</span><span class="n">DiffCallback</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">EmgMedViewHolder</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">binding</span> <span class="p">=</span> <span class="n">ItemEmgmedBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span> <span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">EmgMedViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBindViewHolder</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span> <span class="n">EmgMedViewHolder</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">holder</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">getItem</span><span class="p">(</span><span class="n">position</span><span class="p">))</span>
-    <span class="p">}</span>
-
-    <span class="k">class</span> <span class="nc">EmgMedViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ItemEmgmedBinding</span><span class="p">)</span> <span class="p">:</span>
-        <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-
-        <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">Row</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">tvName</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">mEDCAREINSTNM</span>
-                <span class="n">tvType</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">dISTRCTDIVNM</span>
-                <span class="n">tvPhone</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">eMGNCYCENTERTELNO</span>
-                <span class="n">tvAddr</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">rEFINELOTNOADDR</span>
-                <span class="n">tvWgs84lat</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;위도: </span><span class="si">${item.rEFINEWGS84LAT}</span><span class="s2">&#34;</span>
-                <span class="n">tvWgs84lon</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;경도: </span><span class="si">${item.rEFINEWGS84LOGT}</span><span class="s2">&#34;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-        <span class="k">private</span> <span class="k">val</span> <span class="py">DiffCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">&gt;()</span> <span class="p">{</span>
-            <span class="k">override</span> <span class="k">fun</span> <span class="nf">areItemsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Row</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Row</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="n">oldItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span> <span class="o">==</span> <span class="n">newItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>
-            <span class="p">}</span>
-
-            <span class="k">override</span> <span class="k">fun</span> <span class="nf">areContentsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Row</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Row</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="n">oldItem</span> <span class="o">==</span> <span class="n">newItem</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">EmgMedAdapter</span> <span class="p">:</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">,</span> <span class="n">EmgMedAdapter</span><span class="p">.</span><span class="n">EmgMedViewHolder</span><span class="p">&gt;(</span><span class="n">DiffCallback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateViewHolder</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">,</span> <span class="n">viewType</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">EmgMedViewHolder</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">binding</span> <span class="p">=</span> <span class="n">ItemEmgmedBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">LayoutInflater</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">context</span><span class="p">),</span> <span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">EmgMedViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBindViewHolder</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span> <span class="n">EmgMedViewHolder</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">holder</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">getItem</span><span class="p">(</span><span class="n">position</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">class</span> <span class="nc">EmgMedViewHolder</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ItemEmgmedBinding</span><span class="p">)</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">Row</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">with</span><span class="p">(</span><span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tvName</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">mEDCAREINSTNM</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tvType</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">dISTRCTDIVNM</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tvPhone</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">eMGNCYCENTERTELNO</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tvAddr</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">rEFINELOTNOADDR</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tvWgs84lat</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;위도: </span><span class="si">${item.rEFINEWGS84LAT}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tvWgs84lon</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;경도: </span><span class="si">${item.rEFINEWGS84LOGT}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">val</span> <span class="py">DiffCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="err">: </span><span class="nc">DiffUtil</span><span class="p">.</span><span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">override</span> <span class="k">fun</span> <span class="nf">areItemsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Row</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Row</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">oldItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span> <span class="o">==</span> <span class="n">newItem</span><span class="p">.</span><span class="n">hashCode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">override</span> <span class="k">fun</span> <span class="nf">areContentsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span> <span class="n">Row</span><span class="p">,</span> <span class="n">newItem</span><span class="p">:</span> <span class="n">Row</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">oldItem</span> <span class="o">==</span> <span class="n">newItem</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 MainActivity의 <code>onCreate</code>에서 Recyclerview를 설정합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -1001,19 +1001,19 @@ if (!doNotTrack) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">val</span> <span class="py">myRecyclerViewAdapter</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">EmgMedAdapter</span><span class="p">()</span> <span class="p">}</span>
-
-<span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-    <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
-
-    <span class="n">binding</span><span class="p">.</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
-        <span class="n">layoutManager</span> <span class="p">=</span> <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
-        <span class="n">adapter</span> <span class="p">=</span> <span class="n">myRecyclerViewAdapter</span>
-        <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">val</span> <span class="py">myRecyclerViewAdapter</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">EmgMedAdapter</span><span class="p">()</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">layoutManager</span> <span class="p">=</span> <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">LinearLayoutManager</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">adapter</span> <span class="p">=</span> <span class="n">myRecyclerViewAdapter</span>
+</span></span><span class="line"><span class="cl">        <span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">DividerItemDecoration</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="서비스-작성">서비스 작성</h2>
 <p>Retrofit은 HTTP API의 request를 <a class="link" href="https://kotlinlang.org/docs/interfaces.html"  target="_blank" rel="noopener"
@@ -1067,12 +1067,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">interface</span> <span class="nc">EmgMedService</span> <span class="p">{</span>
-    <span class="nd">@GET</span><span class="p">(</span><span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
-    <span class="k">fun</span> <span class="nf">getEmgMedData</span><span class="p">(</span><span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;KEY&#34;</span><span class="p">)</span> <span class="n">KEY</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-                      <span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;Type&#34;</span><span class="p">)</span> <span class="n">Type</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">interface</span> <span class="nc">EmgMedService</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@GET</span><span class="p">(</span><span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">getEmgMedData</span><span class="p">(</span><span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;KEY&#34;</span><span class="p">)</span> <span class="n">KEY</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;Type&#34;</span><span class="p">)</span> <span class="n">Type</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>코드를 해석하면 <code>getEmgMedData</code> 는 <code>BASE_URL/EmgMedInfo?KEY=&quot;KEY&quot;&amp;Type=&quot;Type&quot;</code>이라는 GET 요청을 보내고 <code>Call&lt;EmgMedResponse&gt;</code> 객체를 반환받는 동작을 하는 함수라는 뜻이 됩니다.</p>
 <h2 id="retrofit-객체-준비">Retrofit 객체 준비</h2>
@@ -1106,30 +1106,30 @@ if (!doNotTrack) {
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">object</span> <span class="nc">RetrofitApi</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">BASE</span><span class="n">_URL</span> <span class="p">=</span> <span class="s2">&#34;https://openapi.gg.go.kr/&#34;</span>
-
-    <span class="k">private</span> <span class="k">val</span> <span class="py">okHttpClient</span><span class="p">:</span> <span class="n">OkHttpClient</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
-        <span class="n">OkHttpClient</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
-            <span class="p">.</span><span class="n">addInterceptor</span><span class="p">(</span><span class="n">HttpLoggingInterceptor</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
-                <span class="n">level</span> <span class="p">=</span> <span class="n">HttpLoggingInterceptor</span><span class="p">.</span><span class="n">Level</span><span class="p">.</span><span class="n">BODY</span>
-            <span class="p">})</span>
-            <span class="p">.</span><span class="n">build</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="k">private</span> <span class="k">val</span> <span class="py">retrofit</span><span class="p">:</span> <span class="n">Retrofit</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
-        <span class="n">Retrofit</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
-            <span class="p">.</span><span class="n">addConverterFactory</span><span class="p">(</span><span class="n">MoshiConverterFactory</span><span class="p">.</span><span class="n">create</span><span class="p">())</span>
-            <span class="p">.</span><span class="n">client</span><span class="p">(</span><span class="n">okHttpClient</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">baseUrl</span><span class="p">(</span><span class="n">BASE_URL</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">build</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="k">val</span> <span class="py">emgMedService</span><span class="p">:</span> <span class="n">EmgMedService</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
-        <span class="n">retrofit</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">EmgMedService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">object</span> <span class="nc">RetrofitApi</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">BASE</span><span class="n">_URL</span> <span class="p">=</span> <span class="s2">&#34;https://openapi.gg.go.kr/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">okHttpClient</span><span class="p">:</span> <span class="n">OkHttpClient</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">OkHttpClient</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">addInterceptor</span><span class="p">(</span><span class="n">HttpLoggingInterceptor</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">level</span> <span class="p">=</span> <span class="n">HttpLoggingInterceptor</span><span class="p">.</span><span class="n">Level</span><span class="p">.</span><span class="n">BODY</span>
+</span></span><span class="line"><span class="cl">            <span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">retrofit</span><span class="p">:</span> <span class="n">Retrofit</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Retrofit</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">addConverterFactory</span><span class="p">(</span><span class="n">MoshiConverterFactory</span><span class="p">.</span><span class="n">create</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">client</span><span class="p">(</span><span class="n">okHttpClient</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">baseUrl</span><span class="p">(</span><span class="n">BASE_URL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">emgMedService</span><span class="p">:</span> <span class="n">EmgMedService</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">retrofit</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">EmgMedService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Retrofit.Builder.html"  target="_blank" rel="noopener"
     >빌더 패턴</a>을 통해 retrofit 객체를 만들어줍니다. <code>addConverterFactory</code>에서 DTO 변환에 사용할 JSON 컨버터를 Moshi로 지정하고, <code>baseUrl</code> 을 전달한 뒤 <code>build()</code>로 객체를 생성합니다. 그리고나서 retrofit 인스턴스의 <code>create</code> 명령을 이용해서 emgMedService의 인스턴스를 만들어줍니다.</p>
@@ -1174,29 +1174,29 @@ if (!doNotTrack) {
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">retrofitWork</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">service</span> <span class="p">=</span> <span class="n">RetrofitApi</span><span class="p">.</span><span class="n">emgMedService</span>
-
-    <span class="n">service</span><span class="p">.</span><span class="n">getEmgMedData</span><span class="p">(</span><span class="n">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">api_key</span><span class="p">),</span> <span class="s2">&#34;json&#34;</span><span class="p">)</span>
-        <span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="k">object</span> <span class="err">: </span><span class="nc">Callback</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span> <span class="p">{</span>
-            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onResponse</span><span class="p">(</span>
-                <span class="n">call</span><span class="p">:</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;,</span>
-                <span class="n">response</span><span class="p">:</span> <span class="n">Response</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span>
-            <span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">isSuccessful</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">().</span><span class="n">toString</span><span class="p">())</span>
-                    <span class="c1">// head를 스킵하기 위해 index 1번을 가져옴
-</span><span class="c1"></span>                    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">()</span><span class="o">?.</span><span class="n">emgMedInfo</span><span class="o">?.</span><span class="k">get</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="o">?.</span><span class="n">row</span>
-                    <span class="n">myRecyclerViewAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">result</span><span class="o">!!</span><span class="p">)</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-
-            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onFailure</span><span class="p">(</span><span class="n">call</span><span class="p">:</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;,</span> <span class="n">t</span><span class="p">:</span>  <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">t</span><span class="p">.</span><span class="n">message</span><span class="p">.</span><span class="n">toString</span><span class="p">())</span>
-            <span class="p">}</span>
-        <span class="p">})</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">retrofitWork</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">service</span> <span class="p">=</span> <span class="n">RetrofitApi</span><span class="p">.</span><span class="n">emgMedService</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">service</span><span class="p">.</span><span class="n">getEmgMedData</span><span class="p">(</span><span class="n">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">api_key</span><span class="p">),</span> <span class="s2">&#34;json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="k">object</span> <span class="err">: </span><span class="nc">Callback</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onResponse</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">call</span><span class="p">:</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">response</span><span class="p">:</span> <span class="n">Response</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">isSuccessful</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">().</span><span class="n">toString</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// head를 스킵하기 위해 index 1번을 가져옴
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">()</span><span class="o">?.</span><span class="n">emgMedInfo</span><span class="o">?.</span><span class="k">get</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="o">?.</span><span class="n">row</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">myRecyclerViewAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">result</span><span class="o">!!</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onFailure</span><span class="p">(</span><span class="n">call</span><span class="p">:</span> <span class="n">Call</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;,</span> <span class="n">t</span><span class="p">:</span>  <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">t</span><span class="p">.</span><span class="n">message</span><span class="p">.</span><span class="n">toString</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>싱글톤 Retrofit으로 서비스 인스턴스를 생성하고 <code>getEmgMedData</code>를 실행해서 Call 객체를 획득합니다. 인증키는 <code>R.string.api_key</code> 를 이용해 입력했고 서버로부터 json 데이터를 반환받도록 하였습니다.</p>
 <p>Call 작업은 두가지 방법으로 실행시킬 수 있습니다. <a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Call.html#execute--"  target="_blank" rel="noopener"
@@ -1213,8 +1213,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">implementation</span> <span class="s1">&#39;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음으로 코루틴으로 작동하는 서비스를 인터페이스에 추가해 줍니다. 서비스가 코루틴 안에서 수행되어야 하므로 <code>suspend</code> 키워드를 붙여주고, 반환값은 <code>Call</code> 객체가 아니라 <a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Response.html"  target="_blank" rel="noopener"
     >Response</a> 객체로 받도록 변경하였습니다. 코루틴 자체적으로 비동기적인 처리를 수행하기 때문에, Call이 제공하는 흐름처리 기능은 더이상 필요가 없습니다.</p>
@@ -1227,12 +1227,12 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="nd">@GET</span><span class="p">(</span><span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
-<span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getDataCoroutine</span><span class="p">(</span>
-    <span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;KEY&#34;</span><span class="p">)</span> <span class="n">KEY</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;Type&#34;</span><span class="p">)</span> <span class="n">Type</span><span class="p">:</span> <span class="n">String</span>
-<span class="p">):</span> <span class="n">Response</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@GET</span><span class="p">(</span><span class="s2">&#34;EmgMedInfo&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getDataCoroutine</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;KEY&#34;</span><span class="p">)</span> <span class="n">KEY</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Query</span><span class="p">(</span><span class="s2">&#34;Type&#34;</span><span class="p">)</span> <span class="n">Type</span><span class="p">:</span> <span class="n">String</span>
+</span></span><span class="line"><span class="cl"><span class="p">):</span> <span class="n">Response</span><span class="p">&lt;</span><span class="n">EmgMedResponse</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음은 retrofitWork()에서 <code>enqueue</code> 처리를 주석처리하고 다음 코드를 추가합니다. 네트워크 작업이므로 IO 디스패처에서 <code>Response</code> 반환을 획득합니다. 그리고 반환값을 RecylerView에 표시할 때만 컨텍스트를 메인 스레드로 스위치하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
@@ -1253,21 +1253,21 @@ if (!doNotTrack) {
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">response</span> <span class="p">=</span> <span class="n">service</span><span class="p">.</span><span class="n">getDataCoroutine</span><span class="p">(</span><span class="n">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">api_key</span><span class="p">),</span> <span class="s2">&#34;json&#34;</span><span class="p">)</span>
-
-    <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">Main</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">isSuccessful</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">()</span><span class="o">?.</span><span class="n">emgMedInfo</span><span class="o">?.</span><span class="k">get</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="o">?.</span><span class="n">row</span>
-            <span class="n">result</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span>
-                <span class="n">myRecyclerViewAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="k">it</span><span class="p">)</span>
-            <span class="p">}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">Log</span><span class="p">.</span><span class="n">e</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="n">code</span><span class="p">().</span><span class="n">toString</span><span class="p">())</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">CoroutineScope</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">).</span><span class="n">launch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">response</span> <span class="p">=</span> <span class="n">service</span><span class="p">.</span><span class="n">getDataCoroutine</span><span class="p">(</span><span class="n">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">api_key</span><span class="p">),</span> <span class="s2">&#34;json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">Main</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">isSuccessful</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">()</span><span class="o">?.</span><span class="n">emgMedInfo</span><span class="o">?.</span><span class="k">get</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="o">?.</span><span class="n">row</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">myRecyclerViewAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="k">it</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Log</span><span class="p">.</span><span class="n">e</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="n">code</span><span class="p">().</span><span class="n">toString</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 Retrofit으로 HTTP 통신을 수행하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

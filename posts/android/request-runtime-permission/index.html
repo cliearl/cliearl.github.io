@@ -369,9 +369,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_COARSE_LOCATION&#34;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_FINE_LOCATION&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_COARSE_LOCATION&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_FINE_LOCATION&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>요청하는 권한은 한 묶음으로 만들어 다루기 위해 <code>REQUIRED_PERMISSIONS</code>로 정의합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -384,13 +384,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">REQUIRED</span><span class="n">_PERMISSIONS</span> <span class="p">=</span> <span class="n">arrayOf</span><span class="p">(</span>
-        <span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_COARSE_LOCATION</span><span class="p">,</span>  <span class="c1">// 도시 블록 단위
-</span><span class="c1"></span>        <span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_FINE_LOCATION</span><span class="p">,</span>  <span class="c1">// 더 정밀한 단위
-</span><span class="c1"></span>    <span class="p">)</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">REQUIRED</span><span class="n">_PERMISSIONS</span> <span class="p">=</span> <span class="n">arrayOf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_COARSE_LOCATION</span><span class="p">,</span>  <span class="c1">// 도시 블록 단위
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_FINE_LOCATION</span><span class="p">,</span>  <span class="c1">// 더 정밀한 단위
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="권한-확인">권한 확인</h2>
 <p>권한을 확인하는 함수를 작성합니다. <a class="link" href="https://developer.android.com/reference/androidx/core/content/ContextCompat#checkSelfPermission%28android.content.Context,%20java.lang.String%29"  target="_blank" rel="noopener"
@@ -404,11 +404,11 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isAllPermissionsGranted</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="n">REQUIRED_PERMISSIONS</span><span class="p">.</span><span class="n">all</span> <span class="p">{</span> <span class="n">permission</span> <span class="o">-&gt;</span>
-    <span class="n">ContextCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">permission</span><span class="p">)</span> <span class="o">==</span>
-            <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isAllPermissionsGranted</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="n">REQUIRED_PERMISSIONS</span><span class="p">.</span><span class="n">all</span> <span class="p">{</span> <span class="n">permission</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ContextCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">permission</span><span class="p">)</span> <span class="o">==</span>
+</span></span><span class="line"><span class="cl">            <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="화면-디자인">화면 디자인</h2>
 <p>화면에 퍼미션을 체크하는 버튼을 하나 만듭니다.</p>
@@ -445,36 +445,36 @@ if (!doNotTrack) {
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
-    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
-    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
-    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;ImageView</span> <span class="na">android:id=</span><span class="s">&#34;@+id/location_icon&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;48dp&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;48dp&#34;</span>
-        <span class="na">android:layout_marginEnd=</span><span class="s">&#34;12dp&#34;</span>
-        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_my_location_24&#34;</span>
-        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintEnd_toStartOf=</span><span class="s">&#34;@+id/location_text&#34;</span>
-        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintHorizontal_chainStyle=</span><span class="s">&#34;packed&#34;</span><span class="nt">/&gt;</span>
-
-    <span class="nt">&lt;TextView</span> <span class="na">android:id=</span><span class="s">&#34;@+id/location_text&#34;</span>
-        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
-        <span class="na">android:text=</span><span class="s">&#34;Location&#34;</span>
-        <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span>
-        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintStart_toEndOf=</span><span class="s">&#34;@+id/location_icon&#34;</span>
-        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
-        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;ImageView</span> <span class="na">android:id=</span><span class="s">&#34;@+id/location_icon&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;48dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;48dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_marginEnd=</span><span class="s">&#34;12dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_baseline_my_location_24&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toStartOf=</span><span class="s">&#34;@+id/location_text&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintHorizontal_chainStyle=</span><span class="s">&#34;packed&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextView</span> <span class="na">android:id=</span><span class="s">&#34;@+id/location_text&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:text=</span><span class="s">&#34;Location&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintStart_toEndOf=</span><span class="s">&#34;@+id/location_icon&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="callback을-이용한-권한-획득">Callback을 이용한 권한 획득</h2>
 <h3 id="requestdangerouspermissions-작성">requestDangerousPermissions 작성</h3>
@@ -499,22 +499,22 @@ if (!doNotTrack) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">binding</span><span class="p">.</span><span class="n">locationIcon</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">isAllPermissionsGranted</span><span class="p">())</span> <span class="p">{</span>
-        <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">requestDangerousPermissions</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">requestDangerousPermissions</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">ActivityCompat</span><span class="p">.</span><span class="n">requestPermissions</span><span class="p">(</span>
-        <span class="k">this</span><span class="p">,</span> <span class="n">REQUIRED_PERMISSIONS</span><span class="p">,</span> <span class="n">REQUEST_CODE_PERMISSIONS</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// companion object
-</span><span class="c1"></span><span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">REQUEST</span><span class="n">_CODE_PERMISSIONS</span> <span class="p">=</span> <span class="m">1001</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">binding</span><span class="p">.</span><span class="n">locationIcon</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">isAllPermissionsGranted</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">requestDangerousPermissions</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">requestDangerousPermissions</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ActivityCompat</span><span class="p">.</span><span class="n">requestPermissions</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">,</span> <span class="n">REQUIRED_PERMISSIONS</span><span class="p">,</span> <span class="n">REQUEST_CODE_PERMISSIONS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// companion object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">private</span> <span class="k">const</span> <span class="k">val</span> <span class="py">REQUEST</span><span class="n">_CODE_PERMISSIONS</span> <span class="p">=</span> <span class="m">1001</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="onrequestpermissionsresult">onRequestPermissionsResult</h3>
 <p><code>requestDangerousPermissions</code>에서 권한을 요청한 뒤 유저의 조작이 행해지면 그 결과는 <a class="link" href="https://developer.android.com/reference/androidx/core/app/ActivityCompat.OnRequestPermissionsResultCallback?hl=ko#onRequestPermissionsResult%28int,%20java.lang.String%5B%5D,%20int%5B%5D%29"  target="_blank" rel="noopener"
@@ -566,38 +566,38 @@ if (!doNotTrack) {
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onRequestPermissionsResult</span><span class="p">(</span>
-    <span class="n">requestCode</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
-    <span class="n">permissions</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="k">out</span> <span class="n">String</span><span class="p">&gt;,</span>
-    <span class="n">grantResults</span><span class="p">:</span> <span class="n">IntArray</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="k">super</span><span class="p">.</span><span class="n">onRequestPermissionsResult</span><span class="p">(</span><span class="n">requestCode</span><span class="p">,</span> <span class="n">permissions</span><span class="p">,</span> <span class="n">grantResults</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">requestCode</span> <span class="o">==</span> <span class="n">REQUEST_CODE_PERMISSIONS</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">grantResults</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">grantResults</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// 모든 권한을 취득함
-</span><span class="c1"></span>            <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">shouldShowRequestPermissionRationale</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">[</span><span class="m">0</span><span class="p">]))</span> <span class="p">{</span>
-                <span class="c1">// 권한을 다시 요구함
-</span><span class="c1"></span>                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span>
-                    <span class="s2">&#34;Permission required to use app!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-                <span class="n">requestDangerousPermissions</span><span class="p">()</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// Settings로 들어가서 설정할 수 있도록 함
-</span><span class="c1"></span>                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission denied&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-<span class="c1">//                        openSettings()
-</span><span class="c1"></span>            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">openSettings</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">Intent</span><span class="p">(</span><span class="n">Settings</span><span class="p">.</span><span class="n">ACTION_APPLICATION_DETAILS_SETTINGS</span><span class="p">).</span><span class="n">apply</span> <span class="p">{</span>
-        <span class="n">addFlags</span><span class="p">(</span><span class="n">Intent</span><span class="p">.</span><span class="n">FLAG_ACTIVITY_NEW_TASK</span><span class="p">)</span>
-        <span class="k">data</span> <span class="p">=</span> <span class="n">Uri</span><span class="p">.</span><span class="n">fromParts</span><span class="p">(</span><span class="s2">&#34;package&#34;</span><span class="p">,</span> <span class="n">packageName</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
-    <span class="p">}.</span><span class="n">run</span><span class="p">(</span><span class="o">::</span><span class="n">startActivity</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onRequestPermissionsResult</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">requestCode</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">permissions</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="k">out</span> <span class="n">String</span><span class="p">&gt;,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grantResults</span><span class="p">:</span> <span class="n">IntArray</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">onRequestPermissionsResult</span><span class="p">(</span><span class="n">requestCode</span><span class="p">,</span> <span class="n">permissions</span><span class="p">,</span> <span class="n">grantResults</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">requestCode</span> <span class="o">==</span> <span class="n">REQUEST_CODE_PERMISSIONS</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">grantResults</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">grantResults</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 모든 권한을 취득함
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">shouldShowRequestPermissionRationale</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">[</span><span class="m">0</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 권한을 다시 요구함
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;Permission required to use app!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="n">requestDangerousPermissions</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// Settings로 들어가서 설정할 수 있도록 함
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission denied&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//                        openSettings()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">openSettings</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Intent</span><span class="p">(</span><span class="n">Settings</span><span class="p">.</span><span class="n">ACTION_APPLICATION_DETAILS_SETTINGS</span><span class="p">).</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">addFlags</span><span class="p">(</span><span class="n">Intent</span><span class="p">.</span><span class="n">FLAG_ACTIVITY_NEW_TASK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">data</span> <span class="p">=</span> <span class="n">Uri</span><span class="p">.</span><span class="n">fromParts</span><span class="p">(</span><span class="s2">&#34;package&#34;</span><span class="p">,</span> <span class="n">packageName</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}.</span><span class="n">run</span><span class="p">(</span><span class="o">::</span><span class="n">startActivity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="activity120-이후의-권한-획득-방법">activity:1.2.0 이후의 권한 획득 방법</h2>
 <h3 id="activityresultcontract">ActivityResultContract</h3>
@@ -681,8 +681,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">implementation</span> <span class="s2">&#34;androidx.activity:activity-ktx:1.4.0&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s2">&#34;androidx.activity:activity-ktx:1.4.0&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="requestmultiplepermissions-작성">requestMultiplePermissions 작성</h3>
 <p>여기서는 복수의 권한을 한번에 요청하기 위해 <a class="link" href="https://developer.android.com/training/basics/intents/result"  target="_blank" rel="noopener"
@@ -709,22 +709,22 @@ if (!doNotTrack) {
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">val</span> <span class="py">requestPermissionLauncher</span> <span class="p">=</span>
-    <span class="n">registerForActivityResult</span><span class="p">(</span><span class="n">ActivityResultContracts</span><span class="p">.</span><span class="n">RequestMultiplePermissions</span><span class="p">())</span> <span class="p">{</span> <span class="n">permissions</span> <span class="o">-&gt;</span>
-        <span class="n">permissions</span><span class="p">.</span><span class="n">entries</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="n">permission</span> <span class="o">-&gt;</span>
-            <span class="k">when</span> <span class="p">{</span>
-                <span class="n">permission</span><span class="p">.</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="p">{</span>
-                    <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-                <span class="p">}</span>
-                <span class="n">shouldShowRequestPermissionRationale</span><span class="p">(</span><span class="n">permission</span><span class="p">.</span><span class="n">key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span>
-                    <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span>
-                        <span class="s2">&#34;Permission required to use app!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-                <span class="p">}</span>
-                <span class="k">else</span> <span class="o">-&gt;</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission denied&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">val</span> <span class="py">requestPermissionLauncher</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">registerForActivityResult</span><span class="p">(</span><span class="n">ActivityResultContracts</span><span class="p">.</span><span class="n">RequestMultiplePermissions</span><span class="p">())</span> <span class="p">{</span> <span class="n">permissions</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">permissions</span><span class="p">.</span><span class="n">entries</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="n">permission</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">when</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">permission</span><span class="p">.</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">shouldShowRequestPermissionRationale</span><span class="p">(</span><span class="n">permission</span><span class="p">.</span><span class="n">key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s2">&#34;Permission required to use app!&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="o">-&gt;</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission denied&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>마지막으로 이미 정의된 <code>requestPermissions</code> 는 주석처리하고 <code>requestPermissionLauncher</code> 를 <a class="link" href="https://developer.android.com/reference/androidx/activity/result/ActivityResultLauncher#launch%28I,androidx.core.app.ActivityOptionsCompat%29"  target="_blank" rel="noopener"
     >launch</a>로 실행시키면 됩니다. <code>RequestMultiplePermissions</code> 및 <code>RequestPermission</code> 내부의 <code>getSynchronousResult</code> 에는 권한을 체크하는 로직도 <a class="link" href="https://modelmaker.tistory.com/18"  target="_blank" rel="noopener"
@@ -741,15 +741,15 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">binding</span><span class="p">.</span><span class="n">locationIcon</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">isAllPermissionsGranted</span><span class="p">())</span> <span class="p">{</span>
-        <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-<span class="c1">//                requestPermissions()
-</span><span class="c1"></span>        <span class="n">requestPermissionLauncher</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">binding</span><span class="p">.</span><span class="n">locationIcon</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">isAllPermissionsGranted</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//                requestPermissions()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">requestPermissionLauncher</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 런타임 퍼미션에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

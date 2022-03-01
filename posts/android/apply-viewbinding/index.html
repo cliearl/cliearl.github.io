@@ -368,10 +368,10 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
-    <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">android</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">buildFeatures</span><span class="o">.</span><span class="na">viewBinding</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>우선은 메인액티비티에 적용해보겠습니다. 자동으로 생성된 ActivityMainBinding 타입의 binding 전역변수를 준비하고 <code>onCreate</code> 에서 inflate시킵니다.</p>
 <p>그러면 View Binding을 사용할 수 있게 되므로 기존에 <code>R.layout.activity_main</code>를 전달하던 <code>setContentView</code>에 <code>binding.root</code>를 전달합니다. 또 findViewById를 사용하던 <code>setSupportActionBar</code>에 전달하는 값도 <code>binding.toolbar</code>로 변경합니다. 플로팅버튼은 <code>binding.fab</code>로 사용할 수 있습니다.</p>
@@ -418,44 +418,44 @@ if (!doNotTrack) {
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-<span class="c1">//        setContentView(R.layout.activity_main)
-</span><span class="c1">//        setSupportActionBar(findViewById(R.id.toolbar))
-</span><span class="c1">//
-</span><span class="c1">//        findViewById&lt;FloatingActionButton&gt;(R.id.fab).setOnClickListener { view -&gt;
-</span><span class="c1">//            Snackbar.make(view, &#34;Replace with your own action&#34;, Snackbar.LENGTH_LONG)
-</span><span class="c1">//                    .setAction(&#34;Action&#34;, null).show()
-</span><span class="c1">//        }
-</span><span class="c1"></span>        <span class="n">binding</span> <span class="p">=</span> <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
-        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
-        <span class="n">setSupportActionBar</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">toolbar</span><span class="p">)</span>
-
-        <span class="n">binding</span><span class="p">.</span><span class="n">fab</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span> <span class="n">view</span> <span class="o">-&gt;</span>
-            <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="s2">&#34;Replace with your own action&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_LONG</span><span class="p">).</span><span class="n">setAction</span><span class="p">(</span><span class="s2">&#34;Action&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateOptionsMenu</span><span class="p">(</span><span class="n">menu</span><span class="p">:</span> <span class="n">Menu</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
-        <span class="c1">// Inflate the menu; this adds items to the action bar if it is present.
-</span><span class="c1"></span>        <span class="n">menuInflater</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">menu</span><span class="p">.</span><span class="n">menu_main</span><span class="p">,</span> <span class="n">menu</span><span class="p">)</span>
-        <span class="k">return</span> <span class="k">true</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onOptionsItemSelected</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MenuItem</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
-        <span class="c1">// Handle action bar item clicks here. The action bar will
-</span><span class="c1"></span>        <span class="c1">// automatically handle clicks on the Home/Up button, so long
-</span><span class="c1"></span>        <span class="c1">// as you specify a parent activity in AndroidManifest.xml.
-</span><span class="c1"></span>        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">itemId</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">action_settings</span> <span class="o">-&gt;</span> <span class="k">true</span>
-            <span class="k">else</span> <span class="o">-&gt;</span> <span class="k">super</span><span class="p">.</span><span class="n">onOptionsItemSelected</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">binding</span><span class="p">:</span> <span class="n">ActivityMainBinding</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//        setContentView(R.layout.activity_main)
+</span></span></span><span class="line"><span class="cl"><span class="c1">//        setSupportActionBar(findViewById(R.id.toolbar))
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">//        findViewById&lt;FloatingActionButton&gt;(R.id.fab).setOnClickListener { view -&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//            Snackbar.make(view, &#34;Replace with your own action&#34;, Snackbar.LENGTH_LONG)
+</span></span></span><span class="line"><span class="cl"><span class="c1">//                    .setAction(&#34;Action&#34;, null).show()
+</span></span></span><span class="line"><span class="cl"><span class="c1">//        }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">binding</span> <span class="p">=</span> <span class="n">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setSupportActionBar</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">toolbar</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">fab</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span> <span class="n">view</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="s2">&#34;Replace with your own action&#34;</span><span class="p">,</span> <span class="n">Snackbar</span><span class="p">.</span><span class="n">LENGTH_LONG</span><span class="p">).</span><span class="n">setAction</span><span class="p">(</span><span class="s2">&#34;Action&#34;</span><span class="p">,</span> <span class="k">null</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateOptionsMenu</span><span class="p">(</span><span class="n">menu</span><span class="p">:</span> <span class="n">Menu</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Inflate the menu; this adds items to the action bar if it is present.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">menuInflater</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">menu</span><span class="p">.</span><span class="n">menu_main</span><span class="p">,</span> <span class="n">menu</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onOptionsItemSelected</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MenuItem</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Handle action bar item clicks here. The action bar will
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// automatically handle clicks on the Home/Up button, so long
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// as you specify a parent activity in AndroidManifest.xml.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">itemId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">action_settings</span> <span class="o">-&gt;</span> <span class="k">true</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="o">-&gt;</span> <span class="k">super</span><span class="p">.</span><span class="n">onOptionsItemSelected</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="fragment에-view-binding-적용">Fragment에 View Binding 적용</h2>
 <p>다음은 Fragment에 View Binding을 적용해 보겠습니다. Fragment에서 사용할 때는 <code>_binding</code>과 <code>binding</code> 변수 두개를 만들어줍니다. <code>_binding</code>은 Fragment를 사용하지 않을 때 자원을 반환할 수 있도록 Nullable 형태로 준비합니다. 그리고 실제로 사용하는 <code>binding</code>은 <code>_binding</code>이 초기화 되었을 때 <code>get()</code>으로 값을 가져오도록 합니다.</p>
@@ -496,38 +496,38 @@ if (!doNotTrack) {
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">var</span> <span class="py">_binding</span> <span class="p">:</span> <span class="n">FragmentFirstBinding</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_binding</span><span class="o">!!</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
-            <span class="n">inflater</span><span class="p">:</span> <span class="n">LayoutInflater</span><span class="p">,</span> <span class="n">container</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">?,</span>
-            <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?</span>
-    <span class="p">):</span> <span class="n">View</span><span class="p">?</span> <span class="p">{</span>
-        <span class="c1">// Inflate the layout for this fragment
-</span><span class="c1">//        return inflater.inflate(R.layout.fragment_first, container, false)
-</span><span class="c1"></span>        <span class="n">_binding</span> <span class="p">=</span> <span class="n">FragmentFirstBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">binding</span><span class="p">.</span><span class="n">root</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">View</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">)</span>
-
-<span class="c1">//        view.findViewById&lt;Button&gt;(R.id.button_first).setOnClickListener {
-</span><span class="c1">//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-</span><span class="c1">//        }
-</span><span class="c1"></span>        <span class="n">binding</span><span class="p">.</span><span class="n">textview</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;first fragment text&#34;</span>
-        <span class="n">binding</span><span class="p">.</span><span class="n">buttonFirst</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
-            <span class="n">findNavController</span><span class="p">().</span><span class="n">navigate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">action_FirstFragment_to_SecondFragment</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroyView</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onDestroyView</span><span class="p">()</span>
-        <span class="n">_binding</span> <span class="p">=</span> <span class="k">null</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FirstFragment</span> <span class="p">:</span> <span class="n">Fragment</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">_binding</span> <span class="p">:</span> <span class="n">FragmentFirstBinding</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_binding</span><span class="o">!!</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateView</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">inflater</span><span class="p">:</span> <span class="n">LayoutInflater</span><span class="p">,</span> <span class="n">container</span><span class="p">:</span> <span class="n">ViewGroup</span><span class="p">?,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span> <span class="n">View</span><span class="p">?</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Inflate the layout for this fragment
+</span></span></span><span class="line"><span class="cl"><span class="c1">//        return inflater.inflate(R.layout.fragment_first, container, false)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">_binding</span> <span class="p">=</span> <span class="n">FragmentFirstBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">binding</span><span class="p">.</span><span class="n">root</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">View</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//        view.findViewById&lt;Button&gt;(R.id.button_first).setOnClickListener {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+</span></span></span><span class="line"><span class="cl"><span class="c1">//        }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">binding</span><span class="p">.</span><span class="n">textview</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;first fragment text&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">buttonFirst</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">findNavController</span><span class="p">().</span><span class="n">navigate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">action_FirstFragment_to_SecondFragment</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDestroyView</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onDestroyView</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_binding</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>SecondFragment의 내용은 FirstFragment와 동일하므로 생략하겠습니다. 이렇게 해서 프로젝트의 액티비티와 Fragement에 View Binding을 적용하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

@@ -437,8 +437,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker ps -a
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker ps -a
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>이전버전 컨테이너에서 파일 덤프</li>
@@ -448,8 +448,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker <span class="nb">exec</span> -it <span class="o">[</span>이전버전 container ID<span class="o">]</span> /usr/bin/pg_dumpall -U <span class="o">[</span>username<span class="o">]</span> &gt; dumpfile.sql
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it <span class="o">[</span>이전버전 container ID<span class="o">]</span> /usr/bin/pg_dumpall -U <span class="o">[</span>username<span class="o">]</span> &gt; dumpfile.sql
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>다음버전 컨테이너에 파일 복원</li>
@@ -459,8 +459,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker <span class="nb">exec</span> -it <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql &lt; dumpfile.sql
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql &lt; dumpfile.sql
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이 때 <code>the input device is not a TTY</code> 라고 뜨면서 입력이 안되면 다음 명령어로 직접 집어넣으면 된다.</p>
 <div class="highlight"><div class="chroma">
@@ -468,8 +468,8 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat dumpfile.sql <span class="p">|</span> docker <span class="nb">exec</span> -i <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql -U gitea
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat dumpfile.sql <span class="p">|</span> docker <span class="nb">exec</span> -i <span class="o">[</span>다음버전 container ID<span class="o">]</span> psql -U gitea
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>끗.</p>
 

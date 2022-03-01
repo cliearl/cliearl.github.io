@@ -361,9 +361,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew install hugo  // hugo를 인스톨
-$ hugo new site <span class="o">[</span>생성할 폴더 이름<span class="o">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ brew install hugo  // hugo를 인스톨
+</span></span><span class="line"><span class="cl">$ hugo new site <span class="o">[</span>생성할 폴더 이름<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="깃-준비">깃 준비</h2>
 <div class="highlight"><div class="chroma">
@@ -376,13 +376,13 @@ $ hugo new site <span class="o">[</span>생성할 폴더 이름<span class="o">]
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">cd</span> cliearl.github.io
-$ git init
-$ git remote add origin <span class="o">[</span>https://hugo 원본파일을 보관할 저장소<span class="o">]</span>
-$ git submodule add <span class="o">[</span>https://hugo가 생성한 사이트를 업로드할 저장소<span class="o">]</span> public
-$ git submodule add <span class="o">[</span>테마 깃주소.git<span class="o">]</span> themes/zzo
-$ git submodule update --init --recursive  // 테마가 업데이트 될 경우 반영
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> cliearl.github.io
+</span></span><span class="line"><span class="cl">$ git init
+</span></span><span class="line"><span class="cl">$ git remote add origin <span class="o">[</span>https://hugo 원본파일을 보관할 저장소<span class="o">]</span>
+</span></span><span class="line"><span class="cl">$ git submodule add <span class="o">[</span>https://hugo가 생성한 사이트를 업로드할 저장소<span class="o">]</span> public
+</span></span><span class="line"><span class="cl">$ git submodule add <span class="o">[</span>테마 깃주소.git<span class="o">]</span> themes/zzo
+</span></span><span class="line"><span class="cl">$ git submodule update --init --recursive  // 테마가 업데이트 될 경우 반영
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="글-작성-후-확인">글 작성 후 확인</h2>
 <div class="highlight"><div class="chroma">
@@ -391,9 +391,9 @@ $ git submodule update --init --recursive  // 테마가 업데이트 될 경우 
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo new posts/test.md  // 새로운 글 작성
-$ hugo server  // 만들어진 정적사이트를 localhost:1313에 띄워줌
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hugo new posts/test.md  // 새로운 글 작성
+</span></span><span class="line"><span class="cl">$ hugo server  // 만들어진 정적사이트를 localhost:1313에 띄워줌
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="페이지-작성-후-업로드">페이지 작성 후 업로드</h2>
 <div class="highlight"><div class="chroma">
@@ -405,12 +405,12 @@ $ hugo server  // 만들어진 정적사이트를 localhost:1313에 띄워줌
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo -t <span class="o">[</span>테마이름<span class="o">]</span>  // 정적사이트 생성
-$ <span class="nb">cd</span> public
-$ git add .
-$ git commit -m <span class="s2">&#34;deploy updates&#34;</span>
-$ git push origin main
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hugo -t <span class="o">[</span>테마이름<span class="o">]</span>  // 정적사이트 생성
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> public
+</span></span><span class="line"><span class="cl">$ git add .
+</span></span><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;deploy updates&#34;</span>
+</span></span><span class="line"><span class="cl">$ git push origin main
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="커밋-자동화-스크립트">커밋 자동화 스크립트</h2>
 <div class="highlight"><div class="chroma">
@@ -453,43 +453,43 @@ $ git push origin main
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-<span class="nb">echo</span> -e <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
-
-<span class="c1"># Build the project.</span>
-hugo -t zzo
-
-<span class="c1"># Go To Public folder</span>
-<span class="nb">cd</span> public
-<span class="c1"># Add changes to git.</span>
-git add .
-
-<span class="c1"># Commit changes.</span>
-<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>
-  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
-<span class="k">fi</span>
-git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
-
-<span class="c1"># Push source and build repos.</span>
-git push origin main
-
-<span class="c1"># Come Back up to the Project Root</span>
-<span class="nb">cd</span> ..
-
-
-<span class="c1"># blog 저장소 Commit &amp; Push</span>
-git add .
-
-<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>
-  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
-<span class="k">fi</span>
-git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
-
-git push origin master
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -e <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Build the project.</span>
+</span></span><span class="line"><span class="cl">hugo -t zzo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Go To Public folder</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> public
+</span></span><span class="line"><span class="cl"><span class="c1"># Add changes to git.</span>
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Commit changes.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Push source and build repos.</span>
+</span></span><span class="line"><span class="cl">git push origin main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Come Back up to the Project Root</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># blog 저장소 Commit &amp; Push</span>
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git push origin master
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="검색엔진에-등록">검색엔진에 등록</h2>
 <h3 id="google-search-console">Google Search Console</h3>
@@ -513,14 +513,14 @@ git push origin master
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># 로봇 검색 허용
-enableRobotsTXT = true
-
-# 사이트맵 작성
-[sitemap]
-changefreq = &#34;daily&#34;
-filename = &#34;sitemap.xml&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 로봇 검색 허용
+</span></span><span class="line"><span class="cl">enableRobotsTXT = true
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 사이트맵 작성
+</span></span><span class="line"><span class="cl">[sitemap]
+</span></span><span class="line"><span class="cl">changefreq = &#34;daily&#34;
+</span></span><span class="line"><span class="cl">filename = &#34;sitemap.xml&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="서치콘솔에-등록">서치콘솔에 등록</h3>
 <p>Sitemaps 메뉴에서 &hellip;/sitemap.xml을 등록.</p>

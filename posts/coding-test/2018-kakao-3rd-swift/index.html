@@ -395,49 +395,49 @@ if (!doNotTrack) {
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
-
-<span class="c1">// 진법변환</span>
-<span class="kd">func</span> <span class="nf">convertBase</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
-    
-    <span class="k">if</span> <span class="n">n</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;0&#34;</span> <span class="p">}</span>
-
-    <span class="kd">let</span> <span class="nv">list</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;3&#34;</span><span class="p">,</span> <span class="s">&#34;4&#34;</span><span class="p">,</span> <span class="s">&#34;5&#34;</span><span class="p">,</span> <span class="s">&#34;6&#34;</span><span class="p">,</span> <span class="s">&#34;7&#34;</span><span class="p">,</span> <span class="s">&#34;8&#34;</span><span class="p">,</span> <span class="s">&#34;9&#34;</span><span class="p">,</span> <span class="s">&#34;A&#34;</span><span class="p">,</span> <span class="s">&#34;B&#34;</span><span class="p">,</span> <span class="s">&#34;C&#34;</span><span class="p">,</span> <span class="s">&#34;D&#34;</span><span class="p">,</span> <span class="s">&#34;E&#34;</span><span class="p">,</span> <span class="s">&#34;F&#34;</span><span class="p">]</span>
-    
-    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">]()</span>
-    <span class="kd">var</span> <span class="nv">quotient</span> <span class="p">=</span> <span class="n">n</span> <span class="c1">// 몫</span>
-    <span class="kd">var</span> <span class="nv">remainder</span> <span class="p">=</span> <span class="mi">0</span> <span class="c1">// 나머지</span>
-    
-    <span class="c1">// 몫이 0이 될 때까지 n을 base로 계속 나누고 튀어나오는 나머지값을 역순으로 배치</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">quotient</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">remainder</span> <span class="p">=</span> <span class="n">quotient</span> <span class="o">%</span> <span class="n">base</span>
-        <span class="n">quotient</span> <span class="p">=</span> <span class="n">quotient</span> <span class="o">/</span> <span class="n">base</span>
-        <span class="n">answer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">remainder</span><span class="p">])</span>
-    <span class="p">}</span>
-    
-    <span class="n">answer</span> <span class="p">=</span> <span class="n">answer</span><span class="p">.</span><span class="n">reversed</span><span class="p">()</span>
-    
-    <span class="k">return</span> <span class="n">answer</span><span class="p">.</span><span class="n">joined</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">n</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">t</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">m</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">p</span><span class="p">:</span><span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
-    <span class="c1">// 진법 n, 미리 구할 숫자의 갯수 t, 게임에 참가하는 인원 m, 튜브의 순서 p</span>
-    
-    <span class="c1">// 총 문자열 구하기</span>
-    <span class="kd">var</span> <span class="nv">totalStr</span> <span class="p">=</span> <span class="s">&#34;&#34;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">totalStr</span> <span class="o">+=</span> <span class="n">convertBase</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">n</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="s">&#34;&#34;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">t</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nv">str</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">totalStr</span><span class="p">[</span><span class="n">totalStr</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">totalStr</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="n">p</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span>
-        <span class="n">answer</span> <span class="o">+=</span> <span class="n">str</span>
-    <span class="p">}</span>
-    
-    <span class="k">return</span> <span class="n">answer</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">Foundation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 진법변환</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">convertBase</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">n</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;0&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">list</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;3&#34;</span><span class="p">,</span> <span class="s">&#34;4&#34;</span><span class="p">,</span> <span class="s">&#34;5&#34;</span><span class="p">,</span> <span class="s">&#34;6&#34;</span><span class="p">,</span> <span class="s">&#34;7&#34;</span><span class="p">,</span> <span class="s">&#34;8&#34;</span><span class="p">,</span> <span class="s">&#34;9&#34;</span><span class="p">,</span> <span class="s">&#34;A&#34;</span><span class="p">,</span> <span class="s">&#34;B&#34;</span><span class="p">,</span> <span class="s">&#34;C&#34;</span><span class="p">,</span> <span class="s">&#34;D&#34;</span><span class="p">,</span> <span class="s">&#34;E&#34;</span><span class="p">,</span> <span class="s">&#34;F&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">quotient</span> <span class="p">=</span> <span class="n">n</span> <span class="c1">// 몫</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">remainder</span> <span class="p">=</span> <span class="mi">0</span> <span class="c1">// 나머지</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 몫이 0이 될 때까지 n을 base로 계속 나누고 튀어나오는 나머지값을 역순으로 배치</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">quotient</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">remainder</span> <span class="p">=</span> <span class="n">quotient</span> <span class="o">%</span> <span class="n">base</span>
+</span></span><span class="line"><span class="cl">        <span class="n">quotient</span> <span class="p">=</span> <span class="n">quotient</span> <span class="o">/</span> <span class="n">base</span>
+</span></span><span class="line"><span class="cl">        <span class="n">answer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">remainder</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">answer</span> <span class="p">=</span> <span class="n">answer</span><span class="p">.</span><span class="n">reversed</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">answer</span><span class="p">.</span><span class="n">joined</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">n</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">t</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">m</span><span class="p">:</span><span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">p</span><span class="p">:</span><span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 진법 n, 미리 구할 숫자의 갯수 t, 게임에 참가하는 인원 m, 튜브의 순서 p</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 총 문자열 구하기</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">totalStr</span> <span class="p">=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">totalStr</span> <span class="o">+=</span> <span class="n">convertBase</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">t</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">str</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">totalStr</span><span class="p">[</span><span class="n">totalStr</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">totalStr</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="n">p</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">answer</span> <span class="o">+=</span> <span class="n">str</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">answer</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="압축">압축</h2>
 <p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17684"  target="_blank" rel="noopener"
@@ -483,44 +483,44 @@ if (!doNotTrack) {
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
-
-<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">msg</span><span class="p">:</span><span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]</span> <span class="p">{</span>
-    
-    <span class="c1">// 알파벳 리스트를 딕셔너리로 준비</span>
-    <span class="kd">let</span> <span class="nv">alphabetList</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">=</span> <span class="p">(</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="mi">26</span><span class="p">).</span><span class="bp">map</span><span class="p">({</span><span class="nb">String</span><span class="p">(</span><span class="nb">UnicodeScalar</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">.</span><span class="n">unicodeScalars</span><span class="p">.</span><span class="bp">first</span><span class="p">!.</span><span class="n">value</span> <span class="o">+</span> <span class="nv">$0</span><span class="p">)</span><span class="o">!</span><span class="p">)})</span>
-    <span class="kd">var</span> <span class="nv">dict</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span> <span class="p">:</span> <span class="nb">Int</span><span class="p">]()</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span> <span class="k">in</span> <span class="n">alphabetList</span><span class="p">.</span><span class="n">enumerated</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">dict</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="p">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="p">}</span>
-    
-    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]()</span>
-    <span class="kd">var</span> <span class="nv">searchWord</span> <span class="p">=</span> <span class="s">&#34;&#34;</span>
-    
-    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">msg</span> <span class="p">{</span>
-        <span class="n">searchWord</span> <span class="o">+=</span> <span class="nb">String</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        
-        <span class="c1">// 찾는 단어가 없으면</span>
-        <span class="k">if</span> <span class="n">dict</span><span class="p">[</span><span class="n">searchWord</span><span class="p">]</span> <span class="p">==</span> <span class="kc">nil</span> <span class="p">{</span>
-            <span class="c1">// 사전에 추가</span>
-            <span class="n">dict</span><span class="p">[</span><span class="n">searchWord</span><span class="p">]</span> <span class="p">=</span> <span class="n">dict</span><span class="p">.</span><span class="bp">count</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="c1">// 찾는 단어의 길이보다 한글자 작은 값의 인덱스를 반환값에 추가</span>
-            <span class="n">answer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">dict</span><span class="p">[</span><span class="nb">String</span><span class="p">(</span><span class="n">searchWord</span><span class="p">.</span><span class="bp">dropLast</span><span class="p">())]</span><span class="o">!</span><span class="p">)</span>
-            <span class="c1">// 다음 찾을 단어를 searchWord에서 찾지 못했던 맨 마지막 문자로 설정</span>
-            <span class="n">searchWord</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">searchWord</span><span class="p">.</span><span class="n">popLast</span><span class="p">()</span><span class="o">!</span><span class="p">)</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">continue</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// 맨 마지막에 남은 글자의 인덱스를 추가해줌</span>
-    <span class="k">if</span> <span class="o">!</span><span class="n">searchWord</span><span class="p">.</span><span class="bp">isEmpty</span> <span class="p">{</span>
-        <span class="n">answer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">dict</span><span class="p">[</span><span class="n">searchWord</span><span class="p">]</span><span class="o">!</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="k">return</span> <span class="n">answer</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">Foundation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">msg</span><span class="p">:</span><span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 알파벳 리스트를 딕셔너리로 준비</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">alphabetList</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">=</span> <span class="p">(</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="mi">26</span><span class="p">).</span><span class="bp">map</span><span class="p">({</span><span class="nb">String</span><span class="p">(</span><span class="nb">UnicodeScalar</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">.</span><span class="n">unicodeScalars</span><span class="p">.</span><span class="bp">first</span><span class="p">!.</span><span class="n">value</span> <span class="o">+</span> <span class="nv">$0</span><span class="p">)</span><span class="o">!</span><span class="p">)})</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">dict</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span> <span class="p">:</span> <span class="nb">Int</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span> <span class="k">in</span> <span class="n">alphabetList</span><span class="p">.</span><span class="n">enumerated</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dict</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="p">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">searchWord</span> <span class="p">=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">msg</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">searchWord</span> <span class="o">+=</span> <span class="nb">String</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 찾는 단어가 없으면</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">dict</span><span class="p">[</span><span class="n">searchWord</span><span class="p">]</span> <span class="p">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 사전에 추가</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dict</span><span class="p">[</span><span class="n">searchWord</span><span class="p">]</span> <span class="p">=</span> <span class="n">dict</span><span class="p">.</span><span class="bp">count</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 찾는 단어의 길이보다 한글자 작은 값의 인덱스를 반환값에 추가</span>
+</span></span><span class="line"><span class="cl">            <span class="n">answer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">dict</span><span class="p">[</span><span class="nb">String</span><span class="p">(</span><span class="n">searchWord</span><span class="p">.</span><span class="bp">dropLast</span><span class="p">())]</span><span class="o">!</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 다음 찾을 단어를 searchWord에서 찾지 못했던 맨 마지막 문자로 설정</span>
+</span></span><span class="line"><span class="cl">            <span class="n">searchWord</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">searchWord</span><span class="p">.</span><span class="n">popLast</span><span class="p">()</span><span class="o">!</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 맨 마지막에 남은 글자의 인덱스를 추가해줌</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">!</span><span class="n">searchWord</span><span class="p">.</span><span class="bp">isEmpty</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">answer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">dict</span><span class="p">[</span><span class="n">searchWord</span><span class="p">]</span><span class="o">!</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">answer</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="파일명-정렬">파일명 정렬</h2>
 <p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17686"  target="_blank" rel="noopener"
@@ -581,59 +581,59 @@ if (!doNotTrack) {
 </span><span class="lnt">52
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
-
-<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">files</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">]()</span>
-    <span class="c1">// HEAD, NUMBER, FILENAME으로 구성된 사전 준비</span>
-    <span class="kd">var</span> <span class="nv">dict</span> <span class="p">=</span> <span class="p">[(</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="p">)]()</span>
-    
-    <span class="c1">// dict 작성</span>
-    <span class="k">for</span> <span class="n">file</span> <span class="k">in</span> <span class="n">files</span> <span class="p">{</span>
-        <span class="c1">// 처음으로 나오는 숫자를 찾음</span>
-        <span class="kd">let</span> <span class="nv">range</span> <span class="p">=</span> <span class="n">NSRange</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">startIndex</span><span class="p">...,</span> <span class="k">in</span><span class="p">:</span> <span class="n">file</span><span class="p">)</span>
-        <span class="kd">let</span> <span class="nv">numberRegex</span> <span class="p">=</span> <span class="k">try</span><span class="p">!</span> <span class="n">NSRegularExpression</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="s">&#34;[0-9]+&#34;</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">[])</span>
-        <span class="kd">let</span> <span class="nv">numberMatch</span> <span class="p">=</span> <span class="n">numberRegex</span><span class="p">.</span><span class="n">firstMatch</span><span class="p">(</span><span class="k">in</span><span class="p">:</span> <span class="n">file</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">[],</span> <span class="n">range</span><span class="p">:</span> <span class="n">range</span><span class="p">)</span>
-        <span class="kd">let</span> <span class="nv">number</span> <span class="p">=</span> <span class="n">numberMatch</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span> <span class="nb">String</span><span class="p">(</span><span class="n">file</span><span class="p">[</span><span class="nb">Range</span><span class="p">(</span><span class="nv">$0</span><span class="p">.</span><span class="n">range</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="n">file</span><span class="p">)</span><span class="o">!</span><span class="p">])</span> <span class="p">}</span><span class="o">!</span>
-
-        <span class="c1">// head 작성</span>
-        <span class="kd">let</span> <span class="nv">wordArr</span> <span class="p">=</span> <span class="n">file</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span> <span class="nb">String</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
-        <span class="kd">let</span> <span class="nv">head</span> <span class="p">=</span> <span class="n">wordArr</span><span class="p">[</span><span class="mf">0.</span><span class="p">..</span><span class="n">numberMatch</span><span class="p">!.</span><span class="n">range</span><span class="p">.</span><span class="n">lowerBound</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="n">joined</span><span class="p">()</span>
-        
-        <span class="n">dict</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">head</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// dict를 정렬</span>
-    <span class="k">for</span> <span class="kc">_</span> <span class="k">in</span> <span class="n">dict</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">dict</span><span class="p">.</span><span class="bp">count</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">{</span>
-            <span class="c1">// head가 같으면</span>
-            <span class="k">if</span> <span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="mf">0.</span><span class="n">lowercased</span><span class="p">()</span> <span class="p">==</span> <span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="mf">0.</span><span class="n">lowercased</span><span class="p">()</span> <span class="p">{</span>
-                <span class="c1">// number를 비교</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="mi">1</span><span class="p">)</span><span class="o">!</span> <span class="o">&gt;</span> <span class="nb">Int</span><span class="p">(</span><span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="mi">1</span><span class="p">)</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="c1">// i가 i+1보다 크면 스왑</span>
-<span class="c1">//                    (dict[i], dict[i+1]) = (dict[i+1], dict[i])</span>
-                    <span class="n">dict</span><span class="p">.</span><span class="n">swapAt</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="p">}</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// head를 비교</span>
-                <span class="k">if</span> <span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="mf">0.</span><span class="n">lowercased</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="mf">0.</span><span class="n">lowercased</span><span class="p">()</span> <span class="p">{</span>
-                    <span class="c1">// i가 i+1보다 크면 스왑</span>
-<span class="c1">//                    (dict[i], dict[i+1]) = (dict[i+1], dict[i])</span>
-                    <span class="n">dict</span><span class="p">.</span><span class="n">swapAt</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// 정렬한 순서대로 파일명을 꺼내 옴</span>
-    <span class="k">for</span> <span class="n">value</span> <span class="k">in</span> <span class="n">dict</span> <span class="p">{</span>
-        <span class="n">answer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="k">return</span> <span class="n">answer</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">Foundation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">files</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// HEAD, NUMBER, FILENAME으로 구성된 사전 준비</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">dict</span> <span class="p">=</span> <span class="p">[(</span><span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="p">,</span> <span class="nb">String</span><span class="p">)]()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// dict 작성</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">file</span> <span class="k">in</span> <span class="n">files</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 처음으로 나오는 숫자를 찾음</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">range</span> <span class="p">=</span> <span class="n">NSRange</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">startIndex</span><span class="p">...,</span> <span class="k">in</span><span class="p">:</span> <span class="n">file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">numberRegex</span> <span class="p">=</span> <span class="k">try</span><span class="p">!</span> <span class="n">NSRegularExpression</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="s">&#34;[0-9]+&#34;</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">[])</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">numberMatch</span> <span class="p">=</span> <span class="n">numberRegex</span><span class="p">.</span><span class="n">firstMatch</span><span class="p">(</span><span class="k">in</span><span class="p">:</span> <span class="n">file</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">[],</span> <span class="n">range</span><span class="p">:</span> <span class="n">range</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">number</span> <span class="p">=</span> <span class="n">numberMatch</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span> <span class="nb">String</span><span class="p">(</span><span class="n">file</span><span class="p">[</span><span class="nb">Range</span><span class="p">(</span><span class="nv">$0</span><span class="p">.</span><span class="n">range</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="n">file</span><span class="p">)</span><span class="o">!</span><span class="p">])</span> <span class="p">}</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// head 작성</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">wordArr</span> <span class="p">=</span> <span class="n">file</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span> <span class="nb">String</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">head</span> <span class="p">=</span> <span class="n">wordArr</span><span class="p">[</span><span class="mf">0.</span><span class="p">..</span><span class="n">numberMatch</span><span class="p">!.</span><span class="n">range</span><span class="p">.</span><span class="n">lowerBound</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="n">joined</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">dict</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">head</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// dict를 정렬</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="kc">_</span> <span class="k">in</span> <span class="n">dict</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="n">dict</span><span class="p">.</span><span class="bp">count</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// head가 같으면</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="mf">0.</span><span class="n">lowercased</span><span class="p">()</span> <span class="p">==</span> <span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="mf">0.</span><span class="n">lowercased</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// number를 비교</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="mi">1</span><span class="p">)</span><span class="o">!</span> <span class="o">&gt;</span> <span class="nb">Int</span><span class="p">(</span><span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="mi">1</span><span class="p">)</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// i가 i+1보다 크면 스왑</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//                    (dict[i], dict[i+1]) = (dict[i+1], dict[i])</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dict</span><span class="p">.</span><span class="n">swapAt</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// head를 비교</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="mf">0.</span><span class="n">lowercased</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">dict</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="mf">0.</span><span class="n">lowercased</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// i가 i+1보다 크면 스왑</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//                    (dict[i], dict[i+1]) = (dict[i+1], dict[i])</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dict</span><span class="p">.</span><span class="n">swapAt</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 정렬한 순서대로 파일명을 꺼내 옴</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">value</span> <span class="k">in</span> <span class="n">dict</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">answer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">answer</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="방금-그-곡">방금 그 곡</h2>
 <p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17683"  target="_blank" rel="noopener"
@@ -701,66 +701,66 @@ if (!doNotTrack) {
 </span><span class="lnt">59
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
-
-<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">m</span><span class="p">:</span><span class="nb">String</span><span class="p">,</span> <span class="kc">_</span> <span class="n">musicinfos</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
-    <span class="c1">// 입력의 샵문자를 일반 캐릭터로 변환</span>
-    <span class="kd">var</span> <span class="nv">convertm</span> <span class="p">=</span> <span class="n">m</span>
-    <span class="n">convertm</span> <span class="p">=</span> <span class="n">convertm</span><span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;A#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;H&#34;</span><span class="p">)</span>
-        <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;C#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;I&#34;</span><span class="p">)</span>
-        <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;D#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;J&#34;</span><span class="p">)</span>
-        <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;F#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;K&#34;</span><span class="p">)</span>
-        <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;G#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;L&#34;</span><span class="p">)</span>
-    
-    <span class="kd">var</span> <span class="nv">matchSong</span> <span class="p">=</span> <span class="s">&#34;&#34;</span>
-    <span class="c1">// 실제 플레이 된 사운드와 타이틀을 매치시킨 사전 준비</span>
-    <span class="kd">var</span> <span class="nv">dict</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span> <span class="p">:</span> <span class="nb">String</span><span class="p">]()</span>
-    
-    <span class="c1">// dict 작성</span>
-    <span class="k">for</span> <span class="n">info</span> <span class="k">in</span> <span class="n">musicinfos</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nv">str</span> <span class="p">=</span> <span class="n">info</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;,&#34;</span><span class="p">)</span>
-        <span class="kd">var</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">str</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">str</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-        <span class="c1">// 시간 변환</span>
-        <span class="kd">let</span> <span class="p">(</span><span class="n">starthh</span><span class="p">,</span> <span class="n">startmm</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">start</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;:&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
-                                  <span class="n">start</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;:&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="kd">let</span> <span class="p">(</span><span class="n">endhh</span><span class="p">,</span> <span class="n">endmm</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">end</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;:&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
-                              <span class="n">end</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;:&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="kd">let</span> <span class="nv">time</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">endhh</span><span class="p">)</span><span class="o">!</span> <span class="o">-</span> <span class="nb">Int</span><span class="p">(</span><span class="n">starthh</span><span class="p">)</span><span class="o">!</span><span class="p">)</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">endmm</span><span class="p">)</span><span class="o">!</span> <span class="o">-</span> <span class="nb">Int</span><span class="p">(</span><span class="n">startmm</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
-        
-        <span class="c1">// 재생한 사운드 작성</span>
-        <span class="n">sound</span> <span class="p">=</span> <span class="n">sound</span><span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;A#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;H&#34;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;C#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;I&#34;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;D#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;J&#34;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;F#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;K&#34;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;G#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;L&#34;</span><span class="p">)</span>
-        
-        <span class="c1">// 처음부터 끝까지 반복 + 남은거 붙이기</span>
-        <span class="kd">let</span> <span class="nv">playedSound</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="n">sound</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="n">time</span> <span class="o">/</span> <span class="n">sound</span><span class="p">.</span><span class="bp">count</span><span class="p">)</span>
-            <span class="o">+</span> <span class="n">sound</span><span class="p">[</span><span class="n">sound</span><span class="p">.</span><span class="n">startIndex</span><span class="p">..&lt;</span><span class="n">sound</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">sound</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="n">time</span><span class="o">%</span><span class="n">sound</span><span class="p">.</span><span class="bp">count</span><span class="p">)]</span>
-        
-        <span class="c1">// dict 작성</span>
-        <span class="n">dict</span><span class="p">[</span><span class="n">playedSound</span><span class="p">]</span> <span class="p">=</span> <span class="n">title</span>
-    <span class="p">}</span>
-    
-    <span class="k">for</span> <span class="n">song</span> <span class="k">in</span> <span class="n">dict</span><span class="p">.</span><span class="n">keys</span> <span class="p">{</span>
-        <span class="c1">// 비교하고 싶은 음이 사전에 있으면</span>
-        <span class="k">if</span> <span class="n">song</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="n">convertm</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// 재생된 시간이 같을 경우 먼저 입력된 음악 제목을 반환</span>
-            <span class="k">if</span> <span class="n">matchSong</span> <span class="p">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
-                <span class="n">matchSong</span> <span class="p">=</span> <span class="n">song</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// 조건이 일치하는 음악이 여러 개일 때에는 라디오에서 재생된 시간이 제일 긴 음악 제목을 반환</span>
-                <span class="k">if</span> <span class="n">matchSong</span><span class="p">.</span><span class="bp">count</span> <span class="o">&lt;</span> <span class="n">song</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
-                    <span class="n">matchSong</span> <span class="p">=</span> <span class="n">song</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    
-    <span class="k">if</span> <span class="n">matchSong</span> <span class="p">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;(None)&#34;</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="n">dict</span><span class="p">[</span><span class="n">matchSong</span><span class="p">]</span><span class="o">!</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">Foundation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">m</span><span class="p">:</span><span class="nb">String</span><span class="p">,</span> <span class="kc">_</span> <span class="n">musicinfos</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 입력의 샵문자를 일반 캐릭터로 변환</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">convertm</span> <span class="p">=</span> <span class="n">m</span>
+</span></span><span class="line"><span class="cl">    <span class="n">convertm</span> <span class="p">=</span> <span class="n">convertm</span><span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;A#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;H&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;C#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;I&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;D#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;J&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;F#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;K&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;G#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;L&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">matchSong</span> <span class="p">=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 실제 플레이 된 사운드와 타이틀을 매치시킨 사전 준비</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">dict</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span> <span class="p">:</span> <span class="nb">String</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// dict 작성</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">info</span> <span class="k">in</span> <span class="n">musicinfos</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">str</span> <span class="p">=</span> <span class="n">info</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;,&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">str</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">str</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 시간 변환</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="p">(</span><span class="n">starthh</span><span class="p">,</span> <span class="n">startmm</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">start</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;:&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                                  <span class="n">start</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;:&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="p">(</span><span class="n">endhh</span><span class="p">,</span> <span class="n">endmm</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="n">end</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;:&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">end</span><span class="p">.</span><span class="n">components</span><span class="p">(</span><span class="n">separatedBy</span><span class="p">:</span> <span class="s">&#34;:&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">time</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">endhh</span><span class="p">)</span><span class="o">!</span> <span class="o">-</span> <span class="nb">Int</span><span class="p">(</span><span class="n">starthh</span><span class="p">)</span><span class="o">!</span><span class="p">)</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="p">(</span><span class="nb">Int</span><span class="p">(</span><span class="n">endmm</span><span class="p">)</span><span class="o">!</span> <span class="o">-</span> <span class="nb">Int</span><span class="p">(</span><span class="n">startmm</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 재생한 사운드 작성</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sound</span> <span class="p">=</span> <span class="n">sound</span><span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;A#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;H&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;C#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;I&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;D#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;J&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;F#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;K&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;G#&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;L&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 처음부터 끝까지 반복 + 남은거 붙이기</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">playedSound</span> <span class="p">=</span> <span class="nb">String</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="n">sound</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="n">time</span> <span class="o">/</span> <span class="n">sound</span><span class="p">.</span><span class="bp">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">+</span> <span class="n">sound</span><span class="p">[</span><span class="n">sound</span><span class="p">.</span><span class="n">startIndex</span><span class="p">..&lt;</span><span class="n">sound</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">sound</span><span class="p">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="n">offsetBy</span><span class="p">:</span> <span class="n">time</span><span class="o">%</span><span class="n">sound</span><span class="p">.</span><span class="bp">count</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// dict 작성</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dict</span><span class="p">[</span><span class="n">playedSound</span><span class="p">]</span> <span class="p">=</span> <span class="n">title</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">song</span> <span class="k">in</span> <span class="n">dict</span><span class="p">.</span><span class="n">keys</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 비교하고 싶은 음이 사전에 있으면</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">song</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="n">convertm</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 재생된 시간이 같을 경우 먼저 입력된 음악 제목을 반환</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">matchSong</span> <span class="p">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">matchSong</span> <span class="p">=</span> <span class="n">song</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 조건이 일치하는 음악이 여러 개일 때에는 라디오에서 재생된 시간이 제일 긴 음악 제목을 반환</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">matchSong</span><span class="p">.</span><span class="bp">count</span> <span class="o">&lt;</span> <span class="n">song</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">matchSong</span> <span class="p">=</span> <span class="n">song</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">matchSong</span> <span class="p">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;(None)&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dict</span><span class="p">[</span><span class="n">matchSong</span><span class="p">]</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="자동완성">자동완성</h2>
 <p><a class="link" href="https://www.welcomekakao.com/learn/courses/30/lessons/17685"  target="_blank" rel="noopener"
@@ -822,60 +822,60 @@ if (!doNotTrack) {
 </span><span class="lnt">53
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
-
-<span class="c1">// 두 문자를 비교한 횟수를 반환</span>
-<span class="kd">func</span> <span class="nf">compare2</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">1.</span><span class="p">..</span><span class="n">object</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
-        <span class="c1">// 일치하지 않은 부분이 나타난 인덱스를 반환</span>
-        <span class="c1">// 타겟길이가 오브젝트길이보다 짧으면 비교할 인덱스를 최대값으로 고정</span>
-        <span class="k">if</span> <span class="n">object</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="n">i</span><span class="p">].</span><span class="n">joined</span><span class="p">()</span>
-            <span class="o">!=</span> <span class="n">target</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="bp">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">target</span><span class="p">.</span><span class="bp">count</span><span class="p">)].</span><span class="n">joined</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">i</span> <span class="p">}</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// 겹치는 부분이 없었으면 (=for문을 중간에 빠져나오지 못했으면) 길이를 그대로 반환</span>
-    <span class="k">return</span> <span class="n">object</span><span class="p">.</span><span class="bp">count</span>
-<span class="p">}</span>
-
-<span class="c1">// 세 문자를 비교</span>
-<span class="kd">func</span> <span class="nf">compare3</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">],</span> <span class="n">targetL</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">],</span> <span class="n">targetR</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">1.</span><span class="p">..</span><span class="n">object</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">object</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="n">i</span><span class="p">].</span><span class="n">joined</span><span class="p">()</span> <span class="o">!=</span> <span class="n">targetL</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="bp">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">targetL</span><span class="p">.</span><span class="bp">count</span><span class="p">)].</span><span class="n">joined</span><span class="p">())</span>
-            <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">object</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="n">i</span><span class="p">].</span><span class="n">joined</span><span class="p">()</span> <span class="o">!=</span> <span class="n">targetR</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="bp">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">targetR</span><span class="p">.</span><span class="bp">count</span><span class="p">)].</span><span class="n">joined</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">i</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    
-    <span class="k">return</span> <span class="n">object</span><span class="p">.</span><span class="bp">count</span>
-<span class="p">}</span>
-
-
-<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">words</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-    <span class="c1">// 고속탐색을 위해 입력받은 문자열을 정렬한 뒤 배열화</span>
-    <span class="kd">var</span> <span class="nv">wordsArr</span> <span class="p">=</span> <span class="p">[[</span><span class="nb">String</span><span class="p">]]()</span>
-    <span class="k">for</span> <span class="n">word</span> <span class="k">in</span> <span class="n">words</span><span class="p">.</span><span class="bp">sorted</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nv">splitWord</span> <span class="p">=</span> <span class="n">word</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span> <span class="nb">String</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
-        <span class="n">wordsArr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">splitWord</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="mi">0</span>
-    
-    <span class="k">for</span> <span class="n">idx</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">wordsArr</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="n">idx</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
-            <span class="c1">// 첫번째 단어는 오른쪽 단어와 비교</span>
-            <span class="n">answer</span> <span class="o">+=</span> <span class="n">compare2</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">idx</span> <span class="p">==</span> <span class="n">wordsArr</span><span class="p">.</span><span class="bp">count</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">{</span>
-            <span class="c1">// 마지막 단어는 왼쪽 단어와 비교</span>
-            <span class="n">answer</span> <span class="o">+=</span> <span class="n">compare2</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// 나머지 단어는 좌우 단어들과 비교</span>
-            <span class="n">answer</span> <span class="o">+=</span> <span class="n">compare3</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">targetL</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">targetR</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    
-    <span class="k">return</span> <span class="n">answer</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">Foundation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 두 문자를 비교한 횟수를 반환</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">compare2</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">1.</span><span class="p">..</span><span class="n">object</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 일치하지 않은 부분이 나타난 인덱스를 반환</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 타겟길이가 오브젝트길이보다 짧으면 비교할 인덱스를 최대값으로 고정</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">object</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="n">i</span><span class="p">].</span><span class="n">joined</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">!=</span> <span class="n">target</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="bp">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">target</span><span class="p">.</span><span class="bp">count</span><span class="p">)].</span><span class="n">joined</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">i</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 겹치는 부분이 없었으면 (=for문을 중간에 빠져나오지 못했으면) 길이를 그대로 반환</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">object</span><span class="p">.</span><span class="bp">count</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 세 문자를 비교</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">compare3</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">],</span> <span class="n">targetL</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">],</span> <span class="n">targetR</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">1.</span><span class="p">..</span><span class="n">object</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">object</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="n">i</span><span class="p">].</span><span class="n">joined</span><span class="p">()</span> <span class="o">!=</span> <span class="n">targetL</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="bp">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">targetL</span><span class="p">.</span><span class="bp">count</span><span class="p">)].</span><span class="n">joined</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">object</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="n">i</span><span class="p">].</span><span class="n">joined</span><span class="p">()</span> <span class="o">!=</span> <span class="n">targetR</span><span class="p">[</span><span class="mf">0.</span><span class="p">.&lt;</span><span class="bp">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">targetR</span><span class="p">.</span><span class="bp">count</span><span class="p">)].</span><span class="n">joined</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">object</span><span class="p">.</span><span class="bp">count</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">words</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 고속탐색을 위해 입력받은 문자열을 정렬한 뒤 배열화</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">wordsArr</span> <span class="p">=</span> <span class="p">[[</span><span class="nb">String</span><span class="p">]]()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">word</span> <span class="k">in</span> <span class="n">words</span><span class="p">.</span><span class="bp">sorted</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">splitWord</span> <span class="p">=</span> <span class="n">word</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span> <span class="nb">String</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">wordsArr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">splitWord</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">idx</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">wordsArr</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">idx</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 첫번째 단어는 오른쪽 단어와 비교</span>
+</span></span><span class="line"><span class="cl">            <span class="n">answer</span> <span class="o">+=</span> <span class="n">compare2</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">idx</span> <span class="p">==</span> <span class="n">wordsArr</span><span class="p">.</span><span class="bp">count</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 마지막 단어는 왼쪽 단어와 비교</span>
+</span></span><span class="line"><span class="cl">            <span class="n">answer</span> <span class="o">+=</span> <span class="n">compare2</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 나머지 단어는 좌우 단어들과 비교</span>
+</span></span><span class="line"><span class="cl">            <span class="n">answer</span> <span class="o">+=</span> <span class="n">compare3</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">targetL</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">targetR</span><span class="p">:</span> <span class="n">wordsArr</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">answer</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -964,90 +964,90 @@ if (!doNotTrack) {
 </span><span class="lnt">83
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
-
-<span class="c1">// 데이터 저장 및 커서관리용 노드</span>
-<span class="kd">class</span> <span class="nc">Node</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nv">key</span><span class="p">:</span> <span class="nb">Character</span><span class="p">?</span>
-    <span class="kd">var</span> <span class="nv">data</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-    <span class="c1">// 노드간 연결용 이름표 컨테이너</span>
-    <span class="kd">var</span> <span class="nv">children</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Character</span> <span class="p">:</span> <span class="n">Node</span><span class="p">]()</span>
-    <span class="c1">// 노드 순서를 표시하는 컨테이너</span>
-    <span class="kd">var</span> <span class="nv">order</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0</span>
-    
-    <span class="kd">init</span> <span class="p">(</span><span class="kc">_</span> <span class="n">key</span><span class="p">:</span> <span class="nb">Character</span><span class="p">?,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">key</span> <span class="p">=</span> <span class="n">key</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">data</span> <span class="p">=</span> <span class="n">data</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// 트라이 자료구조 클래스</span>
-<span class="c1">// 캐릭터를 트리를 이용하여 포도송이처럼 연결시킨 구조</span>
-<span class="kd">class</span> <span class="nc">Trie</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nv">head</span><span class="p">:</span> <span class="n">Node</span>
-    
-    <span class="kd">init</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kc">self</span><span class="p">.</span><span class="n">head</span> <span class="p">=</span> <span class="n">Node</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// 삽입용 함수</span>
-    <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="kc">_</span> <span class="n">str</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nv">curr_node</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">head</span>
-        
-        <span class="c1">// 입력받은 단어의 트리작성</span>
-        <span class="k">for</span> <span class="n">char</span> <span class="k">in</span> <span class="n">str</span> <span class="p">{</span>
-            <span class="c1">// 요소가 없으면 char를 가지는 새 노드를 연결</span>
-            <span class="k">if</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="p">==</span> <span class="kc">nil</span> <span class="p">{</span>
-                <span class="n">curr_node</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="p">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
-            <span class="p">}</span>
-            
-            <span class="c1">// 다음 노드로 이동</span>
-            <span class="n">curr_node</span><span class="p">.</span><span class="n">order</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">curr_node</span> <span class="p">=</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">char</span><span class="p">]</span><span class="o">!</span>
-        <span class="p">}</span>
-        
-        <span class="c1">// 맨 마지막 노드의 data는 str이다</span>
-        <span class="n">curr_node</span><span class="p">.</span><span class="n">data</span> <span class="p">=</span> <span class="n">str</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// 입력 문자열에 대한 값 반환</span>
-    <span class="kd">func</span> <span class="nf">countInputWord</span><span class="p">(</span><span class="kc">_</span> <span class="n">str</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nv">curr_node</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">head</span>
-        <span class="kd">var</span> <span class="nv">count</span> <span class="p">=</span> <span class="mi">0</span>
-        
-        <span class="c1">// 전 노드 검색</span>
-        <span class="k">for</span> <span class="n">char</span> <span class="k">in</span> <span class="n">str</span> <span class="p">{</span>
-            <span class="n">curr_node</span> <span class="p">=</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">char</span><span class="p">]</span><span class="o">!</span>
-            <span class="bp">count</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="c1">// 일치하는 단어가 있거나 첫번째 노드에 데이터가 없으면 중지</span>
-            <span class="k">if</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">data</span> <span class="p">==</span> <span class="n">str</span>
-                <span class="o">||</span> <span class="p">(</span><span class="n">curr_node</span><span class="p">.</span><span class="n">order</span> <span class="p">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">data</span> <span class="p">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="bp">count</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        
-        <span class="k">return</span> <span class="bp">count</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-    
-
-<span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">words</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-    
-    <span class="c1">// 입력으로부터 트라이 구조 작성</span>
-    <span class="kd">let</span> <span class="nv">trie</span> <span class="p">=</span> <span class="n">Trie</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">word</span> <span class="k">in</span> <span class="n">words</span> <span class="p">{</span>
-        <span class="n">trie</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// 입력값 계산</span>
-    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">word</span> <span class="k">in</span> <span class="n">words</span> <span class="p">{</span>
-        <span class="n">answer</span> <span class="o">+=</span> <span class="n">trie</span><span class="p">.</span><span class="n">countInputWord</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">answer</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">Foundation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 데이터 저장 및 커서관리용 노드</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">key</span><span class="p">:</span> <span class="nb">Character</span><span class="p">?</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">data</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 노드간 연결용 이름표 컨테이너</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">children</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Character</span> <span class="p">:</span> <span class="n">Node</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 노드 순서를 표시하는 컨테이너</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">order</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">init</span> <span class="p">(</span><span class="kc">_</span> <span class="n">key</span><span class="p">:</span> <span class="nb">Character</span><span class="p">?,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">key</span> <span class="p">=</span> <span class="n">key</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">data</span> <span class="p">=</span> <span class="n">data</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 트라이 자료구조 클래스</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 캐릭터를 트리를 이용하여 포도송이처럼 연결시킨 구조</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Trie</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">head</span><span class="p">:</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">init</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">head</span> <span class="p">=</span> <span class="n">Node</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 삽입용 함수</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="kc">_</span> <span class="n">str</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nv">curr_node</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">head</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 입력받은 단어의 트리작성</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">char</span> <span class="k">in</span> <span class="n">str</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 요소가 없으면 char를 가지는 새 노드를 연결</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="p">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">curr_node</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="p">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="c1">// 다음 노드로 이동</span>
+</span></span><span class="line"><span class="cl">            <span class="n">curr_node</span><span class="p">.</span><span class="n">order</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="n">curr_node</span> <span class="p">=</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">char</span><span class="p">]</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 맨 마지막 노드의 data는 str이다</span>
+</span></span><span class="line"><span class="cl">        <span class="n">curr_node</span><span class="p">.</span><span class="n">data</span> <span class="p">=</span> <span class="n">str</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 입력 문자열에 대한 값 반환</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">countInputWord</span><span class="p">(</span><span class="kc">_</span> <span class="n">str</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nv">curr_node</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">head</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nv">count</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 전 노드 검색</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">char</span> <span class="k">in</span> <span class="n">str</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">curr_node</span> <span class="p">=</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">char</span><span class="p">]</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 일치하는 단어가 있거나 첫번째 노드에 데이터가 없으면 중지</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">data</span> <span class="p">==</span> <span class="n">str</span>
+</span></span><span class="line"><span class="cl">                <span class="o">||</span> <span class="p">(</span><span class="n">curr_node</span><span class="p">.</span><span class="n">order</span> <span class="p">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">curr_node</span><span class="p">.</span><span class="n">data</span> <span class="p">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="bp">count</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">count</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">solution</span><span class="p">(</span><span class="kc">_</span> <span class="n">words</span><span class="p">:[</span><span class="nb">String</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 입력으로부터 트라이 구조 작성</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">trie</span> <span class="p">=</span> <span class="n">Trie</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">word</span> <span class="k">in</span> <span class="n">words</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">trie</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 입력값 계산</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">answer</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">word</span> <span class="k">in</span> <span class="n">words</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">answer</span> <span class="o">+=</span> <span class="n">trie</span><span class="p">.</span><span class="n">countInputWord</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">answer</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="필기-시험">필기 시험</h2>
 <p><a class="link" href="http://tech.kakao.com/files/kakao-blind-recruitment.pdf"  target="_blank" rel="noopener"

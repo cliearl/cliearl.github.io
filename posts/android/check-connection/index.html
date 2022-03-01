@@ -358,9 +358,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="네트워크-타입-확인">네트워크 타입 확인</h2>
 <p>우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.</p>
@@ -385,24 +385,24 @@ if (!doNotTrack) {
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getNetworkType</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">connMgr</span> <span class="p">=</span>
-        <span class="n">context</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">CONNECTIVITY_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">ConnectivityManager</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">Build</span><span class="p">.</span><span class="n">VERSION</span><span class="p">.</span><span class="n">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="p">.</span><span class="n">VERSION_CODES</span><span class="p">.</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">nw</span> <span class="p">=</span> <span class="n">connMgr</span><span class="p">.</span><span class="n">activeNetwork</span> <span class="o">?:</span> <span class="k">return</span> <span class="s2">&#34;NO_CONNECTION&#34;</span>
-        <span class="k">val</span> <span class="py">actNw</span> <span class="p">=</span> <span class="n">connMgr</span><span class="p">.</span><span class="n">getNetworkCapabilities</span><span class="p">(</span><span class="n">nw</span><span class="p">)</span> <span class="o">?:</span> <span class="k">return</span> <span class="s2">&#34;NO_CONNECTION&#34;</span>
-        <span class="k">return</span> <span class="k">when</span> <span class="p">{</span>
-            <span class="n">actNw</span><span class="p">.</span><span class="n">hasTransport</span><span class="p">(</span><span class="n">NetworkCapabilities</span><span class="p">.</span><span class="n">TRANSPORT_WIFI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&#34;WIFI_STATE&#34;</span>
-            <span class="n">actNw</span><span class="p">.</span><span class="n">hasTransport</span><span class="p">(</span><span class="n">NetworkCapabilities</span><span class="p">.</span><span class="n">TRANSPORT_CELLULAR</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&#34;CELLULAR_STATE&#34;</span>
-            <span class="n">actNw</span><span class="p">.</span><span class="n">hasTransport</span><span class="p">(</span><span class="n">NetworkCapabilities</span><span class="p">.</span><span class="n">TRANSPORT_ETHERNET</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&#34;ETHERNET_STATE&#34;</span>
-            <span class="k">else</span> <span class="o">-&gt;</span> <span class="s2">&#34;NO_CONNECTION&#34;</span>
-        <span class="p">}</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">nwInfo</span> <span class="p">=</span> <span class="n">connMgr</span><span class="p">.</span><span class="n">activeNetworkInfo</span> <span class="o">?:</span> <span class="k">return</span> <span class="s2">&#34;NO_CONNECTION&#34;</span>
-        <span class="k">return</span> <span class="n">nwInfo</span><span class="p">.</span><span class="n">typeName</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getNetworkType</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">connMgr</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">context</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">CONNECTIVITY_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">ConnectivityManager</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">Build</span><span class="p">.</span><span class="n">VERSION</span><span class="p">.</span><span class="n">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="p">.</span><span class="n">VERSION_CODES</span><span class="p">.</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">nw</span> <span class="p">=</span> <span class="n">connMgr</span><span class="p">.</span><span class="n">activeNetwork</span> <span class="o">?:</span> <span class="k">return</span> <span class="s2">&#34;NO_CONNECTION&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">actNw</span> <span class="p">=</span> <span class="n">connMgr</span><span class="p">.</span><span class="n">getNetworkCapabilities</span><span class="p">(</span><span class="n">nw</span><span class="p">)</span> <span class="o">?:</span> <span class="k">return</span> <span class="s2">&#34;NO_CONNECTION&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">when</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">actNw</span><span class="p">.</span><span class="n">hasTransport</span><span class="p">(</span><span class="n">NetworkCapabilities</span><span class="p">.</span><span class="n">TRANSPORT_WIFI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&#34;WIFI_STATE&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">actNw</span><span class="p">.</span><span class="n">hasTransport</span><span class="p">(</span><span class="n">NetworkCapabilities</span><span class="p">.</span><span class="n">TRANSPORT_CELLULAR</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&#34;CELLULAR_STATE&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">actNw</span><span class="p">.</span><span class="n">hasTransport</span><span class="p">(</span><span class="n">NetworkCapabilities</span><span class="p">.</span><span class="n">TRANSPORT_ETHERNET</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&#34;ETHERNET_STATE&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="o">-&gt;</span> <span class="s2">&#34;NO_CONNECTION&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">nwInfo</span> <span class="p">=</span> <span class="n">connMgr</span><span class="p">.</span><span class="n">activeNetworkInfo</span> <span class="o">?:</span> <span class="k">return</span> <span class="s2">&#34;NO_CONNECTION&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nwInfo</span><span class="p">.</span><span class="n">typeName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>기본은 <code>ConnectivityManager</code> 인스턴스를 만들고 그 인스턴스로부터 네트워크 타입을 가져오는 방식입니다. API Level 23 마시멜로우까지는 <a class="link" href="https://developer.android.com/reference/android/net/ConnectivityManager#getActiveNetworkInfo%28%29"  target="_blank" rel="noopener"
     >connMgr.activeNetworkInfo</a>를 통해 <a class="link" href="https://developer.android.com/reference/android/net/NetworkInfo"  target="_blank" rel="noopener"
@@ -450,27 +450,27 @@ if (!doNotTrack) {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">class</span> <span class="nc">CheckConnection</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">host</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">isSuccess</span> <span class="p">=</span> <span class="k">false</span>
-
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">var</span> <span class="py">urlConnection</span><span class="p">:</span> <span class="n">HttpURLConnection</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">urlConnection</span> <span class="p">=</span> <span class="n">URL</span><span class="p">(</span><span class="n">host</span><span class="p">).</span><span class="n">openConnection</span><span class="p">()</span> <span class="k">as</span> <span class="n">HttpURLConnection</span>
-            <span class="n">urlConnection</span><span class="p">.</span><span class="n">setRequestProperty</span><span class="p">(</span><span class="s2">&#34;User-Agent&#34;</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">getProperty</span><span class="p">(</span><span class="s2">&#34;http.agent&#34;</span><span class="p">))</span>
-            <span class="n">urlConnection</span><span class="p">.</span><span class="n">connectTimeout</span> <span class="p">=</span> <span class="m">1000</span>
-            <span class="n">urlConnection</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
-            <span class="k">val</span> <span class="py">responseCode</span> <span class="p">=</span> <span class="n">urlConnection</span><span class="p">.</span><span class="n">responseCode</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">responseCode</span> <span class="o">==</span> <span class="m">204</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">isSuccess</span> <span class="p">=</span> <span class="k">true</span>
-            <span class="p">}</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-        <span class="p">}</span>
-        <span class="n">urlConnection</span><span class="o">?.</span><span class="n">disconnect</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">class</span> <span class="nc">CheckConnection</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">host</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="py">isSuccess</span> <span class="p">=</span> <span class="k">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">var</span> <span class="py">urlConnection</span><span class="p">:</span> <span class="n">HttpURLConnection</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">urlConnection</span> <span class="p">=</span> <span class="n">URL</span><span class="p">(</span><span class="n">host</span><span class="p">).</span><span class="n">openConnection</span><span class="p">()</span> <span class="k">as</span> <span class="n">HttpURLConnection</span>
+</span></span><span class="line"><span class="cl">            <span class="n">urlConnection</span><span class="p">.</span><span class="n">setRequestProperty</span><span class="p">(</span><span class="s2">&#34;User-Agent&#34;</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">getProperty</span><span class="p">(</span><span class="s2">&#34;http.agent&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">urlConnection</span><span class="p">.</span><span class="n">connectTimeout</span> <span class="p">=</span> <span class="m">1000</span>
+</span></span><span class="line"><span class="cl">            <span class="n">urlConnection</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">responseCode</span> <span class="p">=</span> <span class="n">urlConnection</span><span class="p">.</span><span class="n">responseCode</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">responseCode</span> <span class="o">==</span> <span class="m">204</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">isSuccess</span> <span class="p">=</span> <span class="k">true</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">urlConnection</span><span class="o">?.</span><span class="n">disconnect</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음은 <code>CheckConnection</code>을 실행시켜주면 되겠죠. 스레드를 시작하고 204 응답이 돌아왔다면 true를 반환하는 함수를 만들어줍니다. 메인스레드에서 작업이 끝날때까지 대기하도록 하기 위해 <a class="link" href="https://developer.android.com/reference/java/lang/Thread#join%28%29"  target="_blank" rel="noopener"
     >join</a>을 추가로 실행시켜 줍니다.</p>
@@ -489,18 +489,18 @@ if (!doNotTrack) {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isOnline</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">cc</span> <span class="p">=</span> <span class="n">CheckConnection</span><span class="p">(</span><span class="s2">&#34;http://clients3.google.com/generate_204&#34;</span><span class="p">)</span>
-    <span class="n">cc</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
-    <span class="k">try</span> <span class="p">{</span>
-        <span class="n">cc</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">cc</span><span class="p">.</span><span class="n">isSuccess</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="k">false</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">isOnline</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">cc</span> <span class="p">=</span> <span class="n">CheckConnection</span><span class="p">(</span><span class="s2">&#34;http://clients3.google.com/generate_204&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cc</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cc</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cc</span><span class="p">.</span><span class="n">isSuccess</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">false</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 단말의 네트워크 상태를 체크하는 법에 대해 알아보았습니다.</p>
 <div class="video-wrapper">

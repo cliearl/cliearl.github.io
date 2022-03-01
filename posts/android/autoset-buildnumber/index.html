@@ -372,13 +372,13 @@ if (!doNotTrack) {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
-    <span class="n">defaultConfig</span> <span class="o">{</span>
-        <span class="n">versionCode</span> <span class="mi">1</span>
-        <span class="n">versionName</span> <span class="s2">&#34;1.0&#34;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">android</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">defaultConfig</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">versionCode</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">versionName</span> <span class="s2">&#34;1.0&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이 <code>versionCode</code>와 <code>versionName</code>을 프로그램 안에서 표시할 수 있습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -395,17 +395,17 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">versionNumber</span> <span class="p">=</span> <span class="n">BuildConfig</span><span class="p">.</span><span class="n">VERSION_NAME</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;&#39;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
-    <span class="k">private</span> <span class="k">val</span> <span class="py">versionBuild</span> <span class="p">=</span> <span class="n">BuildConfig</span><span class="p">.</span><span class="n">VERSION_CODE</span>
-    
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_main</span><span class="p">)</span>
-        <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;App Version: </span><span class="si">$versionNumber</span><span class="s2"> (</span><span class="si">$versionBuild</span><span class="s2">)&#34;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">versionNumber</span> <span class="p">=</span> <span class="n">BuildConfig</span><span class="p">.</span><span class="n">VERSION_NAME</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;&#39;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">versionBuild</span> <span class="p">=</span> <span class="n">BuildConfig</span><span class="p">.</span><span class="n">VERSION_CODE</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">activity_main</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;App Version: </span><span class="si">$versionNumber</span><span class="s2"> (</span><span class="si">$versionBuild</span><span class="s2">)&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>하지만 <code>verionCode</code>를 빌드할때마다 증가시켜주는건 귀찮기 때문에 이 부분을 자동으로 증가시켜주는 기구를 만들어 볼 겁니다.</p>
 <p>일단은 앱 안에 <code>version.properties</code>라는 파일을 만들고 이 파일 안에서 버전넘버와 빌드넘버를 관리할 겁니다.</p>
@@ -415,9 +415,9 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">VERSION_NUMBER</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span>
-<span class="n">VERSION_BUILD</span><span class="o">=</span><span class="mi">1</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">VERSION_NUMBER</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">VERSION_BUILD</span><span class="o">=</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그다음은 app 레벨의 gradle에서 <code>version.properties</code>에 있는 값을 불러와서 빌드넘버를 1 증가시키고 그걸 저장하는 코드를 작성합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -473,56 +473,56 @@ if (!doNotTrack) {
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
-    <span class="c1">// 저장된 값을 불러오는 부분
-</span><span class="c1"></span>    <span class="kt">def</span> <span class="n">versionPropsFile</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;version.properties&#39;</span><span class="o">)</span>
-    <span class="kt">def</span> <span class="n">versionBuild</span>
-    <span class="kt">def</span> <span class="n">versionNumber</span>
-    <span class="nf">if</span> <span class="o">(</span><span class="n">versionPropsFile</span><span class="o">.</span><span class="na">canRead</span><span class="o">())</span> <span class="o">{</span>
-        <span class="kt">def</span> <span class="n">versionProps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">()</span>
-        <span class="n">versionProps</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">versionPropsFile</span><span class="o">))</span>
-        <span class="n">versionBuild</span> <span class="o">=</span> <span class="n">versionProps</span><span class="o">[</span><span class="s1">&#39;VERSION_BUILD&#39;</span><span class="o">].</span><span class="na">toInteger</span><span class="o">()</span>
-        <span class="n">versionNumber</span> <span class="o">=</span> <span class="n">versionProps</span><span class="o">[</span><span class="s1">&#39;VERSION_NUMBER&#39;</span><span class="o">].</span><span class="na">toString</span><span class="o">()</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nf">FileNotFoundException</span><span class="o">(</span><span class="s2">&#34;Could not read version.properties!&#34;</span><span class="o">)</span>
-    <span class="o">}</span>
-    
-    <span class="c1">// 읽어온 빌드넘버를 증가시키는 부분
-</span><span class="c1"></span>    <span class="n">ext</span><span class="o">.</span><span class="na">autoIncrementBuildNumber</span> <span class="o">=</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">versionPropsFile</span><span class="o">.</span><span class="na">canRead</span><span class="o">())</span> <span class="o">{</span>
-            <span class="kt">def</span> <span class="n">versionProps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">()</span>
-            <span class="n">versionProps</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">versionPropsFile</span><span class="o">))</span>
-            <span class="n">versionBuild</span> <span class="o">=</span> <span class="n">versionProps</span><span class="o">[</span><span class="s1">&#39;VERSION_BUILD&#39;</span><span class="o">].</span><span class="na">toInteger</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">versionProps</span><span class="o">[</span><span class="s1">&#39;VERSION_BUILD&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">versionBuild</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span>
-            <span class="n">versionProps</span><span class="o">.</span><span class="na">store</span><span class="o">(</span><span class="n">versionPropsFile</span><span class="o">.</span><span class="na">newWriter</span><span class="o">(),</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">FileNotFoundException</span><span class="o">(</span><span class="s2">&#34;Could not read version.properties!&#34;</span><span class="o">)</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    
-    <span class="c1">// 함수를 실행시키는 부분
-</span><span class="c1"></span>    <span class="n">gradle</span><span class="o">.</span><span class="na">taskGraph</span><span class="o">.</span><span class="na">whenReady</span> <span class="o">{</span> <span class="n">taskGraph</span> <span class="o">-&gt;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">taskGraph</span><span class="o">.</span><span class="na">hasTask</span><span class="o">(</span><span class="n">assembleDebug</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">autoIncrementBuildNumber</span><span class="o">()</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">taskGraph</span><span class="o">.</span><span class="na">hasTask</span><span class="o">(</span><span class="n">assembleRelease</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">autoIncrementBuildNumber</span><span class="o">()</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="n">compileSdkVersion</span> <span class="mi">29</span>
-
-    <span class="c1">// 수정한 내용을 앱에 반영해 줌
-</span><span class="c1"></span>    <span class="n">defaultConfig</span> <span class="o">{</span>
-        <span class="n">applicationId</span> <span class="s2">&#34;com.example.autobuildnum&#34;</span>
-        <span class="n">minSdkVersion</span> <span class="mi">21</span>
-        <span class="n">targetSdkVersion</span> <span class="mi">29</span>
-        <span class="n">versionCode</span> <span class="n">versionBuild</span>
-        <span class="n">versionName</span> <span class="n">versionNumber</span>
-
-        <span class="n">testInstrumentationRunner</span> <span class="s2">&#34;androidx.test.runner.AndroidJUnitRunner&#34;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">android</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 저장된 값을 불러오는 부분
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">def</span> <span class="n">versionPropsFile</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;version.properties&#39;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">def</span> <span class="n">versionBuild</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">def</span> <span class="n">versionNumber</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">if</span> <span class="o">(</span><span class="n">versionPropsFile</span><span class="o">.</span><span class="na">canRead</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">def</span> <span class="n">versionProps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">versionProps</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">versionPropsFile</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">versionBuild</span> <span class="o">=</span> <span class="n">versionProps</span><span class="o">[</span><span class="s1">&#39;VERSION_BUILD&#39;</span><span class="o">].</span><span class="na">toInteger</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">versionNumber</span> <span class="o">=</span> <span class="n">versionProps</span><span class="o">[</span><span class="s1">&#39;VERSION_NUMBER&#39;</span><span class="o">].</span><span class="na">toString</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nf">FileNotFoundException</span><span class="o">(</span><span class="s2">&#34;Could not read version.properties!&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 읽어온 빌드넘버를 증가시키는 부분
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ext</span><span class="o">.</span><span class="na">autoIncrementBuildNumber</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">versionPropsFile</span><span class="o">.</span><span class="na">canRead</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">def</span> <span class="n">versionProps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">versionProps</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">versionPropsFile</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">versionBuild</span> <span class="o">=</span> <span class="n">versionProps</span><span class="o">[</span><span class="s1">&#39;VERSION_BUILD&#39;</span><span class="o">].</span><span class="na">toInteger</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="n">versionProps</span><span class="o">[</span><span class="s1">&#39;VERSION_BUILD&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">versionBuild</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">versionProps</span><span class="o">.</span><span class="na">store</span><span class="o">(</span><span class="n">versionPropsFile</span><span class="o">.</span><span class="na">newWriter</span><span class="o">(),</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="nf">FileNotFoundException</span><span class="o">(</span><span class="s2">&#34;Could not read version.properties!&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 함수를 실행시키는 부분
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">gradle</span><span class="o">.</span><span class="na">taskGraph</span><span class="o">.</span><span class="na">whenReady</span> <span class="o">{</span> <span class="n">taskGraph</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">taskGraph</span><span class="o">.</span><span class="na">hasTask</span><span class="o">(</span><span class="n">assembleDebug</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">autoIncrementBuildNumber</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">taskGraph</span><span class="o">.</span><span class="na">hasTask</span><span class="o">(</span><span class="n">assembleRelease</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">autoIncrementBuildNumber</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">compileSdkVersion</span> <span class="mi">29</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 수정한 내용을 앱에 반영해 줌
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">defaultConfig</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">applicationId</span> <span class="s2">&#34;com.example.autobuildnum&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">minSdkVersion</span> <span class="mi">21</span>
+</span></span><span class="line"><span class="cl">        <span class="n">targetSdkVersion</span> <span class="mi">29</span>
+</span></span><span class="line"><span class="cl">        <span class="n">versionCode</span> <span class="n">versionBuild</span>
+</span></span><span class="line"><span class="cl">        <span class="n">versionName</span> <span class="n">versionNumber</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">testInstrumentationRunner</span> <span class="s2">&#34;androidx.test.runner.AndroidJUnitRunner&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이제 빌드를 할때마다 빌드넘버가 자동으로 증가하게 됩니다.</p>
 <div class="video-wrapper">

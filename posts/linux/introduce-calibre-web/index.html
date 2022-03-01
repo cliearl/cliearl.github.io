@@ -392,25 +392,25 @@ if (!doNotTrack) {
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-<span class="nv">FILE</span><span class="o">=</span>/books/metadata.db
-<span class="nv">PUID</span><span class="o">=</span><span class="m">1000</span>
-<span class="nv">PGID</span><span class="o">=</span><span class="m">1000</span>
-
-<span class="k">if</span> <span class="nb">test</span> -f <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2"> already exists, skipping generation.&#34;</span>
-<span class="k">else</span>
-    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2"> does not exists, generating...&#34;</span>
-    <span class="nb">cd</span> /app/calibre/bin
-    calibredb restore_database --really-do-it --with-library /books
-    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2"> created, setting permissions...&#34;</span>
-    chmod a+w <span class="nv">$FILE</span>
-    <span class="c1"># this is needed for uploads, you can remove it if you don&#39;t want to allow uploads</span>
-    chown <span class="nv">$PUID</span>:<span class="nv">$PGID</span> /books
-    <span class="nb">echo</span> <span class="s2">&#34;Permissions fixed, use /books as library path&#34;</span>
-<span class="k">fi</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nv">FILE</span><span class="o">=</span>/books/metadata.db
+</span></span><span class="line"><span class="cl"><span class="nv">PUID</span><span class="o">=</span><span class="m">1000</span>
+</span></span><span class="line"><span class="cl"><span class="nv">PGID</span><span class="o">=</span><span class="m">1000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nb">test</span> -f <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2"> already exists, skipping generation.&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2"> does not exists, generating...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">cd</span> /app/calibre/bin
+</span></span><span class="line"><span class="cl">    calibredb restore_database --really-do-it --with-library /books
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2"> created, setting permissions...&#34;</span>
+</span></span><span class="line"><span class="cl">    chmod a+w <span class="nv">$FILE</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># this is needed for uploads, you can remove it if you don&#39;t want to allow uploads</span>
+</span></span><span class="line"><span class="cl">    chown <span class="nv">$PUID</span>:<span class="nv">$PGID</span> /books
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;Permissions fixed, use /books as library path&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>profit!</li>
