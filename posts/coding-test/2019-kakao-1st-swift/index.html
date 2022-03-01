@@ -7,7 +7,7 @@ import Foundation func solution(_ record:[String]) -&amp;gt; [String] { var answ
 
 <link rel='canonical' href='https://cliearl.github.io/posts/coding-test/2019-kakao-1st-swift/'>
 
-<link rel="stylesheet" href="/scss/style.min.844add95e11f6a70c5dcb126d134b58df67ba7b311ea3ab09bae7b0c142d4fef.css"><meta property='og:title' content='2019 카카오 신입 공채 1차 코딩 테스트 Swift 풀이'>
+<link rel="stylesheet" href="/scss/style.min.1b167e2cb0123f4ab756c1f7b38280839833cb553987f96fa7aaeacb7f4f71de.css"><meta property='og:title' content='2019 카카오 신입 공채 1차 코딩 테스트 Swift 풀이'>
 <meta property='og:description' content='문제 해설 http://tech.kakao.com/2018/09/21/kakao-blind-recruitment-for2019-round-1/
 오픈채팅방 https://www.welcomekakao.com/learn/courses/30/lessons/42888
 import Foundation func solution(_ record:[String]) -&amp;gt; [String] { var answer = [String]() var userList = [String : String]() var chatLog = [[String]]() let enterMsg = &amp;#34;님이 들어왔습니다.&amp;#34; let leaveMsg = &amp;#34;님이 나갔습니다.&amp;#34; // chatLog 작성 for info in record { let splitInfo = info.components(separatedBy: &amp;#34; &amp;#34;) if splitInfo[0] == &amp;#34;Enter&amp;#34; { userList[splitInfo[1]] = splitInfo[2] chatLog.append([splitInfo[1], enterMsg]) } else if splitInfo[0] == &amp;#34;Leave&amp;#34; { chatLog.append([splitInfo[1], leaveMsg]) } else if splitInfo[0] == &amp;#34;Change&amp;#34; { userList[splitInfo[1]] = splitInfo[2] } } // 최종 answer 작성 for log in chatLog { answer.'>
@@ -254,9 +254,11 @@ if (!doNotTrack) {
         </li>
         
 
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -264,7 +266,7 @@ if (!doNotTrack) {
 
 
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -272,9 +274,10 @@ if (!doNotTrack) {
 
 
 
-                <span>Dark Mode</span>
-            </li>
-        
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
     </ol>
 </aside>
 <main class="main full-width">
@@ -331,6 +334,8 @@ if (!doNotTrack) {
             </div>
         
     </footer>
+    
+
     
 </div>
 </header>

@@ -7,7 +7,7 @@ func solution(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -&amp;gt; [String] { var answ
 
 <link rel='canonical' href='https://cliearl.github.io/posts/coding-test/2018-kakao-1st-swift/'>
 
-<link rel="stylesheet" href="/scss/style.min.844add95e11f6a70c5dcb126d134b58df67ba7b311ea3ab09bae7b0c142d4fef.css"><meta property='og:title' content='2018 카카오 신입 공채 1차 코딩 테스트 Swift 답안'>
+<link rel="stylesheet" href="/scss/style.min.1b167e2cb0123f4ab756c1f7b38280839833cb553987f96fa7aaeacb7f4f71de.css"><meta property='og:title' content='2018 카카오 신입 공채 1차 코딩 테스트 Swift 답안'>
 <meta property='og:description' content='문제해설 http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
 비밀지도 (비트연산) https://www.welcomekakao.com/learn/courses/30/lessons/17681
 func solution(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -&amp;gt; [String] { var answer = [String](repeating: &amp;#34;&amp;#34;, count: n) var bitAdded = Array&amp;lt;Int&amp;gt;() for i in 0..&amp;lt;n { bitAdded.append(arr1[i] | arr2[i]) } for i in 0..&amp;lt;n { for _ in 0..&amp;lt;n { // 2진수로 변환한 값의 맨 뒷자리가 튀어나온다 // 그걸 반환배열의 맨 앞으로 넣어준다 answer[i].insert(bitAdded[i] % 2 == 1 ? &amp;#34;#&amp;#34; : &amp;#34; &amp;#34;, at: answer[i].startIndex) // 비트를 오른쪽으로 하나 옮김 bitAdded[i] &amp;gt;&amp;gt;= 1 } } return answer } 다트 게임 (정규표현식) https://www.'>
@@ -254,9 +254,11 @@ if (!doNotTrack) {
         </li>
         
 
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -264,7 +266,7 @@ if (!doNotTrack) {
 
 
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -272,9 +274,10 @@ if (!doNotTrack) {
 
 
 
-                <span>Dark Mode</span>
-            </li>
-        
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
     </ol>
 </aside>
 <main class="main full-width">
@@ -331,6 +334,8 @@ if (!doNotTrack) {
             </div>
         
     </footer>
+    
+
     
 </div>
 </header>
