@@ -392,7 +392,7 @@ if (!doNotTrack) {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">splits</span><span class="o">.</span><span class="na">abi</span><span class="o">.</span><span class="na">enable</span> <span class="o">=</span> <span class="kc">false</span>
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">splits</span><span class="o">.</span><span class="na">abi</span><span class="o">.</span><span class="na">enable</span> <span class="o">=</span> <span class="kc">false</span>
 </span></span><span class="line"><span class="cl"><span class="n">splits</span><span class="o">.</span><span class="na">density</span><span class="o">.</span><span class="na">enable</span> <span class="o">=</span> <span class="kc">false</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -410,7 +410,7 @@ if (!doNotTrack) {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">defaultConfig</span><span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">defaultConfig</span><span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">applicationVariants</span><span class="o">.</span><span class="na">all</span> <span class="o">{</span> <span class="n">variant</span> <span class="o">-&gt;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">variant</span><span class="o">.</span><span class="na">buildType</span><span class="o">.</span><span class="na">name</span> <span class="o">==</span> <span class="s2">&#34;debug&#34;</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span><span class="o">.</span><span class="na">mergedFlavor</span><span class="o">.</span><span class="na">resourceConfiguration</span><span class="o">.</span><span class="na">clear</span><span class="o">()</span>
@@ -432,7 +432,7 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">productFlavors</span><span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">productFlavors</span><span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">dev</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">resConfigs</span> <span class="s2">&#34;ko&#34;</span><span class="o">,</span> <span class="s2">&#34;xxxhdpi&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -450,7 +450,7 @@ if (!doNotTrack) {
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">buildTypes</span><span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">buildTypes</span><span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">release</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">crunchPngs</span> <span class="kc">false</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -469,7 +469,7 @@ if (!doNotTrack) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">debug</span><span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">debug</span><span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ext</span><span class="o">.</span><span class="na">enableCrashlytics</span> <span class="kc">false</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
@@ -484,10 +484,10 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="o">-</span><span class="n">compile</span> <span class="s1">&#39;com.android.support:appcompat-v7:26.+&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">+</span><span class="n">compile</span> <span class="s1">&#39;com.android.support:appcompat-v7:26.0.0-alpha1&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl">dependencies {
+</span></span><span class="line"><span class="cl"><span class="gd">-    compile &#39;com.android.support:appcompat-v7:26.+&#39;
+</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+    compile &#39;com.android.support:appcompat-v7:26.0.0-alpha1&#39;
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 해서 안드로이드 스튜디오에서 빌드속도를 빠르게하는 여러가지 방법에 대해 알아보았습니다.</p>
