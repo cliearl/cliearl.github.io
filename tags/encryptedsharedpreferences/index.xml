@@ -1,22 +1,161 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>EncryptedSharedPreferences on 냉동코더의 기술블로그</title>
-    <link>https://cliearl.github.io/tags/encryptedsharedpreferences/</link>
-    <description>Recent content in EncryptedSharedPreferences on 냉동코더의 기술블로그</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 26 Feb 2022 13:39:27 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/encryptedsharedpreferences/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>EncryptedSharedPreferences로 데이터 암호화하기</title>
-      <link>https://cliearl.github.io/posts/android/encrypted-sharedpreferences/</link>
-      <pubDate>Sat, 26 Feb 2022 13:39:27 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/android/encrypted-sharedpreferences/</guid>
-      <description>이번 포스팅에서는 SharedPreference의 암호화에 대해 알아보도록 하겠습니다.
-SharedPreferences의 저장방식 SharedPreference에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
-1  /data/data/{package_name}/shared_prefs/{filename}.xml   Android Studio의 Device File Explorer를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요.</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>EncryptedSharedPreferences on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/tags/encryptedsharedpreferences/</link>
+        <description>Recent content in EncryptedSharedPreferences on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 26 Feb 2022 13:39:27 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/encryptedsharedpreferences/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>EncryptedSharedPreferences로 데이터 암호화하기</title>
+        <link>https://cliearl.github.io/posts/android/encrypted-sharedpreferences/</link>
+        <pubDate>Sat, 26 Feb 2022 13:39:27 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/android/encrypted-sharedpreferences/</guid>
+        <description>&lt;p&gt;이번 포스팅에서는 &lt;code&gt;SharedPreference&lt;/code&gt;의 암호화에 대해 알아보도록 하겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;sharedpreferences의-저장방식&#34;&gt;SharedPreferences의 저장방식&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;SharedPreference&lt;/code&gt;에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/sharedpreferences-basic/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SharedPreferences로 앱 설정값 저장하고 불러오기&lt;/a&gt;에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/data/data/{package_name}/shared_prefs/{filename}.xml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Android Studio의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/studio/debug/device-file-explorer&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Device File Explorer&lt;/a&gt;를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요. 키와 값이 앱에서 지정한대로 기입되어있는 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#39;1.0&amp;#39; encoding=&amp;#39;utf-8&amp;#39; standalone=&amp;#39;yes&amp;#39; ?&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;map&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;int&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;graphic_quality&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2131231054&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;int&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;music_volume&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;42&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;boolean&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;vertical_sync&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;int&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;sfx_volume&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;17&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/map&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;security-library&#34;&gt;Security Library&lt;/h2&gt;
+&lt;p&gt;하지만 앱의 데이터를 이렇게 쉽게 열어볼 수 있게 하는건 좋은 생각이 아닌 것 같습니다. 그래서 구글에서는 &lt;code&gt;SharedPreferences&lt;/code&gt;를 암호화 하여 사용할 수 있게 하는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/jetpack/androidx/releases/security&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Security&lt;/a&gt; 라이브러리를 제공하고 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Security&lt;/code&gt;는 Android 6.0 (API level 23) 이상부터 사용 가능한데, 이 라이브러리를 사용하면 암호화에 사용할 마스터키를 만들고 그 키로 &lt;code&gt;SharedPreferences&lt;/code&gt;의 내용을 암호화/복호화 할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;데이터를 암호화하는데에는 키가 필요한데요, 이 키를 앱 내부에 저장하면 어떤 형태로 숨겨도 결국은 유출이 가능하다고 생각하시면 됩니다. 그래서 &lt;code&gt;Security&lt;/code&gt; 라이브러리는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/articles/keystore&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Android keystore system&lt;/a&gt;을 사용해 키를 앱 내부가 아닌, 시스템만이 접근 가능한 컨테이너에 저장하도록 하였습니다.&lt;/p&gt;
+&lt;p&gt;Android keystore system을 이용해 마스터키를 만들었으면 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;EncryptedSharedPreferences&lt;/a&gt;를 써서 &lt;code&gt;SharedPreferences&lt;/code&gt;를 암호화/복호화할 수 있습니다.&lt;/p&gt;
+&lt;h2 id=&#34;앱에-적용해보기&#34;&gt;앱에 적용해보기&lt;/h2&gt;
+&lt;p&gt;우선 &lt;code&gt;Security&lt;/code&gt; 라이브러리를 추가합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;androidx.security:security-crypto-ktx:1.1.0-alpha03&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;다음은 읽기/쓰기에 사용하던 &lt;code&gt;sharedPreferences&lt;/code&gt; 객체를 &lt;code&gt;SharedPreferences&lt;/code&gt;가 아닌 &lt;code&gt;EncryptedSharedPreferences&lt;/code&gt; 로부터 작성하면 됩니다. 기존의 인스턴스는 주석처리하고 다음과 같은 인스턴스를 만들어줍니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;sharedPreferences&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SharedPreferences&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lazy&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;masterKeyAlias&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MasterKey&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Builder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;applicationContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MasterKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DEFAULT_MASTER_KEY_ALIAS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setKeyScheme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MasterKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyScheme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AES256_GCM&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;EncryptedSharedPreferences&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;create&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;applicationContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;FILE_NAME&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;masterKeyAlias&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;EncryptedSharedPreferences&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PrefKeyEncryptionScheme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AES256_SIV&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;EncryptedSharedPreferences&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PrefValueEncryptionScheme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AES256_GCM&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;companion&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;object&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;FILE&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;_NAME&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;encrypted_settings&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;우선은 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/security/crypto/MasterKey&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;MasterKey&lt;/a&gt; 클래스로 암호화에 사용할 마스터키를 생성합니다. 키를 작성하는 알고리즘은 커스텀하여 사용할 수도 있게 되어있지만 여기서는 이미 잘 정의되어있는 &lt;a class=&#34;link&#34; href=&#34;https://datatracker.ietf.org/doc/html/rfc5116#section-5.2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AES-256 GCM&lt;/a&gt; 알고리즘을 사용하도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;다음은 &lt;code&gt;EncryptedSharedPreferences&lt;/code&gt;를 이용해 읽고쓰기에 사용할 &lt;code&gt;sharedPreferences&lt;/code&gt; 인스턴스를 만들어줍니다. 초기화를 할 때에는 위에서 만든 마스터키와 xml 파일에 적용할 파일 이름, 그리고 데이터를 암호화할 방식을 전달해주면 됩니다. 여기서는 Key의 암호화에 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences.PrefKeyEncryptionScheme#AES256_SIV&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AES256_SIV&lt;/a&gt;, 그리고 Value의 암호화에는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences.PrefValueEncryptionScheme#AES256_GCM&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AES256_GCM&lt;/a&gt;을 사용하도록 했습니다.&lt;/p&gt;
+&lt;p&gt;그리고 나머지는 &lt;code&gt;SharedPreferences&lt;/code&gt;와 동일하게 사용하면 됩니다. 설정을 다시 저장한 뒤 &lt;code&gt;encrypted_settings.xml&lt;/code&gt;의 내용을 확인해보면 다음과 같이 암호화가 되어 있는 것을 알 수 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#39;1.0&amp;#39; encoding=&amp;#39;utf-8&amp;#39; standalone=&amp;#39;yes&amp;#39; ?&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;map&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;string&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;__androidx_security_crypto_encrypted_prefs_key_keyset__&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;12a901d15f8baa24b9e88a9e68f3eb32ad1136cb4af22776b91caea9459bdd5a76d6992b57e268408944152c70171556e4fa065b13160a6951b75a32dc8172d6ee9cbf8b9828f7cc80d68c23794340221ad89ac94306ec5848af9d9c6e6372fdfd42d745be4b4a6d532adc365491e249e92503b64743defab475808f196b90842cabb874cce6a934d0f646f9d9f285814ded11f3d081a72abeb09d6a1849b7768b9e9899601c59797868b0a71a4408beb9cea707123c0a30747970652e676f6f676c65617069732e636f6d2f676f6f676c652e63727970746f2e74696e6b2e4165735369764b6579100118beb9cea7072001&lt;span class=&#34;nt&#34;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;string&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;AXTznL5begfyWVUl+GcGajk7xoVmW0h2DCtZudxTAghw8BjV&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;ARdDw2jfHocuzA3PXT73sMwCNATF/f+ZNWWcG6mgY0mhuMvLz9hGLys=&lt;span class=&#34;nt&#34;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;string&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;AXTznL6Ev8dJ1E4Ws4dwJfyeDUQgK077hhUwLNnCt+3opw==&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;ARdDw2g859mf9i8UgWzWHvbZbBQytmCdcaXBVQgfy6+Qq/eIAs4=&lt;span class=&#34;nt&#34;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;string&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;__androidx_security_crypto_encrypted_prefs_value_keyset__&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;128801aa5d8f25163f993b8f95a2a874a1353f227ffca6f2e5ee1dad9243b8b3a1ea16531bfa8a10da864655c9b33e865bf072eafcdad659912a5198bf32218f186c02ff3efff27338a50617f194c3fd8b06ebfad829c3a53dbfd8b221fa7f9103ad8e8ad1583250b5c1779b20b618e46a3edb0b50d3a3bdc8c7ace84c21a69f36d4996f9e7fe81e8bf01b1a4408e8868fba01123c0a30747970652e676f6f676c65617069732e636f6d2f676f6f676c652e63727970746f2e74696e6b2e41657347636d4b6579100118e8868fba012001&lt;span class=&#34;nt&#34;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;string&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;AXTznL4uW8pTacv6rnmZqMoGZHNWTJqwuD8q0XFlWnvw&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;ARdDw2gTVJYJ3PCEaYgwoZjKMCEAFAv7aLRACnmcKGyjRaHYgeBJZJE=&lt;span class=&#34;nt&#34;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;string&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;AXTznL5AE+UHfloGh5ZBZ+3iZL2hplrdIffsC3I/qA==&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;ARdDw2gRmqy+haYjIRDGML/ai32T5alKEQKaqlJDRhfQHcUIzthVAQo=&lt;span class=&#34;nt&#34;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/map&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;이렇게 해서 &lt;code&gt;SharedPreference&lt;/code&gt;를 암호화하여 사용하는 법에 대해 알아보았습니다.&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/KB0_QpcrWnA&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+        </item>
+        
+    </channel>
 </rss>

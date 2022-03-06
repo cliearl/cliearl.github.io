@@ -1,22 +1,177 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>JDK on 냉동코더의 기술블로그</title>
-    <link>https://cliearl.github.io/tags/jdk/</link>
-    <description>Recent content in JDK on 냉동코더의 기술블로그</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 14:23:23 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/jdk/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Android Studio Arctic Fox와 JDK 11의 도입</title>
-      <link>https://cliearl.github.io/posts/android/android-gradle-java-11/</link>
-      <pubDate>Sun, 15 Aug 2021 14:23:23 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/android/android-gradle-java-11/</guid>
-      <description>이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.
-Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.
-    Default Version     Gradle 7.0.2   SDK Build Tools 30.0.2   NDK 21.4.7075529   JDK 11    이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>JDK on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/tags/jdk/</link>
+        <description>Recent content in JDK on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sun, 15 Aug 2021 14:23:23 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/jdk/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Android Studio Arctic Fox와 JDK 11의 도입</title>
+        <link>https://cliearl.github.io/posts/android/android-gradle-java-11/</link>
+        <pubDate>Sun, 15 Aug 2021 14:23:23 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/android/android-gradle-java-11/</guid>
+        <description>&lt;p&gt;이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;android-gradle-700-도입&#34;&gt;Android Gradle 7.0.0 도입&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/android-gradle-java-11/arcticfox.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;2021년 7월 말에 Android Studio의 버전이 &lt;code&gt;Arctic Fox|2020.3.1&lt;/code&gt; 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/studio/releases/gradle-plugin#7-0-0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;7.0.0&lt;/a&gt;으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Default Version&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Gradle&lt;/td&gt;
+&lt;td&gt;7.0.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SDK Build Tools&lt;/td&gt;
+&lt;td&gt;30.0.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;NDK&lt;/td&gt;
+&lt;td&gt;21.4.7075529&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;JDK&lt;/td&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.&lt;/p&gt;
+&lt;h2 id=&#34;java-8에서-11로-변경된-이유&#34;&gt;Java 8에서 11로 변경된 이유&lt;/h2&gt;
+&lt;p&gt;그렇다면 왜 11버전이 선택되었을까요? 11은 2018년 9월 발표된 버전으로 8과 비교하면 기술적으로 많은 발전이 있었습니다. 그 내용에 대해서는 Microsoft의 &lt;a class=&#34;link&#34; href=&#34;https://docs.microsoft.com/ko-kr/azure/developer/java/fundamentals/reasons-to-move-to-java-11&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Java 11로 전환해야 하는 이유&lt;/a&gt;를 참조하시면 좋을 것 같습니다.&lt;/p&gt;
+&lt;p&gt;Android Studio에서 Java 11의 기능을 이용하고 싶다면 build.gradle을 다음과 같이 수정하면 됩니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;android&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;compileSdkVersion&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;compileOptions&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;n&#34;&gt;sourceCompatibility&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;JavaVersion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;VERSION_11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;n&#34;&gt;targetCompatibility&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;JavaVersion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;VERSION_11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// For Kotlin projects
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;kotlinOptions&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;n&#34;&gt;jvmTarget&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;11&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;또한 11은 &lt;a class=&#34;link&#34; href=&#34;https://www.oracle.com/java/technologies/java-se-support-roadmap.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;LTS(Long Term Support)&lt;/a&gt;가 적용되었으며 &lt;a class=&#34;link&#34; href=&#34;https://adoptium.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ADOPTIUM&lt;/a&gt; 으로부터 오픈소스 빌드인 OpenJDK를 제공받을 수 있는 버전이기도 합니다. OpenJDK는 Oracle JDK의 기능을 모두 구현하면서도 무료로 사용할 수 있는 JDK라고 생각하시면 됩니다.&lt;/p&gt;
+&lt;p&gt;이러한 이유들로 인해 구글에서는 Android Gradle의 JDK 디폴트 버전을 11로 채용하게 된 것으로 보입니다. synk에서 발표한 &lt;a class=&#34;link&#34; href=&#34;https://snyk.io/wp-content/uploads/jvm_2020.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;JVM Ecosystem Report 2020&lt;/a&gt;에 따르면 현재 Java SE 8 사용자는 64%, 11 사용자는 25%라고 하는데 이번 결정으로 11버전의 사용자가 빠르게 증가할 것 같네요.&lt;/p&gt;
+&lt;h2 id=&#34;android-studio의-빌드-실패&#34;&gt;Android Studio의 빌드 실패&lt;/h2&gt;
+&lt;p&gt;현재 Arctic Fox에서 New Project로 생성하는 프로젝트의 Android Gradle은 7.0.0 버전이 적용되도록 되어 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dependencies&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;classpath&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;com.android.tools.build:gradle:7.0.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;근데 문제는 프로젝트의 JDK가 1.8로 지정되었을 경우 Gradle의 디폴트 버전과 맞지 않으므로 다음과 같은 메시지를 뿜으며 빌드에 실패하게 됩니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;An exception occurred applying plugin request [id: &amp;#39;com.android.application&amp;#39;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; Failed to apply plugin &amp;#39;com.android.internal.application&amp;#39;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &amp;gt; Android Gradle plugin requires Java 11 to run. You are currently using Java 1.8.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     You can try some of the following options:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       - changing the IDE settings.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       - changing the JAVA_HOME environment variable.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       - changing `org.gradle.java.home` in `gradle.properties`.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;jdk-버전-변경&#34;&gt;JDK 버전 변경&lt;/h2&gt;
+&lt;p&gt;이 문제를 해결하기 위해서는 프로젝트가 사용하는 JDK 버전을 변경해주면 됩니다.&lt;/p&gt;
+&lt;p&gt;안드로이드 스튜디오 4.2에는 이미 JDK 11이 내장되어 있지만 여기서는 패키지 버전관리가 용이한 brew를 통해 JDK 11을 새로 설치하여 사용하는 법을 소개하겠습니다.&lt;/p&gt;
+&lt;p&gt;우선 brew로 시스템에 &lt;a class=&#34;link&#34; href=&#34;https://github.com/AdoptOpenJDK/homebrew-openjdk&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OpenJDK 11&lt;/a&gt;을 설치해 줍니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ brew tap AdoptOpenJDK/openjdk
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ brew install --cask adoptopenjdk11
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;설치된 JDK의 위치는 &lt;code&gt;/usr/libexec/java_home -V&lt;/code&gt; 명령으로 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;다음은 &lt;code&gt;JAVA_HOME&lt;/code&gt; 파라미터를 변경하기 위해 &lt;code&gt;~/.zshrc&lt;/code&gt;에 다음 행을 추가합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;/usr/libexec/java_home -v 11&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;PATH&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;:&lt;span class=&#34;nv&#34;&gt;$JAVA_HOME&lt;/span&gt;/bin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;// 변경사항 반영
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nb&#34;&gt;source&lt;/span&gt; ~/.zshrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;마지막으로 Android Studio 메뉴에서 &lt;code&gt;Preferences &amp;gt; Build, Execution, Deployment &amp;gt; Build Tools &amp;gt; Gradle&lt;/code&gt;로 들어가 &lt;code&gt;Gradle JDK&lt;/code&gt; 항목을 &lt;code&gt;Android Studio java home&lt;/code&gt;으로 변경해 주면 됩니다.&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/TdinzSmyado&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+        </item>
+        
+    </channel>
 </rss>

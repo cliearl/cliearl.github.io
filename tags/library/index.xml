@@ -1,23 +1,400 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Library on 냉동코더의 기술블로그</title>
-    <link>https://cliearl.github.io/tags/library/</link>
-    <description>Recent content in Library on 냉동코더의 기술블로그</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 23 Oct 2021 10:58:16 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/library/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>안드로이드의 HTTP 통신 라이브러리 고찰</title>
-      <link>https://cliearl.github.io/posts/android/android-http-library-review/</link>
-      <pubDate>Sat, 23 Oct 2021 10:58:16 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/android/android-http-library-review/</guid>
-      <description>이번 포스팅에서는 안드로이드의 HTTP 통신에 대해 알아보도록 하겠습니다.
-안드로이드에서의 통신 앱에서 가장 많이 수행하는 처리중 하나는 서버에 데이터를 요청하고 받아온 데이터를 단말-다시말해 클라이언트의 화면에 표시하는 것입니다. 이 때 클라이언트와 서버가 통신하는 방식은 크게 소켓연결과 HTTP연결 두 가지로 나눌 수 있습니다.
-소켓 연결 소켓은 네트워크 상의 두 프로그램 사이에서 일어나는 양방향 통신중 한 쪽의 엔드 포인트를 의미합니다. 여기서 엔드포인트란 IP와 포트의 조합을 뜻합니다.
-소켓 연결방식에서는 클라이언트와 서버가 특정 포트를 통해 연결을 계속 유지하고 있기 때문에 실시간으로 양방향 통신을 할 수 있는데요, 주로 동영상 스트리밍이나, 온라인 게임등에서 사용되는 연결방식입니다.</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>Library on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/tags/library/</link>
+        <description>Recent content in Library on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 23 Oct 2021 10:58:16 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/library/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>안드로이드의 HTTP 통신 라이브러리 고찰</title>
+        <link>https://cliearl.github.io/posts/android/android-http-library-review/</link>
+        <pubDate>Sat, 23 Oct 2021 10:58:16 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/android/android-http-library-review/</guid>
+        <description>&lt;p&gt;이번 포스팅에서는 안드로이드의 HTTP 통신에 대해 알아보도록 하겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;안드로이드에서의-통신&#34;&gt;안드로이드에서의 통신&lt;/h2&gt;
+&lt;p&gt;앱에서 가장 많이 수행하는 처리중 하나는 서버에 데이터를 요청하고 받아온 데이터를 단말-다시말해 클라이언트의 화면에 표시하는 것입니다. 이 때 클라이언트와 서버가 통신하는 방식은 크게 소켓연결과 HTTP연결 두 가지로 나눌 수 있습니다.&lt;/p&gt;
+&lt;h3 id=&#34;소켓-연결&#34;&gt;소켓 연결&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.oracle.com/javase/tutorial/networking/sockets/definition.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;소켓&lt;/a&gt;은 네트워크 상의 두 프로그램 사이에서 일어나는 양방향 통신중 한 쪽의 엔드 포인트를 의미합니다. 여기서 엔드포인트란 IP와 포트의 조합을 뜻합니다.&lt;/p&gt;
+&lt;p&gt;소켓 연결방식에서는 클라이언트와 서버가 특정 포트를 통해 연결을 계속 유지하고 있기 때문에 실시간으로 양방향 통신을 할 수 있는데요, 주로 동영상 스트리밍이나, 온라인 게임등에서 사용되는 연결방식입니다.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://socket.io/blog/native-socket-io-and-android/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Native Socket.IO and Android&lt;/a&gt; 에 소켓통신을 사용해서 채팅앱을 만드는 법을 설명하고 있으니 궁금하신분은 참고하시면 좋을 것 같습니다.&lt;/p&gt;
+&lt;h3 id=&#34;http-연결&#34;&gt;HTTP 연결&lt;/h3&gt;
+&lt;p&gt;HTTP는 &lt;a class=&#34;link&#34; href=&#34;https://ko.wikipedia.org/wiki/HTTP&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;HyperText Transfer Protocol&lt;/a&gt;의 약자로, 80번 포트를 사용하여 웹 상에서 정보를 주고받을 수 있는 프로토콜을 말합니다. HTTP 통신에서는 클라이언트가 서버에 헤더(header)와 바디(body)로 이루어진 &lt;a class=&#34;link&#34; href=&#34;https://developer.mozilla.org/ko/docs/Web/HTTP/Messages&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;메시지&lt;/a&gt;를 요청(request)합니다. 그러면 서버는 이 요청을 처리하고 &lt;a class=&#34;link&#34; href=&#34;https://ko.wikipedia.org/wiki/HTTP_%EC%83%81%ED%83%9C_%EC%BD%94%EB%93%9C&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;응답코드&lt;/a&gt;와 함께 응답(response)을 반환하게 됩니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Connectionless : HTTP 연결은 소켓을 사용해서 접속을 만들지만, 용건이 있을때만 연결했다가 용건이 끝나면 연결을 끊게 되어 있습니다. 이걸 &lt;code&gt;Connectionless&lt;/code&gt;하다고 표현하는데, 이렇게 하면 서버에 여유가 생겨 더 많은 접속요구에 대응할 수 있게 됩니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Stateless : 통신이 일어날때마다 새로운 접속을 생성하고 삭제하는 &lt;code&gt;Connectionless&lt;/code&gt; 특징때문에 HTTP 통신에서는 기본적으로 서버가 클라이언트를 식별할 수가 없는데 이것을 &lt;code&gt;Stateless&lt;/code&gt;하다고 합니다. 그래서 서버가 클라이언트를 기억해야 할 경우 쿠키나 세션, 혹은 토큰이라는 기술을 사용하게 됩니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;http-method&#34;&gt;HTTP Method&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;HTTP Method&lt;/a&gt;란 클라이언트가 서버에 메시지를 보낼 때 어떠한 목적을 가졌는지 밝히는 것으로, 다음과 같은 것들이 있습니다. 일반적으로 많이 사용되는 GET, POST, PUT, DELETE 이외에도 여러가지 명령어들이 있습니다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Method&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;서버에 리소스를 요청합니다. 서버를 수정하지 않기 때문에 safe method로 분류.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HEAD&lt;/td&gt;
+&lt;td&gt;GET과 같지만 서버가 본문(body)을 포함하지 않음.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;클라이언트에서 요청한 URL에 본문의 내용으로 새로운 리소스를 생성.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;클라이언트가 요청한 내용으로 서버의 리소스를 수정.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;서버의 리소스를 삭제.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CONNECT&lt;/td&gt;
+&lt;td&gt;요청 리소스에 대해 양방향 연결을 수립, 예로 프록시를 통한 SSL 연결수립에  사용될 수 있음.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;OPTIONS&lt;/td&gt;
+&lt;td&gt;서버가 어떤 HTTP 메소드를 지원하는지 물어봄.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TRACE&lt;/td&gt;
+&lt;td&gt;메시지의 변조여부 확인을 위해, 서버가 수신한 클라이언트의 메시지를 반환하도록 함.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PATCH&lt;/td&gt;
+&lt;td&gt;PUT은 리소스 전체를 수정하나, PATCH는 해당 리소스의 일부만을 수정.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;restful-api&#34;&gt;RESTful API&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://cloud.google.com/apis/docs/overview&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;구글&lt;/a&gt;, &lt;a class=&#34;link&#34; href=&#34;https://developers.facebook.com/docs/graph-api&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;페이스북&lt;/a&gt;, &lt;a class=&#34;link&#34; href=&#34;https://developer.twitter.com/en/docs/api-reference-index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;트위터&lt;/a&gt;, &lt;a class=&#34;link&#34; href=&#34;https://developers.naver.com/docs/common/openapiguide/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;네이버&lt;/a&gt;, &lt;a class=&#34;link&#34; href=&#34;https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;카카오&lt;/a&gt; 등 많은 IT회사는 자기 회사의 서비스를 이용할 수 있도록 REST API를 제공합니다. REST API라는게 뭘까요?&lt;/p&gt;
+&lt;p&gt;REST(Representational State Transfer)는 HTTP 기반으로 필요한 자원에 접근하는 방식을 정해놓은 네트워크 아키텍처입니다. 일반적으로 다음과 같은 &lt;a class=&#34;link&#34; href=&#34;https://www.redhat.com/ko/topics/api/what-is-a-rest-api&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;기준&lt;/a&gt;을 만족하면 RESTful 하다고하며 RESTful하게 작동하도록 만든 API를 RESTful API라고 합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;클라이언트와 서버의 분리&lt;/li&gt;
+&lt;li&gt;무상태(Stateless)&lt;/li&gt;
+&lt;li&gt;캐시 처리가 가능해야 함&lt;/li&gt;
+&lt;li&gt;시스템이 계층화(Layered) 되어있어야 함&lt;/li&gt;
+&lt;li&gt;일관성 있는 인터페이스&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Http Method와 RESTful API의 대응은 다음 &lt;a class=&#34;link&#34; href=&#34;https://www.restapitutorial.com/lessons/httpmethods.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;표&lt;/a&gt;와 같이 정리할 수 있습니다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;th&gt;CRUD&lt;/th&gt;
+&lt;th&gt;Entire Collection (e.g. /customers)&lt;/th&gt;
+&lt;th&gt;Specific Item (e.g. /customers/{id})&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;Create&lt;/td&gt;
+&lt;td&gt;201 (Created), &amp;lsquo;Location&amp;rsquo; header with link to /customers/{id} containing new ID.&lt;/td&gt;
+&lt;td&gt;404 (Not Found), 409 (Conflict) if resource already exists..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;Read&lt;/td&gt;
+&lt;td&gt;200 (OK), list of customers. Use pagination, sorting and filtering to navigate big lists.&lt;/td&gt;
+&lt;td&gt;200 (OK), single customer. 404 (Not Found), if ID not found or invalid.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;Update/Replace&lt;/td&gt;
+&lt;td&gt;405 (Method Not Allowed), unless you want to update/replace every resource in the entire collection.&lt;/td&gt;
+&lt;td&gt;200 (OK) or 204 (No Content). 404 (Not Found), if ID not found or invalid.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PATCH&lt;/td&gt;
+&lt;td&gt;Update/Modify&lt;/td&gt;
+&lt;td&gt;405 (Method Not Allowed), unless you want to modify the collection itself.&lt;/td&gt;
+&lt;td&gt;200 (OK) or 204 (No Content). 404 (Not Found), if ID not found or invalid.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;Delete&lt;/td&gt;
+&lt;td&gt;405 (Method Not Allowed), unless you want to delete the whole collection—not often desirable.&lt;/td&gt;
+&lt;td&gt;200 (OK). 404 (Not Found), if ID not found or invalid.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;android-http-통신-라이브러리&#34;&gt;Android HTTP 통신 라이브러리&lt;/h2&gt;
+&lt;p&gt;안드로이드에는 HTTP 통신을 구현하는 여러가지 라이브러리가 있는데요, 여기서는 주요하게 사용된 몇 가지 라이브러리를 시간순으로 다루어보도록 하겠습니다.&lt;/p&gt;
+&lt;h3 id=&#34;httpclient&#34;&gt;HttpClient&lt;/h3&gt;
+&lt;p&gt;Http 통신을 용이하게 수행하기 위해 Apache에서 &lt;a class=&#34;link&#34; href=&#34;https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/org/apache/http/client/HttpClient.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;제작&lt;/a&gt;한 라이브러리입니다. 안드로이드 초기에 주로 사용되었으며 실제로는 HttpClient를 래핑한 &lt;a class=&#34;link&#34; href=&#34;https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/org/apache/http/impl/client/DefaultHttpClient.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DefaultHttpClient&lt;/a&gt;나, 안드로이드에 맞게 개수한 &lt;a class=&#34;link&#34; href=&#34;https://docs.microsoft.com/en-us/dotnet/api/android.net.http.androidhttpclient?view=xamarin-android-sdk-9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AndroidHttpClient&lt;/a&gt;가 사용되었습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;HttpClient&lt;/code&gt;는 안드로이드와 독립적으로 개발되는 라이브러리인지라 변경점을 안드로이드 SDK에 일괄적으로 즉시 반영할 수 없었습니다. 결국 버전이 뒤쳐지면서 버그가 계속 발생하게 되었고, HttpClient는 Android 5.1에서 Deprecated 되며 6.0에서는 아예 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/about/versions/pie/android-9.0-changes-28?hl=zh-tw#apache-p&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;삭제&lt;/a&gt;되었습니다. 이 시기 클라이언트의 버그는 네이버 D2 블로그의 &lt;a class=&#34;link&#34; href=&#34;https://d2.naver.com/helloworld/377316&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Android의 HTTP 클라이언트 라이브러리&lt;/a&gt;에 잘 정리되어 있으니 참고하시기 바랍니다.&lt;/p&gt;
+&lt;h3 id=&#34;httpurlconnection&#34;&gt;HttpUrlConnection&lt;/h3&gt;
+&lt;p&gt;HttpClient를 삭제하면서 구글에서 제시한 대안이 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/net/HttpURLConnection&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;HttpUrlConnection&lt;/a&gt;인데요, 기존의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/net/URLConnection&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;URLConnection&lt;/a&gt;에 HTTP를 다루는데 필요한 메서드를 추가한 클래스입니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;URL.openConnection()&lt;/code&gt;으로 얻어진 &lt;code&gt;URLConnection&lt;/code&gt; 객체를 &lt;code&gt;HttpURLConnection&lt;/code&gt;으로 캐스팅하여 데이터 송수신을 행하고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/net/HttpURLConnection?hl=en#disconnect%28%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;disconnect&lt;/a&gt;로 접속을 종료하는 방식으로 사용합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;n&#34;&gt;URL&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;URL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.android.com/&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;n&#34;&gt;HttpURLConnection&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;urlConnection&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpURLConnection&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;openConnection&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;InputStream&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BufferedInputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;urlConnection&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getInputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;readStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;in&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;finally&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;urlConnection&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;disconnect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;volley&#34;&gt;Volley&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;HttpUrlConnection&lt;/code&gt;을 사용할 때는 Application Not Responding(ANR)을 피하기 위해 백그라운드 스레드도 만들어야하고, 버퍼를 통한 입출력도 준비해야 하고, 캐시나 예외처리도 한땀한땀 다 처리해 주어야 하는 불편함이 있었습니다.&lt;/p&gt;
+&lt;p&gt;그래서 구글에서는 HTTP 연결을 만들때마다 이런 귀찮은 일을 안해도 되는 라이브러리인 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/volley&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Volley&lt;/a&gt;를 2013년 Google I/O에서 &lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=yhv8l9F44qo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;발표&lt;/a&gt;했습니다. Volley는 다음과 같은 특징이 있다고 하네요.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automatic scheduling of network requests.&lt;/li&gt;
+&lt;li&gt;Multiple concurrent network connections.&lt;/li&gt;
+&lt;li&gt;Transparent disk and memory response caching with standard HTTP cache coherence.&lt;/li&gt;
+&lt;li&gt;Support for request prioritization.&lt;/li&gt;
+&lt;li&gt;Cancellation request API. You can cancel a single request, or you can set blocks or scopes of requests to cancel.&lt;/li&gt;
+&lt;li&gt;Ease of customization, for example, for retry and backoff.&lt;/li&gt;
+&lt;li&gt;Strong ordering that makes it easy to correctly populate your UI with data fetched asynchronously from the network.&lt;/li&gt;
+&lt;li&gt;Debugging and tracing tools.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;사용법은 다음과 같습니다. HTTP 메소드와 url 정보를 가진 &lt;a class=&#34;link&#34; href=&#34;https://javadoc.io/static/com.android.volley/volley/1.1.1/com/android/volley/Request.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Request&lt;/a&gt;를 만들어서 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/volley/requestqueue&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;RequestQueue&lt;/a&gt;에 넣어줍니다. 그러면 Volley가 알아서 스레드를 만들고 HttpUrlConnection으로 통신을 수행한 뒤 response를 반환해줍니다. 코드를 보시면 HttpUrlConnection을 직접 사용할 때보다 코드가 더 읽기 쉬워진 것을 알 수 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;textView&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;findViewById&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TextView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;queue&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Volley&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newRequestQueue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;url&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://www.google.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;stringRequest&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;StringRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Method&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Listener&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;// Display the first 500 characters of the response string.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;n&#34;&gt;textView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Response is: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${response.substring(0, 500)}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ErrorListener&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;textView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;That didn&amp;#39;t work!&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;queue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stringRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;okhttp&#34;&gt;OkHttp&lt;/h3&gt;
+&lt;p&gt;그런 와중에 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/okhttp/blob/master/docs/changelog_1x.md#version-100&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2013년 5월 6일&lt;/a&gt;엔 Square에서 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/okhttp/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OkHttp&lt;/a&gt;라는 HTTP 클라이언트 라이브러리를 발표합니다. 이 라이브러리는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/okio&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Okio&lt;/a&gt;와 코틀린을 활용해 쓰여졌고 다음과 같은 특징이 있습니다. Connection pooling과 Redirection을 도입해 접속을 더 안정적이게 하면서도, 속도를 개선시킬 수 있는 여러가지 기술이 적용된 것으로 보입니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP/2 support allows all requests to the same host to share a socket.&lt;/li&gt;
+&lt;li&gt;Connection pooling reduces request latency (if HTTP/2 isn’t available).&lt;/li&gt;
+&lt;li&gt;Transparent GZIP shrinks download sizes.&lt;/li&gt;
+&lt;li&gt;Response caching avoids the network completely for repeat requests.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;사용법은 다음과 같습니다. 클라이언트 인스턴스를 생성하고 리퀘스트 객체를 만들어 클라이언트에 전해주면 response가 반환되는 구조를 가지고 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;OkHttpClient&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;client&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OkHttpClient&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;Request&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Builder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Response&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;newCall&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;execute&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;retrofit&#34;&gt;Retrofit&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Retrofit&lt;/a&gt;은 OkHttp를 개발한 Square에서 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/retrofit/blob/master/CHANGELOG.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2013/05/14&lt;/a&gt; 에 발표한 라이브러리입니다. HttpURLConnection을 사용하기 편하도록 랩핑한게 Volley라면 Retrofit은 OkHttp를 랩핑한 것입니다.&lt;/p&gt;
+&lt;p&gt;사용법은 다음과 같습니다. 우선 REST API 콜을 인터페이스 형식으로 준비합니다. 그리고 Retrofit 객체를 만들어서 인터페이스의 인스턴스를 생성합니다. 마지막으로 인터페이스를 동기 혹은 비동기적으로 구동시켜 response를 반환받게 되어 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;GitHubService&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nd&#34;&gt;@GET&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;users/{user}/repos&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;Call&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;List&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Repo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;listRepos&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;user&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Retrofit&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;retrofit&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Retrofit&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Builder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;baseUrl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://api.github.com/&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;GitHubService&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;service&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;retrofit&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;create&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GitHubService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Call&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;List&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Repo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;repos&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;service&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;listRepos&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;octocat&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;ktor&#34;&gt;Ktor&lt;/h3&gt;
+&lt;p&gt;Jetbrains에서 개발한 &lt;a class=&#34;link&#34; href=&#34;https://ktor.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ktor&lt;/a&gt;는 코틀린을 이용해 비동기 서버와 클라이언트를 구축할수 있게 해주는 라이브러리입니다. &lt;a class=&#34;link&#34; href=&#34;https://github.com/ktorio/ktor&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1.6.3&lt;/a&gt; 버전까지 발표되어 있으며 현재도 활발한 업데이트가 이루어지고 있습니다&lt;/p&gt;
+&lt;p&gt;안드로이드에서의 사용법은 다음과 같습니다. 코루틴 스코프 안에서 &lt;a class=&#34;link&#34; href=&#34;https://api.ktor.io/ktor-client/ktor-client-core/io.ktor.client/-http-client/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Http 클라이언트&lt;/a&gt;를 만들어서 request를 보내고 response를 확인한 뒤, 클라이언트의 리소스를 &lt;a class=&#34;link&#34; href=&#34;https://api.ktor.io/ktor-client/ktor-client-core/io.ktor.client/-http-client/index.html#2010942551%2FFunctions%2F-1897681819&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;close&lt;/a&gt;로 반환하면 됩니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;CoroutineScope&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Dispatchers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IO&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;launch&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;client&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HttpClient&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HttpResponse&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;https://ktor.io/&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;stringBody&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;receive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;volley-or-retrofit&#34;&gt;Volley or Retrofit?&lt;/h2&gt;
+&lt;p&gt;안드로이드의 통신 라이브러리로는 주로 Volley 나 Retrofit을 이용하실 겁니다. 그렇다면 둘 중 어느것을 사용해야 할까요?&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/google/volley&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Volley&lt;/a&gt;와 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/retrofit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Retrofit&lt;/a&gt;은 지금도 꾸준히 갱신되고 있는 라이브러리인데요, 두 라이브러리의 기능차이는 다음과 같이 정리할 수 있을 것 같습니다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Function&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Volley&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Retrofit&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Automatic Parsing&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;No&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Caching&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Yes&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Retrying&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Yes&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Post Requests &amp;amp; Multipart uploads&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Yes&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Partly&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Image Loading&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Built-in&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;속도에 있어서는 Volley가 빠르다는 사람도 있고 Retrofit이 빠르다는 사람도 있습니다만 결국 밀리세컨드 스케일의 차이라 속도만으로 어느 한쪽을 선택하는건 어려울 것 같네요. 코드 가독성은 대부분 Retrofit이 더 좋다는 평가인 것 같습니다. 사용법을 보시고 더 편한 쪽을 선택하시면 될 것 같습니다.&lt;/p&gt;
+&lt;p&gt;개인적으로는 API 콜을 인터페이스로 정의해서 사용하는 Retrofit이 전체 구조를 파악하기 더 좋은것 같아 이쪽을 선호합니다. 한가지 재밌는 것은 구글의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/jetpack/guide#recommended-app-arch&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;권장 앱 아키텍처&lt;/a&gt;에서는 HTTP 통신에 Volley가 아닌 Retrofit을 추천하고 있다는 점입니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/android-http-library-review/final-architecture.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;출처 : https://developer.android.com/jetpack/guide#recommended-app-arch&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;이렇게 해서 HTTP 통신과 안드로이드의 통신 라이브러리에 대해 알아보았습니다.&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/z69FsR_-e_s&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+        </item>
+        
+    </channel>
 </rss>

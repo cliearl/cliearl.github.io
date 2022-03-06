@@ -1,21 +1,90 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Gogs on 냉동코더의 기술블로그</title>
-    <link>https://cliearl.github.io/tags/gogs/</link>
-    <description>Recent content in Gogs on 냉동코더의 기술블로그</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 08 Feb 2019 00:54:25 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/gogs/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Synology에 Gogs 설치하기</title>
-      <link>https://cliearl.github.io/posts/linux/install-gogs-on-synology/</link>
-      <pubDate>Fri, 08 Feb 2019 00:54:25 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/linux/install-gogs-on-synology/</guid>
-      <description>깃 저장소 관리 서비스 Git repositories 를 관리하는 서비스는 여러가지가 있는데 Github는 프라이빗 저장소에 제한이 있다. Gitlab은 시놀로지에 설치는 되는데 Docker를 지원하는 고가의 기종에서만 가능하다. 도커를 지원하는 시놀로지 모델은 다음과 같다.
- 19 시리즈 : RS1619xs+, RS1219+, DS1819+ 18 시리즈 : FS1018, RS3618xs, RS2818RP+, RS2418RP+, RS2418+, RS818RP+, RS818+, DS3018xs, DS1618+, DS918+, DS718+, DS218+ 17 시리즈 : FS3017, FS2017, RS18017xs+, RS4017xs+, RS3617xs+, RS3617RPxs, RS3617xs, DS3617xs, DS1817+, DS1517+ 16 시리즈 : RS18016xs+, RS2416RP+, RS2416+, DS916+, DS716+, DS716+II, DS216+, DS216+II 15 시리즈 : RS815RP+, RS815+, RC18015xs+, DS3615xs, DS2415+, DS1815+, DS1515+, DS415+ 14 시리즈 : RS3614xs+, RS3614RPxs, RS3614xs, RS2414RP+, RS2414+, RS814RP+, RS814+ 13 시리즈 : RS10613xs+, RS3413xs+, DS2413+, DS1813+, DS1513+, DS713+ 12 시리즈 : RS3412RPxs, RS3412xs, RS2212RP+, RS2212+, RS812RP+, RS812+, DS3612xs, DS1812+, DS1512+, DS712+, DS412+ 11 시리즈 : RS3411RPxs, RS3411xs, RS2211RP+, RS2211+, DS3611xs, DS2411+, DS1511+, DS411+, DS411+II 10 시리즈 : RS810RP+, RS810+, DS1010+, DS710+  Gogs 선정 어쨌든 프라이빗 소스를 서비스회사에 맡기고 싶진 않아 개인서버에 git을 설치하고 웹에서 매니징을 할수 있게 해 주는 서비스를 찾아보니 Gogs와 Gogs에서 파생되어 나온 Gitea가 있다.</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>Gogs on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/tags/gogs/</link>
+        <description>Recent content in Gogs on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 08 Feb 2019 00:54:25 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/gogs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Synology에 Gogs 설치하기</title>
+        <link>https://cliearl.github.io/posts/linux/install-gogs-on-synology/</link>
+        <pubDate>Fri, 08 Feb 2019 00:54:25 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/linux/install-gogs-on-synology/</guid>
+        <description>&lt;h2 id=&#34;깃-저장소-관리-서비스&#34;&gt;깃 저장소 관리 서비스&lt;/h2&gt;
+&lt;p&gt;Git repositories 를 관리하는 서비스는 여러가지가 있는데 Github는 프라이빗 저장소에 제한이 있다. Gitlab은 시놀로지에 설치는 되는데 Docker를 지원하는 고가의 기종에서만 가능하다. 도커를 지원하는 시놀로지 모델은 &lt;a class=&#34;link&#34; href=&#34;https://www.synology.com/ko-kr/dsm/packages/Docker-GitLab&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;다음&lt;/a&gt;과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;19 시리즈 : RS1619xs+, RS1219+, DS1819+&lt;/li&gt;
+&lt;li&gt;18 시리즈 : FS1018, RS3618xs, RS2818RP+, RS2418RP+, RS2418+, RS818RP+, RS818+, DS3018xs, DS1618+, DS918+, DS718+, DS218+&lt;/li&gt;
+&lt;li&gt;17 시리즈 : FS3017, FS2017, RS18017xs+, RS4017xs+, RS3617xs+, RS3617RPxs, RS3617xs, DS3617xs, DS1817+, DS1517+&lt;/li&gt;
+&lt;li&gt;16 시리즈 : RS18016xs+, RS2416RP+, RS2416+, DS916+, DS716+, DS716+II, DS216+, DS216+II&lt;/li&gt;
+&lt;li&gt;15 시리즈 : RS815RP+, RS815+, RC18015xs+, DS3615xs, DS2415+, DS1815+, DS1515+, DS415+&lt;/li&gt;
+&lt;li&gt;14 시리즈 : RS3614xs+, RS3614RPxs, RS3614xs, RS2414RP+, RS2414+, RS814RP+, RS814+&lt;/li&gt;
+&lt;li&gt;13 시리즈 : RS10613xs+, RS3413xs+, DS2413+, DS1813+, DS1513+, DS713+&lt;/li&gt;
+&lt;li&gt;12 시리즈 : RS3412RPxs, RS3412xs, RS2212RP+, RS2212+, RS812RP+, RS812+, DS3612xs, DS1812+, DS1512+, DS712+, DS412+&lt;/li&gt;
+&lt;li&gt;11 시리즈 : RS3411RPxs, RS3411xs, RS2211RP+, RS2211+, DS3611xs, DS2411+, DS1511+, DS411+, DS411+II&lt;/li&gt;
+&lt;li&gt;10 시리즈 : RS810RP+, RS810+, DS1010+, DS710+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;gogs-선정&#34;&gt;Gogs 선정&lt;/h2&gt;
+&lt;p&gt;어쨌든 프라이빗 소스를 서비스회사에 맡기고 싶진 않아 개인서버에 git을 설치하고 웹에서 매니징을 할수 있게 해 주는 서비스를 찾아보니 Gogs와 Gogs에서 파생되어 나온 Gitea가 있다. 두 서비스의 차이점은 &lt;a class=&#34;link&#34; href=&#34;https://www.slant.co/versus/1395/19087/~gogs_vs_gitea&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Slant&lt;/a&gt;에서 비교했는데 Gogs는 시놀로지 서버에 설치되므로 Gogs를 사용하기로 했다.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitbucket.github.io/gitbucket-news/gitbucket/2017/03/29/benchmark-of-gitbucket.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Benchmark of GitBucket / Gogs / Gitea / GitLab on Raspberry Pi 3&lt;/a&gt; 를 보면 속도도 다른 서비스들에 비해 충분히 빠른 것 같다.&lt;/p&gt;
+&lt;h2 id=&#34;gogs-설치&#34;&gt;Gogs 설치&lt;/h2&gt;
+&lt;h3 id=&#34;git-server-설치&#34;&gt;git server 설치&lt;/h3&gt;
+&lt;p&gt;시놀로지에서 git을 사용하기 위해 &lt;a class=&#34;link&#34; href=&#34;https://www.synology.com/ko-kr/knowledgebase/DSM/help/Git/git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;git server&lt;/a&gt;를 설치한다. 유저는 생성하지 않아도 된다.&lt;/p&gt;
+&lt;h3 id=&#34;gogs-설치하기&#34;&gt;gogs 설치하기&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://kimcblog.com/2018/08/28/%EC%8B%9C%EB%86%80%EB%A1%9C%EC%A7%80synology-nas%EC%97%90-github%EC%B2%98%EB%9F%BC-%EC%9A%B4%EC%9A%A9%ED%95%98%EA%B8%B0-feat-gogs-1-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://kimcblog.com/2018/08/28/%EC%8B%9C%EB%86%80%EB%A1%9C%EC%A7%80synology-nas%EC%97%90-github%EC%B2%98%EB%9F%BC-%EC%9A%B4%EC%9A%A9%ED%95%98%EA%B8%B0-feat-gogs-1-2/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://kimcblog.com/2018/08/28/%ec%8b%9c%eb%86%80%eb%a1%9c%ec%a7%80synology-nas%ec%97%90-github%ec%b2%98%eb%9f%bc-%ec%9a%b4%ec%9a%a9%ed%95%98%ea%b8%b0-feat-gogs-2-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://kimcblog.com/2018/08/28/%ec%8b%9c%eb%86%80%eb%a1%9c%ec%a7%80synology-nas%ec%97%90-github%ec%b2%98%eb%9f%bc-%ec%9a%b4%ec%9a%a9%ed%95%98%ea%b8%b0-feat-gogs-2-2/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;패키지-다운로드&#34;&gt;패키지 다운로드&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gogs.io/docs/installation/install_from_binary&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Gogs 홈페이지&lt;/a&gt;에서 바이너리를 다운받아 설치한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;gogs_0.11.86_linux_armv5를 풀어서 1_create_package 안에다 넣는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;인증서에 git.주소 추가후, 역방향프록시를 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시놀로지에서 데몬 사용자 계정은 무조건 root 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일업로드-제한-풀기&#34;&gt;파일업로드 제한 풀기&lt;/h3&gt;
+&lt;p&gt;파일업로드 크기에 제한이 걸려있으니 다음 &lt;a class=&#34;link&#34; href=&#34;https://dymaxionkim.github.io/beautiful-jekyll/2017-02-06-GOGS/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;포스팅&lt;/a&gt;을 참고해 풀어준다. 참고로 시놀로지에서 app.ini 파일의 경로는 &lt;code&gt;/volumeX/@appstore/Gogs/gogs/custom/conf/app.ini&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;h3 id=&#34;windows에서의-git-테스트를-위한-bash-설치&#34;&gt;Windows에서의 git 테스트를 위한 bash 설치&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그램 및 기능 -&amp;gt; windows 기능 켜기/끄기 -&amp;gt; Linux용 Windows 하위 시스템 설치 -&amp;gt; window store에서 win10용 ubuntu 설치.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각 폴더에서 바로 실행하기 위해 &lt;a class=&#34;link&#34; href=&#34;https://github.com/mintty/wsltty/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;wsltty&lt;/a&gt; 를 설치.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;설치후-알게된-문제&#34;&gt;설치후 알게된 문제&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Gogs는 시놀로지에서 root 계정으로밖에 설치할수 없다&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시놀로지는 DSM 6.0이후로 root의 ssh접속을 금한다&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Gogs의 ssh 주소는 루트를 기준으로 만들어지는데 시놀로지에서 유저계정을 만들어서 ssh에 접속해도 결국 루트에 액세스할수 없어 ssh를 사용할 수가 없다. 할수없이 https 주소를 써야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Gogs의 remote주소를 https://도메인:포트/git주소 로 설정한뒤 로그인하는 방식으로는 인증에 실패한다. https://계정:패스워드@도메인:포트/git주소 로 설정하면 인증을 통과할 수 있다. 이때 계정은 @마크를 쓰는 이메일이 아닌 평문으로 해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
 </rss>

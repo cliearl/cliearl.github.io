@@ -1,85 +1,716 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>linux on 냉동코더의 기술블로그</title>
-    <link>https://cliearl.github.io/categories/linux/</link>
-    <description>Recent content in linux on 냉동코더의 기술블로그</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 09 Oct 2021 17:45:11 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Postgresql Docker Image의 메이저 버전 업그레이드</title>
-      <link>https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/</link>
-      <pubDate>Sat, 09 Oct 2021 17:45:11 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/</guid>
-      <description>Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.
-Postgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다.
-   Release First release Latest minor version Latest release End of life Milestones     11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions   12 2019-10-03 12.</description>
-    </item>
-    
-    <item>
-      <title>전자책 관리 앱 Calibre-web 도입</title>
-      <link>https://cliearl.github.io/posts/linux/introduce-calibre-web/</link>
-      <pubDate>Fri, 11 Jun 2021 20:55:40 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/linux/introduce-calibre-web/</guid>
-      <description>전자책을 관리해야 할 필요성이 생겨서 셀프호스팅 가능한 오픈소스 앱을 알아봤다.
-전자책 프로젝트 중 현재 활발하게 업데이트 되는 프로젝트는 다음 세개 정도 되는것 같았다.
- Calibre Ubooquity Komga  그런데 이 중 Ubooquity와 Komga는 일반서적보다는 만화책 관리가 더 메인인 것 같아서 Calibre를 선택했다.
-캘리버를 도커에 띄우기 위한 이미지가 여러가지 있는데 linuxserver.io에서 관리하는 훌륭한 linuxserver/calibre-web 이미지가 있어서 그걸 사용하기로 했다.
-캘리버-웹 설치시 문제가 하나 있는데 설치 직후 DB 로케이션 입력이 안된다는 점이다. 캘리버가 실행될려면 DB 폴더 아래에 metadata.</description>
-    </item>
-    
-    <item>
-      <title>Hexo에서 Hugo로 블로그 엔진 변경</title>
-      <link>https://cliearl.github.io/posts/linux/hugo-blog/</link>
-      <pubDate>Thu, 04 Mar 2021 22:24:02 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/linux/hugo-blog/</guid>
-      <description>기술블로그 엔진을 Hugo에서 Hexo로 바꾸어 보았다.
-Hexo에 Icarus 태그를 씌우고 도커에 올려서 잘 쓰고 있었는데 내가 사용한 도커 이미지는 업뎃이 안된다는 문제가 있었다. https://github.com/spurin/docker-hexo
-그래서 비슷한 엔진인 Hugo를 찾아보았는데 Hugo의 도커 이미지는 관리가 잘 되고 있었다. https://hub.docker.com/r/klakegg/hugo/
-근데 이상하게도 이 이미지를 비롯한 모든 hugo의 도커 이미지는 내 시놀로지 환경에서 실행이 안됐다. 짜증나기도 하고 이왕 이렇게 된거 로컬에서 실행하기로 했다. 맥북에서 하면 brew를 사용하기 때문에 업뎃도 쉬워서 관리가 편하다. hexo가 brew로 관리가 안된다는 점도 hugo로 온 이유중에 하나.</description>
-    </item>
-    
-    <item>
-      <title>Synology에서 Docker Image 업데이트하기</title>
-      <link>https://cliearl.github.io/posts/linux/synology-docker-update/</link>
-      <pubDate>Mon, 23 Nov 2020 02:55:00 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/linux/synology-docker-update/</guid>
-      <description>시놀로지에서 도커 이미지를 업데이트하는 법에 대해 정리하였다.
-  도커패널 &amp;gt; 컨테이너 &amp;gt; 업데이트할 컨테이너 선택후 [작업 -&amp;gt; 중지]
-  도커패널 &amp;gt; 레지스트리 &amp;gt; 업데이트할 이미지 찾아서 [다운로드]
-(이전 다운로드 받은 이미지(image) 삭제 하지 않아도 됨)
-  도커패널 &amp;gt; 업데이트할 컨테이너 선택후 [작업 -&amp;gt; 지우기]
-(이전 설정은 지워지지 않음)
-  도커패널 &amp;gt; 업데이트할 컨테이너 선택후 [작업 -&amp;gt; 시작점]
-  </description>
-    </item>
-    
-    <item>
-      <title>도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</title>
-      <link>https://cliearl.github.io/posts/linux/docker-hexo-blog/</link>
-      <pubDate>Fri, 09 Oct 2020 19:24:00 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/linux/docker-hexo-blog/</guid>
-      <description>도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다.
-개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다.
-처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기.
-그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다. 그래서 TTXML Importer로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.</description>
-    </item>
-    
-    <item>
-      <title>Synology에 Gogs 설치하기</title>
-      <link>https://cliearl.github.io/posts/linux/install-gogs-on-synology/</link>
-      <pubDate>Fri, 08 Feb 2019 00:54:25 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/linux/install-gogs-on-synology/</guid>
-      <description>깃 저장소 관리 서비스 Git repositories 를 관리하는 서비스는 여러가지가 있는데 Github는 프라이빗 저장소에 제한이 있다. Gitlab은 시놀로지에 설치는 되는데 Docker를 지원하는 고가의 기종에서만 가능하다. 도커를 지원하는 시놀로지 모델은 다음과 같다.
- 19 시리즈 : RS1619xs+, RS1219+, DS1819+ 18 시리즈 : FS1018, RS3618xs, RS2818RP+, RS2418RP+, RS2418+, RS818RP+, RS818+, DS3018xs, DS1618+, DS918+, DS718+, DS218+ 17 시리즈 : FS3017, FS2017, RS18017xs+, RS4017xs+, RS3617xs+, RS3617RPxs, RS3617xs, DS3617xs, DS1817+, DS1517+ 16 시리즈 : RS18016xs+, RS2416RP+, RS2416+, DS916+, DS716+, DS716+II, DS216+, DS216+II 15 시리즈 : RS815RP+, RS815+, RC18015xs+, DS3615xs, DS2415+, DS1815+, DS1515+, DS415+ 14 시리즈 : RS3614xs+, RS3614RPxs, RS3614xs, RS2414RP+, RS2414+, RS814RP+, RS814+ 13 시리즈 : RS10613xs+, RS3413xs+, DS2413+, DS1813+, DS1513+, DS713+ 12 시리즈 : RS3412RPxs, RS3412xs, RS2212RP+, RS2212+, RS812RP+, RS812+, DS3612xs, DS1812+, DS1512+, DS712+, DS412+ 11 시리즈 : RS3411RPxs, RS3411xs, RS2211RP+, RS2211+, DS3611xs, DS2411+, DS1511+, DS411+, DS411+II 10 시리즈 : RS810RP+, RS810+, DS1010+, DS710+  Gogs 선정 어쨌든 프라이빗 소스를 서비스회사에 맡기고 싶진 않아 개인서버에 git을 설치하고 웹에서 매니징을 할수 있게 해 주는 서비스를 찾아보니 Gogs와 Gogs에서 파생되어 나온 Gitea가 있다.</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>linux on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/categories/linux/</link>
+        <description>Recent content in linux on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 09 Oct 2021 17:45:11 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Postgresql Docker Image의 메이저 버전 업그레이드</title>
+        <link>https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/</link>
+        <pubDate>Sat, 09 Oct 2021 17:45:11 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/</guid>
+        <description>&lt;p&gt;Docker로 &lt;a class=&#34;link&#34; href=&#34;https://www.postgresql.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Postgresql&lt;/a&gt;의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.&lt;/p&gt;
+&lt;h2 id=&#34;postgresql-version&#34;&gt;Postgresql Version&lt;/h2&gt;
+&lt;p&gt;Postgresql 메이저 버전은 최근것만 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/PostgreSQL#Release_history&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;정리&lt;/a&gt;하면 다음과 같다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Release&lt;/th&gt;
+&lt;th&gt;First release&lt;/th&gt;
+&lt;th&gt;Latest minor version&lt;/th&gt;
+&lt;th&gt;Latest release&lt;/th&gt;
+&lt;th&gt;End of life&lt;/th&gt;
+&lt;th&gt;Milestones&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;2018-10-18&lt;/td&gt;
+&lt;td&gt;11.13&lt;/td&gt;
+&lt;td&gt;2021-08-12&lt;/td&gt;
+&lt;td&gt;2023-11-09&lt;/td&gt;
+&lt;td&gt;Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;2019-10-03&lt;/td&gt;
+&lt;td&gt;12.8&lt;/td&gt;
+&lt;td&gt;2021-08-12&lt;/td&gt;
+&lt;td&gt;2024-11-14&lt;/td&gt;
+&lt;td&gt;Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;2020-09-24&lt;/td&gt;
+&lt;td&gt;13.4&lt;/td&gt;
+&lt;td&gt;2021-08-12&lt;/td&gt;
+&lt;td&gt;2025-11-13&lt;/td&gt;
+&lt;td&gt;Space savings and performance gains from de-duplication of B-tree index entries, improved performance for queries that use aggregates or partitioned tables, better query planning when using extended statistics, parallelized vacuuming of indexes, incremental sorting&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;2021-09-30&lt;/td&gt;
+&lt;td&gt;14.0&lt;/td&gt;
+&lt;td&gt;2021-09-30&lt;/td&gt;
+&lt;td&gt;2026-11-12&lt;/td&gt;
+&lt;td&gt;Added SQL-standard SEARCH and CYCLE clauses for common table expressions, allow DISTINCT to be added to GROUP BY&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;whats-new-in-postgresql-13&#34;&gt;What’s New in PostgreSQL 13?&lt;/h2&gt;
+&lt;p&gt;12버전도 지원기간은 많이 남았긴 한데.. 새 버전을 써보고 싶으니 업그레이드하기로 했다. 13의 특징은 다음과 같은 게 있다고 하는데 좀 더 구체적인 설명은 &lt;a class=&#34;link&#34; href=&#34;https://www.enterprisedb.com/blog/whats-new-postgresql-13&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;What’s New in PostgreSQL 13?&lt;/a&gt; 을 참고하자.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Space savings and performance gains from de-duplication of B-tree index entries&lt;/li&gt;
+&lt;li&gt;Improved performance for queries that use aggregates or partitioned tables&lt;/li&gt;
+&lt;li&gt;Better query planning when using extended statistics&lt;/li&gt;
+&lt;li&gt;Parallelized vacuuming of indexes&lt;/li&gt;
+&lt;li&gt;Incremental sorting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;docker-image&#34;&gt;Docker Image&lt;/h2&gt;
+&lt;p&gt;Postgresql의 공식 도커이미지는 &lt;a class=&#34;link&#34; href=&#34;https://hub.docker.com/_/postgres&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Docker Hub&lt;/a&gt;에서 제공하고 있고, 이미지는 다음과 같은 형식으로 제공되고 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;14.0, 14, latest, 14.0-bullseye, 14-bullseye, bullseye&lt;/li&gt;
+&lt;li&gt;14.0-alpine, 14-alpine, alpine, 14.0-alpine3.14, 14-alpine3.14, alpine3.14&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;14.0&lt;/code&gt;은 마이너 버전까지 고정시켜 만든 것이고 &lt;code&gt;14&lt;/code&gt;는 14 릴리즈의 최신버전을 의미한다. &lt;code&gt;latest&lt;/code&gt;는 모든 버전중 최신버전을 의미하는데 안정성을 위해 사용은 추천하지 않는다. &lt;code&gt;bullseye&lt;/code&gt;는 최신 데비안인 11.0을 기반으로 만들어진 이미지이고, &lt;code&gt;alpine&lt;/code&gt;은 용량을 최적화한 알파인 리눅스를 기반으로 만들어진 이미지이다. 개인적으로는 &lt;code&gt;14&lt;/code&gt; 형식의 이미지를 사용한다.&lt;/p&gt;
+&lt;p&gt;각 이미지의 디테일은 &lt;a class=&#34;link&#34; href=&#34;https://github.com/docker-library/repo-info/tree/master/repos/postgres&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;깃헙 저장소&lt;/a&gt;에서 확인할 수 있다.&lt;/p&gt;
+&lt;h2 id=&#34;version-upgrade&#34;&gt;Version upgrade&lt;/h2&gt;
+&lt;h3 id=&#34;pg_upgrade-이용&#34;&gt;&lt;code&gt;pg_upgrade&lt;/code&gt; 이용&lt;/h3&gt;
+&lt;p&gt;Postgresql은 &lt;code&gt;pg_upgrade&lt;/code&gt;와 &lt;code&gt;pg_upgradecluster&lt;/code&gt;라는 명령어를 제공해주는데 이걸 사용하면 업그레이드를 비교적 간단하게 수행할 수 있다. 문제는 이 명령어를 사용하기 위해서는 OS에 현재버전과 업그레이드할 버전이 모두 설치되어 있어야 하기 때문에 도커에서는 사용할 수 없다는 점이다.&lt;/p&gt;
+&lt;p&gt;다만 이걸 또 도커에서 사용할 수 있게 만들어놓은 &lt;a class=&#34;link&#34; href=&#34;https://github.com/tianon/docker-postgres-upgrade&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;사람&lt;/a&gt;이 있긴 하다&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://storage.googleapis.com/jjalbot-jjals/2021/02/tA3zuU8x8o/2Q8oFzDjC.gif&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;백업파일-이용&#34;&gt;백업파일 이용&lt;/h3&gt;
+&lt;p&gt;하지만 내생각에 가장 속편한 것은 그냥 이전버전에서 전체 데이터를 덤프받아 다음버전에 올려버리는 것이다. 우선 이전버전과 다음버전 컨테이너를 동시에 띄우고 다음 내용을 따라한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;도커 컨테이너의 ID 확인&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker ps -a
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;이전버전 컨테이너에서 파일 덤프&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker &lt;span class=&#34;nb&#34;&gt;exec&lt;/span&gt; -it &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;이전버전 container ID&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; /usr/bin/pg_dumpall -U &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;username&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &amp;gt; dumpfile.sql
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;다음버전 컨테이너에 파일 복원&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker &lt;span class=&#34;nb&#34;&gt;exec&lt;/span&gt; -it &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;다음버전 container ID&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; psql &amp;lt; dumpfile.sql
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;이 때 &lt;code&gt;the input device is not a TTY&lt;/code&gt; 라고 뜨면서 입력이 안되면 다음 명령어로 직접 집어넣으면 된다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cat dumpfile.sql &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; docker &lt;span class=&#34;nb&#34;&gt;exec&lt;/span&gt; -i &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;다음버전 container ID&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; psql -U gitea
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;끗.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>전자책 관리 앱 Calibre-web 도입</title>
+        <link>https://cliearl.github.io/posts/linux/introduce-calibre-web/</link>
+        <pubDate>Fri, 11 Jun 2021 20:55:40 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/linux/introduce-calibre-web/</guid>
+        <description>&lt;p&gt;전자책을 관리해야 할 필요성이 생겨서 셀프호스팅 가능한 오픈소스 앱을 알아봤다.&lt;/p&gt;
+&lt;p&gt;전자책 프로젝트 중 현재 활발하게 업데이트 되는 프로젝트는 다음 세개 정도 되는것 같았다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://calibre-ebook.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Calibre&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://vaemendis.net/ubooquity/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ubooquity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://komga.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Komga&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;그런데 이 중 Ubooquity와 Komga는 일반서적보다는 만화책 관리가 더 메인인 것 같아서 Calibre를 선택했다.&lt;/p&gt;
+&lt;p&gt;캘리버를 도커에 띄우기 위한 이미지가 여러가지 있는데 linuxserver.io에서 관리하는 훌륭한 &lt;a class=&#34;link&#34; href=&#34;https://hub.docker.com/r/linuxserver/calibre-web&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;linuxserver/calibre-web&lt;/a&gt; 이미지가 있어서 그걸 사용하기로 했다.&lt;/p&gt;
+&lt;p&gt;캘리버-웹 설치시 문제가 하나 있는데 설치 직후 DB 로케이션 입력이 안된다는 점이다. 캘리버가 실행될려면 DB 폴더 아래에 metadata.db 파일이 있어야 되는데 파일이 없을경우 자동으로 생성되지 않게 되어 있다. 아마도 오프라인 캘리버 앱을 연동해서 쓰는 사람들을 배려해서 DB를 자동으로 초기화하지 않도록 한 것 같다.&lt;/p&gt;
+&lt;p&gt;근데 어쨌든 처음 사용자는 metadata.db가 필요하다. 이 파일이 없으면 오프라인 앱에서 생성해서 복사하는 법이 있는데 이것보다는 설치할 때 자동으로 생성되게 하고 퍼미션도 줘버리는게 편하다.&lt;/p&gt;
+&lt;p&gt;찾아보니 역시 깃헙에서 &lt;a class=&#34;link&#34; href=&#34;https://github.com/linuxserver/docker-calibre-web/issues/30&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;이슈&lt;/a&gt;가 열렸고 해결책도 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;우선은 /books 디렉토리 아래에 /custom-cont-init.d 라는 디렉토리를 만든다.&lt;/li&gt;
+&lt;li&gt;이 안에 다음과 같은 내용의 metadata_generator.sh 파일을 생성한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;FILE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/books/metadata.db
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;PUID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;PGID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -f &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; already exists, skipping generation.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; does not exists, generating...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /app/calibre/bin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    calibredb restore_database --really-do-it --with-library /books
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; created, setting permissions...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    chmod a+w &lt;span class=&#34;nv&#34;&gt;$FILE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# this is needed for uploads, you can remove it if you don&amp;#39;t want to allow uploads&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    chown &lt;span class=&#34;nv&#34;&gt;$PUID&lt;/span&gt;:&lt;span class=&#34;nv&#34;&gt;$PGID&lt;/span&gt; /books
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Permissions fixed, use /books as library path&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;profit!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;부록으로 프로그래밍 관련 서적을 무료로 다운받을 수 있는 사이트를 하나 적어둔다
+&lt;a class=&#34;link&#34; href=&#34;https://ebookfoundation.github.io/free-programming-books/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;free-programming-books&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hexo에서 Hugo로 블로그 엔진 변경</title>
+        <link>https://cliearl.github.io/posts/linux/hugo-blog/</link>
+        <pubDate>Thu, 04 Mar 2021 22:24:02 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/linux/hugo-blog/</guid>
+        <description>&lt;p&gt;기술블로그 엔진을 Hugo에서 Hexo로 바꾸어 보았다.&lt;/p&gt;
+&lt;p&gt;Hexo에 Icarus 태그를 씌우고 도커에 올려서 잘 쓰고 있었는데 내가 사용한 도커 이미지는 업뎃이 안된다는 문제가 있었다.
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/spurin/docker-hexo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/spurin/docker-hexo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;그래서 비슷한 엔진인 Hugo를 찾아보았는데 Hugo의 도커 이미지는 관리가 잘 되고 있었다.
+&lt;a class=&#34;link&#34; href=&#34;https://hub.docker.com/r/klakegg/hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://hub.docker.com/r/klakegg/hugo/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;근데 이상하게도 이 이미지를 비롯한 모든 hugo의 도커 이미지는 내 시놀로지 환경에서 실행이 안됐다. 짜증나기도 하고 이왕 이렇게 된거 로컬에서 실행하기로 했다. 맥북에서 하면 brew를 사용하기 때문에 업뎃도 쉬워서 관리가 편하다. hexo가 brew로 관리가 안된다는 점도 hugo로 온 이유중에 하나. Go를 쓰니까 빠르다는 점은 그렇게까진 다가오지 않았다.&lt;/p&gt;
+&lt;h2 id=&#34;hugo-초기화&#34;&gt;hugo 초기화&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ brew install hugo  // hugo를 인스톨
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ hugo new site &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;생성할 폴더 이름&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;깃-준비&#34;&gt;깃 준비&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; cliearl.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git init
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git remote add origin &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;https://hugo 원본파일을 보관할 저장소&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git submodule add &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;https://hugo가 생성한 사이트를 업로드할 저장소&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; public
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git submodule add &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;테마 깃주소.git&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; themes/zzo
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git submodule update --init --recursive  // 테마가 업데이트 될 경우 반영
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;글-작성-후-확인&#34;&gt;글 작성 후 확인&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ hugo new posts/test.md  // 새로운 글 작성
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ hugo server  // 만들어진 정적사이트를 localhost:1313에 띄워줌
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;페이지-작성-후-업로드&#34;&gt;페이지 작성 후 업로드&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ hugo -t &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;테마이름&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  // 정적사이트 생성
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; public
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;#34;deploy updates&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ git push origin main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;커밋-자동화-스크립트&#34;&gt;커밋 자동화 스크립트&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; -e &lt;span class=&#34;s2&#34;&gt;&amp;#34;\033[0;32mDeploying updates to GitHub...\033[0m&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Build the project.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo -t zzo
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Go To Public folder&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; public
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Add changes to git.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Commit changes.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;rebuilding site `date`&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$#&lt;/span&gt; -eq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$msg&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Push source and build repos.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git push origin main
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Come Back up to the Project Root&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ..
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# blog 저장소 Commit &amp;amp; Push&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;rebuilding site `date`&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$#&lt;/span&gt; -eq &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$msg&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git push origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;검색엔진에-등록&#34;&gt;검색엔진에 등록&lt;/h2&gt;
+&lt;h3 id=&#34;google-search-console&#34;&gt;Google Search Console&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.google.com/webmasters/tools/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Google Search Console&lt;/a&gt;에 접속&lt;/li&gt;
+&lt;li&gt;속성 추가 후 URL 접두어에서 github.io 주소 입력&lt;/li&gt;
+&lt;li&gt;HTML파일로 확인 선택 -&amp;gt; 파일 다운로드&lt;/li&gt;
+&lt;li&gt;hugo의 public 폴더에 복사하면 루트에 업로드 됨&lt;/li&gt;
+&lt;li&gt;소유권 확인됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;configtoml-수정&#34;&gt;config.toml 수정&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 로봇 검색 허용
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;enableRobotsTXT = true
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 사이트맵 작성
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[sitemap]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;changefreq = &amp;#34;daily&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;filename = &amp;#34;sitemap.xml&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;서치콘솔에-등록&#34;&gt;서치콘솔에 등록&lt;/h3&gt;
+&lt;p&gt;Sitemaps 메뉴에서 &amp;hellip;/sitemap.xml을 등록.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Synology에서 Docker Image 업데이트하기</title>
+        <link>https://cliearl.github.io/posts/linux/synology-docker-update/</link>
+        <pubDate>Mon, 23 Nov 2020 02:55:00 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/linux/synology-docker-update/</guid>
+        <description>&lt;p&gt;시놀로지에서 도커 이미지를 업데이트하는 법에 대해 정리하였다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;도커패널 &amp;gt; 컨테이너 &amp;gt; 업데이트할 컨테이너 선택후 [작업 -&amp;gt; 중지]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도커패널 &amp;gt; 레지스트리 &amp;gt; 업데이트할 이미지 찾아서 [다운로드]&lt;br&gt;
+(이전 다운로드 받은 이미지(image) 삭제 하지 않아도 됨)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도커패널 &amp;gt; 업데이트할 컨테이너 선택후 [작업 -&amp;gt; 지우기]&lt;br&gt;
+(이전 설정은 지워지지 않음)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도커패널 &amp;gt; 업데이트할 컨테이너 선택후 [작업 -&amp;gt; 시작점]&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</title>
+        <link>https://cliearl.github.io/posts/linux/docker-hexo-blog/</link>
+        <pubDate>Fri, 09 Oct 2020 19:24:00 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/linux/docker-hexo-blog/</guid>
+        <description>&lt;p&gt;도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다.&lt;/p&gt;
+&lt;p&gt;개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다.&lt;/p&gt;
+&lt;p&gt;처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기.&lt;/p&gt;
+&lt;p&gt;그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다.
+그래서 &lt;a class=&#34;link&#34; href=&#34;https://ani2life.com/wp/?p=898&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TTXML Importer&lt;/a&gt;로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.&lt;/p&gt;
+&lt;p&gt;어차피 블로그를 깔끔하게 옮길 수 없다면 기술블로그 전용 툴을 쓰자 해서 찾은게 &lt;a class=&#34;link&#34; href=&#34;https://ghost.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ghost&lt;/a&gt;인데 얘는 카테고리나 사이드바 기능이 부족해서 탈락시켰다.&lt;/p&gt;
+&lt;p&gt;그 다음으로 찾은 선택지는 정적 사이트 생성기를 이용하는 거였다. 마크다운 쓰기도 좋고, github.io 주소도 사용할 수 있으니 괜찮아보였다. 그래서 찾아보니 &lt;a class=&#34;link&#34; href=&#34;https://jekyllrb.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Jekyll&lt;/a&gt;에는 맘에 드는 스킨이 없어서 &lt;a class=&#34;link&#34; href=&#34;https://hexo.io/ko/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hexo&lt;/a&gt;에 &lt;a class=&#34;link&#34; href=&#34;https://blog.zhangruipeng.me/hexo-theme-icarus/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Icarus&lt;/a&gt;라는 테마를 붙여 써보기로 했다.&lt;/p&gt;
+&lt;p&gt;근데 정적 사이트 생성기는 소스를 로컬에 보관하고 github.io로 퍼블리시하는 구조라, 모든 컴퓨터에 Hexo 소스를 보관할 필요가 있다. 이건 너무 바보같아서 Hexo 소스는 도커로 웹에 띄우고 이놈으로부터 github.io에 퍼블리싱하는 방법을 쓰기로 했다. 굳이 따지면 웹에 띄운 시점에서 바로 접속이 가능하니 굳이 퍼블리시를 할 필요는 없는거긴 한데 사이트를 매번 변환하는것보다는 당연히 변환된 저장소에 접속하는 편이 빠르고 무엇보다 github.io 주소를 쓰는 편이 더 geek하기 때문에 사용하기로 했다.&lt;/p&gt;
+&lt;p&gt;그래서 이 포스트에서는 리눅스 서버에 도커로 Hexo를 띄우고, Hexo-admin 플러그인으로 퍼블리시한 파일을 github.io에 deploy하여 최종적으로는 유저명.github.io로 정적 블로그를 구축하는 법을 설명한다.&lt;/p&gt;
+&lt;h1 id=&#34;github-repository-생성&#34;&gt;github repository 생성&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;깃헙에 유저명.github.io라는 저장소 생성&lt;/li&gt;
+&lt;li&gt;이때 속성은 Public, Initialize this repository with a README를 선택&lt;/li&gt;
+&lt;li&gt;생성된 저장소의 settings → GitHub Pages → Theme Chooser 에서 테마를 아무거나 하나 골라주면 블로그가 가동됨&lt;/li&gt;
+&lt;li&gt;Your site is published at https://유저명.github.io/ 메시지가 뜨면 접속가능하게 된거임&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;도커-이미지-선정&#34;&gt;도커 이미지 선정&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/spurin/docker-hexo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/spurin/docker-hexo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hexo와 관리용 Hexo-admin이 포함되어 있는 이미지&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;icarus-테마-셋업&#34;&gt;icarus 테마 셋업&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ssh로 접속&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo su -
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker ps  &lt;span class=&#34;c1&#34;&gt;# 현재 실행중인 컨테이너 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker &lt;span class=&#34;nb&#34;&gt;exec&lt;/span&gt; -it xxxxxxxxxxxx /bin/bash  &lt;span class=&#34;c1&#34;&gt;# 컨테이너에 접속&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/ppoffice/hexo-theme-icarus.git themes/icarus
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 테마 의존성 패키지 일괄설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install --save bulma-stylus@0.8.0 hexo-renderer-inferno@^0.1.3 hexo-component-inferno@^0.10.1 inferno@^7.3.3 inferno-create-element@^7.3.3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# _config.yml의 theme가 landscape인데 icarus로 수정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;hexo-admin에-패스워드-설정&#34;&gt;hexo-admin에 패스워드 설정&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Settings &amp;gt; Setup authentification에서 YAML을 생성&lt;/li&gt;
+&lt;li&gt;_config.yml의 admin: 밑에 붙여넣는다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hexo-admin에서-deploy-설정&#34;&gt;hexo-admin에서 deploy 설정&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/jaredly/hexo-admin/issues/70&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/jaredly/hexo-admin/issues/70&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;sh파일을 만들고 yml 파일을 수정한다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install --save hexo-deployer-git  &lt;span class=&#34;c1&#34;&gt;# git 배포용 플러그인 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;touch hexo-deploy.sh&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; chmod a+x hexo-deploy.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#!/usr/bin/env sh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hexo clean
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hexo deploy
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# _config.yml을 수정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;deploy:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; type: git
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; repo: https://계정:패스워드@github.com/저장소.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;admin:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; deployCommand: &lt;span class=&#34;s1&#34;&gt;&amp;#39;./hexo-deploy.sh&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;유용한-플러그인httpshexoioplugins&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://hexo.io/plugins/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;유용한 플러그인&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;hexo-deployer-githttpsgithubcomhexojshexo-deployer-git&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/hexojs/hexo-deployer-git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hexo-deployer-git&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;git으로 배포하기 위한 플러그인&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install hexo-deployer-git --save
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/hexojs/hexo-generator-feed&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hexo-generator-feed&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;atom(url/atom.xml ) 혹은 rss2.0(url/rss2.xml)으로 피드 생성해 줌&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install hexo-generator-feed --save
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# _config.yml 파일 끝에 다음 행 추가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;feed:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  enable: &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  type: rss2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  path: rss2.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  limit: &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/hexojs/hexo-generator-sitemap&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hexo-generator-sitemap&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;sitemap.xml 파일을 자동생성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install hexo-generator-sitemap --save
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# _config.yml 파일 맨 끝에 다음 행 추가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sitemap:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  path: sitemap.xml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;hexo-mathhttpsgithubcomhexojshexo-math&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/hexojs/hexo-math&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hexo-math&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;KaTeX and MathJax를 활성화 시켜주는 플러그인&lt;/li&gt;
+&lt;li&gt;플러그인 설치&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install hexo-math --save
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;사용예&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{% mathjax %}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;\frac{1}{x^2-1}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{% endmathjax %}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>Synology에 Gogs 설치하기</title>
+        <link>https://cliearl.github.io/posts/linux/install-gogs-on-synology/</link>
+        <pubDate>Fri, 08 Feb 2019 00:54:25 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/linux/install-gogs-on-synology/</guid>
+        <description>&lt;h2 id=&#34;깃-저장소-관리-서비스&#34;&gt;깃 저장소 관리 서비스&lt;/h2&gt;
+&lt;p&gt;Git repositories 를 관리하는 서비스는 여러가지가 있는데 Github는 프라이빗 저장소에 제한이 있다. Gitlab은 시놀로지에 설치는 되는데 Docker를 지원하는 고가의 기종에서만 가능하다. 도커를 지원하는 시놀로지 모델은 &lt;a class=&#34;link&#34; href=&#34;https://www.synology.com/ko-kr/dsm/packages/Docker-GitLab&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;다음&lt;/a&gt;과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;19 시리즈 : RS1619xs+, RS1219+, DS1819+&lt;/li&gt;
+&lt;li&gt;18 시리즈 : FS1018, RS3618xs, RS2818RP+, RS2418RP+, RS2418+, RS818RP+, RS818+, DS3018xs, DS1618+, DS918+, DS718+, DS218+&lt;/li&gt;
+&lt;li&gt;17 시리즈 : FS3017, FS2017, RS18017xs+, RS4017xs+, RS3617xs+, RS3617RPxs, RS3617xs, DS3617xs, DS1817+, DS1517+&lt;/li&gt;
+&lt;li&gt;16 시리즈 : RS18016xs+, RS2416RP+, RS2416+, DS916+, DS716+, DS716+II, DS216+, DS216+II&lt;/li&gt;
+&lt;li&gt;15 시리즈 : RS815RP+, RS815+, RC18015xs+, DS3615xs, DS2415+, DS1815+, DS1515+, DS415+&lt;/li&gt;
+&lt;li&gt;14 시리즈 : RS3614xs+, RS3614RPxs, RS3614xs, RS2414RP+, RS2414+, RS814RP+, RS814+&lt;/li&gt;
+&lt;li&gt;13 시리즈 : RS10613xs+, RS3413xs+, DS2413+, DS1813+, DS1513+, DS713+&lt;/li&gt;
+&lt;li&gt;12 시리즈 : RS3412RPxs, RS3412xs, RS2212RP+, RS2212+, RS812RP+, RS812+, DS3612xs, DS1812+, DS1512+, DS712+, DS412+&lt;/li&gt;
+&lt;li&gt;11 시리즈 : RS3411RPxs, RS3411xs, RS2211RP+, RS2211+, DS3611xs, DS2411+, DS1511+, DS411+, DS411+II&lt;/li&gt;
+&lt;li&gt;10 시리즈 : RS810RP+, RS810+, DS1010+, DS710+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;gogs-선정&#34;&gt;Gogs 선정&lt;/h2&gt;
+&lt;p&gt;어쨌든 프라이빗 소스를 서비스회사에 맡기고 싶진 않아 개인서버에 git을 설치하고 웹에서 매니징을 할수 있게 해 주는 서비스를 찾아보니 Gogs와 Gogs에서 파생되어 나온 Gitea가 있다. 두 서비스의 차이점은 &lt;a class=&#34;link&#34; href=&#34;https://www.slant.co/versus/1395/19087/~gogs_vs_gitea&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Slant&lt;/a&gt;에서 비교했는데 Gogs는 시놀로지 서버에 설치되므로 Gogs를 사용하기로 했다.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitbucket.github.io/gitbucket-news/gitbucket/2017/03/29/benchmark-of-gitbucket.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Benchmark of GitBucket / Gogs / Gitea / GitLab on Raspberry Pi 3&lt;/a&gt; 를 보면 속도도 다른 서비스들에 비해 충분히 빠른 것 같다.&lt;/p&gt;
+&lt;h2 id=&#34;gogs-설치&#34;&gt;Gogs 설치&lt;/h2&gt;
+&lt;h3 id=&#34;git-server-설치&#34;&gt;git server 설치&lt;/h3&gt;
+&lt;p&gt;시놀로지에서 git을 사용하기 위해 &lt;a class=&#34;link&#34; href=&#34;https://www.synology.com/ko-kr/knowledgebase/DSM/help/Git/git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;git server&lt;/a&gt;를 설치한다. 유저는 생성하지 않아도 된다.&lt;/p&gt;
+&lt;h3 id=&#34;gogs-설치하기&#34;&gt;gogs 설치하기&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://kimcblog.com/2018/08/28/%EC%8B%9C%EB%86%80%EB%A1%9C%EC%A7%80synology-nas%EC%97%90-github%EC%B2%98%EB%9F%BC-%EC%9A%B4%EC%9A%A9%ED%95%98%EA%B8%B0-feat-gogs-1-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://kimcblog.com/2018/08/28/%EC%8B%9C%EB%86%80%EB%A1%9C%EC%A7%80synology-nas%EC%97%90-github%EC%B2%98%EB%9F%BC-%EC%9A%B4%EC%9A%A9%ED%95%98%EA%B8%B0-feat-gogs-1-2/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://kimcblog.com/2018/08/28/%ec%8b%9c%eb%86%80%eb%a1%9c%ec%a7%80synology-nas%ec%97%90-github%ec%b2%98%eb%9f%bc-%ec%9a%b4%ec%9a%a9%ed%95%98%ea%b8%b0-feat-gogs-2-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://kimcblog.com/2018/08/28/%ec%8b%9c%eb%86%80%eb%a1%9c%ec%a7%80synology-nas%ec%97%90-github%ec%b2%98%eb%9f%bc-%ec%9a%b4%ec%9a%a9%ed%95%98%ea%b8%b0-feat-gogs-2-2/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;패키지-다운로드&#34;&gt;패키지 다운로드&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gogs.io/docs/installation/install_from_binary&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Gogs 홈페이지&lt;/a&gt;에서 바이너리를 다운받아 설치한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;gogs_0.11.86_linux_armv5를 풀어서 1_create_package 안에다 넣는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;인증서에 git.주소 추가후, 역방향프록시를 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시놀로지에서 데몬 사용자 계정은 무조건 root 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일업로드-제한-풀기&#34;&gt;파일업로드 제한 풀기&lt;/h3&gt;
+&lt;p&gt;파일업로드 크기에 제한이 걸려있으니 다음 &lt;a class=&#34;link&#34; href=&#34;https://dymaxionkim.github.io/beautiful-jekyll/2017-02-06-GOGS/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;포스팅&lt;/a&gt;을 참고해 풀어준다. 참고로 시놀로지에서 app.ini 파일의 경로는 &lt;code&gt;/volumeX/@appstore/Gogs/gogs/custom/conf/app.ini&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;h3 id=&#34;windows에서의-git-테스트를-위한-bash-설치&#34;&gt;Windows에서의 git 테스트를 위한 bash 설치&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그램 및 기능 -&amp;gt; windows 기능 켜기/끄기 -&amp;gt; Linux용 Windows 하위 시스템 설치 -&amp;gt; window store에서 win10용 ubuntu 설치.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각 폴더에서 바로 실행하기 위해 &lt;a class=&#34;link&#34; href=&#34;https://github.com/mintty/wsltty/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;wsltty&lt;/a&gt; 를 설치.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;설치후-알게된-문제&#34;&gt;설치후 알게된 문제&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Gogs는 시놀로지에서 root 계정으로밖에 설치할수 없다&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시놀로지는 DSM 6.0이후로 root의 ssh접속을 금한다&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Gogs의 ssh 주소는 루트를 기준으로 만들어지는데 시놀로지에서 유저계정을 만들어서 ssh에 접속해도 결국 루트에 액세스할수 없어 ssh를 사용할 수가 없다. 할수없이 https 주소를 써야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Gogs의 remote주소를 https://도메인:포트/git주소 로 설정한뒤 로그인하는 방식으로는 인증에 실패한다. https://계정:패스워드@도메인:포트/git주소 로 설정하면 인증을 통과할 수 있다. 이때 계정은 @마크를 쓰는 이메일이 아닌 평문으로 해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
 </rss>

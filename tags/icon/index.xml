@@ -1,23 +1,104 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>icon on 냉동코더의 기술블로그</title>
-    <link>https://cliearl.github.io/tags/icon/</link>
-    <description>Recent content in icon on 냉동코더의 기술블로그</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 28 Apr 2021 21:46:35 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/icon/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>App Icon 설정하기</title>
-      <link>https://cliearl.github.io/posts/android/appicon/</link>
-      <pubDate>Wed, 28 Apr 2021 21:46:35 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/android/appicon/</guid>
-      <description>이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.
-Legacy Icon과 Adaptive Icon 안드로이드 앱에서는 현재 두 가지 종류의 아이콘을 사용할 수 있습니다. 하나는 Legacy Icon이고 또 하나는 Adaptive Icon입니다.
-Adaptive Icon은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.
-그래서 구글에서는 Adaptive Icon이라는 규격을 제안했습니다.</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>icon on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/tags/icon/</link>
+        <description>Recent content in icon on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Wed, 28 Apr 2021 21:46:35 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/icon/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>App Icon 설정하기</title>
+        <link>https://cliearl.github.io/posts/android/appicon/</link>
+        <pubDate>Wed, 28 Apr 2021 21:46:35 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/android/appicon/</guid>
+        <description>&lt;p&gt;이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;legacy-icon과-adaptive-icon&#34;&gt;Legacy Icon과 Adaptive Icon&lt;/h2&gt;
+&lt;p&gt;안드로이드 앱에서는 현재 두 가지 종류의 아이콘을 사용할 수 있습니다. 하나는 Legacy Icon이고 또 하나는 Adaptive Icon입니다.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Adaptive Icon&lt;/a&gt;은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.&lt;/p&gt;
+&lt;p&gt;그래서 구글에서는 Adaptive Icon이라는 규격을 제안했습니다. Adaptive Icon은 백그라운드와 포그라운드 두 개의 레이어를 정의한 뒤 기기의 요청에 따라 아이콘을 조합하여 필요한 모양으로 표시를 해 줍니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://developer.android.com/guide/practices/ui_guidelines/images/NB_Icon_Layers_3D_03_ext.gif&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;출처 : https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;이 Adaptive Icon은 안드로이드 8 오레오 (API Level 26)부터 지원을 하기 때문에 그 전 버전에서는 Legacy Icon을 사용하여야 합니다.&lt;/p&gt;
+&lt;h2 id=&#34;아이콘-디자인-사양&#34;&gt;아이콘 디자인 사양&lt;/h2&gt;
+&lt;p&gt;구글에서 제안하는 아이콘 디자인시의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/google-play/resources/icon-design-specifications&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;가이드라인&lt;/a&gt;은 다음과 같습니다. 여기서 모양을 정사각형으로 하고 그림자를 넣지 말라고 하는 것은 Adaptive Icon을 사용하면 이 효과를 줄 수 있기 때문입니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;최종크기 : 512 px  - 512 px&lt;/li&gt;
+&lt;li&gt;형식 : 32비트 PNG&lt;/li&gt;
+&lt;li&gt;색상공간 : sRGB&lt;/li&gt;
+&lt;li&gt;최대 파일 크기 : 1,024 KB&lt;/li&gt;
+&lt;li&gt;모양 : 정사각형&lt;/li&gt;
+&lt;li&gt;그림자 : 없음&lt;/li&gt;
+&lt;li&gt;아이콘 속 뱃지 : 없도록 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;xml-구조-확인&#34;&gt;xml 구조 확인&lt;/h2&gt;
+&lt;p&gt;안드로이드 스튜디오에서 기본앱 프로젝트를 만들면 앱 아이콘을 지정하지 않았는데도 안드로이드 머리통 형태의 앱 아이콘이 부여되는 것을 확인할 수 있습니다. &lt;code&gt;AndroidManifest.xml&lt;/code&gt; 을 보시면&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;android:icon=&amp;#34;@mipmap/ic_launcher
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;android:roundIcon=&amp;#34;@mipmap/ic_launcher_round
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;항목이 있는것을 알 수 있는데 앱 아이콘은 이 항목을 이용해 지정합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mipmap/ic_launcher&lt;/code&gt; 폴더는 &lt;code&gt;res&lt;/code&gt; 폴더안에 위치하고 있는대요, Adaptive Icon은 이 안에 xml 형태로 저장되고, Legacy Icon은 png형태로 저장되어 있습니다.&lt;/p&gt;
+&lt;p&gt;예를들어 &lt;code&gt;ic_launcher.xml&lt;/code&gt; 의 내용은 다음과 같이 되어 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;adaptive-icon&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:android=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://schemas.android.com/apk/res/android&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;background&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;android:drawable=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;@drawable/ic_launcher_background&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;foreground&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;android:drawable=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;@drawable/ic_launcher_foreground&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/adaptive-icon&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;백그라운드와 포그라운드는 drawable 폴더 안의 파일을 지정하도록 되어 있는데 내용을 보면 백그라운드 xml은 녹색 배경이고, 포그라운드 xml은 안드로이드 머리통인 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;h2 id=&#34;아이콘-설정&#34;&gt;아이콘 설정&lt;/h2&gt;
+&lt;p&gt;그럼 여기서는 이미지를 이용해서 아이콘을 설정해 보도록 하겠습니다. 이미지는 PNGRepo의 빨간색 안드로이드 아이콘을 사용할건데요, 이 아이콘은 512x512 크기를 가지고 있기 때문에 그대로 앱에 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.pngrepo.com/png/232464/180/android.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;출처 : https://www.pngrepo.com/svg/232464/android&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;res 폴더에서 &lt;code&gt;New -&amp;gt; Image Asset&lt;/code&gt;을 선택하고 Source Asset의 Path에서 그림파일을 선택합니다. 안드로이드가 사각형 안에 들어가도록 Resize에서 대충 조절해 주는데 구글에서는 그림이 70% 크기가 되도록 권장하고 있습니다. 그리고 Color 메뉴를 사용해서 백그라운드는 흰색을 선택해줍니다.&lt;/p&gt;
+&lt;p&gt;mipmap 아래에 아이콘이 추가되었으면 &lt;code&gt;AndroidManifest.xml&lt;/code&gt;에서 사용할 아이콘을 정해주면 끝입니다.&lt;/p&gt;
+&lt;p&gt;이렇게 해서 앱에 아이콘을 지정하는 법에 대해 알아보았습니다.&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/3oCtbayLH3E&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+        </item>
+        
+    </channel>
 </rss>

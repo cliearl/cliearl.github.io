@@ -1,22 +1,191 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>minsdkversion on 냉동코더의 기술블로그</title>
-    <link>https://cliearl.github.io/tags/minsdkversion/</link>
-    <description>Recent content in minsdkversion on 냉동코더의 기술블로그</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 19 Jul 2021 18:39:10 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/minsdkversion/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>2021년 7월 현재, minSdkVersion 몇으로 해야 할까?</title>
-      <link>https://cliearl.github.io/posts/android/how-much-minsdkversion/</link>
-      <pubDate>Mon, 19 Jul 2021 18:39:10 +0900</pubDate>
-      
-      <guid>https://cliearl.github.io/posts/android/how-much-minsdkversion/</guid>
-      <description>minSdkVersion 과연 몇으로 해야할지 정해드립니다.
-다음 코드는 build.gradle의 코드 일부입니다. build.gradle의 minsdkversion은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.
-1 2 3 4 5 6 7 8 9 10 11 12 13  android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>minsdkversion on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/tags/minsdkversion/</link>
+        <description>Recent content in minsdkversion on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Mon, 19 Jul 2021 18:39:10 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/minsdkversion/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2021년 7월 현재, minSdkVersion 몇으로 해야 할까?</title>
+        <link>https://cliearl.github.io/posts/android/how-much-minsdkversion/</link>
+        <pubDate>Mon, 19 Jul 2021 18:39:10 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/android/how-much-minsdkversion/</guid>
+        <description>&lt;p&gt;&lt;code&gt;minSdkVersion&lt;/code&gt; 과연 몇으로 해야할지 정해드립니다.&lt;/p&gt;
+&lt;p&gt;다음 코드는 &lt;code&gt;build.gradle&lt;/code&gt;의 코드 일부입니다. &lt;code&gt;build.gradle&lt;/code&gt;의 &lt;code&gt;minsdkversion&lt;/code&gt;은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;android&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;compileSdkVersion&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;buildToolsVersion&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;30.0.3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;defaultConfig&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;applicationId&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;com.example.myapplication&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;minSdkVersion&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;16&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;targetSdkVersion&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;versionCode&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;versionName&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;testInstrumentationRunner&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;androidx.test.runner.AndroidJUnitRunner&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;그렇다면 2021년 7월 현재, 앱의 &lt;code&gt;minSdkVersion&lt;/code&gt;은 몇으로 하는게 적당할까요?&lt;/p&gt;
+&lt;h2 id=&#34;api-버전별-특징&#34;&gt;API 버전별 특징&lt;/h2&gt;
+&lt;p&gt;그걸 판단하기 위해서 API별로 어떤 기능이 추가되었는지를 확인하는게 좋을 것 같습니다. 제가 생각하기에 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;API별로 채용된 특징&lt;/a&gt; 중 성능이나 개발과정에 큰 변화를 가져오는 내용은 다음과 같습니다.&lt;/p&gt;
+&lt;h3 id=&#34;21-lollipop&#34;&gt;21 Lollipop&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://source.android.com/devices/tech/dalvik&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ART를 기본 런타임환경으로 채용&lt;/a&gt; : Dalvik 런타임이 ART로 변경되면서 &lt;a class=&#34;link&#34; href=&#34;https://www.johnmiller.fr/dalvik-versus-art-benchmarks-on-a-nexus-5/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;구동 퍼포먼스가 향상&lt;/a&gt;되었습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/guide/topics/graphics/opengl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OpenGL ES 3.1 지원&lt;/a&gt; : 그래픽처리에서 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/OpenGL_ES#OpenGL_ES_3.1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;더 많은 기능&lt;/a&gt;을 사용할 수 있게 되었습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://android-developers.googleblog.com/2014/10/appcompat-v21-material-design-for-pre.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;머테리얼 디자인 지원&lt;/a&gt; : &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/guide/topics/ui/look-and-feel&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;구글에서 제시한 플랫 디자인&lt;/a&gt;을 사용할 수 있게 되었습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;23-marshmallow&#34;&gt;23 Marshmallow&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/permissions/requesting&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;런타임 퍼미션 채용&lt;/a&gt; : GPS나 파일쓰기 같은 위험한 권한이 필요할 때 앱 실행중에 권한을 추가적으로 요청함으로써 사용자의 주의를 환기시키는 것이 가능해졌습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;24-nougat&#34;&gt;24 Nougat&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/about/versions/nougat/android-7.0#jit_aot&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ART 엔진 개선&lt;/a&gt; : 기존의 ART 런타임을 ART + JIT 형태로 변경하여 상호보완적인 기능을 수행하도록 하였습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/about/versions/nougat/android-7.0#gles_32&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OpenGL ES 3.2 지원&lt;/a&gt;
+그래픽처리에서 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/OpenGL_ES#OpenGL_ES_3.2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;더더 많은 기능&lt;/a&gt;을 사용할 수 있게 되었습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;26-oreo&#34;&gt;26 Oreo&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/about/versions/oreo/background.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;백그라운드 실행제한&lt;/a&gt; : 백그라운드에서 앱이 계속 살아있지 못하도록 제한하므로 API 26부터는 백그라운드를 사용하는 앱의 구조를 근본적으로 다시 설계해야 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;사용자-비율&#34;&gt;사용자 비율&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;statcounter&lt;/a&gt; 와 &lt;a class=&#34;link&#34; href=&#34;https://www.appbrain.com/stats/top-android-sdk-versions&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AppBrain&lt;/a&gt;이 제공하는 2021년 7월 현재 전세계 안드로이드 API 점유율은 다음 표와 같습니다. 킷캣은 1%대 점유율을 가지고 있네요. 일본내 점유율만을 보여주는 &lt;a class=&#34;link&#34; href=&#34;http://smatabinfo.jp/os/android/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;smatabinfo&lt;/a&gt;에 따르면 이젠 롤리팝조차 1% 점유율이 안된다고 하네요.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;OS Version&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;API level&lt;/th&gt;
+&lt;th style=&#34;text-align:right&#34;&gt;statcounter&lt;/th&gt;
+&lt;th style=&#34;text-align:right&#34;&gt;AppBrain&lt;/th&gt;
+&lt;th style=&#34;text-align:right&#34;&gt;smatabinfo&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;11 (Android 11)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;30&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;17.50%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;17.20%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;16.186%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10 (Android 10)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;29&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;35.91%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;33.00%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;40.773%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9.0 (Pie)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;28&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;17.03%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;17.60%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;18.903%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8.0-8.1 (Oreo)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;26&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;13.04%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;13.70%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;13.118%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7.0-7.1 (Nougat)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;24&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;6.89%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;7.30%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;7.594%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6.0 (Marshmallow)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;23&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;4.63%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;5.00%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;2.175%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5.0-5.1 (Lollipop)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;21&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;3.47%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;4.00%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;0.818%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4.4 (KitKat)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;19&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;1.11%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;1.40%&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;0.317%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;결론&#34;&gt;결론&lt;/h2&gt;
+&lt;p&gt;롤리팝(21)에서는 성능이 향상될 수 있는 여러가지 획기적인 기술도입이 있었으므로 킷캣(19)은 이제는 버리는게 맞아 보입니다. 다만 롤리팝은 설치시 퍼미션을 다 줘버리는 한계가 있으므로, 런타임 퍼미션을 사용할 수 있는 마시멜로(23)를 &lt;code&gt;minsdkversion&lt;/code&gt;으로 설정하는 것을 추천합니다. 여기까지만 해도 95%의 기기를 커버할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;더 강력한 이유로는 &lt;a class=&#34;link&#34; href=&#34;https://twitter.com/minsdkversion&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://twitter.com/minsdkversion&lt;/a&gt; 이 23을 트윗했기 때문입니다&amp;hellip;?&lt;/p&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;und&#34; dir=&#34;ltr&#34;&gt;23&lt;/p&gt;&amp;mdash; minSdkVersion (@minSdkVersion) &lt;a href=&#34;https://twitter.com/minSdkVersion/status/1204145130673975311?ref_src=twsrc%5Etfw&#34;&gt;December 9, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;그리고 개인적으로 개발하는 어플이라면 오레오(26)을 &lt;code&gt;minSdkVersion&lt;/code&gt;으로 추천합니다. 누가(24)는 2019년 10월자로 &lt;a class=&#34;link&#34; href=&#34;https://support.google.com/nexus/answer/4457705?hl=en#zippy=%2Cpixel-phones&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;보안 업데이트가 중단&lt;/a&gt;되어 해킹의 위험이 있는데다, API 26까지의 전세계 점유율은 이미 80%를 넘어섰고 앞으로도 계속 늘어날 것이기 때문입니다. 또한 개발자로서는 API 26 이전의 백그라운드 실행방식을 고려하지 않아도 되는 커다란 이점도 있습니다. 개발자의 편의를 위해 이젠 누가 이하를 사용하는 기기는 과감하게 지원을 포기하는것도 나쁘지 않다고 생각합니다.&lt;/p&gt;
+&lt;p&gt;다시 말씀드리지만 상용앱이 아니라 개인적으로 개발하는 어플에 적용하는게 좋겠죠. 어디까지나 제 개인의 의견일 뿐이고 참고 정도로 생각해주시면 감사하겠습니다.&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/bdKjOVBuKlU&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+        </item>
+        
+    </channel>
 </rss>
