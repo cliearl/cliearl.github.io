@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Open source on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/tags/open-source/</link>
+        <description>Recent content in Open source on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sun, 13 Mar 2022 14:50:32 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/open-source/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>앱에 사용된 Open source의 License 표시하기</title>
+        <link>https://cliearl.github.io/posts/android/oss-licenses/</link>
+        <pubDate>Sun, 13 Mar 2022 14:50:32 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/android/oss-licenses/</guid>
+        <description>&lt;p&gt;이번 포스팅에서는 오픈소스의 라이센스를 표시하는 법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;오픈소스-라이센스&#34;&gt;오픈소스 라이센스&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Opensource.svg/400px-Opensource.svg.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;https://en.wikipedia.org/wiki/Open_Source_Initiative&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;오픈소스는 오픈소스 소프트웨어(Open Source Software, OSS)의 줄임말입니다. OSS는 소스가 공개되어 있어 누구나 자유롭게 확인, 수정, 배포할 수 있습니다. 이용하는데 비용이 들지 않고 필요에 따라 마음대로 변형하여 사용할 수 있기 때문에 현대의 많은 소프트웨어들이 OSS에 의존하고 있습니다.&lt;/p&gt;
+&lt;p&gt;그런데 OSS에는 라이센스, 그러니까 저작권이 존재합니다. 자유롭게 사용할 수는 있지만 그 대신 라이센스로 제한하는 사항은 필히 준수해야 할 필요가 있지요. 오픈소스 라이센스는 수많은 종류가 있는데요 2020년 기준 인기 Top 10 라이센스는 다음과 같다고 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.whitesourcesoftware.com/wp-content/media/2021/04/aHViPTcyNTE0JmNtZD1pdGVtZWRpdG9yaW1hZ2UmZmlsZW5hbWU9aXRlbWVkaXRvcmltYWdlXzYwMTJhYzM0ZWQwN2UucG5nJnZlcnNpb249MDAwMCZzaWc9ZWQ3NWU3MmNiMzE4OWEyOGVhOTg3NWFlZGRlZWUyZDg.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;출처 : https://www.whitesourcesoftware.com/resources/blog/open-source-licenses-trends-and-predictions/&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;각 라이센스마다 제한사항도 다릅니다만, 주로 많이 사용되는 Apache, MIT, BSD 라이센스의 경우 카피라이트를 표시해주는 것 만으로 자유롭게 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://snyk.io/wp-content/uploads/Licenses-image-1536x901.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;출처 : https://snyk.io/learn/open-source-licenses/&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;안드로이드 앱을 만들다보면 수많은 오픈소스를 사용해야 합니다. 당장 androidx에 포함되는 수많은 라이브러리들부터가 오픈소스들이지요. 따라서 앱에 사용된 오픈소스의 라이센스를 앱 어딘가에 고지해야 할 필요가 있는데, 구글에서는 오픈소스의 라이센스를 편하게 고지할 수 있도록 &lt;a class=&#34;link&#34; href=&#34;https://developers.google.com/android/guides/opensource&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OSS Licenses Gradle Plugin&lt;/a&gt;을 공개했습니다. 이 플러그인을 추가하면 새로운 액티비티의 형태로 라이센스 내용을 고지할 수 있습니다.&lt;/p&gt;
+&lt;h2 id=&#34;oss-licenses-gradle-plugin-적용하기&#34;&gt;OSS Licenses Gradle Plugin 적용하기&lt;/h2&gt;
+&lt;p&gt;우선은 project 레벨의 &lt;code&gt;build.gradle&lt;/code&gt;에 다음과 같이 플러그인을 추가합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;buildscript&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;dependencies&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;classpath&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;com.google.android.gms:oss-licenses-plugin:0.10.4&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;다음은 app레벨의 &lt;code&gt;build.gradle&lt;/code&gt;에 다음과 같이 플러그인을 추가합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plugins&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;id&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;com.google.android.gms.oss-licenses-plugin&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dependencies&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;com.google.android.gms:play-services-oss-licenses:17.0.0&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;그러면 남은것은 &lt;a class=&#34;link&#34; href=&#34;https://developers.google.com/android/reference/com/google/android/gms/oss/licenses/OssLicensesMenuActivity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OssLicensesMenuActivity&lt;/a&gt;를 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/app/Activity#startActivity%28android.content.Intent%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;startActivity&lt;/a&gt;로 실행시키면 됩니다. 여기서는 버튼을 하나 만들어서 새로운 액티비티를 띄우게 해 보겠습니다. &lt;a class=&#34;link&#34; href=&#34;https://developers.google.com/android/reference/com/google/android/gms/oss/licenses/OssLicensesMenuActivity#public-static-void-setactivitytitle-string-title&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;setActivityTitle&lt;/a&gt;을 사용하면 액티비티에 제목을 지정할 수도 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;binding&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;button&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setOnClickListener&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;OssLicensesMenuActivity&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setActivityTitle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;오픈소스 라이센스 목록&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;startActivity&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Intent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OssLicensesMenuActivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;java&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;이렇게해서 앱에 사용된 오픈소스 라이센스를 표시하는 법에 대해 알아보았습니다.&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/k4pCvftX8ls&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+        </item>
+        
+    </channel>
+</rss>
