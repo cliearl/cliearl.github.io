@@ -3,24 +3,24 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 런타임 퍼미션에 대해 알아보도록 하겠습니다.
 들어가기 안드로이드는 카메라나 저장소, 위치 이용와 같이 시스템에 큰 영향을 미칠 수 있는 기능에 대해서는 위험한 권한으로 분류하여 다음과 같이 관리하고 있습니다.
-과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 Runtime Permission 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.
-필요한 권한 정의 우선은 AndroidManifest.'><title>Runtime Permission 이해하고 요청 구현하기</title>
+ 출처: https://ieeexplore.ieee.org/document/9272963
+  과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 Runtime Permission 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.'><title>Runtime Permission 이해하고 요청 구현하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/request-runtime-permission/'>
 
 <link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='Runtime Permission 이해하고 요청 구현하기'>
 <meta property='og:description' content='이번 포스팅에서는 런타임 퍼미션에 대해 알아보도록 하겠습니다.
 들어가기 안드로이드는 카메라나 저장소, 위치 이용와 같이 시스템에 큰 영향을 미칠 수 있는 기능에 대해서는 위험한 권한으로 분류하여 다음과 같이 관리하고 있습니다.
-과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 Runtime Permission 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.
-필요한 권한 정의 우선은 AndroidManifest.'>
+ 출처: https://ieeexplore.ieee.org/document/9272963
+  과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 Runtime Permission 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/request-runtime-permission/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Runtime Permission' /><meta property='article:published_time' content='2022-01-29T15:10:31&#43;09:00'/><meta property='article:modified_time' content='2022-01-29T15:10:31&#43;09:00'/>
 <meta name="twitter:title" content="Runtime Permission 이해하고 요청 구현하기">
 <meta name="twitter:description" content="이번 포스팅에서는 런타임 퍼미션에 대해 알아보도록 하겠습니다.
 들어가기 안드로이드는 카메라나 저장소, 위치 이용와 같이 시스템에 큰 영향을 미칠 수 있는 기능에 대해서는 위험한 권한으로 분류하여 다음과 같이 관리하고 있습니다.
-과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 Runtime Permission 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.
-필요한 권한 정의 우선은 AndroidManifest.">
+ 출처: https://ieeexplore.ieee.org/document/9272963
+  과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 Runtime Permission 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -352,16 +352,13 @@ if (!doNotTrack) {
     <p>이번 포스팅에서는 런타임 퍼미션에 대해 알아보도록 하겠습니다.</p>
 <h2 id="들어가기">들어가기</h2>
 <p>안드로이드는 카메라나 저장소, 위치 이용와 같이 시스템에 큰 영향을 미칠 수 있는 기능에 대해서는 위험한 권한으로 분류하여 다음과 같이 관리하고 있습니다.</p>
-<p><img src="/images/request-runtime-permission/almom5-3041432-large.gif"
-	
-	
-	
-	loading="lazy"
-	
-		alt="출처 : https://ieeexplore.ieee.org/document/9272963"
-	
-	
-></p>
+<figure><img src="/images/request-runtime-permission/almom5-3041432-large.gif"
+         alt="출처: https://ieeexplore.ieee.org/document/9272963" width="93%"/><figcaption>
+            <p>출처: <a class="link" href="https://ieeexplore.ieee.org/document/9272963"  target="_blank" rel="noopener"
+    >https://ieeexplore.ieee.org/document/9272963</a></p>
+        </figcaption>
+</figure>
+
 <p>과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 <a class="link" href="https://developer.android.com/training/permissions/requesting"  target="_blank" rel="noopener"
     >Runtime Permission</a> 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.</p>
 <h2 id="필요한-권한-정의">필요한 권한 정의</h2>
@@ -523,16 +520,13 @@ if (!doNotTrack) {
 <p><code>requestDangerousPermissions</code>에서 권한을 요청한 뒤 유저의 조작이 행해지면 그 결과는 <a class="link" href="https://developer.android.com/reference/androidx/core/app/ActivityCompat.OnRequestPermissionsResultCallback?hl=ko#onRequestPermissionsResult%28int,%20java.lang.String%5B%5D,%20int%5B%5D%29"  target="_blank" rel="noopener"
     >onRequestPermissionsResult</a> 콜백으로 받게 됩니다. onRequestPermissionsResult에서는 requestCode를 확인한 뒤 모든 권한이 취득된 경우, 확인 결과 권한이 취득되지 않았을 경우 <a class="link" href="https://developer.android.com/reference/androidx/core/app/ActivityCompat#shouldShowRequestPermissionRationale%28android.app.Activity,%20java.lang.String%29"  target="_blank" rel="noopener"
     >shouldShowRequestPermissionRationale</a>를 써서 권한을 재요청할 수 있습니다. 그럼에도 요청을 거부하면 앱은 더이상 권한을 요청할 수 없습니다. 다음 그림에 권한 요청의 순서를 나타내었습니다.</p>
-<p><img src="/images/request-runtime-permission/workflow-runtime.svg"
-	
-	
-	
-	loading="lazy"
-	
-		alt="출처 : https://developer.android.com/training/permissions/requesting"
-	
-	
-></p>
+<figure><img src="/images/request-runtime-permission/workflow-runtime.svg"
+         alt="출처: https://developer.android.com/training/permissions/requesting" width="93%"/><figcaption>
+            <p>출처: <a class="link" href="https://developer.android.com/training/permissions/requesting"  target="_blank" rel="noopener"
+    >https://developer.android.com/training/permissions/requesting</a></p>
+        </figcaption>
+</figure>
+
 <p>여기에서는 사용자가 모든 권한을 취득했으면 &ldquo;Permission granted&quot;를 보여주고, 요청을 거부하면 &ldquo;Permission required to use app!&ldquo;을 띄운뒤 권한을 다시 요구하도록 했습니다. 여기에서도 요청을 거부하면 마지막으로 Intent를 사용해 유저를 설정화면으로 직접 보내는 openSettings가 실행되도록 했습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
