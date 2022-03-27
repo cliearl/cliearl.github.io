@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 SharedPreference의 암호화에 대해 알아보도록 하겠습니다.
-SharedPreferences의 저장방식 SharedPreference에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 SharedPreferences의 암호화에 대해 알아보도록 하겠습니다.
+SharedPreferences의 저장방식 SharedPreferences에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
 1  /data/data/{package_name}/shared_prefs/{filename}.xml   Android Studio의 Device File Explorer를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요.'><title>EncryptedSharedPreferences로 데이터 암호화하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/encrypted-sharedpreferences/'>
 
 <link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='EncryptedSharedPreferences로 데이터 암호화하기'>
-<meta property='og:description' content='이번 포스팅에서는 SharedPreference의 암호화에 대해 알아보도록 하겠습니다.
-SharedPreferences의 저장방식 SharedPreference에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
+<meta property='og:description' content='이번 포스팅에서는 SharedPreferences의 암호화에 대해 알아보도록 하겠습니다.
+SharedPreferences의 저장방식 SharedPreferences에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
 1  /data/data/{package_name}/shared_prefs/{filename}.xml   Android Studio의 Device File Explorer를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/encrypted-sharedpreferences/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='EncryptedSharedPreferences' /><meta property='article:published_time' content='2022-02-26T13:39:27&#43;09:00'/><meta property='article:modified_time' content='2022-02-26T13:39:27&#43;09:00'/>
 <meta name="twitter:title" content="EncryptedSharedPreferences로 데이터 암호화하기">
-<meta name="twitter:description" content="이번 포스팅에서는 SharedPreference의 암호화에 대해 알아보도록 하겠습니다.
-SharedPreferences의 저장방식 SharedPreference에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
+<meta name="twitter:description" content="이번 포스팅에서는 SharedPreferences의 암호화에 대해 알아보도록 하겠습니다.
+SharedPreferences의 저장방식 SharedPreferences에 대해서는 SharedPreferences로 앱 설정값 저장하고 불러오기에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.
 1  /data/data/{package_name}/shared_prefs/{filename}.xml   Android Studio의 Device File Explorer를 사용하면 지정한 위치에 파일이 생성되어 있는것을 알 수 있고 열어서 내용을 볼 수도 있습니다. 지난 강의에서 만들었던 xml의 내용은 다음과 같이 되어 있네요.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
@@ -346,9 +346,9 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <p>이번 포스팅에서는 <code>SharedPreference</code>의 암호화에 대해 알아보도록 하겠습니다.</p>
+    <p>이번 포스팅에서는 <code>SharedPreferences</code>의 암호화에 대해 알아보도록 하겠습니다.</p>
 <h2 id="sharedpreferences의-저장방식">SharedPreferences의 저장방식</h2>
-<p><code>SharedPreference</code>에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferences-basic/"  target="_blank" rel="noopener"
+<p><code>SharedPreferences</code>에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferences-basic/"  target="_blank" rel="noopener"
     >SharedPreferences로 앱 설정값 저장하고 불러오기</a>에서 설명했던 적이 있습니다. 소규모의 데이터를 앱 안에 XML 파일로 간편하게 저장할 수 있는 저장소인데요, XML 파일은 앱 안의 다음 경로에 만들어지게 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
