@@ -2,19 +2,19 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='LEMP는 Linux &#43; Nginx &#43; MariaDB &#43; PHP 조합을 의미한다. Nginx의 N 대신 발음하기 좋게 EngineX의 E를 쓴다
-방화벽 설치  ufw 와 gufw 설치  1  sudo apt install ufw gufw    포트개방 및 폐쇄  1 2 3 4  sudo ufw allow 80/tcp sudo ufw allow 443/tcp sudo ufw allow 5900/tcp // vncserver port sudo ufw deny 22/tcp // ssh port    ufw 활성화  1  sudo ufw enable    방화벽 설정확인  1  sudo ufw status verbose   nginx 설치 1 2  sudo apt install nginx sudo service nginx start   이 시점에서 서버의 80번 포트로 접속할수 있게 된다.'><title>Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 워드프레스 설치하기</title>
+방화벽 설치  ufw 와 gufw 설치  1  sudo apt install ufw gufw    포트개방 및 폐쇄  1 2 3 4  sudo ufw allow 80/tcp sudo ufw allow 443/tcp sudo ufw allow 5900/tcp // vncserver port sudo ufw deny 22/tcp // ssh port    ufw 활성화  1  sudo ufw enable    방화벽 설정확인  1  sudo ufw status verbose   Nginx 설치 1 2  sudo apt install nginx sudo service nginx start   이 시점에서 서버의 80번 포트로 접속할수 있게 된다.'><title>Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 WordPress 설치하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/linux/wordpress-setup/'>
 
-<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 워드프레스 설치하기'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 WordPress 설치하기'>
 <meta property='og:description' content='LEMP는 Linux &#43; Nginx &#43; MariaDB &#43; PHP 조합을 의미한다. Nginx의 N 대신 발음하기 좋게 EngineX의 E를 쓴다
-방화벽 설치  ufw 와 gufw 설치  1  sudo apt install ufw gufw    포트개방 및 폐쇄  1 2 3 4  sudo ufw allow 80/tcp sudo ufw allow 443/tcp sudo ufw allow 5900/tcp // vncserver port sudo ufw deny 22/tcp // ssh port    ufw 활성화  1  sudo ufw enable    방화벽 설정확인  1  sudo ufw status verbose   nginx 설치 1 2  sudo apt install nginx sudo service nginx start   이 시점에서 서버의 80번 포트로 접속할수 있게 된다.'>
+방화벽 설치  ufw 와 gufw 설치  1  sudo apt install ufw gufw    포트개방 및 폐쇄  1 2 3 4  sudo ufw allow 80/tcp sudo ufw allow 443/tcp sudo ufw allow 5900/tcp // vncserver port sudo ufw deny 22/tcp // ssh port    ufw 활성화  1  sudo ufw enable    방화벽 설정확인  1  sudo ufw status verbose   Nginx 설치 1 2  sudo apt install nginx sudo service nginx start   이 시점에서 서버의 80번 포트로 접속할수 있게 된다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/linux/wordpress-setup/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-03-30T20:35:18&#43;09:00'/><meta property='article:modified_time' content='2022-03-30T20:35:18&#43;09:00'/>
-<meta name="twitter:title" content="Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 워드프레스 설치하기">
+<meta name="twitter:title" content="Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 WordPress 설치하기">
 <meta name="twitter:description" content="LEMP는 Linux &#43; Nginx &#43; MariaDB &#43; PHP 조합을 의미한다. Nginx의 N 대신 발음하기 좋게 EngineX의 E를 쓴다
-방화벽 설치  ufw 와 gufw 설치  1  sudo apt install ufw gufw    포트개방 및 폐쇄  1 2 3 4  sudo ufw allow 80/tcp sudo ufw allow 443/tcp sudo ufw allow 5900/tcp // vncserver port sudo ufw deny 22/tcp // ssh port    ufw 활성화  1  sudo ufw enable    방화벽 설정확인  1  sudo ufw status verbose   nginx 설치 1 2  sudo apt install nginx sudo service nginx start   이 시점에서 서버의 80번 포트로 접속할수 있게 된다.">
+방화벽 설치  ufw 와 gufw 설치  1  sudo apt install ufw gufw    포트개방 및 폐쇄  1 2 3 4  sudo ufw allow 80/tcp sudo ufw allow 443/tcp sudo ufw allow 5900/tcp // vncserver port sudo ufw deny 22/tcp // ssh port    ufw 활성화  1  sudo ufw enable    방화벽 설정확인  1  sudo ufw status verbose   Nginx 설치 1 2  sudo apt install nginx sudo service nginx start   이 시점에서 서버의 80번 포트로 접속할수 있게 된다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -295,7 +295,7 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/posts/linux/wordpress-setup/">Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 워드프레스 설치하기</a>
+            <a href="/posts/linux/wordpress-setup/">Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 WordPress 설치하기</a>
         </h2>
     
         
@@ -367,7 +367,7 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo ufw allow 80/tcp
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ufw allow 80/tcp
 </span></span><span class="line"><span class="cl">sudo ufw allow 443/tcp
 </span></span><span class="line"><span class="cl">sudo ufw allow 5900/tcp  // vncserver port
 </span></span><span class="line"><span class="cl">sudo ufw deny 22/tcp  // ssh port
@@ -395,7 +395,7 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ufw status verbose
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="nginx-설치">nginx 설치</h2>
+</div><h2 id="nginx-설치">Nginx 설치</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -407,7 +407,7 @@ if (!doNotTrack) {
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>이 시점에서 서버의 80번 포트로 접속할수 있게 된다.</p>
-<h2 id="php-설치">php 설치</h2>
+<h2 id="php-설치">PHP 설치</h2>
 <ul>
 <li>Nginx는 PHP를 네이티브로 지원하지 않으므로 Fastcgi Process Manager(FPM)로 구현된 PHP를 설치한다.</li>
 </ul>
@@ -467,7 +467,7 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo service nginx reload
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="mysql-설정">Mysql 설정</h2>
+</div><h2 id="mariadb-설정">MariaDB 설정</h2>
 <ul>
 <li>설치</li>
 </ul>
@@ -540,7 +540,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">flush privileges<span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="워드프레스-설치">워드프레스 설치</h2>
+</div><h2 id="wordpress-설치">WordPress 설치</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -966,10 +966,10 @@ if (!doNotTrack) {
             <nav id="TableOfContents">
   <ol>
     <li><a href="#방화벽-설치">방화벽 설치</a></li>
-    <li><a href="#nginx-설치">nginx 설치</a></li>
-    <li><a href="#php-설치">php 설치</a></li>
-    <li><a href="#mysql-설정">Mysql 설정</a></li>
-    <li><a href="#워드프레스-설치">워드프레스 설치</a></li>
+    <li><a href="#nginx-설치">Nginx 설치</a></li>
+    <li><a href="#php-설치">PHP 설치</a></li>
+    <li><a href="#mariadb-설정">MariaDB 설정</a></li>
+    <li><a href="#wordpress-설치">WordPress 설치</a></li>
     <li><a href="#ssl-설정">SSL 설정</a></li>
   </ol>
 </nav>
