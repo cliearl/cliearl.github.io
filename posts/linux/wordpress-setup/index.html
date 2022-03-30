@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다.
-개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다.
-처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기.
-그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다. 그래서 TTXML Importer로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.'><title>도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='LEMP는 Linux &#43; Nginx &#43; MariaDB &#43; PHP 조합을 의미한다. Nginx의 N 대신 발음하기 좋게 EngineX의 E를 쓴다
+방화벽 설치  ufw 와 gufw 설치  1  sudo apt install ufw gufw    포트개방 및 폐쇄  1 2 3 4  sudo ufw allow 80/tcp sudo ufw allow 443/tcp sudo ufw allow 5900/tcp // vncserver port sudo ufw deny 22/tcp // ssh port    ufw 활성화  1  sudo ufw enable    방화벽 설정확인  1  sudo ufw status verbose   nginx 설치 1 2  sudo apt install nginx sudo service nginx start   이 시점에서 서버의 80번 포트로 접속할수 있게 된다.'><title>Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 워드프레스 설치하기</title>
 
-<link rel='canonical' href='https://cliearl.github.io/posts/linux/docker-hexo-blog/'>
+<link rel='canonical' href='https://cliearl.github.io/posts/linux/wordpress-setup/'>
 
-<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='도커로 Hexo 블로그 만들고 github.io 주소로 접속하기'>
-<meta property='og:description' content='도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다.
-개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다.
-처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기.
-그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다. 그래서 TTXML Importer로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.'>
-<meta property='og:url' content='https://cliearl.github.io/posts/linux/docker-hexo-blog/'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 워드프레스 설치하기'>
+<meta property='og:description' content='LEMP는 Linux &#43; Nginx &#43; MariaDB &#43; PHP 조합을 의미한다. Nginx의 N 대신 발음하기 좋게 EngineX의 E를 쓴다
+방화벽 설치  ufw 와 gufw 설치  1  sudo apt install ufw gufw    포트개방 및 폐쇄  1 2 3 4  sudo ufw allow 80/tcp sudo ufw allow 443/tcp sudo ufw allow 5900/tcp // vncserver port sudo ufw deny 22/tcp // ssh port    ufw 활성화  1  sudo ufw enable    방화벽 설정확인  1  sudo ufw status verbose   nginx 설치 1 2  sudo apt install nginx sudo service nginx start   이 시점에서 서버의 80번 포트로 접속할수 있게 된다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/linux/wordpress-setup/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='docker' /><meta property='article:tag' content='hexo' /><meta property='article:tag' content='github.io' /><meta property='article:tag' content='blog' /><meta property='article:published_time' content='2020-10-09T19:24:00&#43;09:00'/><meta property='article:modified_time' content='2020-10-09T19:24:00&#43;09:00'/>
-<meta name="twitter:title" content="도커로 Hexo 블로그 만들고 github.io 주소로 접속하기">
-<meta name="twitter:description" content="도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다.
-개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다.
-처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기.
-그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다. 그래서 TTXML Importer로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.">
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-03-30T20:35:18&#43;09:00'/><meta property='article:modified_time' content='2022-03-30T20:35:18&#43;09:00'/>
+<meta name="twitter:title" content="Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 워드프레스 설치하기">
+<meta name="twitter:description" content="LEMP는 Linux &#43; Nginx &#43; MariaDB &#43; PHP 조합을 의미한다. Nginx의 N 대신 발음하기 좋게 EngineX의 E를 쓴다
+방화벽 설치  ufw 와 gufw 설치  1  sudo apt install ufw gufw    포트개방 및 폐쇄  1 2 3 4  sudo ufw allow 80/tcp sudo ufw allow 443/tcp sudo ufw allow 5900/tcp // vncserver port sudo ufw deny 22/tcp // ssh port    ufw 활성화  1  sudo ufw enable    방화벽 설정확인  1  sudo ufw status verbose   nginx 설치 1 2  sudo apt install nginx sudo service nginx start   이 시점에서 서버의 80번 포트로 접속할수 있게 된다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
@@ -301,7 +295,7 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/posts/linux/docker-hexo-blog/">도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</a>
+            <a href="/posts/linux/wordpress-setup/">Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 워드프레스 설치하기</a>
         </h2>
     
         
@@ -320,7 +314,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Oct 09, 2020</time>
+                <time class="article-time--published">Mar 30, 2022</time>
             </div>
         
 
@@ -349,68 +343,84 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <p>도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다.</p>
-<p>개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다.</p>
-<p>처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기.</p>
-<p>그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다.
-그래서 <a class="link" href="https://ani2life.com/wp/?p=898"  target="_blank" rel="noopener"
-    >TTXML Importer</a>로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.</p>
-<p>어차피 블로그를 깔끔하게 옮길 수 없다면 기술블로그 전용 툴을 쓰자 해서 찾은게 <a class="link" href="https://ghost.org/"  target="_blank" rel="noopener"
-    >Ghost</a>인데 얘는 카테고리나 사이드바 기능이 부족해서 탈락시켰다.</p>
-<p>그 다음으로 찾은 선택지는 정적 사이트 생성기를 이용하는 거였다. 마크다운 쓰기도 좋고, github.io 주소도 사용할 수 있으니 괜찮아보였다. 그래서 찾아보니 <a class="link" href="https://jekyllrb.com/"  target="_blank" rel="noopener"
-    >Jekyll</a>에는 맘에 드는 스킨이 없어서 <a class="link" href="https://hexo.io/ko/index.html"  target="_blank" rel="noopener"
-    >Hexo</a>에 <a class="link" href="https://blog.zhangruipeng.me/hexo-theme-icarus/"  target="_blank" rel="noopener"
-    >Icarus</a>라는 테마를 붙여 써보기로 했다.</p>
-<p>근데 정적 사이트 생성기는 소스를 로컬에 보관하고 github.io로 퍼블리시하는 구조라, 모든 컴퓨터에 Hexo 소스를 보관할 필요가 있다. 이건 너무 바보같아서 Hexo 소스는 도커로 웹에 띄우고 이놈으로부터 github.io에 퍼블리싱하는 방법을 쓰기로 했다. 굳이 따지면 웹에 띄운 시점에서 바로 접속이 가능하니 굳이 퍼블리시를 할 필요는 없는거긴 한데 사이트를 매번 변환하는것보다는 당연히 변환된 저장소에 접속하는 편이 빠르고 무엇보다 github.io 주소를 쓰는 편이 더 geek하기 때문에 사용하기로 했다.</p>
-<p>그래서 이 포스트에서는 리눅스 서버에 도커로 Hexo를 띄우고, Hexo-admin 플러그인으로 퍼블리시한 파일을 github.io에 deploy하여 최종적으로는 유저명.github.io로 정적 블로그를 구축하는 법을 설명한다.</p>
-<h1 id="github-repository-생성">github repository 생성</h1>
+    <p>LEMP는 Linux + Nginx + MariaDB + PHP 조합을 의미한다. Nginx의 N 대신 발음하기 좋게 EngineX의 E를 쓴다</p>
+<h2 id="방화벽-설치">방화벽 설치</h2>
 <ul>
-<li><a class="link" href="https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site"  target="_blank" rel="noopener"
-    >https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site</a></li>
-<li>깃헙에 유저명.github.io라는 저장소 생성</li>
-<li>이때 속성은 Public, Initialize this repository with a README를 선택</li>
-<li>생성된 저장소의 settings → GitHub Pages → Theme Chooser 에서 테마를 아무거나 하나 골라주면 블로그가 가동됨</li>
-<li>Your site is published at https://유저명.github.io/ 메시지가 뜨면 접속가능하게 된거임</li>
+<li>ufw 와 gufw 설치</li>
 </ul>
-<h2 id="도커-이미지-선정">도커 이미지 선정</h2>
-<ul>
-<li><a class="link" href="https://github.com/spurin/docker-hexo"  target="_blank" rel="noopener"
-    >https://github.com/spurin/docker-hexo</a></li>
-<li>Hexo와 관리용 Hexo-admin이 포함되어 있는 이미지</li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install ufw gufw
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>포트개방 및 폐쇄</li>
 </ul>
-<h2 id="icarus-테마-셋업">icarus 테마 셋업</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ssh로 접속</span>
-</span></span><span class="line"><span class="cl">sudo su -
-</span></span><span class="line"><span class="cl">docker ps  <span class="c1"># 현재 실행중인 컨테이너 확인</span>
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it xxxxxxxxxxxx /bin/bash  <span class="c1"># 컨테이너에 접속</span>
-</span></span><span class="line"><span class="cl">git clone https://github.com/ppoffice/hexo-theme-icarus.git themes/icarus
-</span></span><span class="line"><span class="cl"><span class="c1"># 테마 의존성 패키지 일괄설치</span>
-</span></span><span class="line"><span class="cl">npm install --save bulma-stylus@0.8.0 hexo-renderer-inferno@^0.1.3 hexo-component-inferno@^0.10.1 inferno@^7.3.3 inferno-create-element@^7.3.3
-</span></span><span class="line"><span class="cl"><span class="c1"># _config.yml의 theme가 landscape인데 icarus로 수정</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo ufw allow 80/tcp
+</span></span><span class="line"><span class="cl">sudo ufw allow 443/tcp
+</span></span><span class="line"><span class="cl">sudo ufw allow 5900/tcp  // vncserver port
+</span></span><span class="line"><span class="cl">sudo ufw deny 22/tcp  // ssh port
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="hexo-admin에-패스워드-설정">hexo-admin에 패스워드 설정</h2>
-<ul>
-<li>Settings &gt; Setup authentification에서 YAML을 생성</li>
-<li>_config.yml의 admin: 밑에 붙여넣는다</li>
+</div><ul>
+<li>ufw 활성화</li>
 </ul>
-<h2 id="hexo-admin에서-deploy-설정">hexo-admin에서 deploy 설정</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ufw <span class="nb">enable</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>방화벽 설정확인</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ufw status verbose
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="nginx-설치">nginx 설치</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install nginx
+</span></span><span class="line"><span class="cl">sudo service nginx start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 시점에서 서버의 80번 포트로 접속할수 있게 된다.</p>
+<h2 id="php-설치">php 설치</h2>
 <ul>
-<li><a class="link" href="https://github.com/jaredly/hexo-admin/issues/70"  target="_blank" rel="noopener"
-    >https://github.com/jaredly/hexo-admin/issues/70</a></li>
-<li>sh파일을 만들고 yml 파일을 수정한다</li>
+<li>Nginx는 PHP를 네이티브로 지원하지 않으므로 Fastcgi Process Manager(FPM)로 구현된 PHP를 설치한다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install php php-fpm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>php-fpm을 사용하도록 설정하기 위해 설정파일을 만든다.</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -426,120 +436,273 @@ if (!doNotTrack) {
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install --save hexo-deployer-git  <span class="c1"># git 배포용 플러그인 설치</span>
-</span></span><span class="line"><span class="cl">touch hexo-deploy.sh<span class="p">;</span> chmod a+x hexo-deploy.sh
-</span></span><span class="line"><span class="cl"><span class="c1">#!/usr/bin/env sh</span>
-</span></span><span class="line"><span class="cl">hexo clean
-</span></span><span class="line"><span class="cl">hexo deploy
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/nginx/sites-available/default
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># _config.yml을 수정</span>
-</span></span><span class="line"><span class="cl">deploy:
-</span></span><span class="line"><span class="cl"> type: git
-</span></span><span class="line"><span class="cl"> repo: https://계정:패스워드@github.com/저장소.git
-</span></span><span class="line"><span class="cl">admin:
-</span></span><span class="line"><span class="cl"> deployCommand: <span class="s1">&#39;./hexo-deploy.sh&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="유용한-플러그인httpshexoioplugins"><a class="link" href="https://hexo.io/plugins/"  target="_blank" rel="noopener"
-    >유용한 플러그인</a></h2>
-<h3 id="hexo-deployer-githttpsgithubcomhexojshexo-deployer-git"><a class="link" href="https://github.com/hexojs/hexo-deployer-git"  target="_blank" rel="noopener"
-    >hexo-deployer-git</a></h3>
-<ul>
-<li>git으로 배포하기 위한 플러그인</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 설치</span>
-</span></span><span class="line"><span class="cl">npm install hexo-deployer-git --save
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed"><a class="link" href="https://github.com/hexojs/hexo-generator-feed"  target="_blank" rel="noopener"
-    >hexo-generator-feed</a></h3>
-<ul>
-<li>atom(url/atom.xml ) 혹은 rss2.0(url/rss2.xml)으로 피드 생성해 줌</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 설치</span>
-</span></span><span class="line"><span class="cl">npm install hexo-generator-feed --save
+</span></span><span class="line"><span class="cl">// 다음 행 마지막에 index.php 추가
+</span></span><span class="line"><span class="cl">index index.html index.htm index.nginx-debian.html<span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># _config.yml 파일 끝에 다음 행 추가</span>
-</span></span><span class="line"><span class="cl">feed:
-</span></span><span class="line"><span class="cl">  enable: <span class="nb">true</span>
-</span></span><span class="line"><span class="cl">  type: rss2
-</span></span><span class="line"><span class="cl">  path: rss2.xml
-</span></span><span class="line"><span class="cl">  limit: <span class="m">20</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap"><a class="link" href="https://github.com/hexojs/hexo-generator-sitemap"  target="_blank" rel="noopener"
-    >hexo-generator-sitemap</a></h3>
-<ul>
-<li>sitemap.xml 파일을 자동생성</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 설치</span>
-</span></span><span class="line"><span class="cl">npm install hexo-generator-sitemap --save
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># _config.yml 파일 맨 끝에 다음 행 추가</span>
-</span></span><span class="line"><span class="cl">sitemap:
-</span></span><span class="line"><span class="cl">  path: sitemap.xml
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="hexo-mathhttpsgithubcomhexojshexo-math"><a class="link" href="https://github.com/hexojs/hexo-math"  target="_blank" rel="noopener"
-    >hexo-math</a></h3>
-<ul>
-<li>KaTeX and MathJax를 활성화 시켜주는 플러그인</li>
-<li>플러그인 설치</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 설치</span>
-</span></span><span class="line"><span class="cl">npm install hexo-math --save
+</span></span><span class="line"><span class="cl">// 다음 행의 주석처리를 해제
+</span></span><span class="line"><span class="cl"><span class="c1">#location ~ \.php$ { </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># include snippets/fastcgi-php.conf; </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># # With php-fpm (or other unix sockets): </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># # With php-cgi (or other tcp sockets): </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># fastcgi_pass 127.0.0.1:9000; </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>사용예</li>
+<li>서비스 재시작</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo service nginx reload
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="mysql-설정">Mysql 설정</h2>
+<ul>
+<li>설치</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install mariadb-server php-mysql
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>셋업</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">// 셋업 시작
+</span></span><span class="line"><span class="cl">sudo mysql_secure_installation
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 초기 셋업
+</span></span><span class="line"><span class="cl">Enter current password <span class="k">for</span> root <span class="o">(</span>enter <span class="k">for</span> none<span class="o">)</span>: 엔터
+</span></span><span class="line"><span class="cl">Set root password? <span class="o">[</span>Y/n<span class="o">]</span> y
+</span></span><span class="line"><span class="cl">New password: 패스워드 입력
+</span></span><span class="line"><span class="cl">Remove anonymous users? <span class="o">[</span>Y/n<span class="o">]</span> y
+</span></span><span class="line"><span class="cl">Disallow root login remotely? <span class="o">[</span>Y/n<span class="o">]</span> y
+</span></span><span class="line"><span class="cl">Remove <span class="nb">test</span> database and access to it? <span class="o">[</span>Y/n<span class="o">]</span> y
+</span></span><span class="line"><span class="cl">Reload privilege tables now? <span class="o">[</span>Y/n<span class="o">]</span> y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 로그인
+</span></span><span class="line"><span class="cl">sudo mysql -uroot -p
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 워드프레스용 DB 생성
+</span></span><span class="line"><span class="cl">create database wordpress<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 워드프레스 DB에 접근할 수 있는 유저 생성
+</span></span><span class="line"><span class="cl">create user 사용자이름 identified by <span class="s1">&#39;패스워드&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 생성한 유저에 워드프레스 DB에 대한 모든 권한을 부여
+</span></span><span class="line"><span class="cl">grant all privileges on wordpress.* to <span class="s1">&#39;사용자이름&#39;</span>@<span class="s1">&#39;localhost&#39;</span> identified by <span class="s1">&#39;패스워드&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 권한변경을 적용
+</span></span><span class="line"><span class="cl">flush privileges<span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="워드프레스-설치">워드프레스 설치</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">// html 폴더 안의 모든 파일 삭제
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /var/www/html/
+</span></span><span class="line"><span class="cl">sudo rm *
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 워드프레스 다운로드
+</span></span><span class="line"><span class="cl">sudo wget http://wordpress.org/latest.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 다운로드한 파일의 압축해제
+</span></span><span class="line"><span class="cl">sudo tar xzf latest.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 워드프레스 폴더안의 모든파일을 현재 폴더로 이동
+</span></span><span class="line"><span class="cl">sudo mv wordpress/* .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 압축파일과 빈 워드프레스 폴더를 삭제
+</span></span><span class="line"><span class="cl">sudo rm -rf wordpress latest.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 워드프레스 셋업
+</span></span><span class="line"><span class="cl">http://localhost 로 접속하여 웹브라우저 상에서 셋업
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ssl-설정">SSL 설정</h2>
+<ul>
+<li>Let`s encrypt 설치</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install letsencrypt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>HTTP-based DCV 방식으로 서버 인증</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo letsencrypt certonly --webroot --webroot-path<span class="o">=</span>/var/www/html -d qualitybitz.com -d www.qualitybitz.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>인증성공시 인증서 발급</li>
+</ul>
+<p><code>/etc/letsencrypt/live/test.com/</code> 폴더에 <code>cert.pem</code>(인증서 파일), <code>chain.pem</code>(인증서 발급자 파일), <code>fullchain.pem</code>(cert.pem 과 chain.pen 을 하나로 합쳐놓은 파일),<code>privkey.pem</code>(인증암호를 해독하는 개인키) 가 생성된다</p>
+<p>Apache2는 <code>cert.pem</code>, <code>chain.pem</code>, <code>privkey.pem</code> 을 사용하고, Nginx는 <code>fullchain.pem</code>, <code>privkey.pem</code> 을 사용한다.</p>
+<ul>
+<li>Nginx 설정
+<code>/etc/nginx/sites-available/default</code>를 다음과 같이 수정한다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    listen <span class="m">80</span> default_server<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    listen <span class="o">[</span>::<span class="o">]</span>:80 default_server<span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    server_name www.test.com test.com<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="m">301</span> https://<span class="nv">$server_name$request_uri</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    listen <span class="m">443</span> default_server<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    listen <span class="o">[</span>::<span class="o">]</span>:443 default_server<span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    root /var/www/html<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    index index.html index.htm index.php<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server_name _<span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        try_files <span class="nv">$uri</span> <span class="nv">$uri</span>/ <span class="o">=</span>404<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    ssl                  on<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    ssl_certificate      /etc/letsencrypt/live/test.com/fullchain.pem<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    ssl_certificate_key  /etc/letsencrypt/live/test.com/privkey.pem<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    ssl_ciphers  HIGH:!aNULL:!MD5<span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    location ~ <span class="se">\.</span>php$ <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        include snippets/fastcgi-php.conf<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>인증서 갱신</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo letsencrypt renew
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>인증서 삭제</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{% mathjax %}
-</span></span><span class="line"><span class="cl">\frac{1}{x^2-1}
-</span></span><span class="line"><span class="cl">{% endmathjax %}
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot revoke --cert-path /etc/letsencrypt/live/test.com/cert.pem
+</span></span><span class="line"><span class="cl">certbot delete --cert-name test.com
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -548,18 +711,6 @@ if (!doNotTrack) {
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/docker/">docker</a>
-        
-            <a href="/tags/hexo/">hexo</a>
-        
-            <a href="/tags/github.io/">github.io</a>
-        
-            <a href="/tags/blog/">blog</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">
@@ -590,12 +741,12 @@ if (!doNotTrack) {
             
                 
 <article class="">
-    <a href="/posts/linux/hugo-blog/">
+    <a href="/posts/linux/postgresql-docker-upgrade/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">Hexo에서 Hugo로 블로그 엔진 변경</h2>
+            <h2 class="article-title">Postgresql Docker Image의 메이저 버전 업그레이드</h2>
         </div>
     </a>
 </article>
@@ -614,6 +765,18 @@ if (!doNotTrack) {
             
                 
 <article class="">
+    <a href="/posts/linux/hugo-blog/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hexo에서 Hugo로 블로그 엔진 변경</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
     <a href="/posts/linux/synology-docker-update/">
         
         
@@ -626,24 +789,12 @@ if (!doNotTrack) {
             
                 
 <article class="">
-    <a href="/posts/linux/wordpress-setup/">
+    <a href="/posts/linux/docker-hexo-blog/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 워드프레스 설치하기</h2>
-        </div>
-    </a>
-</article>
-            
-                
-<article class="">
-    <a href="/posts/linux/postgresql-docker-upgrade/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Postgresql Docker Image의 메이저 버전 업그레이드</h2>
+            <h2 class="article-title">도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</h2>
         </div>
     </a>
 </article>
@@ -814,18 +965,12 @@ if (!doNotTrack) {
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#도커-이미지-선정">도커 이미지 선정</a></li>
-    <li><a href="#icarus-테마-셋업">icarus 테마 셋업</a></li>
-    <li><a href="#hexo-admin에-패스워드-설정">hexo-admin에 패스워드 설정</a></li>
-    <li><a href="#hexo-admin에서-deploy-설정">hexo-admin에서 deploy 설정</a></li>
-    <li><a href="#유용한-플러그인httpshexoioplugins"><a href="https://hexo.io/plugins/">유용한 플러그인</a></a>
-      <ol>
-        <li><a href="#hexo-deployer-githttpsgithubcomhexojshexo-deployer-git"><a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a></a></li>
-        <li><a href="#hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed"><a href="https://github.com/hexojs/hexo-generator-feed">hexo-generator-feed</a></a></li>
-        <li><a href="#hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap"><a href="https://github.com/hexojs/hexo-generator-sitemap">hexo-generator-sitemap</a></a></li>
-        <li><a href="#hexo-mathhttpsgithubcomhexojshexo-math"><a href="https://github.com/hexojs/hexo-math">hexo-math</a></a></li>
-      </ol>
-    </li>
+    <li><a href="#방화벽-설치">방화벽 설치</a></li>
+    <li><a href="#nginx-설치">nginx 설치</a></li>
+    <li><a href="#php-설치">php 설치</a></li>
+    <li><a href="#mysql-설정">Mysql 설정</a></li>
+    <li><a href="#워드프레스-설치">워드프레스 설치</a></li>
+    <li><a href="#ssl-설정">SSL 설정</a></li>
   </ol>
 </nav>
         </div>
