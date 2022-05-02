@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다.
+다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다.
+ 출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering
+  여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다.
+Dependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다.
+1 2 3  dependencies { implementation &amp;#39;com.'><title>구글맵에 커스텀 마커와 클러스터아이템 적용하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/google-maps-cluster/'>
+
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='구글맵에 커스텀 마커와 클러스터아이템 적용하기'>
+<meta property='og:description' content='이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다.
+다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다.
+ 출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering
+  여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다.
+Dependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다.
+1 2 3  dependencies { implementation &amp;#39;com.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/google-maps-cluster/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-05-02T20:18:53&#43;09:00'/><meta property='article:modified_time' content='2022-05-02T20:18:53&#43;09:00'/>
+<meta name="twitter:title" content="구글맵에 커스텀 마커와 클러스터아이템 적용하기">
+<meta name="twitter:description" content="이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다.
+다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다.
+ 출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering
+  여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다.
+Dependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다.
+1 2 3  dependencies { implementation &amp;#39;com.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
+            <h2 class="site-description">@Andromeda Galaxy</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/cliearl'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/coder_frozen'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.youtube.com/channel/UC6V7LBEgcoTZUUgUU0Jv3xg'
+                        target="_blank"
+                        title="Youtube"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="4" />
+  <path d="M10 9l5 3l-5 3z" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/page/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/android/google-maps-cluster/">구글맵에 커스텀 마커와 클러스터아이템 적용하기</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 02, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다.</p>
+<p>다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다.</p>
+<figure><img src="https://developers.google.com/maps/documentation/android-sdk/images/utility-markercluster.png"
+         alt="출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering" width="93%"/><figcaption>
+            <p>출처 : <a class="link" href="https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering"  target="_blank" rel="noopener"
+    >https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering</a></p>
+        </figcaption>
+</figure>
+
+<p>여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다.</p>
+<h2 id="dependency-추가">Dependency 추가</h2>
+<p>build.gradle에 클러스터링에 사용할 클래스를 담은 <a class="link" href="https://github.com/googlemaps/android-maps-utils"  target="_blank" rel="noopener"
+    >android-maps-utils</a> 를 추가합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s1">&#39;com.google.maps.android:android-maps-utils:2.3.0&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="선별진료소-데이터-준비">선별진료소 데이터 준비</h2>
+<p>마커에 사용할 선별진료소 데이터는 경기데이터드림에서 제공하는 <a class="link" href="https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=461Q599QLK8UTE14E3LW12837248&amp;infSeq=1"  target="_blank" rel="noopener"
+    >코로나바이러스 감염증 선별진료소 운영 의료기관 현황데이터</a>를 사용하겠습니다. 이 데이터에는 마커에 바로 사용할 수 있는 경도와 위도정보가 포함되어 있기 때문에 이번 강의의 제물로 선택되었습니다.</p>
+<p><code>sheet</code> 탭에서 <code>JSON</code> 을 클릭하여 데이터를 json 형식으로 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 값들을 정렬하는게 보기에 좋을 것 같으니 <a class="link" href="https://jsonformatter.curiousconcept.com/"  target="_blank" rel="noopener"
+    >Json Formatter</a> 에서 파일을 정렬하고 data.json이라는 이름으로 <code>assets</code> 폴더에 저장합니다.</p>
+<p>앱에서 json 파일을 편하게 다루기 위해 <a class="link" href="https://github.com/google/gson"  target="_blank" rel="noopener"
+    >gson</a> 라이브러리를 추가하고, 데이터를 오브젝트로 변환하기 위한 DAO를 작성합니다. <a class="link" href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-"  target="_blank" rel="noopener"
+    >JSON To Kotlin Class</a> 플러그인을 사용하면 DAO를 편하게 만들 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s1">&#39;com.google.code.gson:gson:2.8.6&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CoronaMed</span> <span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">CoronaMedItem</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">CoronaMedItem</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">AGRGT</span><span class="n">_DE</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 2021-04-01
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">DISTRCT</span><span class="n">_DIV_DTLS</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 호흡기전담클리닉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">EMGC</span><span class="n">_CENTER_TELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 031-8003-8275
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">MEDINST</span><span class="n">_NM</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 상쾌한이비인후과의원
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_LOTNO_ADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 경기도 화성시 반송동 216-1번지
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_ROADNM_ADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 경기도 화성시 동탄솔빛로 44
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_WGS84_LAT</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 37.1928811270
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_WGS84_LOGT</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 127.0729965789
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REPRSNT</span><span class="n">_TELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">SIGUN</span><span class="n">_NM</span><span class="p">:</span> <span class="n">String</span> <span class="c1">// 화성시
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>마지막으로 <code>asset</code> 폴더에서 불러온 데이터를 DAO로 변환하는 함수를 작성합니다. 함수의 자세한 설명은 <a class="link" href="https://cliearl.github.io/posts/android/assets-json-recycler/"  target="_blank" rel="noopener"
+    >Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기</a> 강의를 참조하시기 바랍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">getJsonData</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">CoronaMed</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="py">result</span> <span class="p">=</span> <span class="n">CoronaMed</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">assetManager</span> <span class="p">=</span> <span class="n">resources</span><span class="p">.</span><span class="n">assets</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">inputStream</span> <span class="p">=</span> <span class="n">assetManager</span><span class="p">.</span><span class="k">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">reader</span> <span class="p">=</span> <span class="n">inputStream</span><span class="p">.</span><span class="n">bufferedReader</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">gson</span> <span class="p">=</span> <span class="n">Gson</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="p">=</span> <span class="n">gson</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">CoronaMed</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="마커-준비">마커 준비</h2>
+<p>데이터 준비가 끝났으니 이젠 마커를 준비하겠습니다. 우선은 마커로 사용할 아이콘을 설정해줍니다. 코로나 선별진료소를 표시할 것이므로 적십자 마크를 사용하도록 하겠습니다. 다음 png 파일을 <code>drawable</code> 폴더에 복사하여 넣어줍니다.</p>
+<figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Red_Cross_icon.svg/240px-Red_Cross_icon.svg.png"
+         alt="출처 : https://commons.wikimedia.org/wiki/File:Red_Cross_icon.svg" width="93%"/><figcaption>
+            <p>출처 : <a class="link" href="https://commons.wikimedia.org/wiki/File:Red_Cross_icon.svg"  target="_blank" rel="noopener"
+    >https://commons.wikimedia.org/wiki/File:Red_Cross_icon.svg</a></p>
+        </figcaption>
+</figure>
+
+<p>이 이미지파일은 <a class="link" href="https://developer.android.com/reference/android/graphics/Bitmap#createScaledBitmap%28android.graphics.Bitmap,%20int,%20int,%20boolean%29"  target="_blank" rel="noopener"
+    >createScaledBitmap</a> 을 통해 다음과 같이 비트맵으로 변환해서 마커를 렌더링할때 사용합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">val</span> <span class="py">mapIcon</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">drawable</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ResourcesCompat</span><span class="p">.</span><span class="n">getDrawable</span><span class="p">(</span><span class="n">resources</span><span class="p">,</span> <span class="n">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">mapicon</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span> <span class="k">as</span> <span class="n">BitmapDrawable</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Bitmap</span><span class="p">.</span><span class="n">createScaledBitmap</span><span class="p">(</span><span class="n">drawable</span><span class="p">.</span><span class="n">bitmap</span><span class="p">,</span> <span class="m">64</span><span class="p">,</span> <span class="m">64</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="클러스터-아이템-구현">클러스터 아이템 구현</h2>
+<p>클러스터링을 구현하기 위해서는 <a class="link" href="https://googlemaps.github.io/android-maps-utils/javadoc/com/google/maps/android/clustering/ClusterItem.html"  target="_blank" rel="noopener"
+    >ClusterItem</a> 을 상속받게 해서 생성한 마커를 <a class="link" href="https://googlemaps.github.io/android-maps-utils/javadoc/com/google/maps/android/clustering/ClusterManager.html"  target="_blank" rel="noopener"
+    >ClusterManager</a>에 전달해주면 됩니다.</p>
+<p>우선 <code>ClusterItem</code>을 상속받는 <code>CoronaMedClusterItem</code> 클래스를 작성합니다. 마커 모양은 기본값이 아닌 적십자 이미지를 적용하기 위해 <code>_icon</code> 속성을 정의하고, <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/maps/model/BitmapDescriptor"  target="_blank" rel="noopener"
+    >BitmapDescriptor</a> 를 반환하는 <code>getIcon</code> 메소드를 추가합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">CoronaMedClusterItem</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">_position</span><span class="p">:</span> <span class="n">LatLng</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">_title</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">_snippet</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">_icon</span><span class="p">:</span> <span class="n">BitmapDescriptor</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ClusterItem</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getSnippet</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_snippet</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getTitle</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_title</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getPosition</span><span class="p">():</span> <span class="n">LatLng</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_position</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">getIcon</span><span class="p">():</span> <span class="n">BitmapDescriptor</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_icon</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="클러스터-렌더러-구현">클러스터 렌더러 구현</h2>
+<p>마커는 <a class="link" href="https://googlemaps.github.io/android-maps-utils/javadoc/com/google/maps/android/clustering/view/DefaultClusterRenderer.html"  target="_blank" rel="noopener"
+    >DefaultClusterRenderer</a> 에 의해 렌더링되는데요, 이 때 렌더러가 비트맵 이미지를 반영해서 렌더링하도록 <a class="link" href="https://googlemaps.github.io/android-maps-utils/javadoc/com/google/maps/android/clustering/view/DefaultClusterRenderer.html#onBeforeClusterItemRendered-T-MarkerOptions-"  target="_blank" rel="noopener"
+    >onBeforeClusterItemRendered</a>에서 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/maps/model/MarkerOptions#public-bitmapdescriptor-geticon"  target="_blank" rel="noopener"
+    >markerOptions.icon</a>에 이미지를 지정하도록 합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CoronaMedClusterRenderer</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="p">:</span> <span class="n">GoogleMap</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">clusterManager</span><span class="p">:</span> <span class="n">ClusterManager</span><span class="p">&lt;</span><span class="n">CoronaMedClusterItem</span><span class="p">&gt;,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">:</span> <span class="n">DefaultClusterRenderer</span><span class="p">&lt;</span><span class="n">CoronaMedClusterItem</span><span class="p">&gt;(</span><span class="n">context</span><span class="p">,</span> <span class="n">map</span><span class="p">,</span> <span class="n">clusterManager</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clusterManager</span><span class="p">.</span><span class="n">renderer</span> <span class="p">=</span> <span class="k">this</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onBeforeClusterItemRendered</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">CoronaMedClusterItem</span><span class="p">,</span> <span class="n">markerOptions</span><span class="p">:</span> <span class="n">MarkerOptions</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">markerOptions</span><span class="p">.</span><span class="n">icon</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">getIcon</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="n">markerOptions</span><span class="p">.</span><span class="n">visible</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="커스텀-마커-생성-및-클러스터매니저-구현">커스텀 마커 생성 및 클러스터매니저 구현</h2>
+<p>그럼 클러스터매니저를 이용해서 마커를 추가하는 메소드를 작성합니다. <code>getJsonData</code> 로 json 파일을 읽어와 오브젝트화 합니다. 그리고나서 요소를 하나씩 꺼내와 위치좌표, 타입, 아이콘을 가지는 <code>CoronaMedClusterItem</code> 마커를 만들어 클러스터매니저에 전달해주도록 합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">addMarkers</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">getJsonData</span><span class="p">(</span><span class="s2">&#34;data.json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">item</span> <span class="k">in</span> <span class="n">items</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">medClusterItem</span> <span class="p">=</span> <span class="n">CoronaMedClusterItem</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">LatLng</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">REFINE_WGS84_LAT</span><span class="p">.</span><span class="n">toDouble</span><span class="p">(),</span> <span class="n">item</span><span class="p">.</span><span class="n">REFINE_WGS84_LOGT</span><span class="p">.</span><span class="n">toDouble</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">item</span><span class="p">.</span><span class="n">MEDINST_NM</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;타입: </span><span class="si">${item.DISTRCT_DIV_DTLS}</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">BitmapDescriptorFactory</span><span class="p">.</span><span class="n">fromBitmap</span><span class="p">(</span><span class="n">mapIcon</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clusterManager</span><span class="p">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">medClusterItem</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>나머지는 OnMapReady()에서 클러스터매니저를 초기화하고 <code>addMarkers</code>를 실행시켜주면 되겠죠.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gi">+ private lateinit var clusterManager: ClusterManager&lt;CoronaMedClusterItem&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span><span class="line"><span class="cl"><span class="gu">@SuppressLint(&#34;MissingPermission&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span>override fun onMapReady(googleMap: GoogleMap) {
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="gi">+    clusterManager = ClusterManager(requireContext(), map)
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    CoronaMedClusterRenderer(requireContext(), map, clusterManager)
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    map.setOnCameraIdleListener(clusterManager)
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span><span class="line"><span class="cl"><span class="gi">+    addMarkers()
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게해서 구글맵에 커스텀 마커와 클러스터아이템을 적용하는 법에 대해 알아보았습니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+        <div class="article-list--compact links">
+    
+        <article>
+            <a href="https://github.com/cliearl/android-tutorial/tree/master/" target="_blank" rel="noopener">
+                <div class="article-details">
+                    <h2 class="article-title">GitHub/cliearl</h2>
+                    <footer class="article-time">
+                        
+                            Find and download source code of the article from this link.
+                        
+                    </footer>
+                </div>
+        
+                
+                    <div class="article-image">
+                        <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
+                    </div>
+                
+            </a>
+        </article>
+    
+</div>
+    
+
+    
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">Related contents</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/android/google-maps-basic/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">프래그먼트에서 구글맵 구현하고 내 위치 표시하기</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/android/show-sensor-list/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">기기에 설치된 센서종류 확인하기</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/android/oss-licenses/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">앱에 사용된 Open source의 License 표시하기</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/android/encrypted-sharedpreferences/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">EncryptedSharedPreferences로 데이터 암호화하기</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/android/evaluate-mad-score/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">내 앱의 MAD score 평가하기</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.11.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#dependency-추가">Dependency 추가</a></li>
+    <li><a href="#선별진료소-데이터-준비">선별진료소 데이터 준비</a></li>
+    <li><a href="#마커-준비">마커 준비</a></li>
+    <li><a href="#클러스터-아이템-구현">클러스터 아이템 구현</a></li>
+    <li><a href="#클러스터-렌더러-구현">클러스터 렌더러 구현</a></li>
+    <li><a href="#커스텀-마커-생성-및-클러스터매니저-구현">커스텀 마커 생성 및 클러스터매니저 구현</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
