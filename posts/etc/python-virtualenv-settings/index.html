@@ -2,25 +2,25 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='VS Code에 파이썬 가상환경 설정하고 사용하는 법에 대해 정리했다.
-venv 환경 작성  작업폴더를 연 뒤 터미널에서 다음 값 입력  1  $ python3 -m venv .venv     상태표시줄의 파이썬을 눌러 (&amp;rsquo;.venv&amp;rsquo;)인 python을 선택
-  다음 명령어로 가상환경을 활성화 후 패키지 설치
-  1 2 3 4 5  //윈도우 .venv\\scripts\\activate // macOS source .venv/bin/activate   code-runner를 실행하기 위한 settings.json 설정 1 2 3 4 5  // 윈도우 &amp;#34;python.'><title>VSCODE에서 Python VirtualEnv 환경설정하기</title>
+venv 환경 작성 작업폴더를 연 뒤 터미널에서 다음 값 입력 1 $ python3 -m venv .venv 상태표시줄의 파이썬을 눌러 (&amp;rsquo;.venv&amp;rsquo;)인 python을 선택
+다음 명령어로 가상환경을 활성화 후 패키지 설치
+1 2 3 4 5 //윈도우 .venv\\scripts\\activate // macOS source .venv/bin/activate code-runner를 실행하기 위한 settings.json 설정 1 2 3 4 5 // 윈도우 &amp;#34;python.pythonPath&amp;#34;: &amp;#34;blahblah\\.venv\\Script\\python.exe&amp;#34;, // macOS &amp;#34;python.pythonPath&amp;#34;: &amp;#34;.venv/bin/python&amp;#34;, '><title>VSCODE에서 Python VirtualEnv 환경설정하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/etc/python-virtualenv-settings/'>
 
 <link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='VSCODE에서 Python VirtualEnv 환경설정하기'>
 <meta property='og:description' content='VS Code에 파이썬 가상환경 설정하고 사용하는 법에 대해 정리했다.
-venv 환경 작성  작업폴더를 연 뒤 터미널에서 다음 값 입력  1  $ python3 -m venv .venv     상태표시줄의 파이썬을 눌러 (&amp;rsquo;.venv&amp;rsquo;)인 python을 선택
-  다음 명령어로 가상환경을 활성화 후 패키지 설치
-  1 2 3 4 5  //윈도우 .venv\\scripts\\activate // macOS source .venv/bin/activate   code-runner를 실행하기 위한 settings.json 설정 1 2 3 4 5  // 윈도우 &amp;#34;python.'>
+venv 환경 작성 작업폴더를 연 뒤 터미널에서 다음 값 입력 1 $ python3 -m venv .venv 상태표시줄의 파이썬을 눌러 (&amp;rsquo;.venv&amp;rsquo;)인 python을 선택
+다음 명령어로 가상환경을 활성화 후 패키지 설치
+1 2 3 4 5 //윈도우 .venv\\scripts\\activate // macOS source .venv/bin/activate code-runner를 실행하기 위한 settings.json 설정 1 2 3 4 5 // 윈도우 &amp;#34;python.pythonPath&amp;#34;: &amp;#34;blahblah\\.venv\\Script\\python.exe&amp;#34;, // macOS &amp;#34;python.pythonPath&amp;#34;: &amp;#34;.venv/bin/python&amp;#34;, '>
 <meta property='og:url' content='https://cliearl.github.io/posts/etc/python-virtualenv-settings/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='python' /><meta property='article:tag' content='virtualenv' /><meta property='article:published_time' content='2020-12-13T15:37:00&#43;09:00'/><meta property='article:modified_time' content='2020-12-13T15:37:00&#43;09:00'/>
 <meta name="twitter:title" content="VSCODE에서 Python VirtualEnv 환경설정하기">
 <meta name="twitter:description" content="VS Code에 파이썬 가상환경 설정하고 사용하는 법에 대해 정리했다.
-venv 환경 작성  작업폴더를 연 뒤 터미널에서 다음 값 입력  1  $ python3 -m venv .venv     상태표시줄의 파이썬을 눌러 (&amp;rsquo;.venv&amp;rsquo;)인 python을 선택
-  다음 명령어로 가상환경을 활성화 후 패키지 설치
-  1 2 3 4 5  //윈도우 .venv\\scripts\\activate // macOS source .venv/bin/activate   code-runner를 실행하기 위한 settings.json 설정 1 2 3 4 5  // 윈도우 &amp;#34;python.">
+venv 환경 작성 작업폴더를 연 뒤 터미널에서 다음 값 입력 1 $ python3 -m venv .venv 상태표시줄의 파이썬을 눌러 (&amp;rsquo;.venv&amp;rsquo;)인 python을 선택
+다음 명령어로 가상환경을 활성화 후 패키지 설치
+1 2 3 4 5 //윈도우 .venv\\scripts\\activate // macOS source .venv/bin/activate code-runner를 실행하기 위한 settings.json 설정 1 2 3 4 5 // 윈도우 &amp;#34;python.pythonPath&amp;#34;: &amp;#34;blahblah\\.venv\\Script\\python.exe&amp;#34;, // macOS &amp;#34;python.pythonPath&amp;#34;: &amp;#34;.venv/bin/python&amp;#34;, ">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">

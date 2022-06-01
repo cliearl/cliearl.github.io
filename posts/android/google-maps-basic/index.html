@@ -3,24 +3,24 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다.
 구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다.
-1 2 3 4  &amp;lt;fragment class=&amp;#34;com.google.android.gms.maps.SupportMapFragment&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;/&amp;gt;   두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.
-1 2 3 4  &amp;lt;com.google.android.gms.maps.MapView android:id=&amp;#34;@&#43;id/mapview&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt;   액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.'><title>프래그먼트에서 구글맵 구현하고 내 위치 표시하기</title>
+1 2 3 4 &amp;lt;fragment class=&amp;#34;com.google.android.gms.maps.SupportMapFragment&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;/&amp;gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.
+1 2 3 4 &amp;lt;com.google.android.gms.maps.MapView android:id=&amp;#34;@&#43;id/mapview&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.'><title>프래그먼트에서 구글맵 구현하고 내 위치 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/google-maps-basic/'>
 
 <link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='프래그먼트에서 구글맵 구현하고 내 위치 표시하기'>
 <meta property='og:description' content='이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다.
 구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다.
-1 2 3 4  &amp;lt;fragment class=&amp;#34;com.google.android.gms.maps.SupportMapFragment&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;/&amp;gt;   두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.
-1 2 3 4  &amp;lt;com.google.android.gms.maps.MapView android:id=&amp;#34;@&#43;id/mapview&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt;   액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.'>
+1 2 3 4 &amp;lt;fragment class=&amp;#34;com.google.android.gms.maps.SupportMapFragment&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;/&amp;gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.
+1 2 3 4 &amp;lt;com.google.android.gms.maps.MapView android:id=&amp;#34;@&#43;id/mapview&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.'>
 <meta property='og:url' content='https://cliearl.github.io/posts/android/google-maps-basic/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-05-02T20:16:12&#43;09:00'/><meta property='article:modified_time' content='2022-05-02T20:16:12&#43;09:00'/>
 <meta name="twitter:title" content="프래그먼트에서 구글맵 구현하고 내 위치 표시하기">
 <meta name="twitter:description" content="이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다.
 구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다.
-1 2 3 4  &amp;lt;fragment class=&amp;#34;com.google.android.gms.maps.SupportMapFragment&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;/&amp;gt;   두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.
-1 2 3 4  &amp;lt;com.google.android.gms.maps.MapView android:id=&amp;#34;@&#43;id/mapview&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt;   액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.">
+1 2 3 4 &amp;lt;fragment class=&amp;#34;com.google.android.gms.maps.SupportMapFragment&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;/&amp;gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.
+1 2 3 4 &amp;lt;com.google.android.gms.maps.MapView android:id=&amp;#34;@&#43;id/mapview&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script type="application/javascript">
