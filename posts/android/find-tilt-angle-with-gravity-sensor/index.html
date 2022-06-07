@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 기기의 수평도를 확인하는 법에 대해 알아보도록 하겠습니다.
+좌표계와 기울기에 대한 이해 안드로이드 시스템의 좌표계는 다음과 같이 구성됩니다.
+출처 : https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate
+기기가 세워진 상태로 정지하고 있을 때 가속도 센서로 각 축에 걸리는 가속도를 측정하면 x, z 축에서는 0, 그리고 y 축에는 9.8 m/s^2 값이 확인됩니다. y축의 -방향으로 9.8 m/s^2의 중력이 걸리고 있으므로 기기는 &#43;방향으로 9.8 m/s^2 만큼 가속되는 것이기 때문입니다. 같은 이유로 기기를 책상에 눕혀놓으면 축이 바뀌면서 x, y 축에는 0, 그리고 z 축에는 &#43;9.'><title>중력센서를 사용해 기기의 기울기 각도 확인하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/find-tilt-angle-with-gravity-sensor/'>
+
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='중력센서를 사용해 기기의 기울기 각도 확인하기'>
+<meta property='og:description' content='이번 포스팅에서는 기기의 수평도를 확인하는 법에 대해 알아보도록 하겠습니다.
+좌표계와 기울기에 대한 이해 안드로이드 시스템의 좌표계는 다음과 같이 구성됩니다.
+출처 : https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate
+기기가 세워진 상태로 정지하고 있을 때 가속도 센서로 각 축에 걸리는 가속도를 측정하면 x, z 축에서는 0, 그리고 y 축에는 9.8 m/s^2 값이 확인됩니다. y축의 -방향으로 9.8 m/s^2의 중력이 걸리고 있으므로 기기는 &#43;방향으로 9.8 m/s^2 만큼 가속되는 것이기 때문입니다. 같은 이유로 기기를 책상에 눕혀놓으면 축이 바뀌면서 x, y 축에는 0, 그리고 z 축에는 &#43;9.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/find-tilt-angle-with-gravity-sensor/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-06-07T21:55:44&#43;09:00'/><meta property='article:modified_time' content='2022-06-07T21:55:44&#43;09:00'/>
+<meta name="twitter:title" content="중력센서를 사용해 기기의 기울기 각도 확인하기">
+<meta name="twitter:description" content="이번 포스팅에서는 기기의 수평도를 확인하는 법에 대해 알아보도록 하겠습니다.
+좌표계와 기울기에 대한 이해 안드로이드 시스템의 좌표계는 다음과 같이 구성됩니다.
+출처 : https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate
+기기가 세워진 상태로 정지하고 있을 때 가속도 센서로 각 축에 걸리는 가속도를 측정하면 x, z 축에서는 0, 그리고 y 축에는 9.8 m/s^2 값이 확인됩니다. y축의 -방향으로 9.8 m/s^2의 중력이 걸리고 있으므로 기기는 &#43;방향으로 9.8 m/s^2 만큼 가속되는 것이기 때문입니다. 같은 이유로 기기를 책상에 눕혀놓으면 축이 바뀌면서 x, y 축에는 0, 그리고 z 축에는 &#43;9.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
+            <h2 class="site-description">@Andromeda Galaxy</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/cliearl'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/coder_frozen'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.youtube.com/channel/UC6V7LBEgcoTZUUgUU0Jv3xg'
+                        target="_blank"
+                        title="Youtube"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="4" />
+  <path d="M10 9l5 3l-5 3z" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/page/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/android/find-tilt-angle-with-gravity-sensor/">중력센서를 사용해 기기의 기울기 각도 확인하기</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 07, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 포스팅에서는 기기의 수평도를 확인하는 법에 대해 알아보도록 하겠습니다.</p>
+<h1 id="좌표계와-기울기에-대한-이해">좌표계와 기울기에 대한 이해</h1>
+<p>안드로이드 시스템의 좌표계는 다음과 같이 구성됩니다.</p>
+<figure><img src="https://developer.android.com/images/axis_globe.png"
+         alt="출처 : https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate" width="93%"/><figcaption>
+            <p>출처 : <a class="link" href="https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate"  target="_blank" rel="noopener"
+    >https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate</a></p>
+        </figcaption>
+</figure>
+
+<p>기기가 세워진 상태로 정지하고 있을 때 가속도 센서로 각 축에 걸리는 가속도를 측정하면 x, z 축에서는 0, 그리고 y 축에는 9.8 m/s^2 값이 확인됩니다. y축의 -방향으로 9.8 m/s^2의 중력이 걸리고 있으므로 기기는 +방향으로 9.8 m/s^2 만큼 가속되는 것이기 때문입니다. 같은 이유로 기기를 책상에 눕혀놓으면 축이 바뀌면서 x, y 축에는 0, 그리고 z 축에는 +9.8 m/s^2의 가속도가 걸리게 됩니다.</p>
+<p>그런데 다음과 같은 3D 좌표계에서 벡터 R과 Rx, Ry, Rz 사이의 각도는 수학적으로 다음과 같이 구할 수 있습니다.</p>
+<figure><img src="https://i.stack.imgur.com/4v8pS.png"
+         alt="출처 : https://electronics.stackexchange.com/q/21902" width="93%"/><figcaption>
+            <p>출처 : <a class="link" href="https://electronics.stackexchange.com/q/21902"  target="_blank" rel="noopener"
+    >https://electronics.stackexchange.com/q/21902</a></p>
+        </figcaption>
+</figure>
+
+<p>$$
+\begin{align}
+cos(A_{xr})=\frac{R_{x}}{R} \
+cos(A_{yr})=\frac{R_{y}}{R} \
+cos(A_{zr})=\frac{R_{z}}{R}
+\end{align}
+$$</p>
+<p><code>Rx</code>, <code>Ry</code>, <code>Rz</code> 벡터의 총 크기는 피타고라스 정리에 의해 다음과 같이 정의됩니다.</p>
+<p>$$
+\begin{align}
+R=\sqrt{R_{x}^2+R_{y}^2+R_{z}^2}
+\end{align}
+$$</p>
+<p>기기가 벡터 <code>R</code>처럼 기울었을 때 기기에 걸리는 가속도값은 <code>Rx</code>, <code>Ry</code>, <code>Rz</code>입니다. 그러면 각 축에 대한 벡터<code>R</code>의 기울기는 다음과 같이 계산할 수 있습니다.</p>
+<p>$$
+\begin{align}
+A_{xr}=arccos\left(\frac{R_{x}}{R}\right) \
+A_{yr}=arccos\left(\frac{R_{y}}{R}\right) \
+A_{zr}=arccos\left(\frac{R_{z}}{R}\right)
+\end{align}
+$$</p>
+<p>수평계는 기기가 화면을 +z 방향으로 하고 누워있을 때의 x축과 y축에 대한 기울기를 구하는 것이니까 <code>Axr</code>과 <code>Ayr</code>을 구하면 됩니다.</p>
+<p>그런데 가속도 센서는 노이즈에 민감하고, 또 기기가 사용자에 의해 움직이고 있을 때는 중력가속도에 외력이 더해지기 때문에 각도를 정확하게 측정할 수 없습니다. 그래서 여기서는 가속도 센서 대신 중력 센서를 사용할 겁니다. 중력센서는 가속도센서와 자이로스코프 보정을 통해 각 축의 중력강도만을 반환하기 때문에 외력의 영향을 무시할 수 있습니다.</p>
+<h1 id="수평계-구현">수평계 구현</h1>
+<p>기기가 회전하면 좌표축이 바뀌게 되므로 우선은 기기가 회전하지 않도록 합니다. onCreate를 초기화하기 전에 <a class="link" href="https://developer.android.com/reference/android/app/Activity#setRequestedOrientation%28int%29"  target="_blank" rel="noopener"
+    >setRequestedOrientation</a>을 <a class="link" href="https://developer.android.com/reference/android/content/pm/ActivityInfo#SCREEN_ORIENTATION_PORTRAIT"  target="_blank" rel="noopener"
+    >SCREEN_ORIENTATION_PORTRAIT</a>로 설정해주면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@SuppressLint</span><span class="p">(</span><span class="s2">&#34;SourceLockedOrientationActivity&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 세로모드 고정
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">requestedOrientation</span> <span class="p">=</span> <span class="n">ActivityInfo</span><span class="p">.</span><span class="n">SCREEN_ORIENTATION_PORTRAIT</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 센서를 인식시켜 줍니다. <a class="link" href="https://developer.android.com/reference/android/hardware/SensorManager"  target="_blank" rel="noopener"
+    >SensorManager</a> 전역변수를 만들어주고 액티비티에서 <a class="link" href="https://developer.android.com/reference/android/hardware/SensorEventListener"  target="_blank" rel="noopener"
+    >SensorEventListener
+</a>를 상속받아 센서값의 변화를 통지받을 수 있게 합니다. <code>onResume</code>에서는 <a class="link" href="https://developer.android.com/reference/android/hardware/SensorManager#registerListener%28android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int%29"  target="_blank" rel="noopener"
+    >registerListener</a>로 센서를 등록합니다. 그리고 앱이 백그라운드로 전환되면 자원낭비를 막기 위해 <a class="link" href="https://developer.android.com/reference/android/hardware/SensorManager#unregisterListener%28android.hardware.SensorEventListener%29"  target="_blank" rel="noopener"
+    >unregisterListener</a>로 사용을 해제하게 하면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">(),</span> <span class="n">SensorEventListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">sensorManager</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">SENSOR_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">SensorManager</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onResume</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onResume</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sensorManager</span><span class="p">.</span><span class="n">registerListener</span><span class="p">(</span><span class="k">this</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sensorManager</span><span class="p">.</span><span class="n">getDefaultSensor</span><span class="p">(</span><span class="n">Sensor</span><span class="p">.</span><span class="n">TYPE_GRAVITY</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">SensorManager</span><span class="p">.</span><span class="n">SENSOR_DELAY_FASTEST</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPause</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onPause</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sensorManager</span><span class="p">.</span><span class="n">unregisterListener</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>센서값이 변화되면 <a class="link" href="https://developer.android.com/reference/android/hardware/SensorEventListener#onSensorChanged%28android.hardware.SensorEvent%29"  target="_blank" rel="noopener"
+    >onSensorChanged</a> 콜백으로 값을 확인할 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onSensorChanged</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SensorEvent</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">event</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">y</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">z</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">r</span> <span class="p">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="n">y</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="n">z</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;MainActivity&#34;</span><span class="p">,</span> <span class="s2">&#34;onSensorChanged: x: </span><span class="si">$x</span><span class="s2">, y: </span><span class="si">$y</span><span class="s2">, z: </span><span class="si">$z</span><span class="s2">, R: </span><span class="si">$r</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">xrAngle</span> <span class="p">=</span> <span class="p">(</span><span class="m">90</span> <span class="p">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">x</span> <span class="p">/</span> <span class="n">r</span><span class="p">)</span> <span class="p">*</span> <span class="m">180</span> <span class="p">/</span> <span class="n">PI</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">yrAngle</span> <span class="p">=</span> <span class="p">(</span><span class="m">90</span> <span class="p">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">y</span> <span class="p">/</span> <span class="n">r</span><span class="p">)</span> <span class="p">*</span> <span class="m">180</span> <span class="p">/</span> <span class="n">PI</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">textview</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">String</span><span class="p">.</span><span class="n">format</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;x-rotation: %.1f</span><span class="se">\u00B0</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> y-rotation: %.1f</span><span class="se">\u00B0</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">xrAngle</span><span class="p">,</span> <span class="n">yrAngle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onAccuracyChanged</span><span class="p">(</span><span class="n">p0</span><span class="p">:</span> <span class="n">Sensor</span><span class="p">?,</span> <span class="n">p1</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>중력센서의 값은 SensorEvent의 <a class="link" href="https://developer.android.com/reference/android/hardware/SensorEvent#values"  target="_blank" rel="noopener"
+    >value</a> 속성으로 가져올 수 있습니다. 공식에 따라 <code>r</code> 값을 계산하고 <code>Axr</code>과 <code>Ayr</code>을 계산하면 됩니다. 계산값은 라디안으로 반환되기 때문에 (180/PI)를 곱해서 각도로 변환합니다. 그리고 안드로이드 시스템의 좌표계에서 기기가 누워있는 상태는 x, y축으로 90도 회전한 상태이기 때문에 이 값을 0으로 만들기 위해 90을 빼주면 됩니다.</p>
+<p>이렇게 해서 센서를 이용해 기기의 수평도를 계산하는 방법에 대해 알아보았습니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+        <div class="article-list--compact links">
+    
+        <article>
+            <a href="https://github.com/cliearl/android-tutorial/tree/master/TiltSensor/" target="_blank" rel="noopener">
+                <div class="article-details">
+                    <h2 class="article-title">GitHub/cliearl</h2>
+                    <footer class="article-time">
+                        
+                            Find and download source code of the article from this link.
+                        
+                    </footer>
+                </div>
+        
+                
+                    <div class="article-image">
+                        <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
+                    </div>
+                
+            </a>
+        </article>
+    
+</div>
+    
+
+    
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">Related contents</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/android/google-maps-cluster/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">구글맵에 커스텀 마커와 클러스터아이템 적용하기</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/android/google-maps-basic/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">프래그먼트에서 구글맵 구현하고 내 위치 표시하기</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/android/show-sensor-list/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">기기에 설치된 센서종류 확인하기</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/android/oss-licenses/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">앱에 사용된 Open source의 License 표시하기</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/posts/android/encrypted-sharedpreferences/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">EncryptedSharedPreferences로 데이터 암호화하기</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.11.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
