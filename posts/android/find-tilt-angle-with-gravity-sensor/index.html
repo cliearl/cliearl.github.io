@@ -350,7 +350,7 @@ if (!doNotTrack) {
     
     
     <p>이번 포스팅에서는 기기의 수평도를 확인하는 법에 대해 알아보도록 하겠습니다.</p>
-<h1 id="좌표계와-기울기에-대한-이해">좌표계와 기울기에 대한 이해</h1>
+<h2 id="좌표계와-기울기에-대한-이해">좌표계와 기울기에 대한 이해</h2>
 <p>안드로이드 시스템의 좌표계는 다음과 같이 구성됩니다.</p>
 <figure><img src="https://developer.android.com/images/axis_globe.png"
          alt="출처 : https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate" width="93%"/><figcaption>
@@ -391,7 +391,7 @@ A_{zr}=arccos\left(\frac{R_{z}}{R}\right)
 $$</p>
 <p>수평계는 기기가 화면을 +z 방향으로 하고 누워있을 때의 x축과 y축에 대한 기울기를 구하는 것이니까 <code>Axr</code>과 <code>Ayr</code>을 구하면 됩니다.</p>
 <p>그런데 가속도 센서는 노이즈에 민감하고, 또 기기가 사용자에 의해 움직이고 있을 때는 중력가속도에 외력이 더해지기 때문에 각도를 정확하게 측정할 수 없습니다. 그래서 여기서는 가속도 센서 대신 중력 센서를 사용할 겁니다. 중력센서는 가속도센서와 자이로스코프 보정을 통해 각 축의 중력강도만을 반환하기 때문에 외력의 영향을 무시할 수 있습니다.</p>
-<h1 id="수평계-구현">수평계 구현</h1>
+<h2 id="수평계-구현">수평계 구현</h2>
 <p>기기가 회전하면 좌표축이 바뀌게 되므로 우선은 기기가 회전하지 않도록 합니다. onCreate를 초기화하기 전에 <a class="link" href="https://developer.android.com/reference/android/app/Activity#setRequestedOrientation%28int%29"  target="_blank" rel="noopener"
     >setRequestedOrientation</a>을 <a class="link" href="https://developer.android.com/reference/android/content/pm/ActivityInfo#SCREEN_ORIENTATION_PORTRAIT"  target="_blank" rel="noopener"
     >SCREEN_ORIENTATION_PORTRAIT</a>로 설정해주면 됩니다.</p>
@@ -797,7 +797,39 @@ $$</p>
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#좌표계와-기울기에-대한-이해">좌표계와 기울기에 대한 이해</a></li>
+    <li><a href="#수평계-구현">수평계 구현</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 
