@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다.
+SOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.
+단일 책임 원칙 (Single responsibility principle, SRP) &amp;ldquo;There should never be more than one reason for a class to change.'><title>Dependency Injection 기초</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/dependency-injection-basic/'>
+
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Dependency Injection 기초'>
+<meta property='og:description' content='이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다.
+SOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.
+단일 책임 원칙 (Single responsibility principle, SRP) &amp;ldquo;There should never be more than one reason for a class to change.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/dependency-injection-basic/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-07-31T21:19:03&#43;09:00'/><meta property='article:modified_time' content='2022-07-31T21:19:03&#43;09:00'/>
+<meta name="twitter:title" content="Dependency Injection 기초">
+<meta name="twitter:description" content="이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다.
+SOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.
+단일 책임 원칙 (Single responsibility principle, SRP) &amp;ldquo;There should never be more than one reason for a class to change.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-769063-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
+            <h2 class="site-description">@Andromeda Galaxy</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/cliearl'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/coder_frozen'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.youtube.com/channel/UC6V7LBEgcoTZUUgUU0Jv3xg'
+                        target="_blank"
+                        title="Youtube"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="4" />
+  <path d="M10 9l5 3l-5 3z" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/page/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/android/dependency-injection-basic/">Dependency Injection 기초</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 31, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    10 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다.</p>
+<h2 id="solid-원칙">SOLID 원칙</h2>
+<p>의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. <a class="link" href="https://en.wikipedia.org/wiki/SOLID"  target="_blank" rel="noopener"
+    >SOLID 원칙</a>이란 <a class="link" href="https://en.wikipedia.org/wiki/Robert_C._Martin"  target="_blank" rel="noopener"
+    >로버트 마틴</a> 선생이 2000년에 <a class="link" href="https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf"  target="_blank" rel="noopener"
+    >Design Principles and Design Patterns</a>에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.</p>
+<h3 id="단일-책임-원칙-single-responsibility-principle-srp">단일 책임 원칙 (Single responsibility principle, SRP)</h3>
+<blockquote>
+<p>&ldquo;There should never be more than one reason for a class to change.&rdquo;</p>
+</blockquote>
+<p>단일 책임 원칙이란 클래스가 여러개의 책임을 갖게 되면, 각 책임마다 클래스를 변경할 수 있는 이유가 생기므로 책임을 단 한 개만 가지도록 설계하라는 뜻입니다.</p>
+<p>예를 들면 네트워크에 접속해서, 암호화된 데이터를 다운로드하고, 데이터를 복호화한 뒤, 파일로 저장하는 <code>Work</code> 클래스가 있다고 하겠습니다. 네 개의 책임 중 하나만 변경이 되어도 이 클래스는 수정되어야 합니다. 또 이 클래스에 연결된 클래스가 있다면 책임 하나의 기능 변경이 일어나도 연결된 모든 클래스가 그에 맞춰 수정되어야 하지요.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+classDiagram
+    class Work{
+      -accessToNetwork()
+      -downloadData()
+      -decryptData()
+      -saveAsFile()
+    }
+
+</div>
+<p>객체가 갖는 책임이 많아질수록 기능 변경은 점점 어려워지게 되므로, 이를테면 <code>Work</code>의 책임을 네 개의 클래스로 나누어 기능을 유연하게 변경할 수 있도록 하라는 것이 단일 책임 원칙입니다.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+classDiagram
+
+    Work --|> AccessToNetwork
+    Work --|> DownloadData
+    Work --|> DecryptData
+    Work --|> SaveAsFile
+    class Work{
+      -accessToNetwork()
+      -downloadData()
+      -decryptData()
+      -saveAsFile()
+    }
+
+    class AccessToNetwork
+    class DownloadData
+    class DecryptData
+    class SaveAsFile
+
+</div>
+<h3 id="개방-폐쇄-원칙-open-closed-principle-ocp">개방-폐쇄 원칙 (Open-closed principle, OCP)</h3>
+<blockquote>
+<p>&ldquo;Software entities &hellip; should be open for extension, but closed for modification.&rdquo;</p>
+</blockquote>
+<p>개방-폐쇄 원칙은 객체를 수정하지 않고도 기능을 확장할 수 있게 설계해야 한다는 뜻입니다. 이게 어떻게 가능할까요?</p>
+<p>예를 들어 네트워크에서 데이터를 읽어오는 <code>DataReader</code> 클래스가 있다고 하겠습니다. 이 때 네트워크에서 데이터를 다운로드하는 기능은 <code>NetworkAccess</code> 클래스로 분리시킵니다. 그리고 <code>DataSource</code> 인터페이스를 만들어서 <code>NetworkAccess</code>가 <code>DataSource</code>를 상속하게 합니다.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+classDiagram
+
+  class DataSource{
+      <!-- <<interface>> -->
+  }
+
+  DataSource<..DataReader
+  DataSource<|..NetworkAccess
+
+</div>
+<p>이제 <code>DataReader</code>에 네트워크가 아닌 로컬파일에서 데이터를 읽어오는 기능을 추가하고 싶다고 합시다. 그러면 우리는 로컬 파일에서 데이터를 읽어오는 기능을 가진 <code>FileAccess</code> 클래스를 만들고 <code>FileAccess</code>가 <code>DataSource</code> 인터페이스를 상속하게 하면 됩니다. 그러면 <code>DataReader</code>는 <code>DataSource</code>를 참조하고 있기 때문에 기능을 변경하지 않고도 파일에서 데이터를 읽어오는 기능을 추가할 수 있게 됩니다.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+classDiagram
+  class DataSource{
+      <!-- <<interface>> -->
+  }
+
+  DataSource<..DataReader
+  DataSource<|..NetworkAccess
+  DataSource<|..FileAccess 
+
+</div>
+<p>기능을 확장하는 부분은 인터페이스를 사용해 추상화하고, 새로운 기능의 추가에는 상속(다형성)을 적용함으로써 클래스를 유연하게 변경할 수 있게 되는 것입니다.</p>
+<h3 id="리스코프-치환-원칙-liskov-substitution-principle-lsp">리스코프 치환 원칙 (Liskov substitution principle, LSP)</h3>
+<blockquote>
+<p>&ldquo;Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.&rdquo;</p>
+</blockquote>
+<p>리스코프 치환 원칙에 따르면 상위타입 객체가 하위타입 객체로 변환되어도 상위타입을 사용하는 프로그램은 정상적으로 동작해야 합니다.</p>
+<p>잘 알려진 <a class="link" href="https://en.wikipedia.org/wiki/Circle%E2%80%93ellipse_problem"  target="_blank" rel="noopener"
+    >직사각형-정사각형 문제</a>를 예로들어 설명을 해 보겠습니다. 직사각형의 정의는 <code>네 각이 직각인 사각형</code>이고, 정사각형은 <code>네 각이 직각이면서 네 변의 길이가 모두 같은 사각형</code>입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Rectangle</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">open</span> <span class="k">var</span> <span class="py">width</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">open</span> <span class="k">var</span> <span class="py">height</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">area</span><span class="p">:</span> <span class="n">Int</span>
+</span></span><span class="line"><span class="cl">        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">width</span> <span class="p">*</span> <span class="k">this</span><span class="p">.</span><span class="n">height</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Square</span> <span class="p">:</span> <span class="n">Rectangle</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">var</span> <span class="py">width</span><span class="p">:</span> <span class="n">Int</span>
+</span></span><span class="line"><span class="cl">        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="k">super</span><span class="p">.</span><span class="n">width</span>
+</span></span><span class="line"><span class="cl">        <span class="k">set</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">super</span><span class="p">.</span><span class="n">width</span> <span class="p">=</span> <span class="n">width</span>
+</span></span><span class="line"><span class="cl">            <span class="k">super</span><span class="p">.</span><span class="n">height</span> <span class="p">=</span> <span class="n">width</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">var</span> <span class="py">height</span><span class="p">:</span> <span class="n">Int</span>
+</span></span><span class="line"><span class="cl">        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="k">super</span><span class="p">.</span><span class="n">height</span>
+</span></span><span class="line"><span class="cl">        <span class="k">set</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">super</span><span class="p">.</span><span class="n">width</span> <span class="p">=</span> <span class="n">height</span>
+</span></span><span class="line"><span class="cl">            <span class="k">super</span><span class="p">.</span><span class="n">height</span> <span class="p">=</span> <span class="n">height</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 사각형의 면적을 구하는 코드인데요 <code>Rectangle</code>을 전달하면 문제없이 <code>Assertion</code>이 성공합니다. 그런데 LSP에 따르면 <code>Rectangle</code>의 하위타입인 <code>Square</code>를 전달해도 면적이 정상적으로 구해져야 하는데 그렇지 않으므로 LSP를 위반하게 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">calculateArea</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Rectangle</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span><span class="p">.</span><span class="n">width</span> <span class="p">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span><span class="p">.</span><span class="n">height</span> <span class="p">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assert</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">area</span> <span class="o">==</span> <span class="m">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">calculateArea</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">calculateArea</span><span class="p">(</span><span class="n">Square</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이것은 개념적으로는 직사각형과 정사각형이 상속관계처럼 보이더라도 실제 구현은 상속관계가 아니기 때문입니다. 그러므로 여기서는 더 추상화된 <code>Shape</code> 객체를 추가로 만들어서 <code>Rectangle</code>과 <code>Square</code>가 모두 <code>Shape</code>를 상속하게 하고 <code>Shape</code>의 면적을 계산하는 함수를 만드는 것이 더 적절합니다.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+classDiagram
+
+    Shape <|-- Rectangle
+    Shape <|-- Square
+
+    class Shape
+    class Rectangle
+    class Square
+
+</div>
+<p>LSP를 위반한다는 것은 하위타입이 상위타입의 명세를 제대로 지키지 않고 있다는 뜻입니다. 만약 상위타입의 코드에서 하위타입을 구분해야 하는 경우, 상위타입으로 치환할 수 없기 때문에 코드 내부에서 <code>instanceOf</code> 를 써야 합니다. 그런데 이렇게 하면 하위타입을 새로 만들때마다 상위타입의 코드를 수정해야 하니 결과적으로 OCP도 깨지기 쉬워져서 기능확장이 어려워지게 됩니다.</p>
+<h3 id="인터페이스-분리-원칙-interface-segregation-principle-isp">인터페이스 분리 원칙 (Interface segregation principle, ISP)</h3>
+<blockquote>
+<p>&ldquo;Many client-specific interfaces are better than one general-purpose interface.&rdquo;</p>
+</blockquote>
+<p>이 문장의 뜻은 구현할 필요가 없는 메소드를 가진 인터페이스를 객체에 사용하지 말라는 뜻입니다. 예를 들어 동물을 표현하는 <code>Animal</code> 인터페이스가 있다고 하겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">interface</span> <span class="nc">Animal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">eat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">run</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">Where</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">Where</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">fly</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">Where</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">Where</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>그리고 <code>Animal</code>을 구현하는 <code>Eagle</code>과 <code>Lion</code> 클래스를 작성합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Eagle</span> <span class="p">:</span> <span class="n">Animal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">eat</span><span class="p">()</span> <span class="p">=</span> <span class="n">println</span><span class="p">(</span><span class="s2">&#34;### walk ###&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">Where</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">Where</span><span class="p">)</span> <span class="p">=</span> <span class="n">println</span><span class="p">(</span><span class="s2">&#34;### run ###&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">fly</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">Where</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">Where</span><span class="p">)</span> <span class="p">=</span> <span class="n">println</span><span class="p">(</span><span class="s2">&#34;### fly ###&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Lion</span> <span class="p">:</span> <span class="n">Animal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">eat</span><span class="p">()</span> <span class="p">=</span> <span class="n">println</span><span class="p">(</span><span class="s2">&#34;### walk ###&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">Where</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">Where</span><span class="p">)</span> <span class="p">=</span> <span class="n">println</span><span class="p">(</span><span class="s2">&#34;### run ###&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">fly</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">Where</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">Where</span><span class="p">)</span> <span class="c1">// 구현 필요 없음
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Eagle</code>은 <code>Animal</code>의 모든 기능을 구현해야하므로 사용에 아무런 문제가 없지만, <code>Lion</code>은 날지도 못하는데 <code>Animal</code>을 상속했기 때문에 의무적으로 <code>fly</code>를 구현해야 합니다. 게다가 만약 <code>fly</code>의 파라메터나 리턴타입같은 사양이 변경될 경우 <code>Lion</code> 클래스는 사용하지도 않는 <code>fly</code>를 그에 따라 수정해야 하는 문제가 발생합니다.</p>
+<p>클라이언트의 입장에서 사용하는 기능만 제공하도록 인터페이스를 분리하라는 것이 ISP의 의도이므로, 여기서는 <code>Animal</code> 인터페이스를 <code>Bird</code>와 <code>Mammal</code>로 분리하여 사용하는 것이 적절하겠죠.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">interface</span> <span class="nc">Bird</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">eat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">run</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">Where</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">Where</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">fly</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">Where</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">Where</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">interface</span> <span class="nc">Mammal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">eat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">run</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">Where</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">Where</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="의존성-역전-원칙-dependency-inversion-principle-dip">의존성 역전 원칙 (Dependency inversion principle, DIP)</h3>
+<blockquote>
+<p>&ldquo;Depend upon abstractions, [not] concretions.&rdquo;</p>
+</blockquote>
+<p>Dependency, 의존이란 무엇일까요. 객체 A가 객체 B를 생성하거나 객체 B의 메서드를 호출할 때 A는 B에 의존한다, 혹은 A가 의존성 B를 갖는다고 표현합니다. 다음 그림에서는 <code>Car</code> 클래스가 <code>Engine</code> 클래스에 의존하고 있습니다.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+classDiagram
+    Car ..> Engine
+    Car : +Engine engine
+
+    class Engine{
+      +int fuel
+      +work()
+    }
+
+</div>
+<p>의존성 역전 원칙에 따르면 상위 레벨 모듈이 하위 레벨 모듈에 의존해서는 안 되고 추상화에 의존해야 한다고 정의합니다. 이게 무슨 말일까요?</p>
+<p>자동차를 예를 들어 설명해 보겠습니다. 자동차는 상위레벨 모듈이고 자동차를 구성하는 엔진, 타이어, 핸들은 하위레벨 모듈이 됩니다. 이제 가솔린 엔진을 탑재한 <code>Car</code> 클래스가 있다고 하겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">GasolineEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">fuel</span> <span class="p">=</span> <span class="s2">&#34;gasoline&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Car</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">engine</span> <span class="p">=</span> <span class="n">GasolineEngine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이제 가솔린 엔진을 경유 엔진으로 변경해 보겠습니다. 엔진을 변경하였기 때문에 <code>Car</code> 내부의 코드를 다음과 같이 변경하면 되겠죠.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DieselEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">fuel</span> <span class="p">=</span> <span class="s2">&#34;diesel&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Car</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// val engine = GasolineEngine()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">engine</span> <span class="p">=</span> <span class="n">DieselEngine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>하지만 의존성 역전 원칙의 핵심은 의존하는 하위레벨 모듈이 변하더라도 상위레벨 모듈은 변하지 않아야 한다는 것입니다. 다시말해 엔진이 <code>GasolineEngine</code>에서 <code>DieselEngine</code>으로 바뀌더라도 <code>Car</code>의 코드는 변하면 안된다는 것이죠. 그럼 어떻게 해야 할까요. 현재 <code>Car</code>는 <code>GasolineEngine</code>에 의존하고 있지만, <code>GasolineEngine</code>은 어디에도 의존하지 않습니다.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+flowchart RL
+    Car --> GasolineEngine;
+
+</div>
+<p>이 흐름 중간에 다음과 같이 <code>Engine</code> 인터페이스를 도입하겠습니다. 그러면 의존이 없었던 하위레벨 모듈인 <code>GasolineEngine</code>이 역으로 상위레벨 모듈인 <code>Engine</code>에 의존하게 되는 의존관계 역전이 일어나게 됩니다. <code>Car</code>는 <code>Engine</code>에 의존하고 있기 때문에 엔진을 어떻게 갈아끼우더라도 <code>Car</code>의 코드에는 더 이상 변경이 발생하지 않게 되지요. 잘 생각해 보시면 DIP란 결국 OCP의 실현을 돕는 원칙이란 것을 알 수 있습니다.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+classDiagram
+  class Engine{
+      <!-- <<interface>> -->
+  }
+
+  Engine<..Car
+  Engine<|..GasolineEngine
+  Engine<|..DieselEngine 
+
+</div>
+<h2 id="의존성-주입dependency-injection-di">의존성 주입(Dependency Injection, DI)</h2>
+<p>이제 의존성 주입에 대해 알아보도록 하겠습니다.</p>
+<h3 id="순환의존">순환의존</h3>
+<p>의존의 영향은 꼬리에 꼬리를 문 것처럼 전파되는 특징이 있습니다. 그래서 다음과 같은 의존관계가 있을 때 <code>Piston</code>이 변경되면 <code>Engine</code>도 변경되어야 하고 결국 <code>Car</code>도 따라서 변경되게 됩니다.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+flowchart RL
+    Engine --> Piston;
+    Car --> Engine;
+
+</div>
+<p>그런데 프로그램을 짜다 보면 다음과 같이 의존이 순환되는 경우가 생기기도 합니다. 이런 경우엔 <code>Piston</code>이 변경된 영향으로 다시 <code>Piston</code> 자신이 변경되는 문제가 발생합니다. 이것을 순환참조(Circular reference)라고 하며, 유지보수를 어렵게 만들기 때문에 반드시 피해야 하는 문제입니다.</p>
+<script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
+    var config = {
+        startOnLoad: true,
+        theme: 'dark',
+        align: 'center'
+    };
+    mermaid.initialize(config);
+</script>
+
+<div class="mermaid">
+    
+flowchart RL
+    Engine --> Piston;
+    Car --> Engine;
+    Piston --> Car;
+
+</div>
+<p>이 순환 의존을 깨는 원칙중 하나가 앞에서 설명한 의존역전 원칙이고, 의존역전 원칙을 코드로 실현하는 방법 중 하나가 의존성 주입입니다. 그래서 프로그램에 의존성 주입을 적용하면 구조적으로 더 좋아진다고 할 수 있는 것입니다.</p>
+<p>또한 의존성 주입을 사용하게 되면 테스트를 용이하게 수행할 수 있게 되는 장점도 생깁니다. 예를 들면 <code>DieselEngine</code> 의존성을 사용하던 <code>Car</code> 클래스의 엔진을 쉽게 <code>TestEngine</code>으로 갈아낄 수 있게 되는 것이죠.</p>
+<p>다만 개발자가 의존성 주입을 개별적으로 구현하는 것은 번거롭고 까다롭기 때문에 안드로이드에는 DI를 더 용이하게 수행할 수 있는 <a class="link" href="https://github.com/google/dagger"  target="_blank" rel="noopener"
+    >Dagger</a>, <a class="link" href="https://github.com/google/dagger/tree/master/java/dagger/hilt"  target="_blank" rel="noopener"
+    >Hilt</a>, <a class="link" href="https://github.com/InsertKoinIO/koin"  target="_blank" rel="noopener"
+    >Koin</a>, <a class="link" href="https://github.com/Kodein-Framework/Kodein-DI"  target="_blank" rel="noopener"
+    >Kodein</a>, <a class="link" href="https://github.com/square/anvil"  target="_blank" rel="noopener"
+    >Anvil</a> 등의 라이브러리들이 개발되어 있습니다.</p>
+<h3 id="의존성-주입-방식별-구분">의존성 주입 방식별 구분</h3>
+<p>의존성 역전 원칙에서 다루었던 예에서는 <code>Car</code>가 <code>DieselEngine</code> 의존을 내부에서 직접 생성했었습니다. 이렇게 되면 의존성 역전 원칙을 위배하게 되고 결과적으로 확장-폐쇄 원칙까지 위반하게 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DieselEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">fuel</span> <span class="p">=</span> <span class="s2">&#34;diesel&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Car</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">engine</span> <span class="p">=</span> <span class="n">DieselEngine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 구조에 의존성을 주입해 보도록 하겠습니다. 의존성 주입을 실현하는 방식은 생성자 주입 방식과, 메소드 주입 방식 그리고 인터페이스를 통한 주입 방식이 있습니다.</p>
+<ul>
+<li>생성자 주입 방식</li>
+</ul>
+<p>생성자 주입 방식은 다음과 같이 클래스를 초기화 하는 시점에서 외부에서 작성한 <code>DieselEngine</code> 객체를 생성자로 주입하는 방식입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DieselEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">fuel</span> <span class="p">=</span> <span class="s2">&#34;diesel&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Car</span><span class="p">(</span><span class="k">val</span> <span class="py">engine</span><span class="p">:</span> <span class="n">DieselEngine</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">dieselEngine</span> <span class="p">=</span> <span class="n">DieselEngine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">car</span> <span class="p">=</span> <span class="n">Car</span><span class="p">(</span><span class="n">dieselEngine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>메소드 주입 방식</li>
+</ul>
+<p>메소드 주입 방식은 클래스 초기화가 끝난 뒤 어떤 시점에서 <code>setEngine</code>을 실행시켜서 객체를 주입하는 방식입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DieselEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">fuel</span> <span class="p">=</span> <span class="s2">&#34;diesel&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Car</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">engine</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">fun</span> <span class="nf">setEngine</span><span class="p">(</span><span class="n">engine</span><span class="p">:</span> <span class="n">Engine</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">engine</span> <span class="p">=</span> <span class="n">engine</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">dieselEngine</span> <span class="p">=</span> <span class="n">DieselEngine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">car</span> <span class="p">=</span> <span class="n">Car</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">car</span><span class="p">.</span><span class="n">setEngine</span><span class="p">(</span><span class="n">dieselEngine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>인터페이스를 통한 주입 방식</li>
+</ul>
+<p>인터페이스를 통한 주입 방식은 메소드 주입 방식과 유사하나 인터페이스를 통해 의존성을 주입합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">interface</span> <span class="nc">DieselEngineInjector</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">inject</span><span class="p">(</span><span class="n">dieselEngine</span><span class="p">:</span> <span class="n">DieselEngine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DieselEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">fuel</span> <span class="p">=</span> <span class="s2">&#34;diesel&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Car</span> <span class="n">implements</span> <span class="n">DieselEngineInjector</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">engine</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">inject</span><span class="p">(</span><span class="n">dieselEngine</span><span class="p">:</span> <span class="n">DieselEngine</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">engine</span> <span class="p">=</span> <span class="n">engine</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">dieselEngine</span> <span class="p">=</span> <span class="n">DieselEngine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">car</span> <span class="p">=</span> <span class="n">Car</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">car</span><span class="p">.</span><span class="n">inject</span><span class="p">(</span><span class="n">dieselEngine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>생성자 주입 방식은 필요한 모든 의존객체를 객체를 생성하는 시점에 준비할 수 있고, 또한 생성 시점에 의존객체가 정상인지 아닌지 판정할 수 있습니다. 반면에 메소드와 인터페이스를 통한 주입 방식은 의존객체가 나중에 생성되는 경우에 사용할 수 있으며, 메소드의 이름을 통해 어떤 의존객체를 주입하는지 더 알기 쉽다는 특징이 있습니다.</p>
+<h3 id="서비스-로케이터-방식">서비스 로케이터 방식</h3>
+<p>서비스 로케이터 방식은 우선 로케이터 클래스에 의존객체를 모은 뒤, 로케이터가 각 클래스에 의존객체를 전달하는 구조로 되어 있습니다. DI와 동일하게 생성자 주입 방식과 메소드 주입 방식으로 구현할 수 있는데 여기서는 생성자 주입 방식으로 사용하는 법만 보여드리도록 하겠습니다.</p>
+<p>코드를 보시죠. 우선 메인루틴에서 모든 의존객체를 초기화한 뒤 그것들을 <code>Locator</code>에 생성자로 전달합니다. <code>Locator</code>는 모든 의존객체를 가지고 있도록 설계되어 있습니다. 그리고 <code>Car</code>에서 <code>DieselEngine</code> 객체가 필요하면 <code>Locator</code>를 통해 의존객체를 주입받게 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">GasolineEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">fuel</span> <span class="p">=</span> <span class="s2">&#34;gasoline&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DieselEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">fuel</span> <span class="p">=</span> <span class="s2">&#34;diesel&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Locator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">dieselEngine</span><span class="p">:</span> <span class="n">DieselEngine</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">gasolineEngine</span><span class="p">:</span> <span class="n">GasolineEngine</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">getGasolineEngine</span><span class="p">():</span> <span class="n">GasolineEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">gasolineEngine</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">getDieselEngine</span><span class="p">():</span> <span class="n">DieselEngine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dieselEngine</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">var</span> <span class="py">instance</span><span class="p">:</span> <span class="n">Locator</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">fun</span> <span class="nf">getInstance</span><span class="p">(</span><span class="n">locator</span><span class="p">:</span> <span class="n">Locator</span><span class="p">)</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">instance</span> <span class="o">?:</span> <span class="n">Locator</span><span class="p">(</span><span class="n">dieselEngine</span><span class="p">,</span> <span class="n">gasolineEngine</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">instance</span> <span class="p">=</span> <span class="k">it</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Car</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">engine</span> <span class="p">=</span> <span class="n">Locator</span><span class="p">.</span><span class="n">getInstance</span><span class="p">().</span><span class="n">getDieselEngine</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">dieselEngine</span> <span class="p">=</span> <span class="n">DieselEngine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">gasolineEngine</span> <span class="p">=</span> <span class="n">GasolineEngine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">locator</span> <span class="p">=</span> <span class="n">Locator</span><span class="p">(</span><span class="n">dieselEngine</span><span class="p">,</span> <span class="n">gasolineEngine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">car</span> <span class="p">=</span> <span class="n">Car</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>                              
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>문제는 서비스 로케이터를 사용하면 앞에서 설명한 인터페이스 분리원칙을 위반하게 된다는 점입니다. <code>Car</code>는 <code>dieselEngine</code>만 있으면 되는데 서비스 로케이터가 가진 <code>gasolineEngine</code> 객체에도 접근할 수 있게 되지요. 그리고 동일한 의존객체를 여러 클래스에서 사용해야 할 경우, 제공 메소드를 각 객체 수만큼 준비해야 합니다. 또한 의존성에 문제가 있어도 그걸 컴파일 타임에 확인할 수 없다는 한계도 있습니다.</p>
+<p>이렇게 해서 의존성 주입을 위한 기초이론과 실 사용예들에 대해 알아보았습니다. 생성자 주입방식만이 가장 좋은것처럼 설명된 면이 있지만, 의존성 주입을 구현하는데에 정해진 답이 있는 것은 아니니 각자 용도에 맞춰서 사용하면 됩니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/android/find-tilt-angle-with-gravity-sensor/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">중력센서를 사용해 기기의 기울기 각도 확인하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/google-maps-cluster/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">구글맵에 커스텀 마커와 클러스터아이템 적용하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/google-maps-basic/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">프래그먼트에서 구글맵 구현하고 내 위치 표시하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/show-sensor-list/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">기기에 설치된 센서종류 확인하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/oss-licenses/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">앱에 사용된 Open source의 License 표시하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.12.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#solid-원칙">SOLID 원칙</a>
+      <ol>
+        <li><a href="#단일-책임-원칙-single-responsibility-principle-srp">단일 책임 원칙 (Single responsibility principle, SRP)</a></li>
+        <li><a href="#개방-폐쇄-원칙-open-closed-principle-ocp">개방-폐쇄 원칙 (Open-closed principle, OCP)</a></li>
+        <li><a href="#리스코프-치환-원칙-liskov-substitution-principle-lsp">리스코프 치환 원칙 (Liskov substitution principle, LSP)</a></li>
+        <li><a href="#인터페이스-분리-원칙-interface-segregation-principle-isp">인터페이스 분리 원칙 (Interface segregation principle, ISP)</a></li>
+        <li><a href="#의존성-역전-원칙-dependency-inversion-principle-dip">의존성 역전 원칙 (Dependency inversion principle, DIP)</a></li>
+      </ol>
+    </li>
+    <li><a href="#의존성-주입dependency-injection-di">의존성 주입(Dependency Injection, DI)</a>
+      <ol>
+        <li><a href="#순환의존">순환의존</a></li>
+        <li><a href="#의존성-주입-방식별-구분">의존성 주입 방식별 구분</a></li>
+        <li><a href="#서비스-로케이터-방식">서비스 로케이터 방식</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
