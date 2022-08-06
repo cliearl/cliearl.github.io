@@ -6,7 +6,57 @@
         <description>Recent content in android on 냉동코더의 기술블로그</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 31 Jul 2022 21:19:03 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/categories/android/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 06 Aug 2022 12:14:15 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/categories/android/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>자바의 리플렉션이란</title>
+        <link>https://cliearl.github.io/posts/android/java-reflection/</link>
+        <pubDate>Sat, 06 Aug 2022 12:14:15 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/android/java-reflection/</guid>
+        <description>&lt;p&gt;이번 포스팅에서는 자바의 &lt;a class=&#34;link&#34; href=&#34;https://www.oracle.com/technical-resources/articles/java/javareflection.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;리플렉션&lt;/a&gt;에 대해 알아보도록 하겠습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;bookSearchViewModel&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ViewModelProvider&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;factory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BookSearchViewModel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;java&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;위 코드의 의미는 런타임에 뷰모델을 만들기 위해 &lt;code&gt;BookSearchViewModel&lt;/code&gt; 클래스를 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModelProvider#ViewModelProvider%28androidx.lifecycle.ViewModelStoreOwner,androidx.lifecycle.ViewModelProvider.Factory%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ViewModelProvider&lt;/a&gt;에게 전달해준다는 의미입니다. 이 때 ViewModelProvider의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModelProvider#get%28java.lang.Class%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;get&lt;/a&gt; 메소드는 다음과 같이 &lt;a class=&#34;link&#34; href=&#34;https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Class&lt;!-- raw HTML omitted --&gt;&lt;/a&gt;를 전달받아서 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModelStoreOwner&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ViewModelStoreOwner&lt;/a&gt;에게 ViewModel을 반환하게 됩니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@MainThread&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;open&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;operator&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;fun&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;T&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ViewModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;modelClass&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Class&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;):&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;ViewModelProvider&lt;/code&gt;는 컴파일 타임이 아니라 런타임에 실행되어 &lt;code&gt;BookSearchViewModel&lt;/code&gt;을 만들어야 하는데 런타임에는 &lt;code&gt;BookSearchViewModel&lt;/code&gt;의 클래스 정보를 알 수가 없습니다.&lt;/p&gt;
+&lt;p&gt;여기서 &lt;code&gt;::&lt;/code&gt;은 자바의 리플렉션 문법인데, 리플렉션은 클래스 타입을 몰라도 그 클래스의 속성에 접근할 수 있게 해주는 API입니다. 그러니까 위의 코드에서는 리플렉션을 통해 &lt;code&gt;ViewModelProvider&lt;/code&gt;에게 &lt;code&gt;BookSearchViewModel&lt;/code&gt; 클래스 정보를 전달해 준 것이고 따라서 런타임에 &lt;code&gt;BookSearchViewModel&lt;/code&gt; 인스턴스가 만들어지게 된 것입니다.&lt;/p&gt;
+&lt;p&gt;리플렉션 작업은 &lt;a class=&#34;link&#34; href=&#34;https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/package-summary.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;java.lang.reflect&lt;/a&gt;라는 패키지에 의해 수행되는데 다음과 같은 프로퍼티에 대해 접근할 수 있습니다.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://docstore.mik.ua/orelly/java/fclass/figs/jfc_1301.gif&#34;
+         alt=&#34;출처 : https://docstore.mik.ua/orelly/java/fclass/ch13_01.htm&#34; width=&#34;93%&#34;/&gt;&lt;figcaption&gt;
+            &lt;p&gt;출처 : &lt;a class=&#34;link&#34; href=&#34;https://docstore.mik.ua/orelly/java/fclass/ch13_01.htm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://docstore.mik.ua/orelly/java/fclass/ch13_01.htm&lt;/a&gt;&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;리플렉션을 이용하면 이렇게 런타임에 클래스 정보를 다룰 수 있지만 다음과 같은 단점도 있기 때문에 제한적으로만 사용하는 것이 좋습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;컴파일 불가 : 컴파일시 타입 검사나 예외 검사를 할 수 없어 런타임에 문제를 야기할 수 있습니다.&lt;/li&gt;
+&lt;li&gt;성능 저하 : 리플렉션을 통한 작업은 일반 작업보다 훨씬 느립니다.&lt;/li&gt;
+&lt;li&gt;내부 노출 : 리플렉션을 사용하면 접근 지시자를 무시할 수 있기 때문에 추상화가 깨지고 플랫폼 업그레이드 시 동작이 변경될 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Dependency Injection 기초</title>
         <link>https://cliearl.github.io/posts/android/dependency-injection-basic/</link>
         <pubDate>Sun, 31 Jul 2022 21:19:03 +0900</pubDate>
