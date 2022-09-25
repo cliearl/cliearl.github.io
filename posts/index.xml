@@ -6,7 +6,51 @@
         <description>Recent content in Posts on 냉동코더의 기술블로그</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 11 Sep 2022 09:44:29 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/posts/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 25 Sep 2022 11:15:54 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/posts/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>내 장비의 안드로이드 스튜디오 빌드능력 벤치마킹하기</title>
+        <link>https://cliearl.github.io/posts/android/build-performance-benchmark/</link>
+        <pubDate>Sun, 25 Sep 2022 11:15:54 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/android/build-performance-benchmark/</guid>
+        <description>&lt;p&gt;이번 포스팅에서는 내 장비의 안드로이드 스튜디오 빌드능력을 벤치마킹 해 보겠습니다.&lt;/p&gt;
+&lt;p&gt;2020년 Apple에서 M시리즈 칩셋을 탑재한 &lt;a class=&#34;link&#34; href=&#34;https://www.apple.com/kr/newsroom/2020/11/apple-unleashes-m1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;맥북&lt;/a&gt;이 발표된 이후 밝혀진 엄청난 전성비와 성능은 세상을 놀라게 했습니다. 물론 저도 마찬가지였구요.&lt;/p&gt;
+&lt;p&gt;저는 &lt;a class=&#34;link&#34; href=&#34;https://support.apple.com/kb/SP776?locale=ko_KR&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2018년형 15인치 MacBook Pro&lt;/a&gt;를 사용하고 있는데요 2.2GHz 인텔 코어 i7과 16GB 메모리를 탑재하였고 외장 그래픽으로 Radeon Pro 555X 4 GB가 추가되어 있는 사양입니다. 당시에는 거금을 주고 구입한 머신이지만 에뮬레이터를 하나 띄우고 영상을 녹화하면서 안드로이드 프로젝트를 하나 빌드하면 처리가 느려져서 녹화영상의 프레임이 뚝뚝 떨어지는 문제가 있습니다.&lt;/p&gt;
+&lt;p&gt;M1은 성능 향상에 힘입어 프로젝트 빌드 속도가 빨라진다는 소문이 있었지만 출시 당시에는 인텔용 안드로이드 스튜디오를 ARM에서 강제로 돌려야했기 때문에 한계가 있었지만 Apple Silicon 전용 안드로이드 스튜디오가 발표되고 나서는 퍼포먼스를 정확히 비교할 수 있게 되었습니다.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://proandroiddev.com/m1-android-dev-benchmark-f658b42dde8f&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Modern MacBook benchmarks for Android development&lt;/a&gt; 블로그에서 실험한 결과를 보면 M1 Max는 기존 i7에 비해 150~200%까지 성능 향상이 있는 것 같네요.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1400/1*ELe-_FwXe2ireXHfBz8UOg.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;자 그럼 제 컴퓨터의 빌드성능을 알아보도록 하겠습니다. 여기서는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/yozhik/AndroidStudioBenchmark&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AndroidStudioBenchmark (Firefox Focus for Android)&lt;/a&gt; 저장소를 사용해서 테스트 해 볼 겁니다.&lt;/p&gt;
+&lt;p&gt;이 저장소는 안드로이드용 Firefox Focus를 빌드하는데 걸리는 시간을 서로 비교해 봄으로써 내 머신의 빌드성능을 가늠할 수 있게 해 줍니다. 다른 사람들이 실행한 벤치마크 결과는 다음 엑셀 파일에서 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.google.com/spreadsheets/d/1AeeT_54b2VnovN4ikIsglh2Sc7U0bWxAarDKmGAJFtg/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://docs.google.com/spreadsheets/d/1AeeT_54b2VnovN4ikIsglh2Sc7U0bWxAarDKmGAJFtg/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;그럼 저장소를 다운받고 빌드를 3회 실행시켜서 걸리는 시간을 체크해 보도록 하겠습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1회 클린 빌드 : 1분 42초&lt;/li&gt;
+&lt;li&gt;2회째 : 36초&lt;/li&gt;
+&lt;li&gt;3회째 : 32초&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;생각보다 빌드시간이 짧게 나왔네요. 안드로이드 스튜디오 버전이 올라가면서 빌드과정을 많이 최적화 한 것 같습니다. M2도 나온 시점이라 저는 내년에 나올 것으로 예상되는 M2 Pro를 기다리고 있습니다만, 과연 어느정도 성능으로 출시될지 기대가 되네요. 요즘 올라가는 환율은 걱정이 되지만요..&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://bunny.jjalbot.com/2019/07/H7pBAZ9_c0/rJJpCye0Y.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Dokka로 프로젝트 문서화하기</title>
         <link>https://cliearl.github.io/posts/android/dokka-example/</link>
         <pubDate>Sun, 11 Sep 2022 09:44:29 +0900</pubDate>
