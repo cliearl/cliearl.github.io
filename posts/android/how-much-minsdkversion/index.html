@@ -3,11 +3,12 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='minSdkVersion 과연 몇으로 해야할지 정해드립니다.
 다음 코드는 build.gradle의 코드 일부입니다. build.gradle의 minsdkversion은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.
-1 2 3 4 5 6 7 8 9 10 11 12 13 android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.0&amp;#34; testInstrumentationRunner &amp;#34;androidx.'><title>2021년 7월 현재, minSdkVersion 몇으로 해야 할까?</title>
+1 2 3 4 5 6 7 8 9 10 11 12 13 android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.0&amp;#34; testInstrumentationRunner &amp;#34;androidx.'>
+<title>2021년 7월 현재, minSdkVersion 몇으로 해야 할까?</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/how-much-minsdkversion/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='2021년 7월 현재, minSdkVersion 몇으로 해야 할까?'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='2021년 7월 현재, minSdkVersion 몇으로 해야 할까?'>
 <meta property='og:description' content='minSdkVersion 과연 몇으로 해야할지 정해드립니다.
 다음 코드는 build.gradle의 코드 일부입니다. build.gradle의 minsdkversion은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.
 1 2 3 4 5 6 7 8 9 10 11 12 13 android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.0&amp;#34; testInstrumentationRunner &amp;#34;androidx.'>
@@ -280,7 +281,50 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#api-버전별-특징">API 버전별 특징</a>
+      <ol>
+        <li><a href="#21-lollipop">21 Lollipop</a></li>
+        <li><a href="#23-marshmallow">23 Marshmallow</a></li>
+        <li><a href="#24-nougat">24 Nougat</a></li>
+        <li><a href="#26-oreo">26 Oreo</a></li>
+      </ol>
+    </li>
+    <li><a href="#사용자-비율">사용자 비율</a></li>
+    <li><a href="#결론">결론</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -320,7 +364,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -340,6 +384,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -705,7 +750,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -789,48 +834,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#api-버전별-특징">API 버전별 특징</a>
-      <ol>
-        <li><a href="#21-lollipop">21 Lollipop</a></li>
-        <li><a href="#23-marshmallow">23 Marshmallow</a></li>
-        <li><a href="#24-nougat">24 Nougat</a></li>
-        <li><a href="#26-oreo">26 Oreo</a></li>
-      </ol>
-    </li>
-    <li><a href="#사용자-비율">사용자 비율</a></li>
-    <li><a href="#결론">결론</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

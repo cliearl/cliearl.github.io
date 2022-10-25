@@ -3,11 +3,12 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 ProgressBar와 AsyncTask의 사용방법에 대해 알아보도록 하겠습니다.
 들어가기 ProgressBar는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황을 보여주는 모듈입니다. 시간이 걸리는 처리가 필요할 때 표시해주면 기다리는 유저의 거부감을 줄일 수 있습니다. 이 기능은 기존에는 ProgressDialog를 이용해서 구현했는데 다이얼로그가 표시될 때 유저의 조작을 제한한다는 문제가 있어 API level 26에서 deprecated 되고 ProgressBar로 대체되었습니다.
-메인 스레드의 관점에서 보면 ProgressBar는 처리에 긴 시간이 걸리기 때문에 메인 스레드와는 별개의 스레드에서 처리를 수행해야 할 필요가 있습니다.'><title>ProgressBar로 AsyncTask 이해하기</title>
+메인 스레드의 관점에서 보면 ProgressBar는 처리에 긴 시간이 걸리기 때문에 메인 스레드와는 별개의 스레드에서 처리를 수행해야 할 필요가 있습니다.'>
+<title>ProgressBar로 AsyncTask 이해하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/progressbar-asynctask/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='ProgressBar로 AsyncTask 이해하기'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='ProgressBar로 AsyncTask 이해하기'>
 <meta property='og:description' content='이번 포스팅에서는 ProgressBar와 AsyncTask의 사용방법에 대해 알아보도록 하겠습니다.
 들어가기 ProgressBar는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황을 보여주는 모듈입니다. 시간이 걸리는 처리가 필요할 때 표시해주면 기다리는 유저의 거부감을 줄일 수 있습니다. 이 기능은 기존에는 ProgressDialog를 이용해서 구현했는데 다이얼로그가 표시될 때 유저의 조작을 제한한다는 문제가 있어 API level 26에서 deprecated 되고 ProgressBar로 대체되었습니다.
 메인 스레드의 관점에서 보면 ProgressBar는 처리에 긴 시간이 걸리기 때문에 메인 스레드와는 별개의 스레드에서 처리를 수행해야 할 필요가 있습니다.'>
@@ -280,7 +281,61 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#들어가기">들어가기</a></li>
+    <li><a href="#asynctask란">AsyncTask란</a>
+      <ol>
+        <li><a href="#asynctask-구조">AsyncTask 구조</a></li>
+        <li><a href="#asynctask의-동작">AsyncTask의 동작</a></li>
+      </ol>
+    </li>
+    <li><a href="#코드-작성">코드 작성</a>
+      <ol>
+        <li><a href="#화면-구성">화면 구성</a></li>
+        <li><a href="#downloadtask-클래스-준비">DownloadTask 클래스 준비</a></li>
+        <li><a href="#액티비티-처리">액티비티 처리</a></li>
+        <li><a href="#작업-중-취소-처리">작업 중 취소 처리</a></li>
+      </ol>
+    </li>
+    <li><a href="#메모리-누수-방어하기">메모리 누수 방어하기</a>
+      <ol>
+        <li><a href="#asynctask의-특징">AsyncTask의 특징</a></li>
+        <li><a href="#weakreference화-하기">Weakreference화 하기</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -320,7 +375,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -340,6 +395,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1030,7 +1086,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1114,59 +1170,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#들어가기">들어가기</a></li>
-    <li><a href="#asynctask란">AsyncTask란</a>
-      <ol>
-        <li><a href="#asynctask-구조">AsyncTask 구조</a></li>
-        <li><a href="#asynctask의-동작">AsyncTask의 동작</a></li>
-      </ol>
-    </li>
-    <li><a href="#코드-작성">코드 작성</a>
-      <ol>
-        <li><a href="#화면-구성">화면 구성</a></li>
-        <li><a href="#downloadtask-클래스-준비">DownloadTask 클래스 준비</a></li>
-        <li><a href="#액티비티-처리">액티비티 처리</a></li>
-        <li><a href="#작업-중-취소-처리">작업 중 취소 처리</a></li>
-      </ol>
-    </li>
-    <li><a href="#메모리-누수-방어하기">메모리 누수 방어하기</a>
-      <ol>
-        <li><a href="#asynctask의-특징">AsyncTask의 특징</a></li>
-        <li><a href="#weakreference화-하기">Weakreference화 하기</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

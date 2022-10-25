@@ -3,11 +3,12 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 코틀린의 코루틴(Coroutine)에 대해 알아보도록 하겠습니다.
 코루틴의 개념 안드로이드에서는 AsyncTask를 이용해서 손쉽게 비동기 프로그래밍을 구현했었지만 구글이 다음과 같이 밝힌 것처럼 메모리 누수등 여러가지 문제가 있었습니다. 그래서 API 30부터는 AsyncTask를 deprecate 시키고 코루틴을 사용하도록 권장하고 있습니다.
-AsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes.'><title>알기쉬운 코루틴 이론</title>
+AsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes.'>
+<title>알기쉬운 코루틴 이론</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/coroutine-principle/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='알기쉬운 코루틴 이론'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='알기쉬운 코루틴 이론'>
 <meta property='og:description' content='이번 포스팅에서는 코틀린의 코루틴(Coroutine)에 대해 알아보도록 하겠습니다.
 코루틴의 개념 안드로이드에서는 AsyncTask를 이용해서 손쉽게 비동기 프로그래밍을 구현했었지만 구글이 다음과 같이 밝힌 것처럼 메모리 누수등 여러가지 문제가 있었습니다. 그래서 API 30부터는 AsyncTask를 deprecate 시키고 코루틴을 사용하도록 권장하고 있습니다.
 AsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes.'>
@@ -280,7 +281,70 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#코루틴의-개념">코루틴의 개념</a></li>
+    <li><a href="#코루틴과-스레드">코루틴과 스레드</a>
+      <ol>
+        <li><a href="#메모리-구조의-차이">메모리 구조의 차이</a></li>
+        <li><a href="#수행방식의-차이">수행방식의 차이</a></li>
+        <li><a href="#코루틴의-장점">코루틴의 장점</a></li>
+        <li><a href="#코틀린에서의-사용">코틀린에서의 사용</a></li>
+      </ol>
+    </li>
+    <li><a href="#코루틴-구조">코루틴 구조</a>
+      <ol>
+        <li><a href="#coroutine-scope">Coroutine Scope</a>
+          <ol>
+            <li><a href="#coroutinescope">CoroutineScope</a></li>
+            <li><a href="#globalscope">GlobalScope</a></li>
+          </ol>
+        </li>
+        <li><a href="#coroutine-context">Coroutine Context</a>
+          <ol>
+            <li><a href="#dispatchers">Dispatchers</a></li>
+            <li><a href="#job--deferred">Job &amp; Deferred</a></li>
+          </ol>
+        </li>
+        <li><a href="#coroutine-builder">Coroutine Builder</a></li>
+      </ol>
+    </li>
+    <li><a href="#코루틴-지연">코루틴 지연</a></li>
+    <li><a href="#코루틴-취소">코루틴 취소</a></li>
+    <li><a href="#예외-처리">예외 처리</a></li>
+    <li><a href="#코루틴-사용">코루틴 사용</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -320,7 +384,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -340,6 +404,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -809,7 +874,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -893,68 +958,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#코루틴의-개념">코루틴의 개념</a></li>
-    <li><a href="#코루틴과-스레드">코루틴과 스레드</a>
-      <ol>
-        <li><a href="#메모리-구조의-차이">메모리 구조의 차이</a></li>
-        <li><a href="#수행방식의-차이">수행방식의 차이</a></li>
-        <li><a href="#코루틴의-장점">코루틴의 장점</a></li>
-        <li><a href="#코틀린에서의-사용">코틀린에서의 사용</a></li>
-      </ol>
-    </li>
-    <li><a href="#코루틴-구조">코루틴 구조</a>
-      <ol>
-        <li><a href="#coroutine-scope">Coroutine Scope</a>
-          <ol>
-            <li><a href="#coroutinescope">CoroutineScope</a></li>
-            <li><a href="#globalscope">GlobalScope</a></li>
-          </ol>
-        </li>
-        <li><a href="#coroutine-context">Coroutine Context</a>
-          <ol>
-            <li><a href="#dispatchers">Dispatchers</a></li>
-            <li><a href="#job--deferred">Job &amp; Deferred</a></li>
-          </ol>
-        </li>
-        <li><a href="#coroutine-builder">Coroutine Builder</a></li>
-      </ol>
-    </li>
-    <li><a href="#코루틴-지연">코루틴 지연</a></li>
-    <li><a href="#코루틴-취소">코루틴 취소</a></li>
-    <li><a href="#예외-처리">예외 처리</a></li>
-    <li><a href="#코루틴-사용">코루틴 사용</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

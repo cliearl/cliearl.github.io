@@ -3,11 +3,12 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다.
 구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 소개했고 유튜브에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다.
-최신버전의 Gradle 사용 우선은 최신버전의 Gradle을 사용하는게 중요합니다. 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다. 버전내역을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.'><title>앱 빌드속도 빠르게 하기</title>
+최신버전의 Gradle 사용 우선은 최신버전의 Gradle을 사용하는게 중요합니다. 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다. 버전내역을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.'>
+<title>앱 빌드속도 빠르게 하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/fast-build/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='앱 빌드속도 빠르게 하기'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='앱 빌드속도 빠르게 하기'>
 <meta property='og:description' content='이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다.
 구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 소개했고 유튜브에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다.
 최신버전의 Gradle 사용 우선은 최신버전의 Gradle을 사용하는게 중요합니다. 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다. 버전내역을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.'>
@@ -280,7 +281,54 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#최신버전의-gradle-사용">최신버전의 Gradle 사용</a></li>
+    <li><a href="#개발시-서로-다른-빌드세팅-사용">개발시 서로 다른 빌드세팅 사용</a></li>
+    <li><a href="#multidex-사용하지-않음">multidex 사용하지 않음</a>
+      <ol>
+        <li><a href="#dalvik-vm">Dalvik VM</a></li>
+        <li><a href="#android-runtimeart-vm">Android RunTime(ART) VM</a></li>
+      </ol>
+    </li>
+    <li><a href="#복수의-apk-생성기능-비활성화">복수의 APK 생성기능 비활성화</a></li>
+    <li><a href="#패키징-리소스-최소화">패키징 리소스 최소화</a></li>
+    <li><a href="#png-크런칭-비활성화">PNG 크런칭 비활성화</a></li>
+    <li><a href="#필요없는-변경하지-않기">필요없는 변경하지 않기</a></li>
+    <li><a href="#오류리포팅-기능-사용안함">오류리포팅 기능 사용안함</a></li>
+    <li><a href="#라이브러리-버전">라이브러리 버전</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -320,7 +368,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -340,6 +388,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -715,7 +764,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -799,52 +848,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#최신버전의-gradle-사용">최신버전의 Gradle 사용</a></li>
-    <li><a href="#개발시-서로-다른-빌드세팅-사용">개발시 서로 다른 빌드세팅 사용</a></li>
-    <li><a href="#multidex-사용하지-않음">multidex 사용하지 않음</a>
-      <ol>
-        <li><a href="#dalvik-vm">Dalvik VM</a></li>
-        <li><a href="#android-runtimeart-vm">Android RunTime(ART) VM</a></li>
-      </ol>
-    </li>
-    <li><a href="#복수의-apk-생성기능-비활성화">복수의 APK 생성기능 비활성화</a></li>
-    <li><a href="#패키징-리소스-최소화">패키징 리소스 최소화</a></li>
-    <li><a href="#png-크런칭-비활성화">PNG 크런칭 비활성화</a></li>
-    <li><a href="#필요없는-변경하지-않기">필요없는 변경하지 않기</a></li>
-    <li><a href="#오류리포팅-기능-사용안함">오류리포팅 기능 사용안함</a></li>
-    <li><a href="#라이브러리-버전">라이브러리 버전</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

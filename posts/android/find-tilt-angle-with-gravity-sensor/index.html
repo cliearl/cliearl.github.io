@@ -4,11 +4,12 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 기기의 수평도를 확인하는 법에 대해 알아보도록 하겠습니다.
 좌표계와 기울기에 대한 이해 안드로이드 시스템의 좌표계는 다음과 같이 구성됩니다.
 출처 : https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate
-기기가 세워진 상태로 정지하고 있을 때 가속도 센서로 각 축에 걸리는 가속도를 측정하면 x, z 축에서는 0, 그리고 y 축에는 9.8 m/s^2 값이 확인됩니다. y축의 -방향으로 9.8 m/s^2의 중력이 걸리고 있으므로 기기는 &#43;방향으로 9.8 m/s^2 만큼 가속되는 것이기 때문입니다. 같은 이유로 기기를 책상에 눕혀놓으면 축이 바뀌면서 x, y 축에는 0, 그리고 z 축에는 &#43;9.'><title>중력센서를 사용해 기기의 기울기 각도 확인하기</title>
+기기가 세워진 상태로 정지하고 있을 때 가속도 센서로 각 축에 걸리는 가속도를 측정하면 x, z 축에서는 0, 그리고 y 축에는 9.8 m/s^2 값이 확인됩니다. y축의 -방향으로 9.8 m/s^2의 중력이 걸리고 있으므로 기기는 &#43;방향으로 9.8 m/s^2 만큼 가속되는 것이기 때문입니다. 같은 이유로 기기를 책상에 눕혀놓으면 축이 바뀌면서 x, y 축에는 0, 그리고 z 축에는 &#43;9.'>
+<title>중력센서를 사용해 기기의 기울기 각도 확인하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/find-tilt-angle-with-gravity-sensor/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='중력센서를 사용해 기기의 기울기 각도 확인하기'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='중력센서를 사용해 기기의 기울기 각도 확인하기'>
 <meta property='og:description' content='이번 포스팅에서는 기기의 수평도를 확인하는 법에 대해 알아보도록 하겠습니다.
 좌표계와 기울기에 대한 이해 안드로이드 시스템의 좌표계는 다음과 같이 구성됩니다.
 출처 : https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate
@@ -283,7 +284,42 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#좌표계와-기울기에-대한-이해">좌표계와 기울기에 대한 이해</a></li>
+    <li><a href="#수평계-구현">수평계 구현</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -323,7 +359,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -343,6 +379,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -712,7 +749,7 @@ $$</p>
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -796,40 +833,6 @@ $$</p>
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#좌표계와-기울기에-대한-이해">좌표계와 기울기에 대한 이해</a></li>
-    <li><a href="#수평계-구현">수평계 구현</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

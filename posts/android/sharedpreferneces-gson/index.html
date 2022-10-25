@@ -4,11 +4,12 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.
 SharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.
 이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 Gson이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.
-여기서는 Data class 이해하고 RecyclerView에서 사용하기 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.'><title>SharedPreferences를 json 포맷으로 관리하기</title>
+여기서는 Data class 이해하고 RecyclerView에서 사용하기 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.'>
+<title>SharedPreferences를 json 포맷으로 관리하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/sharedpreferneces-gson/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='SharedPreferences를 json 포맷으로 관리하기'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='SharedPreferences를 json 포맷으로 관리하기'>
 <meta property='og:description' content='이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.
 SharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.
 이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 Gson이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.
@@ -283,7 +284,46 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#라이브러리-추가">라이브러리 추가</a></li>
+    <li><a href="#화면-구성">화면 구성</a></li>
+    <li><a href="#key-준비">Key 준비</a></li>
+    <li><a href="#savepref-작성">savePref() 작성</a></li>
+    <li><a href="#loadpref-함수-작성">loadPref() 함수 작성</a></li>
+    <li><a href="#함수-실행">함수 실행</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -323,7 +363,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -343,6 +383,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -738,7 +779,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -822,44 +863,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#라이브러리-추가">라이브러리 추가</a></li>
-    <li><a href="#화면-구성">화면 구성</a></li>
-    <li><a href="#key-준비">Key 준비</a></li>
-    <li><a href="#savepref-작성">savePref() 작성</a></li>
-    <li><a href="#loadpref-함수-작성">loadPref() 함수 작성</a></li>
-    <li><a href="#함수-실행">함수 실행</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

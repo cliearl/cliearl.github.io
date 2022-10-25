@@ -3,11 +3,12 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 두 파트에 걸쳐 안드로이드에서 SQLite를 다루는 법에 대해 알아보도록 하겠습니다.
 Part A. 데이터베이스 관계형 데이터베이스 여러 사람들의 연락처 데이터는 다음과 같이 테이블 구조로 관리할 수 있습니다. 이런 식으로 통일된 규칙의 데이터를 관리할 수 있는 테이블을 데이터베이스라고 합니다.
-순서 이름 전화번호 이메일 주소 0 김철수 010-1111-1111 kim@abc.com 서울 1 이영희 010-2222-2222 lee@abc.com 서울 2 박모모 010-3333-3333 park@abc.com 인천 이 때 1행 2열의 이름을 Key라고 하고 2행 2열의 김철수를 Value라고 합니다.'><title>SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기</title>
+순서 이름 전화번호 이메일 주소 0 김철수 010-1111-1111 kim@abc.com 서울 1 이영희 010-2222-2222 lee@abc.com 서울 2 박모모 010-3333-3333 park@abc.com 인천 이 때 1행 2열의 이름을 Key라고 하고 2행 2열의 김철수를 Value라고 합니다.'>
+<title>SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/implement-crud-with-sqliteopenhelper/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기'>
 <meta property='og:description' content='이번 포스팅에서는 두 파트에 걸쳐 안드로이드에서 SQLite를 다루는 법에 대해 알아보도록 하겠습니다.
 Part A. 데이터베이스 관계형 데이터베이스 여러 사람들의 연락처 데이터는 다음과 같이 테이블 구조로 관리할 수 있습니다. 이런 식으로 통일된 규칙의 데이터를 관리할 수 있는 테이블을 데이터베이스라고 합니다.
 순서 이름 전화번호 이메일 주소 0 김철수 010-1111-1111 kim@abc.com 서울 1 이영희 010-2222-2222 lee@abc.com 서울 2 박모모 010-3333-3333 park@abc.com 인천 이 때 1행 2열의 이름을 Key라고 하고 2행 2열의 김철수를 Value라고 합니다.'>
@@ -280,7 +281,70 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#part-a-데이터베이스">Part A. 데이터베이스</a>
+      <ol>
+        <li><a href="#관계형-데이터베이스">관계형 데이터베이스</a></li>
+        <li><a href="#sql과-crud">SQL과 CRUD</a></li>
+        <li><a href="#database-management-system">DataBase Management System</a></li>
+        <li><a href="#sqlite란">SQLite란</a></li>
+        <li><a href="#안드로이드의-sqlite-버전">안드로이드의 SQLite 버전</a></li>
+        <li><a href="#안드로이드에서의-sqlite-사용">안드로이드에서의 SQLite 사용</a></li>
+      </ol>
+    </li>
+    <li><a href="#part-b-샘플-앱-작성">Part B. 샘플 앱 작성</a>
+      <ol>
+        <li><a href="#메인-레이아웃">메인 레이아웃</a></li>
+        <li><a href="#databasehelper-작성">DatabaseHelper 작성</a></li>
+        <li><a href="#oncreate-구현">onCreate 구현</a></li>
+        <li><a href="#onupgrade-구현">onUpgrade 구현</a></li>
+        <li><a href="#crud-구현">CRUD 구현</a>
+          <ol>
+            <li><a href="#create">Create</a></li>
+            <li><a href="#update">Update</a></li>
+            <li><a href="#delete">Delete</a></li>
+            <li><a href="#read">Read</a></li>
+          </ol>
+        </li>
+        <li><a href="#mainactivity-준비">MainActivity 준비</a></li>
+        <li><a href="#유틸-메소드-준비">유틸 메소드 준비</a></li>
+        <li><a href="#버튼기능-정의">버튼기능 정의</a></li>
+        <li><a href="#oncreate-정의">onCreate 정의</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -320,7 +384,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -340,6 +404,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1576,7 +1641,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1660,68 +1725,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#part-a-데이터베이스">Part A. 데이터베이스</a>
-      <ol>
-        <li><a href="#관계형-데이터베이스">관계형 데이터베이스</a></li>
-        <li><a href="#sql과-crud">SQL과 CRUD</a></li>
-        <li><a href="#database-management-system">DataBase Management System</a></li>
-        <li><a href="#sqlite란">SQLite란</a></li>
-        <li><a href="#안드로이드의-sqlite-버전">안드로이드의 SQLite 버전</a></li>
-        <li><a href="#안드로이드에서의-sqlite-사용">안드로이드에서의 SQLite 사용</a></li>
-      </ol>
-    </li>
-    <li><a href="#part-b-샘플-앱-작성">Part B. 샘플 앱 작성</a>
-      <ol>
-        <li><a href="#메인-레이아웃">메인 레이아웃</a></li>
-        <li><a href="#databasehelper-작성">DatabaseHelper 작성</a></li>
-        <li><a href="#oncreate-구현">onCreate 구현</a></li>
-        <li><a href="#onupgrade-구현">onUpgrade 구현</a></li>
-        <li><a href="#crud-구현">CRUD 구현</a>
-          <ol>
-            <li><a href="#create">Create</a></li>
-            <li><a href="#update">Update</a></li>
-            <li><a href="#delete">Delete</a></li>
-            <li><a href="#read">Read</a></li>
-          </ol>
-        </li>
-        <li><a href="#mainactivity-준비">MainActivity 준비</a></li>
-        <li><a href="#유틸-메소드-준비">유틸 메소드 준비</a></li>
-        <li><a href="#버튼기능-정의">버튼기능 정의</a></li>
-        <li><a href="#oncreate-정의">onCreate 정의</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

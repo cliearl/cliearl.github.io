@@ -3,11 +3,12 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 ViewPager를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다.
 ViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다.
-화면 구성 우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다.'><title>ViewPager를 써서 좌우로 스와이프되는 화면 만들기</title>
+화면 구성 우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다.'>
+<title>ViewPager를 써서 좌우로 스와이프되는 화면 만들기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewpager-swipe/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='ViewPager를 써서 좌우로 스와이프되는 화면 만들기'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='ViewPager를 써서 좌우로 스와이프되는 화면 만들기'>
 <meta property='og:description' content='이번 포스팅에서는 ViewPager를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다.
 ViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다.
 화면 구성 우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다.'>
@@ -280,7 +281,43 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#화면-구성">화면 구성</a></li>
+    <li><a href="#프래그먼트-작성">프래그먼트 작성</a></li>
+    <li><a href="#viewpager-어댑터-작성-및-연결">ViewPager 어댑터 작성 및 연결</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -320,7 +357,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -340,6 +377,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -895,7 +933,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -979,41 +1017,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#화면-구성">화면 구성</a></li>
-    <li><a href="#프래그먼트-작성">프래그먼트 작성</a></li>
-    <li><a href="#viewpager-어댑터-작성-및-연결">ViewPager 어댑터 작성 및 연결</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

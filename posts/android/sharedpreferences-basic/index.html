@@ -3,11 +3,12 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다.
 데이터를 앱에 저장하는 방법 데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다.
-파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다.'><title>SharedPreferences로 앱 설정값 저장하고 불러오기</title>
+파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다.'>
+<title>SharedPreferences로 앱 설정값 저장하고 불러오기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/sharedpreferences-basic/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='SharedPreferences로 앱 설정값 저장하고 불러오기'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='SharedPreferences로 앱 설정값 저장하고 불러오기'>
 <meta property='og:description' content='이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다.
 데이터를 앱에 저장하는 방법 데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다.
 파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다.'>
@@ -280,7 +281,47 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#데이터를-앱에-저장하는-방법">데이터를 앱에 저장하는 방법</a></li>
+    <li><a href="#sharedpreferences-사용법">SharedPreferences 사용법</a></li>
+    <li><a href="#화면-구성">화면 구성</a></li>
+    <li><a href="#버튼에-클릭리스너-설정">버튼에 클릭리스너 설정</a></li>
+    <li><a href="#접근키-작성">접근키 작성</a></li>
+    <li><a href="#savepref-작성">savePref 작성</a></li>
+    <li><a href="#loadpref-작성">loadPref() 작성</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -320,7 +361,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -340,6 +381,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -1098,7 +1140,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1182,45 +1224,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#데이터를-앱에-저장하는-방법">데이터를 앱에 저장하는 방법</a></li>
-    <li><a href="#sharedpreferences-사용법">SharedPreferences 사용법</a></li>
-    <li><a href="#화면-구성">화면 구성</a></li>
-    <li><a href="#버튼에-클릭리스너-설정">버튼에 클릭리스너 설정</a></li>
-    <li><a href="#접근키-작성">접근키 작성</a></li>
-    <li><a href="#savepref-작성">savePref 작성</a></li>
-    <li><a href="#loadpref-작성">loadPref() 작성</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

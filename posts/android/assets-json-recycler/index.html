@@ -4,11 +4,12 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.
 안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.
 assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다.
-값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.'><title>Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기</title>
+값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.'>
+<title>Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/assets-json-recycler/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기'>
 <meta property='og:description' content='이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.
 안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.
 assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다.
@@ -283,7 +284,49 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#안드로이드의-읽기전용-파일-저장폴더">안드로이드의 읽기전용 파일 저장폴더</a></li>
+    <li><a href="#앱-만들어보기">앱 만들어보기</a>
+      <ol>
+        <li><a href="#데이터-준비">데이터 준비</a></li>
+        <li><a href="#데이터클래스-준비">데이터클래스 준비</a></li>
+        <li><a href="#recyclerview-구축하기">Recyclerview 구축하기</a></li>
+        <li><a href="#assets-폴더속-파일-불러오기">assets 폴더속 파일 불러오기</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -323,7 +366,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -343,6 +386,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -917,7 +961,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1001,47 +1045,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#안드로이드의-읽기전용-파일-저장폴더">안드로이드의 읽기전용 파일 저장폴더</a></li>
-    <li><a href="#앱-만들어보기">앱 만들어보기</a>
-      <ol>
-        <li><a href="#데이터-준비">데이터 준비</a></li>
-        <li><a href="#데이터클래스-준비">데이터클래스 준비</a></li>
-        <li><a href="#recyclerview-구축하기">Recyclerview 구축하기</a></li>
-        <li><a href="#assets-폴더속-파일-불러오기">assets 폴더속 파일 불러오기</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"

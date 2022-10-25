@@ -4,11 +4,12 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.
 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.
 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.
-그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &amp;ldquo;회차&amp;quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.'><title>코루틴으로 로또번호 당첨 확인하기</title>
+그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &amp;ldquo;회차&amp;quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.'>
+<title>코루틴으로 로또번호 당첨 확인하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/lotto-checker/'>
 
-<link rel="stylesheet" href="/scss/style.min.18145888f21de6cb02d8cb0891be8240096206785da14eda35f6c23c239b966a.css"><meta property='og:title' content='코루틴으로 로또번호 당첨 확인하기'>
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='코루틴으로 로또번호 당첨 확인하기'>
 <meta property='og:description' content='이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.
 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.
 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.
@@ -283,7 +284,46 @@ if (!doNotTrack) {
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#당첨번호-조회하기">당첨번호 조회하기</a></li>
+    <li><a href="#dependency-확인">Dependency 확인</a></li>
+    <li><a href="#네트워크로-당첨번호-받아오기">네트워크로 당첨번호 받아오기</a></li>
+    <li><a href="#내-번호와-당첨번호-비교하기">내 번호와 당첨번호 비교하기</a></li>
+    <li><a href="#코루틴으로-작업-처리하기">코루틴으로 작업 처리하기</a></li>
+    <li><a href="#코루틴-취소하기">코루틴 취소하기</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -323,7 +363,7 @@ if (!doNotTrack) {
             </div>
         
 
-        
+    
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -343,6 +383,7 @@ if (!doNotTrack) {
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -883,7 +924,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.14.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -967,44 +1008,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#당첨번호-조회하기">당첨번호 조회하기</a></li>
-    <li><a href="#dependency-확인">Dependency 확인</a></li>
-    <li><a href="#네트워크로-당첨번호-받아오기">네트워크로 당첨번호 받아오기</a></li>
-    <li><a href="#내-번호와-당첨번호-비교하기">내 번호와 당첨번호 비교하기</a></li>
-    <li><a href="#코루틴으로-작업-처리하기">코루틴으로 작업 처리하기</a></li>
-    <li><a href="#코루틴-취소하기">코루틴 취소하기</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
