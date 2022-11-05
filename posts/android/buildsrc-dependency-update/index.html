@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 영상에서는 buildSrc가 적용된 Gradle에서 디펜던시 버전을 체크하는 방법에 대해 알아보도록 하겠습니다.
+안드로이드 스튜디오는 프로젝트의 디펜던시에 대해 다음 린트를 실행시키기 때문에 새 버전이 있을 경우 자동으로 알림을 받을 수 있지만, dependency 추가에 buildSrc를 적용하면 이 린트 기능을 활용할 수 없게 됩니다.
+1 Editor &amp;gt; Inspections &amp;gt; Android &amp;gt; Lint &amp;gt; Correctness &amp;gt; Newer Library Versions Available 이런 문제를 해결하기 위해서 여기서는 IDE의 기능에 관계없이 디펜던시 버전을 체크해주는 Gradle Versions Plugin을 사용하는 방법에 대해 알아보도록 하겠습니다.'>
+<title>buildSrc를 적용한 Gradle의 Dependency Update하기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/buildsrc-dependency-update/'>
+
+<link rel="stylesheet" href="/scss/style.min.3b122f5b6a7023e613be9affad843eaceacf4a3383edd177ce41e35501998968.css"><meta property='og:title' content='buildSrc를 적용한 Gradle의 Dependency Update하기'>
+<meta property='og:description' content='이번 영상에서는 buildSrc가 적용된 Gradle에서 디펜던시 버전을 체크하는 방법에 대해 알아보도록 하겠습니다.
+안드로이드 스튜디오는 프로젝트의 디펜던시에 대해 다음 린트를 실행시키기 때문에 새 버전이 있을 경우 자동으로 알림을 받을 수 있지만, dependency 추가에 buildSrc를 적용하면 이 린트 기능을 활용할 수 없게 됩니다.
+1 Editor &amp;gt; Inspections &amp;gt; Android &amp;gt; Lint &amp;gt; Correctness &amp;gt; Newer Library Versions Available 이런 문제를 해결하기 위해서 여기서는 IDE의 기능에 관계없이 디펜던시 버전을 체크해주는 Gradle Versions Plugin을 사용하는 방법에 대해 알아보도록 하겠습니다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/buildsrc-dependency-update/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='buildSrc' /><meta property='article:tag' content='gradle' /><meta property='article:published_time' content='2022-11-05T22:06:34&#43;09:00'/><meta property='article:modified_time' content='2022-11-05T22:06:34&#43;09:00'/>
+<meta name="twitter:title" content="buildSrc를 적용한 Gradle의 Dependency Update하기">
+<meta name="twitter:description" content="이번 영상에서는 buildSrc가 적용된 Gradle에서 디펜던시 버전을 체크하는 방법에 대해 알아보도록 하겠습니다.
+안드로이드 스튜디오는 프로젝트의 디펜던시에 대해 다음 린트를 실행시키기 때문에 새 버전이 있을 경우 자동으로 알림을 받을 수 있지만, dependency 추가에 buildSrc를 적용하면 이 린트 기능을 활용할 수 없게 됩니다.
+1 Editor &amp;gt; Inspections &amp;gt; Android &amp;gt; Lint &amp;gt; Correctness &amp;gt; Newer Library Versions Available 이런 문제를 해결하기 위해서 여기서는 IDE의 기능에 관계없이 디펜던시 버전을 체크해주는 Gradle Versions Plugin을 사용하는 방법에 대해 알아보도록 하겠습니다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
+            <h2 class="site-description">@Andromeda Galaxy</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/cliearl'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/coder_frozen'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.youtube.com/channel/UC6V7LBEgcoTZUUgUU0Jv3xg'
+                        target="_blank"
+                        title="Youtube"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="4" />
+  <path d="M10 9l5 3l-5 3z" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/page/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/android/buildsrc-dependency-update/">buildSrc를 적용한 Gradle의 Dependency Update하기</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 05, 2022</time>
+            </div>
+        
+
+    
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 영상에서는 buildSrc가 적용된 Gradle에서 디펜던시 버전을 체크하는 방법에 대해 알아보도록 하겠습니다.</p>
+<p>안드로이드 스튜디오는 프로젝트의 디펜던시에 대해 다음 린트를 실행시키기 때문에 새 버전이 있을 경우 자동으로 알림을 받을 수 있지만, dependency 추가에 buildSrc를 적용하면 이 린트 기능을 활용할 수 없게 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Editor &gt; Inspections &gt; Android &gt; Lint &gt; Correctness &gt; Newer Library Versions Available
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이런 문제를 해결하기 위해서 여기서는 IDE의 기능에 관계없이 디펜던시 버전을 체크해주는 <a class="link" href="https://github.com/ben-manes/gradle-versions-plugin"  target="_blank" rel="noopener"
+    >Gradle Versions Plugin</a>을 사용하는 방법에 대해 알아보도록 하겠습니다.</p>
+<p>여기서는 저의 <a class="link" href="https://www.inflearn.com/course/%EC%95%8C%EA%B8%B0%EC%89%AC%EC%9A%B4-modern-android"  target="_blank" rel="noopener"
+    >Modern Android Development 인프런 강의</a>에서 만들어 본 <a class="link" href="https://github.com/cliearl/book-search-app"  target="_blank" rel="noopener"
+    >BookSearchApp</a>에 기능을 적용해 보도록 하겠습니다. 우선은 프로젝트 레벨의 <code>build.gradle</code>에 플러그인을 추가합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">plugins</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span><span class="p">(</span><span class="s2">&#34;com.github.ben-manes.versions&#34;</span><span class="p">)</span> <span class="n">version</span> <span class="s2">&#34;0.43.0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 네트워크에서 아티팩트 정보를 받아온 뒤 안정버전인지 여부를 판정하는 함수를 추가합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">isNonStable</span><span class="p">(</span><span class="n">version</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">stableKeyword</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;RELEASE&#34;</span><span class="p">,</span> <span class="s2">&#34;FINAL&#34;</span><span class="p">,</span> <span class="s2">&#34;GA&#34;</span><span class="p">).</span><span class="n">any</span> <span class="p">{</span> <span class="n">version</span><span class="p">.</span><span class="n">toUpperCase</span><span class="p">().</span><span class="n">contains</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">regex</span> <span class="p">=</span> <span class="s2">&#34;^[0-9,.v-]+(-r)?$&#34;</span><span class="p">.</span><span class="n">toRegex</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">isStable</span> <span class="p">=</span> <span class="n">stableKeyword</span> <span class="o">||</span> <span class="n">regex</span><span class="p">.</span><span class="n">matches</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">isStable</span><span class="p">.</span><span class="n">not</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 디펜던시 버전을 체크하는 태스크를 정의합니다. 제한사항을 <code>rejectVersionIf</code>로 간편하게 정의할 수도 있고 full syntax를 써서 정의할 수도 있습니다. 또한 옵션을 정의할 수도 있는데요, 각 프로퍼티의 기능은 이름을 보면 잘 알 수 있게 되어 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">import</span> <span class="nn">com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tasks</span><span class="p">.</span><span class="n">named</span><span class="p">&lt;</span><span class="n">DependencyUpdatesTask</span><span class="p">&gt;(</span><span class="s2">&#34;dependencyUpdates&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">configure</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// isStable에 해당되지 않는 모든 버전을 거부
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">rejectVersionIf</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">isNonStable</span><span class="p">(</span><span class="n">candidate</span><span class="p">.</span><span class="n">version</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// optional parameters
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">checkForGradleUpdate</span> <span class="p">=</span> <span class="k">true</span>
+</span></span><span class="line"><span class="cl">        <span class="n">outputFormatter</span> <span class="p">=</span> <span class="s2">&#34;json&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">outputDir</span> <span class="p">=</span> <span class="s2">&#34;build/dependencyUpdates&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">reportfileName</span> <span class="p">=</span> <span class="s2">&#34;report&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>그리고나서 <code>dependencyUpdate</code>를 실행시키면 콘솔 화면에 체크 결과가 출력되고, 옵션에 설정된 json 파일도 생성되는 것을 확인할 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="go">./gradlew dependencyUpdate
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>인프런 강의에서 만들어 본 <a class="link" href="https://github.com/cliearl/book-search-app"  target="_blank" rel="noopener"
+    >BookSearchApp</a>의 디펜던시를 체크한 결과는 다음과 같습니다. 프로젝트가 마무리 된 2022년 4월 이후로 많은 업데이트가 있었던 것을 확인할 수 있네요. 나머지는 업데이트가 필요한 디펜던시를 찾아 버전을 올리면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="go">------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="go">: Project Dependency Updates (report to plain text file)
+</span></span></span><span class="line"><span class="cl"><span class="go">------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="go">The following dependencies are using the latest milestone version:
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.datastore:datastore-preferences:1.0.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.hilt:hilt-compiler:1.0.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.hilt:hilt-work:1.0.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.paging:paging-runtime-ktx:3.1.1
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.recyclerview:recyclerview:1.2.1
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.test:core:1.4.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.test:runner:1.4.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.test.espresso:espresso-contrib:3.4.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.test.espresso:espresso-core:3.4.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.test.ext:junit:1.1.3
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.test.ext:truth:1.4.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.work:work-runtime-ktx:2.7.1
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.google.android.libraries.mapsplatform.secrets-gradle-plugin:com.google.android.libraries.mapsplatform.secrets-gradle-plugin.gradle.plugin:2.0.1
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.squareup.retrofit2:converter-moshi:2.9.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.squareup.retrofit2:retrofit:2.9.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - junit:junit:4.13.2
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.hamcrest:hamcrest:2.2
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="go">The following dependencies have later milestone versions:
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.activity:activity-ktx [1.4.0 -&gt; 1.6.1]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/activity#1.6.1
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.appcompat:appcompat [1.4.1 -&gt; 1.5.1]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/appcompat#1.5.1
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.constraintlayout:constraintlayout [2.1.3 -&gt; 2.1.4]
+</span></span></span><span class="line"><span class="cl"><span class="go">     http://tools.android.com
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.core:core-ktx [1.7.0 -&gt; 1.9.0]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/core#1.9.0
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.databinding:viewbinding [7.1.3 -&gt; 7.3.1]
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.fragment:fragment-ktx [1.4.1 -&gt; 1.5.4]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/fragment#1.5.4
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.lifecycle:lifecycle-runtime-ktx [2.4.1 -&gt; 2.5.1]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/lifecycle#2.5.1
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.lifecycle:lifecycle-viewmodel-ktx [2.4.1 -&gt; 2.5.1]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/lifecycle#2.5.1
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.lifecycle:lifecycle-viewmodel-savedstate [2.4.1 -&gt; 2.5.1]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/lifecycle#2.5.1
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.navigation:navigation-fragment-ktx [2.4.1 -&gt; 2.5.3]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/navigation#2.5.3
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.navigation:navigation-ui-ktx [2.4.1 -&gt; 2.5.3]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/navigation#2.5.3
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.navigation.safeargs.kotlin:androidx.navigation.safeargs.kotlin.gradle.plugin [2.4.1 -&gt; 2.5.3]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/navigation#2.5.3
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.room:room-compiler [2.4.2 -&gt; 2.4.3]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/room#2.4.3
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.room:room-ktx [2.4.2 -&gt; 2.4.3]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/room#2.4.3
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.room:room-paging [2.4.2 -&gt; 2.4.3]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/room#2.4.3
+</span></span></span><span class="line"><span class="cl"><span class="go"> - androidx.room:room-runtime [2.4.2 -&gt; 2.4.3]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/jetpack/androidx/releases/room#2.4.3
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.android.application:com.android.application.gradle.plugin [7.1.3 -&gt; 7.3.1]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/studio/build
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.android.library:com.android.library.gradle.plugin [7.1.3 -&gt; 7.3.1]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://developer.android.com/studio/build
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.google.android.material:material [1.5.0 -&gt; 1.7.0]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/material-components/material-components-android
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.google.dagger:hilt-android [2.41 -&gt; 2.44]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/google/dagger
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.google.dagger:hilt-android-compiler [2.41 -&gt; 2.44]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/google/dagger
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.google.dagger:hilt-android-testing [2.41 -&gt; 2.44]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/google/dagger
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.google.dagger:hilt-compiler [2.41 -&gt; 2.44]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/google/dagger
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.google.dagger.hilt.android:com.google.dagger.hilt.android.gradle.plugin [2.41 -&gt; 2.44]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/google/dagger
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.squareup.moshi:moshi [1.13.0 -&gt; 1.14.0]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/square/moshi/
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.squareup.moshi:moshi-kotlin-codegen [1.13.0 -&gt; 1.14.0]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/square/moshi/
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.squareup.okhttp3:logging-interceptor [4.9.3 -&gt; 4.10.0]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://square.github.io/okhttp/
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.squareup.okhttp3:okhttp [4.9.3 -&gt; 4.10.0]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://square.github.io/okhttp/
+</span></span></span><span class="line"><span class="cl"><span class="go"> - io.coil-kt:coil [1.4.0 -&gt; 2.2.2]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/coil-kt/coil
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jacoco:org.jacoco.ant [0.8.3 -&gt; 0.8.8]
+</span></span></span><span class="line"><span class="cl"><span class="go">     http://jacoco.org
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlin:kotlin-annotation-processing-gradle [1.6.10 -&gt; 1.7.20]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://kotlinlang.org/
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlin:kotlin-parcelize-compiler [1.6.10 -&gt; 1.7.20]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://kotlinlang.org/
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlin:kotlin-parcelize-runtime [1.6.10 -&gt; 1.7.20]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://kotlinlang.org/
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlin:kotlin-stdlib [1.6.10 -&gt; 1.7.20]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://kotlinlang.org/
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlin.plugin.serialization:org.jetbrains.kotlin.plugin.serialization.gradle.plugin [1.6.10 -&gt; 1.7.20]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://kotlinlang.org/
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlinx:kotlinx-coroutines-android [1.6.0 -&gt; 1.6.4]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/Kotlin/kotlinx.coroutines
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlinx:kotlinx-coroutines-core [1.6.0 -&gt; 1.6.4]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/Kotlin/kotlinx.coroutines
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlinx:kotlinx-coroutines-test [1.6.2 -&gt; 1.6.4]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/Kotlin/kotlinx.coroutines
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlinx:kotlinx-serialization-json [1.3.2 -&gt; 1.4.1]
+</span></span></span><span class="line"><span class="cl"><span class="go">     https://github.com/Kotlin/kotlinx.serialization
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.robolectric:robolectric [4.8.1 -&gt; 4.9]
+</span></span></span><span class="line"><span class="cl"><span class="go">     http://robolectric.org
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="go">Failed to determine the latest version for the following dependencies (use --info for details):
+</span></span></span><span class="line"><span class="cl"><span class="go"> - com.github.ben-manes.versions:com.github.ben-manes.versions.gradle.plugin
+</span></span></span><span class="line"><span class="cl"><span class="go"> - org.jetbrains.kotlin.android:org.jetbrains.kotlin.android.gradle.plugin
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="go">Gradle release-candidate updates:
+</span></span></span><span class="line"><span class="cl"><span class="go"> - Gradle: [7.2 -&gt; 7.5.1 -&gt; 7.6-rc-1]
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="go">Generated report file build/dependencyUpdates/report.json
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 Gradle에서 사용된 디펜던시의 버전을 체크하는 법에 대해 알아보았습니다.</p>
+<div class="video-wrapper">
+    <iframe loading="lazy" 
+            src="https://www.youtube.com/embed/l_aIu1Kho-M" 
+            allowfullscreen 
+            title="YouTube Video"
+    >
+    </iframe>
+</div>
+
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/buildsrc/">buildSrc</a>
+        
+            <a href="/tags/gradle/">gradle</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+        <div class="article-list--compact links">
+    
+        <article>
+            <a href="https://github.com/cliearl/book-search-app/tree/31d6edfbe964725713e0cd764d5cee09cade2423" target="_blank" rel="noopener">
+                <div class="article-details">
+                    <h2 class="article-title">GitHub/cliearl</h2>
+                    <footer class="article-time">
+                        
+                            Find and download source code of the article from this link.
+                        
+                    </footer>
+                </div>
+        
+                
+                    <div class="article-image">
+                        <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
+                    </div>
+                
+            </a>
+        </article>
+    
+</div>
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/android/fast-build/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">앱 빌드속도 빠르게 하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/build-performance-benchmark/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">내 장비의 안드로이드 스튜디오 빌드능력 벤치마킹하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/dokka-example/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Dokka로 프로젝트 문서화하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/java-reflection/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">자바의 리플렉션이란</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/dependency-injection-basic/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Dependency Injection 기초</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.15.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
