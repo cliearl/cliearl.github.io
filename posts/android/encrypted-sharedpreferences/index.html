@@ -465,17 +465,17 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">val</span> <span class="py">sharedPreferences</span><span class="p">:</span> <span class="n">SharedPreferences</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">masterKeyAlias</span> <span class="p">=</span> <span class="n">MasterKey</span>
-</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="n">MasterKey</span><span class="p">.</span><span class="n">DEFAULT_MASTER_KEY_ALIAS</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">setKeyScheme</span><span class="p">(</span><span class="n">MasterKey</span><span class="p">.</span><span class="n">KeyScheme</span><span class="p">.</span><span class="n">AES256_GCM</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">,</span> <span class="nc">MasterKey</span><span class="p">.</span><span class="n">DEFAULT_MASTER_KEY_ALIAS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">setKeyScheme</span><span class="p">(</span><span class="nc">MasterKey</span><span class="p">.</span><span class="nc">KeyScheme</span><span class="p">.</span><span class="n">AES256_GCM</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nc">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="n">applicationContext</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">FILE_NAME</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">masterKeyAlias</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">PrefKeyEncryptionScheme</span><span class="p">.</span><span class="n">AES256_SIV</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">EncryptedSharedPreferences</span><span class="p">.</span><span class="n">PrefValueEncryptionScheme</span><span class="p">.</span><span class="n">AES256_GCM</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">EncryptedSharedPreferences</span><span class="p">.</span><span class="nc">PrefKeyEncryptionScheme</span><span class="p">.</span><span class="n">AES256_SIV</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">EncryptedSharedPreferences</span><span class="p">.</span><span class="nc">PrefValueEncryptionScheme</span><span class="p">.</span><span class="n">AES256_GCM</span>
 </span></span><span class="line"><span class="cl">    <span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">

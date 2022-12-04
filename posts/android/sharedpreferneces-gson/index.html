@@ -478,13 +478,13 @@ if (!doNotTrack) {
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">savePref</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="nc">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">editor</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">edit</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">gson</span> <span class="p">=</span> <span class="n">Gson</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">json</span> <span class="p">=</span> <span class="n">gson</span><span class="p">.</span><span class="n">toJson</span><span class="p">(</span><span class="n">rvAdapter</span><span class="p">.</span><span class="n">dataSet</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">editor</span><span class="p">.</span><span class="n">putString</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">,</span> <span class="n">json</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">editor</span><span class="p">.</span><span class="n">apply</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data saved&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nc">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data saved&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -510,7 +510,7 @@ if (!doNotTrack) {
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">loadPref</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="n">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sharedPreferences</span> <span class="p">=</span> <span class="n">getSharedPreferences</span><span class="p">(</span><span class="n">KEY_PREFS</span><span class="p">,</span> <span class="nc">Context</span><span class="p">.</span><span class="n">MODE_PRIVATE</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">sharedPreferences</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">gson</span> <span class="p">=</span> <span class="n">Gson</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">json</span> <span class="p">=</span> <span class="n">sharedPreferences</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="n">KEY_DATA</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
@@ -520,7 +520,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">JsonParseException</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data loaded&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="s2">&#34;Data loaded&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
