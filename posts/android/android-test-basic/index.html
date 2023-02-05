@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다.
+들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다.'>
+<title>안드로이드 테스트 자동화 기초</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/android-test-basic/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='안드로이드 테스트 자동화 기초'>
+<meta property='og:description' content='이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다.
+들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/android-test-basic/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='android' /><meta property='article:tag' content='test' /><meta property='article:published_time' content='2023-02-05T16:47:26&#43;09:00'/><meta property='article:modified_time' content='2023-02-05T16:47:26&#43;09:00'/>
+<meta name="twitter:title" content="안드로이드 테스트 자동화 기초">
+<meta name="twitter:description" content="이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다.
+들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다.">
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
+            <h2 class="site-description">@Andromeda Galaxy</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/cliearl'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/coder_frozen'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.youtube.com/channel/UC6V7LBEgcoTZUUgUU0Jv3xg'
+                        target="_blank"
+                        title="Youtube"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="4" />
+  <path d="M10 9l5 3l-5 3z" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/page/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://cliearl.github.io/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#들어가기">들어가기</a></li>
+    <li><a href="#테스트-자동화의-필요성">테스트 자동화의 필요성</a></li>
+    <li><a href="#자동-테스트의-분류">자동 테스트의 분류</a>
+      <ol>
+        <li><a href="#단위-테스트-unit-test">단위 테스트 (Unit Test)</a></li>
+        <li><a href="#통합-테스트-intergration-test">통합 테스트 (Intergration Test)</a></li>
+        <li><a href="#종단간-테스트-end-to-end-test">종단간 테스트 (End-to-end Test)</a></li>
+        <li><a href="#테스트-사이즈">테스트 사이즈</a></li>
+      </ol>
+    </li>
+    <li><a href="#테스트-기본-원칙">테스트 기본 원칙</a>
+      <ol>
+        <li><a href="#seven-testing-principles">Seven Testing Principles</a></li>
+        <li><a href="#first-principles">F.I.R.S.T Principles</a></li>
+        <li><a href="#테스트-코드-작성-스타일">테스트 코드 작성 스타일</a></li>
+      </ol>
+    </li>
+    <li><a href="#test-double">Test Double</a>
+      <ol>
+        <li><a href="#dummy">Dummy</a></li>
+        <li><a href="#stub">Stub</a></li>
+        <li><a href="#spy">Spy</a></li>
+        <li><a href="#fake">Fake</a></li>
+        <li><a href="#mock">Mock</a></li>
+      </ol>
+    </li>
+    <li><a href="#테스트-대상-항목">테스트 대상 항목</a></li>
+    <li><a href="#테스트-라이브러리">테스트 라이브러리</a>
+      <ol>
+        <li><a href="#testing-framework">Testing Framework</a></li>
+        <li><a href="#assertion">Assertion</a></li>
+        <li><a href="#mocking">Mocking</a></li>
+        <li><a href="#ui-testing">UI Testing</a></li>
+      </ol>
+    </li>
+    <li><a href="#구글의-안드로이드-테스팅-환경">구글의 안드로이드 테스팅 환경</a>
+      <ol>
+        <li><a href="#testing-related-video-from-android-developers">Testing Related Video from Android Developers</a></li>
+        <li><a href="#jetpack-test-library">Jetpack Test Library</a></li>
+        <li><a href="#uiapplication-exerciser-monkey">UI/Application Exerciser Monkey</a></li>
+        <li><a href="#unified-test-platform">Unified Test Platform</a></li>
+      </ol>
+    </li>
+    <li><a href="#code-coverage">Code Coverage</a></li>
+    <li><a href="#어떤-코드가-테스트-하기-좋은-코드인가">어떤 코드가 테스트 하기 좋은 코드인가?</a></li>
+    <li><a href="#cicd">CI/CD</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                android
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/android/android-test-basic/">안드로이드 테스트 자동화 기초</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 05, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    12 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다.</p>
+<h2 id="들어가기">들어가기</h2>
+<p>테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다.
+<a class="link" href="https://www.testingreferences.com/testinghistory.php"  target="_blank" rel="noopener"
+    >The History of Software Testing</a>에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다. 테스트 커버리지는 100%를 목표해야 한다는 사람도 있고 혹은 100%를 목표하는 것은 무의미한 일이라고 하는 사람도 있습니다. 테스트를 먼저 만들고 프로덕션 코드를 만들어야 한다는 주장도 있고, 실무중에 그러한 방식으로 일을 할 여유가 없다는 사람도 있습니다.</p>
+<p>모든 주장은 나름의 논리가 있기 때문에 무엇이 옳고 그른지는 알 수 없습니다. 그래서 이 파트에서는 방법론보다는 기술적으로 안드로이드에서 코드 테스트를 어떻게 수행하는지에 대해 중점을 두고 설명하도록 하겠습니다.</p>
+<h2 id="테스트-자동화의-필요성">테스트 자동화의 필요성</h2>
+<p>안드로이드 앱의 기능을 작성하면 필연적으로 기능의 테스트를 수행하게 됩니다. 코드를 수정하고 앱을 빌드한 뒤 에뮬레이터로 앱을 실행하고 화면을 터치해 보면서 내가 만든 기능이 기대한대로 작동하는지 확인하게 되지요. 이 때 다음과 같이 다양한 유형의 테스트를 수행해야 합니다.</p>
+<ul>
+<li>기능 테스트 : 내 앱이 기능을 수행합니까?</li>
+<li>성능 테스트 : 빠르고 효율적으로 수행합니까?</li>
+<li>접근성 테스트 : 접근성 서비스와 잘 작동합니까?</li>
+<li>호환성 테스트 : 모든 기기와 API 수준에서 잘 작동합니까?</li>
+</ul>
+<p>하지만 앱의 기능이 많아지고 구조가 복잡해지게 되면 점점 빌드 시간도 증가하게 되므로 코드를 수정할 때마다 개발자가 수동으로 앱의 모든 기능을 테스트하는 것은 물리적으로 불가능하게 됩니다. 앱의 기능을 수동으로 테스트하는 전문 QA팀을 운용할 수도 있겠지만 개발 비용이 많이 증가하게 되겠지요.</p>
+<p>컴퓨터가 테스트를 자동으로 수행하게 하는 것을 테스트 자동화라고 하는데요, 개발에 테스트 자동화를 적용하면 기능을 개발할 때마다 일일이 빌드를 수행할 필요가 없어 개발 시간을 줄여주고, 버그를 빠른 시점에 파악할 수 있어 개발 비용을 줄일 수 있습니다. 또한 기능을 개발할 때 자동 테스트가 가능한 구조가 되도록 고려하게 되기 때문에 자연스럽게 프로그램이 더욱 견고한 구조를 갖게 되는 많은 장점이 있습니다.</p>
+<h2 id="자동-테스트의-분류">자동 테스트의 분류</h2>
+<p>소프트웨어를 테스트하는 방법은 크게 블랙박스 테스트와 화이트박스 테스트로 나눌 수 있습니다. 블랙박스 테스트는 소프트웨어의 내부 구조나 작동 원리를 모르는 상태에서 소프트웨어의 동작이 요구사항을 만족하는지 검사하는 방법으로 개발자가 아닌 사용자 입장에서의 테스팅입니다. 화이트박스 테스트는 블랙박스 테스트와는 반대로 소프트웨어의 내부 구조와 제어 흐름을 직접 관찰하는 테스트 방식으로 개발자 입장에서의 테스팅이 되겠습니다. 안드로이드의 테스트 자동화에는 이 두 방식이 모두 사용됩니다.</p>
+<p><img src="https://1.bp.blogspot.com/-g6u515hjzAA/WO3_nI2n4xI/AAAAAAAADW0/cI_u-wIfoq4DI5NbPnZt6l4Z3x4D70zGgCLcB/s400/%25EA%25B7%25B8%25EB%25A6%25BC1.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처 : https://korea-sw-eng.blogspot.com/2017/04/1.html"
+	
+	
+></p>
+<p>구글은 안드로이드의 자동 테스트를 다음 그림과 같이 단위 테스트 (Unit Test), 통합 테스트 (Intergration Test), 종단간 테스트 (End-to-end Test)로 분류하고 있습니다. 단위 테스트에서 종단간 테스트로 갈수록 각 테스트의 충실도는 증가하지만 실행 시간과 유지보수 및 디버깅에 드는 노력도 증가하게 됩니다. 따라서 일반적으로는 단위 테스트를 통합 테스트보다 많이 작성하고 통합 테스트를 종단간 테스트보다 더 많이 작성하게 됩니다.</p>
+<p><img src="https://developer.android.com/training/testing/fundamentals/test-scopes.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처 : https://developer.android.com/training/testing/fundamentals"
+	
+	
+></p>
+<h3 id="단위-테스트-unit-test">단위 테스트 (Unit Test)</h3>
+<p>단위 테스트는 앱의 메서드 또는 클래스와 같은 작은 단위의 기능을 검증합니다. 테스트 범위가 작기 때문에 작성이 수월하고 테스트 속도가 빠릅니다.</p>
+<ul>
+<li>로컬 단위 테스트 (Local Unit Test)</li>
+</ul>
+<p>Android Framework에 의존하지 않고 로컬 JVM에서 실행되는 테스트입니다. 실제 기기나 에뮬레이터를 사용하지 않으므로 테스트 속도가 빠르다는 특징이 있습니다.</p>
+<ul>
+<li>계측 단위 테스트 (Instrumented Unit Test)</li>
+</ul>
+<p>Android Framework에 의존하는 기능을 검증하는 단위 테스트입니다. 실제 기기 또는 에뮬레이터에서 실행해야 하기 때문에 실행시간이 오래 걸린다는 특징이 있습니다.</p>
+<h3 id="통합-테스트-intergration-test">통합 테스트 (Intergration Test)</h3>
+<p>통합 테스트는 서로 다른 모듈 또는 클래스 간의 상호작용이 정상적으로 기능하는지를 검증합니다. 단위 테스트로 각 모듈의 기능을 검증했을지라도, 동시에 여러 모듈을 동작시켰을 때는 정상작동을 하지 않을 수도 있기 때문입니다.</p>
+<p><img src="https://i.stack.imgur.com/yHGn1.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처 : https://stackoverflow.com/a/57283806"
+	
+	
+></p>
+<h3 id="종단간-테스트-end-to-end-test">종단간 테스트 (End-to-end Test)</h3>
+<p>종단간 테스트는 앱의 전체 화면 또는 여러 모듈에 걸친 사용자 흐름과 같은 큰 부분에 대한 기능 검증을 수행합니다. User Interface를 사용할 때 화면이 올바르게 응답하는지 확인하는 테스트이기 때문에 UI 테스트라 부르기도 합니다.</p>
+<h3 id="테스트-사이즈">테스트 사이즈</h3>
+<p>단위, 통합, 종단간이라는 분류는 얼핏 듣기에 모호하게 들릴 수 있습니다. 그래서 구글은 사이즈 기준으로 단위 테스트는 소형 테스트, 통합 테스트는 중형 테스트, 그리고 종단간 테스트는 대형 테스트로 분류하기도 합니다. 크기에 따른 각 테스트의 특징은 <a class="link" href="https://testing.googleblog.com/2010/12/test-sizes.html"  target="_blank" rel="noopener"
+    >다음 표</a>와 같습니다.</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Small</th>
+<th>Medium</th>
+<th>Large</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Network access</td>
+<td>No</td>
+<td>localhost only</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>File system access</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Use external systems</td>
+<td>No</td>
+<td>Discouraged</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Multiple threads</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Sleep statements</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>System properties</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Time limit (seconds)</td>
+<td>60</td>
+<td>300</td>
+<td>900+</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="테스트-기본-원칙">테스트 기본 원칙</h2>
+<p>이번에는 프로그램을 테스트할 때 지켜야 하는 몇가지 원칙을 소개하겠습니다.</p>
+<h3 id="seven-testing-principles">Seven Testing Principles</h3>
+<p>Seven Testing Principles은 <a class="link" href="https://astqb.org/istqb-foundation-level-seven-testing-principles/"  target="_blank" rel="noopener"
+    >ISTQB (International Software Testing Qualifications Board)</a>에서 제안한 7가지 테스트 원칙입니다.</p>
+<ul>
+<li>Testing shows the presence of defects, not their absence : 테스팅은 결함의 존재를 보여주는 것이다.</li>
+<li>Exhaustive testing is impossible : 완벽한 테스트는 불가능하다.</li>
+<li>Early testing saves time and money : 테스트 구성은 가능한 빠르게 시작한다.</li>
+<li>Defects cluster together : 결함은 군집되어 있다.</li>
+<li>Beware of the pesticide paradox : 살충제 역설 - 비슷한 테스트가 반복되면 새로운 결함을 발견할 수 없다.</li>
+<li>Testing is context dependent : 테스팅은 문맥에 의존적이다.</li>
+<li>Absence-of-errors is a fallacy : 오류 부재의 궤변 - 사용되지 않는 시스템이나 사용자의 기대에 부응하지 않는 기능의 결함을 찾고 수정하는 것은 의미가 없다.</li>
+</ul>
+<h3 id="first-principles">F.I.R.S.T Principles</h3>
+<p>F.I.R.S.T Principles이란 로버트 마틴 선생의 <a class="link" href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"  target="_blank" rel="noopener"
+    >Clean Code</a>에서 소개한 단위 테스트에 관한 원칙들을 Brett Schuchert과 Tim Ottinger가 F.I.R.S.T라는 이름으로 <a class="link" href="https://agileinaflash.blogspot.com/2009/02/first.html"  target="_blank" rel="noopener"
+    >정리</a>한 것입니다.</p>
+<ul>
+<li><code>Fast</code>: 단위 테스트는 빨라야 한다.</li>
+<li><code>Isolated</code>: 테스트가 다른 테스트 케이스에 의존하지 않아야 한다.</li>
+<li><code>Repeatable</code>: 테스트는 실행할 때마다 같은 결과를 만들어야 한다.</li>
+<li><code>Self-validating</code>: 테스트 결과는 성공이거나 실패여야 한다. 결과에 대한 해석이 필요해서는 안된다.</li>
+<li><code>Timely</code>: 단위 테스트는 기능이 출시된 후에도 언제든 작성할 수 있지만 적절한 시점은 프로덕션 코드를 구현하고 있는 와중에 테스트 코드를 작성하는 것이다.</li>
+</ul>
+<h3 id="테스트-코드-작성-스타일">테스트 코드 작성 스타일</h3>
+<p>테스트의 원칙은 알겠습니다. 그럼 테스트 코드는 어떤 스타일로 작성해야 할까요? 넓은 공감대를 얻고 있는 스타일 중의 하나는 마틴 파울러 선생이 제안한 <a class="link" href="https://martinfowler.com/bliki/GivenWhenThen.html"  target="_blank" rel="noopener"
+    >Given-When-Then</a> 스타일입니다. GWT는 테스트 코드 구조를 다음 세 부분으로 분리해서 생각합니다.</p>
+<ul>
+<li><code>Given</code>: 어떠한 상태하에서</li>
+<li><code>When</code>: 어떠한 기능을 실행하면</li>
+<li><code>Then</code>: 어떠한 결과가 나와야 한다.</li>
+</ul>
+<p>예를들어 x = 1일 때(Given), 2를 곱하면(When), 2가 나와야 하는(Then) 테스트 메소드는 다음과 같은 구조를 갖게 되는 것입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@Test</span>
+</span></span><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">x1</span><span class="n">_multiplyBy2_2</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// GIVEN
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// WHEN
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="nc">Utils</span><span class="p">.</span><span class="n">multipleBy2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// THEN
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">assertEquals</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="test-double">Test Double</h2>
+<p>영화 촬영에서 우리가 흔히 아는 스턴트맨의 정확한 용어는 스턴트 더블이라고 하는데요, 테스트 더블은 말그대로 실제 구성요소 대신 테스트를 수행하는 객체입니다. <a class="link" href="https://www.amazon.com/xUnit-Test-Patterns-Refactoring-Code/dp/0131495054"  target="_blank" rel="noopener"
+    >xUnit Test Patterns</a>의 저자인 제라드 메스자로스(Gerard Meszaros)가 만든 용어라고 하네요.</p>
+<p>F.I.R.S.T Principles중 <code>Isolated</code>에 따르면 테스트는 다른 테스트에 의존하지 않고 격리되어서 어떤 순서로든, 어떤 개별 테스트이든 실행할 수 있어야 합니다. 격리한다는 것은 테스트 대상이 의존하는 것을 실제가 아닌 다른 것으로 대체하는 것인데 이 때 사용하는 것이 테스트 더블인 것입니다. 테스트 더블에는 다음과 같이 Dummy, Stub, Spy, Mock, Fake 가 있는데요, 각각의 정의와 사용법에 대해 설명하도록 하겠습니다.</p>
+<p><img src="https://www.informit.com/content/images/ch23_9780131495050/elementLinks/23fig02.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처 : http://xunitpatterns.com/Test%20Double.html"
+	
+	
+></p>
+<h3 id="dummy">Dummy</h3>
+<p>가장 기본적인 테스트 더블로 기능을 전혀 구현하지 않은 객체입니다. 인스턴스는 필요하지만 기능까지는 필요하지 않은 경우에 사용합니다. <code>DummyAccountDao</code>는 <code>AccountDao</code>를 상속하고 있지만 기능을 구현하지 않았죠.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">interface</span> <span class="nc">AccountDao</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">showMember</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DummyAccountDao</span> <span class="p">:</span> <span class="n">AccountDao</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">showMember</span><span class="p">()</span> <span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// No implementation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="stub">Stub</h3>
+<p>Dummy가 실제로 동작하는 것처럼 보이게 만들어 놓은 객체입니다. 인터페이스 혹은 클래스를 최소한으로 구현하고, 결과는 특정 상태를 가정해서 하드코딩된 값을 제공합니다. 따라서 로직에 따른 값의 변경은 테스트 할 수 없습니다. 객체에 특정한 메소드를 적용하기 전과 후의 상태를 확인하는 상태 기반 테스트(State-based testing)에 사용되는 테스트 더블입니다. <code>StubAccountDao</code>는 <code>AccountDao</code>를 상속하지만 <code>showMember</code> 처리까지 완전히 구현하는게 아니라 단순히 고정된 상수값을 반환하도록 하고 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">interface</span> <span class="nc">AccountDao</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">showMember</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">StubAccountDao</span> <span class="p">:</span> <span class="n">AccountDao</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">showMember</span><span class="p">()</span> <span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">memberList</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="s2">&#34;Bob&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memberList</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="spy">Spy</h3>
+<p>Stub과 비슷한 객체인데 추가적인 정보를 더 기록할 수 있게 구성되어 있습니다. 예를 들어 예상된 메소드가 잘 호출되었는지 몇 번이나 호출되었는지 등을 파악할 수 있습니다. 어떤 메소드 A가 호출 되었을 때 또 다른 메소드 B가 실행이 되었는지 확인하는 등의 행위 기반 테스트 (Interaction-based testing)에 사용되는 테스트 더블입니다. <code>SpyAccountDao</code>의 <code>showMember</code> 메소드를 보면 내부에서 <code>callMemberCount</code>를 증가시키는 스파이 동작을 하는 것을 알 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">interface</span> <span class="nc">AccountDao</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">showMember</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SpyAccountDao</span> <span class="p">:</span> <span class="n">AccountDao</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">callMemberCount</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">showMember</span><span class="p">()</span> <span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">memberList</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="s2">&#34;Bob&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">callMemberCount</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memberList</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="fake">Fake</h3>
+<p>동작하는 구현이 있기에 테스트에는 사용할 수 있지만 프로덕션 구현과 동일하지는 않은 객체입니다. 상태 기반 테스트(State-based testing)에 사용되는 테스트 더블인데, Mocking을 필요로 하지 않고 가볍기 때문에 <a class="link" href="https://developer.android.com/training/testing/fundamentals/test-doubles#types"  target="_blank" rel="noopener"
+    >구글에서 추천</a>하는 더블입니다. <code>FakeAccountDb</code>는 <code>AccountDb</code>를 가짜로 구현하는데, Stub과 차이점이라면 Stub의 경우 메소드 로직은 구현하지 않고 단지 고정값을 반환하지만, Fake는 메소드 로직까지 구현한다는 점이 다릅니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">interface</span> <span class="nc">AccountDb</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">saveItem</span><span class="p">(</span><span class="n">userId</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">getItem</span><span class="p">(</span><span class="n">userId</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="n">String</span><span class="p">?</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FakeAccountDb</span> <span class="p">:</span> <span class="n">AccountDb</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">accounts</span> <span class="p">=</span> <span class="n">HashMap</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">accounts</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="s2">&#34;Alice&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">accounts</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="s2">&#34;Bob&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">saveItem</span><span class="p">(</span><span class="n">userId</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">accounts</span><span class="p">[</span><span class="n">userId</span><span class="p">]</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItem</span><span class="p">(</span><span class="n">userId</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">accounts</span><span class="p">[</span><span class="n">userId</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="mock">Mock</h3>
+<p>Mock은 Spy처럼 행위 기반 테스트에 사용되는 테스트 더블입니다. 차이점은 Spy가 메소드 A와 B의 실제 동작을 추적하는 더블인데 반해, Mock은 A가 실행되면 그냥 B의 정상 작동값을 반환하도록 구성된 더블이라고 생각하시면 됩니다. 행위 기반 테스트는 작성이 복잡하고 까다로운 부분이 많기 때문에 Mocking에 사용하는 전용 라이브러리들이 만들어져 있습니다. 코드를 보시면 <code>Car</code>는 엔진과 대시보드 의존성을 주입받도록 되어 있고 <code>CarTest</code>에서 <code>Car</code>를 테스트 합니다. 이때 엔진과 대시보드의 Mock을 만들어서 주입한 뒤 Mock이 정상적으로 작동하는지를 <code>verify</code>로 검증하는 방식입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Car</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">engine</span><span class="p">:</span> <span class="n">Engine</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">dashboard</span><span class="p">:</span> <span class="n">Dashboard</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">engine</span><span class="p">.</span><span class="n">ignite</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dashboard</span><span class="p">.</span><span class="n">display</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CarTest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="py">engineMock</span><span class="p">:</span> <span class="n">Engine</span> <span class="p">=</span> <span class="n">mock</span><span class="p">(</span><span class="n">Engine</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="py">dashboardMock</span><span class="p">:</span> <span class="n">Dashboard</span> <span class="p">=</span> <span class="n">mock</span><span class="p">(</span><span class="n">Dashboard</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">start</span><span class="n">_the_car</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">car</span> <span class="p">=</span> <span class="n">Car</span><span class="p">(</span><span class="n">engineMock</span><span class="p">,</span> <span class="n">dashboradMock</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">car</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">verify</span><span class="p">(</span><span class="n">engineMock</span><span class="p">).</span><span class="n">ignite</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">verify</span><span class="p">(</span><span class="n">dashboardMock</span><span class="p">).</span><span class="n">display</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>테스트 더블은 기능을 구현한 정도에 따라 다음과 같이 구분할 수도 있습니다.</p>
+<p><img src="https://docs.microsoft.com/ko-kr/archive/msdn-magazine/2007/september/images/cc163358.fig02.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처 : https://docs.microsoft.com/ko-kr/archive/msdn-magazine/2007/september/unit-testing-exploring-the-continuum-of-test-doubles"
+	
+	
+></p>
+<h2 id="테스트-대상-항목">테스트 대상 항목</h2>
+<p>구글에서 제안하는 앱의 주된 테스트 대상 항목은 <a class="link" href="https://developer.android.com/training/testing/fundamentals/what-to-test"  target="_blank" rel="noopener"
+    >다음</a>과 같습니다.</p>
+<ul>
+<li>단위 테스트 대상
+<ul>
+<li>ViewModels 또는 Presenter</li>
+<li>데이터 레이어</li>
+<li>유즈 케이스</li>
+<li>값을 계산하는 유틸리티 클래스</li>
+</ul>
+</li>
+<li>엣지 케이스
+<ul>
+<li>음수, 0 및 경계 조건 을 사용하는 수학 연산</li>
+<li>가능한 모든 네트워크 연결 오류</li>
+<li>형식이 잘못된 JSON과 같은 손상된 데이터</li>
+<li>파일 저장시 스토리지가 가득 찬 상황</li>
+<li>프로세스 중간에 다시 생성된 개체(예: 장치가 회전할 때의 액티비티)</li>
+</ul>
+</li>
+<li>UI 테스트
+<ul>
+<li>스크린 UI</li>
+<li>유저 플로우</li>
+<li>내비게이션</li>
+</ul>
+</li>
+<li>테스트 제외 대상
+<ul>
+<li>프레임워크 자체의 동작</li>
+<li>activities, fragments, 혹은 services에는 테스트가 필요한 로직을 가능한 배치하지 않음</li>
+</ul>
+</li>
+</ul>
+<h2 id="테스트-라이브러리">테스트 라이브러리</h2>
+<p>안드로이드에서 사용할 수 있는 테스트용 라이브러리에 대해 알아보도록 하겠습니다.</p>
+<h3 id="testing-framework">Testing Framework</h3>
+<p><img src="https://junit.org/junit4/images/junit-logo.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li><a class="link" href="https://github.com/junit-team/junit4"  target="_blank" rel="noopener"
+    >JUnit4</a> : Java의 단위 테스트 코드를 작성하기 위해 만들어진 프레임워크로 Jetpack Test 라이브러리는 JUnit4를 기준으로 만들어져 있음. 현재 최신 버전은 <a class="link" href="https://github.com/junit-team/junit5"  target="_blank" rel="noopener"
+    >JUnit5</a>이나, 안드로이드를 완벽히 지원하지 않음.</li>
+</ul>
+<p><img src="https://github.com/kotest/kotest/raw/master/doc/logo7-with-text.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li><a class="link" href="https://github.com/kotest/kotest"  target="_blank" rel="noopener"
+    >Kotest</a> : Kotlin의 단위테스트 코드를 작성하기 위해 만들어진 프레임워크.</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/953edcc8c094ae8ddabcf3d6ebaf0afe2c4e5e36631949110e59782d09a02d62/68747470733a2f2f7261776769746875622e636f6d2f726f626f6c6563747269632f726f626f6c6563747269632f6d61737465722f696d616765732f726f626f6c6563747269632d686f72697a6f6e74616c2e706e67"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li><a class="link" href="https://github.com/robolectric/robolectric"  target="_blank" rel="noopener"
+    >Roboletric</a> : JVM 만으로 안드로이드 프레임워크를 테스팅하기 위해 만들어진 프레임워크.</li>
+</ul>
+<h3 id="assertion">Assertion</h3>
+<p>Assertion의 표현력이 부족한 JUnit의 단점을 메워주는 여러가지 라이브러리들이 있습니다. AssertJ와 Truth는 사용법이 비슷한데 라이브러리를 관리하는 <a class="link" href="https://truth.dev/comparison.html"  target="_blank" rel="noopener"
+    >구글</a>에 따르면 Truth가 AssertJ보다 먼저 만들어졌다고 하네요.</p>
+<ul>
+<li><a class="link" href="https://github.com/assertj/assertj-core"  target="_blank" rel="noopener"
+    >AssertJ</a></li>
+<li><a class="link" href="https://github.com/google/truth"  target="_blank" rel="noopener"
+    >Truth</a></li>
+<li><a class="link" href="https://github.com/hamcrest/JavaHamcrest"  target="_blank" rel="noopener"
+    >Hamcrest</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// JUnit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">assertTrue</span><span class="o">(</span><span class="n">notificationText</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">&#34;testuser@google.com&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// AssertJ, Truth
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">assertThat</span><span class="o">(</span><span class="n">notificationText</span><span class="o">).</span><span class="na">contains</span><span class="o">(</span><span class="s">&#34;testuser@google.com&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Hamcrest
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">assertThat</span><span class="o">(</span><span class="n">notificationText</span><span class="o">,</span> <span class="n">containsString</span><span class="o">(</span><span class="s">&#34;testuser@google.com&#34;</span><span class="o">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="mocking">Mocking</h3>
+<p><img src="https://raw.githubusercontent.com/mockito/mockito/main/src/javadoc/org/mockito/logo.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li><a class="link" href="https://github.com/mockito/mockito"  target="_blank" rel="noopener"
+    >Mockito</a> : Java 테스트를 위한 Mocking 라이브러리</li>
+</ul>
+<p><img src="https://github.com/mockk/mockk/raw/master/doc/logo-site.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li><a class="link" href="https://github.com/mockk/mockk"  target="_blank" rel="noopener"
+    >MockK</a> : Kotlin 테스트를 위한 Mocking 라이브러리</li>
+</ul>
+<h3 id="ui-testing">UI Testing</h3>
+<p><img src="https://miro.medium.com/max/1180/1*P3KAvHlmubD6dCO45YSbgA.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처: https://medium.com/mindorks/android-testing-part-1-espresso-basics-7219b86c862b"
+	
+	
+></p>
+<ul>
+<li><a class="link" href="https://developer.android.com/training/testing/espresso"  target="_blank" rel="noopener"
+    >Espresso</a> : 단일 안드로이드 앱의 UI를 테스트하는 프레임워크</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/e75f322d29b8865104186dd7dad4eb7c78e8f22a44fa0218c5f62c511b820426/68747470733a2f2f686162726173746f726167652e6f72672f776562742f64772f6a682f396b2f64776a68396b79706a6c3633376b786a3874696178776a767470302e706e67"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li><a class="link" href="https://github.com/KasperskyLab/Kaspresso"  target="_blank" rel="noopener"
+    >Kaspresso</a> : KasperskyLab에서 제작한 안드로이드 앱 UI 테스트 프레임워크</li>
+</ul>
+<p><img src="https://blog.frugaltesting.com/static/59fa90629e81d7454fcc2d21beee940c/78797/appium.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<ul>
+<li><a class="link" href="https://github.com/appium/appium"  target="_blank" rel="noopener"
+    >Appium</a> : iOS와 Android를 모두 테스트 할 수 있는 UI 테스트 프레임워크</li>
+</ul>
+<p><img src="https://2.bp.blogspot.com/-bD9iB6eEFNc/WXdfMahDf-I/AAAAAAAAEX0/Jr2V9cPvrJITSZkTmwt2k1PBZ_m830A5wCLcBGAs/s1600/image1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="https://android-developers.googleblog.com/2017/07/android-testing-support-library-10-is.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A&#43;blogspot%2FhsDu&#43;%28Android&#43;Developers&#43;Blog%29"
+	
+	
+></p>
+<ul>
+<li><a class="link" href="https://developer.android.com/training/testing/ui-automator"  target="_blank" rel="noopener"
+    >UI Automator</a> : 복수 앱 간의 UI 기능을 테스트하는 프레임워크</li>
+</ul>
+<h2 id="구글의-안드로이드-테스팅-환경">구글의 안드로이드 테스팅 환경</h2>
+<h3 id="testing-related-video-from-android-developers">Testing Related Video from Android Developers</h3>
+<p>구글은 테스팅의 중요성을 지속적으로 강조해왔고 테스팅 전략이나 새로운 테스팅 라이브러리를 꾸준히 발표해 왔습니다.</p>
+<ul>
+<li><a class="link" href="https://www.youtube.com/watch?v=vdasFFfXKOY"  target="_blank" rel="noopener"
+    >Android Testing (Android Dev Summit 2015)</a></li>
+<li><a class="link" href="https://www.youtube.com/watch?v=pK7W5npkhho"  target="_blank" rel="noopener"
+    >Test-driven development on Android with the Android Testing Support Library (Google I/O &lsquo;17)</a></li>
+<li><a class="link" href="https://www.youtube.com/watch?v=wYMIadv9iF8"  target="_blank" rel="noopener"
+    >Frictionless Android testing: Write once, run everywhere (Google I/O &lsquo;18)</a></li>
+<li><a class="link" href="https://www.youtube.com/watch?v=4m2yYSTdvIg"  target="_blank" rel="noopener"
+    >Testing rebooted (with AndroidX Test) (Android Dev Summit &lsquo;18)</a></li>
+<li><a class="link" href="https://www.youtube.com/watch?v=-_kZC29sWAo"  target="_blank" rel="noopener"
+    >Testing Android apps at scale with Nitrogen (Android Dev Summit &lsquo;18)</a></li>
+<li><a class="link" href="https://www.youtube.com/watch?v=VJi2vmaQe6w"  target="_blank" rel="noopener"
+    >Build testable apps for Android (Google I/O'19)</a></li>
+<li><a class="link" href="https://www.youtube.com/watch?v=juEkViDyzF8"  target="_blank" rel="noopener"
+    >What&rsquo;s new in Android testing tools | Session</a></li>
+</ul>
+<h3 id="jetpack-test-library">Jetpack Test Library</h3>
+<p>안드로이드 모듈의 테스트를 위한 핵심 라이브러리가 바로 <a class="link" href="https://developer.android.com/jetpack/androidx/releases/test"  target="_blank" rel="noopener"
+    >Jetpack Test</a> 라이브러리 입니다. <a class="link" href="https://github.com/android/android-test"  target="_blank" rel="noopener"
+    >저장소</a>는 Github에도 공개되어 적극적인 피드백을 받고 있는데, 다음과 같은 아티팩트들로 구성되어 있습니다.</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Stable Release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>annotation</td>
+<td>1.0.0</td>
+</tr>
+<tr>
+<td>core</td>
+<td>1.4.0</td>
+</tr>
+<tr>
+<td>espresso</td>
+<td>3.4.0</td>
+</tr>
+<tr>
+<td>ext.junit</td>
+<td>1.1.3</td>
+</tr>
+<tr>
+<td>ext.truth</td>
+<td>1.4.0</td>
+</tr>
+<tr>
+<td>monitor</td>
+<td>1.5.0</td>
+</tr>
+<tr>
+<td>orchestrator</td>
+<td>1.4.1</td>
+</tr>
+<tr>
+<td>runner</td>
+<td>1.4.0</td>
+</tr>
+<tr>
+<td>rules</td>
+<td>1.4.0</td>
+</tr>
+<tr>
+<td>services</td>
+<td>1.4.1</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="uiapplication-exerciser-monkey">UI/Application Exerciser Monkey</h3>
+<p>안드로이드 앱은 <a class="link" href="https://developer.android.com/studio/test/other-testing-tools/monkey"  target="_blank" rel="noopener"
+    >UI/Application Exerciser Monkey</a>를 통해 몽키 테스트를 수행할 수 있습니다. 사람이 아닌 원숭이는 앱에 대해 아는게 없으니까 아무거나 막 눌러보겠죠. 그런 임의 동작을 통해 이슈를 찾아내는 테스트 방법을 몽키 테스트라고 합니다.</p>
+<p>Monkey는 에뮬레이터 또는 장치에서 실행되고 클릭, 터치 또는 제스처와 같은 사용자 이벤트의 의사 무작위 스트림과 여러 시스템 수준 이벤트를 생성합니다. ADB를 통해 다음과 같이 실행하며 여러가지 <a class="link" href="https://developer.android.com/studio/test/other-testing-tools/monkey#command-options-reference"  target="_blank" rel="noopener"
+    >옵션</a>을 지정할 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="go">adb shell monkey [options] &lt;event-count&gt;
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="unified-test-platform">Unified Test Platform</h3>
+<p>Android Studio와 Android Gradle Plugin에서 Android Instrument Test Runner 버전이 다를 경우 Android Studio와 CI서버의 테스트 결과가 다르게 보고될 수 있습니다.</p>
+<p><img src="https://developer.android.com/studio/images/test/no-consolidated-test-runner.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처 : https://developer.android.com/studio/test/test-in-android-studio#bumblebee-unified-test-runner"
+	
+	
+></p>
+<p>이런 문제를 해결하기 위해 AGP 7.1.0 및 Android Studio Bumblebee 이상의 버전에서는 모든 계측 테스트가 통합된 Gradle Test Runner에서 실행되도록 변경되었습니다.</p>
+<p><img src="https://developer.android.com/studio/images/test/consolidated-test-runner.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처 : https://developer.android.com/studio/test/test-in-android-studio#bumblebee-unified-test-runner"
+	
+	
+></p>
+<p>구글은 여기에서 한걸음 더 나아가 Unified Test Platform이라는 것을 발표했습니다. 처음에는 Nitrogen이라는 이름으로 2018년에 발표된 프로젝트인데 2021년 Google I/O에서 처음으로 실물이 공개되었습니다. Jetpack의 연료라는 의미에서 Nitrogen이라는 이름을 붙였다고 하네요. UTP를 이용하면 서로 다른 OS의 테스트를 모듈 방식으로 추가할 수 있고 병렬로 테스트를 수행할 수 있어서 테스트를 대규모화할 수 있게 된다고 합니다.</p>
+<p><img src="https://pluu.github.io/assets/img/blog/io/io21/whats-new-in-android-testing-tools/005.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처 : https://youtu.be/juEkViDyzF8?t=187"
+	
+	
+></p>
+<h2 id="code-coverage">Code Coverage</h2>
+<p>내 코드가 얼마만큼 테스트 되고 있는지 평가할 수 있는 지표를 Code Coverage라고 합니다. Java 코드를 평가하는 데에는 <a class="link" href="https://github.com/jacoco/jacoco"  target="_blank" rel="noopener"
+    >Java Code Coverage Library(JaCoCo)</a>가 사용되는데요, 안드로이드 스튜디오에는 이 기능이 기본적으로 포함되어 있기 때문에 코드 테스트를 실행할 때 <code>Run</code> 대신 <code>Run test-name with coverage</code> 메뉴로 실행하면 다음과 같이 Code Coverage 결과를 얻을 수 있습니다.</p>
+<p><img src="https://developer.android.com/studio/images/test/code-coverage-percentages.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처: https://developer.android.com/studio/test/test-in-android-studio#view_test_coverage"
+	
+	
+></p>
+<p>앱의 모든 코드가 테스트 되고 있다면 Code Coverage는 100%가 될 텐데요, Code Coverage 100%를 달성하는 것은 물리적으로도 매우 어려운 일일 뿐더러, 실제로는 테스트를 하지 말아야 하는 종류의 코드도 있기 때문에 100%라는 숫자를 달성하는 것에 매달릴 필요는 없습니다. <a class="link" href="https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530"  target="_blank" rel="noopener"
+    >Test Driven Development</a>의 저자인 Kent Beck 선생은 코드 커버리지 100%를 뽐내는 사람은 신문의 글자 하나 하나를 읽었다고 자랑하는 것과 같다고 <a class="link" href="https://twitter.com/KentBeck/status/812703192437981184"  target="_blank" rel="noopener"
+    >비판</a>하기도 했습니다.</p>
+<h2 id="어떤-코드가-테스트-하기-좋은-코드인가">어떤 코드가 테스트 하기 좋은 코드인가?</h2>
+<p>어쨌든 Code Coverage를 높이기 위해서는 더 많은 기능에 대한 테스트를 만들어야 합니다. 그럴려면 각 기능이 테스트를 하기 좋은 구조로 되어 있어야 하겠죠. 그렇다면 테스트를 하기 좋은 코드라는 건 어떤 것일까요?</p>
+<p>이 부분은 간단히 설명할 수 있는 주제가 아니기 때문에 대신 인사이트를 얻을 수 있는 훌륭한 세미나 발표를 하나 소개드리도록 하겠습니다. OKKY가 TDD를 주제로 2018년에 주최한 <a class="link" href="http://okkycon.com/2018/"  target="_blank" rel="noopener"
+    >OKKYCON: 2018 - The Real TDD</a>라는 세미나가 있는데요, 당시 발표자료가 <a class="link" href="https://www.youtube.com/playlist?list=PLhSAACiXcoKK318PRta9AmxgdkPB9q9Sm"  target="_blank" rel="noopener"
+    >유튜브</a>에 공개 되어 있기 때문에 참고하시면 좋을 것 같습니다.</p>
+<h2 id="cicd">CI/CD</h2>
+<p>마지막으로 CI/CD에 대해 알아보도록 하겠습니다. <code>Build tool과 Android Gradle Plugin</code> 강의에서 설명한대로 프로덕트의 빌드는 다음과 같은 과정을 거치게 됩니다.</p>
+<ol>
+<li>연관된 의존성 다운로드</li>
+<li>소스 코드를 바이너리 코드로 컴파일</li>
+<li>바이너리 코드 링크하여 실행가능 파일로 패키징</li>
+<li>테스트 수행</li>
+<li>프로덕션 시스템에 배포</li>
+</ol>
+<p>다시 말해 개발자는 코드를 작성할 때마다 컴파일을 하고 테스트를 수행한 뒤 서버에 업로드해야 합니다. 코드 변경이 별로 없는 프로덕션이라면 빌드를 개발자가 직접 수행해도 문제 없겠지만, 코드 변경이 10분마다 한 번씩 일어난다면 빌드를 수행하다가 하루가 끝나버릴 것 같네요. 만약 수십명의 개발자가 기능을 개발하는데 연관되어 있다면 이젠 어떤 순서로 빌드를 수행해야 할 지도 알 수 없게 되어 버릴 것입니다.</p>
+<p>지속적 통합(Continuous Integration, CI)은 개발자가 코드를 작성하고 저장소에 커밋하면 자동으로 컴파일과 테스트를 수행하고, 여러 개발자의 커밋에 대한 빌드 순서도 관리해 주는 솔루션을 의미합니다. 실무에서 많이 사용되는 솔루션으로는 <a class="link" href="https://github.com/features/actions"  target="_blank" rel="noopener"
+    >Github Actions</a>, <a class="link" href="https://circleci.com/"  target="_blank" rel="noopener"
+    >CircleCI</a>, <a class="link" href="https://www.bitrise.io/"  target="_blank" rel="noopener"
+    >Bitrise</a>, <a class="link" href="https://www.jenkins.io/"  target="_blank" rel="noopener"
+    >Jenkins</a>, <a class="link" href="https://www.jetbrains.com/teamcity/"  target="_blank" rel="noopener"
+    >TeamCity</a> 등이 있습니다.</p>
+<p>지속적 제공(Continuous delivery, CD)은 CI가 완료되어 배포할 수 있는 상태의 빌드 결과물을 저장소에 업로드 하는 것이고, 지속적 배포(Continuous Deployment, CD)는 지속적 제공 과정이 완료된 결과물을 최종 사용자가 사용할 수 있는 환경까지 자동으로 배포하는 솔루션을 의미합니다. 실무에서 많이 사용되는 솔루션으로는 <a class="link" href="https://fastlane.tools/"  target="_blank" rel="noopener"
+    >Fastlane</a>, <a class="link" href="https://firebase.google.com/docs/app-distribution"  target="_blank" rel="noopener"
+    >Firebase App Distribution</a>, <a class="link" href="https://deploygate.com/"  target="_blank" rel="noopener"
+    >DeployGate</a>, <a class="link" href="https://www.bitrise.io/add-ons/deploy-with-bitrise-ship"  target="_blank" rel="noopener"
+    >Bitrise Ship</a> 등이 있습니다.</p>
+<p>CI와 CD의 진행구성은 다음 그림과 같습니다. CI/CD를 도입하면 개발자는 빌드와 배포에 대해서는 신경쓰지 않고 코드를 작성하는데에만 집중할 수 있습니다. 테스트 자동화는 CI/CD 솔루션과 결합될 때 진정한 위력을 발휘할 수 있게 되는 것입니다.</p>
+<p><img src="https://www.redhat.com/cms/managed-files/styles/wysiwyg_full_width/s3/ci-cd-flow-desktop.png?itok=2EX0MpQZ"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처 : https://www.redhat.com/ko/topics/devops/what-is-ci-cd"
+	
+	
+></p>
+<p>이렇게 해서 안드로이드의 테스트 자동화 기초에 대해 알아보았습니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/android/">android</a>
+        
+            <a href="/tags/test/">test</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/android/buildsrc-gradle-dependency-update/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">buildSrc를 적용한 Gradle의 Dependency Update하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/build-performance-benchmark/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">내 장비의 안드로이드 스튜디오 빌드능력 벤치마킹하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/dokka-example/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Dokka로 프로젝트 문서화하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/java-reflection/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">자바의 리플렉션이란</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/dependency-injection-basic/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Dependency Injection 기초</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
