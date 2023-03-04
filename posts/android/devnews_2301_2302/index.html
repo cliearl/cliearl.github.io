@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.
-Legacy Icon과 Adaptive Icon 안드로이드 앱에서는 현재 두 가지 종류의 아이콘을 사용할 수 있습니다. 하나는 Legacy Icon이고 또 하나는 Adaptive Icon입니다.
-Adaptive Icon은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.
-그래서 구글에서는 Adaptive Icon이라는 규격을 제안했습니다.'>
-<title>App Icon 설정하기</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Android Studio Electric Eel Stable
+https://android-developers.googleblog.com/2023/01/android-studio-electric-eel.html Android Studio Electric Eel | 2022.2.1 Patch 1 now available
+https://androidstudio.googleblog.com/2023/02/android-studio-electric-eel-202221.html Applying Kotlin context receivers
+https://proandroiddev.com/applying-kotlin-context-receivers-5f2ad2ec4043 See Crashlytics issue reports directly in Android Studio with App Quality Insights
+https://medium.com/androiddevelopers/see-crashlytics-issue-reports-directly-in-android-studio-with-app-quality-insights-db0ff27454f0 Kotlin 1.8.10 stable
+https://github.com/JetBrains/kotlin/releases/tag/v1.8.10 Officially, Databinding is in maintenance mode, and recommended to use Jetpack Compose instead of it.
+https://www.reddit.com/r/androiddev/comments/10qe9x2/officially_databinding_is_in_maintenance_mode_and/ Android 14의 최초 개발자 프리뷰
+https://developers-kr.googleblog.com/2023/02/first-developer-preview-android14.html K2 컴파일러가 Kotlin 2.0에서 안정화됩니다
+https://blog.jetbrains.com/ko/kotlin/2023/02/k2-kotlin-2-0/ API desugaring supporting Android 13 and java.'>
+<title>냉동코더의 안드로이드 개발 뉴스::23.01~23.02</title>
 
-<link rel='canonical' href='https://cliearl.github.io/posts/android/appicon/'>
+<link rel='canonical' href='https://cliearl.github.io/posts/android/devnews_2301_2302/'>
 
-<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='App Icon 설정하기'>
-<meta property='og:description' content='이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.
-Legacy Icon과 Adaptive Icon 안드로이드 앱에서는 현재 두 가지 종류의 아이콘을 사용할 수 있습니다. 하나는 Legacy Icon이고 또 하나는 Adaptive Icon입니다.
-Adaptive Icon은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.
-그래서 구글에서는 Adaptive Icon이라는 규격을 제안했습니다.'>
-<meta property='og:url' content='https://cliearl.github.io/posts/android/appicon/'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='냉동코더의 안드로이드 개발 뉴스::23.01~23.02'>
+<meta property='og:description' content='Android Studio Electric Eel Stable
+https://android-developers.googleblog.com/2023/01/android-studio-electric-eel.html Android Studio Electric Eel | 2022.2.1 Patch 1 now available
+https://androidstudio.googleblog.com/2023/02/android-studio-electric-eel-202221.html Applying Kotlin context receivers
+https://proandroiddev.com/applying-kotlin-context-receivers-5f2ad2ec4043 See Crashlytics issue reports directly in Android Studio with App Quality Insights
+https://medium.com/androiddevelopers/see-crashlytics-issue-reports-directly-in-android-studio-with-app-quality-insights-db0ff27454f0 Kotlin 1.8.10 stable
+https://github.com/JetBrains/kotlin/releases/tag/v1.8.10 Officially, Databinding is in maintenance mode, and recommended to use Jetpack Compose instead of it.
+https://www.reddit.com/r/androiddev/comments/10qe9x2/officially_databinding_is_in_maintenance_mode_and/ Android 14의 최초 개발자 프리뷰
+https://developers-kr.googleblog.com/2023/02/first-developer-preview-android14.html K2 컴파일러가 Kotlin 2.0에서 안정화됩니다
+https://blog.jetbrains.com/ko/kotlin/2023/02/k2-kotlin-2-0/ API desugaring supporting Android 13 and java.'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/devnews_2301_2302/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='icon' /><meta property='article:published_time' content='2021-04-28T21:46:35&#43;09:00'/><meta property='article:modified_time' content='2021-04-28T21:46:35&#43;09:00'/>
-<meta name="twitter:title" content="App Icon 설정하기">
-<meta name="twitter:description" content="이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.
-Legacy Icon과 Adaptive Icon 안드로이드 앱에서는 현재 두 가지 종류의 아이콘을 사용할 수 있습니다. 하나는 Legacy Icon이고 또 하나는 Adaptive Icon입니다.
-Adaptive Icon은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.
-그래서 구글에서는 Adaptive Icon이라는 규격을 제안했습니다.">
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2023-03-04T23:35:01&#43;09:00'/><meta property='article:modified_time' content='2023-03-04T23:35:01&#43;09:00'/>
+<meta name="twitter:title" content="냉동코더의 안드로이드 개발 뉴스::23.01~23.02">
+<meta name="twitter:description" content="Android Studio Electric Eel Stable
+https://android-developers.googleblog.com/2023/01/android-studio-electric-eel.html Android Studio Electric Eel | 2022.2.1 Patch 1 now available
+https://androidstudio.googleblog.com/2023/02/android-studio-electric-eel-202221.html Applying Kotlin context receivers
+https://proandroiddev.com/applying-kotlin-context-receivers-5f2ad2ec4043 See Crashlytics issue reports directly in Android Studio with App Quality Insights
+https://medium.com/androiddevelopers/see-crashlytics-issue-reports-directly-in-android-studio-with-app-quality-insights-db0ff27454f0 Kotlin 1.8.10 stable
+https://github.com/JetBrains/kotlin/releases/tag/v1.8.10 Officially, Databinding is in maintenance mode, and recommended to use Jetpack Compose instead of it.
+https://www.reddit.com/r/androiddev/comments/10qe9x2/officially_databinding_is_in_maintenance_mode_and/ Android 14의 최초 개발자 프리뷰
+https://developers-kr.googleblog.com/2023/02/first-developer-preview-android14.html K2 컴파일러가 Kotlin 2.0에서 안정화됩니다
+https://blog.jetbrains.com/ko/kotlin/2023/02/k2-kotlin-2-0/ API desugaring supporting Android 13 and java.">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
@@ -283,41 +298,7 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#legacy-icon과-adaptive-icon">Legacy Icon과 Adaptive Icon</a></li>
-    <li><a href="#아이콘-디자인-사양">아이콘 디자인 사양</a></li>
-    <li><a href="#xml-구조-확인">xml 구조 확인</a></li>
-    <li><a href="#아이콘-설정">아이콘 설정</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+    
 
             <main class="main full-width">
     <article class="main-article">
@@ -336,7 +317,7 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/posts/android/appicon/">App Icon 설정하기</a>
+            <a href="/posts/android/devnews_2301_2302/">냉동코더의 안드로이드 개발 뉴스::23.01~23.02</a>
         </h2>
     
         
@@ -358,7 +339,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Apr 28, 2021</time>
+                <time class="article-time--published">Mar 04, 2023</time>
             </div>
         
 
@@ -373,7 +354,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    1 minute read
                 </time>
             </div>
         
@@ -388,82 +369,102 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <p>이번 포스팅에서는 앱에 아이콘을 설정하는 방법에 대해 알아보도록 하겠습니다.</p>
-<h2 id="legacy-icon과-adaptive-icon">Legacy Icon과 Adaptive Icon</h2>
-<p>안드로이드 앱에서는 현재 두 가지 종류의 아이콘을 사용할 수 있습니다. 하나는 Legacy Icon이고 또 하나는 Adaptive Icon입니다.</p>
-<p><a class="link" href="https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive"  target="_blank" rel="noopener"
-    >Adaptive Icon</a>은 다양화된 기기의 해상도와 UI 디자인에 대응하기 위해 제안된 규격으로, 안드로이드는 iOS와 달리 여러 제조사에서 여러 규격의 기기를 만들기 때문에 해상도에 많은 차이가 있고, 회사마다 고유의 UI 디자인을 사용하기 때문에 앱 아이콘의 형태도 조금씩 달라지게 됩니다.</p>
-<p>그래서 구글에서는 Adaptive Icon이라는 규격을 제안했습니다. Adaptive Icon은 백그라운드와 포그라운드 두 개의 레이어를 정의한 뒤 기기의 요청에 따라 아이콘을 조합하여 필요한 모양으로 표시를 해 줍니다.</p>
-<figure><img src="https://developer.android.com/guide/practices/ui_guidelines/images/NB_Icon_Layers_3D_03_ext.gif"
-         alt="출처 : https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive" width="93%"/><figcaption>
-            <p>출처 : <a class="link" href="https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive"  target="_blank" rel="noopener"
-    >https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive</a></p>
-        </figcaption>
-</figure>
-
-<p>이 Adaptive Icon은 안드로이드 8 오레오 (API Level 26)부터 지원을 하기 때문에 그 전 버전에서는 Legacy Icon을 사용하여야 합니다.</p>
-<h2 id="아이콘-디자인-사양">아이콘 디자인 사양</h2>
-<p>구글에서 제안하는 아이콘 디자인시의 <a class="link" href="https://developer.android.com/google-play/resources/icon-design-specifications"  target="_blank" rel="noopener"
-    >가이드라인</a>은 다음과 같습니다. 여기서 모양을 정사각형으로 하고 그림자를 넣지 말라고 하는 것은 Adaptive Icon을 사용하면 이 효과를 줄 수 있기 때문입니다.</p>
+    <ul>
+<li>
+<p>Android Studio Electric Eel Stable</p>
 <ul>
-<li>최종크기 : 512 px  - 512 px</li>
-<li>형식 : 32비트 PNG</li>
-<li>색상공간 : sRGB</li>
-<li>최대 파일 크기 : 1,024 KB</li>
-<li>모양 : 정사각형</li>
-<li>그림자 : 없음</li>
-<li>아이콘 속 뱃지 : 없도록 함</li>
+<li><a class="link" href="https://android-developers.googleblog.com/2023/01/android-studio-electric-eel.html"  target="_blank" rel="noopener"
+    >https://android-developers.googleblog.com/2023/01/android-studio-electric-eel.html</a></li>
 </ul>
-<h2 id="xml-구조-확인">xml 구조 확인</h2>
-<p>안드로이드 스튜디오에서 기본앱 프로젝트를 만들면 앱 아이콘을 지정하지 않았는데도 안드로이드 머리통 형태의 앱 아이콘이 부여되는 것을 확인할 수 있습니다. <code>AndroidManifest.xml</code> 을 보시면</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">android:icon=&#34;@mipmap/ic_launcher
-</span></span><span class="line"><span class="cl">android:roundIcon=&#34;@mipmap/ic_launcher_round
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>항목이 있는것을 알 수 있는데 앱 아이콘은 이 항목을 이용해 지정합니다.</p>
-<p><code>mipmap/ic_launcher</code> 폴더는 <code>res</code> 폴더안에 위치하고 있는대요, Adaptive Icon은 이 안에 xml 형태로 저장되고, Legacy Icon은 png형태로 저장되어 있습니다.</p>
-<p>예를들어 <code>ic_launcher.xml</code> 의 내용은 다음과 같이 되어 있습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;adaptive-icon</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;background</span> <span class="na">android:drawable=</span><span class="s">&#34;@drawable/ic_launcher_background&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;foreground</span> <span class="na">android:drawable=</span><span class="s">&#34;@drawable/ic_launcher_foreground&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/adaptive-icon&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>백그라운드와 포그라운드는 drawable 폴더 안의 파일을 지정하도록 되어 있는데 내용을 보면 백그라운드 xml은 녹색 배경이고, 포그라운드 xml은 안드로이드 머리통인 것을 확인할 수 있습니다.</p>
-<h2 id="아이콘-설정">아이콘 설정</h2>
-<p>그럼 여기서는 이미지를 이용해서 아이콘을 설정해 보도록 하겠습니다. 이미지는 PNGRepo의 빨간색 안드로이드 아이콘을 사용할건데요, 이 아이콘은 512x512 크기를 가지고 있기 때문에 그대로 앱에 사용할 수 있습니다.</p>
-<p><img src="https://www.pngrepo.com/png/232464/180/android.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="출처 : https://www.pngrepo.com/svg/232464/android"
-	
-	
-></p>
-<p>res 폴더에서 <code>New -&gt; Image Asset</code>을 선택하고 Source Asset의 Path에서 그림파일을 선택합니다. 안드로이드가 사각형 안에 들어가도록 Resize에서 대충 조절해 주는데 구글에서는 그림이 70% 크기가 되도록 권장하고 있습니다. 그리고 Color 메뉴를 사용해서 백그라운드는 흰색을 선택해줍니다.</p>
-<p>mipmap 아래에 아이콘이 추가되었으면 <code>AndroidManifest.xml</code>에서 사용할 아이콘을 정해주면 끝입니다.</p>
-<p>이렇게 해서 앱에 아이콘을 지정하는 법에 대해 알아보았습니다.</p>
+</li>
+<li>
+<p>Android Studio Electric Eel | 2022.2.1 Patch 1 now available</p>
+<ul>
+<li><a class="link" href="https://androidstudio.googleblog.com/2023/02/android-studio-electric-eel-202221.html"  target="_blank" rel="noopener"
+    >https://androidstudio.googleblog.com/2023/02/android-studio-electric-eel-202221.html</a></li>
+</ul>
+</li>
+<li>
+<p>Applying Kotlin context receivers</p>
+<ul>
+<li><a class="link" href="https://proandroiddev.com/applying-kotlin-context-receivers-5f2ad2ec4043"  target="_blank" rel="noopener"
+    >https://proandroiddev.com/applying-kotlin-context-receivers-5f2ad2ec4043</a></li>
+</ul>
+</li>
+<li>
+<p>See Crashlytics issue reports directly in Android Studio with App Quality Insights</p>
+<ul>
+<li><a class="link" href="https://medium.com/androiddevelopers/see-crashlytics-issue-reports-directly-in-android-studio-with-app-quality-insights-db0ff27454f0"  target="_blank" rel="noopener"
+    >https://medium.com/androiddevelopers/see-crashlytics-issue-reports-directly-in-android-studio-with-app-quality-insights-db0ff27454f0</a></li>
+</ul>
+</li>
+<li>
+<p>Kotlin 1.8.10 stable</p>
+<ul>
+<li><a class="link" href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.10"  target="_blank" rel="noopener"
+    >https://github.com/JetBrains/kotlin/releases/tag/v1.8.10</a></li>
+</ul>
+</li>
+<li>
+<p>Officially, Databinding is in maintenance mode, and recommended to use Jetpack Compose instead of it.</p>
+<ul>
+<li><a class="link" href="https://www.reddit.com/r/androiddev/comments/10qe9x2/officially_databinding_is_in_maintenance_mode_and/"  target="_blank" rel="noopener"
+    >https://www.reddit.com/r/androiddev/comments/10qe9x2/officially_databinding_is_in_maintenance_mode_and/</a></li>
+</ul>
+</li>
+<li>
+<p>Android 14의 최초 개발자 프리뷰</p>
+<ul>
+<li><a class="link" href="https://developers-kr.googleblog.com/2023/02/first-developer-preview-android14.html"  target="_blank" rel="noopener"
+    >https://developers-kr.googleblog.com/2023/02/first-developer-preview-android14.html</a></li>
+</ul>
+</li>
+<li>
+<p>K2 컴파일러가 Kotlin 2.0에서 안정화됩니다</p>
+<ul>
+<li><a class="link" href="https://blog.jetbrains.com/ko/kotlin/2023/02/k2-kotlin-2-0/"  target="_blank" rel="noopener"
+    >https://blog.jetbrains.com/ko/kotlin/2023/02/k2-kotlin-2-0/</a></li>
+</ul>
+</li>
+<li>
+<p>API desugaring supporting Android 13 and java.nio</p>
+<ul>
+<li><a class="link" href="https://android-developers.googleblog.com/2023/02/api-desugaring-supporting-android-13-and-java-nio.html"  target="_blank" rel="noopener"
+    >https://android-developers.googleblog.com/2023/02/api-desugaring-supporting-android-13-and-java-nio.html</a></li>
+</ul>
+</li>
+<li>
+<p>Gradle 8.0 Release</p>
+<ul>
+<li><a class="link" href="https://docs.gradle.org/8.0/release-notes.html"  target="_blank" rel="noopener"
+    >https://docs.gradle.org/8.0/release-notes.html</a></li>
+</ul>
+</li>
+<li>
+<p>AndroidのE2Eテスト / UIテストでのwaitの仕方ベストプラクティス</p>
+<ul>
+<li><a class="link" href="https://qiita.com/ko2ic/items/ca09652c9c8f4701ff4f"  target="_blank" rel="noopener"
+    >https://qiita.com/ko2ic/items/ca09652c9c8f4701ff4f</a></li>
+</ul>
+</li>
+<li>
+<p>Android library compatibility and public API management with Binary Compatibility Validator</p>
+<ul>
+<li><a class="link" href="https://proandroiddev.com/android-library-compatibility-and-public-api-management-with-binary-compatibility-validator-971762957594"  target="_blank" rel="noopener"
+    >https://proandroiddev.com/android-library-compatibility-and-public-api-management-with-binary-compatibility-validator-971762957594</a></li>
+</ul>
+</li>
+<li>
+<p>Recent Release Notes</p>
+<ul>
+<li><a class="link" href="https://developer.android.com/jetpack/androidx/versions/all-channel"  target="_blank" rel="noopener"
+    >https://developer.android.com/jetpack/androidx/versions/all-channel</a></li>
+</ul>
+</li>
+</ul>
 <div class="video-wrapper">
     <iframe loading="lazy" 
-            src="https://www.youtube.com/embed/3oCtbayLH3E" 
+            src="https://www.youtube.com/embed/S6b0eF1-9FI" 
             allowfullscreen 
             title="YouTube Video"
     >
@@ -476,12 +477,6 @@ if (!doNotTrack) {
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/icon/">icon</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">
@@ -526,29 +521,6 @@ if (!doNotTrack) {
 </article>
 
     
-        <div class="article-list--compact links">
-    
-        <article>
-            <a href="https://github.com/cliearl/android-tutorial/tree/master/AppIcon" target="_blank" rel="noopener">
-                <div class="article-details">
-                    <h2 class="article-title">GitHub/cliearl</h2>
-                    <footer class="article-time">
-                        
-                            Find and download source code of the article from this link.
-                        
-                    </footer>
-                </div>
-        
-                
-                    <div class="article-image">
-                        <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
-                    </div>
-                
-            </a>
-        </article>
-    
-</div>
-    
 
     
 
@@ -556,19 +528,6 @@ if (!doNotTrack) {
     <h2 class="section-title">Related content</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
-            
-                
-<article class="">
-    <a href="/posts/android/devnews_2301_2302/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.01~23.02</h2>
-        </div>
-    </a>
-</article>
-
             
                 
 <article class="">
@@ -617,6 +576,19 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">Dokka로 프로젝트 문서화하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/java-reflection/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">자바의 리플렉션이란</h2>
         </div>
     </a>
 </article>
