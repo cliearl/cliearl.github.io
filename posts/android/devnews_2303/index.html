@@ -1,24 +1,48 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='minSdkVersion 과연 몇으로 해야할지 정해드립니다.
-다음 코드는 build.gradle의 코드 일부입니다. build.gradle의 minsdkversion은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.
-1 2 3 4 5 6 7 8 9 10 11 12 13 android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.0&amp;#34; testInstrumentationRunner &amp;#34;androidx.'>
-<title>2021년 7월 현재, minSdkVersion 몇으로 해야 할까?</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Why Ktor Should Be Your Next Framework
+https://towardsdev.com/why-ktor-should-be-your-next-framework-fe8881407c8e Different ways to handle Android Gradle dependencies
+https://proandroiddev.com/different-ways-to-handle-android-gradle-dependencies-68ae00ca286c 【Coroutinesガイド】コルーチンコンテキストとディスパッチャー
+https://qiita.com/CuriosityKilledTheCat/items/ede742a84e5eb8c52576 Automating dependency updates in a Compose project
+https://medium.com/androiddevelopers/automating-dependency-updates-in-a-compose-project-168ef5e89ac5 DataClassGenerate
+https://github.com/facebookincubator/dataclassgenerate Let’s go. It’s Google I/O 2023
+https://android-developers.googleblog.com/2023/03/lets-go-its-google-io-2023.html ChatGPT, for Android developers
+https://proandroiddev.com/chatgpt-for-android-developers-1c3c1ecc6440 Building a GPT Client for Android with Jetpack Compose in Kotlin
+https://itnext.io/building-a-gpt-client-for-android-with-jetpack-compose-in-kotlin-a4a751be4a95 Realm Kotlin 1.7
+https://medium.com/realm/realm-kotlin-1-7-e644f79c0e77 From Dagger &amp;amp; Hilt into the multiplatform world with kotlin-inject
+https://proandroiddev.com/from-dagger-hilt-into-the-multiplatform-world-with-kotlin-inject-647d8e3bddd5 Key product updates from the 2023 Google for Games Developer Summit'>
+<title>냉동코더의 안드로이드 개발 뉴스::23.03</title>
 
-<link rel='canonical' href='https://cliearl.github.io/posts/android/how-much-minsdkversion/'>
+<link rel='canonical' href='https://cliearl.github.io/posts/android/devnews_2303/'>
 
-<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='2021년 7월 현재, minSdkVersion 몇으로 해야 할까?'>
-<meta property='og:description' content='minSdkVersion 과연 몇으로 해야할지 정해드립니다.
-다음 코드는 build.gradle의 코드 일부입니다. build.gradle의 minsdkversion은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.
-1 2 3 4 5 6 7 8 9 10 11 12 13 android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.0&amp;#34; testInstrumentationRunner &amp;#34;androidx.'>
-<meta property='og:url' content='https://cliearl.github.io/posts/android/how-much-minsdkversion/'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='냉동코더의 안드로이드 개발 뉴스::23.03'>
+<meta property='og:description' content='Why Ktor Should Be Your Next Framework
+https://towardsdev.com/why-ktor-should-be-your-next-framework-fe8881407c8e Different ways to handle Android Gradle dependencies
+https://proandroiddev.com/different-ways-to-handle-android-gradle-dependencies-68ae00ca286c 【Coroutinesガイド】コルーチンコンテキストとディスパッチャー
+https://qiita.com/CuriosityKilledTheCat/items/ede742a84e5eb8c52576 Automating dependency updates in a Compose project
+https://medium.com/androiddevelopers/automating-dependency-updates-in-a-compose-project-168ef5e89ac5 DataClassGenerate
+https://github.com/facebookincubator/dataclassgenerate Let’s go. It’s Google I/O 2023
+https://android-developers.googleblog.com/2023/03/lets-go-its-google-io-2023.html ChatGPT, for Android developers
+https://proandroiddev.com/chatgpt-for-android-developers-1c3c1ecc6440 Building a GPT Client for Android with Jetpack Compose in Kotlin
+https://itnext.io/building-a-gpt-client-for-android-with-jetpack-compose-in-kotlin-a4a751be4a95 Realm Kotlin 1.7
+https://medium.com/realm/realm-kotlin-1-7-e644f79c0e77 From Dagger &amp;amp; Hilt into the multiplatform world with kotlin-inject
+https://proandroiddev.com/from-dagger-hilt-into-the-multiplatform-world-with-kotlin-inject-647d8e3bddd5 Key product updates from the 2023 Google for Games Developer Summit'>
+<meta property='og:url' content='https://cliearl.github.io/posts/android/devnews_2303/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='minsdkversion' /><meta property='article:published_time' content='2021-07-19T18:39:10&#43;09:00'/><meta property='article:modified_time' content='2021-07-19T18:39:10&#43;09:00'/>
-<meta name="twitter:title" content="2021년 7월 현재, minSdkVersion 몇으로 해야 할까?">
-<meta name="twitter:description" content="minSdkVersion 과연 몇으로 해야할지 정해드립니다.
-다음 코드는 build.gradle의 코드 일부입니다. build.gradle의 minsdkversion은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.
-1 2 3 4 5 6 7 8 9 10 11 12 13 android { compileSdkVersion 30 buildToolsVersion &amp;#34;30.0.3&amp;#34; defaultConfig { applicationId &amp;#34;com.example.myapplication&amp;#34; minSdkVersion 16 targetSdkVersion 30 versionCode 1 versionName &amp;#34;1.0&amp;#34; testInstrumentationRunner &amp;#34;androidx.">
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2023-04-02T14:41:21&#43;09:00'/><meta property='article:modified_time' content='2023-04-02T14:41:21&#43;09:00'/>
+<meta name="twitter:title" content="냉동코더의 안드로이드 개발 뉴스::23.03">
+<meta name="twitter:description" content="Why Ktor Should Be Your Next Framework
+https://towardsdev.com/why-ktor-should-be-your-next-framework-fe8881407c8e Different ways to handle Android Gradle dependencies
+https://proandroiddev.com/different-ways-to-handle-android-gradle-dependencies-68ae00ca286c 【Coroutinesガイド】コルーチンコンテキストとディスパッチャー
+https://qiita.com/CuriosityKilledTheCat/items/ede742a84e5eb8c52576 Automating dependency updates in a Compose project
+https://medium.com/androiddevelopers/automating-dependency-updates-in-a-compose-project-168ef5e89ac5 DataClassGenerate
+https://github.com/facebookincubator/dataclassgenerate Let’s go. It’s Google I/O 2023
+https://android-developers.googleblog.com/2023/03/lets-go-its-google-io-2023.html ChatGPT, for Android developers
+https://proandroiddev.com/chatgpt-for-android-developers-1c3c1ecc6440 Building a GPT Client for Android with Jetpack Compose in Kotlin
+https://itnext.io/building-a-gpt-client-for-android-with-jetpack-compose-in-kotlin-a4a751be4a95 Realm Kotlin 1.7
+https://medium.com/realm/realm-kotlin-1-7-e644f79c0e77 From Dagger &amp;amp; Hilt into the multiplatform world with kotlin-inject
+https://proandroiddev.com/from-dagger-hilt-into-the-multiplatform-world-with-kotlin-inject-647d8e3bddd5 Key product updates from the 2023 Google for Games Developer Summit">
     <link rel="shortcut icon" href="favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
@@ -280,47 +304,7 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#api-버전별-특징">API 버전별 특징</a>
-      <ol>
-        <li><a href="#21-lollipop">21 Lollipop</a></li>
-        <li><a href="#23-marshmallow">23 Marshmallow</a></li>
-        <li><a href="#24-nougat">24 Nougat</a></li>
-        <li><a href="#26-oreo">26 Oreo</a></li>
-      </ol>
-    </li>
-    <li><a href="#사용자-비율">사용자 비율</a></li>
-    <li><a href="#결론">결론</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+    
 
             <main class="main full-width">
     <article class="main-article">
@@ -339,7 +323,7 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/posts/android/how-much-minsdkversion/">2021년 7월 현재, minSdkVersion 몇으로 해야 할까?</a>
+            <a href="/posts/android/devnews_2303/">냉동코더의 안드로이드 개발 뉴스::23.03</a>
         </h2>
     
         
@@ -361,7 +345,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Jul 19, 2021</time>
+                <time class="article-time--published">Apr 02, 2023</time>
             </div>
         
 
@@ -376,7 +360,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    3 minute read
+                    1 minute read
                 </time>
             </div>
         
@@ -391,172 +375,123 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <p><code>minSdkVersion</code> 과연 몇으로 해야할지 정해드립니다.</p>
-<p>다음 코드는 <code>build.gradle</code>의 코드 일부입니다. <code>build.gradle</code>의 <code>minsdkversion</code>은 내 앱을 설치할 수 있는 기기버전을 정하는 인자인데요, 낮으면 낮을수록 더 많은 기기에 앱을 설치할 수 있지만 그만큼 앱을 설계할 때 구형 API까지 고려해야 한다는 문제가 있습니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">android</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">compileSdkVersion</span> <span class="mi">30</span>
-</span></span><span class="line"><span class="cl">    <span class="n">buildToolsVersion</span> <span class="s2">&#34;30.0.3&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">defaultConfig</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">applicationId</span> <span class="s2">&#34;com.example.myapplication&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">minSdkVersion</span> <span class="mi">16</span>
-</span></span><span class="line"><span class="cl">        <span class="n">targetSdkVersion</span> <span class="mi">30</span>
-</span></span><span class="line"><span class="cl">        <span class="n">versionCode</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">        <span class="n">versionName</span> <span class="s2">&#34;1.0&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">testInstrumentationRunner</span> <span class="s2">&#34;androidx.test.runner.AndroidJUnitRunner&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>그렇다면 2021년 7월 현재, 앱의 <code>minSdkVersion</code>은 몇으로 하는게 적당할까요?</p>
-<h2 id="api-버전별-특징">API 버전별 특징</h2>
-<p>그걸 판단하기 위해서 API별로 어떤 기능이 추가되었는지를 확인하는게 좋을 것 같습니다. 제가 생각하기에 <a class="link" href="https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels"  target="_blank" rel="noopener"
-    >API별로 채용된 특징</a> 중 성능이나 개발과정에 큰 변화를 가져오는 내용은 다음과 같습니다.</p>
-<h3 id="21-lollipop">21 Lollipop</h3>
+    <ul>
+<li>
+<p>Why Ktor Should Be Your Next Framework</p>
 <ul>
-<li>
-<p><a class="link" href="https://source.android.com/devices/tech/dalvik"  target="_blank" rel="noopener"
-    >ART를 기본 런타임환경으로 채용</a> : Dalvik 런타임이 ART로 변경되면서 <a class="link" href="https://www.johnmiller.fr/dalvik-versus-art-benchmarks-on-a-nexus-5/"  target="_blank" rel="noopener"
-    >구동 퍼포먼스가 향상</a>되었습니다.</p>
+<li><a class="link" href="https://towardsdev.com/why-ktor-should-be-your-next-framework-fe8881407c8e"  target="_blank" rel="noopener"
+    >https://towardsdev.com/why-ktor-should-be-your-next-framework-fe8881407c8e</a></li>
+</ul>
 </li>
 <li>
-<p><a class="link" href="https://developer.android.com/guide/topics/graphics/opengl"  target="_blank" rel="noopener"
-    >OpenGL ES 3.1 지원</a> : 그래픽처리에서 <a class="link" href="https://en.wikipedia.org/wiki/OpenGL_ES#OpenGL_ES_3.1"  target="_blank" rel="noopener"
-    >더 많은 기능</a>을 사용할 수 있게 되었습니다.</p>
+<p>Different ways to handle Android Gradle dependencies</p>
+<ul>
+<li><a class="link" href="https://proandroiddev.com/different-ways-to-handle-android-gradle-dependencies-68ae00ca286c"  target="_blank" rel="noopener"
+    >https://proandroiddev.com/different-ways-to-handle-android-gradle-dependencies-68ae00ca286c</a></li>
+</ul>
 </li>
 <li>
-<p><a class="link" href="https://android-developers.googleblog.com/2014/10/appcompat-v21-material-design-for-pre.html"  target="_blank" rel="noopener"
-    >머테리얼 디자인 지원</a> : <a class="link" href="https://developer.android.com/guide/topics/ui/look-and-feel"  target="_blank" rel="noopener"
-    >구글에서 제시한 플랫 디자인</a>을 사용할 수 있게 되었습니다.</p>
+<p>【Coroutinesガイド】コルーチンコンテキストとディスパッチャー</p>
+<ul>
+<li><a class="link" href="https://qiita.com/CuriosityKilledTheCat/items/ede742a84e5eb8c52576"  target="_blank" rel="noopener"
+    >https://qiita.com/CuriosityKilledTheCat/items/ede742a84e5eb8c52576</a></li>
+</ul>
+</li>
+<li>
+<p>Automating dependency updates in a Compose project</p>
+<ul>
+<li><a class="link" href="https://medium.com/androiddevelopers/automating-dependency-updates-in-a-compose-project-168ef5e89ac5"  target="_blank" rel="noopener"
+    >https://medium.com/androiddevelopers/automating-dependency-updates-in-a-compose-project-168ef5e89ac5</a></li>
+</ul>
+</li>
+<li>
+<p>DataClassGenerate</p>
+<ul>
+<li><a class="link" href="https://github.com/facebookincubator/dataclassgenerate"  target="_blank" rel="noopener"
+    >https://github.com/facebookincubator/dataclassgenerate</a></li>
+</ul>
+</li>
+<li>
+<p>Let’s go. It’s Google I/O 2023</p>
+<ul>
+<li><a class="link" href="https://android-developers.googleblog.com/2023/03/lets-go-its-google-io-2023.html"  target="_blank" rel="noopener"
+    >https://android-developers.googleblog.com/2023/03/lets-go-its-google-io-2023.html</a></li>
+</ul>
+</li>
+<li>
+<p>ChatGPT, for Android developers</p>
+<ul>
+<li><a class="link" href="https://proandroiddev.com/chatgpt-for-android-developers-1c3c1ecc6440"  target="_blank" rel="noopener"
+    >https://proandroiddev.com/chatgpt-for-android-developers-1c3c1ecc6440</a></li>
+</ul>
+</li>
+<li>
+<p>Building a GPT Client for Android with Jetpack Compose in Kotlin</p>
+<ul>
+<li><a class="link" href="https://itnext.io/building-a-gpt-client-for-android-with-jetpack-compose-in-kotlin-a4a751be4a95"  target="_blank" rel="noopener"
+    >https://itnext.io/building-a-gpt-client-for-android-with-jetpack-compose-in-kotlin-a4a751be4a95</a></li>
+</ul>
+</li>
+<li>
+<p>Realm Kotlin 1.7</p>
+<ul>
+<li><a class="link" href="https://medium.com/realm/realm-kotlin-1-7-e644f79c0e77"  target="_blank" rel="noopener"
+    >https://medium.com/realm/realm-kotlin-1-7-e644f79c0e77</a></li>
+</ul>
+</li>
+<li>
+<p>From Dagger &amp; Hilt into the multiplatform world with kotlin-inject</p>
+<ul>
+<li><a class="link" href="https://proandroiddev.com/from-dagger-hilt-into-the-multiplatform-world-with-kotlin-inject-647d8e3bddd5"  target="_blank" rel="noopener"
+    >https://proandroiddev.com/from-dagger-hilt-into-the-multiplatform-world-with-kotlin-inject-647d8e3bddd5</a></li>
+</ul>
+</li>
+<li>
+<p>Key product updates from the 2023 Google for Games Developer Summit</p>
+<ul>
+<li><a class="link" href="https://android-developers.googleblog.com/2023/03/GGDS-recap-blog.html"  target="_blank" rel="noopener"
+    >https://android-developers.googleblog.com/2023/03/GGDS-recap-blog.html</a></li>
+</ul>
+</li>
+<li>
+<p>What’s new in the Jetpack Compose March ’23 release</p>
+<ul>
+<li><a class="link" href="https://android-developers.googleblog.com/2023/03/whats-new-in-jetpack-compose-march-23-release.html"  target="_blank" rel="noopener"
+    >https://android-developers.googleblog.com/2023/03/whats-new-in-jetpack-compose-march-23-release.html</a></li>
+</ul>
+</li>
+<li>
+<p>Android13の写真選択ツールを導入しようとしてやめた話</p>
+<ul>
+<li><a class="link" href="https://qiita.com/all_fort/items/7a933439fcc576918160"  target="_blank" rel="noopener"
+    >https://qiita.com/all_fort/items/7a933439fcc576918160</a></li>
+</ul>
+</li>
+<li>
+<p>Media3 is ready to play!</p>
+<ul>
+<li><a class="link" href="https://android-developers.googleblog.com/2023/03/media3-is-ready-to-play.html"  target="_blank" rel="noopener"
+    >https://android-developers.googleblog.com/2023/03/media3-is-ready-to-play.html</a></li>
+</ul>
+</li>
+<li>
+<p>Is Jetpack Compose/Flutter way of building UI really better than xml</p>
+<ul>
+<li><a class="link" href="https://www.reddit.com/r/androiddev/comments/121g90o/is_jetpack_composeflutter_way_of_building_ui/"  target="_blank" rel="noopener"
+    >https://www.reddit.com/r/androiddev/comments/121g90o/is_jetpack_composeflutter_way_of_building_ui/</a></li>
+</ul>
+</li>
+<li>
+<p>Recent Release Notes</p>
+<ul>
+<li><a class="link" href="https://developer.android.com/jetpack/androidx/versions/all-channel"  target="_blank" rel="noopener"
+    >https://developer.android.com/jetpack/androidx/versions/all-channel</a> </li>
+</ul>
 </li>
 </ul>
-<h3 id="23-marshmallow">23 Marshmallow</h3>
-<ul>
-<li><a class="link" href="https://developer.android.com/training/permissions/requesting"  target="_blank" rel="noopener"
-    >런타임 퍼미션 채용</a> : GPS나 파일쓰기 같은 위험한 권한이 필요할 때 앱 실행중에 권한을 추가적으로 요청함으로써 사용자의 주의를 환기시키는 것이 가능해졌습니다.</li>
-</ul>
-<h3 id="24-nougat">24 Nougat</h3>
-<ul>
-<li>
-<p><a class="link" href="https://developer.android.com/about/versions/nougat/android-7.0#jit_aot"  target="_blank" rel="noopener"
-    >ART 엔진 개선</a> : 기존의 ART 런타임을 ART + JIT 형태로 변경하여 상호보완적인 기능을 수행하도록 하였습니다.</p>
-</li>
-<li>
-<p><a class="link" href="https://developer.android.com/about/versions/nougat/android-7.0#gles_32"  target="_blank" rel="noopener"
-    >OpenGL ES 3.2 지원</a>
-그래픽처리에서 <a class="link" href="https://en.wikipedia.org/wiki/OpenGL_ES#OpenGL_ES_3.2"  target="_blank" rel="noopener"
-    >더더 많은 기능</a>을 사용할 수 있게 되었습니다.</p>
-</li>
-</ul>
-<h3 id="26-oreo">26 Oreo</h3>
-<ul>
-<li><a class="link" href="https://developer.android.com/about/versions/oreo/background.html"  target="_blank" rel="noopener"
-    >백그라운드 실행제한</a> : 백그라운드에서 앱이 계속 살아있지 못하도록 제한하므로 API 26부터는 백그라운드를 사용하는 앱의 구조를 근본적으로 다시 설계해야 합니다.</li>
-</ul>
-<h2 id="사용자-비율">사용자 비율</h2>
-<p><a class="link" href="https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide"  target="_blank" rel="noopener"
-    >statcounter</a> 와 <a class="link" href="https://www.appbrain.com/stats/top-android-sdk-versions"  target="_blank" rel="noopener"
-    >AppBrain</a>이 제공하는 2021년 7월 현재 전세계 안드로이드 API 점유율은 다음 표와 같습니다. 킷캣은 1%대 점유율을 가지고 있네요. 일본내 점유율만을 보여주는 <a class="link" href="http://smatabinfo.jp/os/android/index.html"  target="_blank" rel="noopener"
-    >smatabinfo</a>에 따르면 이젠 롤리팝조차 1% 점유율이 안된다고 하네요.</p>
-<div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>OS Version</th>
-<th style="text-align:center">API level</th>
-<th style="text-align:right">statcounter</th>
-<th style="text-align:right">AppBrain</th>
-<th style="text-align:right">smatabinfo</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>11 (Android 11)</td>
-<td style="text-align:center">30</td>
-<td style="text-align:right">17.50%</td>
-<td style="text-align:right">17.20%</td>
-<td style="text-align:right">16.186%</td>
-</tr>
-<tr>
-<td>10 (Android 10)</td>
-<td style="text-align:center">29</td>
-<td style="text-align:right">35.91%</td>
-<td style="text-align:right">33.00%</td>
-<td style="text-align:right">40.773%</td>
-</tr>
-<tr>
-<td>9.0 (Pie)</td>
-<td style="text-align:center">28</td>
-<td style="text-align:right">17.03%</td>
-<td style="text-align:right">17.60%</td>
-<td style="text-align:right">18.903%</td>
-</tr>
-<tr>
-<td>8.0-8.1 (Oreo)</td>
-<td style="text-align:center">26</td>
-<td style="text-align:right">13.04%</td>
-<td style="text-align:right">13.70%</td>
-<td style="text-align:right">13.118%</td>
-</tr>
-<tr>
-<td>7.0-7.1 (Nougat)</td>
-<td style="text-align:center">24</td>
-<td style="text-align:right">6.89%</td>
-<td style="text-align:right">7.30%</td>
-<td style="text-align:right">7.594%</td>
-</tr>
-<tr>
-<td>6.0 (Marshmallow)</td>
-<td style="text-align:center">23</td>
-<td style="text-align:right">4.63%</td>
-<td style="text-align:right">5.00%</td>
-<td style="text-align:right">2.175%</td>
-</tr>
-<tr>
-<td>5.0-5.1 (Lollipop)</td>
-<td style="text-align:center">21</td>
-<td style="text-align:right">3.47%</td>
-<td style="text-align:right">4.00%</td>
-<td style="text-align:right">0.818%</td>
-</tr>
-<tr>
-<td>4.4 (KitKat)</td>
-<td style="text-align:center">19</td>
-<td style="text-align:right">1.11%</td>
-<td style="text-align:right">1.40%</td>
-<td style="text-align:right">0.317%</td>
-</tr>
-</tbody>
-</table></div>
-<h2 id="결론">결론</h2>
-<p>롤리팝(21)에서는 성능이 향상될 수 있는 여러가지 획기적인 기술도입이 있었으므로 킷캣(19)은 이제는 버리는게 맞아 보입니다. 다만 롤리팝은 설치시 퍼미션을 다 줘버리는 한계가 있으므로, 런타임 퍼미션을 사용할 수 있는 마시멜로(23)를 <code>minsdkversion</code>으로 설정하는 것을 추천합니다. 여기까지만 해도 95%의 기기를 커버할 수 있습니다.</p>
-<p>더 강력한 이유로는 <a class="link" href="https://twitter.com/minsdkversion"  target="_blank" rel="noopener"
-    >https://twitter.com/minsdkversion</a> 이 23을 트윗했기 때문입니다&hellip;?</p>
-<blockquote class="twitter-tweet"><p lang="qst" dir="ltr">23</p>&mdash; minSdkVersion (@minSdkVersion) <a href="https://twitter.com/minSdkVersion/status/1204145130673975311?ref_src=twsrc%5Etfw">December 9, 2019</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<p>그리고 개인적으로 개발하는 어플이라면 오레오(26)을 <code>minSdkVersion</code>으로 추천합니다. 누가(24)는 2019년 10월자로 <a class="link" href="https://support.google.com/nexus/answer/4457705?hl=en#zippy=%2Cpixel-phones"  target="_blank" rel="noopener"
-    >보안 업데이트가 중단</a>되어 해킹의 위험이 있는데다, API 26까지의 전세계 점유율은 이미 80%를 넘어섰고 앞으로도 계속 늘어날 것이기 때문입니다. 또한 개발자로서는 API 26 이전의 백그라운드 실행방식을 고려하지 않아도 되는 커다란 이점도 있습니다. 개발자의 편의를 위해 이젠 누가 이하를 사용하는 기기는 과감하게 지원을 포기하는것도 나쁘지 않다고 생각합니다.</p>
-<p>다시 말씀드리지만 상용앱이 아니라 개인적으로 개발하는 어플에 적용하는게 좋겠죠. 어디까지나 제 개인의 의견일 뿐이고 참고 정도로 생각해주시면 감사하겠습니다.</p>
 <div class="video-wrapper">
     <iframe loading="lazy" 
-            src="https://www.youtube.com/embed/bdKjOVBuKlU" 
+            src="https://www.youtube.com/embed/ucvFblsbVqs" 
             allowfullscreen 
             title="YouTube Video"
     >
@@ -569,12 +504,6 @@ if (!doNotTrack) {
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/minsdkversion/">minsdkversion</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">
@@ -629,19 +558,6 @@ if (!doNotTrack) {
             
                 
 <article class="">
-    <a href="/posts/android/devnews_2303/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.03</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
     <a href="/posts/android/uninstall-haxm-macos/">
         
         
@@ -687,6 +603,19 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">buildSrc를 적용한 Gradle의 Dependency Update하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/build-performance-benchmark/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">내 장비의 안드로이드 스튜디오 빌드능력 벤치마킹하기</h2>
         </div>
     </a>
 </article>
