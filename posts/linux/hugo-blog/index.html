@@ -307,6 +307,7 @@ if (!doNotTrack) {
   <ol>
     <li><a href="#hugo-초기화">hugo 초기화</a></li>
     <li><a href="#깃-준비">깃 준비</a></li>
+    <li><a href="#새로-설정하는-경우">새로 설정하는 경우</a></li>
     <li><a href="#글-작성-후-확인">글 작성 후 확인</a></li>
     <li><a href="#페이지-작성-후-업로드">페이지 작성 후 업로드</a></li>
     <li><a href="#커밋-자동화-스크립트">커밋 자동화 스크립트</a></li>
@@ -381,7 +382,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -429,8 +430,27 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> cliearl.github.io
 </span></span><span class="line"><span class="cl">$ git init
 </span></span><span class="line"><span class="cl">$ git remote add origin <span class="o">[</span>https://hugo 원본파일을 보관할 저장소<span class="o">]</span>
-</span></span><span class="line"><span class="cl">$ git submodule add <span class="o">[</span>https://hugo가 생성한 사이트를 업로드할 저장소<span class="o">]</span> public
-</span></span><span class="line"><span class="cl">$ git submodule add <span class="o">[</span>테마 깃주소.git<span class="o">]</span> themes/zzo
+</span></span><span class="line"><span class="cl">$ git submodule add https://github.com/cliearl/cliearl.github.io.git public
+</span></span><span class="line"><span class="cl">$ git submodule add https://github.com/CaiJimmy/hugo-theme-stack.git themes/stack
+</span></span><span class="line"><span class="cl">$ git submodule update --init --recursive  // 테마가 업데이트 될 경우 반영
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="새로-설정하는-경우">새로 설정하는 경우</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git pull <span class="o">[</span>https://hugo 원본파일을 보관할 저장소<span class="o">]</span>
+</span></span><span class="line"><span class="cl">$ git rm --cached public
+</span></span><span class="line"><span class="cl">$ git rm --cached themes/stack
+</span></span><span class="line"><span class="cl">$ git submodule add https://github.com/cliearl/cliearl.github.io.git public
+</span></span><span class="line"><span class="cl">$ git submodule add https://github.com/CaiJimmy/hugo-theme-stack.git themes/stack
 </span></span><span class="line"><span class="cl">$ git submodule update --init --recursive  // 테마가 업데이트 될 경우 반영
 </span></span></code></pre></td></tr></table>
 </div>
