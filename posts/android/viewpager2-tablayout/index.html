@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다.
-ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
-플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-1 2 3 4 5 6 7 8 9 // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다. ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다. # 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다. 1 2 3 4 5 6 7 8 9 // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &#39;androidx.viewpager2:viewpager2:1.0.0&#39; } # Fragment의 레이아웃 작성 다음은 new -&gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.">
 <title>ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewpager2-tablayout/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기'>
-<meta property='og:description' content='이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다.
-ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
-플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-1 2 3 4 5 6 7 8 9 // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기">
+<meta property='og:description' content="이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다. ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다. # 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다. 1 2 3 4 5 6 7 8 9 // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &#39;androidx.viewpager2:viewpager2:1.0.0&#39; } # Fragment의 레이아웃 작성 다음은 new -&gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/viewpager2-tablayout/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='ViewPager2' /><meta property='article:tag' content='TabLayout' /><meta property='article:published_time' content='2021-05-02T22:44:04&#43;09:00'/><meta property='article:modified_time' content='2021-05-02T22:44:04&#43;09:00'/>
 <meta name="twitter:title" content="ViewPager2와 TabLayout을 이용해 스와이프 되는 화면 구현하기">
-<meta name="twitter:description" content="이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다.
-ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.
-플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.
-1 2 3 4 5 6 7 8 9 // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &amp;#39;androidx.viewpager2:viewpager2:1.0.0&amp;#39; } Fragment의 레이아웃 작성 다음은 new -&amp;gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="이번 포스팅에서는 ViewPager2와 TabLayout을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다. ViewPager2를 사용하는 이유나 장점에 대해서는 ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다. # 플러그인 추가 우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다. 1 2 3 4 5 6 7 8 9 // 뷰바인딩 사용준비 android { buildFeatures.viewBinding true } // ViewPager2 라이브러리 추가 dependencies { implementation &#39;androidx.viewpager2:viewpager2:1.0.0&#39; } # Fragment의 레이아웃 작성 다음은 new -&gt; fragment 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -94,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -255,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -268,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -276,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -334,7 +326,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/android/" >
-                android
+                Android
             </a>
         
     </header>
@@ -399,8 +391,10 @@ if (!doNotTrack) {
     >TabLayout</a>을 이용해 스와이프 되는 화면을 구현해 보도록 하겠습니다.</p>
 <p>ViewPager2를 사용하는 이유나 장점에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/viewpager2-convert/"  target="_blank" rel="noopener"
     >ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기</a> 포스팅에서 다루었으니 그 내용을 참조해 주시기 바랍니다.</p>
-<h2 id="플러그인-추가">플러그인 추가</h2>
-<p>우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.</p>
+<h2 id="플러그인-추가">
+    <a href="#%ed%94%8c%eb%9f%ac%ea%b7%b8%ec%9d%b8-%ec%b6%94%ea%b0%80" class="header-anchor">#</a>
+    플러그인 추가
+</h2><p>우선은 뷰바인딩 사용설정 및 ViewPager2 플러그인을 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -425,8 +419,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="fragment의-레이아웃-작성">Fragment의 레이아웃 작성</h2>
-<p>다음은 <code>new -&gt; fragment</code> 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.</p>
+</div><h2 id="fragment의-레이아웃-작성">
+    <a href="#fragment%ec%9d%98-%eb%a0%88%ec%9d%b4%ec%95%84%ec%9b%83-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
+    Fragment의 레이아웃 작성
+</h2><p>다음은 <code>new -&gt; fragment</code> 를 선택하여 테스트용으로 사용할 프래그먼트를 만들어줍니다. 텍스트를 화면 중간에 표시하기 위해 코드를 약간 변경합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -447,8 +443,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    <span class="na">android:textAppearance=</span><span class="s">&#34;@style/TextAppearance.AppCompat.Large&#34;</span> <span class="nt">/&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="fragment-클래스-작성">Fragment 클래스 작성</h2>
-<p>기본 프래그먼트에 뷰 바인딩을 적용하고 텍스트를 표시하도록 변경합니다.</p>
+</div><h2 id="fragment-클래스-작성">
+    <a href="#fragment-%ed%81%b4%eb%9e%98%ec%8a%a4-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
+    Fragment 클래스 작성
+</h2><p>기본 프래그먼트에 뷰 바인딩을 적용하고 텍스트를 표시하도록 변경합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -499,8 +497,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="viewpager2의-pageradapter-작성">ViewPager2의 PagerAdapter 작성</h2>
-<p>방금 작성한 프래그먼트에 텍스트를 전해주는 ViewPager2 어댑터를 작성합니다. 여기서는 3개의 페이지를 갖도록 하겠습니다.</p>
+</div><h2 id="viewpager2의-pageradapter-작성">
+    <a href="#viewpager2%ec%9d%98-pageradapter-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
+    ViewPager2의 PagerAdapter 작성
+</h2><p>방금 작성한 프래그먼트에 텍스트를 전해주는 ViewPager2 어댑터를 작성합니다. 여기서는 3개의 페이지를 갖도록 하겠습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -533,8 +533,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="activity_mainxml">activity_main.xml</h3>
-<p>메인 액티비티의 화면을 구성합니다. 화면 위쪽에 ViewPager를 배치하고 나머지 공간에 <a class="link" href="https://developer.android.com/reference/com/google/android/material/appbar/AppBarLayout"  target="_blank" rel="noopener"
+</div><h3 id="activity_mainxml">
+    <a href="#activity_mainxml" class="header-anchor">#</a>
+    activity_main.xml
+</h3><p>메인 액티비티의 화면을 구성합니다. 화면 위쪽에 ViewPager를 배치하고 나머지 공간에 <a class="link" href="https://developer.android.com/reference/com/google/android/material/appbar/AppBarLayout"  target="_blank" rel="noopener"
     >AppBarLayout</a>을 배치한 뒤 그 내부에 TabLayout을 배치합니다. 그리고 TabLayout의 <code>app::tab~</code> 속성을 사용해서 색을 지정합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -624,8 +626,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="mainactivity-설정">Mainactivity 설정</h2>
-<p>ViewPager 어댑터 클래스의 인스턴스를 만들어 ViewPager 어댑터 속성에 연결시킵니다. 그리고 <a class="link" href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator"  target="_blank" rel="noopener"
+</div><h2 id="mainactivity-설정">
+    <a href="#mainactivity-%ec%84%a4%ec%a0%95" class="header-anchor">#</a>
+    Mainactivity 설정
+</h2><p>ViewPager 어댑터 클래스의 인스턴스를 만들어 ViewPager 어댑터 속성에 연결시킵니다. 그리고 <a class="link" href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator"  target="_blank" rel="noopener"
     >TabLayoutMediator</a>를 이용해서 TabLayout과 ViewPager를 연결합니다. 각 탭의 타이틀과 아이콘은 블럭내부에서 지정할 수 있습니다. 탭의 이름은 <code>Title 0</code> 형식으로 지정하고 아이콘은 벡터 이미지를 추가한 뒤 <code>setIcon</code> 에서 불러오도록 하였습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -677,8 +681,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="pagetransformer-설정">PageTransformer 설정</h2>
-<p>ViewPager에서는 페이지를 변경할때 여러가지 효과를 줄 수 있습니다. 구글에서 공개하는 <a class="link" href="https://developer.android.com/training/animation/screen-slide-2#zoom-out"  target="_blank" rel="noopener"
+</div><h2 id="pagetransformer-설정">
+    <a href="#pagetransformer-%ec%84%a4%ec%a0%95" class="header-anchor">#</a>
+    PageTransformer 설정
+</h2><p>ViewPager에서는 페이지를 변경할때 여러가지 효과를 줄 수 있습니다. 구글에서 공개하는 <a class="link" href="https://developer.android.com/training/animation/screen-slide-2#zoom-out"  target="_blank" rel="noopener"
     >ZoomOutPageTransformer</a>를 사용한다면 스크롤할때 페이지가 축소되면서 페이드아웃되고, 페이지가 중앙에 가까워지면 원래 크기로 다시 커지면서 페이드인 되는 효과를 낼 수 있습니다.</p>
 <p>그 외에도 여러가지 페이지 전환효과를 사용하고 싶다면 <a class="link" href="https://medium.com/codex/33-viewpager2-transformers-for-your-android-uis-bbdab801eb2b"  target="_blank" rel="noopener"
     >33 Viewpager2 Transformers for Your Android ui’s</a> 페이지를 참고하세요.</p>
@@ -825,18 +831,18 @@ if (!doNotTrack) {
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -864,6 +870,8 @@ if (!doNotTrack) {
                 </div>
         
                 
+                    
+                    
                     <div class="article-image">
                         <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
                     </div>
@@ -1012,7 +1020,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

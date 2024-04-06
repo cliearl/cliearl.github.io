@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다.
-SOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.
-단일 책임 원칙 (Single responsibility principle, SRP) &amp;ldquo;There should never be more than one reason for a class to change.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다. # SOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다. # 단일 책임 원칙 (Single responsibility principle, SRP) &ldquo;There should never be more than one reason for a class to change.">
 <title>Dependency Injection 기초</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/dependency-injection-basic/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='Dependency Injection 기초'>
-<meta property='og:description' content='이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다.
-SOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.
-단일 책임 원칙 (Single responsibility principle, SRP) &amp;ldquo;There should never be more than one reason for a class to change.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="Dependency Injection 기초">
+<meta property='og:description' content="이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다. # SOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다. # 단일 책임 원칙 (Single responsibility principle, SRP) &ldquo;There should never be more than one reason for a class to change.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/dependency-injection-basic/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-07-31T21:19:03&#43;09:00'/><meta property='article:modified_time' content='2022-07-31T21:19:03&#43;09:00'/>
 <meta name="twitter:title" content="Dependency Injection 기초">
-<meta name="twitter:description" content="이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다.
-SOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.
-단일 책임 원칙 (Single responsibility principle, SRP) &amp;ldquo;There should never be more than one reason for a class to change.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다. # SOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다. # 단일 책임 원칙 (Single responsibility principle, SRP) &ldquo;There should never be more than one reason for a class to change.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -91,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -252,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -265,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -273,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -337,7 +332,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/android/" >
-                android
+                Android
             </a>
         
     </header>
@@ -398,13 +393,17 @@ if (!doNotTrack) {
     
     
     <p>이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다.</p>
-<h2 id="solid-원칙">SOLID 원칙</h2>
-<p>의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. <a class="link" href="https://en.wikipedia.org/wiki/SOLID"  target="_blank" rel="noopener"
+<h2 id="solid-원칙">
+    <a href="#solid-%ec%9b%90%ec%b9%99" class="header-anchor">#</a>
+    SOLID 원칙
+</h2><p>의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. <a class="link" href="https://en.wikipedia.org/wiki/SOLID"  target="_blank" rel="noopener"
     >SOLID 원칙</a>이란 <a class="link" href="https://en.wikipedia.org/wiki/Robert_C._Martin"  target="_blank" rel="noopener"
     >로버트 마틴</a> 선생이 2000년에 <a class="link" href="https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf"  target="_blank" rel="noopener"
     >Design Principles and Design Patterns</a>에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.</p>
-<h3 id="단일-책임-원칙-single-responsibility-principle-srp">단일 책임 원칙 (Single responsibility principle, SRP)</h3>
-<blockquote>
+<h3 id="단일-책임-원칙-single-responsibility-principle-srp">
+    <a href="#%eb%8b%a8%ec%9d%bc-%ec%b1%85%ec%9e%84-%ec%9b%90%ec%b9%99-single-responsibility-principle-srp" class="header-anchor">#</a>
+    단일 책임 원칙 (Single responsibility principle, SRP)
+</h3><blockquote>
 <p>&ldquo;There should never be more than one reason for a class to change.&rdquo;</p>
 </blockquote>
 <p>단일 책임 원칙이란 클래스가 여러개의 책임을 갖게 되면, 각 책임마다 클래스를 변경할 수 있는 이유가 생기므로 책임을 단 한 개만 가지도록 설계하라는 뜻입니다.</p>
@@ -460,8 +459,10 @@ classDiagram
     class SaveAsFile
 
 </div>
-<h3 id="개방-폐쇄-원칙-open-closed-principle-ocp">개방-폐쇄 원칙 (Open-closed principle, OCP)</h3>
-<blockquote>
+<h3 id="개방-폐쇄-원칙-open-closed-principle-ocp">
+    <a href="#%ea%b0%9c%eb%b0%a9-%ed%8f%90%ec%87%84-%ec%9b%90%ec%b9%99-open-closed-principle-ocp" class="header-anchor">#</a>
+    개방-폐쇄 원칙 (Open-closed principle, OCP)
+</h3><blockquote>
 <p>&ldquo;Software entities &hellip; should be open for extension, but closed for modification.&rdquo;</p>
 </blockquote>
 <p>개방-폐쇄 원칙은 객체를 수정하지 않고도 기능을 확장할 수 있게 설계해야 한다는 뜻입니다. 이게 어떻게 가능할까요?</p>
@@ -510,8 +511,10 @@ classDiagram
 
 </div>
 <p>기능을 확장하는 부분은 인터페이스를 사용해 추상화하고, 새로운 기능의 추가에는 상속(다형성)을 적용함으로써 클래스를 유연하게 변경할 수 있게 되는 것입니다.</p>
-<h3 id="리스코프-치환-원칙-liskov-substitution-principle-lsp">리스코프 치환 원칙 (Liskov substitution principle, LSP)</h3>
-<blockquote>
+<h3 id="리스코프-치환-원칙-liskov-substitution-principle-lsp">
+    <a href="#%eb%a6%ac%ec%8a%a4%ec%bd%94%ed%94%84-%ec%b9%98%ed%99%98-%ec%9b%90%ec%b9%99-liskov-substitution-principle-lsp" class="header-anchor">#</a>
+    리스코프 치환 원칙 (Liskov substitution principle, LSP)
+</h3><blockquote>
 <p>&ldquo;Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.&rdquo;</p>
 </blockquote>
 <p>리스코프 치환 원칙에 따르면 상위타입 객체가 하위타입 객체로 변환되어도 상위타입을 사용하는 프로그램은 정상적으로 동작해야 합니다.</p>
@@ -615,8 +618,10 @@ classDiagram
 
 </div>
 <p>LSP를 위반한다는 것은 하위타입이 상위타입의 명세를 제대로 지키지 않고 있다는 뜻입니다. 만약 상위타입의 코드에서 하위타입을 구분해야 하는 경우, 상위타입으로 치환할 수 없기 때문에 코드 내부에서 <code>instanceOf</code> 를 써야 합니다. 그런데 이렇게 하면 하위타입을 새로 만들때마다 상위타입의 코드를 수정해야 하니 결과적으로 OCP도 깨지기 쉬워져서 기능확장이 어려워지게 됩니다.</p>
-<h3 id="인터페이스-분리-원칙-interface-segregation-principle-isp">인터페이스 분리 원칙 (Interface segregation principle, ISP)</h3>
-<blockquote>
+<h3 id="인터페이스-분리-원칙-interface-segregation-principle-isp">
+    <a href="#%ec%9d%b8%ed%84%b0%ed%8e%98%ec%9d%b4%ec%8a%a4-%eb%b6%84%eb%a6%ac-%ec%9b%90%ec%b9%99-interface-segregation-principle-isp" class="header-anchor">#</a>
+    인터페이스 분리 원칙 (Interface segregation principle, ISP)
+</h3><blockquote>
 <p>&ldquo;Many client-specific interfaces are better than one general-purpose interface.&rdquo;</p>
 </blockquote>
 <p>이 문장의 뜻은 구현할 필요가 없는 메소드를 가진 인터페이스를 객체에 사용하지 말라는 뜻입니다. 예를 들어 동물을 표현하는 <code>Animal</code> 인터페이스가 있다고 하겠습니다.</p>
@@ -693,8 +698,10 @@ classDiagram
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="의존성-역전-원칙-dependency-inversion-principle-dip">의존성 역전 원칙 (Dependency inversion principle, DIP)</h3>
-<blockquote>
+</div><h3 id="의존성-역전-원칙-dependency-inversion-principle-dip">
+    <a href="#%ec%9d%98%ec%a1%b4%ec%84%b1-%ec%97%ad%ec%a0%84-%ec%9b%90%ec%b9%99-dependency-inversion-principle-dip" class="header-anchor">#</a>
+    의존성 역전 원칙 (Dependency inversion principle, DIP)
+</h3><blockquote>
 <p>&ldquo;Depend upon abstractions, [not] concretions.&rdquo;</p>
 </blockquote>
 <p>Dependency, 의존이란 무엇일까요. 객체 A가 객체 B를 생성하거나 객체 B의 메서드를 호출할 때 A는 B에 의존한다, 혹은 A가 의존성 B를 갖는다고 표현합니다. 다음 그림에서는 <code>Car</code> 클래스가 <code>Engine</code> 클래스에 의존하고 있습니다.</p>
@@ -802,10 +809,14 @@ classDiagram
   Engine<|..DieselEngine 
 
 </div>
-<h2 id="의존성-주입dependency-injection-di">의존성 주입(Dependency Injection, DI)</h2>
-<p>이제 의존성 주입에 대해 알아보도록 하겠습니다.</p>
-<h3 id="순환의존">순환의존</h3>
-<p>의존의 영향은 꼬리에 꼬리를 문 것처럼 전파되는 특징이 있습니다. 그래서 다음과 같은 의존관계가 있을 때 <code>Piston</code>이 변경되면 <code>Engine</code>도 변경되어야 하고 결국 <code>Car</code>도 따라서 변경되게 됩니다.</p>
+<h2 id="의존성-주입dependency-injection-di">
+    <a href="#%ec%9d%98%ec%a1%b4%ec%84%b1-%ec%a3%bc%ec%9e%85dependency-injection-di" class="header-anchor">#</a>
+    의존성 주입(Dependency Injection, DI)
+</h2><p>이제 의존성 주입에 대해 알아보도록 하겠습니다.</p>
+<h3 id="순환의존">
+    <a href="#%ec%88%9c%ed%99%98%ec%9d%98%ec%a1%b4" class="header-anchor">#</a>
+    순환의존
+</h3><p>의존의 영향은 꼬리에 꼬리를 문 것처럼 전파되는 특징이 있습니다. 그래서 다음과 같은 의존관계가 있을 때 <code>Piston</code>이 변경되면 <code>Engine</code>도 변경되어야 하고 결국 <code>Car</code>도 따라서 변경되게 됩니다.</p>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
     var config = {
         startOnLoad: true,
@@ -848,8 +859,10 @@ flowchart RL
     >Koin</a>, <a class="link" href="https://github.com/Kodein-Framework/Kodein-DI"  target="_blank" rel="noopener"
     >Kodein</a>, <a class="link" href="https://github.com/square/anvil"  target="_blank" rel="noopener"
     >Anvil</a> 등의 라이브러리들이 개발되어 있습니다.</p>
-<h3 id="의존성-주입-방식별-구분">의존성 주입 방식별 구분</h3>
-<p>의존성 역전 원칙에서 다루었던 예에서는 <code>Car</code>가 <code>DieselEngine</code> 의존을 내부에서 직접 생성했었습니다. 이렇게 되면 의존성 역전 원칙을 위배하게 되고 결과적으로 확장-폐쇄 원칙까지 위반하게 됩니다.</p>
+<h3 id="의존성-주입-방식별-구분">
+    <a href="#%ec%9d%98%ec%a1%b4%ec%84%b1-%ec%a3%bc%ec%9e%85-%eb%b0%a9%ec%8b%9d%eb%b3%84-%ea%b5%ac%eb%b6%84" class="header-anchor">#</a>
+    의존성 주입 방식별 구분
+</h3><p>의존성 역전 원칙에서 다루었던 예에서는 <code>Car</code>가 <code>DieselEngine</code> 의존을 내부에서 직접 생성했었습니다. 이렇게 되면 의존성 역전 원칙을 위배하게 되고 결과적으로 확장-폐쇄 원칙까지 위반하게 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1000,8 +1013,10 @@ flowchart RL
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>생성자 주입 방식은 필요한 모든 의존객체를 객체를 생성하는 시점에 준비할 수 있고, 또한 생성 시점에 의존객체가 정상인지 아닌지 판정할 수 있습니다. 반면에 메소드와 인터페이스를 통한 주입 방식은 의존객체가 나중에 생성되는 경우에 사용할 수 있으며, 메소드의 이름을 통해 어떤 의존객체를 주입하는지 더 알기 쉽다는 특징이 있습니다.</p>
-<h3 id="서비스-로케이터-방식">서비스 로케이터 방식</h3>
-<p>서비스 로케이터 방식은 우선 로케이터 클래스에 의존객체를 모은 뒤, 로케이터가 각 클래스에 의존객체를 전달하는 구조로 되어 있습니다. DI와 동일하게 생성자 주입 방식과 메소드 주입 방식으로 구현할 수 있는데 여기서는 생성자 주입 방식으로 사용하는 법만 보여드리도록 하겠습니다.</p>
+<h3 id="서비스-로케이터-방식">
+    <a href="#%ec%84%9c%eb%b9%84%ec%8a%a4-%eb%a1%9c%ec%bc%80%ec%9d%b4%ed%84%b0-%eb%b0%a9%ec%8b%9d" class="header-anchor">#</a>
+    서비스 로케이터 방식
+</h3><p>서비스 로케이터 방식은 우선 로케이터 클래스에 의존객체를 모은 뒤, 로케이터가 각 클래스에 의존객체를 전달하는 구조로 되어 있습니다. DI와 동일하게 생성자 주입 방식과 메소드 주입 방식으로 구현할 수 있는데 여기서는 생성자 주입 방식으로 사용하는 법만 보여드리도록 하겠습니다.</p>
 <p>코드를 보시죠. 우선 메인루틴에서 모든 의존객체를 초기화한 뒤 그것들을 <code>Locator</code>에 생성자로 전달합니다. <code>Locator</code>는 모든 의존객체를 가지고 있도록 설계되어 있습니다. 그리고 <code>Car</code>에서 <code>DieselEngine</code> 객체가 필요하면 <code>Locator</code>를 통해 의존객체를 주입받게 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1129,18 +1144,18 @@ flowchart RL
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -1293,7 +1308,7 @@ flowchart RL
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

@@ -15,8 +15,10 @@
         <description>&lt;p&gt;이번 포스팅에서는 앱에서 움직이는 GIF를 표시하는 법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
 &lt;p&gt;안드로이드에서 이미지를 보여줄때는 화면을 구성하는 xml파일에 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/widget/ImageView&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ImageView&lt;/a&gt;를 올리고 그 이미지뷰에 그림파일을 삽입해주면 됩니다. 이 때 그림파일은 &lt;code&gt;drawable&lt;/code&gt; 폴더에 넣어주며 파일이름은 영문소문자 + 언더바로만 구성합니다.&lt;/p&gt;
-&lt;h2 id=&#34;imageview로-이미지-표시&#34;&gt;ImageView로 이미지 표시&lt;/h2&gt;
-&lt;p&gt;이미지를 표시하기 위해서는 다음과 같이 &lt;code&gt;imageView&lt;/code&gt;의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/widget/ImageView#setImageResource%28int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;imageview로-이미지-표시&#34;&gt;
+    &lt;a href=&#34;#imageview%eb%a1%9c-%ec%9d%b4%eb%af%b8%ec%a7%80-%ed%91%9c%ec%8b%9c&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    ImageView로 이미지 표시
+&lt;/h2&gt;&lt;p&gt;이미지를 표시하기 위해서는 다음과 같이 &lt;code&gt;imageView&lt;/code&gt;의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/widget/ImageView#setImageResource%28int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;setImageResource&lt;/a&gt; 메소드를 사용합니다. 그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -26,8 +28,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;imageView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setImageResource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;drawable&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sample00&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;glide-사용&#34;&gt;Glide 사용&lt;/h2&gt;
-&lt;p&gt;하지만 &lt;a class=&#34;link&#34; href=&#34;https://github.com/bumptech/glide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;glide-사용&#34;&gt;
+    &lt;a href=&#34;#glide-%ec%82%ac%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Glide 사용
+&lt;/h2&gt;&lt;p&gt;하지만 &lt;a class=&#34;link&#34; href=&#34;https://github.com/bumptech/glide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Glide&lt;/a&gt;라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;이렇게 이미지를 표시하는 라이브러리로는 square의 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/picasso&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Picasso&lt;/a&gt;나 facebook에서 만든 &lt;a class=&#34;link&#34; href=&#34;https://github.com/facebook/fresco&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;

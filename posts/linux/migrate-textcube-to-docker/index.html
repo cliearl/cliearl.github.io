@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.
-그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.
-textcube 도커 띄우기 https://registry.hub.docker.com/r/nacyot/textcube/ 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다. 그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역. # textcube 도커 띄우기 https://registry.hub.docker.com/r/nacyot/textcube/ 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정.">
 <title>텍스트큐브를 도커로 마이그레이션하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/linux/migrate-textcube-to-docker/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='텍스트큐브를 도커로 마이그레이션하기'>
-<meta property='og:description' content='기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.
-그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.
-textcube 도커 띄우기 https://registry.hub.docker.com/r/nacyot/textcube/ 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="텍스트큐브를 도커로 마이그레이션하기">
+<meta property='og:description' content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다. 그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역. # textcube 도커 띄우기 https://registry.hub.docker.com/r/nacyot/textcube/ 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정.">
 <meta property='og:url' content='https://cliearl.github.io/posts/linux/migrate-textcube-to-docker/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='textcube' /><meta property='article:tag' content='docker' /><meta property='article:published_time' content='2022-11-09T15:53:08&#43;09:00'/><meta property='article:modified_time' content='2022-11-09T15:53:08&#43;09:00'/>
 <meta name="twitter:title" content="텍스트큐브를 도커로 마이그레이션하기">
-<meta name="twitter:description" content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.
-그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.
-textcube 도커 띄우기 https://registry.hub.docker.com/r/nacyot/textcube/ 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다. 그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역. # textcube 도커 띄우기 https://registry.hub.docker.com/r/nacyot/textcube/ 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -91,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -252,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -265,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -273,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -328,7 +323,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/linux/" >
-                linux
+                Linux
             </a>
         
     </header>
@@ -390,12 +385,16 @@ if (!doNotTrack) {
     
     <p>기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.</p>
 <p>그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.</p>
-<h2 id="textcube-도커-띄우기">textcube 도커 띄우기</h2>
-<p><a class="link" href="https://registry.hub.docker.com/r/nacyot/textcube/"  target="_blank" rel="noopener"
+<h2 id="textcube-도커-띄우기">
+    <a href="#textcube-%eb%8f%84%ec%bb%a4-%eb%9d%84%ec%9a%b0%ea%b8%b0" class="header-anchor">#</a>
+    textcube 도커 띄우기
+</h2><p><a class="link" href="https://registry.hub.docker.com/r/nacyot/textcube/"  target="_blank" rel="noopener"
     >https://registry.hub.docker.com/r/nacyot/textcube/</a>
 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정. 컨테이너 옵션은 따로 건들 것이 없음</p>
-<h2 id="터미널에서-시놀로지에-ssh로-접속">터미널에서 시놀로지에 ssh로 접속</h2>
-<div class="highlight"><div class="chroma">
+<h2 id="터미널에서-시놀로지에-ssh로-접속">
+    <a href="#%ed%84%b0%eb%af%b8%eb%84%90%ec%97%90%ec%84%9c-%ec%8b%9c%eb%86%80%eb%a1%9c%ec%a7%80%ec%97%90-ssh%eb%a1%9c-%ec%a0%91%ec%86%8d" class="header-anchor">#</a>
+    터미널에서 시놀로지에 ssh로 접속
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -405,10 +404,14 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="gp">$</span> sudo -i
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="db-연결">DB 연결</h2>
-<p>기존 mariadb 정보를 사용해 연결</p>
-<h2 id="도커-컨테이너-id-확인">도커 컨테이너 ID 확인</h2>
-<div class="highlight"><div class="chroma">
+</div><h2 id="db-연결">
+    <a href="#db-%ec%97%b0%ea%b2%b0" class="header-anchor">#</a>
+    DB 연결
+</h2><p>기존 mariadb 정보를 사용해 연결</p>
+<h2 id="도커-컨테이너-id-확인">
+    <a href="#%eb%8f%84%ec%bb%a4-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-id-%ed%99%95%ec%9d%b8" class="header-anchor">#</a>
+    도커 컨테이너 ID 확인
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -416,8 +419,10 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="gp">$</span> docker ps -a
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="도커-컨테이너에-이미지-파일-복사">도커 컨테이너에 이미지 파일 복사</h2>
-<div class="highlight"><div class="chroma">
+</div><h2 id="도커-컨테이너에-이미지-파일-복사">
+    <a href="#%eb%8f%84%ec%bb%a4-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88%ec%97%90-%ec%9d%b4%eb%af%b8%ec%a7%80-%ed%8c%8c%ec%9d%bc-%eb%b3%b5%ec%82%ac" class="header-anchor">#</a>
+    도커 컨테이너에 이미지 파일 복사
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -425,8 +430,10 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="gp">$</span> docker cp /volume1/USER/attach/1 <span class="o">[</span>CONTAINER ID<span class="o">]</span>:/var/www/html/attach
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="도커-컨테이너-접속">도커 컨테이너 접속</h2>
-<div class="highlight"><div class="chroma">
+</div><h2 id="도커-컨테이너-접속">
+    <a href="#%eb%8f%84%ec%bb%a4-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-%ec%a0%91%ec%86%8d" class="header-anchor">#</a>
+    도커 컨테이너 접속
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -434,8 +441,10 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="gp">$</span> docker <span class="nb">exec</span> -it <span class="o">[</span>CONTAINER ID<span class="o">]</span> /bin/bash
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="이미지-파일-폴더의-권한-변경">이미지 파일 폴더의 권한 변경</h2>
-<div class="highlight"><div class="chroma">
+</div><h2 id="이미지-파일-폴더의-권한-변경">
+    <a href="#%ec%9d%b4%eb%af%b8%ec%a7%80-%ed%8c%8c%ec%9d%bc-%ed%8f%b4%eb%8d%94%ec%9d%98-%ea%b6%8c%ed%95%9c-%eb%b3%80%ea%b2%bd" class="header-anchor">#</a>
+    이미지 파일 폴더의 권한 변경
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -451,9 +460,9 @@ if (!doNotTrack) {
     
     <section class="article-tags">
         
-            <a href="/tags/textcube/">textcube</a>
+            <a href="/tags/textcube/">Textcube</a>
         
-            <a href="/tags/docker/">docker</a>
+            <a href="/tags/docker/">Docker</a>
         
     </section>
 
@@ -476,18 +485,18 @@ if (!doNotTrack) {
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -640,7 +649,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

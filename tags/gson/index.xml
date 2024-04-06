@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>gson on 냉동코더의 기술블로그</title>
+        <title>Gson on 냉동코더의 기술블로그</title>
         <link>https://cliearl.github.io/tags/gson/</link>
-        <description>Recent content in gson on 냉동코더의 기술블로그</description>
+        <description>Recent content in Gson on 냉동코더의 기술블로그</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <lastBuildDate>Thu, 22 Apr 2021 20:33:39 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/gson/index.xml" rel="self" type="application/rss+xml" /><item>
@@ -19,8 +19,10 @@
     &gt;Gson&lt;/a&gt;이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.&lt;/p&gt;
 &lt;p&gt;여기서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/dataclass-recyclerview/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Data class 이해하고 RecyclerView에서 사용하기&lt;/a&gt; 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;라이브러리-추가&#34;&gt;라이브러리 추가&lt;/h2&gt;
-&lt;p&gt;우선 Gson을 디펜던시에 추가합니다.&lt;/p&gt;
+&lt;h2 id=&#34;라이브러리-추가&#34;&gt;
+    &lt;a href=&#34;#%eb%9d%bc%ec%9d%b4%eb%b8%8c%eb%9f%ac%eb%a6%ac-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    라이브러리 추가
+&lt;/h2&gt;&lt;p&gt;우선 Gson을 디펜던시에 추가합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -33,8 +35,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;화면-구성&#34;&gt;화면 구성&lt;/h2&gt;
-&lt;p&gt;다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;화면-구성&#34;&gt;
+    &lt;a href=&#34;#%ed%99%94%eb%a9%b4-%ea%b5%ac%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    화면 구성
+&lt;/h2&gt;&lt;p&gt;다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -67,8 +71,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/androidx.constraintlayout.widget.ConstraintLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;key-준비&#34;&gt;Key 준비&lt;/h2&gt;
-&lt;p&gt;SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;key-준비&#34;&gt;
+    &lt;a href=&#34;#key-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Key 준비
+&lt;/h2&gt;&lt;p&gt;SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -83,8 +89,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;savepref-작성&#34;&gt;savePref() 작성&lt;/h2&gt;
-&lt;p&gt;다음은 데이터를 저장하는 함수를 만듭니다. 이미 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/sharedpreferences-basic/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;savepref-작성&#34;&gt;
+    &lt;a href=&#34;#savepref-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    savePref() 작성
+&lt;/h2&gt;&lt;p&gt;다음은 데이터를 저장하는 함수를 만듭니다. 이미 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/sharedpreferences-basic/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;SharedPreferences로 앱 설정값 저장하고 불러오기&lt;/a&gt;강의에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고, 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. Recyclerview 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -110,8 +118,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;loadpref-함수-작성&#34;&gt;loadPref() 함수 작성&lt;/h2&gt;
-&lt;p&gt;이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, &lt;a class=&#34;link&#34; href=&#34;https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;loadpref-함수-작성&#34;&gt;
+    &lt;a href=&#34;#loadpref-%ed%95%a8%ec%88%98-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    loadPref() 함수 작성
+&lt;/h2&gt;&lt;p&gt;이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, &lt;a class=&#34;link&#34; href=&#34;https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;TypeToken&lt;/a&gt;을 적용해서 데이터를 복원하는 부분이 추가되었습니다. json으로 SharedPreferences에 저장하는 순간 데이터가 가지고 있는 타입정보가 모두 사라지기 때문에 데이터를 복원하면서 타입정보를 다시 부여하기 위해 타입토큰을 사용합니다. 여기서는 &lt;code&gt;&amp;lt;&amp;lt;ArrayList&amp;lt;Monster&amp;gt;&amp;gt;&lt;/code&gt;라는 타입을 만들어서 데이터에 부여해 줍니다. 그리고 Recyclerview 어댑터 안의 데이터는 변경가능하도록 &lt;code&gt;var&lt;/code&gt; 로 변경해줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -147,8 +157,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;함수-실행&#34;&gt;함수 실행&lt;/h2&gt;
-&lt;p&gt;다음은 메인액티비티 안에서 &lt;code&gt;savePref&lt;/code&gt;와 &lt;code&gt;loadPref&lt;/code&gt;를 실행시키면 됩니다. &lt;code&gt;loadPref&lt;/code&gt;를 실행하고 어댑터에 데이터 변경을 알려주면 됩니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;함수-실행&#34;&gt;
+    &lt;a href=&#34;#%ed%95%a8%ec%88%98-%ec%8b%a4%ed%96%89&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    함수 실행
+&lt;/h2&gt;&lt;p&gt;다음은 메인액티비티 안에서 &lt;code&gt;savePref&lt;/code&gt;와 &lt;code&gt;loadPref&lt;/code&gt;를 실행시키면 됩니다. &lt;code&gt;loadPref&lt;/code&gt;를 실행하고 어댑터에 데이터 변경을 알려주면 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1

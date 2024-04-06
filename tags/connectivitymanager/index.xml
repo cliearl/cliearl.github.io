@@ -16,8 +16,10 @@
 &lt;p&gt;앱을 만들다보면 WIFI를 사용할 수 있는 환경에서 대용량 데이터를 다운로드하도록 하는 등의 처리를 위해 단말의 인터넷 연결상태를 체크해야 할 일이 있습니다.
 이때 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/net/ConnectivityManager&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ConnectivityManager&lt;/a&gt;를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.&lt;/p&gt;
-&lt;h2 id=&#34;권한추가&#34;&gt;권한추가&lt;/h2&gt;
-&lt;p&gt;인터넷에 접근하고 네트워크 상태를 가져오기 위해 &lt;code&gt;AndroidManifest.xml&lt;/code&gt;에 다음 권한을 추가합니다.&lt;/p&gt;
+&lt;h2 id=&#34;권한추가&#34;&gt;
+    &lt;a href=&#34;#%ea%b6%8c%ed%95%9c%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    권한추가
+&lt;/h2&gt;&lt;p&gt;인터넷에 접근하고 네트워크 상태를 가져오기 위해 &lt;code&gt;AndroidManifest.xml&lt;/code&gt;에 다음 권한을 추가합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -28,8 +30,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;uses-permission&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;android:name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;android.permission.INTERNET&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;네트워크-타입-확인&#34;&gt;네트워크 타입 확인&lt;/h2&gt;
-&lt;p&gt;우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;네트워크-타입-확인&#34;&gt;
+    &lt;a href=&#34;#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ed%83%80%ec%9e%85-%ed%99%95%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    네트워크 타입 확인
+&lt;/h2&gt;&lt;p&gt;우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -80,8 +84,10 @@
     &gt;getNetworkCapabilities&lt;/a&gt;로 전달하여 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/net/NetworkCapabilities#hasTransport%28int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;NetworkCapabilities&lt;/a&gt;의 인스턴스를 얻은 뒤 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/net/NetworkCapabilities#hasTransport%28int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;hasTransport&lt;/a&gt;를 실행하여 네트워크 타입을 가져오게 됩니다. 이 시점에서 접속이 확인되지 않을 경우 네트워크에 접속되지 않은 것입니다.&lt;/p&gt;
-&lt;h2 id=&#34;네트워크-접속여부-확인&#34;&gt;네트워크 접속여부 확인&lt;/h2&gt;
-&lt;p&gt;NetworkInfo 인스턴스의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/net/NetworkInfo#isConnected%28%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;네트워크-접속여부-확인&#34;&gt;
+    &lt;a href=&#34;#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ec%a0%91%ec%86%8d%ec%97%ac%eb%b6%80-%ed%99%95%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    네트워크 접속여부 확인
+&lt;/h2&gt;&lt;p&gt;NetworkInfo 인스턴스의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/net/NetworkInfo#isConnected%28%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;isConnected&lt;/a&gt; 메소드를 사용하면 현재 인터넷에 접속되어있는지를 확인할 수 있습니다. 그런데 이 메소드로는 버스나 공항에서 접속할 수 있는 인증이 필요한 와이파이에 대해서는 인증이 되지 않아서 실제로는 와이파이를 사용할 수 없어도 true를 반환하게 됩니다.&lt;/p&gt;
 &lt;p&gt;따라서 실제로 임의의 주소에 핑을 날려보는게 더 확실합니다. 구글에서는 이렇게 네트워크 접속을 확인할 때 쓰라고 &lt;a class=&#34;link&#34; href=&#34;https://www.chromium.org/chromium-os/chromiumos-design-docs/network-portal-detection&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Network Portal Detection 서비스&lt;/a&gt;를 제공하고 있는데요, 그 주소는 다음과 같습니다.

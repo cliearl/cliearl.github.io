@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.
-안드로이드 라이브러리가 androidx로 바뀌는 과정에서 ViewPager 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.
-ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다.
-Vertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : Recyclerview의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음 ViewPager2로 변환 여기서는 기존에 ViewPager를 써서 좌우로 스와이프되는 화면 만들기 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다. 안드로이드 라이브러리가 androidx로 바뀌는 과정에서 ViewPager 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다. # ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다. Vertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : Recyclerview의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음 # ViewPager2로 변환 여기서는 기존에 ViewPager를 써서 좌우로 스와이프되는 화면 만들기 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.">
 <title>ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewpager2-convert/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기'>
-<meta property='og:description' content='이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.
-안드로이드 라이브러리가 androidx로 바뀌는 과정에서 ViewPager 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.
-ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다.
-Vertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : Recyclerview의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음 ViewPager2로 변환 여기서는 기존에 ViewPager를 써서 좌우로 스와이프되는 화면 만들기 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기">
+<meta property='og:description' content="이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다. 안드로이드 라이브러리가 androidx로 바뀌는 과정에서 ViewPager 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다. # ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다. Vertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : Recyclerview의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음 # ViewPager2로 변환 여기서는 기존에 ViewPager를 써서 좌우로 스와이프되는 화면 만들기 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/viewpager2-convert/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='ViewPager' /><meta property='article:tag' content='ViewPager2' /><meta property='article:published_time' content='2021-04-17T18:38:59&#43;09:00'/><meta property='article:modified_time' content='2021-04-17T18:38:59&#43;09:00'/>
 <meta name="twitter:title" content="ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기">
-<meta name="twitter:description" content="이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.
-안드로이드 라이브러리가 androidx로 바뀌는 과정에서 ViewPager 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.
-ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다.
-Vertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : Recyclerview의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음 ViewPager2로 변환 여기서는 기존에 ViewPager를 써서 좌우로 스와이프되는 화면 만들기 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다. 안드로이드 라이브러리가 androidx로 바뀌는 과정에서 ViewPager 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다. # ViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다. Vertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : Recyclerview의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음 # ViewPager2로 변환 여기서는 기존에 ViewPager를 써서 좌우로 스와이프되는 화면 만들기 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -94,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -255,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -268,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -276,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -326,7 +318,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/android/" >
-                android
+                Android
             </a>
         
     </header>
@@ -390,8 +382,10 @@ if (!doNotTrack) {
     >ViewPager1</a> 모듈을 <a class="link" href="https://developer.android.com/guide/navigation/navigation-swipe-view-2"  target="_blank" rel="noopener"
     >ViewPager2</a> 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.</p>
 <p>안드로이드 라이브러리가 androidx로 바뀌는 과정에서 ViewPager 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.</p>
-<h2 id="viewpager2의-특징">ViewPager2의 특징</h2>
-<p>구글에서 설명하는 ViewPager2의 [장점]((<a class="link" href="https://developer.android.com/training/animation/vp2-migration"  target="_blank" rel="noopener"
+<h2 id="viewpager2의-특징">
+    <a href="#viewpager2%ec%9d%98-%ed%8a%b9%ec%a7%95" class="header-anchor">#</a>
+    ViewPager2의 특징
+</h2><p>구글에서 설명하는 ViewPager2의 [장점]((<a class="link" href="https://developer.android.com/training/animation/vp2-migration"  target="_blank" rel="noopener"
     >https://developer.android.com/training/animation/vp2-migration</a>)은 다음과 같습니다.</p>
 <ul>
 <li>Vertical scrolling : 세로스크롤</li>
@@ -400,8 +394,10 @@ if (!doNotTrack) {
 <li>DiffUtil : Recyclerview의 DiffUtil을 사용 가능</li>
 <li>ViewPager1 라이브러리는 더이상 관리되지 않음</li>
 </ul>
-<h2 id="viewpager2로-변환">ViewPager2로 변환</h2>
-<p>여기서는 기존에 <a class="link" href="https://cliearl.github.io/posts/android/viewpager-swipe/"  target="_blank" rel="noopener"
+<h2 id="viewpager2로-변환">
+    <a href="#viewpager2%eb%a1%9c-%eb%b3%80%ed%99%98" class="header-anchor">#</a>
+    ViewPager2로 변환
+</h2><p>여기서는 기존에 <a class="link" href="https://cliearl.github.io/posts/android/viewpager-swipe/"  target="_blank" rel="noopener"
     >ViewPager를 써서 좌우로 스와이프되는 화면 만들기</a> 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.</p>
 <p>우선은 ViewPager2 라이브러리를 추가합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -591,18 +587,18 @@ if (!doNotTrack) {
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -630,6 +626,8 @@ if (!doNotTrack) {
                 </div>
         
                 
+                    
+                    
                     <div class="article-image">
                         <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
                     </div>
@@ -778,7 +776,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

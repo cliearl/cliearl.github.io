@@ -16,8 +16,10 @@
     &gt;ViewPager1&lt;/a&gt; 모듈을 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/guide/navigation/navigation-swipe-view-2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ViewPager2&lt;/a&gt; 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
 &lt;p&gt;안드로이드 라이브러리가 androidx로 바뀌는 과정에서 ViewPager 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.&lt;/p&gt;
-&lt;h2 id=&#34;viewpager2의-특징&#34;&gt;ViewPager2의 특징&lt;/h2&gt;
-&lt;p&gt;구글에서 설명하는 ViewPager2의 [장점]((&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/animation/vp2-migration&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;viewpager2의-특징&#34;&gt;
+    &lt;a href=&#34;#viewpager2%ec%9d%98-%ed%8a%b9%ec%a7%95&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    ViewPager2의 특징
+&lt;/h2&gt;&lt;p&gt;구글에서 설명하는 ViewPager2의 [장점]((&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/animation/vp2-migration&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://developer.android.com/training/animation/vp2-migration&lt;/a&gt;)은 다음과 같습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Vertical scrolling : 세로스크롤&lt;/li&gt;
@@ -26,8 +28,10 @@
 &lt;li&gt;DiffUtil : Recyclerview의 DiffUtil을 사용 가능&lt;/li&gt;
 &lt;li&gt;ViewPager1 라이브러리는 더이상 관리되지 않음&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;viewpager2로-변환&#34;&gt;ViewPager2로 변환&lt;/h2&gt;
-&lt;p&gt;여기서는 기존에 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/viewpager-swipe/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;viewpager2로-변환&#34;&gt;
+    &lt;a href=&#34;#viewpager2%eb%a1%9c-%eb%b3%80%ed%99%98&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    ViewPager2로 변환
+&lt;/h2&gt;&lt;p&gt;여기서는 기존에 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/viewpager-swipe/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ViewPager를 써서 좌우로 스와이프되는 화면 만들기&lt;/a&gt; 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.&lt;/p&gt;
 &lt;p&gt;우선은 ViewPager2 라이브러리를 추가합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -195,8 +199,10 @@
         <description>&lt;p&gt;이번 포스팅에서는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/guide/navigation/navigation-swipe-view&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ViewPager&lt;/a&gt;를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다.&lt;/p&gt;
 &lt;p&gt;ViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;화면-구성&#34;&gt;화면 구성&lt;/h2&gt;
-&lt;p&gt;우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다. 인디케이터는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/ongakuer/CircleIndicator&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;화면-구성&#34;&gt;
+    &lt;a href=&#34;#%ed%99%94%eb%a9%b4-%ea%b5%ac%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    화면 구성
+&lt;/h2&gt;&lt;p&gt;우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다. 인디케이터는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/ongakuer/CircleIndicator&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CircleIndicator&lt;/a&gt;라는 외부 라이브러리를 이용하겠습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -285,8 +291,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/shape&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;프래그먼트-작성&#34;&gt;프래그먼트 작성&lt;/h2&gt;
-&lt;p&gt;다음은 페이지를 만드는데 사용할 프래그먼트를 작성해줍니다. &lt;code&gt;TestFragment&lt;/code&gt;라는 이름의 빈 프래그먼트를 하나 만들고 다음과 같이 이미지뷰와 텍스트뷰를 가지는 화면을 만들어줍니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;프래그먼트-작성&#34;&gt;
+    &lt;a href=&#34;#%ed%94%84%eb%9e%98%ea%b7%b8%eb%a8%bc%ed%8a%b8-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    프래그먼트 작성
+&lt;/h2&gt;&lt;p&gt;다음은 페이지를 만드는데 사용할 프래그먼트를 작성해줍니다. &lt;code&gt;TestFragment&lt;/code&gt;라는 이름의 빈 프래그먼트를 하나 만들고 다음과 같이 이미지뷰와 텍스트뷰를 가지는 화면을 만들어줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -438,8 +446,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;viewpager-어댑터-작성-및-연결&#34;&gt;ViewPager 어댑터 작성 및 연결&lt;/h2&gt;
-&lt;p&gt;다음으로는 ViewPager Adapter를 만들어줍니다. 별개 클래스이지만 내용이 복잡하지 않으므로 메인액티비티 클래스 안에 만들어줍니다. 어댑터는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/fragment/app/FragmentStatePagerAdapter&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;viewpager-어댑터-작성-및-연결&#34;&gt;
+    &lt;a href=&#34;#viewpager-%ec%96%b4%eb%8c%91%ed%84%b0-%ec%9e%91%ec%84%b1-%eb%b0%8f-%ec%97%b0%ea%b2%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    ViewPager 어댑터 작성 및 연결
+&lt;/h2&gt;&lt;p&gt;다음으로는 ViewPager Adapter를 만들어줍니다. 별개 클래스이지만 내용이 복잡하지 않으므로 메인액티비티 클래스 안에 만들어줍니다. 어댑터는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/fragment/app/FragmentStatePagerAdapter&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;FragmentStatePagerAdapter&lt;/a&gt; 혹은 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentStateAdapter&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;FragmentStateAdapter&lt;/a&gt;를 상속받아야 하는데 페이지가 많을 경우에는 자원을 동적으로 관리해 주는 &lt;code&gt;FragmentStatePagerAdapter&lt;/code&gt;가 적절하고 페이지수가 적다면 &lt;code&gt;FragmentStateAdapter&lt;/code&gt;를 사용하면 됩니다. 전체 페이지수는 4개이고 &lt;code&gt;getItem&lt;/code&gt;에서 페이지를 선택했을 때 반환할 프래그먼트를 지정해줍니다. 이때 프래그먼트에 전달할 내용을 어댑터 안에서 지정해줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

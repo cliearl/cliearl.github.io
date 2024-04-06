@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>build number on 냉동코더의 기술블로그</title>
+        <title>Build Number on 냉동코더의 기술블로그</title>
         <link>https://cliearl.github.io/tags/build-number/</link>
-        <description>Recent content in build number on 냉동코더의 기술블로그</description>
+        <description>Recent content in Build Number on 냉동코더의 기술블로그</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <lastBuildDate>Tue, 06 Apr 2021 19:24:59 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/build-number/index.xml" rel="self" type="application/rss+xml" /><item>
@@ -13,18 +13,26 @@
         
         <guid>https://cliearl.github.io/posts/android/autoset-buildnumber/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;버전넘버와-빌드넘버&#34;&gt;버전넘버와 빌드넘버&lt;/h2&gt;
-&lt;h3 id=&#34;버전넘버&#34;&gt;버전넘버&lt;/h3&gt;
-&lt;p&gt;소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 &lt;code&gt;1.0.0&lt;/code&gt; 과 같이 세자리로 결정을 합니다.&lt;/p&gt;
+&lt;h2 id=&#34;버전넘버와-빌드넘버&#34;&gt;
+    &lt;a href=&#34;#%eb%b2%84%ec%a0%84%eb%84%98%eb%b2%84%ec%99%80-%eb%b9%8c%eb%93%9c%eb%84%98%eb%b2%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    버전넘버와 빌드넘버
+&lt;/h2&gt;&lt;h3 id=&#34;버전넘버&#34;&gt;
+    &lt;a href=&#34;#%eb%b2%84%ec%a0%84%eb%84%98%eb%b2%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    버전넘버
+&lt;/h3&gt;&lt;p&gt;소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 &lt;code&gt;1.0.0&lt;/code&gt; 과 같이 세자리로 결정을 합니다.&lt;/p&gt;
 &lt;p&gt;첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다.&lt;/p&gt;
 &lt;p&gt;그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다.&lt;/p&gt;
 &lt;p&gt;다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.&lt;/p&gt;
-&lt;h3 id=&#34;빌드넘버&#34;&gt;빌드넘버&lt;/h3&gt;
-&lt;p&gt;빌드넘버란 어떤 버전을 출시할 때 여러번 반복해서 빌드를 할 때마다 숫자를 증가시키는 방법으로 사용하는 숫자인데요, 그러니까 버전넘버가 동일하다고 해도 여러가지 서로다른 빌드넘버를 가질 수 있습니다.&lt;/p&gt;
+&lt;h3 id=&#34;빌드넘버&#34;&gt;
+    &lt;a href=&#34;#%eb%b9%8c%eb%93%9c%eb%84%98%eb%b2%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    빌드넘버
+&lt;/h3&gt;&lt;p&gt;빌드넘버란 어떤 버전을 출시할 때 여러번 반복해서 빌드를 할 때마다 숫자를 증가시키는 방법으로 사용하는 숫자인데요, 그러니까 버전넘버가 동일하다고 해도 여러가지 서로다른 빌드넘버를 가질 수 있습니다.&lt;/p&gt;
 &lt;p&gt;그래서 빌드를 수행할 때마다 어쨌든 변화가 있어야 되는데, 일반적으로는 증가시키는 형식으로 빌드넘버를 사용을 하구요, 보통은 이 빌드넘버를 일반 사용자가 알 필요가 없기 때문에 이걸 보여주지는 않지만, 개중에는 보여주는 소프트웨어도 있습니다. 윈도우같은 경우는 이 빌드넘버를 프로그램 안에서 확인할 수도 있습니다.&lt;/p&gt;
 &lt;p&gt;그런데 이 빌드넘버는 빌드를 수행할 때 하나씩 증가를 시켜야 하는데 안드로이드 스튜디오에서는 이걸 자동으로 증가시켜주지 않기 때문에 이 부분을 자동으로 증가시켜주는 기구를 프로젝트에 적용하는 법에 대해 설명하도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;프로그램-작성&#34;&gt;프로그램 작성&lt;/h2&gt;
-&lt;p&gt;app 레벨의 gradle에서 빌드넘버는 &lt;code&gt;versionCode&lt;/code&gt;가 됩니다. 그래서 빌드를 한 번 할 때마다 &lt;code&gt;versionCode&lt;/code&gt;는 증가가 되야 하구요, &lt;code&gt;versionName&lt;/code&gt;은 기능 추가가 있을때마다 그때그때 개발자가 필요에 의해서 증가를 시켜주면 되겠죠.&lt;/p&gt;
+&lt;h2 id=&#34;프로그램-작성&#34;&gt;
+    &lt;a href=&#34;#%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%a8-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    프로그램 작성
+&lt;/h2&gt;&lt;p&gt;app 레벨의 gradle에서 빌드넘버는 &lt;code&gt;versionCode&lt;/code&gt;가 됩니다. 그래서 빌드를 한 번 할 때마다 &lt;code&gt;versionCode&lt;/code&gt;는 증가가 되야 하구요, &lt;code&gt;versionName&lt;/code&gt;은 기능 추가가 있을때마다 그때그때 개발자가 필요에 의해서 증가를 시켜주면 되겠죠.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1

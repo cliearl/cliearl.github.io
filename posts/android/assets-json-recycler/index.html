@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.
-안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.
-assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다.
-값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다. # 안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다. assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다. 값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.">
 <title>Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/assets-json-recycler/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기'>
-<meta property='og:description' content='이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.
-안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.
-assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다.
-값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기">
+<meta property='og:description' content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다. # 안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다. assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다. 값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/assets-json-recycler/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='assets' /><meta property='article:tag' content='json' /><meta property='article:tag' content='recyclerview' /><meta property='article:published_time' content='2021-05-05T23:05:14&#43;09:00'/><meta property='article:modified_time' content='2021-05-05T23:05:14&#43;09:00'/>
 <meta name="twitter:title" content="Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기">
-<meta name="twitter:description" content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.
-안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.
-assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다.
-값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다. # 안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다. assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다. 값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -94,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -255,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -268,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -276,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -333,7 +325,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/android/" >
-                android
+                Android
             </a>
         
     </header>
@@ -394,8 +386,10 @@ if (!doNotTrack) {
     
     
     <p>이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.</p>
-<h2 id="안드로이드의-읽기전용-파일-저장폴더">안드로이드의 읽기전용 파일 저장폴더</h2>
-<p>앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.</p>
+<h2 id="안드로이드의-읽기전용-파일-저장폴더">
+    <a href="#%ec%95%88%eb%93%9c%eb%a1%9c%ec%9d%b4%eb%93%9c%ec%9d%98-%ec%9d%bd%ea%b8%b0%ec%a0%84%ec%9a%a9-%ed%8c%8c%ec%9d%bc-%ec%a0%80%ec%9e%a5%ed%8f%b4%eb%8d%94" class="header-anchor">#</a>
+    안드로이드의 읽기전용 파일 저장폴더
+</h2><p>앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.</p>
 <ul>
 <li>assets folder</li>
 <li>resources/raw folder</li>
@@ -444,27 +438,35 @@ if (!doNotTrack) {
 </tbody>
 </table></div>
 <p>간단히 정리하면 XML과 연계하여 다루어야 할 때는 <code>res/raw</code> 폴더를 사용하고, 그렇지 않을 경우 <code>assets</code> 폴더를 사용하면 될 것 같네요.</p>
-<h2 id="앱-만들어보기">앱 만들어보기</h2>
-<p>그럼 asset폴더를 사용해보기 위해 json 파일을 불러와서 Recyclerview에 표시하는 간단한 앱을 만들어 보겠습니다.</p>
+<h2 id="앱-만들어보기">
+    <a href="#%ec%95%b1-%eb%a7%8c%eb%93%a4%ec%96%b4%eb%b3%b4%ea%b8%b0" class="header-anchor">#</a>
+    앱 만들어보기
+</h2><p>그럼 asset폴더를 사용해보기 위해 json 파일을 불러와서 Recyclerview에 표시하는 간단한 앱을 만들어 보겠습니다.</p>
 <p>Recyclerview는 <a class="link" href="https://cliearl.github.io/posts/android/viewbinding-recyclerview/"  target="_blank" rel="noopener"
     >RecyclerView에 View Binding 적용하기</a>에서 작성했던 프로젝트를 참고해서 사용하겠습니다. Json 포맷을 다루어야 하므로 우선 <a class="link" href="https://github.com/google/gson"  target="_blank" rel="noopener"
     >Gson</a> 라이브러리를 추가합니다. Gson에 대한 구체적인 설명에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferneces-gson/"  target="_blank" rel="noopener"
     >SharedPreferences를 json 포맷으로 관리하기</a>에서 설명한 내용을 참조하시기 바랍니다.</p>
-<h3 id="데이터-준비">데이터 준비</h3>
-<p><code>New &gt; Folder &gt; Asset Folder</code>를 선택하여 assets 폴더를 추가합니다.</p>
+<h3 id="데이터-준비">
+    <a href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a4%80%eb%b9%84" class="header-anchor">#</a>
+    데이터 준비
+</h3><p><code>New &gt; Folder &gt; Asset Folder</code>를 선택하여 assets 폴더를 추가합니다.</p>
 <p>데이터는 경기데이터드림에서 제공하는 <a class="link" href="https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=461Q599QLK8UTE14E3LW12837248&amp;infSeq=1"  target="_blank" rel="noopener"
     >코로나바이러스 감염증 선별진료소 운영 의료기관 현황</a>데이터를 사용하겠습니다.</p>
 <p><code>sheet</code> 탭에서 <code>json</code>을 클릭하여 데이터를 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 값들을 정렬하는게 보기에 좋을 것 같으니 <a class="link" href="https://jsonformatter.curiousconcept.com/"  target="_blank" rel="noopener"
     >Json Formatter</a> 에서 파일을 정렬하고 <code>data.json</code>이라는 파일명을 붙여 assets 폴더에 저장합니다.</p>
-<h3 id="데이터클래스-준비">데이터클래스 준비</h3>
-<p>데이터 파일에는 데이터기준일자, 시군명,	의료기관명,	의료기관 구분,	의료기관 전화번호1,	의료기관 전화번호2,	소재지지번주소,	소재지도로명주소,	WGS84위도,	WGS84경도 등 여러가지 탭이 있습니다.</p>
+<h3 id="데이터클래스-준비">
+    <a href="#%eb%8d%b0%ec%9d%b4%ed%84%b0%ed%81%b4%eb%9e%98%ec%8a%a4-%ec%a4%80%eb%b9%84" class="header-anchor">#</a>
+    데이터클래스 준비
+</h3><p>데이터 파일에는 데이터기준일자, 시군명,	의료기관명,	의료기관 구분,	의료기관 전화번호1,	의료기관 전화번호2,	소재지지번주소,	소재지도로명주소,	WGS84위도,	WGS84경도 등 여러가지 탭이 있습니다.</p>
 <p>각 데이터는 배열 속의 데이터클래스로 관리하기 위해 데이터클래스를 만들어줍니다. 데이터클래스의 특징에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/dataclass-recyclerview/"  target="_blank" rel="noopener"
     >Data class 이해하고 RecyclerView에서 사용하기</a>강의에서 설명한 내용을 참고하시기 바랍니다.</p>
 <p>안드로이드 스튜디오에 <a class="link" href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-"  target="_blank" rel="noopener"
     >Kotlin data class File from JSON</a> 플러그인을 설치하면 json 파일을 손쉽게 데이터클래스로 변환할 수 있습니다. 플러그인을 설치한 뒤 New &gt; <a class="link" href="https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-"  target="_blank" rel="noopener"
     >Kotlin data class File from JSON</a>을 선택하여 위에서 만든 json 데이터와 클래스명을 입력하면 자동으로 데이터클래스와, 그 클래스를 아이템으로 갖는 배열 클래스가 생성되는데 클래스 이름은 <code>CoronaMed</code>라고 하겠습니다.</p>
-<h3 id="recyclerview-구축하기">Recyclerview 구축하기</h3>
-<p>다음으로 새로 만들어진 데이터클래스의 형식에 맞게 Recyclerview와 ViewHolder의 형태를 정의해줍니다. <code>activity_main.xml</code>에 RecyclerView를 추가합니다.</p>
+<h3 id="recyclerview-구축하기">
+    <a href="#recyclerview-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
+    Recyclerview 구축하기
+</h3><p>다음으로 새로 만들어진 데이터클래스의 형식에 맞게 Recyclerview와 ViewHolder의 형태를 정의해줍니다. <code>activity_main.xml</code>에 RecyclerView를 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -669,8 +671,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="assets-폴더속-파일-불러오기">assets 폴더속 파일 불러오기</h3>
-<p>다음은 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 <a class="link" href="https://developer.android.com/reference/android/content/res/AssetManager"  target="_blank" rel="noopener"
+</div><h3 id="assets-폴더속-파일-불러오기">
+    <a href="#assets-%ed%8f%b4%eb%8d%94%ec%86%8d-%ed%8c%8c%ec%9d%bc-%eb%b6%88%eb%9f%ac%ec%98%a4%ea%b8%b0" class="header-anchor">#</a>
+    assets 폴더속 파일 불러오기
+</h3><p>다음은 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 <a class="link" href="https://developer.android.com/reference/android/content/res/AssetManager"  target="_blank" rel="noopener"
     >Asset Manager</a> 인스턴스를 생성하고 <a class="link" href="https://developer.android.com/reference/android/content/res/AssetManager#open%28java.lang.String%29"  target="_blank" rel="noopener"
     >open</a> 메소드로 파일을 오픈합니다.그리고 <a class="link" href="https://developer.android.com/reference/java/io/BufferedReader"  target="_blank" rel="noopener"
     >bufferedReader</a>를 이용해 InputStream을 텍스트로 변환합니다.</p>
@@ -755,11 +759,11 @@ if (!doNotTrack) {
     
     <section class="article-tags">
         
-            <a href="/tags/assets/">assets</a>
+            <a href="/tags/assets/">Assets</a>
         
-            <a href="/tags/json/">json</a>
+            <a href="/tags/json/">Json</a>
         
-            <a href="/tags/recyclerview/">recyclerview</a>
+            <a href="/tags/recyclerview/">RecyclerView</a>
         
     </section>
 
@@ -782,18 +786,18 @@ if (!doNotTrack) {
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -821,6 +825,8 @@ if (!doNotTrack) {
                 </div>
         
                 
+                    
+                    
                     <div class="article-image">
                         <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
                     </div>
@@ -969,7 +975,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

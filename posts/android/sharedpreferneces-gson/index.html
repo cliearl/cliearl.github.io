@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.
-SharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.
-이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 Gson이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.
-여기서는 Data class 이해하고 RecyclerView에서 사용하기 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다. SharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다. 이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 Gson이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다. 여기서는 Data class 이해하고 RecyclerView에서 사용하기 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.">
 <title>SharedPreferences를 json 포맷으로 관리하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/sharedpreferneces-gson/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='SharedPreferences를 json 포맷으로 관리하기'>
-<meta property='og:description' content='이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.
-SharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.
-이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 Gson이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.
-여기서는 Data class 이해하고 RecyclerView에서 사용하기 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="SharedPreferences를 json 포맷으로 관리하기">
+<meta property='og:description' content="이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다. SharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다. 이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 Gson이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다. 여기서는 Data class 이해하고 RecyclerView에서 사용하기 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/sharedpreferneces-gson/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='SharedPreferences' /><meta property='article:tag' content='json' /><meta property='article:tag' content='gson' /><meta property='article:published_time' content='2021-04-22T20:33:39&#43;09:00'/><meta property='article:modified_time' content='2021-04-22T20:33:39&#43;09:00'/>
 <meta name="twitter:title" content="SharedPreferences를 json 포맷으로 관리하기">
-<meta name="twitter:description" content="이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.
-SharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.
-이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 Gson이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.
-여기서는 Data class 이해하고 RecyclerView에서 사용하기 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다. SharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다. 이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 Gson이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다. 여기서는 Data class 이해하고 RecyclerView에서 사용하기 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -94,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -255,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -268,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -276,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -330,7 +322,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/android/" >
-                android
+                Android
             </a>
         
     </header>
@@ -375,7 +367,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -397,8 +389,10 @@ if (!doNotTrack) {
     >Gson</a>이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.</p>
 <p>여기서는 <a class="link" href="https://cliearl.github.io/posts/android/dataclass-recyclerview/"  target="_blank" rel="noopener"
     >Data class 이해하고 RecyclerView에서 사용하기</a> 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.</p>
-<h2 id="라이브러리-추가">라이브러리 추가</h2>
-<p>우선 Gson을 디펜던시에 추가합니다.</p>
+<h2 id="라이브러리-추가">
+    <a href="#%eb%9d%bc%ec%9d%b4%eb%b8%8c%eb%9f%ac%eb%a6%ac-%ec%b6%94%ea%b0%80" class="header-anchor">#</a>
+    라이브러리 추가
+</h2><p>우선 Gson을 디펜던시에 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -411,8 +405,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="화면-구성">화면 구성</h2>
-<p>다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.</p>
+</div><h2 id="화면-구성">
+    <a href="#%ed%99%94%eb%a9%b4-%ea%b5%ac%ec%84%b1" class="header-anchor">#</a>
+    화면 구성
+</h2><p>다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -445,8 +441,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="key-준비">Key 준비</h2>
-<p>SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.</p>
+</div><h2 id="key-준비">
+    <a href="#key-%ec%a4%80%eb%b9%84" class="header-anchor">#</a>
+    Key 준비
+</h2><p>SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -461,8 +459,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="savepref-작성">savePref() 작성</h2>
-<p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferences-basic/"  target="_blank" rel="noopener"
+</div><h2 id="savepref-작성">
+    <a href="#savepref-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
+    savePref() 작성
+</h2><p>다음은 데이터를 저장하는 함수를 만듭니다. 이미 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferences-basic/"  target="_blank" rel="noopener"
     >SharedPreferences로 앱 설정값 저장하고 불러오기</a>강의에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고, 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. Recyclerview 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -488,8 +488,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="loadpref-함수-작성">loadPref() 함수 작성</h2>
-<p>이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, <a class="link" href="https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html"  target="_blank" rel="noopener"
+</div><h2 id="loadpref-함수-작성">
+    <a href="#loadpref-%ed%95%a8%ec%88%98-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
+    loadPref() 함수 작성
+</h2><p>이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, <a class="link" href="https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html"  target="_blank" rel="noopener"
     >TypeToken</a>을 적용해서 데이터를 복원하는 부분이 추가되었습니다. json으로 SharedPreferences에 저장하는 순간 데이터가 가지고 있는 타입정보가 모두 사라지기 때문에 데이터를 복원하면서 타입정보를 다시 부여하기 위해 타입토큰을 사용합니다. 여기서는 <code>&lt;&lt;ArrayList&lt;Monster&gt;&gt;</code>라는 타입을 만들어서 데이터에 부여해 줍니다. 그리고 Recyclerview 어댑터 안의 데이터는 변경가능하도록 <code>var</code> 로 변경해줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -525,8 +527,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="함수-실행">함수 실행</h2>
-<p>다음은 메인액티비티 안에서 <code>savePref</code>와 <code>loadPref</code>를 실행시키면 됩니다. <code>loadPref</code>를 실행하고 어댑터에 데이터 변경을 알려주면 됩니다.</p>
+</div><h2 id="함수-실행">
+    <a href="#%ed%95%a8%ec%88%98-%ec%8b%a4%ed%96%89" class="header-anchor">#</a>
+    함수 실행
+</h2><p>다음은 메인액티비티 안에서 <code>savePref</code>와 <code>loadPref</code>를 실행시키면 됩니다. <code>loadPref</code>를 실행하고 어댑터에 데이터 변경을 알려주면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -575,9 +579,9 @@ if (!doNotTrack) {
         
             <a href="/tags/sharedpreferences/">SharedPreferences</a>
         
-            <a href="/tags/json/">json</a>
+            <a href="/tags/json/">Json</a>
         
-            <a href="/tags/gson/">gson</a>
+            <a href="/tags/gson/">Gson</a>
         
     </section>
 
@@ -600,18 +604,18 @@ if (!doNotTrack) {
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -639,6 +643,8 @@ if (!doNotTrack) {
                 </div>
         
                 
+                    
+                    
                     <div class="article-image">
                         <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
                     </div>
@@ -787,7 +793,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

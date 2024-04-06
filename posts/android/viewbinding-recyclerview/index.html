@@ -1,31 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.
-View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
-이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
-코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-1 2 3 4 5 6 7 plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다. View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다. 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다. # 코드 작성 # View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다. 1 2 3 4 5 6 7 plugins { - id &#39;kotlin-android-extensions&#39; } android { + buildFeatures.">
 <title>RecyclerView에 View Binding 적용하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewbinding-recyclerview/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='RecyclerView에 View Binding 적용하기'>
-<meta property='og:description' content='이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.
-View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
-이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
-코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-1 2 3 4 5 6 7 plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="RecyclerView에 View Binding 적용하기">
+<meta property='og:description' content="이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다. View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다. 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다. # 코드 작성 # View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다. 1 2 3 4 5 6 7 plugins { - id &#39;kotlin-android-extensions&#39; } android { + buildFeatures.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/viewbinding-recyclerview/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='RecyclerView' /><meta property='article:tag' content='View Binding' /><meta property='article:published_time' content='2021-04-17T22:43:04&#43;09:00'/><meta property='article:modified_time' content='2021-04-17T22:43:04&#43;09:00'/>
 <meta name="twitter:title" content="RecyclerView에 View Binding 적용하기">
-<meta name="twitter:description" content="이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.
-View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.
-이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.
-코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.
-1 2 3 4 5 6 7 plugins { - id &amp;#39;kotlin-android-extensions&amp;#39; } android { &#43; buildFeatures.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다. View Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다. 이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다. # 코드 작성 # View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다. 1 2 3 4 5 6 7 plugins { - id &#39;kotlin-android-extensions&#39; } android { + buildFeatures.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -97,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -258,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -271,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -279,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -335,7 +324,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/android/" >
-                android
+                Android
             </a>
         
     </header>
@@ -401,9 +390,13 @@ if (!doNotTrack) {
     >유튜브 강의</a>를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.</p>
 <p>이번 포스팅에서 변환에 사용한 프로젝트는 <a class="link" href="https://cliearl.github.io/posts/android/implement-recyclerview/"  target="_blank" rel="noopener"
     >앱에서 RecyclerView 사용하기</a> 포스팅에서 작성한 것을 사용하도록 하겠습니다.</p>
-<h2 id="코드-작성">코드 작성</h2>
-<h3 id="view-binding-활성화">View Binding 활성화</h3>
-<p>우선은 gradle에서 <code>kotlin-android-extensions</code> 플러그인을 삭제하고 View Binding을 활성화합니다.</p>
+<h2 id="코드-작성">
+    <a href="#%ec%bd%94%eb%93%9c-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
+    코드 작성
+</h2><h3 id="view-binding-활성화">
+    <a href="#view-binding-%ed%99%9c%ec%84%b1%ed%99%94" class="header-anchor">#</a>
+    View Binding 활성화
+</h3><p>우선은 gradle에서 <code>kotlin-android-extensions</code> 플러그인을 삭제하고 View Binding을 활성화합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -424,8 +417,10 @@ if (!doNotTrack) {
 </span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="메인액티비티-수정">메인액티비티 수정</h3>
-<p>다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 <code>ActivityMainBinding</code> 클래스를 초기화하여 <code>binding</code>이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 <code>binding.recyclerView</code>로 접근하여 설정합니다.</p>
+</div><h3 id="메인액티비티-수정">
+    <a href="#%eb%a9%94%ec%9d%b8%ec%95%a1%ed%8b%b0%eb%b9%84%ed%8b%b0-%ec%88%98%ec%a0%95" class="header-anchor">#</a>
+    메인액티비티 수정
+</h3><p>다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 <code>ActivityMainBinding</code> 클래스를 초기화하여 <code>binding</code>이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 <code>binding.recyclerView</code>로 접근하여 설정합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -492,8 +487,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="recyclerview-어댑터-수정">Recyclerview 어댑터 수정</h3>
-<p><code>onCreateViewHolder</code>에서 뷰를 만들 때 <code>ListItemBinding</code> 클래스로 만들어지는 <code>binding</code> 인스턴스를 사용하도록 변경하여줍니다.</p>
+</div><h3 id="recyclerview-어댑터-수정">
+    <a href="#recyclerview-%ec%96%b4%eb%8c%91%ed%84%b0-%ec%88%98%ec%a0%95" class="header-anchor">#</a>
+    Recyclerview 어댑터 수정
+</h3><p><code>onCreateViewHolder</code>에서 뷰를 만들 때 <code>ListItemBinding</code> 클래스로 만들어지는 <code>binding</code> 인스턴스를 사용하도록 변경하여줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -538,8 +535,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="viewholder-수정">ViewHolder 수정</h3>
-<p>기존의 ViewHolder에서는 뷰를 받아와서 정의하고 그걸 데이터와 연결하는 작업이 필요했는데, View Binding에서는 binding 인스턴스가 생성되는순간 자동으로 뷰를 binding의 프로퍼티로 접근할 수 있기 때문에 이 코드가 필요없게 됩니다.</p>
+</div><h3 id="viewholder-수정">
+    <a href="#viewholder-%ec%88%98%ec%a0%95" class="header-anchor">#</a>
+    ViewHolder 수정
+</h3><p>기존의 ViewHolder에서는 뷰를 받아와서 정의하고 그걸 데이터와 연결하는 작업이 필요했는데, View Binding에서는 binding 인스턴스가 생성되는순간 자동으로 뷰를 binding의 프로퍼티로 접근할 수 있기 때문에 이 코드가 필요없게 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -600,7 +599,7 @@ if (!doNotTrack) {
     
     <section class="article-tags">
         
-            <a href="/tags/recyclerview/">recyclerview</a>
+            <a href="/tags/recyclerview/">RecyclerView</a>
         
             <a href="/tags/view-binding/">View Binding</a>
         
@@ -625,18 +624,18 @@ if (!doNotTrack) {
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -664,6 +663,8 @@ if (!doNotTrack) {
                 </div>
         
                 
+                    
+                    
                     <div class="article-image">
                         <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
                     </div>
@@ -812,7 +813,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

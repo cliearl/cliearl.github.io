@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다.
-구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다.
-1 2 3 4 &amp;lt;fragment class=&amp;#34;com.google.android.gms.maps.SupportMapFragment&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;/&amp;gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.
-1 2 3 4 &amp;lt;com.google.android.gms.maps.MapView android:id=&amp;#34;@&#43;id/mapview&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다. # 구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다. 1 2 3 4 &lt;fragment class=&#34;com.google.android.gms.maps.SupportMapFragment&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34;/&gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다. 1 2 3 4 &lt;com.google.android.gms.maps.MapView android:id=&#34;@+id/mapview&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34; /&gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.">
 <title>프래그먼트에서 구글맵 구현하고 내 위치 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/google-maps-basic/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='프래그먼트에서 구글맵 구현하고 내 위치 표시하기'>
-<meta property='og:description' content='이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다.
-구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다.
-1 2 3 4 &amp;lt;fragment class=&amp;#34;com.google.android.gms.maps.SupportMapFragment&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;/&amp;gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.
-1 2 3 4 &amp;lt;com.google.android.gms.maps.MapView android:id=&amp;#34;@&#43;id/mapview&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="프래그먼트에서 구글맵 구현하고 내 위치 표시하기">
+<meta property='og:description' content="이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다. # 구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다. 1 2 3 4 &lt;fragment class=&#34;com.google.android.gms.maps.SupportMapFragment&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34;/&gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다. 1 2 3 4 &lt;com.google.android.gms.maps.MapView android:id=&#34;@+id/mapview&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34; /&gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/google-maps-basic/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-05-02T20:16:12&#43;09:00'/><meta property='article:modified_time' content='2022-05-02T20:16:12&#43;09:00'/>
 <meta name="twitter:title" content="프래그먼트에서 구글맵 구현하고 내 위치 표시하기">
-<meta name="twitter:description" content="이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다.
-구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다.
-1 2 3 4 &amp;lt;fragment class=&amp;#34;com.google.android.gms.maps.SupportMapFragment&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;/&amp;gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.
-1 2 3 4 &amp;lt;com.google.android.gms.maps.MapView android:id=&amp;#34;@&#43;id/mapview&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다. # 구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다. 1 2 3 4 &lt;fragment class=&#34;com.google.android.gms.maps.SupportMapFragment&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34;/&gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다. 1 2 3 4 &lt;com.google.android.gms.maps.MapView android:id=&#34;@+id/mapview&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34; /&gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -94,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -255,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -268,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -276,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -338,7 +330,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/android/" >
-                android
+                Android
             </a>
         
     </header>
@@ -399,8 +391,10 @@ if (!doNotTrack) {
     
     
     <p>이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다.</p>
-<h2 id="구글-맵-구현법">구글 맵 구현법</h2>
-<p>안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요,
+<h2 id="구글-맵-구현법">
+    <a href="#%ea%b5%ac%ea%b8%80-%eb%a7%b5-%ea%b5%ac%ed%98%84%eb%b2%95" class="header-anchor">#</a>
+    구글 맵 구현법
+</h2><p>안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요,
 우선은 액티비티에서 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/maps/OnMapReadyCallback"  target="_blank" rel="noopener"
     >OnMapReadyCallback</a>을 구현하고 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/maps/SupportMapFragment"  target="_blank" rel="noopener"
     >SupportMapFragment</a>를 통해 다음과 같이 화면에 표시하는 방법이 있습니다.</p>
@@ -436,8 +430,10 @@ if (!doNotTrack) {
 </div>
 </div><p>액티비티로 구글맵을 구현하는 방법은 <a class="link" href="https://developers.google.com/maps/documentation/android-sdk/map"  target="_blank" rel="noopener"
     >구글 디벨로퍼 사이트</a>에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.</p>
-<h2 id="bottom-navigation-구현">Bottom navigation 구현</h2>
-<p>프래그먼트에 맵을 표시하기 위해 Bottom navigation을 구성해 주겠습니다. 우선은 액티비티 레이아웃에 Bottom navigation 컴포넌트와 프래그먼트를 표시할 FrameLayout을 추가해 줍니다.</p>
+<h2 id="bottom-navigation-구현">
+    <a href="#bottom-navigation-%ea%b5%ac%ed%98%84" class="header-anchor">#</a>
+    Bottom navigation 구현
+</h2><p>프래그먼트에 맵을 표시하기 위해 Bottom navigation을 구성해 주겠습니다. 우선은 액티비티 레이아웃에 Bottom navigation 컴포넌트와 프래그먼트를 표시할 FrameLayout을 추가해 줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -612,8 +608,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="구글맵-api-키-설정">구글맵 API 키 설정</h2>
-<p>구글맵을 사용하기 위해서는 구글 클라우드에서 API 키를 취득해야 합니다. <a class="link" href="https://developers.google.com/maps/documentation/android-sdk/cloud-setup#create"  target="_blank" rel="noopener"
+</div><h2 id="구글맵-api-키-설정">
+    <a href="#%ea%b5%ac%ea%b8%80%eb%a7%b5-api-%ed%82%a4-%ec%84%a4%ec%a0%95" class="header-anchor">#</a>
+    구글맵 API 키 설정
+</h2><p>구글맵을 사용하기 위해서는 구글 클라우드에서 API 키를 취득해야 합니다. <a class="link" href="https://developers.google.com/maps/documentation/android-sdk/cloud-setup#create"  target="_blank" rel="noopener"
     >Google Cloud Console에서 설정</a> 페이지를 참조하여 구글 클라우드에 새 프로젝트를 작성하고 API 사용설정을 해 줍니다. 그리고 <a class="link" href="https://developers.google.com/maps/documentation/android-sdk/get-api-key#creating-api-keys"  target="_blank" rel="noopener"
     >API 키 만들기</a> 페이지를 참조해서 만들어진 API 키를 확인합니다. 웹페이지의 설명이 어려우시면 <a class="link" href="https://www.youtube.com/watch?v=2_HZObVbe-g"  target="_blank" rel="noopener"
     >Google 지도 플랫폼에서 API 키를 생성하고 제한하기</a> 영상을 참고하세요.</p>
@@ -630,8 +628,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    <span class="na">android:value=</span><span class="s">&#34;API KEY&#34;</span> <span class="nt">/&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="dependency-추가">Dependency 추가</h2>
-<p>이제 맵을 구현하는 <code>MapFragment</code>를 작성하겠습니다. 우선은 build.gradle 에 구글맵과 디바이스의 위치를 사용하기 위한 <a class="link" href="https://developers.google.com/android/guides/setup#list-dependencies"  target="_blank" rel="noopener"
+</div><h2 id="dependency-추가">
+    <a href="#dependency-%ec%b6%94%ea%b0%80" class="header-anchor">#</a>
+    Dependency 추가
+</h2><p>이제 맵을 구현하는 <code>MapFragment</code>를 작성하겠습니다. 우선은 build.gradle 에 구글맵과 디바이스의 위치를 사용하기 위한 <a class="link" href="https://developers.google.com/android/guides/setup#list-dependencies"  target="_blank" rel="noopener"
     >dependency</a>를 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -645,8 +645,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.google.android.gms:play-services-location:19.0.1&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="레이아웃-구성">레이아웃 구성</h2>
-<p>이제 프래그먼트 레이아웃에 지도를 표시할 <code>MapView</code>를 추가합니다.</p>
+</div><h2 id="레이아웃-구성">
+    <a href="#%eb%a0%88%ec%9d%b4%ec%95%84%ec%9b%83-%ea%b5%ac%ec%84%b1" class="header-anchor">#</a>
+    레이아웃 구성
+</h2><p>이제 프래그먼트 레이아웃에 지도를 표시할 <code>MapView</code>를 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -687,8 +689,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="mapfragment-작성">MapFragment 작성</h2>
-<p>프래그먼트 클래스는 액티비티에서 구현할 때처럼 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/maps/OnMapReadyCallback#onMapReady%28com.google.android.gms.maps.GoogleMap%29"  target="_blank" rel="noopener"
+</div><h2 id="mapfragment-작성">
+    <a href="#mapfragment-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
+    MapFragment 작성
+</h2><p>프래그먼트 클래스는 액티비티에서 구현할 때처럼 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/maps/OnMapReadyCallback#onMapReady%28com.google.android.gms.maps.GoogleMap%29"  target="_blank" rel="noopener"
     >OnMapReadyCallback</a> 을 구현하게 합니다. 우선은 <code>onViewCreated</code>에서 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/maps/MapFragment#public-void-getmapasync-onmapreadycallback-callback"  target="_blank" rel="noopener"
     >getMapAsync</a>를 이용해 <code>MapView</code>를 초기화합니다. 그리고 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/maps/OnMapReadyCallback#public-methods"  target="_blank" rel="noopener"
     >OnMapReady</a>에서 나머지 처리를 수행하면 됩니다. 여기서는 맵이 시작되면 카메라의 초기위치로 서울시청을 보여주도록 하였습니다. 그리고 <a class="link" href="https://developer.android.com/guide/fragments/saving-state#savedstate"  target="_blank" rel="noopener"
@@ -789,8 +793,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="위치권한-획득하기">위치권한 획득하기</h2>
-<p>맵에 나의 위치를 표시하기 위해서는 <a class="link" href="https://developer.android.com/training/location/permissions"  target="_blank" rel="noopener"
+</div><h2 id="위치권한-획득하기">
+    <a href="#%ec%9c%84%ec%b9%98%ea%b6%8c%ed%95%9c-%ed%9a%8d%eb%93%9d%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
+    위치권한 획득하기
+</h2><p>맵에 나의 위치를 표시하기 위해서는 <a class="link" href="https://developer.android.com/training/location/permissions"  target="_blank" rel="noopener"
     >위치권한</a>이 필요합니다. Android 6.0(API 레벨 23) 이상에서는 위치권한 등의 위험한 권한들이 필요할 경우 앱이 실행중에 권한을 요청할 수 있도록 시스템이 <a class="link" href="https://developer.android.com/training/permissions/requesting"  target="_blank" rel="noopener"
     >변경</a>되었습니다.</p>
 <p>우선은 <code>AndroidManifest.xml</code>에서 앱에 필요한 권한을 정의합니다. 맵 데이터를 인터넷에서 받아오기 위한 <code>INTERNET</code>권한과, 위치정보를 가져오기 위한 <code>LOCATION</code> 권한이 필요합니다.</p>
@@ -891,15 +897,19 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="맵에-내-위치-표시하기">맵에 내 위치 표시하기</h2>
-<h3 id="getuisetting-이용하기">getUiSetting 이용하기</h3>
-<p><code>GoogleMap</code>에 내장된 <a class="link" href="https://developers.google.com/maps/documentation/android-sdk/controls"  target="_blank" rel="noopener"
+</div><h2 id="맵에-내-위치-표시하기">
+    <a href="#%eb%a7%b5%ec%97%90-%eb%82%b4-%ec%9c%84%ec%b9%98-%ed%91%9c%ec%8b%9c%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
+    맵에 내 위치 표시하기
+</h2><h3 id="getuisetting-이용하기">
+    <a href="#getuisetting-%ec%9d%b4%ec%9a%a9%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
+    getUiSetting 이용하기
+</h3><p><code>GoogleMap</code>에 내장된 <a class="link" href="https://developers.google.com/maps/documentation/android-sdk/controls"  target="_blank" rel="noopener"
     >getUiSetting</a> 을 이용하면 다음과 같은 위치표시 버튼을 맵에 표시할 수 있습니다. 옵션을 추가함으로써 Zoom control이나 Level picker도 표시하게 할 수 있습니다.</p>
 <figure><img src="https://developers.google.com/maps/documentation/android-sdk/images/mylocationbutton_2x.png"
-         alt="출처 : https://developers.google.com/maps/documentation/android-sdk/controls" width="93%"/><figcaption>
-            <p>출처 : <a class="link" href="https://developers.google.com/maps/documentation/android-sdk/controls"  target="_blank" rel="noopener"
+    alt="출처 : https://developers.google.com/maps/documentation/android-sdk/controls" width="93%"><figcaption>
+      <p>출처 : <a class="link" href="https://developers.google.com/maps/documentation/android-sdk/controls"  target="_blank" rel="noopener"
     >https://developers.google.com/maps/documentation/android-sdk/controls</a></p>
-        </figcaption>
+    </figcaption>
 </figure>
 
 <p>맵 상에 위치표시 버튼을 보여주게 하려면 <code>onMapReady</code>에서 map 객체를 획득한 후 다음 작업을 수행하면 됩니다. 위치권한을 사용해야 하는 작업인데 프래그먼트에서 권한을 획득하는 로직이 없으므로 <code>Missing permissions</code> 경고가 발생합니다. 하지만 권한은 액티비티에서 이미 취득했으므로 경고를 무시하기 위해 <code>@SuppressLint(&quot;MissingPermission&quot;)</code> 어노테이션을 붙여줍니다.</p>
@@ -931,8 +941,10 @@ if (!doNotTrack) {
 </span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="fusedlocationproviderclient-이용하기">FusedLocationProviderClient 이용하기</h3>
-<p>기본으로 제공된 버튼을 사용하지 않고 내 위치를 받아오는 기능을 직접 구현할 수도 있는데요, 그 경우엔 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient.html"  target="_blank" rel="noopener"
+</div><h3 id="fusedlocationproviderclient-이용하기">
+    <a href="#fusedlocationproviderclient-%ec%9d%b4%ec%9a%a9%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
+    FusedLocationProviderClient 이용하기
+</h3><p>기본으로 제공된 버튼을 사용하지 않고 내 위치를 받아오는 기능을 직접 구현할 수도 있는데요, 그 경우엔 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient.html"  target="_blank" rel="noopener"
     >FusedLocationProviderClient</a>를 사용하면 됩니다.</p>
 <p>우선은 맵프래그먼트의 레이아웃에 현재 위치를 확인할 플로팅 버튼을 추가합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -1013,8 +1025,10 @@ if (!doNotTrack) {
 <li>Google Play services on the device has restarted, and there is no active Fused Location Provider client that has requested location after the services restarted. To avoid this situation you can create a new client and request location updates yourself. For more information, see Receiving Location Updates.</li>
 </ul>
 </blockquote>
-<h2 id="생명주기-관리">생명주기 관리</h2>
-<p>프래그먼트의 생명주기에 따라 구글맵을 관리하기 위한 처리를 해 줍니다. 맵을 액티비티에서 <code>SupportMapFragment</code>로 구현할 경우에는 신경쓰지 않아도 되는 부분입니다.</p>
+<h2 id="생명주기-관리">
+    <a href="#%ec%83%9d%eb%aa%85%ec%a3%bc%ea%b8%b0-%ea%b4%80%eb%a6%ac" class="header-anchor">#</a>
+    생명주기 관리
+</h2><p>프래그먼트의 생명주기에 따라 구글맵을 관리하기 위한 처리를 해 줍니다. 맵을 액티비티에서 <code>SupportMapFragment</code>로 구현할 경우에는 신경쓰지 않아도 되는 부분입니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1101,18 +1115,18 @@ if (!doNotTrack) {
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -1140,6 +1154,8 @@ if (!doNotTrack) {
                 </div>
         
                 
+                    
+                    
                     <div class="article-image">
                         <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
                     </div>
@@ -1288,7 +1304,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

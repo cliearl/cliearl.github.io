@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>ktlint on 냉동코더의 기술블로그</title>
+        <title>Ktlint on 냉동코더의 기술블로그</title>
         <link>https://cliearl.github.io/tags/ktlint/</link>
-        <description>Recent content in ktlint on 냉동코더의 기술블로그</description>
+        <description>Recent content in Ktlint on 냉동코더의 기술블로그</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <lastBuildDate>Sun, 21 Mar 2021 18:07:38 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/ktlint/index.xml" rel="self" type="application/rss+xml" /><item>
@@ -13,8 +13,10 @@
         
         <guid>https://cliearl.github.io/posts/android/use-ktlint/</guid>
         <description>&lt;p&gt;이번 포스트에서는 작성된 코드의 교열을 보는 방법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;들어가기&#34;&gt;들어가기&lt;/h2&gt;
-&lt;p&gt;우리가 작성하는 코드는 기본적으로는 컴퓨터에게 명령을 내리기 위한 것이고 그 명령은 각 언어의 문법에 따라 작성되어져야 합니다.&lt;/p&gt;
+&lt;h2 id=&#34;들어가기&#34;&gt;
+    &lt;a href=&#34;#%eb%93%a4%ec%96%b4%ea%b0%80%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    들어가기
+&lt;/h2&gt;&lt;p&gt;우리가 작성하는 코드는 기본적으로는 컴퓨터에게 명령을 내리기 위한 것이고 그 명령은 각 언어의 문법에 따라 작성되어져야 합니다.&lt;/p&gt;
 &lt;p&gt;코틀린에서 상수 두 개를 만들고 그 상수를 더하는 명령은 다음과 같이 쓸 수 있습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -49,8 +51,10 @@
 &lt;p&gt;내가 작성한 코드를 내 동료가 검토할 수도 있고, 몇 년후 내가 더 이상 코드를 관리하지 않게 되었을 때 내 후임이 코드를 읽어야 할 일이 생길 수 있습니다.  또 다음주쯤에 내 스스로가 내가 작성한 코드를 다시 읽어야 할 일도 생길 수 있죠.&lt;/p&gt;
 &lt;p&gt;코드는 나와 컴퓨터의 대화이기도 하지만, 나와 다른 사람과의 대화이기도 합니다. 따라서 컴파일이 되게 문법을 맞추는 것 뿐만 아니라, 사람이 보기 좋도록 코드의 구조도 이쁘게 만드는 것이 좋습니다.&lt;/p&gt;
 &lt;p&gt;프로그래머들 사이에서는 코드가 이쁘다고 느끼게 하는 어느정도 일반적으로 받아들여지는 정도의 수준이 있고 이걸 정리한 것을 코드 컨벤션이라고 합니다.&lt;/p&gt;
-&lt;h2 id=&#34;ktlint&#34;&gt;ktlint&lt;/h2&gt;
-&lt;p&gt;코드 컨벤션의 형태는 언어별로 다른데 코틀린의 경우 다음과 같은 규약이 정의되어 있습니다.&lt;/p&gt;
+&lt;h2 id=&#34;ktlint&#34;&gt;
+    &lt;a href=&#34;#ktlint&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    ktlint
+&lt;/h2&gt;&lt;p&gt;코드 컨벤션의 형태는 언어별로 다른데 코틀린의 경우 다음과 같은 규약이 정의되어 있습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/kotlin/style-guide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Kotlin style guide&lt;/a&gt;&lt;/li&gt;
@@ -72,8 +76,10 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/pinterest/ktlint#standard-rules&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://github.com/pinterest/ktlint#standard-rules&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;ktlint-사용법&#34;&gt;ktlint 사용법&lt;/h2&gt;
-&lt;p&gt;ktlint는 그 자체를 프로젝트에 삽입해서 사용해도 되지만 래퍼 라이브러리를 사용하면 더 간편하게 사용할 수 있습니다. ktlint의 래퍼는 여러가지가 있는데 여기서는 커밋이 활발하게 이루어지는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/jlleitschuh/ktlint-gradle&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;ktlint-사용법&#34;&gt;
+    &lt;a href=&#34;#ktlint-%ec%82%ac%ec%9a%a9%eb%b2%95&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    ktlint 사용법
+&lt;/h2&gt;&lt;p&gt;ktlint는 그 자체를 프로젝트에 삽입해서 사용해도 되지만 래퍼 라이브러리를 사용하면 더 간편하게 사용할 수 있습니다. ktlint의 래퍼는 여러가지가 있는데 여기서는 커밋이 활발하게 이루어지는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/jlleitschuh/ktlint-gradle&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ktlint-gradle&lt;/a&gt;을 사용하겠습니다.&lt;/p&gt;
 &lt;p&gt;우선 라이브러리를 project 레벨의 gradle에 플러그인으로 추가합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

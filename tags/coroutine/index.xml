@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>coroutine on 냉동코더의 기술블로그</title>
+        <title>Coroutine on 냉동코더의 기술블로그</title>
         <link>https://cliearl.github.io/tags/coroutine/</link>
-        <description>Recent content in coroutine on 냉동코더의 기술블로그</description>
+        <description>Recent content in Coroutine on 냉동코더의 기술블로그</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <lastBuildDate>Sun, 07 Nov 2021 08:32:11 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/coroutine/index.xml" rel="self" type="application/rss+xml" /><item>
@@ -19,8 +19,10 @@
     &gt;Retrofit 2과 함께하는 정말 쉬운 HTTP&lt;/a&gt; 를 보는것이 가장 정확할 것 같습니다.&lt;/p&gt;
 &lt;p&gt;이 강의에서는 경기데이터드림에서 제공하는 &lt;a class=&#34;link&#34; href=&#34;https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&amp;amp;rows=10&amp;amp;sortColumn=&amp;amp;sortDirection=&amp;amp;infId=461Q599QLK8UTE14E3LW12837248&amp;amp;infSeq=1&amp;amp;order=&amp;amp;loc=&amp;amp;searchWord=%EC%BD%94%EB%A1%9C%EB%82%98&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;코로나바이러스 감염증 선별진료소 운영 의료기관 현황&lt;/a&gt; API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;라이브러리-추가&#34;&gt;라이브러리 추가&lt;/h2&gt;
-&lt;p&gt;build.gradle에 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/retrofit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;라이브러리-추가&#34;&gt;
+    &lt;a href=&#34;#%eb%9d%bc%ec%9d%b4%eb%b8%8c%eb%9f%ac%eb%a6%ac-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    라이브러리 추가
+&lt;/h2&gt;&lt;p&gt;build.gradle에 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/retrofit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Retrofit&lt;/a&gt;과 JSON을 다루기 위한 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/moshi/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Moshi&lt;/a&gt; 컨버터, 그리고 로그를 찍기위한 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/okhttp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;OkHttp&lt;/a&gt; 라이브러리를 추가해 줍니다.&lt;/p&gt;
@@ -44,8 +46,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;com.squareup.okhttp3:logging-interceptor:4.9.1&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;권한-추가&#34;&gt;권한 추가&lt;/h2&gt;
-&lt;p&gt;HTTP 통신에 인터넷을 사용해야 하니 &lt;code&gt;AndroidManefest.xml&lt;/code&gt;에서 권한을 추가해줍니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;권한-추가&#34;&gt;
+    &lt;a href=&#34;#%ea%b6%8c%ed%95%9c-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    권한 추가
+&lt;/h2&gt;&lt;p&gt;HTTP 통신에 인터넷을 사용해야 하니 &lt;code&gt;AndroidManefest.xml&lt;/code&gt;에서 권한을 추가해줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -54,9 +58,13 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;uses-permission&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;android:name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;android.permission.INTERNET&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;data-transfer-object-준비&#34;&gt;Data Transfer Object 준비&lt;/h2&gt;
-&lt;h3 id=&#34;데이터-형식-확인&#34;&gt;데이터 형식 확인&lt;/h3&gt;
-&lt;p&gt;API의 주소인 &lt;a class=&#34;link&#34; href=&#34;https://openapi.gg.go.kr/EmgMedInfo?type=json&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;data-transfer-object-준비&#34;&gt;
+    &lt;a href=&#34;#data-transfer-object-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Data Transfer Object 준비
+&lt;/h2&gt;&lt;h3 id=&#34;데이터-형식-확인&#34;&gt;
+    &lt;a href=&#34;#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ed%98%95%ec%8b%9d-%ed%99%95%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    데이터 형식 확인
+&lt;/h3&gt;&lt;p&gt;API의 주소인 &lt;a class=&#34;link&#34; href=&#34;https://openapi.gg.go.kr/EmgMedInfo?type=json&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://openapi.gg.go.kr/EmgMedInfo?type=json&lt;/a&gt; 에 웹브라우저로 접속해보면 다음과 같은 값을 반환받게 됩니다. &lt;code&gt;&amp;quot;head&amp;quot;&lt;/code&gt;안의 항목은 필요하지 않은 메타정보이고, &lt;code&gt;&amp;quot;row&amp;quot;&lt;/code&gt; 안의 내용이 Recyclerview로 표시해야 하는 것들입니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -242,8 +250,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;dto-클래스-작성&#34;&gt;DTO 클래스 작성&lt;/h3&gt;
-&lt;p&gt;JSON 형식으로 받아온 텍스트는 앱에서 사용할 수 있는 데이터 객체로 변환하게 되는데 이 때 그 객체의 틀이 되는것이 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Data_transfer_object&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h3 id=&#34;dto-클래스-작성&#34;&gt;
+    &lt;a href=&#34;#dto-%ed%81%b4%eb%9e%98%ec%8a%a4-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    DTO 클래스 작성
+&lt;/h3&gt;&lt;p&gt;JSON 형식으로 받아온 텍스트는 앱에서 사용할 수 있는 데이터 객체로 변환하게 되는데 이 때 그 객체의 틀이 되는것이 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Data_transfer_object&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Data Transfer Object (DTO)&lt;/a&gt;입니다.&lt;/p&gt;
 &lt;p&gt;그럼 이 JSON에 대응하는 DTO를 작성합니다. &lt;a class=&#34;link&#34; href=&#34;https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;JSON To Kotlin Class&lt;/a&gt; 플러그인에 위의 JSON을 붙여넣고 EmgMedResponse라는 이름으로 변환하면 다음과 같이 5개의 데이터 클래스가 생성됩니다. 이 때 옵션은 &lt;code&gt;Val&lt;/code&gt;, &lt;code&gt;Nullable&lt;/code&gt;, &lt;code&gt;MoShi (Reflect)&lt;/code&gt;를 선택해줍니다.&lt;/p&gt;
@@ -354,8 +364,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;아이템-디자인&#34;&gt;아이템 디자인&lt;/h2&gt;
-&lt;p&gt;Recyclerview에서 사용할 아이템의 디자인을 만들어줍니다. LinearLayout을 써서 API 응답중 Row의 내용을 표시하는 화면을 만들어줍니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;아이템-디자인&#34;&gt;
+    &lt;a href=&#34;#%ec%95%84%ec%9d%b4%ed%85%9c-%eb%94%94%ec%9e%90%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    아이템 디자인
+&lt;/h2&gt;&lt;p&gt;Recyclerview에서 사용할 아이템의 디자인을 만들어줍니다. LinearLayout을 써서 API 응답중 Row의 내용을 표시하는 화면을 만들어줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -498,8 +510,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/LinearLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;레이아웃-작성&#34;&gt;레이아웃 작성&lt;/h2&gt;
-&lt;p&gt;다음은 &lt;code&gt;activity_main.xml&lt;/code&gt;을 작성합니다. JSON 응답결과를 표시할 Recyclerview를 하나 배치하고 네트워크 연결을 시작하는데 사용할 플로팅버튼을 하나 달아줍니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;레이아웃-작성&#34;&gt;
+    &lt;a href=&#34;#%eb%a0%88%ec%9d%b4%ec%95%84%ec%9b%83-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    레이아웃 작성
+&lt;/h2&gt;&lt;p&gt;다음은 &lt;code&gt;activity_main.xml&lt;/code&gt;을 작성합니다. JSON 응답결과를 표시할 Recyclerview를 하나 배치하고 네트워크 연결을 시작하는데 사용할 플로팅버튼을 하나 달아줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -568,8 +582,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/androidx.constraintlayout.widget.ConstraintLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;recyclerview-어댑터-작성&#34;&gt;Recyclerview 어댑터 작성&lt;/h2&gt;
-&lt;p&gt;DTO 중 Row 클래스의 내용을 받아 ViewHolder에 표시하는 Recyclerview 어댑터를 작성합니다. 데이터의 갱신은 ListAdapter를 사용하여 수행합니다. ListAdapter의 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/recyclerview-listadapter/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;recyclerview-어댑터-작성&#34;&gt;
+    &lt;a href=&#34;#recyclerview-%ec%96%b4%eb%8c%91%ed%84%b0-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Recyclerview 어댑터 작성
+&lt;/h2&gt;&lt;p&gt;DTO 중 Row 클래스의 내용을 받아 ViewHolder에 표시하는 Recyclerview 어댑터를 작성합니다. 데이터의 갱신은 ListAdapter를 사용하여 수행합니다. ListAdapter의 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/recyclerview-listadapter/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기&lt;/a&gt; 강의를 참조하시기 바랍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -684,8 +700,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;서비스-작성&#34;&gt;서비스 작성&lt;/h2&gt;
-&lt;p&gt;Retrofit은 HTTP API의 request를 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/docs/interfaces.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;서비스-작성&#34;&gt;
+    &lt;a href=&#34;#%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    서비스 작성
+&lt;/h2&gt;&lt;p&gt;Retrofit은 HTTP API의 request를 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/docs/interfaces.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;인터페이스&lt;/a&gt;로 정의하여 사용합니다. 이 강의에서 사용할 선별진료소 API는 다음과 같은 &lt;a class=&#34;link&#34; href=&#34;https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&amp;amp;rows=10&amp;amp;sortColumn=&amp;amp;sortDirection=&amp;amp;infId=461Q599QLK8UTE14E3LW12837248&amp;amp;infSeq=3&amp;amp;order=&amp;amp;loc=&amp;amp;searchWord=%EC%BD%94%EB%A1%9C%EB%82%98&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;인자&lt;/a&gt;를 받을 수 있게 만들어져 있습니다.&lt;/p&gt;
 &lt;table&gt;
@@ -744,9 +762,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;코드를 해석하면 &lt;code&gt;getEmgMedData&lt;/code&gt; 는 &lt;code&gt;BASE_URL/EmgMedInfo?KEY=&amp;quot;KEY&amp;quot;&amp;amp;Type=&amp;quot;Type&amp;quot;&lt;/code&gt;이라는 GET 요청을 보내고 &lt;code&gt;Call&amp;lt;EmgMedResponse&amp;gt;&lt;/code&gt; 객체를 반환받는 동작을 하는 함수라는 뜻이 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;retrofit-객체-준비&#34;&gt;Retrofit 객체 준비&lt;/h2&gt;
-&lt;h3 id=&#34;retrofitapi-작성&#34;&gt;RetrofitApi 작성&lt;/h3&gt;
-&lt;p&gt;Retrofit을 사용하기 위해서는 우선 객체를 만들어주어야 합니다. 이 때 여러개의 객체가 만들어지면 자원도 낭비되고 통신에 혼선도 발생할 수 있으므로 &lt;code&gt;object&lt;/code&gt; 키워드를 써서 싱글톤으로 만들어지도록 합니다. 이 때 각 변수에는 &lt;code&gt;lazy&lt;/code&gt;를 적용함으로써 실제 사용되는 순간이 와야 비로소 만들어지게 되고, 단 하나의 인스턴스만이 만들어지도록 하였습니다. 싱글톤에 대한 구체적인 설명은 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/understanding-singleton-pattern/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;retrofit-객체-준비&#34;&gt;
+    &lt;a href=&#34;#retrofit-%ea%b0%9d%ec%b2%b4-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Retrofit 객체 준비
+&lt;/h2&gt;&lt;h3 id=&#34;retrofitapi-작성&#34;&gt;
+    &lt;a href=&#34;#retrofitapi-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    RetrofitApi 작성
+&lt;/h3&gt;&lt;p&gt;Retrofit을 사용하기 위해서는 우선 객체를 만들어주어야 합니다. 이 때 여러개의 객체가 만들어지면 자원도 낭비되고 통신에 혼선도 발생할 수 있으므로 &lt;code&gt;object&lt;/code&gt; 키워드를 써서 싱글톤으로 만들어지도록 합니다. 이 때 각 변수에는 &lt;code&gt;lazy&lt;/code&gt;를 적용함으로써 실제 사용되는 순간이 와야 비로소 만들어지게 되고, 단 하나의 인스턴스만이 만들어지도록 하였습니다. 싱글톤에 대한 구체적인 설명은 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/understanding-singleton-pattern/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;알기쉬운 Singleton Pattern&lt;/a&gt; 강의를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -802,8 +824,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/2.x/retrofit/retrofit2/Retrofit.Builder.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;빌더 패턴&lt;/a&gt;을 통해 retrofit 객체를 만들어줍니다. &lt;code&gt;addConverterFactory&lt;/code&gt;에서 DTO 변환에 사용할 JSON 컨버터를 Moshi로 지정하고, &lt;code&gt;baseUrl&lt;/code&gt; 을 전달한 뒤 &lt;code&gt;build()&lt;/code&gt;로 객체를 생성합니다. 그리고나서 retrofit 인스턴스의 &lt;code&gt;create&lt;/code&gt; 명령을 이용해서 emgMedService의 인스턴스를 만들어줍니다.&lt;/p&gt;
-&lt;h3 id=&#34;전송패킷-모니터링&#34;&gt;전송패킷 모니터링&lt;/h3&gt;
-&lt;p&gt;retrofit 객체를 생성할때 &lt;code&gt;client&lt;/code&gt; 속성에 &lt;code&gt;okHttpClient&lt;/code&gt;를 넘겨주면 로그캣에서 패킷내용을 모니터링할 수 있습니다. okHttpClient는 다음과 같이 서버와 코어 사이에서 데이터를 가로채는 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/okhttp/interceptors/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;전송패킷-모니터링&#34;&gt;
+    &lt;a href=&#34;#%ec%a0%84%ec%86%a1%ed%8c%a8%ed%82%b7-%eb%aa%a8%eb%8b%88%ed%84%b0%eb%a7%81&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    전송패킷 모니터링
+&lt;/h3&gt;&lt;p&gt;retrofit 객체를 생성할때 &lt;code&gt;client&lt;/code&gt; 속성에 &lt;code&gt;okHttpClient&lt;/code&gt;를 넘겨주면 로그캣에서 패킷내용을 모니터링할 수 있습니다. okHttpClient는 다음과 같이 서버와 코어 사이에서 데이터를 가로채는 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/okhttp/interceptors/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Interceptor&lt;/a&gt;로서 기능하는 객체입니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/download-json-data-using-retrofit/okhttp-interceptors.png&#34;
 	
@@ -815,8 +839,10 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;retrofit-구동&#34;&gt;Retrofit 구동&lt;/h2&gt;
-&lt;p&gt;그럼 MainActivity에서 Retrofit을 사용해보겠습니다. 플로팅 버튼에 대해 다음 내용의 &lt;code&gt;retrofitWork()&lt;/code&gt;를 실행하는 클릭리스너를 구성합니다.&lt;/p&gt;
+&lt;h2 id=&#34;retrofit-구동&#34;&gt;
+    &lt;a href=&#34;#retrofit-%ea%b5%ac%eb%8f%99&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Retrofit 구동
+&lt;/h2&gt;&lt;p&gt;그럼 MainActivity에서 Retrofit을 사용해보겠습니다. 플로팅 버튼에 대해 다음 내용의 &lt;code&gt;retrofitWork()&lt;/code&gt;를 실행하는 클릭리스너를 구성합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -872,8 +898,10 @@
     &gt;execute&lt;/a&gt;를 사용하면 request를 보내고 response를 받는 행위를 동기적으로 행합니다. 그리고 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/2.x/retrofit/retrofit2/Call.html#enqueue-retrofit2.Callback-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;enqueue&lt;/a&gt; 작업을 실행하면 request는 비동기적으로 보내고, response는 콜백으로 받게 됩니다. 여기서는 네트워크 작업을 안정적으로 수행하기 위해 enqueue로 실행하도록 하였습니다.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;enqueue&lt;/code&gt;의 통신결과는 성공했을 때 &lt;code&gt;onResponse&lt;/code&gt;, 실패했을 때 &lt;code&gt;onFailure&lt;/code&gt; 를 리스너로 받을 수 있으므로 각 상황에 따른 처리를 해 줍니다. 통신에 성공하면 &lt;code&gt;response.isSuccessful&lt;/code&gt;을 확인하여 사용할 수 있는 응답이 돌아왔는지 확인하고, 그렇다면 body에서 값을 꺼내어 Recyclerview에 넘겨주면 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;코루틴에서-사용하기&#34;&gt;코루틴에서 사용하기&lt;/h2&gt;
-&lt;p&gt;retrofit의 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;코루틴에서-사용하기&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4%ec%97%90%ec%84%9c-%ec%82%ac%ec%9a%a9%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴에서 사용하기
+&lt;/h2&gt;&lt;p&gt;retrofit의 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;사양&lt;/a&gt;에 따르면 &lt;code&gt;enqueue&lt;/code&gt;는 request를 백그라운드 스레드에서, response 콜백은 메인스레드에서 처리하게 됩니다. 그런데 코루틴을 사용하면 콜백을 쓰지 않아도 동일한 처리를 할 수 있습니다. 그래서 이번엔 코루틴 안에서 retrofit 처리를 수행하도록 해 보겠습니다. 코루틴에 대한 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/coroutine-principle/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;알기쉬운 코루틴 이론&lt;/a&gt;을 참조하시기 바랍니다.&lt;/p&gt;
 &lt;p&gt;우선은 &lt;code&gt;build.gradle&lt;/code&gt;에 플러그인을 추가합니다.&lt;/p&gt;
@@ -957,8 +985,10 @@
         
         <guid>https://cliearl.github.io/posts/android/lotto-checker/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;당첨번호-조회하기&#34;&gt;당첨번호 조회하기&lt;/h2&gt;
-&lt;p&gt;이전에 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/lotto-generator/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;당첨번호-조회하기&#34;&gt;
+    &lt;a href=&#34;#%eb%8b%b9%ec%b2%a8%eb%b2%88%ed%98%b8-%ec%a1%b0%ed%9a%8c%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    당첨번호 조회하기
+&lt;/h2&gt;&lt;p&gt;이전에 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/lotto-generator/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;로또번호 생성기 만들기&lt;/a&gt;강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/coroutine-principle/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;알기쉬운 코루틴 이론&lt;/a&gt; 강의를 참조하시기 바랍니다.&lt;/p&gt;
 &lt;p&gt;금주의 로또 당첨번호는 &lt;a class=&#34;link&#34; href=&#34;https://dhlottery.co.kr/common.do?method=main&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -982,8 +1012,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;totSellamnt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;95924229000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;returnValue&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;success&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;drwNoDate&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;2021-06-19&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;firstWinamnt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1667729683&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;drwtNo6&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;39&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;drwtNo4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;firstPrzwnerCo&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;drwtNo5&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;bnusNo&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;33&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;firstAccumamnt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;21680485879&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;drwNo&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;968&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;drwtNo2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;drwtNo3&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;drwtNo1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;dependency-확인&#34;&gt;Dependency 확인&lt;/h2&gt;
-&lt;p&gt;자 그러면 &lt;code&gt;drwtNo1~6&lt;/code&gt;, &lt;code&gt;bnusNo&lt;/code&gt;의 값을 추출해서 나의 값과 비교하면 되겠네요. 당첨번호는 네트워크에서 백그라운드로 받아와야 하기 때문에 코루틴으로 처리하도록 하면 되겠고, 받아온 json으로부터 값을 추출하는데에는 gson 라이브러리를 사용하면 될 것 같습니다. gson의 사용법에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/sharedpreferneces-gson/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;dependency-확인&#34;&gt;
+    &lt;a href=&#34;#dependency-%ed%99%95%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Dependency 확인
+&lt;/h2&gt;&lt;p&gt;자 그러면 &lt;code&gt;drwtNo1~6&lt;/code&gt;, &lt;code&gt;bnusNo&lt;/code&gt;의 값을 추출해서 나의 값과 비교하면 되겠네요. 당첨번호는 네트워크에서 백그라운드로 받아와야 하기 때문에 코루틴으로 처리하도록 하면 되겠고, 받아온 json으로부터 값을 추출하는데에는 gson 라이브러리를 사용하면 될 것 같습니다. gson의 사용법에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/sharedpreferneces-gson/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;SharedPreferences를 json 포맷으로 관리하기&lt;/a&gt; 강의에서 다루었으니 그것을 참고하시면 되겠습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -995,8 +1027,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;com&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;google&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2.8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;네트워크로-당첨번호-받아오기&#34;&gt;네트워크로 당첨번호 받아오기&lt;/h2&gt;
-&lt;p&gt;그럼 네트워크로 당첨번호를 받아오는 &lt;code&gt;getLottoNumbers&lt;/code&gt; 함수와, 두 값을 비교하는 &lt;code&gt;whatIsRank&lt;/code&gt; 함수를 만들도록 하겠습니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;네트워크로-당첨번호-받아오기&#34;&gt;
+    &lt;a href=&#34;#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac%eb%a1%9c-%eb%8b%b9%ec%b2%a8%eb%b2%88%ed%98%b8-%eb%b0%9b%ec%95%84%ec%98%a4%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    네트워크로 당첨번호 받아오기
+&lt;/h2&gt;&lt;p&gt;그럼 네트워크로 당첨번호를 받아오는 &lt;code&gt;getLottoNumbers&lt;/code&gt; 함수와, 두 값을 비교하는 &lt;code&gt;whatIsRank&lt;/code&gt; 함수를 만들도록 하겠습니다.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;getLottoNumbers&lt;/code&gt;는 전달받은 API 주소에 조회를 요청하고 반환값을 처리합니다. 이 함수는 네트워크를 사용해야 하므로 코루틴 안에서 사용하기 위해 &lt;code&gt;suspend&lt;/code&gt; 키워드를 붙여줍니다. API는 단순한 GET 요청이므로 소켓을 만들지 않고 간단하게 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/api/latest/jvm/stdlib/org.w3c.dom.url/-u-r-l/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;URL&lt;/a&gt;과 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.net.-u-r-l/read-text.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;readText&lt;/a&gt;로 값을 읽어오도록 하였습니다.&lt;/p&gt;
@@ -1057,8 +1091,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;내-번호와-당첨번호-비교하기&#34;&gt;내 번호와 당첨번호 비교하기&lt;/h2&gt;
-&lt;p&gt;다음은 내 번호와 당첨번호를 비교하는 함수를 만듭니다. 로또의 규칙은 표의 내용과 같이 되어 있습니다. 그래서 &lt;code&gt;whatIsRank&lt;/code&gt;에서는 내 로또번호와 당첨번호를 전달받아 처음 6개까지의 숫자를 비교해 일치한 갯수를 세고, 일치한 번호의 갯수가 5개이면 추가로 보너스번호인 7번째 번호가 일치하는지 확인하도록 하면 됩니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;내-번호와-당첨번호-비교하기&#34;&gt;
+    &lt;a href=&#34;#%eb%82%b4-%eb%b2%88%ed%98%b8%ec%99%80-%eb%8b%b9%ec%b2%a8%eb%b2%88%ed%98%b8-%eb%b9%84%ea%b5%90%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    내 번호와 당첨번호 비교하기
+&lt;/h2&gt;&lt;p&gt;다음은 내 번호와 당첨번호를 비교하는 함수를 만듭니다. 로또의 규칙은 표의 내용과 같이 되어 있습니다. 그래서 &lt;code&gt;whatIsRank&lt;/code&gt;에서는 내 로또번호와 당첨번호를 전달받아 처음 6개까지의 숫자를 비교해 일치한 갯수를 세고, 일치한 번호의 갯수가 5개이면 추가로 보너스번호인 7번째 번호가 일치하는지 확인하도록 하면 됩니다.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1168,8 +1204,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;na&#34;&gt;android:textAppearance=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;@style/TextAppearance.AppCompat.Large&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;코루틴으로-작업-처리하기&#34;&gt;코루틴으로 작업 처리하기&lt;/h2&gt;
-&lt;p&gt;그러면 번호생성버튼을 눌렀을 때 생성된 번호를 당첨번호와 비교하는 코루틴을 추가하겠습니다. &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;코루틴으로-작업-처리하기&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4%ec%9c%bc%eb%a1%9c-%ec%9e%91%ec%97%85-%ec%b2%98%eb%a6%ac%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴으로 작업 처리하기
+&lt;/h2&gt;&lt;p&gt;그러면 번호생성버튼을 눌렀을 때 생성된 번호를 당첨번호와 비교하는 코루틴을 추가하겠습니다. &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CoroutineScope&lt;/a&gt;로 스코프를 정의하고, 네트워크에서 값을 가져올 것이기 때문에 &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Dispatchers&lt;/a&gt;는 &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html#-978510185%2FProperties%2F-1316292404&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;IO&lt;/a&gt;로 설정합니다. 그리고 작업 후에 값을 반환할 필요가 없기 때문에 빌더는 &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/launch.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -1217,8 +1255,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;코루틴-취소하기&#34;&gt;코루틴 취소하기&lt;/h2&gt;
-&lt;p&gt;액티비티가 종료되었을 때 실행중인 코루틴이 살아남는것을 방지하기 위해 취소하는 기능을 추가해 보도록 하겠습니다. &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/coroutine-principle/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;코루틴-취소하기&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4-%ec%b7%a8%ec%86%8c%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴 취소하기
+&lt;/h2&gt;&lt;p&gt;액티비티가 종료되었을 때 실행중인 코루틴이 살아남는것을 방지하기 위해 취소하는 기능을 추가해 보도록 하겠습니다. &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/coroutine-principle/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;알기쉬운 코루틴 이론&lt;/a&gt; 강의에서 설명했던 것처럼 코루틴을 취소하기 위해서는 &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;job&lt;/a&gt;에 대해 &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/cancel.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;cancel&lt;/a&gt;을 수행하면 됩니다. 그런데 &lt;code&gt;generateButton&lt;/code&gt; 안에서 수행된 &lt;code&gt;CoroutineScope&lt;/code&gt;에 대해서는 반환되는 &lt;code&gt;job&lt;/code&gt;을 오브젝트로 만들지 않았습니다.&lt;/p&gt;
@@ -1287,8 +1327,10 @@
         
         <guid>https://cliearl.github.io/posts/android/coroutine-principle/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 코틀린의 코루틴(Coroutine)에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;코루틴의-개념&#34;&gt;코루틴의 개념&lt;/h2&gt;
-&lt;p&gt;안드로이드에서는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/os/AsyncTask&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;코루틴의-개념&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4%ec%9d%98-%ea%b0%9c%eb%85%90&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴의 개념
+&lt;/h2&gt;&lt;p&gt;안드로이드에서는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/os/AsyncTask&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;AsyncTask&lt;/a&gt;를 이용해서 손쉽게 비동기 프로그래밍을 구현했었지만 &lt;a class=&#34;link&#34; href=&#34;https://android-review.googlesource.com/c/platform/frameworks/base/&amp;#43;/1156409/6/core/java/android/os/AsyncTask.java#40&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;구글&lt;/a&gt;이 다음과 같이 밝힌 것처럼 메모리 누수등 여러가지 문제가 있었습니다. 그래서 API 30부터는 AsyncTask를 deprecate 시키고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/kotlin/coroutines&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;코루틴&lt;/a&gt;을 사용하도록 권장하고 있습니다.&lt;/p&gt;
@@ -1301,29 +1343,45 @@
 &lt;p&gt;루틴의 한 종류인 함수는 호출을 함으로써 그 내부에 진입하여 내부에서 처리를 수행하고, 처리가 끝나면 함수도 종료되는 구조를 가지고 있기 때문에 보통은 루틴이 일직선적인 흐름을 가지고 있다고 할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;그런데 코루틴의 특징은 이 일직선적인 흐름을 중간에 지연시켰다가(suspend) 다시 재시작하는(resume) 것이 가능합니다. 따라서 코루틴을 사용하면 루틴이 실행 되었더라도 더 바쁜 다른 루틴이 실행되는동안 잠시 멈췄다가, 바쁜게 끝나면 재시작하여 나머지 작업을 끝내는 형태의 비동기 프로그래밍이 가능하게 됩니다.&lt;/p&gt;
 &lt;p&gt;또 코루틴은 자기 스스로가 메인루틴이 되면서도 서브루틴이 될 수 있다는 특징도 있습니다.&lt;/p&gt;
-&lt;h2 id=&#34;코루틴과-스레드&#34;&gt;코루틴과 스레드&lt;/h2&gt;
-&lt;p&gt;구글에서는 AsyncTask를 코루틴으로 대체하여 쓰라고 하고 있기 때문에 얼핏 생각하면 코루틴은 AsyncTask의 약점인 메모리누수가 없는 스레드라고 생각하기 쉽습니다. 그러나 &lt;a class=&#34;link&#34; href=&#34;https://aaronryu.github.io/2019/05/27/coroutine-and-thread/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;코루틴과-스레드&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4%ea%b3%bc-%ec%8a%a4%eb%a0%88%eb%93%9c&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴과 스레드
+&lt;/h2&gt;&lt;p&gt;구글에서는 AsyncTask를 코루틴으로 대체하여 쓰라고 하고 있기 때문에 얼핏 생각하면 코루틴은 AsyncTask의 약점인 메모리누수가 없는 스레드라고 생각하기 쉽습니다. 그러나 &lt;a class=&#34;link&#34; href=&#34;https://aaronryu.github.io/2019/05/27/coroutine-and-thread/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;코루틴은 스레드가 아닙니다&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;메모리-구조의-차이&#34;&gt;메모리 구조의 차이&lt;/h3&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/progressdialog-thread/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;메모리-구조의-차이&#34;&gt;
+    &lt;a href=&#34;#%eb%a9%94%eb%aa%a8%eb%a6%ac-%ea%b5%ac%ec%a1%b0%ec%9d%98-%ec%b0%a8%ec%9d%b4&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    메모리 구조의 차이
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/progressdialog-thread/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ProgressDialog로 Thread와 Handler 이해하기&lt;/a&gt; 강의에서 다루었던 것처럼 프로세스속에서 실행되는 독립된 여러 흐름중의 하나를 스레드라고 합니다. 프로세스는 자기가 사용할 메모리영역(Heap)을 할당받는데, 이때 스레드는 Heap 안에서 다시 자신만이 사용할 수 있는 고유의 메모리영역(Stack)을 할당받게 됩니다.&lt;/p&gt;
 &lt;p&gt;그런데 앞에서 설명했듯이 코루틴은 스택을 할당받지 않고 프로세스의 Heap 메모리를 공유하여 사용하기 때문에 비동기 작업을 구현한다는 점에서는 스레드와 동일한 일을 하고 있지만, 스레드보다는 함수에 가까운 구조를 가지고 있습니다.&lt;/p&gt;
-&lt;h3 id=&#34;수행방식의-차이&#34;&gt;수행방식의 차이&lt;/h3&gt;
-&lt;p&gt;코루틴은 비선점형 멀티태스킹(Non-preemptive Multitasking)이고 스레드는 선점형 멀티태스킹(Preemptive Multitasking)입니다. 스레드는 실제로 멀티코어를 사용함으로써 동시에 복수의 스레드를 처리할 수 있는데요 이것을 &lt;code&gt;병행성&lt;/code&gt;이 있다고 합니다. 그런데 코루틴은 CPU를 시간분할하여 사용하기 때문에 실제로는 복수의 작업을 동시에 처리할 수 없어 병행성은 없습니다. 하지만 코루틴은 한번에 한개밖에 실행되지 않음에도 불구하고 전환속도가 빠르기 때문에 외부에서 볼 때는 마치 동시에 처리되는 것처럼 인식되므로 &lt;code&gt;동시성&lt;/code&gt;이 있다고 합니다.&lt;/p&gt;
-&lt;h3 id=&#34;코루틴의-장점&#34;&gt;코루틴의 장점&lt;/h3&gt;
-&lt;p&gt;예를들어 세개의 스레드를 사용해야 하는 작업을 코루틴 세개로 만들어 사용할 경우 스택을 따로 할당할 필요가 없으니 사용되는 메모리가 줄어들게 됩니다. 그리고 스레드끼리 처리순서를 조정할 때 메모리를 공유하지 않기 때문에 수행해야 했던 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Context_switch&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;수행방식의-차이&#34;&gt;
+    &lt;a href=&#34;#%ec%88%98%ed%96%89%eb%b0%a9%ec%8b%9d%ec%9d%98-%ec%b0%a8%ec%9d%b4&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    수행방식의 차이
+&lt;/h3&gt;&lt;p&gt;코루틴은 비선점형 멀티태스킹(Non-preemptive Multitasking)이고 스레드는 선점형 멀티태스킹(Preemptive Multitasking)입니다. 스레드는 실제로 멀티코어를 사용함으로써 동시에 복수의 스레드를 처리할 수 있는데요 이것을 &lt;code&gt;병행성&lt;/code&gt;이 있다고 합니다. 그런데 코루틴은 CPU를 시간분할하여 사용하기 때문에 실제로는 복수의 작업을 동시에 처리할 수 없어 병행성은 없습니다. 하지만 코루틴은 한번에 한개밖에 실행되지 않음에도 불구하고 전환속도가 빠르기 때문에 외부에서 볼 때는 마치 동시에 처리되는 것처럼 인식되므로 &lt;code&gt;동시성&lt;/code&gt;이 있다고 합니다.&lt;/p&gt;
+&lt;h3 id=&#34;코루틴의-장점&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4%ec%9d%98-%ec%9e%a5%ec%a0%90&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴의 장점
+&lt;/h3&gt;&lt;p&gt;예를들어 세개의 스레드를 사용해야 하는 작업을 코루틴 세개로 만들어 사용할 경우 스택을 따로 할당할 필요가 없으니 사용되는 메모리가 줄어들게 됩니다. 그리고 스레드끼리 처리순서를 조정할 때 메모리를 공유하지 않기 때문에 수행해야 했던 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Context_switch&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;context switching&lt;/a&gt;을 하지 않게 되므로 작업전환시의 오버헤드도 줄어들게 됩니다. 한 개의 스레드 안에서 여러개의 코루틴이 돌아가도록 할 수 있으니 스레드를 불필요하게 많이 만들어야 할 필요도 없어지게 됩니다.&lt;/p&gt;
-&lt;h3 id=&#34;코틀린에서의-사용&#34;&gt;코틀린에서의 사용&lt;/h3&gt;
-&lt;p&gt;코틀린의 코루틴 안에서 실행되는 함수에는 &lt;code&gt;suspend&lt;/code&gt; 키워드를 붙여서 실행을 보류하거나 재개할수 있다는 표시를 하게 됩니다.&lt;/p&gt;
+&lt;h3 id=&#34;코틀린에서의-사용&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%ed%8b%80%eb%a6%b0%ec%97%90%ec%84%9c%ec%9d%98-%ec%82%ac%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코틀린에서의 사용
+&lt;/h3&gt;&lt;p&gt;코틀린의 코루틴 안에서 실행되는 함수에는 &lt;code&gt;suspend&lt;/code&gt; 키워드를 붙여서 실행을 보류하거나 재개할수 있다는 표시를 하게 됩니다.&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://myungpyo.medium.com/%EC%BD%94%EB%A3%A8%ED%8B%B4-%EA%B3%B5%EC%8B%9D-%EA%B0%80%EC%9D%B4%EB%93%9C-%EC%9E%90%EC%84%B8%ED%9E%88-%EC%9D%BD%EA%B8%B0-part-1-dive-3-b174c735d4fa&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;공식 가이드&lt;/a&gt;에 따르면 suspend 키워드로 마킹된 함수는 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Continuation-passing_style&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Continuation Passing Style&lt;/a&gt;로 변환되고, Coroutine Builder를 통해 적절한 스레드 상에서 시나리오에 따라 동작하도록 구성되게 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;코루틴-구조&#34;&gt;코루틴 구조&lt;/h2&gt;
-&lt;p&gt;코틀린의 코루틴은 크게 Coroutine Scope, Coroutine Context, Coroutine Builder의 세 부분으로 나눌 수 있습니다.&lt;/p&gt;
-&lt;h3 id=&#34;coroutine-scope&#34;&gt;Coroutine Scope&lt;/h3&gt;
-&lt;p&gt;코루틴의 동작하는 범위를 규정합니다. 스코프 내에서 실행되는 코루틴의 실행을 감시하거나 취소할 수 있습니다.&lt;/p&gt;
-&lt;h4 id=&#34;coroutinescope&#34;&gt;CoroutineScope&lt;/h4&gt;
-&lt;p&gt;다음과 같은 인터페이스로 정의되며 특정한 dispatcher를 지정하여 동작이 실행될 스코프를 제한할 수 있습니다.&lt;/p&gt;
+&lt;h2 id=&#34;코루틴-구조&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4-%ea%b5%ac%ec%a1%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴 구조
+&lt;/h2&gt;&lt;p&gt;코틀린의 코루틴은 크게 Coroutine Scope, Coroutine Context, Coroutine Builder의 세 부분으로 나눌 수 있습니다.&lt;/p&gt;
+&lt;h3 id=&#34;coroutine-scope&#34;&gt;
+    &lt;a href=&#34;#coroutine-scope&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Coroutine Scope
+&lt;/h3&gt;&lt;p&gt;코루틴의 동작하는 범위를 규정합니다. 스코프 내에서 실행되는 코루틴의 실행을 감시하거나 취소할 수 있습니다.&lt;/p&gt;
+&lt;h4 id=&#34;coroutinescope&#34;&gt;
+    &lt;a href=&#34;#coroutinescope&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    CoroutineScope
+&lt;/h4&gt;&lt;p&gt;다음과 같은 인터페이스로 정의되며 특정한 dispatcher를 지정하여 동작이 실행될 스코프를 제한할 수 있습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1336,14 +1394,20 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;globalscope&#34;&gt;GlobalScope&lt;/h4&gt;
-&lt;p&gt;GlobalScope는 CoroutineScope의 한 종류입니다. 안드로이드에서 어플리케이션 라이프사이클을 따르며, 싱글톤으로 최상위 레벨에서 코루틴을 시작하기 때문에 필요할때 만들어 쓰고 버린다는 사용법이 불가능합니다. 일반적으로는 &lt;a class=&#34;link&#34; href=&#34;https://medium.com/harrythegreat/%EB%B2%88%EC%97%AD-%EC%BD%94%ED%8B%80%EB%A6%B0-%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%9D%98-%ED%8C%A8%ED%84%B4%EA%B3%BC-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-6e97f852ea2d&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h4 id=&#34;globalscope&#34;&gt;
+    &lt;a href=&#34;#globalscope&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    GlobalScope
+&lt;/h4&gt;&lt;p&gt;GlobalScope는 CoroutineScope의 한 종류입니다. 안드로이드에서 어플리케이션 라이프사이클을 따르며, 싱글톤으로 최상위 레벨에서 코루틴을 시작하기 때문에 필요할때 만들어 쓰고 버린다는 사용법이 불가능합니다. 일반적으로는 &lt;a class=&#34;link&#34; href=&#34;https://medium.com/harrythegreat/%EB%B2%88%EC%97%AD-%EC%BD%94%ED%8B%80%EB%A6%B0-%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%9D%98-%ED%8C%A8%ED%84%B4%EA%B3%BC-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-6e97f852ea2d&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;사용 자체를 추천하지 않습니다&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;coroutine-context&#34;&gt;Coroutine Context&lt;/h3&gt;
-&lt;p&gt;코루틴은 항상 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/docs/coroutine-context-and-dispatchers.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;coroutine-context&#34;&gt;
+    &lt;a href=&#34;#coroutine-context&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Coroutine Context
+&lt;/h3&gt;&lt;p&gt;코루틴은 항상 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/docs/coroutine-context-and-dispatchers.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Coroutine Context&lt;/a&gt;로 구성된 콘텍스트 안에서 실행되는데, 이 콘텍스트는 Dispatchers와 Job으로 구성됩니다.&lt;/p&gt;
-&lt;h4 id=&#34;dispatchers&#34;&gt;Dispatchers&lt;/h4&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h4 id=&#34;dispatchers&#34;&gt;
+    &lt;a href=&#34;#dispatchers&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Dispatchers
+&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Dispatchers&lt;/a&gt;는 코루틴이 실행될 스레드를 지정하는 역할을 합니다. 네가지 타입이 있는데 특징을 간단하게 정리해보면 &lt;code&gt;.Default&lt;/code&gt;는 주로 CPU에서 많은 연산이 필요한 처리, &lt;code&gt;.IO&lt;/code&gt;는 파일IO나 네트워크 콜을 수행해야 할 때, 그리고 코루틴에서 처리된 값을 UI에 반영할 때는 &lt;code&gt;.Main&lt;/code&gt;을 사용한다고 생각하면 될 것 같습니다. &lt;code&gt;.Unconfined는&lt;/code&gt; 일반적인 용도에서는 사용하지 않기 때문에 무시하셔도 됩니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1380,8 +1444,10 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;job--deferred&#34;&gt;Job &amp;amp; Deferred&lt;/h4&gt;
-&lt;p&gt;코틀린에서는 코루틴 작업을 &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h4 id=&#34;job--deferred&#34;&gt;
+    &lt;a href=&#34;#job--deferred&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Job &amp;amp; Deferred
+&lt;/h4&gt;&lt;p&gt;코틀린에서는 코루틴 작업을 &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Job&lt;/a&gt; 혹은 &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Deferred&lt;/a&gt;라는 오브젝트로 만들어 다룹니다. Deferred는 결과값을 가지는 Job이므로 실제로는 둘 다 Job이라고 볼 수 있습니다.&lt;/p&gt;
 &lt;p&gt;코루틴이라는 것은 프로그램의 흐름이라고 하는 추상적인 개념인데요, 코루틴 한 덩어리를 한 개의 Job이라는 오브젝트로 만들게 되면 그 오브젝트에 대해 취소나 예외처리를 함으로써 용이하게 코루틴의 흐름제어를 할 수 있게 됩니다.&lt;/p&gt;
@@ -1481,8 +1547,10 @@
     &gt;cancel&lt;/a&gt;, &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html#86493028%2FFunctions%2F1975948010&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;join&lt;/a&gt;, &lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html#845358634%2FFunctions%2F1975948010&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;start&lt;/a&gt; 등의 메소드가 정의되어 있습니다. &lt;code&gt;cancel&lt;/code&gt;과 &lt;code&gt;start&lt;/code&gt;는 위의 다이어그램에서 표시되는 cancel과 start 동작을 구현하는 메소드입니다. &lt;code&gt;join&lt;/code&gt;은 코루틴을 병렬처리하지 않고 현재 job에 정의된 작업을 수행하는동안 기다리도록 하는 메소드입니다.&lt;/p&gt;
-&lt;h3 id=&#34;coroutine-builder&#34;&gt;Coroutine Builder&lt;/h3&gt;
-&lt;p&gt;코루틴을 시작하는 방법에는 4가지가 있습니다.&lt;/p&gt;
+&lt;h3 id=&#34;coroutine-builder&#34;&gt;
+    &lt;a href=&#34;#coroutine-builder&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Coroutine Builder
+&lt;/h3&gt;&lt;p&gt;코루틴을 시작하는 방법에는 4가지가 있습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;launch : 메인 스레드를 블록하지 않는 코루틴 작업을 실행합니다. 결과를 반환할 필요가 없는 작업에 사용하며 Job 객체를 반환합니다.&lt;/li&gt;
 &lt;li&gt;async : 메인 스레드를 블록하지 않는 코루틴 작업을 실행합니다. 결과를 반환할 필요가 있는 작업에 사용하며 Deferred 객체를 반환합니다.&lt;/li&gt;
@@ -1518,15 +1586,19 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;코루틴-지연&#34;&gt;코루틴 지연&lt;/h2&gt;
-&lt;ul&gt;
+&lt;/div&gt;&lt;h2 id=&#34;코루틴-지연&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4-%ec%a7%80%ec%97%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴 지연
+&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;delay : milisecond단위로 루틴을 잠시 대기시킵니다. &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/lang/Thread#sleep%28long,%20int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Thread.sleep&lt;/a&gt;은 스레드 자체를 정지시키는데 반해, delay는 코루틴이 멈추지 않고 대기상태에 들어간다는 점이 다릅니다.&lt;/li&gt;
 &lt;li&gt;join : Job의 실행이 끝날때까지 대기시킵니다.&lt;/li&gt;
 &lt;li&gt;await : Deferred의 실행이 끝날때까지 대기시키고 결과값을 반환합니다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;코루틴-취소&#34;&gt;코루틴 취소&lt;/h2&gt;
-&lt;p&gt;코루틴 실행을 취소하는데에는 몇가지 방법이 있습니다.&lt;/p&gt;
+&lt;h2 id=&#34;코루틴-취소&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4-%ec%b7%a8%ec%86%8c&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴 취소
+&lt;/h2&gt;&lt;p&gt;코루틴 실행을 취소하는데에는 몇가지 방법이 있습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/cancel.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;cancel&lt;/a&gt; : 위에서 설명한대로 job을 Cancelling (transient state)로 변화시킵니다.&lt;/li&gt;
@@ -1537,8 +1609,10 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/with-timeout-or-null.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;withTimeoutOrNull&lt;/a&gt; : withTimeout을 처리중 제한시간이 경과되었을 경우 예외 대신 null을 반환합니다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;예외-처리&#34;&gt;예외 처리&lt;/h2&gt;
-&lt;p&gt;코루틴의 예외는 다음과 같이 &lt;a class=&#34;link&#34; href=&#34;https://tourspace.tistory.com/154?category=797357&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;예외-처리&#34;&gt;
+    &lt;a href=&#34;#%ec%98%88%ec%99%b8-%ec%b2%98%eb%a6%ac&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    예외 처리
+&lt;/h2&gt;&lt;p&gt;코루틴의 예외는 다음과 같이 &lt;a class=&#34;link&#34; href=&#34;https://tourspace.tistory.com/154?category=797357&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;정리&lt;/a&gt;할 수 있습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;CoroutineExceptionHandler를 이용하여 코루틴 내부의 기본 catch block으로 사용할 수 있다.&lt;/li&gt;
@@ -1548,8 +1622,10 @@
 &lt;li&gt;자식 코루틴에서 exception이 발생하면 다른 자식 코루틴 및 부모코루틴이 다 취소되버리기 때문에, 문제가 생긴 코루틴만 exception 처리할 수 있도록 하기 위해 CoroutineExceptionHandler를 설정한다. 단, CancellationException는 handler에서 무시된다.&lt;/li&gt;
 &lt;li&gt;여러개의 exception이 발생하면 가장 먼저 발생한 exception이 handler로 전달되며 나머지는 무시된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;코루틴-사용&#34;&gt;코루틴 사용&lt;/h2&gt;
-&lt;p&gt;심플하게 정리하면 스코프는 &lt;code&gt;CoroutineScope&lt;/code&gt;를 사용합니다. CPU 작업이냐 IO 작업이냐를 판단하여 &lt;code&gt;Dispatchers&lt;/code&gt;를 정의하고 마지막으로 코루틴 처리후 값이 나와야 되는가 아닌가에 따라 &lt;code&gt;launch&lt;/code&gt;나 &lt;code&gt;async&lt;/code&gt;를 구별해서 사용하면 되겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;코루틴-사용&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4-%ec%82%ac%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴 사용
+&lt;/h2&gt;&lt;p&gt;심플하게 정리하면 스코프는 &lt;code&gt;CoroutineScope&lt;/code&gt;를 사용합니다. CPU 작업이냐 IO 작업이냐를 판단하여 &lt;code&gt;Dispatchers&lt;/code&gt;를 정의하고 마지막으로 코루틴 처리후 값이 나와야 되는가 아닌가에 따라 &lt;code&gt;launch&lt;/code&gt;나 &lt;code&gt;async&lt;/code&gt;를 구별해서 사용하면 되겠습니다.&lt;/p&gt;
 &lt;p&gt;이렇게 해서 코틀린의 코루틴에 대해 알아보았습니다.&lt;/p&gt;
 &lt;div class=&#34;video-wrapper&#34;&gt;
     &lt;iframe loading=&#34;lazy&#34; 

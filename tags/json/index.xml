@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>json on 냉동코더의 기술블로그</title>
+        <title>Json on 냉동코더의 기술블로그</title>
         <link>https://cliearl.github.io/tags/json/</link>
-        <description>Recent content in json on 냉동코더의 기술블로그</description>
+        <description>Recent content in Json on 냉동코더의 기술블로그</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <lastBuildDate>Sun, 07 Nov 2021 08:32:11 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/json/index.xml" rel="self" type="application/rss+xml" /><item>
@@ -19,8 +19,10 @@
     &gt;Retrofit 2과 함께하는 정말 쉬운 HTTP&lt;/a&gt; 를 보는것이 가장 정확할 것 같습니다.&lt;/p&gt;
 &lt;p&gt;이 강의에서는 경기데이터드림에서 제공하는 &lt;a class=&#34;link&#34; href=&#34;https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&amp;amp;rows=10&amp;amp;sortColumn=&amp;amp;sortDirection=&amp;amp;infId=461Q599QLK8UTE14E3LW12837248&amp;amp;infSeq=1&amp;amp;order=&amp;amp;loc=&amp;amp;searchWord=%EC%BD%94%EB%A1%9C%EB%82%98&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;코로나바이러스 감염증 선별진료소 운영 의료기관 현황&lt;/a&gt; API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;라이브러리-추가&#34;&gt;라이브러리 추가&lt;/h2&gt;
-&lt;p&gt;build.gradle에 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/retrofit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;라이브러리-추가&#34;&gt;
+    &lt;a href=&#34;#%eb%9d%bc%ec%9d%b4%eb%b8%8c%eb%9f%ac%eb%a6%ac-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    라이브러리 추가
+&lt;/h2&gt;&lt;p&gt;build.gradle에 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/retrofit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Retrofit&lt;/a&gt;과 JSON을 다루기 위한 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/moshi/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Moshi&lt;/a&gt; 컨버터, 그리고 로그를 찍기위한 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/okhttp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;OkHttp&lt;/a&gt; 라이브러리를 추가해 줍니다.&lt;/p&gt;
@@ -44,8 +46,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;com.squareup.okhttp3:logging-interceptor:4.9.1&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;권한-추가&#34;&gt;권한 추가&lt;/h2&gt;
-&lt;p&gt;HTTP 통신에 인터넷을 사용해야 하니 &lt;code&gt;AndroidManefest.xml&lt;/code&gt;에서 권한을 추가해줍니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;권한-추가&#34;&gt;
+    &lt;a href=&#34;#%ea%b6%8c%ed%95%9c-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    권한 추가
+&lt;/h2&gt;&lt;p&gt;HTTP 통신에 인터넷을 사용해야 하니 &lt;code&gt;AndroidManefest.xml&lt;/code&gt;에서 권한을 추가해줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -54,9 +58,13 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;uses-permission&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;android:name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;android.permission.INTERNET&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;data-transfer-object-준비&#34;&gt;Data Transfer Object 준비&lt;/h2&gt;
-&lt;h3 id=&#34;데이터-형식-확인&#34;&gt;데이터 형식 확인&lt;/h3&gt;
-&lt;p&gt;API의 주소인 &lt;a class=&#34;link&#34; href=&#34;https://openapi.gg.go.kr/EmgMedInfo?type=json&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;data-transfer-object-준비&#34;&gt;
+    &lt;a href=&#34;#data-transfer-object-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Data Transfer Object 준비
+&lt;/h2&gt;&lt;h3 id=&#34;데이터-형식-확인&#34;&gt;
+    &lt;a href=&#34;#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ed%98%95%ec%8b%9d-%ed%99%95%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    데이터 형식 확인
+&lt;/h3&gt;&lt;p&gt;API의 주소인 &lt;a class=&#34;link&#34; href=&#34;https://openapi.gg.go.kr/EmgMedInfo?type=json&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://openapi.gg.go.kr/EmgMedInfo?type=json&lt;/a&gt; 에 웹브라우저로 접속해보면 다음과 같은 값을 반환받게 됩니다. &lt;code&gt;&amp;quot;head&amp;quot;&lt;/code&gt;안의 항목은 필요하지 않은 메타정보이고, &lt;code&gt;&amp;quot;row&amp;quot;&lt;/code&gt; 안의 내용이 Recyclerview로 표시해야 하는 것들입니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -242,8 +250,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;dto-클래스-작성&#34;&gt;DTO 클래스 작성&lt;/h3&gt;
-&lt;p&gt;JSON 형식으로 받아온 텍스트는 앱에서 사용할 수 있는 데이터 객체로 변환하게 되는데 이 때 그 객체의 틀이 되는것이 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Data_transfer_object&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h3 id=&#34;dto-클래스-작성&#34;&gt;
+    &lt;a href=&#34;#dto-%ed%81%b4%eb%9e%98%ec%8a%a4-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    DTO 클래스 작성
+&lt;/h3&gt;&lt;p&gt;JSON 형식으로 받아온 텍스트는 앱에서 사용할 수 있는 데이터 객체로 변환하게 되는데 이 때 그 객체의 틀이 되는것이 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Data_transfer_object&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Data Transfer Object (DTO)&lt;/a&gt;입니다.&lt;/p&gt;
 &lt;p&gt;그럼 이 JSON에 대응하는 DTO를 작성합니다. &lt;a class=&#34;link&#34; href=&#34;https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;JSON To Kotlin Class&lt;/a&gt; 플러그인에 위의 JSON을 붙여넣고 EmgMedResponse라는 이름으로 변환하면 다음과 같이 5개의 데이터 클래스가 생성됩니다. 이 때 옵션은 &lt;code&gt;Val&lt;/code&gt;, &lt;code&gt;Nullable&lt;/code&gt;, &lt;code&gt;MoShi (Reflect)&lt;/code&gt;를 선택해줍니다.&lt;/p&gt;
@@ -354,8 +364,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;아이템-디자인&#34;&gt;아이템 디자인&lt;/h2&gt;
-&lt;p&gt;Recyclerview에서 사용할 아이템의 디자인을 만들어줍니다. LinearLayout을 써서 API 응답중 Row의 내용을 표시하는 화면을 만들어줍니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;아이템-디자인&#34;&gt;
+    &lt;a href=&#34;#%ec%95%84%ec%9d%b4%ed%85%9c-%eb%94%94%ec%9e%90%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    아이템 디자인
+&lt;/h2&gt;&lt;p&gt;Recyclerview에서 사용할 아이템의 디자인을 만들어줍니다. LinearLayout을 써서 API 응답중 Row의 내용을 표시하는 화면을 만들어줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -498,8 +510,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/LinearLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;레이아웃-작성&#34;&gt;레이아웃 작성&lt;/h2&gt;
-&lt;p&gt;다음은 &lt;code&gt;activity_main.xml&lt;/code&gt;을 작성합니다. JSON 응답결과를 표시할 Recyclerview를 하나 배치하고 네트워크 연결을 시작하는데 사용할 플로팅버튼을 하나 달아줍니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;레이아웃-작성&#34;&gt;
+    &lt;a href=&#34;#%eb%a0%88%ec%9d%b4%ec%95%84%ec%9b%83-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    레이아웃 작성
+&lt;/h2&gt;&lt;p&gt;다음은 &lt;code&gt;activity_main.xml&lt;/code&gt;을 작성합니다. JSON 응답결과를 표시할 Recyclerview를 하나 배치하고 네트워크 연결을 시작하는데 사용할 플로팅버튼을 하나 달아줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -568,8 +582,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/androidx.constraintlayout.widget.ConstraintLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;recyclerview-어댑터-작성&#34;&gt;Recyclerview 어댑터 작성&lt;/h2&gt;
-&lt;p&gt;DTO 중 Row 클래스의 내용을 받아 ViewHolder에 표시하는 Recyclerview 어댑터를 작성합니다. 데이터의 갱신은 ListAdapter를 사용하여 수행합니다. ListAdapter의 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/recyclerview-listadapter/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;recyclerview-어댑터-작성&#34;&gt;
+    &lt;a href=&#34;#recyclerview-%ec%96%b4%eb%8c%91%ed%84%b0-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Recyclerview 어댑터 작성
+&lt;/h2&gt;&lt;p&gt;DTO 중 Row 클래스의 내용을 받아 ViewHolder에 표시하는 Recyclerview 어댑터를 작성합니다. 데이터의 갱신은 ListAdapter를 사용하여 수행합니다. ListAdapter의 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/recyclerview-listadapter/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기&lt;/a&gt; 강의를 참조하시기 바랍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -684,8 +700,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;서비스-작성&#34;&gt;서비스 작성&lt;/h2&gt;
-&lt;p&gt;Retrofit은 HTTP API의 request를 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/docs/interfaces.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;서비스-작성&#34;&gt;
+    &lt;a href=&#34;#%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    서비스 작성
+&lt;/h2&gt;&lt;p&gt;Retrofit은 HTTP API의 request를 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/docs/interfaces.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;인터페이스&lt;/a&gt;로 정의하여 사용합니다. 이 강의에서 사용할 선별진료소 API는 다음과 같은 &lt;a class=&#34;link&#34; href=&#34;https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&amp;amp;rows=10&amp;amp;sortColumn=&amp;amp;sortDirection=&amp;amp;infId=461Q599QLK8UTE14E3LW12837248&amp;amp;infSeq=3&amp;amp;order=&amp;amp;loc=&amp;amp;searchWord=%EC%BD%94%EB%A1%9C%EB%82%98&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;인자&lt;/a&gt;를 받을 수 있게 만들어져 있습니다.&lt;/p&gt;
 &lt;table&gt;
@@ -744,9 +762,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;코드를 해석하면 &lt;code&gt;getEmgMedData&lt;/code&gt; 는 &lt;code&gt;BASE_URL/EmgMedInfo?KEY=&amp;quot;KEY&amp;quot;&amp;amp;Type=&amp;quot;Type&amp;quot;&lt;/code&gt;이라는 GET 요청을 보내고 &lt;code&gt;Call&amp;lt;EmgMedResponse&amp;gt;&lt;/code&gt; 객체를 반환받는 동작을 하는 함수라는 뜻이 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;retrofit-객체-준비&#34;&gt;Retrofit 객체 준비&lt;/h2&gt;
-&lt;h3 id=&#34;retrofitapi-작성&#34;&gt;RetrofitApi 작성&lt;/h3&gt;
-&lt;p&gt;Retrofit을 사용하기 위해서는 우선 객체를 만들어주어야 합니다. 이 때 여러개의 객체가 만들어지면 자원도 낭비되고 통신에 혼선도 발생할 수 있으므로 &lt;code&gt;object&lt;/code&gt; 키워드를 써서 싱글톤으로 만들어지도록 합니다. 이 때 각 변수에는 &lt;code&gt;lazy&lt;/code&gt;를 적용함으로써 실제 사용되는 순간이 와야 비로소 만들어지게 되고, 단 하나의 인스턴스만이 만들어지도록 하였습니다. 싱글톤에 대한 구체적인 설명은 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/understanding-singleton-pattern/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;retrofit-객체-준비&#34;&gt;
+    &lt;a href=&#34;#retrofit-%ea%b0%9d%ec%b2%b4-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Retrofit 객체 준비
+&lt;/h2&gt;&lt;h3 id=&#34;retrofitapi-작성&#34;&gt;
+    &lt;a href=&#34;#retrofitapi-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    RetrofitApi 작성
+&lt;/h3&gt;&lt;p&gt;Retrofit을 사용하기 위해서는 우선 객체를 만들어주어야 합니다. 이 때 여러개의 객체가 만들어지면 자원도 낭비되고 통신에 혼선도 발생할 수 있으므로 &lt;code&gt;object&lt;/code&gt; 키워드를 써서 싱글톤으로 만들어지도록 합니다. 이 때 각 변수에는 &lt;code&gt;lazy&lt;/code&gt;를 적용함으로써 실제 사용되는 순간이 와야 비로소 만들어지게 되고, 단 하나의 인스턴스만이 만들어지도록 하였습니다. 싱글톤에 대한 구체적인 설명은 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/understanding-singleton-pattern/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;알기쉬운 Singleton Pattern&lt;/a&gt; 강의를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -802,8 +824,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/2.x/retrofit/retrofit2/Retrofit.Builder.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;빌더 패턴&lt;/a&gt;을 통해 retrofit 객체를 만들어줍니다. &lt;code&gt;addConverterFactory&lt;/code&gt;에서 DTO 변환에 사용할 JSON 컨버터를 Moshi로 지정하고, &lt;code&gt;baseUrl&lt;/code&gt; 을 전달한 뒤 &lt;code&gt;build()&lt;/code&gt;로 객체를 생성합니다. 그리고나서 retrofit 인스턴스의 &lt;code&gt;create&lt;/code&gt; 명령을 이용해서 emgMedService의 인스턴스를 만들어줍니다.&lt;/p&gt;
-&lt;h3 id=&#34;전송패킷-모니터링&#34;&gt;전송패킷 모니터링&lt;/h3&gt;
-&lt;p&gt;retrofit 객체를 생성할때 &lt;code&gt;client&lt;/code&gt; 속성에 &lt;code&gt;okHttpClient&lt;/code&gt;를 넘겨주면 로그캣에서 패킷내용을 모니터링할 수 있습니다. okHttpClient는 다음과 같이 서버와 코어 사이에서 데이터를 가로채는 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/okhttp/interceptors/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h3 id=&#34;전송패킷-모니터링&#34;&gt;
+    &lt;a href=&#34;#%ec%a0%84%ec%86%a1%ed%8c%a8%ed%82%b7-%eb%aa%a8%eb%8b%88%ed%84%b0%eb%a7%81&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    전송패킷 모니터링
+&lt;/h3&gt;&lt;p&gt;retrofit 객체를 생성할때 &lt;code&gt;client&lt;/code&gt; 속성에 &lt;code&gt;okHttpClient&lt;/code&gt;를 넘겨주면 로그캣에서 패킷내용을 모니터링할 수 있습니다. okHttpClient는 다음과 같이 서버와 코어 사이에서 데이터를 가로채는 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/okhttp/interceptors/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Interceptor&lt;/a&gt;로서 기능하는 객체입니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/download-json-data-using-retrofit/okhttp-interceptors.png&#34;
 	
@@ -815,8 +839,10 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;retrofit-구동&#34;&gt;Retrofit 구동&lt;/h2&gt;
-&lt;p&gt;그럼 MainActivity에서 Retrofit을 사용해보겠습니다. 플로팅 버튼에 대해 다음 내용의 &lt;code&gt;retrofitWork()&lt;/code&gt;를 실행하는 클릭리스너를 구성합니다.&lt;/p&gt;
+&lt;h2 id=&#34;retrofit-구동&#34;&gt;
+    &lt;a href=&#34;#retrofit-%ea%b5%ac%eb%8f%99&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Retrofit 구동
+&lt;/h2&gt;&lt;p&gt;그럼 MainActivity에서 Retrofit을 사용해보겠습니다. 플로팅 버튼에 대해 다음 내용의 &lt;code&gt;retrofitWork()&lt;/code&gt;를 실행하는 클릭리스너를 구성합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -872,8 +898,10 @@
     &gt;execute&lt;/a&gt;를 사용하면 request를 보내고 response를 받는 행위를 동기적으로 행합니다. 그리고 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/2.x/retrofit/retrofit2/Call.html#enqueue-retrofit2.Callback-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;enqueue&lt;/a&gt; 작업을 실행하면 request는 비동기적으로 보내고, response는 콜백으로 받게 됩니다. 여기서는 네트워크 작업을 안정적으로 수행하기 위해 enqueue로 실행하도록 하였습니다.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;enqueue&lt;/code&gt;의 통신결과는 성공했을 때 &lt;code&gt;onResponse&lt;/code&gt;, 실패했을 때 &lt;code&gt;onFailure&lt;/code&gt; 를 리스너로 받을 수 있으므로 각 상황에 따른 처리를 해 줍니다. 통신에 성공하면 &lt;code&gt;response.isSuccessful&lt;/code&gt;을 확인하여 사용할 수 있는 응답이 돌아왔는지 확인하고, 그렇다면 body에서 값을 꺼내어 Recyclerview에 넘겨주면 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;코루틴에서-사용하기&#34;&gt;코루틴에서 사용하기&lt;/h2&gt;
-&lt;p&gt;retrofit의 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;코루틴에서-사용하기&#34;&gt;
+    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4%ec%97%90%ec%84%9c-%ec%82%ac%ec%9a%a9%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    코루틴에서 사용하기
+&lt;/h2&gt;&lt;p&gt;retrofit의 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;사양&lt;/a&gt;에 따르면 &lt;code&gt;enqueue&lt;/code&gt;는 request를 백그라운드 스레드에서, response 콜백은 메인스레드에서 처리하게 됩니다. 그런데 코루틴을 사용하면 콜백을 쓰지 않아도 동일한 처리를 할 수 있습니다. 그래서 이번엔 코루틴 안에서 retrofit 처리를 수행하도록 해 보겠습니다. 코루틴에 대한 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/coroutine-principle/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;알기쉬운 코루틴 이론&lt;/a&gt;을 참조하시기 바랍니다.&lt;/p&gt;
 &lt;p&gt;우선은 &lt;code&gt;build.gradle&lt;/code&gt;에 플러그인을 추가합니다.&lt;/p&gt;
@@ -957,8 +985,10 @@
         
         <guid>https://cliearl.github.io/posts/android/assets-json-recycler/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;안드로이드의-읽기전용-파일-저장폴더&#34;&gt;안드로이드의 읽기전용 파일 저장폴더&lt;/h2&gt;
-&lt;p&gt;앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.&lt;/p&gt;
+&lt;h2 id=&#34;안드로이드의-읽기전용-파일-저장폴더&#34;&gt;
+    &lt;a href=&#34;#%ec%95%88%eb%93%9c%eb%a1%9c%ec%9d%b4%eb%93%9c%ec%9d%98-%ec%9d%bd%ea%b8%b0%ec%a0%84%ec%9a%a9-%ed%8c%8c%ec%9d%bc-%ec%a0%80%ec%9e%a5%ed%8f%b4%eb%8d%94&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    안드로이드의 읽기전용 파일 저장폴더
+&lt;/h2&gt;&lt;p&gt;앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;assets folder&lt;/li&gt;
 &lt;li&gt;resources/raw folder&lt;/li&gt;
@@ -1007,27 +1037,35 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;간단히 정리하면 XML과 연계하여 다루어야 할 때는 &lt;code&gt;res/raw&lt;/code&gt; 폴더를 사용하고, 그렇지 않을 경우 &lt;code&gt;assets&lt;/code&gt; 폴더를 사용하면 될 것 같네요.&lt;/p&gt;
-&lt;h2 id=&#34;앱-만들어보기&#34;&gt;앱 만들어보기&lt;/h2&gt;
-&lt;p&gt;그럼 asset폴더를 사용해보기 위해 json 파일을 불러와서 Recyclerview에 표시하는 간단한 앱을 만들어 보겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;앱-만들어보기&#34;&gt;
+    &lt;a href=&#34;#%ec%95%b1-%eb%a7%8c%eb%93%a4%ec%96%b4%eb%b3%b4%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    앱 만들어보기
+&lt;/h2&gt;&lt;p&gt;그럼 asset폴더를 사용해보기 위해 json 파일을 불러와서 Recyclerview에 표시하는 간단한 앱을 만들어 보겠습니다.&lt;/p&gt;
 &lt;p&gt;Recyclerview는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/viewbinding-recyclerview/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;RecyclerView에 View Binding 적용하기&lt;/a&gt;에서 작성했던 프로젝트를 참고해서 사용하겠습니다. Json 포맷을 다루어야 하므로 우선 &lt;a class=&#34;link&#34; href=&#34;https://github.com/google/gson&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Gson&lt;/a&gt; 라이브러리를 추가합니다. Gson에 대한 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/sharedpreferneces-gson/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;SharedPreferences를 json 포맷으로 관리하기&lt;/a&gt;에서 설명한 내용을 참조하시기 바랍니다.&lt;/p&gt;
-&lt;h3 id=&#34;데이터-준비&#34;&gt;데이터 준비&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;New &amp;gt; Folder &amp;gt; Asset Folder&lt;/code&gt;를 선택하여 assets 폴더를 추가합니다.&lt;/p&gt;
+&lt;h3 id=&#34;데이터-준비&#34;&gt;
+    &lt;a href=&#34;#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    데이터 준비
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;New &amp;gt; Folder &amp;gt; Asset Folder&lt;/code&gt;를 선택하여 assets 폴더를 추가합니다.&lt;/p&gt;
 &lt;p&gt;데이터는 경기데이터드림에서 제공하는 &lt;a class=&#34;link&#34; href=&#34;https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=461Q599QLK8UTE14E3LW12837248&amp;amp;infSeq=1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;코로나바이러스 감염증 선별진료소 운영 의료기관 현황&lt;/a&gt;데이터를 사용하겠습니다.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;sheet&lt;/code&gt; 탭에서 &lt;code&gt;json&lt;/code&gt;을 클릭하여 데이터를 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 값들을 정렬하는게 보기에 좋을 것 같으니 &lt;a class=&#34;link&#34; href=&#34;https://jsonformatter.curiousconcept.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Json Formatter&lt;/a&gt; 에서 파일을 정렬하고 &lt;code&gt;data.json&lt;/code&gt;이라는 파일명을 붙여 assets 폴더에 저장합니다.&lt;/p&gt;
-&lt;h3 id=&#34;데이터클래스-준비&#34;&gt;데이터클래스 준비&lt;/h3&gt;
-&lt;p&gt;데이터 파일에는 데이터기준일자, 시군명,	의료기관명,	의료기관 구분,	의료기관 전화번호1,	의료기관 전화번호2,	소재지지번주소,	소재지도로명주소,	WGS84위도,	WGS84경도 등 여러가지 탭이 있습니다.&lt;/p&gt;
+&lt;h3 id=&#34;데이터클래스-준비&#34;&gt;
+    &lt;a href=&#34;#%eb%8d%b0%ec%9d%b4%ed%84%b0%ed%81%b4%eb%9e%98%ec%8a%a4-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    데이터클래스 준비
+&lt;/h3&gt;&lt;p&gt;데이터 파일에는 데이터기준일자, 시군명,	의료기관명,	의료기관 구분,	의료기관 전화번호1,	의료기관 전화번호2,	소재지지번주소,	소재지도로명주소,	WGS84위도,	WGS84경도 등 여러가지 탭이 있습니다.&lt;/p&gt;
 &lt;p&gt;각 데이터는 배열 속의 데이터클래스로 관리하기 위해 데이터클래스를 만들어줍니다. 데이터클래스의 특징에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/dataclass-recyclerview/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Data class 이해하고 RecyclerView에서 사용하기&lt;/a&gt;강의에서 설명한 내용을 참고하시기 바랍니다.&lt;/p&gt;
 &lt;p&gt;안드로이드 스튜디오에 &lt;a class=&#34;link&#34; href=&#34;https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Kotlin data class File from JSON&lt;/a&gt; 플러그인을 설치하면 json 파일을 손쉽게 데이터클래스로 변환할 수 있습니다. 플러그인을 설치한 뒤 New &amp;gt; &lt;a class=&#34;link&#34; href=&#34;https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Kotlin data class File from JSON&lt;/a&gt;을 선택하여 위에서 만든 json 데이터와 클래스명을 입력하면 자동으로 데이터클래스와, 그 클래스를 아이템으로 갖는 배열 클래스가 생성되는데 클래스 이름은 &lt;code&gt;CoronaMed&lt;/code&gt;라고 하겠습니다.&lt;/p&gt;
-&lt;h3 id=&#34;recyclerview-구축하기&#34;&gt;Recyclerview 구축하기&lt;/h3&gt;
-&lt;p&gt;다음으로 새로 만들어진 데이터클래스의 형식에 맞게 Recyclerview와 ViewHolder의 형태를 정의해줍니다. &lt;code&gt;activity_main.xml&lt;/code&gt;에 RecyclerView를 추가합니다.&lt;/p&gt;
+&lt;h3 id=&#34;recyclerview-구축하기&#34;&gt;
+    &lt;a href=&#34;#recyclerview-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Recyclerview 구축하기
+&lt;/h3&gt;&lt;p&gt;다음으로 새로 만들어진 데이터클래스의 형식에 맞게 Recyclerview와 ViewHolder의 형태를 정의해줍니다. &lt;code&gt;activity_main.xml&lt;/code&gt;에 RecyclerView를 추가합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1232,8 +1270,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;assets-폴더속-파일-불러오기&#34;&gt;assets 폴더속 파일 불러오기&lt;/h3&gt;
-&lt;p&gt;다음은 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/content/res/AssetManager&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h3 id=&#34;assets-폴더속-파일-불러오기&#34;&gt;
+    &lt;a href=&#34;#assets-%ed%8f%b4%eb%8d%94%ec%86%8d-%ed%8c%8c%ec%9d%bc-%eb%b6%88%eb%9f%ac%ec%98%a4%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    assets 폴더속 파일 불러오기
+&lt;/h3&gt;&lt;p&gt;다음은 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/content/res/AssetManager&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Asset Manager&lt;/a&gt; 인스턴스를 생성하고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/content/res/AssetManager#open%28java.lang.String%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;open&lt;/a&gt; 메소드로 파일을 오픈합니다.그리고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/io/BufferedReader&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;bufferedReader&lt;/a&gt;를 이용해 InputStream을 텍스트로 변환합니다.&lt;/p&gt;
@@ -1325,8 +1365,10 @@
     &gt;Gson&lt;/a&gt;이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.&lt;/p&gt;
 &lt;p&gt;여기서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/dataclass-recyclerview/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Data class 이해하고 RecyclerView에서 사용하기&lt;/a&gt; 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;라이브러리-추가&#34;&gt;라이브러리 추가&lt;/h2&gt;
-&lt;p&gt;우선 Gson을 디펜던시에 추가합니다.&lt;/p&gt;
+&lt;h2 id=&#34;라이브러리-추가&#34;&gt;
+    &lt;a href=&#34;#%eb%9d%bc%ec%9d%b4%eb%b8%8c%eb%9f%ac%eb%a6%ac-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    라이브러리 추가
+&lt;/h2&gt;&lt;p&gt;우선 Gson을 디펜던시에 추가합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1339,8 +1381,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;화면-구성&#34;&gt;화면 구성&lt;/h2&gt;
-&lt;p&gt;다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;화면-구성&#34;&gt;
+    &lt;a href=&#34;#%ed%99%94%eb%a9%b4-%ea%b5%ac%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    화면 구성
+&lt;/h2&gt;&lt;p&gt;다음은 로딩에 사용할 플로팅버튼을 화면에 추가해줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1373,8 +1417,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/androidx.constraintlayout.widget.ConstraintLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;key-준비&#34;&gt;Key 준비&lt;/h2&gt;
-&lt;p&gt;SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;key-준비&#34;&gt;
+    &lt;a href=&#34;#key-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    Key 준비
+&lt;/h2&gt;&lt;p&gt;SharedPreferences에서는 데이터를 다룰때 키를 사용하므로 그때 사용할 키를 정의해줍니다. 평범하게 SharedPreferences를 이용하는 경우에는 각 밸류마다 서로다른 키를 지정해야하므로 많은 키를 지정해야 하는데 여기서는 모든 데이터를 뭉뚱그려서 하나의 키에 저장할 것이므로 데이터용 키는 하나만 만들면 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1389,8 +1435,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;savepref-작성&#34;&gt;savePref() 작성&lt;/h2&gt;
-&lt;p&gt;다음은 데이터를 저장하는 함수를 만듭니다. 이미 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/sharedpreferences-basic/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;savepref-작성&#34;&gt;
+    &lt;a href=&#34;#savepref-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    savePref() 작성
+&lt;/h2&gt;&lt;p&gt;다음은 데이터를 저장하는 함수를 만듭니다. 이미 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/sharedpreferences-basic/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;SharedPreferences로 앱 설정값 저장하고 불러오기&lt;/a&gt;강의에서 설명했던 방식과 유사한데요, gson을 사용하면 gson 인스턴스를 만들고, 그 인스턴스를 이용해서 데이터를 json으로 변환하는 작업이 추가됩니다. Recyclerview 어댑터 안의 데이터는 private를 떼어서 다른 클래스에서도 접근할수 있도록 합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1416,8 +1464,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;loadpref-함수-작성&#34;&gt;loadPref() 함수 작성&lt;/h2&gt;
-&lt;p&gt;이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, &lt;a class=&#34;link&#34; href=&#34;https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;h2 id=&#34;loadpref-함수-작성&#34;&gt;
+    &lt;a href=&#34;#loadpref-%ed%95%a8%ec%88%98-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    loadPref() 함수 작성
+&lt;/h2&gt;&lt;p&gt;이번엔 데이터를 불러오는 함수를 만듭니다. 기존의 방법과 역시 동일한데, &lt;a class=&#34;link&#34; href=&#34;https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/reflect/TypeToken.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;TypeToken&lt;/a&gt;을 적용해서 데이터를 복원하는 부분이 추가되었습니다. json으로 SharedPreferences에 저장하는 순간 데이터가 가지고 있는 타입정보가 모두 사라지기 때문에 데이터를 복원하면서 타입정보를 다시 부여하기 위해 타입토큰을 사용합니다. 여기서는 &lt;code&gt;&amp;lt;&amp;lt;ArrayList&amp;lt;Monster&amp;gt;&amp;gt;&lt;/code&gt;라는 타입을 만들어서 데이터에 부여해 줍니다. 그리고 Recyclerview 어댑터 안의 데이터는 변경가능하도록 &lt;code&gt;var&lt;/code&gt; 로 변경해줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1453,8 +1503,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;함수-실행&#34;&gt;함수 실행&lt;/h2&gt;
-&lt;p&gt;다음은 메인액티비티 안에서 &lt;code&gt;savePref&lt;/code&gt;와 &lt;code&gt;loadPref&lt;/code&gt;를 실행시키면 됩니다. &lt;code&gt;loadPref&lt;/code&gt;를 실행하고 어댑터에 데이터 변경을 알려주면 됩니다.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;함수-실행&#34;&gt;
+    &lt;a href=&#34;#%ed%95%a8%ec%88%98-%ec%8b%a4%ed%96%89&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
+    함수 실행
+&lt;/h2&gt;&lt;p&gt;다음은 메인액티비티 안에서 &lt;code&gt;savePref&lt;/code&gt;와 &lt;code&gt;loadPref&lt;/code&gt;를 실행시키면 됩니다. &lt;code&gt;loadPref&lt;/code&gt;를 실행하고 어댑터에 데이터 변경을 알려주면 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1

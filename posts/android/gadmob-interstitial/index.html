@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 구글 애드몹을 이용해서 전면광고를 표시하는 법에 대해 알아보도록 하겠습니다.
-우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 19.7.0인데요, 19.6.0 버전과는 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다.
-Google Admob Version 19.6.0 이하에서의 구현 1 2 3 dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:19.6.0&amp;#39; } AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다.
-1 2 3 4 5 6 7 &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt; &amp;lt;application &amp;lt;meta-data android:name=&amp;#34;com.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 구글 애드몹을 이용해서 전면광고를 표시하는 법에 대해 알아보도록 하겠습니다. 우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 19.7.0인데요, 19.6.0 버전과는 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다. # Google Admob Version 19.6.0 이하에서의 구현 1 2 3 dependencies { implementation &#39;com.google.android.gms:play-services-ads:19.6.0&#39; } AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다. 1 2 3 4 5 6 7 &lt;uses-permission android:name=&#34;android.permission.INTERNET&#34; /&gt; &lt;application &lt;meta-data android:name=&#34;com.">
 <title>Google Admob으로 전면광고 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/gadmob-interstitial/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='Google Admob으로 전면광고 표시하기'>
-<meta property='og:description' content='이번 포스팅에서는 구글 애드몹을 이용해서 전면광고를 표시하는 법에 대해 알아보도록 하겠습니다.
-우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 19.7.0인데요, 19.6.0 버전과는 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다.
-Google Admob Version 19.6.0 이하에서의 구현 1 2 3 dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:19.6.0&amp;#39; } AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다.
-1 2 3 4 5 6 7 &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt; &amp;lt;application &amp;lt;meta-data android:name=&amp;#34;com.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="Google Admob으로 전면광고 표시하기">
+<meta property='og:description' content="이번 포스팅에서는 구글 애드몹을 이용해서 전면광고를 표시하는 법에 대해 알아보도록 하겠습니다. 우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 19.7.0인데요, 19.6.0 버전과는 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다. # Google Admob Version 19.6.0 이하에서의 구현 1 2 3 dependencies { implementation &#39;com.google.android.gms:play-services-ads:19.6.0&#39; } AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다. 1 2 3 4 5 6 7 &lt;uses-permission android:name=&#34;android.permission.INTERNET&#34; /&gt; &lt;application &lt;meta-data android:name=&#34;com.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/gadmob-interstitial/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Google Admob' /><meta property='article:tag' content='Interstitial ads' /><meta property='article:published_time' content='2021-04-22T20:36:18&#43;09:00'/><meta property='article:modified_time' content='2021-04-22T20:36:18&#43;09:00'/>
 <meta name="twitter:title" content="Google Admob으로 전면광고 표시하기">
-<meta name="twitter:description" content="이번 포스팅에서는 구글 애드몹을 이용해서 전면광고를 표시하는 법에 대해 알아보도록 하겠습니다.
-우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 19.7.0인데요, 19.6.0 버전과는 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다.
-Google Admob Version 19.6.0 이하에서의 구현 1 2 3 dependencies { implementation &amp;#39;com.google.android.gms:play-services-ads:19.6.0&amp;#39; } AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다.
-1 2 3 4 5 6 7 &amp;lt;uses-permission android:name=&amp;#34;android.permission.INTERNET&amp;#34; /&amp;gt; &amp;lt;application &amp;lt;meta-data android:name=&amp;#34;com.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="이번 포스팅에서는 구글 애드몹을 이용해서 전면광고를 표시하는 법에 대해 알아보도록 하겠습니다. 우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 19.7.0인데요, 19.6.0 버전과는 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다. # Google Admob Version 19.6.0 이하에서의 구현 1 2 3 dependencies { implementation &#39;com.google.android.gms:play-services-ads:19.6.0&#39; } AndroidManifest.xml 안에 애드몹 사이트에서 부여받는 앱 ID를 입력합니다. 여기서는 구글에서 테스트용으로 제공하는 ID를 입력하였습니다. 1 2 3 4 5 6 7 &lt;uses-permission android:name=&#34;android.permission.INTERNET&#34; /&gt; &lt;application &lt;meta-data android:name=&#34;com.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -94,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -255,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -268,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -276,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -326,7 +318,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/android/" >
-                android
+                Android
             </a>
         
     </header>
@@ -388,8 +380,10 @@ if (!doNotTrack) {
     
     <p>이번 포스팅에서는 구글 애드몹을 이용해서 전면광고를 표시하는 법에 대해 알아보도록 하겠습니다.</p>
 <p>우선은 애드몹 디펜던시를 추가합니다. 현재 애드몹 라이브러리의 최신버전은 <code>19.7.0</code>인데요, <code>19.6.0</code> 버전과는 사용법이 많이 다르기 때문에 두 방법 모두 설명하도록 하겠습니다.</p>
-<h2 id="google-admob-version-1960-이하에서의-구현">Google Admob Version 19.6.0 이하에서의 구현</h2>
-<div class="highlight"><div class="chroma">
+<h2 id="google-admob-version-1960-이하에서의-구현">
+    <a href="#google-admob-version-1960-%ec%9d%b4%ed%95%98%ec%97%90%ec%84%9c%ec%9d%98-%ea%b5%ac%ed%98%84" class="header-anchor">#</a>
+    Google Admob Version 19.6.0 이하에서의 구현
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -580,8 +574,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="google-admob-version-1970-이상에서의-구현">Google Admob Version 19.7.0 이상에서의 구현</h2>
-<p>구현은 <code>loadInterstitialAd</code>와 <code>showInterstitialad</code>의 내용만 변경하면 됩니다. 우선 <code>loadInterstitialAd</code>는 다음과 같이 변경됩니다.</p>
+</div><h2 id="google-admob-version-1970-이상에서의-구현">
+    <a href="#google-admob-version-1970-%ec%9d%b4%ec%83%81%ec%97%90%ec%84%9c%ec%9d%98-%ea%b5%ac%ed%98%84" class="header-anchor">#</a>
+    Google Admob Version 19.7.0 이상에서의 구현
+</h2><p>구현은 <code>loadInterstitialAd</code>와 <code>showInterstitialad</code>의 내용만 변경하면 됩니다. 우선 <code>loadInterstitialAd</code>는 다음과 같이 변경됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -698,7 +694,7 @@ if (!doNotTrack) {
         
             <a href="/tags/google-admob/">Google Admob</a>
         
-            <a href="/tags/interstitial-ads/">Interstitial ads</a>
+            <a href="/tags/interstitial-ads/">Interstitial Ads</a>
         
     </section>
 
@@ -721,18 +717,18 @@ if (!doNotTrack) {
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -760,6 +756,8 @@ if (!doNotTrack) {
                 </div>
         
                 
+                    
+                    
                     <div class="article-image">
                         <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
                     </div>
@@ -908,7 +906,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

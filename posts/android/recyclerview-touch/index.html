@@ -1,31 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이번 포스팅에서는 RecyclerView에 Swipe, Drag, Touch 동작을 연결하는 법에 대해 알아보도록 하겠습니다.
-이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다.
-여기서는 제가 RecyclerView에 View Binding 적용하기 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다.
-리팩토링 우선 View Binding을 사용하도록 설정을 추가합니다.
-1 2 3 android { buildFeatures.viewBinding true } 메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 RecyclerView에 Swipe, Drag, Touch 동작을 연결하는 법에 대해 알아보도록 하겠습니다. 이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다. 여기서는 제가 RecyclerView에 View Binding 적용하기 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다. # 리팩토링 우선 View Binding을 사용하도록 설정을 추가합니다. 1 2 3 android { buildFeatures.viewBinding true } 메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.">
 <title>RecyclerView를 Swipe, Drag, Touch하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/recyclerview-touch/'>
 
-<link rel="stylesheet" href="/scss/style.min.fd84e57133f7e873d7b16bba3f165639533befb316512be183800fd65952f8fe.css"><meta property='og:title' content='RecyclerView를 Swipe, Drag, Touch하기'>
-<meta property='og:description' content='이번 포스팅에서는 RecyclerView에 Swipe, Drag, Touch 동작을 연결하는 법에 대해 알아보도록 하겠습니다.
-이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다.
-여기서는 제가 RecyclerView에 View Binding 적용하기 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다.
-리팩토링 우선 View Binding을 사용하도록 설정을 추가합니다.
-1 2 3 android { buildFeatures.viewBinding true } 메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.'>
+<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="RecyclerView를 Swipe, Drag, Touch하기">
+<meta property='og:description' content="이번 포스팅에서는 RecyclerView에 Swipe, Drag, Touch 동작을 연결하는 법에 대해 알아보도록 하겠습니다. 이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다. 여기서는 제가 RecyclerView에 View Binding 적용하기 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다. # 리팩토링 우선 View Binding을 사용하도록 설정을 추가합니다. 1 2 3 android { buildFeatures.viewBinding true } 메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/recyclerview-touch/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='RecyclerView' /><meta property='article:tag' content='swipe' /><meta property='article:tag' content='drag' /><meta property='article:tag' content='touch' /><meta property='article:published_time' content='2021-04-18T22:40:04&#43;09:00'/><meta property='article:modified_time' content='2021-04-18T22:40:04&#43;09:00'/>
 <meta name="twitter:title" content="RecyclerView를 Swipe, Drag, Touch하기">
-<meta name="twitter:description" content="이번 포스팅에서는 RecyclerView에 Swipe, Drag, Touch 동작을 연결하는 법에 대해 알아보도록 하겠습니다.
-이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다.
-여기서는 제가 RecyclerView에 View Binding 적용하기 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다.
-리팩토링 우선 View Binding을 사용하도록 설정을 추가합니다.
-1 2 3 android { buildFeatures.viewBinding true } 메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.">
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
+<meta name="twitter:description" content="이번 포스팅에서는 RecyclerView에 Swipe, Drag, Touch 동작을 연결하는 법에 대해 알아보도록 하겠습니다. 이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다. 여기서는 제가 RecyclerView에 View Binding 적용하기 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다. # 리팩토링 우선 View Binding을 사용하도록 설정을 추가합니다. 1 2 3 android { buildFeatures.viewBinding true } 메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
 <script>
@@ -97,7 +85,7 @@ if (!doNotTrack) {
             <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
             <h2 class="site-description">@Andromeda Galaxy</h2>
         </div>
-    </header><ol class="social-menu">
+    </header><ol class="menu-social">
             
                 <li>
                     <a 
@@ -258,12 +246,12 @@ if (!doNotTrack) {
             </a>
         </li>
         
+        <li class="menu-bottom-section">
+            <ol class="menu">
 
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -271,7 +259,7 @@ if (!doNotTrack) {
 
 
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -279,10 +267,11 @@ if (!doNotTrack) {
 
 
 
-                    <span>Dark Mode</span>
-                </li>
-            
-        </div>
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
     </ol>
 </aside>
 
@@ -334,7 +323,7 @@ if (!doNotTrack) {
     <header class="article-category">
         
             <a href="/categories/android/" >
-                android
+                Android
             </a>
         
     </header>
@@ -398,8 +387,10 @@ if (!doNotTrack) {
 <p>이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다.</p>
 <p>여기서는 제가 <a class="link" href="https://cliearl.github.io/posts/android/viewbinding-recyclerview/"  target="_blank" rel="noopener"
     >RecyclerView에 View Binding 적용하기</a> 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다.</p>
-<h2 id="리팩토링">리팩토링</h2>
-<p>우선 View Binding을 사용하도록 설정을 추가합니다.</p>
+<h2 id="리팩토링">
+    <a href="#%eb%a6%ac%ed%8c%a9%ed%86%a0%eb%a7%81" class="header-anchor">#</a>
+    리팩토링
+</h2><p>우선 View Binding을 사용하도록 설정을 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -467,8 +458,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="데이터-조작함수-추가">데이터 조작함수 추가</h2>
-<p>데이터를 조작하는 함수를 Recyclerview 안에 다음과 같이 추가합니다.</p>
+</div><h2 id="데이터-조작함수-추가">
+    <a href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a1%b0%ec%9e%91%ed%95%a8%ec%88%98-%ec%b6%94%ea%b0%80" class="header-anchor">#</a>
+    데이터 조작함수 추가
+</h2><p>데이터를 조작하는 함수를 Recyclerview 안에 다음과 같이 추가합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -515,8 +508,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="스와이프와-드래그-기능-붙이기">스와이프와 드래그 기능 붙이기</h2>
-<p>안드로이드에서는 Recyclerview에 입력되는 스와이프와 드래그 동작을 감지하는 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.SimpleCallback"  target="_blank" rel="noopener"
+</div><h2 id="스와이프와-드래그-기능-붙이기">
+    <a href="#%ec%8a%a4%ec%99%80%ec%9d%b4%ed%94%84%ec%99%80-%eb%93%9c%eb%9e%98%ea%b7%b8-%ea%b8%b0%eb%8a%a5-%eb%b6%99%ec%9d%b4%ea%b8%b0" class="header-anchor">#</a>
+    스와이프와 드래그 기능 붙이기
+</h2><p>안드로이드에서는 Recyclerview에 입력되는 스와이프와 드래그 동작을 감지하는 <a class="link" href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.SimpleCallback"  target="_blank" rel="noopener"
     >ItemTouchHelper.SimpleCallback</a> 클래스가 이미 준비되어 있으니 이걸 사용하겠습니다. 이 콜백함수는 다음과 같이 정의하면 됩니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -575,8 +570,10 @@ if (!doNotTrack) {
 <p>이때 <code>onSwiped</code>에서는 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder#getLayoutPosition%28%29"  target="_blank" rel="noopener"
     >layoutPosition</a>을 사용했고, <code>onMove</code>에서는 <a class="link" href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder#getAdapterPosition%28%29"  target="_blank" rel="noopener"
     >adapterPosition</a>을 사용했습니다. 스와이프를 할 때 ViewHolder의 위치는 고정되어 있지만 드래그를 할때는 ViewHolder의 위치가 계속 변하게 됩니다. <code>adapterPosition</code>은 전체 Recyclerview 안에서 위치를 가져오는 속성이고 <code>layoutPosition</code>은 고정된 ViewHolder의 위치를 가져오는 속성입니다.</p>
-<h2 id="viewholder에-드래그-가능-여부를-알리는-이미지-표시">ViewHolder에 드래그 가능 여부를 알리는 이미지 표시</h2>
-<p>현재는 ViewHolder가 데이터만 표시되고 있어서 이 ViewHolder를 드래그 할수 있는지 바로 알수 있는 방법이 없습니다. 그래서 ViewHolder 오른쪽에 햄버거 마크를 넣어서 드래그 할 수 있는 ViewHolder라는 표시를 해 주도록 하겠습니다.</p>
+<h2 id="viewholder에-드래그-가능-여부를-알리는-이미지-표시">
+    <a href="#viewholder%ec%97%90-%eb%93%9c%eb%9e%98%ea%b7%b8-%ea%b0%80%eb%8a%a5-%ec%97%ac%eb%b6%80%eb%a5%bc-%ec%95%8c%eb%a6%ac%eb%8a%94-%ec%9d%b4%eb%af%b8%ec%a7%80-%ed%91%9c%ec%8b%9c" class="header-anchor">#</a>
+    ViewHolder에 드래그 가능 여부를 알리는 이미지 표시
+</h2><p>현재는 ViewHolder가 데이터만 표시되고 있어서 이 ViewHolder를 드래그 할수 있는지 바로 알수 있는 방법이 없습니다. 그래서 ViewHolder 오른쪽에 햄버거 마크를 넣어서 드래그 할 수 있는 ViewHolder라는 표시를 해 주도록 하겠습니다.</p>
 <p>아이콘은 <code>Vector Asset</code> 메뉴에서 추가하고 <code>LinearLayout</code>과 <code>FrameLayout</code>을 섞어서 ViewHolder 모양을 수정했습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -674,8 +671,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/LinearLayout&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="스와이프시-백그라운드-설정하기">스와이프시 백그라운드 설정하기</h2>
-<p>다음으로 스와이프를 할때 미끄러져 나간 ViewHolder 아래에 <a class="link" href="https://developer.android.com/reference/android/graphics/Canvas"  target="_blank" rel="noopener"
+</div><h2 id="스와이프시-백그라운드-설정하기">
+    <a href="#%ec%8a%a4%ec%99%80%ec%9d%b4%ed%94%84%ec%8b%9c-%eb%b0%b1%ea%b7%b8%eb%9d%bc%ec%9a%b4%eb%93%9c-%ec%84%a4%ec%a0%95%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
+    스와이프시 백그라운드 설정하기
+</h2><p>다음으로 스와이프를 할때 미끄러져 나간 ViewHolder 아래에 <a class="link" href="https://developer.android.com/reference/android/graphics/Canvas"  target="_blank" rel="noopener"
     >Canvas</a> 클래스를 이용해 작성한 빨간색 비트맵 이미지와 휴지통 아이콘을 표시되도록 하겠습니다. 이것을 위해서는 <code>ItemTouchHelper.SimpleCallback</code>의 <code>onChildDraw</code>를 사용합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -763,8 +762,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="터치-조작-정의하기">터치 조작 정의하기</h2>
-<p>Recyclerview 어댑터 안에 정의한 ViewHolder 클래스에 클릭 리스너를 붙여주면 ViewHolder의 터치를 인식할 수 있습니다. 그럴려면 ViewHolder가 사용하는 <code>list_item.xml</code>에서 레이아웃에 id를 부여해줘야 합니다.</p>
+</div><h2 id="터치-조작-정의하기">
+    <a href="#%ed%84%b0%ec%b9%98-%ec%a1%b0%ec%9e%91-%ec%a0%95%ec%9d%98%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
+    터치 조작 정의하기
+</h2><p>Recyclerview 어댑터 안에 정의한 ViewHolder 클래스에 클릭 리스너를 붙여주면 ViewHolder의 터치를 인식할 수 있습니다. 그럴려면 ViewHolder가 사용하는 <code>list_item.xml</code>에서 레이아웃에 id를 부여해줘야 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -813,8 +814,10 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="viewholder-터치시-애니메이션-추가">ViewHolder 터치시 애니메이션 추가</h2>
-<p>현재는 ViewHolder를 터치했을 때 내용이 바뀌도록 하긴 했지만 정확히 어떤 ViewHolder를 터치한건지에 대한 표시가 나타나지 않습니다. 하지만 xml에 <a class="link" href="https://developer.android.com/training/material/animations#Touch"  target="_blank" rel="noopener"
+</div><h2 id="viewholder-터치시-애니메이션-추가">
+    <a href="#viewholder-%ed%84%b0%ec%b9%98%ec%8b%9c-%ec%95%a0%eb%8b%88%eb%a9%94%ec%9d%b4%ec%85%98-%ec%b6%94%ea%b0%80" class="header-anchor">#</a>
+    ViewHolder 터치시 애니메이션 추가
+</h2><p>현재는 ViewHolder를 터치했을 때 내용이 바뀌도록 하긴 했지만 정확히 어떤 ViewHolder를 터치한건지에 대한 표시가 나타나지 않습니다. 하지만 xml에 <a class="link" href="https://developer.android.com/training/material/animations#Touch"  target="_blank" rel="noopener"
     >selectableItemBackground</a> 속성을 정의하면 터치한 ViewHolder를 주목시키는 효과를 추가할 수 있습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -846,13 +849,13 @@ if (!doNotTrack) {
     
     <section class="article-tags">
         
-            <a href="/tags/recyclerview/">recyclerview</a>
+            <a href="/tags/recyclerview/">RecyclerView</a>
         
-            <a href="/tags/swipe/">swipe</a>
+            <a href="/tags/swipe/">Swipe</a>
         
-            <a href="/tags/drag/">drag</a>
+            <a href="/tags/drag/">Drag</a>
         
-            <a href="/tags/touch/">touch</a>
+            <a href="/tags/touch/">Touch</a>
         
     </section>
 
@@ -875,18 +878,18 @@ if (!doNotTrack) {
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
                 defer
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
                 defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.querySelector(`.article-content`), {
+        renderMathInElement(document.body, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -914,6 +917,8 @@ if (!doNotTrack) {
                 </div>
         
                 
+                    
+                    
                     <div class="article-image">
                         <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
                     </div>
@@ -1062,7 +1067,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
