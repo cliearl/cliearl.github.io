@@ -13,12 +13,8 @@
         
         <guid>https://cliearl.github.io/posts/android/implement-crud-with-sqliteopenhelper/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 두 파트에 걸쳐 안드로이드에서 SQLite를 다루는 법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;part-a-데이터베이스&#34;&gt;
-    &lt;a href=&#34;#part-a-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Part A. 데이터베이스
-&lt;/h2&gt;&lt;h3 id=&#34;관계형-데이터베이스&#34;&gt;
-    &lt;a href=&#34;#%ea%b4%80%ea%b3%84%ed%98%95-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    관계형 데이터베이스
+&lt;h2 id=&#34;part-a-데이터베이스&#34;&gt;Part A. 데이터베이스
+&lt;/h2&gt;&lt;h3 id=&#34;관계형-데이터베이스&#34;&gt;관계형 데이터베이스
 &lt;/h3&gt;&lt;p&gt;여러 사람들의 연락처 데이터는 다음과 같이 테이블 구조로 관리할 수 있습니다. 이런 식으로 통일된 규칙의 데이터를 관리할 수 있는 테이블을 데이터베이스라고 합니다.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -57,9 +53,7 @@
 &lt;p&gt;이 때 1행 2열의 &lt;code&gt;이름&lt;/code&gt;을 &lt;code&gt;Key&lt;/code&gt;라고 하고 2행 2열의 &lt;code&gt;김철수&lt;/code&gt;를 &lt;code&gt;Value&lt;/code&gt;라고 합니다. 전화번호, 이메일, 주소도 역시 Key이고 그에 대응되는 값들도 역시 Value가 되겠죠. &lt;code&gt;순서&lt;/code&gt;라는 Key는 각 데이터에 대해 겹치지 않는 고유한 값이기 때문에 &lt;code&gt;고유키(Primary Key)&lt;/code&gt;라고 합니다.&lt;/p&gt;
 &lt;p&gt;이렇게 Key와 Value가 1:1이나 1:n 또는 n:n 의 관계를 가지는 데이터베이스를 관계형 데이터베이스(&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Relational_database&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Relational Database&lt;/a&gt;)라고 합니다.&lt;/p&gt;
-&lt;h3 id=&#34;sql과-crud&#34;&gt;
-    &lt;a href=&#34;#sql%ea%b3%bc-crud&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    SQL과 CRUD
+&lt;h3 id=&#34;sql과-crud&#34;&gt;SQL과 CRUD
 &lt;/h3&gt;&lt;p&gt;위에 보여드린 DB에서 박모모의 전화번호를 찾는건 매우 간단합니다. 하지만 만약 행의 길이가 수만줄에 이르고 그 안에 박모모의 동명이인도 수백명이 존재하는 테이블이 있다면 어떨까요? 그 안에서 내가 원하는 박모모의 전화번호를 찾는건 쉽지 않은 일일겁니다. &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/SQL&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Structured Query Language (SQL)&lt;/a&gt;는 그런 복잡한 DB를 좀 더 용이하게 다루기 위해서 만들어진 언어입니다.&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ko.wikipedia.org/wiki/CRUD&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -131,9 +125,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DROP&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DATABASE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;database_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;database-management-system&#34;&gt;
-    &lt;a href=&#34;#database-management-system&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    DataBase Management System
+&lt;/div&gt;&lt;h3 id=&#34;database-management-system&#34;&gt;DataBase Management System
 &lt;/h3&gt;&lt;p&gt;대량의 데이터를 다루는데 관계형 데이터베이스가 사용되고, SQL이라는 언어를 사용해 데이터베이스의 데이터를 다룬다는 걸 알았습니다. 이런 데이터베이스와 SQL을 결합해서, 사용할 수 있는 형태의 프로그램으로 만든 것을 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Database#Database_management_system&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Database Management System&lt;/a&gt;이라고 합니다. 거기에 관계형 데이터베이스를 사용했다면 RDBMS가 되겠죠.&lt;/p&gt;
 &lt;p&gt;여러분이 잘 아시는 Oracle이나 MySQL 등이 대표적인 DBMS입니다. &lt;a class=&#34;link&#34; href=&#34;https://db-engines.com/en/ranking_trend&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -151,9 +143,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h3 id=&#34;sqlite란&#34;&gt;
-    &lt;a href=&#34;#sqlite%eb%9e%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    SQLite란
+&lt;h3 id=&#34;sqlite란&#34;&gt;SQLite란
 &lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://pngpress.com/wp-content/uploads/2020/04/SQLite-logo-300x134.png&#34;
 	
 	
@@ -167,9 +157,7 @@
 &lt;p&gt;처음엔 미해군의 구축함에서 이용하기 위해 만들어진 프로그램인데 &lt;a class=&#34;link&#34; href=&#34;https://www.sqlite.org/mostdeployed.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;공식 홈페이지&lt;/a&gt;에 따르면 현재는 전세계에서 1조개가 넘는 SQLite가 운용되고 있다고 하네요. SQLite에 대해 더 알고싶으신 분은 &lt;a class=&#34;link&#34; href=&#34;https://news.hada.io/topic?id=4558&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;SQLite의 알려지지 않은 이야기&lt;/a&gt;를 읽어보시면 좋을 것 같습니다.&lt;/p&gt;
-&lt;h3 id=&#34;안드로이드의-sqlite-버전&#34;&gt;
-    &lt;a href=&#34;#%ec%95%88%eb%93%9c%eb%a1%9c%ec%9d%b4%eb%93%9c%ec%9d%98-sqlite-%eb%b2%84%ec%a0%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    안드로이드의 SQLite 버전
+&lt;h3 id=&#34;안드로이드의-sqlite-버전&#34;&gt;안드로이드의 SQLite 버전
 &lt;/h3&gt;&lt;p&gt;상기한 이유로 안드로이드 API에는 SQLite가 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/package-summary&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;기본 내장&lt;/a&gt;되어 있습니다. 복잡한 DB를 다룰 계획이 없다면 SQLite를 이용해 DB를 구축하는 것으로 충분합니다.&lt;/p&gt;
 &lt;p&gt;현재까지 개발된 SQLite의 최신 버전은 &lt;a class=&#34;link&#34; href=&#34;https://www.sqlite.org/draft/changes.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -222,9 +210,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/requery/sqlite-android&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;외부 라이브러리&lt;/a&gt;를 추가하면 안드로이드에서 최신버전의 SQLite를 사용할 수도 있습니다만 가능하면 공식 라이브러리를 사용하는 게 좋겠죠.&lt;/p&gt;
-&lt;h3 id=&#34;안드로이드에서의-sqlite-사용&#34;&gt;
-    &lt;a href=&#34;#%ec%95%88%eb%93%9c%eb%a1%9c%ec%9d%b4%eb%93%9c%ec%97%90%ec%84%9c%ec%9d%98-sqlite-%ec%82%ac%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    안드로이드에서의 SQLite 사용
+&lt;h3 id=&#34;안드로이드에서의-sqlite-사용&#34;&gt;안드로이드에서의 SQLite 사용
 &lt;/h3&gt;&lt;p&gt;SQLite를 사용하기 위해서는 DB를 만들고 그 DB에 대해 SQL query를 전달하여 CRUD를 수행하면 됩니다. 안드로이드에서는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;SQLiteDatabase&lt;/a&gt; 클래스를 이용해, 작성한 데이터베이스에 대해 CRUD를 수행할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;그런데 구글 공식문서인 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/data-storage/sqlite&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -235,12 +221,8 @@
 &lt;/blockquote&gt;
 &lt;p&gt;그 대신 구글에서는 SQLite를 더 안전하게 사용할 수 있는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;SQLiteOpenHelper&lt;/a&gt;라는 헬퍼클래스를 제공하고 있습니다. 다음 파트에서는 이 SQLiteOpenHelper 클래스를 사용해서 CRUD작업을 하는 간단한 앱을 만들어보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;part-b-샘플-앱-작성&#34;&gt;
-    &lt;a href=&#34;#part-b-%ec%83%98%ed%94%8c-%ec%95%b1-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Part B. 샘플 앱 작성
-&lt;/h2&gt;&lt;h3 id=&#34;메인-레이아웃&#34;&gt;
-    &lt;a href=&#34;#%eb%a9%94%ec%9d%b8-%eb%a0%88%ec%9d%b4%ec%95%84%ec%9b%83&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    메인 레이아웃
+&lt;h2 id=&#34;part-b-샘플-앱-작성&#34;&gt;Part B. 샘플 앱 작성
+&lt;/h2&gt;&lt;h3 id=&#34;메인-레이아웃&#34;&gt;메인 레이아웃
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;New Project &amp;gt; Empty Activity&lt;/code&gt;를 선택해 빈 프로젝트를 하나 만들어줍니다.&lt;/p&gt;
 &lt;p&gt;그리고 앱에서 사용할 화면을 만듭니다. 전화번호부 DB를 상정할 것이므로 이름, 전화번호, 이메일 그리고 데이터의 Primary Key로 사용할 ID를 화면에서 입력할 수 있도록 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/widget/EditText&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;EditText&lt;/a&gt;를 배치하겠습니다. 고유키는 데이터를 데이터베이스에 입력할 때 자동으로 부여되기 때문에 입력할 필요가 없지만 삭제, 업데이트를 테스트할 때 필요하기 때문입니다.&lt;/p&gt;
@@ -562,9 +544,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/LinearLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;databasehelper-작성&#34;&gt;
-    &lt;a href=&#34;#databasehelper-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    DatabaseHelper 작성
+&lt;/div&gt;&lt;h3 id=&#34;databasehelper-작성&#34;&gt;DatabaseHelper 작성
 &lt;/h3&gt;&lt;p&gt;다음은 &lt;code&gt;SQLiteOpenHelper&lt;/code&gt; 클래스를 상속하는 &lt;code&gt;DatabaseHelper&lt;/code&gt; 클래스를 작성합니다. 이 앱에서 사용하게 될 데이터베이스의 프라이머리키는 &lt;code&gt;_id&lt;/code&gt;이고 그 외에 &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;phone&lt;/code&gt;, &lt;code&gt;email&lt;/code&gt; 이라는 키를 갖고 있습니다. 데이터베이스의 파일명 및 그외 중복으로 써야하는 상수들을 &lt;code&gt;companion object&lt;/code&gt;에 정의하고 상속에 필요한 생성자들을 전달해줍니다.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;DatabaseHelper&lt;/code&gt;는 복수개의 인스턴스가 생성되어 DB에 동시접근할수 있는 문제를 방지하기 위해 싱글톤으로 작성합니다. constructor에 직접 접근하지 못하도록 private화 하고, &lt;code&gt;getInstance&lt;/code&gt;에서 Double Checked Locking을 통해 인스턴스를 반환하는 싱글톤 구조를 구축합니다. 싱글톤에 대한 더 자세한 설명은 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/understanding-singleton-pattern/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;알기쉬운 Singleton Pattern&lt;/a&gt; 강의를 참고하세요.&lt;/p&gt;
@@ -622,9 +602,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;oncreate-구현&#34;&gt;
-    &lt;a href=&#34;#oncreate-%ea%b5%ac%ed%98%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    onCreate 구현
+&lt;/div&gt;&lt;h3 id=&#34;oncreate-구현&#34;&gt;onCreate 구현
 &lt;/h3&gt;&lt;p&gt;테이블을 생성하는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#onCreate%28android.database.sqlite.SQLiteDatabase%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;onCreate&lt;/a&gt;함수를 오버라이드 합니다. &lt;code&gt;onCreate&lt;/code&gt;는 시스템에 DB가 없을경우에만 실행되기 때문에 쿼리를 &lt;code&gt;CREATE TABLE IF EXIST&lt;/code&gt;로 줄 필요가 없습니다.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;_id&lt;/code&gt;는 데이터가 입력될 때 자동으로 증가시키기 위해 &lt;code&gt;PRIMARY KEY AUTOINCREMENT&lt;/code&gt;를 추가해줍니다. 작성한 쿼리는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#execSQL%28java.lang.String%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -655,9 +633,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;onupgrade-구현&#34;&gt;
-    &lt;a href=&#34;#onupgrade-%ea%b5%ac%ed%98%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    onUpgrade 구현
+&lt;/div&gt;&lt;h3 id=&#34;onupgrade-구현&#34;&gt;onUpgrade 구현
 &lt;/h3&gt;&lt;p&gt;다음은 DB버전이 변경되었을 때 동작하는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#onUpgrade%28android.database.sqlite.SQLiteDatabase,%20int,%20int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;onUpgrade&lt;/a&gt;를 구현합니다. 여기서는 DB버전이 증가되었으면 기존 DB를 삭제하고 새로운 DB를 작성하는 단순한 구조로 정의했습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -678,12 +654,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;crud-구현&#34;&gt;
-    &lt;a href=&#34;#crud-%ea%b5%ac%ed%98%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    CRUD 구현
-&lt;/h3&gt;&lt;h4 id=&#34;create&#34;&gt;
-    &lt;a href=&#34;#create&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Create
+&lt;/div&gt;&lt;h3 id=&#34;crud-구현&#34;&gt;CRUD 구현
+&lt;/h3&gt;&lt;h4 id=&#34;create&#34;&gt;Create
 &lt;/h4&gt;&lt;p&gt;우선은 CRUD의 C를 구현하겠습니다. &lt;code&gt;insertData&lt;/code&gt;에서는 &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;phone&lt;/code&gt;, &lt;code&gt;email&lt;/code&gt;을 파라메터로 받게 됩니다.  &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getWritableDatabase%28%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;writableDatabase&lt;/a&gt;로 데이터베이스를 오픈하고 외부에서 받아온 데이터를 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/content/ContentValues&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;contentValues&lt;/a&gt;로 묶어서 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#insert%28java.lang.String,%20java.lang.String,%20android.content.ContentValues%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -712,9 +684,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;update&#34;&gt;
-    &lt;a href=&#34;#update&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Update
+&lt;/div&gt;&lt;h4 id=&#34;update&#34;&gt;Update
 &lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#update%28java.lang.String,%20android.content.ContentValues,%20java.lang.String,%20java.lang.String[]%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;update&lt;/a&gt;에서는 id로 선택해 준 데이터의 내용을 갱신합니다. insert에서처럼 &lt;code&gt;writableDatabase&lt;/code&gt;로 데이터베이스를 오픈하고 &lt;code&gt;contentValues&lt;/code&gt;를 넘겨주어 데이터를 갱신합니다. 이 때 &lt;code&gt;&amp;quot;$COL1_ID = ?&amp;quot;&lt;/code&gt; 쿼리를 사용해 갱신할 데이터를 특정해주면 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -743,9 +713,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;delete&#34;&gt;
-    &lt;a href=&#34;#delete&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Delete
+&lt;/div&gt;&lt;h4 id=&#34;delete&#34;&gt;Delete
 &lt;/h4&gt;&lt;p&gt;전달받은 id를 프라이머리키로 가진 데이터를 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete%28java.lang.String,%20java.lang.String,%20java.lang.String[]%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;delete&lt;/a&gt; 명령으로 삭제합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -762,9 +730,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;read&#34;&gt;
-    &lt;a href=&#34;#read&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Read
+&lt;/div&gt;&lt;h4 id=&#34;read&#34;&gt;Read
 &lt;/h4&gt;&lt;p&gt;마지막으로 읽기를 구현합니다. &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#getReadableDatabase%28%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;readableDatabase&lt;/a&gt;로 데이터베이스를 열고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#rawQuery%28java.lang.String,%20java.lang.String[],%20android.os.CancellationSignal%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;rawQuery&lt;/a&gt; 에 &lt;code&gt;&amp;quot;SELECT * FROM $TABLE_NAME&amp;quot;&lt;/code&gt; 을 전달하여 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/Cursor&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -830,9 +796,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;mainactivity-준비&#34;&gt;
-    &lt;a href=&#34;#mainactivity-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    MainActivity 준비
+&lt;/div&gt;&lt;h3 id=&#34;mainactivity-준비&#34;&gt;MainActivity 준비
 &lt;/h3&gt;&lt;p&gt;뷰 바인딩을 적용한 메인액티비티를 작성합니다. &lt;code&gt;dbHelper&lt;/code&gt; 인스턴스를 생성하고, 사용이 끝나면 &lt;code&gt;onDestroy&lt;/code&gt;에서 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper#close%28%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;close()&lt;/a&gt;로 리소스를 반환하도록 하였습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -879,9 +843,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;유틸-메소드-준비&#34;&gt;
-    &lt;a href=&#34;#%ec%9c%a0%ed%8b%b8-%eb%a9%94%ec%86%8c%eb%93%9c-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    유틸 메소드 준비
+&lt;/div&gt;&lt;h3 id=&#34;유틸-메소드-준비&#34;&gt;유틸 메소드 준비
 &lt;/h3&gt;&lt;p&gt;데이터베이스 조작이 이루어졌을때 처리 결과를 텍스트뷰에 표시하기 위한 &lt;code&gt;showTxt&lt;/code&gt;를 작성합니다. 그리고 버튼을 눌렀을 때 에디트텍스트에 입력한 내용을 삭제하는 &lt;code&gt;clearEditTexts&lt;/code&gt; 함수도 작성합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -913,9 +875,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;버튼기능-정의&#34;&gt;
-    &lt;a href=&#34;#%eb%b2%84%ed%8a%bc%ea%b8%b0%eb%8a%a5-%ec%a0%95%ec%9d%98&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    버튼기능 정의
+&lt;/div&gt;&lt;h3 id=&#34;버튼기능-정의&#34;&gt;버튼기능 정의
 &lt;/h3&gt;&lt;p&gt;각 버튼을 클릭했을 때 부여할 기능을 정의합니다. 값을 입력하는 &lt;code&gt;insertDb&lt;/code&gt;, 갱신하는 &lt;code&gt;updateDb&lt;/code&gt;, 삭제하는 &lt;code&gt;deleteDb&lt;/code&gt;, 그리고 조회하는 &lt;code&gt;getAllDb&lt;/code&gt;함수를 만듭니다. 작업은 &lt;code&gt;try&lt;/code&gt; 블록 안에서 실행하며 에디트텍스트에 입력한 값을 &lt;code&gt;dbHelper&lt;/code&gt;에 정의한 각 함수로 전달합니다. 이 때 입력되는 sql 쿼리에 공백이 있으면 안되기 때문에 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;trim&lt;/a&gt;으로 공백을 제거하도록 했습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1034,9 +994,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;oncreate-정의&#34;&gt;
-    &lt;a href=&#34;#oncreate-%ec%a0%95%ec%9d%98&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    onCreate 정의
+&lt;/div&gt;&lt;h3 id=&#34;oncreate-정의&#34;&gt;onCreate 정의
 &lt;/h3&gt;&lt;p&gt;마지막으로 위에서 정의한 버튼기능을 &lt;code&gt;onCreate&lt;/code&gt; 안에서 실행하도록 하면 되겠죠.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

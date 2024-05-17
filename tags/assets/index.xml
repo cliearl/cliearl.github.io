@@ -13,9 +13,7 @@
         
         <guid>https://cliearl.github.io/posts/android/assets-json-recycler/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;안드로이드의-읽기전용-파일-저장폴더&#34;&gt;
-    &lt;a href=&#34;#%ec%95%88%eb%93%9c%eb%a1%9c%ec%9d%b4%eb%93%9c%ec%9d%98-%ec%9d%bd%ea%b8%b0%ec%a0%84%ec%9a%a9-%ed%8c%8c%ec%9d%bc-%ec%a0%80%ec%9e%a5%ed%8f%b4%eb%8d%94&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    안드로이드의 읽기전용 파일 저장폴더
+&lt;h2 id=&#34;안드로이드의-읽기전용-파일-저장폴더&#34;&gt;안드로이드의 읽기전용 파일 저장폴더
 &lt;/h2&gt;&lt;p&gt;앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;assets folder&lt;/li&gt;
@@ -65,34 +63,26 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;간단히 정리하면 XML과 연계하여 다루어야 할 때는 &lt;code&gt;res/raw&lt;/code&gt; 폴더를 사용하고, 그렇지 않을 경우 &lt;code&gt;assets&lt;/code&gt; 폴더를 사용하면 될 것 같네요.&lt;/p&gt;
-&lt;h2 id=&#34;앱-만들어보기&#34;&gt;
-    &lt;a href=&#34;#%ec%95%b1-%eb%a7%8c%eb%93%a4%ec%96%b4%eb%b3%b4%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    앱 만들어보기
+&lt;h2 id=&#34;앱-만들어보기&#34;&gt;앱 만들어보기
 &lt;/h2&gt;&lt;p&gt;그럼 asset폴더를 사용해보기 위해 json 파일을 불러와서 Recyclerview에 표시하는 간단한 앱을 만들어 보겠습니다.&lt;/p&gt;
 &lt;p&gt;Recyclerview는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/viewbinding-recyclerview/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;RecyclerView에 View Binding 적용하기&lt;/a&gt;에서 작성했던 프로젝트를 참고해서 사용하겠습니다. Json 포맷을 다루어야 하므로 우선 &lt;a class=&#34;link&#34; href=&#34;https://github.com/google/gson&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Gson&lt;/a&gt; 라이브러리를 추가합니다. Gson에 대한 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/sharedpreferneces-gson/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;SharedPreferences를 json 포맷으로 관리하기&lt;/a&gt;에서 설명한 내용을 참조하시기 바랍니다.&lt;/p&gt;
-&lt;h3 id=&#34;데이터-준비&#34;&gt;
-    &lt;a href=&#34;#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    데이터 준비
+&lt;h3 id=&#34;데이터-준비&#34;&gt;데이터 준비
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;New &amp;gt; Folder &amp;gt; Asset Folder&lt;/code&gt;를 선택하여 assets 폴더를 추가합니다.&lt;/p&gt;
 &lt;p&gt;데이터는 경기데이터드림에서 제공하는 &lt;a class=&#34;link&#34; href=&#34;https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=461Q599QLK8UTE14E3LW12837248&amp;amp;infSeq=1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;코로나바이러스 감염증 선별진료소 운영 의료기관 현황&lt;/a&gt;데이터를 사용하겠습니다.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;sheet&lt;/code&gt; 탭에서 &lt;code&gt;json&lt;/code&gt;을 클릭하여 데이터를 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 값들을 정렬하는게 보기에 좋을 것 같으니 &lt;a class=&#34;link&#34; href=&#34;https://jsonformatter.curiousconcept.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Json Formatter&lt;/a&gt; 에서 파일을 정렬하고 &lt;code&gt;data.json&lt;/code&gt;이라는 파일명을 붙여 assets 폴더에 저장합니다.&lt;/p&gt;
-&lt;h3 id=&#34;데이터클래스-준비&#34;&gt;
-    &lt;a href=&#34;#%eb%8d%b0%ec%9d%b4%ed%84%b0%ed%81%b4%eb%9e%98%ec%8a%a4-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    데이터클래스 준비
+&lt;h3 id=&#34;데이터클래스-준비&#34;&gt;데이터클래스 준비
 &lt;/h3&gt;&lt;p&gt;데이터 파일에는 데이터기준일자, 시군명,	의료기관명,	의료기관 구분,	의료기관 전화번호1,	의료기관 전화번호2,	소재지지번주소,	소재지도로명주소,	WGS84위도,	WGS84경도 등 여러가지 탭이 있습니다.&lt;/p&gt;
 &lt;p&gt;각 데이터는 배열 속의 데이터클래스로 관리하기 위해 데이터클래스를 만들어줍니다. 데이터클래스의 특징에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/dataclass-recyclerview/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Data class 이해하고 RecyclerView에서 사용하기&lt;/a&gt;강의에서 설명한 내용을 참고하시기 바랍니다.&lt;/p&gt;
 &lt;p&gt;안드로이드 스튜디오에 &lt;a class=&#34;link&#34; href=&#34;https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Kotlin data class File from JSON&lt;/a&gt; 플러그인을 설치하면 json 파일을 손쉽게 데이터클래스로 변환할 수 있습니다. 플러그인을 설치한 뒤 New &amp;gt; &lt;a class=&#34;link&#34; href=&#34;https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Kotlin data class File from JSON&lt;/a&gt;을 선택하여 위에서 만든 json 데이터와 클래스명을 입력하면 자동으로 데이터클래스와, 그 클래스를 아이템으로 갖는 배열 클래스가 생성되는데 클래스 이름은 &lt;code&gt;CoronaMed&lt;/code&gt;라고 하겠습니다.&lt;/p&gt;
-&lt;h3 id=&#34;recyclerview-구축하기&#34;&gt;
-    &lt;a href=&#34;#recyclerview-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Recyclerview 구축하기
+&lt;h3 id=&#34;recyclerview-구축하기&#34;&gt;Recyclerview 구축하기
 &lt;/h3&gt;&lt;p&gt;다음으로 새로 만들어진 데이터클래스의 형식에 맞게 Recyclerview와 ViewHolder의 형태를 정의해줍니다. &lt;code&gt;activity_main.xml&lt;/code&gt;에 RecyclerView를 추가합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -298,9 +288,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;assets-폴더속-파일-불러오기&#34;&gt;
-    &lt;a href=&#34;#assets-%ed%8f%b4%eb%8d%94%ec%86%8d-%ed%8c%8c%ec%9d%bc-%eb%b6%88%eb%9f%ac%ec%98%a4%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    assets 폴더속 파일 불러오기
+&lt;/div&gt;&lt;h3 id=&#34;assets-폴더속-파일-불러오기&#34;&gt;assets 폴더속 파일 불러오기
 &lt;/h3&gt;&lt;p&gt;다음은 메인액티비티에서 assets 폴더속 파일을 불러오기 위한 함수를 만들어줍니다. assets 폴더에 접근하기 위해 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/content/res/AssetManager&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Asset Manager&lt;/a&gt; 인스턴스를 생성하고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/content/res/AssetManager#open%28java.lang.String%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;open&lt;/a&gt; 메소드로 파일을 오픈합니다.그리고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/io/BufferedReader&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;

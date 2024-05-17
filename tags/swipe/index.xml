@@ -16,9 +16,7 @@
 &lt;p&gt;이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다.&lt;/p&gt;
 &lt;p&gt;여기서는 제가 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/viewbinding-recyclerview/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;RecyclerView에 View Binding 적용하기&lt;/a&gt; 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;리팩토링&#34;&gt;
-    &lt;a href=&#34;#%eb%a6%ac%ed%8c%a9%ed%86%a0%eb%a7%81&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    리팩토링
+&lt;h2 id=&#34;리팩토링&#34;&gt;리팩토링
 &lt;/h2&gt;&lt;p&gt;우선 View Binding을 사용하도록 설정을 추가합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -87,9 +85,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;데이터-조작함수-추가&#34;&gt;
-    &lt;a href=&#34;#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a1%b0%ec%9e%91%ed%95%a8%ec%88%98-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    데이터 조작함수 추가
+&lt;/div&gt;&lt;h2 id=&#34;데이터-조작함수-추가&#34;&gt;데이터 조작함수 추가
 &lt;/h2&gt;&lt;p&gt;데이터를 조작하는 함수를 Recyclerview 안에 다음과 같이 추가합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -137,9 +133,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;스와이프와-드래그-기능-붙이기&#34;&gt;
-    &lt;a href=&#34;#%ec%8a%a4%ec%99%80%ec%9d%b4%ed%94%84%ec%99%80-%eb%93%9c%eb%9e%98%ea%b7%b8-%ea%b8%b0%eb%8a%a5-%eb%b6%99%ec%9d%b4%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    스와이프와 드래그 기능 붙이기
+&lt;/div&gt;&lt;h2 id=&#34;스와이프와-드래그-기능-붙이기&#34;&gt;스와이프와 드래그 기능 붙이기
 &lt;/h2&gt;&lt;p&gt;안드로이드에서는 Recyclerview에 입력되는 스와이프와 드래그 동작을 감지하는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/ItemTouchHelper.SimpleCallback&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ItemTouchHelper.SimpleCallback&lt;/a&gt; 클래스가 이미 준비되어 있으니 이걸 사용하겠습니다. 이 콜백함수는 다음과 같이 정의하면 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -199,9 +193,7 @@
 &lt;p&gt;이때 &lt;code&gt;onSwiped&lt;/code&gt;에서는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder#getLayoutPosition%28%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;layoutPosition&lt;/a&gt;을 사용했고, &lt;code&gt;onMove&lt;/code&gt;에서는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder#getAdapterPosition%28%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;adapterPosition&lt;/a&gt;을 사용했습니다. 스와이프를 할 때 ViewHolder의 위치는 고정되어 있지만 드래그를 할때는 ViewHolder의 위치가 계속 변하게 됩니다. &lt;code&gt;adapterPosition&lt;/code&gt;은 전체 Recyclerview 안에서 위치를 가져오는 속성이고 &lt;code&gt;layoutPosition&lt;/code&gt;은 고정된 ViewHolder의 위치를 가져오는 속성입니다.&lt;/p&gt;
-&lt;h2 id=&#34;viewholder에-드래그-가능-여부를-알리는-이미지-표시&#34;&gt;
-    &lt;a href=&#34;#viewholder%ec%97%90-%eb%93%9c%eb%9e%98%ea%b7%b8-%ea%b0%80%eb%8a%a5-%ec%97%ac%eb%b6%80%eb%a5%bc-%ec%95%8c%eb%a6%ac%eb%8a%94-%ec%9d%b4%eb%af%b8%ec%a7%80-%ed%91%9c%ec%8b%9c&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    ViewHolder에 드래그 가능 여부를 알리는 이미지 표시
+&lt;h2 id=&#34;viewholder에-드래그-가능-여부를-알리는-이미지-표시&#34;&gt;ViewHolder에 드래그 가능 여부를 알리는 이미지 표시
 &lt;/h2&gt;&lt;p&gt;현재는 ViewHolder가 데이터만 표시되고 있어서 이 ViewHolder를 드래그 할수 있는지 바로 알수 있는 방법이 없습니다. 그래서 ViewHolder 오른쪽에 햄버거 마크를 넣어서 드래그 할 수 있는 ViewHolder라는 표시를 해 주도록 하겠습니다.&lt;/p&gt;
 &lt;p&gt;아이콘은 &lt;code&gt;Vector Asset&lt;/code&gt; 메뉴에서 추가하고 &lt;code&gt;LinearLayout&lt;/code&gt;과 &lt;code&gt;FrameLayout&lt;/code&gt;을 섞어서 ViewHolder 모양을 수정했습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -300,9 +292,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/LinearLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;스와이프시-백그라운드-설정하기&#34;&gt;
-    &lt;a href=&#34;#%ec%8a%a4%ec%99%80%ec%9d%b4%ed%94%84%ec%8b%9c-%eb%b0%b1%ea%b7%b8%eb%9d%bc%ec%9a%b4%eb%93%9c-%ec%84%a4%ec%a0%95%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    스와이프시 백그라운드 설정하기
+&lt;/div&gt;&lt;h2 id=&#34;스와이프시-백그라운드-설정하기&#34;&gt;스와이프시 백그라운드 설정하기
 &lt;/h2&gt;&lt;p&gt;다음으로 스와이프를 할때 미끄러져 나간 ViewHolder 아래에 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/graphics/Canvas&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Canvas&lt;/a&gt; 클래스를 이용해 작성한 빨간색 비트맵 이미지와 휴지통 아이콘을 표시되도록 하겠습니다. 이것을 위해서는 &lt;code&gt;ItemTouchHelper.SimpleCallback&lt;/code&gt;의 &lt;code&gt;onChildDraw&lt;/code&gt;를 사용합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -391,9 +381,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;터치-조작-정의하기&#34;&gt;
-    &lt;a href=&#34;#%ed%84%b0%ec%b9%98-%ec%a1%b0%ec%9e%91-%ec%a0%95%ec%9d%98%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    터치 조작 정의하기
+&lt;/div&gt;&lt;h2 id=&#34;터치-조작-정의하기&#34;&gt;터치 조작 정의하기
 &lt;/h2&gt;&lt;p&gt;Recyclerview 어댑터 안에 정의한 ViewHolder 클래스에 클릭 리스너를 붙여주면 ViewHolder의 터치를 인식할 수 있습니다. 그럴려면 ViewHolder가 사용하는 &lt;code&gt;list_item.xml&lt;/code&gt;에서 레이아웃에 id를 부여해줘야 합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -443,9 +431,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;viewholder-터치시-애니메이션-추가&#34;&gt;
-    &lt;a href=&#34;#viewholder-%ed%84%b0%ec%b9%98%ec%8b%9c-%ec%95%a0%eb%8b%88%eb%a9%94%ec%9d%b4%ec%85%98-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    ViewHolder 터치시 애니메이션 추가
+&lt;/div&gt;&lt;h2 id=&#34;viewholder-터치시-애니메이션-추가&#34;&gt;ViewHolder 터치시 애니메이션 추가
 &lt;/h2&gt;&lt;p&gt;현재는 ViewHolder를 터치했을 때 내용이 바뀌도록 하긴 했지만 정확히 어떤 ViewHolder를 터치한건지에 대한 표시가 나타나지 않습니다. 하지만 xml에 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/material/animations#Touch&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;selectableItemBackground&lt;/a&gt; 속성을 정의하면 터치한 ViewHolder를 주목시키는 효과를 추가할 수 있습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -481,9 +467,7 @@
         <description>&lt;p&gt;이번 포스팅에서는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/guide/navigation/navigation-swipe-view&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ViewPager&lt;/a&gt;를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다.&lt;/p&gt;
 &lt;p&gt;ViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;화면-구성&#34;&gt;
-    &lt;a href=&#34;#%ed%99%94%eb%a9%b4-%ea%b5%ac%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    화면 구성
+&lt;h2 id=&#34;화면-구성&#34;&gt;화면 구성
 &lt;/h2&gt;&lt;p&gt;우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다. 인디케이터는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/ongakuer/CircleIndicator&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CircleIndicator&lt;/a&gt;라는 외부 라이브러리를 이용하겠습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -573,9 +557,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/shape&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;프래그먼트-작성&#34;&gt;
-    &lt;a href=&#34;#%ed%94%84%eb%9e%98%ea%b7%b8%eb%a8%bc%ed%8a%b8-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    프래그먼트 작성
+&lt;/div&gt;&lt;h2 id=&#34;프래그먼트-작성&#34;&gt;프래그먼트 작성
 &lt;/h2&gt;&lt;p&gt;다음은 페이지를 만드는데 사용할 프래그먼트를 작성해줍니다. &lt;code&gt;TestFragment&lt;/code&gt;라는 이름의 빈 프래그먼트를 하나 만들고 다음과 같이 이미지뷰와 텍스트뷰를 가지는 화면을 만들어줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -728,9 +710,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;viewpager-어댑터-작성-및-연결&#34;&gt;
-    &lt;a href=&#34;#viewpager-%ec%96%b4%eb%8c%91%ed%84%b0-%ec%9e%91%ec%84%b1-%eb%b0%8f-%ec%97%b0%ea%b2%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    ViewPager 어댑터 작성 및 연결
+&lt;/div&gt;&lt;h2 id=&#34;viewpager-어댑터-작성-및-연결&#34;&gt;ViewPager 어댑터 작성 및 연결
 &lt;/h2&gt;&lt;p&gt;다음으로는 ViewPager Adapter를 만들어줍니다. 별개 클래스이지만 내용이 복잡하지 않으므로 메인액티비티 클래스 안에 만들어줍니다. 어댑터는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/fragment/app/FragmentStatePagerAdapter&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;FragmentStatePagerAdapter&lt;/a&gt; 혹은 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/viewpager2/adapter/FragmentStateAdapter&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;FragmentStateAdapter&lt;/a&gt;를 상속받아야 하는데 페이지가 많을 경우에는 자원을 동적으로 관리해 주는 &lt;code&gt;FragmentStatePagerAdapter&lt;/code&gt;가 적절하고 페이지수가 적다면 &lt;code&gt;FragmentStateAdapter&lt;/code&gt;를 사용하면 됩니다. 전체 페이지수는 4개이고 &lt;code&gt;getItem&lt;/code&gt;에서 페이지를 선택했을 때 반환할 프래그먼트를 지정해줍니다. 이때 프래그먼트에 전달할 내용을 어댑터 안에서 지정해줍니다.&lt;/p&gt;

@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다. # Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다. Default Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다. Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다. Default Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
 <title>Android Studio Arctic Fox와 JDK 11의 도입</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="Android Studio Arctic Fox와 JDK 11의 도입">
-<meta property='og:description' content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다. # Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다. Default Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Android Studio Arctic Fox와 JDK 11의 도입">
+<meta property='og:description' content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다. Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다. Default Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='JDK' /><meta property='article:published_time' content='2021-08-15T14:23:23&#43;09:00'/><meta property='article:modified_time' content='2021-08-15T14:23:23&#43;09:00'/>
 <meta name="twitter:title" content="Android Studio Arctic Fox와 JDK 11의 도입">
-<meta name="twitter:description" content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다. # Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다. Default Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다. Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다. Default Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -381,9 +390,7 @@ if (!doNotTrack) {
     
     
     <p>이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.</p>
-<h2 id="android-gradle-700-도입">
-    <a href="#android-gradle-700-%eb%8f%84%ec%9e%85" class="header-anchor">#</a>
-    Android Gradle 7.0.0 도입
+<h2 id="android-gradle-700-도입">Android Gradle 7.0.0 도입
 </h2><p><img src="/images/android-gradle-java-11/arcticfox.png"
 	
 	
@@ -421,9 +428,7 @@ if (!doNotTrack) {
 </tbody>
 </table></div>
 <p>이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.</p>
-<h2 id="java-8에서-11로-변경된-이유">
-    <a href="#java-8%ec%97%90%ec%84%9c-11%eb%a1%9c-%eb%b3%80%ea%b2%bd%eb%90%9c-%ec%9d%b4%ec%9c%a0" class="header-anchor">#</a>
-    Java 8에서 11로 변경된 이유
+<h2 id="java-8에서-11로-변경된-이유">Java 8에서 11로 변경된 이유
 </h2><p>그렇다면 왜 11버전이 선택되었을까요? 11은 2018년 9월 발표된 버전으로 8과 비교하면 기술적으로 많은 발전이 있었습니다. 그 내용에 대해서는 Microsoft의 <a class="link" href="https://docs.microsoft.com/ko-kr/azure/developer/java/fundamentals/reasons-to-move-to-java-11"  target="_blank" rel="noopener"
     >Java 11로 전환해야 하는 이유</a>를 참조하시면 좋을 것 같습니다.</p>
 <p>Android Studio에서 Java 11의 기능을 이용하고 싶다면 build.gradle을 <a class="link" href="https://developer.android.com/studio/releases/gradle-plugin#java-11"  target="_blank" rel="noopener"
@@ -465,9 +470,7 @@ if (!doNotTrack) {
     >ADOPTIUM</a> 으로부터 오픈소스 빌드인 OpenJDK를 제공받을 수 있는 버전이기도 합니다. OpenJDK는 Oracle JDK의 기능을 모두 구현하면서도 무료로 사용할 수 있는 JDK라고 생각하시면 됩니다.</p>
 <p>이러한 이유들로 인해 구글에서는 Android Gradle의 JDK 디폴트 버전을 11로 채용하게 된 것으로 보입니다. synk에서 발표한 <a class="link" href="https://snyk.io/wp-content/uploads/jvm_2020.pdf"  target="_blank" rel="noopener"
     >JVM Ecosystem Report 2020</a>에 따르면 현재 Java SE 8 사용자는 64%, 11 사용자는 25%라고 하는데 이번 결정으로 11버전의 사용자가 빠르게 증가할 것 같네요.</p>
-<h2 id="android-studio의-빌드-실패">
-    <a href="#android-studio%ec%9d%98-%eb%b9%8c%eb%93%9c-%ec%8b%a4%ed%8c%a8" class="header-anchor">#</a>
-    Android Studio의 빌드 실패
+<h2 id="android-studio의-빌드-실패">Android Studio의 빌드 실패
 </h2><p>현재 Arctic Fox에서 New Project로 생성하는 프로젝트의 Android Gradle은 7.0.0 버전이 적용되도록 되어 있습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -502,9 +505,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">       <span class="o">-</span> <span class="n">changing</span> <span class="err">`</span><span class="n">org</span><span class="o">.</span><span class="n">gradle</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">home</span><span class="err">`</span> <span class="ow">in</span> <span class="err">`</span><span class="n">gradle</span><span class="o">.</span><span class="n">properties</span><span class="err">`</span><span class="o">.</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="jdk-버전-변경">
-    <a href="#jdk-%eb%b2%84%ec%a0%84-%eb%b3%80%ea%b2%bd" class="header-anchor">#</a>
-    JDK 버전 변경
+</div><h2 id="jdk-버전-변경">JDK 버전 변경
 </h2><p>이 문제를 해결하기 위해서는 프로젝트가 사용하는 JDK 버전을 변경해주면 됩니다.</p>
 <p>안드로이드 스튜디오 4.2에는 이미 JDK 11이 내장되어 있지만 여기서는 패키지 버전관리가 용이한 brew를 통해 JDK 11을 새로 설치하여 사용하는 법을 소개하겠습니다.</p>
 <p>우선 brew로 시스템에 <a class="link" href="https://github.com/AdoptOpenJDK/homebrew-openjdk"  target="_blank" rel="noopener"
@@ -742,7 +743,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

@@ -12,9 +12,7 @@
         <pubDate>Sun, 05 Dec 2021 10:20:46 +0900</pubDate>
         
         <guid>https://cliearl.github.io/posts/android/prevent-fragment-memory-leak-during-viewbinding/</guid>
-        <description>&lt;h2 id=&#34;들어가기&#34;&gt;
-    &lt;a href=&#34;#%eb%93%a4%ec%96%b4%ea%b0%80%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    들어가기
+        <description>&lt;h2 id=&#34;들어가기&#34;&gt;들어가기
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/apply-viewbinding/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;findViewById 대신 View Binding 사용하기&lt;/a&gt; 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/prevent-fragment-memory-leak-during-viewbinding/viewbinding-table.png&#34;
@@ -27,9 +25,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;fragment에서의-메모리-누수&#34;&gt;
-    &lt;a href=&#34;#fragment%ec%97%90%ec%84%9c%ec%9d%98-%eb%a9%94%eb%aa%a8%eb%a6%ac-%eb%88%84%ec%88%98&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Fragment에서의 메모리 누수
+&lt;h2 id=&#34;fragment에서의-메모리-누수&#34;&gt;Fragment에서의 메모리 누수
 &lt;/h2&gt;&lt;p&gt;그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 &lt;code&gt;onDestroyView&lt;/code&gt;에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://developer.android.com/images/guide/fragments/fragment-view-lifecycle.png&#34;
 	
@@ -41,12 +37,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;메모리-누수-대응법&#34;&gt;
-    &lt;a href=&#34;#%eb%a9%94%eb%aa%a8%eb%a6%ac-%eb%88%84%ec%88%98-%eb%8c%80%ec%9d%91%eb%b2%95&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    메모리 누수 대응법
-&lt;/h2&gt;&lt;h3 id=&#34;_binding의-직접-해제&#34;&gt;
-    &lt;a href=&#34;#_binding%ec%9d%98-%ec%a7%81%ec%a0%91-%ed%95%b4%ec%a0%9c&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    &lt;code&gt;_binding&lt;/code&gt;의 직접 해제
+&lt;h2 id=&#34;메모리-누수-대응법&#34;&gt;메모리 누수 대응법
+&lt;/h2&gt;&lt;h3 id=&#34;_binding의-직접-해제&#34;&gt;&lt;code&gt;_binding&lt;/code&gt;의 직접 해제
 &lt;/h3&gt;&lt;p&gt;그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 &lt;code&gt;_binding&lt;/code&gt; 변수를 만들어 사용한 뒤 &lt;code&gt;onDestroyView&lt;/code&gt;에서 해제해주는 구조를 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/topic/libraries/view-binding#fragments&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;공식 문서&lt;/a&gt; 에서 제안하고 있습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -101,9 +93,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;autoclearedvalue-사용하기&#34;&gt;
-    &lt;a href=&#34;#autoclearedvalue-%ec%82%ac%ec%9a%a9%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    AutoClearedValue 사용하기
+&lt;/div&gt;&lt;h3 id=&#34;autoclearedvalue-사용하기&#34;&gt;AutoClearedValue 사용하기
 &lt;/h3&gt;&lt;p&gt;그런데 Fragment마다 &lt;code&gt;_binding&lt;/code&gt;을 사용하면 보일러플레이트 코드가 너무 많아지고, 리소스를 해제하는 걸 깜박할 수도 있습니다. 그래서 구글에서는 binding의 초기화를 위임하는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/android/architecture-components-samples/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/util/AutoClearedValue.kt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;AutoClearedValue&lt;/a&gt;라는 개념을 제안했습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -277,9 +267,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;viewbindingpropertydelegate-사용&#34;&gt;
-    &lt;a href=&#34;#viewbindingpropertydelegate-%ec%82%ac%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    ViewBindingPropertyDelegate 사용
+&lt;/div&gt;&lt;h3 id=&#34;viewbindingpropertydelegate-사용&#34;&gt;ViewBindingPropertyDelegate 사용
 &lt;/h3&gt;&lt;p&gt;AutoclearedValue는 어디까지나 코드 스니펫일 뿐이므로 업데이트가 있을 경우 관리가 쉽지 않습니다. 그래서 이 작업을 하기위해 만들어진 &lt;a class=&#34;link&#34; href=&#34;https://github.com/androidbroadcast/ViewBindingPropertyDelegate&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ViewBindingPropertyDelegate&lt;/a&gt; 또는  &lt;a class=&#34;link&#34; href=&#34;https://github.com/wada811/ViewBinding-ktx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ViewBinding-ktx&lt;/a&gt;같이 Delegate를 활용하는 라이브러리를 사용하는 방법이 있습니다.&lt;/p&gt;
@@ -320,12 +308,8 @@
     &gt;유튜브 강의&lt;/a&gt;를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.&lt;/p&gt;
 &lt;p&gt;이번 포스팅에서 변환에 사용한 프로젝트는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/implement-recyclerview/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;앱에서 RecyclerView 사용하기&lt;/a&gt; 포스팅에서 작성한 것을 사용하도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;코드-작성&#34;&gt;
-    &lt;a href=&#34;#%ec%bd%94%eb%93%9c-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    코드 작성
-&lt;/h2&gt;&lt;h3 id=&#34;view-binding-활성화&#34;&gt;
-    &lt;a href=&#34;#view-binding-%ed%99%9c%ec%84%b1%ed%99%94&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    View Binding 활성화
+&lt;h2 id=&#34;코드-작성&#34;&gt;코드 작성
+&lt;/h2&gt;&lt;h3 id=&#34;view-binding-활성화&#34;&gt;View Binding 활성화
 &lt;/h3&gt;&lt;p&gt;우선은 gradle에서 &lt;code&gt;kotlin-android-extensions&lt;/code&gt; 플러그인을 삭제하고 View Binding을 활성화합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -347,9 +331,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gi&#34;&gt;&lt;/span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;메인액티비티-수정&#34;&gt;
-    &lt;a href=&#34;#%eb%a9%94%ec%9d%b8%ec%95%a1%ed%8b%b0%eb%b9%84%ed%8b%b0-%ec%88%98%ec%a0%95&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    메인액티비티 수정
+&lt;/div&gt;&lt;h3 id=&#34;메인액티비티-수정&#34;&gt;메인액티비티 수정
 &lt;/h3&gt;&lt;p&gt;다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 &lt;code&gt;ActivityMainBinding&lt;/code&gt; 클래스를 초기화하여 &lt;code&gt;binding&lt;/code&gt;이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 &lt;code&gt;binding.recyclerView&lt;/code&gt;로 접근하여 설정합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -417,9 +399,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;recyclerview-어댑터-수정&#34;&gt;
-    &lt;a href=&#34;#recyclerview-%ec%96%b4%eb%8c%91%ed%84%b0-%ec%88%98%ec%a0%95&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Recyclerview 어댑터 수정
+&lt;/div&gt;&lt;h3 id=&#34;recyclerview-어댑터-수정&#34;&gt;Recyclerview 어댑터 수정
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;onCreateViewHolder&lt;/code&gt;에서 뷰를 만들 때 &lt;code&gt;ListItemBinding&lt;/code&gt; 클래스로 만들어지는 &lt;code&gt;binding&lt;/code&gt; 인스턴스를 사용하도록 변경하여줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -465,9 +445,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;viewholder-수정&#34;&gt;
-    &lt;a href=&#34;#viewholder-%ec%88%98%ec%a0%95&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    ViewHolder 수정
+&lt;/div&gt;&lt;h3 id=&#34;viewholder-수정&#34;&gt;ViewHolder 수정
 &lt;/h3&gt;&lt;p&gt;기존의 ViewHolder에서는 뷰를 받아와서 정의하고 그걸 데이터와 연결하는 작업이 필요했는데, View Binding에서는 binding 인스턴스가 생성되는순간 자동으로 뷰를 binding의 프로퍼티로 접근할 수 있기 때문에 이 코드가 필요없게 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -530,35 +508,25 @@
         
         <guid>https://cliearl.github.io/posts/android/apply-viewbinding/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 View Binding을 사용하는 법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;kotlin-android-extensions의-지원-중단&#34;&gt;
-    &lt;a href=&#34;#kotlin-android-extensions%ec%9d%98-%ec%a7%80%ec%9b%90-%ec%a4%91%eb%8b%a8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Kotlin Android Extensions의 지원 중단
+&lt;h2 id=&#34;kotlin-android-extensions의-지원-중단&#34;&gt;Kotlin Android Extensions의 지원 중단
 &lt;/h2&gt;&lt;p&gt;안드로이드 스튜디오에서는 뷰를 만들고 그 뷰를 불러오기 위해서 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/view/View#findViewById%28int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;findViewById&lt;/a&gt;를 사용합니다. 이 때 &lt;a class=&#34;link&#34; href=&#34;https://plugins.gradle.org/plugin/org.jetbrains.kotlin.android.extensions&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;kotlin-android-extensions&lt;/a&gt; 플러그인을 사용하면 이 함수의 사용을 생략하고 간편하게 코드를 작성할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;문제는 서로 다른 xml파일을 만들었을 때 Id를 동일하게 사용할 수 있기 때문에 코드에서 헷갈릴 수 있다는 문제가 있습니다. 그래서 구글에서는 안드로이드 스튜디오 4.1부터 kotlin-android-extensions의 &lt;a class=&#34;link&#34; href=&#34;https://developers-kr.googleblog.com/2020/11/the-future-of-kotlin-android-extensions.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;지원을 중단&lt;/a&gt;하고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/topic/libraries/view-binding&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;View Binding&lt;/a&gt;을 사용하도록 안내하고 있습니다.&lt;/p&gt;
-&lt;h2 id=&#34;view-binding의-구조&#34;&gt;
-    &lt;a href=&#34;#view-binding%ec%9d%98-%ea%b5%ac%ec%a1%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    View Binding의 구조
+&lt;h2 id=&#34;view-binding의-구조&#34;&gt;View Binding의 구조
 &lt;/h2&gt;&lt;p&gt;View Binding을 프로젝트에서 사용하도록 설정하면 각 레이아웃 xml 파일에 대해 ViewBinding 클래스를 상속받는 개별 binding class가 자동으로 생성됩니다. 이 때 클래스 이름은 레이아웃 파일 이름을 파스칼 표기법으로 변환하고 Binding 접미사를 추가합니다.&lt;/p&gt;
 &lt;p&gt;그리고나서 &lt;code&gt;onCreate&lt;/code&gt; 안에서 View Binding 클래스에 인스턴스를 생성하면 뷰의 Id를 인스턴스의 프로퍼티로 사용할 수 있게 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;view-binding의-장점&#34;&gt;
-    &lt;a href=&#34;#view-binding%ec%9d%98-%ec%9e%a5%ec%a0%90&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    View Binding의 장점
+&lt;h2 id=&#34;view-binding의-장점&#34;&gt;View Binding의 장점
 &lt;/h2&gt;&lt;p&gt;구글에서 설명하는 View Binding의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/topic/libraries/view-binding#findviewbyid&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;장점&lt;/a&gt;은 두가지가 있습니다. 하나는 &lt;code&gt;Null-safe&lt;/code&gt;로, 서로 다른 레이아웃에 대해 같은 ID를 가진 뷰를 정확히 구분할 수 있게 됩니다. 만약 Id를 참조할 수 없을 경우 &lt;code&gt;@Nullable&lt;/code&gt;로 만들어 아예 사용할 수 없게 막습니다. 두번째는 &lt;code&gt;Type-safe&lt;/code&gt;로, findViewById를 사용할 경우 뷰에 잘못된 타입을 지정할 수 있다는 문제가 있는데, View Binding에서는 그런 문제가 발생하지 않는다는 특징이 있습니다.&lt;/p&gt;
-&lt;h2 id=&#34;findviewbyid-사용상의-문제&#34;&gt;
-    &lt;a href=&#34;#findviewbyid-%ec%82%ac%ec%9a%a9%ec%83%81%ec%9d%98-%eb%ac%b8%ec%a0%9c&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    findViewById 사용상의 문제
+&lt;h2 id=&#34;findviewbyid-사용상의-문제&#34;&gt;findViewById 사용상의 문제
 &lt;/h2&gt;&lt;p&gt;안드로이드 스튜디오의 Create new project에서 Basic Activity를 만들어서 View Binding 환경을 구현해 보겠습니다. 우선은 findViewById를 사용할 때 어떤 문제가 발생하는지 보여드리겠습니다.&lt;/p&gt;
 &lt;p&gt;kotlin-android-extensions 플러그인을 적용한 뒤, &lt;code&gt;fragment_first.xml&lt;/code&gt;, &lt;code&gt;fragment_second.xml&lt;/code&gt;의 텍스트뷰 Id를 동일하게 지정해줍니다.&lt;/p&gt;
 &lt;p&gt;이 상태에서 &lt;code&gt;FirstFragment.kt&lt;/code&gt;에서 텍스트뷰를 사용하면 연결된 xml이 자동으로 임포트 되는데, 코드만 봐서는 이게 &lt;code&gt;fragment_first.xml&lt;/code&gt;에서 온 코드인지 &lt;code&gt;fragment_second.xml&lt;/code&gt;에서 온 것인지 알 수가 없습니다.&lt;/p&gt;
 &lt;p&gt;참조한 뷰가 한개일 때는 import 파트를 보면 출처를 알 수 있지만 사용하는 뷰가 많아지면 어떤 뷰가 어떤 import를 참조한 것인지 한눈에 파악하는 것이 매우 어려워지게 되는 문제가 있습니다.&lt;/p&gt;
-&lt;h2 id=&#34;activity에-view-binding-적용&#34;&gt;
-    &lt;a href=&#34;#activity%ec%97%90-view-binding-%ec%a0%81%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Activity에 View Binding 적용
+&lt;h2 id=&#34;activity에-view-binding-적용&#34;&gt;Activity에 View Binding 적용
 &lt;/h2&gt;&lt;p&gt;다음과 같이 gradle에서 View Binding을 활성화하면 모든 레이아웃 xml 파일에 대해 바인딩클래스가 생성됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -656,9 +624,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;fragment에-view-binding-적용&#34;&gt;
-    &lt;a href=&#34;#fragment%ec%97%90-view-binding-%ec%a0%81%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Fragment에 View Binding 적용
+&lt;/div&gt;&lt;h2 id=&#34;fragment에-view-binding-적용&#34;&gt;Fragment에 View Binding 적용
 &lt;/h2&gt;&lt;p&gt;다음은 Fragment에 View Binding을 적용해 보겠습니다. Fragment에서 사용할 때는 &lt;code&gt;_binding&lt;/code&gt;과 &lt;code&gt;binding&lt;/code&gt; 변수 두개를 만들어줍니다. &lt;code&gt;_binding&lt;/code&gt;은 Fragment를 사용하지 않을 때 자원을 반환할 수 있도록 Nullable 형태로 준비합니다. 그리고 실제로 사용하는 &lt;code&gt;binding&lt;/code&gt;은 &lt;code&gt;_binding&lt;/code&gt;이 초기화 되었을 때 &lt;code&gt;get()&lt;/code&gt;으로 값을 가져오도록 합니다.&lt;/p&gt;
 &lt;p&gt;Fragment의 라이프사이클을 고려해 &lt;code&gt;_binding&lt;/code&gt;을 &lt;code&gt;onCreateView&lt;/code&gt; 안에서 초기화하면 &lt;code&gt;binding&lt;/code&gt;이 자동으로 생성됩니다. 그러면 &lt;code&gt;binding.root&lt;/code&gt;를 뷰로 반환하여주고, &lt;code&gt;onViewCreated&lt;/code&gt;에서는 &lt;code&gt;binding&lt;/code&gt;의 프로퍼티로써 텍스트뷰와 버튼을 사용하면 됩니다.&lt;/p&gt;
 &lt;p&gt;마지막으로 &lt;code&gt;onDestroyView&lt;/code&gt;에서는 Fragment가 어떠한 이유로 파괴될 때 &lt;code&gt;_binding&lt;/code&gt;을 null로 만들어서 자원을 반환하도록 합니다.&lt;/p&gt;

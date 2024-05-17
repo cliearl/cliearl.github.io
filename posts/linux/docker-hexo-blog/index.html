@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/linux/docker-hexo-blog/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="도커로 Hexo 블로그 만들고 github.io 주소로 접속하기">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="도커로 Hexo 블로그 만들고 github.io 주소로 접속하기">
 <meta property='og:description' content="도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다. 개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다. 처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기. 그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다. 그래서 TTXML Importer로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/linux/docker-hexo-blog/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -15,16 +15,25 @@
 <meta name="twitter:description" content="도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다. 개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다. 처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기. 그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다. 그래서 TTXML Importer로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -402,9 +411,7 @@ if (!doNotTrack) {
     >Icarus</a>라는 테마를 붙여 써보기로 했다.</p>
 <p>근데 정적 사이트 생성기는 소스를 로컬에 보관하고 github.io로 퍼블리시하는 구조라, 모든 컴퓨터에 Hexo 소스를 보관할 필요가 있다. 이건 너무 바보같아서 Hexo 소스는 도커로 웹에 띄우고 이놈으로부터 github.io에 퍼블리싱하는 방법을 쓰기로 했다. 굳이 따지면 웹에 띄운 시점에서 바로 접속이 가능하니 굳이 퍼블리시를 할 필요는 없는거긴 한데 사이트를 매번 변환하는것보다는 당연히 변환된 저장소에 접속하는 편이 빠르고 무엇보다 github.io 주소를 쓰는 편이 더 geek하기 때문에 사용하기로 했다.</p>
 <p>그래서 이 포스트에서는 리눅스 서버에 도커로 Hexo를 띄우고, Hexo-admin 플러그인으로 퍼블리시한 파일을 github.io에 deploy하여 최종적으로는 유저명.github.io로 정적 블로그를 구축하는 법을 설명한다.</p>
-<h1 id="github-repository-생성">
-    <a href="#github-repository-%ec%83%9d%ec%84%b1" class="header-anchor">#</a>
-    github repository 생성
+<h1 id="github-repository-생성">github repository 생성
 </h1><ul>
 <li><a class="link" href="https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site"  target="_blank" rel="noopener"
     >https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site</a></li>
@@ -413,17 +420,13 @@ if (!doNotTrack) {
 <li>생성된 저장소의 settings → GitHub Pages → Theme Chooser 에서 테마를 아무거나 하나 골라주면 블로그가 가동됨</li>
 <li>Your site is published at https://유저명.github.io/ 메시지가 뜨면 접속가능하게 된거임</li>
 </ul>
-<h2 id="도커-이미지-선정">
-    <a href="#%eb%8f%84%ec%bb%a4-%ec%9d%b4%eb%af%b8%ec%a7%80-%ec%84%a0%ec%a0%95" class="header-anchor">#</a>
-    도커 이미지 선정
+<h2 id="도커-이미지-선정">도커 이미지 선정
 </h2><ul>
 <li><a class="link" href="https://github.com/spurin/docker-hexo"  target="_blank" rel="noopener"
     >https://github.com/spurin/docker-hexo</a></li>
 <li>Hexo와 관리용 Hexo-admin이 포함되어 있는 이미지</li>
 </ul>
-<h2 id="icarus-테마-셋업">
-    <a href="#icarus-%ed%85%8c%eb%a7%88-%ec%85%8b%ec%97%85" class="header-anchor">#</a>
-    icarus 테마 셋업
+<h2 id="icarus-테마-셋업">icarus 테마 셋업
 </h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -446,16 +449,12 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="c1"># _config.yml의 theme가 landscape인데 icarus로 수정</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="hexo-admin에-패스워드-설정">
-    <a href="#hexo-admin%ec%97%90-%ed%8c%a8%ec%8a%a4%ec%9b%8c%eb%93%9c-%ec%84%a4%ec%a0%95" class="header-anchor">#</a>
-    hexo-admin에 패스워드 설정
+</div><h2 id="hexo-admin에-패스워드-설정">hexo-admin에 패스워드 설정
 </h2><ul>
 <li>Settings &gt; Setup authentification에서 YAML을 생성</li>
 <li>_config.yml의 admin: 밑에 붙여넣는다</li>
 </ul>
-<h2 id="hexo-admin에서-deploy-설정">
-    <a href="#hexo-admin%ec%97%90%ec%84%9c-deploy-%ec%84%a4%ec%a0%95" class="header-anchor">#</a>
-    hexo-admin에서 deploy 설정
+<h2 id="hexo-admin에서-deploy-설정">hexo-admin에서 deploy 설정
 </h2><ul>
 <li><a class="link" href="https://github.com/jaredly/hexo-admin/issues/70"  target="_blank" rel="noopener"
     >https://github.com/jaredly/hexo-admin/issues/70</a></li>
@@ -491,13 +490,9 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"> deployCommand: <span class="s1">&#39;./hexo-deploy.sh&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="유용한-플러그인httpshexoioplugins">
-    <a href="#%ec%9c%a0%ec%9a%a9%ed%95%9c-%ed%94%8c%eb%9f%ac%ea%b7%b8%ec%9d%b8httpshexoioplugins" class="header-anchor">#</a>
-    <a class="link" href="https://hexo.io/plugins/"  target="_blank" rel="noopener"
+</div><h2 id="유용한-플러그인httpshexoioplugins"><a class="link" href="https://hexo.io/plugins/"  target="_blank" rel="noopener"
     >유용한 플러그인</a>
-</h2><h3 id="hexo-deployer-githttpsgithubcomhexojshexo-deployer-git">
-    <a href="#hexo-deployer-githttpsgithubcomhexojshexo-deployer-git" class="header-anchor">#</a>
-    <a class="link" href="https://github.com/hexojs/hexo-deployer-git"  target="_blank" rel="noopener"
+</h2><h3 id="hexo-deployer-githttpsgithubcomhexojshexo-deployer-git"><a class="link" href="https://github.com/hexojs/hexo-deployer-git"  target="_blank" rel="noopener"
     >hexo-deployer-git</a>
 </h3><ul>
 <li>git으로 배포하기 위한 플러그인</li>
@@ -512,9 +507,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">npm install hexo-deployer-git --save
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed">
-    <a href="#hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed" class="header-anchor">#</a>
-    <a class="link" href="https://github.com/hexojs/hexo-generator-feed"  target="_blank" rel="noopener"
+</div><h3 id="hexo-generator-feedhttpsgithubcomhexojshexo-generator-feed"><a class="link" href="https://github.com/hexojs/hexo-generator-feed"  target="_blank" rel="noopener"
     >hexo-generator-feed</a>
 </h3><ul>
 <li>atom(url/atom.xml ) 혹은 rss2.0(url/rss2.xml)으로 피드 생성해 줌</li>
@@ -543,9 +536,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">  limit: <span class="m">20</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap">
-    <a href="#hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap" class="header-anchor">#</a>
-    <a class="link" href="https://github.com/hexojs/hexo-generator-sitemap"  target="_blank" rel="noopener"
+</div><h3 id="hexo-generator-sitemaphttpsgithubcomhexojshexo-generator-sitemap"><a class="link" href="https://github.com/hexojs/hexo-generator-sitemap"  target="_blank" rel="noopener"
     >hexo-generator-sitemap</a>
 </h3><ul>
 <li>sitemap.xml 파일을 자동생성</li>
@@ -568,9 +559,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">  path: sitemap.xml
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="hexo-mathhttpsgithubcomhexojshexo-math">
-    <a href="#hexo-mathhttpsgithubcomhexojshexo-math" class="header-anchor">#</a>
-    <a class="link" href="https://github.com/hexojs/hexo-math"  target="_blank" rel="noopener"
+</div><h3 id="hexo-mathhttpsgithubcomhexojshexo-math"><a class="link" href="https://github.com/hexojs/hexo-math"  target="_blank" rel="noopener"
     >hexo-math</a>
 </h3><ul>
 <li>KaTeX and MathJax를 활성화 시켜주는 플러그인</li>
@@ -802,7 +791,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다. # 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다. 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다. 그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다. 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다. 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다. 그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.">
 <title>코루틴으로 로또번호 당첨 확인하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/lotto-checker/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="코루틴으로 로또번호 당첨 확인하기">
-<meta property='og:description' content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다. # 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다. 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다. 그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다.">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="코루틴으로 로또번호 당첨 확인하기">
+<meta property='og:description' content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다. 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다. 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다. 그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/lotto-checker/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='coroutine' /><meta property='article:tag' content='lotto' /><meta property='article:published_time' content='2021-07-17T16:01:01&#43;09:00'/><meta property='article:modified_time' content='2021-07-17T16:01:01&#43;09:00'/>
 <meta name="twitter:title" content="코루틴으로 로또번호 당첨 확인하기">
-<meta name="twitter:description" content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다. # 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다. 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다. 그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다. 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다. 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다. 그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -383,9 +392,7 @@ if (!doNotTrack) {
     
     
     <p>이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.</p>
-<h2 id="당첨번호-조회하기">
-    <a href="#%eb%8b%b9%ec%b2%a8%eb%b2%88%ed%98%b8-%ec%a1%b0%ed%9a%8c%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
-    당첨번호 조회하기
+<h2 id="당첨번호-조회하기">당첨번호 조회하기
 </h2><p>이전에 <a class="link" href="https://cliearl.github.io/posts/android/lotto-generator/"  target="_blank" rel="noopener"
     >로또번호 생성기 만들기</a>강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 <a class="link" href="https://cliearl.github.io/posts/android/coroutine-principle/"  target="_blank" rel="noopener"
     >알기쉬운 코루틴 이론</a> 강의를 참조하시기 바랍니다.</p>
@@ -410,9 +417,7 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;totSellamnt&#34;</span><span class="p">:</span><span class="mi">95924229000</span><span class="p">,</span><span class="nt">&#34;returnValue&#34;</span><span class="p">:</span><span class="s2">&#34;success&#34;</span><span class="p">,</span><span class="nt">&#34;drwNoDate&#34;</span><span class="p">:</span><span class="s2">&#34;2021-06-19&#34;</span><span class="p">,</span><span class="nt">&#34;firstWinamnt&#34;</span><span class="p">:</span><span class="mi">1667729683</span><span class="p">,</span><span class="nt">&#34;drwtNo6&#34;</span><span class="p">:</span><span class="mi">39</span><span class="p">,</span><span class="nt">&#34;drwtNo4&#34;</span><span class="p">:</span><span class="mi">14</span><span class="p">,</span><span class="nt">&#34;firstPrzwnerCo&#34;</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="nt">&#34;drwtNo5&#34;</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span><span class="nt">&#34;bnusNo&#34;</span><span class="p">:</span><span class="mi">33</span><span class="p">,</span><span class="nt">&#34;firstAccumamnt&#34;</span><span class="p">:</span><span class="mi">21680485879</span><span class="p">,</span><span class="nt">&#34;drwNo&#34;</span><span class="p">:</span><span class="mi">968</span><span class="p">,</span><span class="nt">&#34;drwtNo2&#34;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="nt">&#34;drwtNo3&#34;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="nt">&#34;drwtNo1&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="dependency-확인">
-    <a href="#dependency-%ed%99%95%ec%9d%b8" class="header-anchor">#</a>
-    Dependency 확인
+</div><h2 id="dependency-확인">Dependency 확인
 </h2><p>자 그러면 <code>drwtNo1~6</code>, <code>bnusNo</code>의 값을 추출해서 나의 값과 비교하면 되겠네요. 당첨번호는 네트워크에서 백그라운드로 받아와야 하기 때문에 코루틴으로 처리하도록 하면 되겠고, 받아온 json으로부터 값을 추출하는데에는 gson 라이브러리를 사용하면 될 것 같습니다. gson의 사용법에 대해서는 <a class="link" href="https://cliearl.github.io/posts/android/sharedpreferneces-gson/"  target="_blank" rel="noopener"
     >SharedPreferences를 json 포맷으로 관리하기</a> 강의에서 다루었으니 그것을 참고하시면 되겠습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -425,9 +430,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">code</span><span class="p">.</span><span class="n">gson</span><span class="p">:</span><span class="n">gson</span><span class="p">:</span><span class="m">2.8</span><span class="p">.</span><span class="m">6</span><span class="err">&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="네트워크로-당첨번호-받아오기">
-    <a href="#%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac%eb%a1%9c-%eb%8b%b9%ec%b2%a8%eb%b2%88%ed%98%b8-%eb%b0%9b%ec%95%84%ec%98%a4%ea%b8%b0" class="header-anchor">#</a>
-    네트워크로 당첨번호 받아오기
+</div><h2 id="네트워크로-당첨번호-받아오기">네트워크로 당첨번호 받아오기
 </h2><p>그럼 네트워크로 당첨번호를 받아오는 <code>getLottoNumbers</code> 함수와, 두 값을 비교하는 <code>whatIsRank</code> 함수를 만들도록 하겠습니다.</p>
 <p><code>getLottoNumbers</code>는 전달받은 API 주소에 조회를 요청하고 반환값을 처리합니다. 이 함수는 네트워크를 사용해야 하므로 코루틴 안에서 사용하기 위해 <code>suspend</code> 키워드를 붙여줍니다. API는 단순한 GET 요청이므로 소켓을 만들지 않고 간단하게 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/org.w3c.dom.url/-u-r-l/"  target="_blank" rel="noopener"
     >URL</a>과 <a class="link" href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.net.-u-r-l/read-text.html"  target="_blank" rel="noopener"
@@ -489,9 +492,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="내-번호와-당첨번호-비교하기">
-    <a href="#%eb%82%b4-%eb%b2%88%ed%98%b8%ec%99%80-%eb%8b%b9%ec%b2%a8%eb%b2%88%ed%98%b8-%eb%b9%84%ea%b5%90%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
-    내 번호와 당첨번호 비교하기
+</div><h2 id="내-번호와-당첨번호-비교하기">내 번호와 당첨번호 비교하기
 </h2><p>다음은 내 번호와 당첨번호를 비교하는 함수를 만듭니다. 로또의 규칙은 표의 내용과 같이 되어 있습니다. 그래서 <code>whatIsRank</code>에서는 내 로또번호와 당첨번호를 전달받아 처음 6개까지의 숫자를 비교해 일치한 갯수를 세고, 일치한 번호의 갯수가 5개이면 추가로 보너스번호인 7번째 번호가 일치하는지 확인하도록 하면 됩니다.</p>
 <div class="table-wrapper"><table>
 <thead>
@@ -602,9 +603,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    <span class="na">android:textAppearance=</span><span class="s">&#34;@style/TextAppearance.AppCompat.Large&#34;</span> <span class="nt">/&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="코루틴으로-작업-처리하기">
-    <a href="#%ec%bd%94%eb%a3%a8%ed%8b%b4%ec%9c%bc%eb%a1%9c-%ec%9e%91%ec%97%85-%ec%b2%98%eb%a6%ac%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
-    코루틴으로 작업 처리하기
+</div><h2 id="코루틴으로-작업-처리하기">코루틴으로 작업 처리하기
 </h2><p>그러면 번호생성버튼을 눌렀을 때 생성된 번호를 당첨번호와 비교하는 코루틴을 추가하겠습니다. <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/"  target="_blank" rel="noopener"
     >CoroutineScope</a>로 스코프를 정의하고, 네트워크에서 값을 가져올 것이기 때문에 <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html"  target="_blank" rel="noopener"
     >Dispatchers</a>는 <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html#-978510185%2FProperties%2F-1316292404"  target="_blank" rel="noopener"
@@ -653,9 +652,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="코루틴-취소하기">
-    <a href="#%ec%bd%94%eb%a3%a8%ed%8b%b4-%ec%b7%a8%ec%86%8c%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
-    코루틴 취소하기
+</div><h2 id="코루틴-취소하기">코루틴 취소하기
 </h2><p>액티비티가 종료되었을 때 실행중인 코루틴이 살아남는것을 방지하기 위해 취소하는 기능을 추가해 보도록 하겠습니다. <a class="link" href="https://cliearl.github.io/posts/android/coroutine-principle/"  target="_blank" rel="noopener"
     >알기쉬운 코루틴 이론</a> 강의에서 설명했던 것처럼 코루틴을 취소하기 위해서는 <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html"  target="_blank" rel="noopener"
     >job</a>에 대해 <a class="link" href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/cancel.html"  target="_blank" rel="noopener"
@@ -938,7 +935,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

@@ -13,9 +13,7 @@
         
         <guid>https://cliearl.github.io/posts/android/android-gradle-java-11/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;android-gradle-700-도입&#34;&gt;
-    &lt;a href=&#34;#android-gradle-700-%eb%8f%84%ec%9e%85&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Android Gradle 7.0.0 도입
+&lt;h2 id=&#34;android-gradle-700-도입&#34;&gt;Android Gradle 7.0.0 도입
 &lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/android-gradle-java-11/arcticfox.png&#34;
 	
 	
@@ -53,9 +51,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.&lt;/p&gt;
-&lt;h2 id=&#34;java-8에서-11로-변경된-이유&#34;&gt;
-    &lt;a href=&#34;#java-8%ec%97%90%ec%84%9c-11%eb%a1%9c-%eb%b3%80%ea%b2%bd%eb%90%9c-%ec%9d%b4%ec%9c%a0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Java 8에서 11로 변경된 이유
+&lt;h2 id=&#34;java-8에서-11로-변경된-이유&#34;&gt;Java 8에서 11로 변경된 이유
 &lt;/h2&gt;&lt;p&gt;그렇다면 왜 11버전이 선택되었을까요? 11은 2018년 9월 발표된 버전으로 8과 비교하면 기술적으로 많은 발전이 있었습니다. 그 내용에 대해서는 Microsoft의 &lt;a class=&#34;link&#34; href=&#34;https://docs.microsoft.com/ko-kr/azure/developer/java/fundamentals/reasons-to-move-to-java-11&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Java 11로 전환해야 하는 이유&lt;/a&gt;를 참조하시면 좋을 것 같습니다.&lt;/p&gt;
 &lt;p&gt;Android Studio에서 Java 11의 기능을 이용하고 싶다면 build.gradle을 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/studio/releases/gradle-plugin#java-11&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -97,9 +93,7 @@
     &gt;ADOPTIUM&lt;/a&gt; 으로부터 오픈소스 빌드인 OpenJDK를 제공받을 수 있는 버전이기도 합니다. OpenJDK는 Oracle JDK의 기능을 모두 구현하면서도 무료로 사용할 수 있는 JDK라고 생각하시면 됩니다.&lt;/p&gt;
 &lt;p&gt;이러한 이유들로 인해 구글에서는 Android Gradle의 JDK 디폴트 버전을 11로 채용하게 된 것으로 보입니다. synk에서 발표한 &lt;a class=&#34;link&#34; href=&#34;https://snyk.io/wp-content/uploads/jvm_2020.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;JVM Ecosystem Report 2020&lt;/a&gt;에 따르면 현재 Java SE 8 사용자는 64%, 11 사용자는 25%라고 하는데 이번 결정으로 11버전의 사용자가 빠르게 증가할 것 같네요.&lt;/p&gt;
-&lt;h2 id=&#34;android-studio의-빌드-실패&#34;&gt;
-    &lt;a href=&#34;#android-studio%ec%9d%98-%eb%b9%8c%eb%93%9c-%ec%8b%a4%ed%8c%a8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Android Studio의 빌드 실패
+&lt;h2 id=&#34;android-studio의-빌드-실패&#34;&gt;Android Studio의 빌드 실패
 &lt;/h2&gt;&lt;p&gt;현재 Arctic Fox에서 New Project로 생성하는 프로젝트의 Android Gradle은 7.0.0 버전이 적용되도록 되어 있습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -134,9 +128,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;changing&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;org&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gradle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;java&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;home&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;`&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gradle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;properties&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;jdk-버전-변경&#34;&gt;
-    &lt;a href=&#34;#jdk-%eb%b2%84%ec%a0%84-%eb%b3%80%ea%b2%bd&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    JDK 버전 변경
+&lt;/div&gt;&lt;h2 id=&#34;jdk-버전-변경&#34;&gt;JDK 버전 변경
 &lt;/h2&gt;&lt;p&gt;이 문제를 해결하기 위해서는 프로젝트가 사용하는 JDK 버전을 변경해주면 됩니다.&lt;/p&gt;
 &lt;p&gt;안드로이드 스튜디오 4.2에는 이미 JDK 11이 내장되어 있지만 여기서는 패키지 버전관리가 용이한 brew를 통해 JDK 11을 새로 설치하여 사용하는 법을 소개하겠습니다.&lt;/p&gt;
 &lt;p&gt;우선 brew로 시스템에 &lt;a class=&#34;link&#34; href=&#34;https://github.com/AdoptOpenJDK/homebrew-openjdk&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;

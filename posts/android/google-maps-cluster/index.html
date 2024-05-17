@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다. 다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다. 출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering 여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다. # Dependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다. 1 2 3 dependencies { implementation &#39;com.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다. 다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다. 출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering 여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다. Dependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다. 1 2 3 dependencies { implementation &#39;com.">
 <title>구글맵에 커스텀 마커와 클러스터아이템 적용하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/google-maps-cluster/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="구글맵에 커스텀 마커와 클러스터아이템 적용하기">
-<meta property='og:description' content="이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다. 다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다. 출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering 여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다. # Dependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다. 1 2 3 dependencies { implementation &#39;com.">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="구글맵에 커스텀 마커와 클러스터아이템 적용하기">
+<meta property='og:description' content="이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다. 다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다. 출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering 여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다. Dependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다. 1 2 3 dependencies { implementation &#39;com.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/google-maps-cluster/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-05-02T20:18:53&#43;09:00'/><meta property='article:modified_time' content='2022-05-02T20:18:53&#43;09:00'/>
 <meta name="twitter:title" content="구글맵에 커스텀 마커와 클러스터아이템 적용하기">
-<meta name="twitter:description" content="이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다. 다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다. 출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering 여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다. # Dependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다. 1 2 3 dependencies { implementation &#39;com.">
+<meta name="twitter:description" content="이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다. 다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다. 출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering 여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다. Dependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다. 1 2 3 dependencies { implementation &#39;com.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -392,9 +401,7 @@ if (!doNotTrack) {
 </figure>
 
 <p>여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다.</p>
-<h2 id="dependency-추가">
-    <a href="#dependency-%ec%b6%94%ea%b0%80" class="header-anchor">#</a>
-    Dependency 추가
+<h2 id="dependency-추가">Dependency 추가
 </h2><p>build.gradle에 클러스터링에 사용할 클래스를 담은 <a class="link" href="https://github.com/googlemaps/android-maps-utils"  target="_blank" rel="noopener"
     >android-maps-utils</a> 를 추가합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -409,9 +416,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="선별진료소-데이터-준비">
-    <a href="#%ec%84%a0%eb%b3%84%ec%a7%84%eb%a3%8c%ec%86%8c-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a4%80%eb%b9%84" class="header-anchor">#</a>
-    선별진료소 데이터 준비
+</div><h2 id="선별진료소-데이터-준비">선별진료소 데이터 준비
 </h2><p>마커에 사용할 선별진료소 데이터는 경기데이터드림에서 제공하는 <a class="link" href="https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=461Q599QLK8UTE14E3LW12837248&amp;infSeq=1"  target="_blank" rel="noopener"
     >코로나바이러스 감염증 선별진료소 운영 의료기관 현황데이터</a>를 사용하겠습니다. 이 데이터에는 마커에 바로 사용할 수 있는 경도와 위도정보가 포함되어 있기 때문에 이번 강의의 제물로 선택되었습니다.</p>
 <p><code>sheet</code> 탭에서 <code>JSON</code> 을 클릭하여 데이터를 json 형식으로 다운받습니다. 다운받아보면 내용이 한줄에 모여있어 보기 불편합니다. 사용하는데는 관계 없지만 값들을 정렬하는게 보기에 좋을 것 같으니 <a class="link" href="https://jsonformatter.curiousconcept.com/"  target="_blank" rel="noopener"
@@ -501,9 +506,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="마커-준비">
-    <a href="#%eb%a7%88%ec%bb%a4-%ec%a4%80%eb%b9%84" class="header-anchor">#</a>
-    마커 준비
+</div><h2 id="마커-준비">마커 준비
 </h2><p>데이터 준비가 끝났으니 이젠 마커를 준비하겠습니다. 우선은 마커로 사용할 아이콘을 설정해줍니다. 코로나 선별진료소를 표시할 것이므로 적십자 마크를 사용하도록 하겠습니다. 다음 png 파일을 <code>drawable</code> 폴더에 복사하여 넣어줍니다.</p>
 <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Red_Cross_icon.svg/240px-Red_Cross_icon.svg.png"
     alt="출처 : https://commons.wikimedia.org/wiki/File:Red_Cross_icon.svg" width="93%"><figcaption>
@@ -530,9 +533,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="클러스터-아이템-구현">
-    <a href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%ec%95%84%ec%9d%b4%ed%85%9c-%ea%b5%ac%ed%98%84" class="header-anchor">#</a>
-    클러스터 아이템 구현
+</div><h2 id="클러스터-아이템-구현">클러스터 아이템 구현
 </h2><p>클러스터링을 구현하기 위해서는 <a class="link" href="https://googlemaps.github.io/android-maps-utils/javadoc/com/google/maps/android/clustering/ClusterItem.html"  target="_blank" rel="noopener"
     >ClusterItem</a> 을 상속받게 해서 생성한 마커를 <a class="link" href="https://googlemaps.github.io/android-maps-utils/javadoc/com/google/maps/android/clustering/ClusterManager.html"  target="_blank" rel="noopener"
     >ClusterManager</a>에 전달해주면 됩니다.</p>
@@ -590,9 +591,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="클러스터-렌더러-구현">
-    <a href="#%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%eb%a0%8c%eb%8d%94%eb%9f%ac-%ea%b5%ac%ed%98%84" class="header-anchor">#</a>
-    클러스터 렌더러 구현
+</div><h2 id="클러스터-렌더러-구현">클러스터 렌더러 구현
 </h2><p>마커는 <a class="link" href="https://googlemaps.github.io/android-maps-utils/javadoc/com/google/maps/android/clustering/view/DefaultClusterRenderer.html"  target="_blank" rel="noopener"
     >DefaultClusterRenderer</a> 에 의해 렌더링되는데요, 이 때 렌더러가 비트맵 이미지를 반영해서 렌더링하도록 <a class="link" href="https://googlemaps.github.io/android-maps-utils/javadoc/com/google/maps/android/clustering/view/DefaultClusterRenderer.html#onBeforeClusterItemRendered-T-MarkerOptions-"  target="_blank" rel="noopener"
     >onBeforeClusterItemRendered</a>에서 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/maps/model/MarkerOptions#public-bitmapdescriptor-geticon"  target="_blank" rel="noopener"
@@ -631,9 +630,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="커스텀-마커-생성-및-클러스터매니저-구현">
-    <a href="#%ec%bb%a4%ec%8a%a4%ed%85%80-%eb%a7%88%ec%bb%a4-%ec%83%9d%ec%84%b1-%eb%b0%8f-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%a7%a4%eb%8b%88%ec%a0%80-%ea%b5%ac%ed%98%84" class="header-anchor">#</a>
-    커스텀 마커 생성 및 클러스터매니저 구현
+</div><h2 id="커스텀-마커-생성-및-클러스터매니저-구현">커스텀 마커 생성 및 클러스터매니저 구현
 </h2><p>그럼 클러스터매니저를 이용해서 마커를 추가하는 메소드를 작성합니다. <code>getJsonData</code> 로 json 파일을 읽어와 오브젝트화 합니다. 그리고나서 요소를 하나씩 꺼내와 위치좌표, 타입, 아이콘을 가지는 <code>CoronaMedClusterItem</code> 마커를 만들어 클러스터매니저에 전달해주도록 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -911,7 +908,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

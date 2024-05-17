@@ -13,9 +13,7 @@
         
         <guid>https://cliearl.github.io/posts/android/request-runtime-permission/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 런타임 퍼미션에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;들어가기&#34;&gt;
-    &lt;a href=&#34;#%eb%93%a4%ec%96%b4%ea%b0%80%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    들어가기
+&lt;h2 id=&#34;들어가기&#34;&gt;들어가기
 &lt;/h2&gt;&lt;p&gt;안드로이드는 카메라나 저장소, 위치 이용와 같이 시스템에 큰 영향을 미칠 수 있는 기능에 대해서는 위험한 권한으로 분류하여 다음과 같이 관리하고 있습니다.&lt;/p&gt;
 &lt;figure&gt;&lt;img src=&#34;https://cliearl.github.io/images/request-runtime-permission/almom5-3041432-large.gif&#34;
     alt=&#34;출처: https://ieeexplore.ieee.org/document/9272963&#34; width=&#34;93%&#34;&gt;&lt;figcaption&gt;
@@ -26,9 +24,7 @@
 
 &lt;p&gt;과거에는 앱 설치시 모든 권한을 부여했지만 Android 6.0(API 레벨 23) 이상에서는 앱이 이런 위험한 권한들을 필요로 할 경우 앱 실행중에 권한을 요청할 수 있도록 시스템에 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/permissions/requesting&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Runtime Permission&lt;/a&gt; 을 도입하였습니다. 여기서는 위치 권한을 예로들어 권한을 획득하는 방법을 보여드리겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;필요한-권한-정의&#34;&gt;
-    &lt;a href=&#34;#%ed%95%84%ec%9a%94%ed%95%9c-%ea%b6%8c%ed%95%9c-%ec%a0%95%ec%9d%98&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    필요한 권한 정의
+&lt;h2 id=&#34;필요한-권한-정의&#34;&gt;필요한 권한 정의
 &lt;/h2&gt;&lt;p&gt;우선은 &lt;code&gt;AndroidManifest.xml&lt;/code&gt;에서 앱에 필요한 위험한 권한을 추가합니다. 위치에 관련된 권한은 두가지가 있는데 하나는 네트워크만을 이용해서 약 1.6km 이내로 위치를 파악하는 &lt;code&gt;ACCESS_COARSE_LOCATION&lt;/code&gt;과, GPS도 같이 써서 위치를 약 50m 이내로 더 정확하게 파악하는 &lt;code&gt;ACCESS_FINE_LOCATION&lt;/code&gt;이 있습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -59,9 +55,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;권한-확인&#34;&gt;
-    &lt;a href=&#34;#%ea%b6%8c%ed%95%9c-%ed%99%95%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    권한 확인
+&lt;/div&gt;&lt;h2 id=&#34;권한-확인&#34;&gt;권한 확인
 &lt;/h2&gt;&lt;p&gt;권한을 확인하는 함수를 작성합니다. &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/core/content/ContextCompat#checkSelfPermission%28android.content.Context,%20java.lang.String%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ContextCompat.checkSelfPermission&lt;/a&gt;으로 해당 권한이 부여되었는지 확인할 수 있는데요, &lt;code&gt;REQUIRED_PERMISSIONS&lt;/code&gt;에 대해 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/all.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;all&lt;/a&gt;을 수행하여 이중 하나라도 권한이 부여되지 않은 경우 &lt;code&gt;isAllPermissionsGranted&lt;/code&gt;가 &lt;code&gt;false&lt;/code&gt;를 반환하도록 했습니다.&lt;/p&gt;
@@ -79,9 +73,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;화면-디자인&#34;&gt;
-    &lt;a href=&#34;#%ed%99%94%eb%a9%b4-%eb%94%94%ec%9e%90%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    화면 디자인
+&lt;/div&gt;&lt;h2 id=&#34;화면-디자인&#34;&gt;화면 디자인
 &lt;/h2&gt;&lt;p&gt;화면에 퍼미션을 체크하는 버튼을 하나 만듭니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -147,12 +139,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/androidx.constraintlayout.widget.ConstraintLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;callback을-이용한-권한-획득&#34;&gt;
-    &lt;a href=&#34;#callback%ec%9d%84-%ec%9d%b4%ec%9a%a9%ed%95%9c-%ea%b6%8c%ed%95%9c-%ed%9a%8d%eb%93%9d&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Callback을 이용한 권한 획득
-&lt;/h2&gt;&lt;h3 id=&#34;requestdangerouspermissions-작성&#34;&gt;
-    &lt;a href=&#34;#requestdangerouspermissions-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    requestDangerousPermissions 작성
+&lt;/div&gt;&lt;h2 id=&#34;callback을-이용한-권한-획득&#34;&gt;Callback을 이용한 권한 획득
+&lt;/h2&gt;&lt;h3 id=&#34;requestdangerouspermissions-작성&#34;&gt;requestDangerousPermissions 작성
 &lt;/h3&gt;&lt;p&gt;버튼에 클릭리스너를 하나 만들어 권한이 부여되어있지 않으면 권한을 요청하는 로직을 구성합니다. 권한 요청에는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/core/app/ActivityCompat#requestPermissions%28android.app.Activity,%20java.lang.String[],%20int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ActivityCompat.requestPermissions&lt;/a&gt;를 사용하는데, 이 때 request code가 필요하므로 companion object 안에 &lt;code&gt;REQUEST_CODE_PERMISSIONS&lt;/code&gt;도 정의해 줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -191,9 +179,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;py&#34;&gt;REQUEST&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;_CODE_PERMISSIONS&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;onrequestpermissionsresult&#34;&gt;
-    &lt;a href=&#34;#onrequestpermissionsresult&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    onRequestPermissionsResult
+&lt;/div&gt;&lt;h3 id=&#34;onrequestpermissionsresult&#34;&gt;onRequestPermissionsResult
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;requestDangerousPermissions&lt;/code&gt;에서 권한을 요청한 뒤 유저의 조작이 행해지면 그 결과는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/core/app/ActivityCompat.OnRequestPermissionsResultCallback?hl=ko#onRequestPermissionsResult%28int,%20java.lang.String%5B%5D,%20int%5B%5D%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;onRequestPermissionsResult&lt;/a&gt; 콜백으로 받게 됩니다. onRequestPermissionsResult에서는 requestCode를 확인한 뒤 모든 권한이 취득된 경우, 확인 결과 권한이 취득되지 않았을 경우 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/core/app/ActivityCompat#shouldShowRequestPermissionRationale%28android.app.Activity,%20java.lang.String%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;shouldShowRequestPermissionRationale&lt;/a&gt;를 써서 권한을 재요청할 수 있습니다. 그럼에도 요청을 거부하면 앱은 더이상 권한을 요청할 수 없습니다. 다음 그림에 권한 요청의 순서를 나타내었습니다.&lt;/p&gt;
@@ -273,12 +259,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;activity120-이후의-권한-획득-방법&#34;&gt;
-    &lt;a href=&#34;#activity120-%ec%9d%b4%ed%9b%84%ec%9d%98-%ea%b6%8c%ed%95%9c-%ed%9a%8d%eb%93%9d-%eb%b0%a9%eb%b2%95&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    activity:1.2.0 이후의 권한 획득 방법
-&lt;/h2&gt;&lt;h3 id=&#34;activityresultcontract&#34;&gt;
-    &lt;a href=&#34;#activityresultcontract&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    ActivityResultContract
+&lt;/div&gt;&lt;h2 id=&#34;activity120-이후의-권한-획득-방법&#34;&gt;activity:1.2.0 이후의 권한 획득 방법
+&lt;/h2&gt;&lt;h3 id=&#34;activityresultcontract&#34;&gt;ActivityResultContract
 &lt;/h3&gt;&lt;p&gt;그런데 구글은 &lt;code&gt;onRequestPermissionsResult&lt;/code&gt;를 &lt;code&gt;androidx.activity:activity:1.2.0-alpha04&lt;/code&gt;부터 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/jetpack/androidx/releases/activity#1.2.0-alpha04&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;deprecated&lt;/a&gt; 시키고, 시스템에서 전달된 결과를 처리하기 위해 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/basics/intents/result&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ActivityResultContract&lt;/a&gt;를 새로 만들었습니다. ActivityResultContract를 사용하면 다음과 같이 미리 정의된 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/activity/result/contract/package-summary&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -362,9 +344,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;androidx.activity:activity-ktx:1.4.0&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;requestmultiplepermissions-작성&#34;&gt;
-    &lt;a href=&#34;#requestmultiplepermissions-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    requestMultiplePermissions 작성
+&lt;/div&gt;&lt;h3 id=&#34;requestmultiplepermissions-작성&#34;&gt;requestMultiplePermissions 작성
 &lt;/h3&gt;&lt;p&gt;여기서는 복수의 권한을 한번에 요청하기 위해 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/training/basics/intents/result&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;registerForActivityResult&lt;/a&gt; 에 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts.RequestMultiplePermissions&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;RequestMultiplePermissions&lt;/a&gt; 계약서를 전달하고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/androidx/activity/result/ActivityResultLauncher&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;

@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다. # 데이터를 앱에 저장하는 방법 데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다. 파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다. 데이터를 앱에 저장하는 방법 데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다. 파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다.">
 <title>SharedPreferences로 앱 설정값 저장하고 불러오기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/sharedpreferences-basic/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="SharedPreferences로 앱 설정값 저장하고 불러오기">
-<meta property='og:description' content="이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다. # 데이터를 앱에 저장하는 방법 데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다. 파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다.">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="SharedPreferences로 앱 설정값 저장하고 불러오기">
+<meta property='og:description' content="이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다. 데이터를 앱에 저장하는 방법 데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다. 파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/sharedpreferences-basic/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='SharedPreferences' /><meta property='article:published_time' content='2021-04-20T21:35:43&#43;09:00'/><meta property='article:modified_time' content='2021-04-20T21:35:43&#43;09:00'/>
 <meta name="twitter:title" content="SharedPreferences로 앱 설정값 저장하고 불러오기">
-<meta name="twitter:description" content="이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다. # 데이터를 앱에 저장하는 방법 데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다. 파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다. 데이터를 앱에 저장하는 방법 데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다. 파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -384,9 +393,7 @@ if (!doNotTrack) {
     
     
     <p>이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다.</p>
-<h2 id="데이터를-앱에-저장하는-방법">
-    <a href="#%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%a5%bc-%ec%95%b1%ec%97%90-%ec%a0%80%ec%9e%a5%ed%95%98%eb%8a%94-%eb%b0%a9%eb%b2%95" class="header-anchor">#</a>
-    데이터를 앱에 저장하는 방법
+<h2 id="데이터를-앱에-저장하는-방법">데이터를 앱에 저장하는 방법
 </h2><p>데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다.</p>
 <ul>
 <li>파일 I/O (내부 또는 외부 저장소)
@@ -410,9 +417,7 @@ if (!doNotTrack) {
 </ul>
 <p><a class="link" href="https://developer.android.com/reference/android/content/SharedPreferences"  target="_blank" rel="noopener"
     >SharedPreferences</a>는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다. 그래서 이번에는 <code>SharedPreferences</code>를 사용해서 게임설정값을 저장하고 복원하는 앱을 만들어보도록 하겠습니다.</p>
-<h2 id="sharedpreferences-사용법">
-    <a href="#sharedpreferences-%ec%82%ac%ec%9a%a9%eb%b2%95" class="header-anchor">#</a>
-    SharedPreferences 사용법
+<h2 id="sharedpreferences-사용법">SharedPreferences 사용법
 </h2><ul>
 <li><a class="link" href="https://developer.android.com/reference/android/content/Context#getSharedPreferences%28java.lang.String,%20int%29"  target="_blank" rel="noopener"
     >getSharedPreferences(KEY, MODE)</a>로 핸들러를 받아옴
@@ -431,9 +436,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 id="화면-구성">
-    <a href="#%ed%99%94%eb%a9%b4-%ea%b5%ac%ec%84%b1" class="header-anchor">#</a>
-    화면 구성
+<h2 id="화면-구성">화면 구성
 </h2><p>위에서부터 순서대로 화면의 요소를 구성하는 여러가지 종류의 버튼을 배치하여 값을 변화시킬수 있도록 구성하였습니다. 앱이 처음 실행되었을 때 표시되는 기본값도 여기서 설정해줍니다. 그리고 마지막으로 SAVE버튼과 LOAD 동작을 하는 버튼 두개도 배치합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -771,9 +774,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="버튼에-클릭리스너-설정">
-    <a href="#%eb%b2%84%ed%8a%bc%ec%97%90-%ed%81%b4%eb%a6%ad%eb%a6%ac%ec%8a%a4%eb%84%88-%ec%84%a4%ec%a0%95" class="header-anchor">#</a>
-    버튼에 클릭리스너 설정
+</div><h2 id="버튼에-클릭리스너-설정">버튼에 클릭리스너 설정
 </h2><p>View Binding을 적용하고 SAVE 버튼을 눌렀을 때는 <code>savePref</code>, LOAD 버튼을 눌렀을때는 <code>loadPref</code>를 실행하도록 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -829,9 +830,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="접근키-작성">
-    <a href="#%ec%a0%91%ea%b7%bc%ed%82%a4-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
-    접근키 작성
+</div><h2 id="접근키-작성">접근키 작성
 </h2><p>SharedPreferences는 Key-Value 형태로 값을 저장하고 불러오기 때문에 이 때 사용할 Key 값을 <code>companion object</code>로 준비해서 편하게 사용할 수 있도록 준비합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -853,9 +852,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="savepref-작성">
-    <a href="#savepref-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
-    savePref 작성
+</div><h2 id="savepref-작성">savePref 작성
 </h2><p>데이터를 저장하는 부분을 작성합니다. 핸들러를 만들고 <a class="link" href="https://developer.android.com/reference/android/content/SharedPreferences.Editor"  target="_blank" rel="noopener"
     >Editor</a> 객체를 만들어서 <code>put</code> 함수로 Key-Value 쌍을 저장하도록 했습니다. 버튼의 값은 개체가 가진 프로퍼티로 가져올 수 있습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -888,9 +885,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="loadpref-작성">
-    <a href="#loadpref-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
-    loadPref() 작성
+</div><h2 id="loadpref-작성">loadPref() 작성
 </h2><p>저장된 데이터를 불러오는 부분을 작성합니다. 저장할때와 마찬가지로 핸들러를 만들고 저장할때 사용한 키와 동일한 키를 사용해서 <code>get</code>함수로 값을 불러온 뒤 그 값을 버튼에 반영합니다. 이 때 <a class="link" href="https://developer.android.com/reference/android/content/SharedPreferences#contains%28java.lang.String%29"  target="_blank" rel="noopener"
     >contains</a>를 사용해서 SharedPreferences 데이터가 존재하는지를 우선 확인하고 작업을 수행하도록 했습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -1159,7 +1154,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="맥을 전체화면에서 쓰면 언어를 전환했을 때 전환된 언어가 어떤 것인지 확인할 수가 없다는 불편함이 있어서 방법을 찾아봤다. # isHud 현재 언어를 화면에 표시해주는 isHUD 라는 앱이 있는데 2018년 이후로 업뎃이 안되고 있어 쓰기가 좀 깨름찍하다. # Input Source Pro Input Source Pro 라는 최신 앱도 있다. # Hammerspoon Hammerspoon 은 Lua로 시스템과 상호작용할 수 있게하는 앱이다. 이걸 설치하고 Open Config에서 다음 코드를 붙여넣으면 한글, 영어, 일본어를 전환할 때마다 전환한 언어를 화면에 오버레이로 1초간 표시해준다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="맥을 전체화면에서 쓰면 언어를 전환했을 때 전환된 언어가 어떤 것인지 확인할 수가 없다는 불편함이 있어서 방법을 찾아봤다. isHud 현재 언어를 화면에 표시해주는 isHUD 라는 앱이 있는데 2018년 이후로 업뎃이 안되고 있어 쓰기가 좀 깨름찍하다. Input Source Pro Input Source Pro 라는 최신 앱도 있다. Hammerspoon Hammerspoon 은 Lua로 시스템과 상호작용할 수 있게하는 앱이다. 이걸 설치하고 Open Config에서 다음 코드를 붙여넣으면 한글, 영어, 일본어를 전환할 때마다 전환한 언어를 화면에 오버레이로 1초간 표시해준다.">
 <title>macOS에서 현재 사용 언어 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/etc/show-current-language-in-macos/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="macOS에서 현재 사용 언어 표시하기">
-<meta property='og:description' content="맥을 전체화면에서 쓰면 언어를 전환했을 때 전환된 언어가 어떤 것인지 확인할 수가 없다는 불편함이 있어서 방법을 찾아봤다. # isHud 현재 언어를 화면에 표시해주는 isHUD 라는 앱이 있는데 2018년 이후로 업뎃이 안되고 있어 쓰기가 좀 깨름찍하다. # Input Source Pro Input Source Pro 라는 최신 앱도 있다. # Hammerspoon Hammerspoon 은 Lua로 시스템과 상호작용할 수 있게하는 앱이다. 이걸 설치하고 Open Config에서 다음 코드를 붙여넣으면 한글, 영어, 일본어를 전환할 때마다 전환한 언어를 화면에 오버레이로 1초간 표시해준다.">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="macOS에서 현재 사용 언어 표시하기">
+<meta property='og:description' content="맥을 전체화면에서 쓰면 언어를 전환했을 때 전환된 언어가 어떤 것인지 확인할 수가 없다는 불편함이 있어서 방법을 찾아봤다. isHud 현재 언어를 화면에 표시해주는 isHUD 라는 앱이 있는데 2018년 이후로 업뎃이 안되고 있어 쓰기가 좀 깨름찍하다. Input Source Pro Input Source Pro 라는 최신 앱도 있다. Hammerspoon Hammerspoon 은 Lua로 시스템과 상호작용할 수 있게하는 앱이다. 이걸 설치하고 Open Config에서 다음 코드를 붙여넣으면 한글, 영어, 일본어를 전환할 때마다 전환한 언어를 화면에 오버레이로 1초간 표시해준다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/etc/show-current-language-in-macos/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2023-10-01T16:16:21&#43;09:00'/><meta property='article:modified_time' content='2023-10-01T16:16:21&#43;09:00'/>
 <meta name="twitter:title" content="macOS에서 현재 사용 언어 표시하기">
-<meta name="twitter:description" content="맥을 전체화면에서 쓰면 언어를 전환했을 때 전환된 언어가 어떤 것인지 확인할 수가 없다는 불편함이 있어서 방법을 찾아봤다. # isHud 현재 언어를 화면에 표시해주는 isHUD 라는 앱이 있는데 2018년 이후로 업뎃이 안되고 있어 쓰기가 좀 깨름찍하다. # Input Source Pro Input Source Pro 라는 최신 앱도 있다. # Hammerspoon Hammerspoon 은 Lua로 시스템과 상호작용할 수 있게하는 앱이다. 이걸 설치하고 Open Config에서 다음 코드를 붙여넣으면 한글, 영어, 일본어를 전환할 때마다 전환한 언어를 화면에 오버레이로 1초간 표시해준다.">
+<meta name="twitter:description" content="맥을 전체화면에서 쓰면 언어를 전환했을 때 전환된 언어가 어떤 것인지 확인할 수가 없다는 불편함이 있어서 방법을 찾아봤다. isHud 현재 언어를 화면에 표시해주는 isHUD 라는 앱이 있는데 2018년 이후로 업뎃이 안되고 있어 쓰기가 좀 깨름찍하다. Input Source Pro Input Source Pro 라는 최신 앱도 있다. Hammerspoon Hammerspoon 은 Lua로 시스템과 상호작용할 수 있게하는 앱이다. 이걸 설치하고 Open Config에서 다음 코드를 붙여넣으면 한글, 영어, 일본어를 전환할 때마다 전환한 언어를 화면에 오버레이로 1초간 표시해준다.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -380,19 +389,13 @@ if (!doNotTrack) {
     
     
     <p>맥을 전체화면에서 쓰면 언어를 전환했을 때 전환된 언어가 어떤 것인지 확인할 수가 없다는 불편함이 있어서 방법을 찾아봤다.</p>
-<h2 id="ishud">
-    <a href="#ishud" class="header-anchor">#</a>
-    isHud
+<h2 id="ishud">isHud
 </h2><p>현재 언어를 화면에 표시해주는 <a class="link" href="https://apps.apple.com/kr/app/ishud/id484757536"  target="_blank" rel="noopener"
     >isHUD</a> 라는 앱이 있는데 2018년 이후로 업뎃이 안되고 있어 쓰기가 좀 깨름찍하다.</p>
-<h2 id="input-source-pro">
-    <a href="#input-source-pro" class="header-anchor">#</a>
-    Input Source Pro
+<h2 id="input-source-pro">Input Source Pro
 </h2><p><a class="link" href="https://inputsource.pro/"  target="_blank" rel="noopener"
     >Input Source Pro</a> 라는 최신 앱도 있다.</p>
-<h2 id="hammerspoon">
-    <a href="#hammerspoon" class="header-anchor">#</a>
-    Hammerspoon
+<h2 id="hammerspoon">Hammerspoon
 </h2><p><a class="link" href="https://www.hammerspoon.org/"  target="_blank" rel="noopener"
     >Hammerspoon</a> 은 Lua로 시스템과 상호작용할 수 있게하는 앱이다. 이걸 설치하고 <code>Open Config</code>에서 다음 코드를 붙여넣으면 한글, 영어, 일본어를 전환할 때마다 전환한 언어를 화면에 오버레이로 1초간 표시해준다.</p>
 <div class="highlight"><div class="chroma">
@@ -697,7 +700,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

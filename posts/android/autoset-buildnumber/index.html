@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다. # 버전넘버와 빌드넘버 # 버전넘버 소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 1.0.0 과 같이 세자리로 결정을 합니다. 첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다. 그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다. 다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다. 버전넘버와 빌드넘버 버전넘버 소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 1.0.0 과 같이 세자리로 결정을 합니다. 첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다. 그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다. 다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.">
 <title>프로젝트의 빌드넘버 자동증가 시키기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/autoset-buildnumber/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="프로젝트의 빌드넘버 자동증가 시키기">
-<meta property='og:description' content="이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다. # 버전넘버와 빌드넘버 # 버전넘버 소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 1.0.0 과 같이 세자리로 결정을 합니다. 첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다. 그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다. 다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="프로젝트의 빌드넘버 자동증가 시키기">
+<meta property='og:description' content="이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다. 버전넘버와 빌드넘버 버전넘버 소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 1.0.0 과 같이 세자리로 결정을 합니다. 첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다. 그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다. 다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/autoset-buildnumber/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='build number' /><meta property='article:tag' content='Kotlin' /><meta property='article:published_time' content='2021-04-06T19:24:59&#43;09:00'/><meta property='article:modified_time' content='2021-04-06T19:24:59&#43;09:00'/>
 <meta name="twitter:title" content="프로젝트의 빌드넘버 자동증가 시키기">
-<meta name="twitter:description" content="이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다. # 버전넘버와 빌드넘버 # 버전넘버 소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 1.0.0 과 같이 세자리로 결정을 합니다. 첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다. 그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다. 다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다. 버전넘버와 빌드넘버 버전넘버 소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 1.0.0 과 같이 세자리로 결정을 합니다. 첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다. 그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다. 다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -384,25 +393,17 @@ if (!doNotTrack) {
     
     
     <p>이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다.</p>
-<h2 id="버전넘버와-빌드넘버">
-    <a href="#%eb%b2%84%ec%a0%84%eb%84%98%eb%b2%84%ec%99%80-%eb%b9%8c%eb%93%9c%eb%84%98%eb%b2%84" class="header-anchor">#</a>
-    버전넘버와 빌드넘버
-</h2><h3 id="버전넘버">
-    <a href="#%eb%b2%84%ec%a0%84%eb%84%98%eb%b2%84" class="header-anchor">#</a>
-    버전넘버
+<h2 id="버전넘버와-빌드넘버">버전넘버와 빌드넘버
+</h2><h3 id="버전넘버">버전넘버
 </h3><p>소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 <code>1.0.0</code> 과 같이 세자리로 결정을 합니다.</p>
 <p>첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다.</p>
 <p>그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다.</p>
 <p>다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.</p>
-<h3 id="빌드넘버">
-    <a href="#%eb%b9%8c%eb%93%9c%eb%84%98%eb%b2%84" class="header-anchor">#</a>
-    빌드넘버
+<h3 id="빌드넘버">빌드넘버
 </h3><p>빌드넘버란 어떤 버전을 출시할 때 여러번 반복해서 빌드를 할 때마다 숫자를 증가시키는 방법으로 사용하는 숫자인데요, 그러니까 버전넘버가 동일하다고 해도 여러가지 서로다른 빌드넘버를 가질 수 있습니다.</p>
 <p>그래서 빌드를 수행할 때마다 어쨌든 변화가 있어야 되는데, 일반적으로는 증가시키는 형식으로 빌드넘버를 사용을 하구요, 보통은 이 빌드넘버를 일반 사용자가 알 필요가 없기 때문에 이걸 보여주지는 않지만, 개중에는 보여주는 소프트웨어도 있습니다. 윈도우같은 경우는 이 빌드넘버를 프로그램 안에서 확인할 수도 있습니다.</p>
 <p>그런데 이 빌드넘버는 빌드를 수행할 때 하나씩 증가를 시켜야 하는데 안드로이드 스튜디오에서는 이걸 자동으로 증가시켜주지 않기 때문에 이 부분을 자동으로 증가시켜주는 기구를 프로젝트에 적용하는 법에 대해 설명하도록 하겠습니다.</p>
-<h2 id="프로그램-작성">
-    <a href="#%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%a8-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
-    프로그램 작성
+<h2 id="프로그램-작성">프로그램 작성
 </h2><p>app 레벨의 gradle에서 빌드넘버는 <code>versionCode</code>가 됩니다. 그래서 빌드를 한 번 할 때마다 <code>versionCode</code>는 증가가 되야 하구요, <code>versionName</code>은 기능 추가가 있을때마다 그때그때 개발자가 필요에 의해서 증가를 시켜주면 되겠죠.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -798,7 +799,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

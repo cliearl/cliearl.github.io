@@ -13,35 +13,25 @@
         
         <guid>https://cliearl.github.io/posts/android/apply-viewbinding/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 View Binding을 사용하는 법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;kotlin-android-extensions의-지원-중단&#34;&gt;
-    &lt;a href=&#34;#kotlin-android-extensions%ec%9d%98-%ec%a7%80%ec%9b%90-%ec%a4%91%eb%8b%a8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Kotlin Android Extensions의 지원 중단
+&lt;h2 id=&#34;kotlin-android-extensions의-지원-중단&#34;&gt;Kotlin Android Extensions의 지원 중단
 &lt;/h2&gt;&lt;p&gt;안드로이드 스튜디오에서는 뷰를 만들고 그 뷰를 불러오기 위해서 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/view/View#findViewById%28int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;findViewById&lt;/a&gt;를 사용합니다. 이 때 &lt;a class=&#34;link&#34; href=&#34;https://plugins.gradle.org/plugin/org.jetbrains.kotlin.android.extensions&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;kotlin-android-extensions&lt;/a&gt; 플러그인을 사용하면 이 함수의 사용을 생략하고 간편하게 코드를 작성할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;문제는 서로 다른 xml파일을 만들었을 때 Id를 동일하게 사용할 수 있기 때문에 코드에서 헷갈릴 수 있다는 문제가 있습니다. 그래서 구글에서는 안드로이드 스튜디오 4.1부터 kotlin-android-extensions의 &lt;a class=&#34;link&#34; href=&#34;https://developers-kr.googleblog.com/2020/11/the-future-of-kotlin-android-extensions.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;지원을 중단&lt;/a&gt;하고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/topic/libraries/view-binding&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;View Binding&lt;/a&gt;을 사용하도록 안내하고 있습니다.&lt;/p&gt;
-&lt;h2 id=&#34;view-binding의-구조&#34;&gt;
-    &lt;a href=&#34;#view-binding%ec%9d%98-%ea%b5%ac%ec%a1%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    View Binding의 구조
+&lt;h2 id=&#34;view-binding의-구조&#34;&gt;View Binding의 구조
 &lt;/h2&gt;&lt;p&gt;View Binding을 프로젝트에서 사용하도록 설정하면 각 레이아웃 xml 파일에 대해 ViewBinding 클래스를 상속받는 개별 binding class가 자동으로 생성됩니다. 이 때 클래스 이름은 레이아웃 파일 이름을 파스칼 표기법으로 변환하고 Binding 접미사를 추가합니다.&lt;/p&gt;
 &lt;p&gt;그리고나서 &lt;code&gt;onCreate&lt;/code&gt; 안에서 View Binding 클래스에 인스턴스를 생성하면 뷰의 Id를 인스턴스의 프로퍼티로 사용할 수 있게 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;view-binding의-장점&#34;&gt;
-    &lt;a href=&#34;#view-binding%ec%9d%98-%ec%9e%a5%ec%a0%90&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    View Binding의 장점
+&lt;h2 id=&#34;view-binding의-장점&#34;&gt;View Binding의 장점
 &lt;/h2&gt;&lt;p&gt;구글에서 설명하는 View Binding의 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/topic/libraries/view-binding#findviewbyid&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;장점&lt;/a&gt;은 두가지가 있습니다. 하나는 &lt;code&gt;Null-safe&lt;/code&gt;로, 서로 다른 레이아웃에 대해 같은 ID를 가진 뷰를 정확히 구분할 수 있게 됩니다. 만약 Id를 참조할 수 없을 경우 &lt;code&gt;@Nullable&lt;/code&gt;로 만들어 아예 사용할 수 없게 막습니다. 두번째는 &lt;code&gt;Type-safe&lt;/code&gt;로, findViewById를 사용할 경우 뷰에 잘못된 타입을 지정할 수 있다는 문제가 있는데, View Binding에서는 그런 문제가 발생하지 않는다는 특징이 있습니다.&lt;/p&gt;
-&lt;h2 id=&#34;findviewbyid-사용상의-문제&#34;&gt;
-    &lt;a href=&#34;#findviewbyid-%ec%82%ac%ec%9a%a9%ec%83%81%ec%9d%98-%eb%ac%b8%ec%a0%9c&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    findViewById 사용상의 문제
+&lt;h2 id=&#34;findviewbyid-사용상의-문제&#34;&gt;findViewById 사용상의 문제
 &lt;/h2&gt;&lt;p&gt;안드로이드 스튜디오의 Create new project에서 Basic Activity를 만들어서 View Binding 환경을 구현해 보겠습니다. 우선은 findViewById를 사용할 때 어떤 문제가 발생하는지 보여드리겠습니다.&lt;/p&gt;
 &lt;p&gt;kotlin-android-extensions 플러그인을 적용한 뒤, &lt;code&gt;fragment_first.xml&lt;/code&gt;, &lt;code&gt;fragment_second.xml&lt;/code&gt;의 텍스트뷰 Id를 동일하게 지정해줍니다.&lt;/p&gt;
 &lt;p&gt;이 상태에서 &lt;code&gt;FirstFragment.kt&lt;/code&gt;에서 텍스트뷰를 사용하면 연결된 xml이 자동으로 임포트 되는데, 코드만 봐서는 이게 &lt;code&gt;fragment_first.xml&lt;/code&gt;에서 온 코드인지 &lt;code&gt;fragment_second.xml&lt;/code&gt;에서 온 것인지 알 수가 없습니다.&lt;/p&gt;
 &lt;p&gt;참조한 뷰가 한개일 때는 import 파트를 보면 출처를 알 수 있지만 사용하는 뷰가 많아지면 어떤 뷰가 어떤 import를 참조한 것인지 한눈에 파악하는 것이 매우 어려워지게 되는 문제가 있습니다.&lt;/p&gt;
-&lt;h2 id=&#34;activity에-view-binding-적용&#34;&gt;
-    &lt;a href=&#34;#activity%ec%97%90-view-binding-%ec%a0%81%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Activity에 View Binding 적용
+&lt;h2 id=&#34;activity에-view-binding-적용&#34;&gt;Activity에 View Binding 적용
 &lt;/h2&gt;&lt;p&gt;다음과 같이 gradle에서 View Binding을 활성화하면 모든 레이아웃 xml 파일에 대해 바인딩클래스가 생성됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -139,9 +129,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;fragment에-view-binding-적용&#34;&gt;
-    &lt;a href=&#34;#fragment%ec%97%90-view-binding-%ec%a0%81%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Fragment에 View Binding 적용
+&lt;/div&gt;&lt;h2 id=&#34;fragment에-view-binding-적용&#34;&gt;Fragment에 View Binding 적용
 &lt;/h2&gt;&lt;p&gt;다음은 Fragment에 View Binding을 적용해 보겠습니다. Fragment에서 사용할 때는 &lt;code&gt;_binding&lt;/code&gt;과 &lt;code&gt;binding&lt;/code&gt; 변수 두개를 만들어줍니다. &lt;code&gt;_binding&lt;/code&gt;은 Fragment를 사용하지 않을 때 자원을 반환할 수 있도록 Nullable 형태로 준비합니다. 그리고 실제로 사용하는 &lt;code&gt;binding&lt;/code&gt;은 &lt;code&gt;_binding&lt;/code&gt;이 초기화 되었을 때 &lt;code&gt;get()&lt;/code&gt;으로 값을 가져오도록 합니다.&lt;/p&gt;
 &lt;p&gt;Fragment의 라이프사이클을 고려해 &lt;code&gt;_binding&lt;/code&gt;을 &lt;code&gt;onCreateView&lt;/code&gt; 안에서 초기화하면 &lt;code&gt;binding&lt;/code&gt;이 자동으로 생성됩니다. 그러면 &lt;code&gt;binding.root&lt;/code&gt;를 뷰로 반환하여주고, &lt;code&gt;onViewCreated&lt;/code&gt;에서는 &lt;code&gt;binding&lt;/code&gt;의 프로퍼티로써 텍스트뷰와 버튼을 사용하면 됩니다.&lt;/p&gt;
 &lt;p&gt;마지막으로 &lt;code&gt;onDestroyView&lt;/code&gt;에서는 Fragment가 어떠한 이유로 파괴될 때 &lt;code&gt;_binding&lt;/code&gt;을 null로 만들어서 자원을 반환하도록 합니다.&lt;/p&gt;

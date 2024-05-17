@@ -13,33 +13,23 @@
         
         <guid>https://cliearl.github.io/posts/android/evaluate-mad-score/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 내 앱의 MAD score를 평가하는 방법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;mad-score란&#34;&gt;
-    &lt;a href=&#34;#mad-score%eb%9e%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    MAD score란
+&lt;h2 id=&#34;mad-score란&#34;&gt;MAD score란
 &lt;/h2&gt;&lt;p&gt;구글에서는 안드로이드 앱의 안정성을 향상시키기 위해 여러가지 기술을 도입해 왔는데요, 대표적인 것이 Kotlin 언어와 Jetpack 라이브러리라고 할 수 있을 것 같습니다.&lt;/p&gt;
 &lt;p&gt;그 외에도 수많은 선진적인 기술을 도입하고 있습니다만, 그러한 기술을 단순히 도입하는데 그치지 않고 실제 개발자들이 기술을 더 잘 이해하고 사용할 수 있도록 Modern Android Development (MAD) Skills 라는 제목으로 &lt;a class=&#34;link&#34; href=&#34;https://medium.com/androiddevelopers/tagged/mad-skills&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;블로그 포스팅&lt;/a&gt;도 하고, 유튜브에서 &lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/playlist?list=PLWz5rJ2EKKc91i2QT8qfrfKgLNlJiG1z7&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;강의 영상&lt;/a&gt;도 제공하고 있습니다.&lt;/p&gt;
 &lt;p&gt;그런데 구글은 여기에 한술 더 떠 내 앱에서 안드로이드의 MAD 기술을 얼마나 적극적으로 사용하고 있는지를 점수로 환산해주는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/modern-android-development/scorecard&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;MAD score&lt;/a&gt; 시스템을 발표합니다. 점수에 따른 이익이나 불이익이 있는 것은 아니고, 그냥 높은 숫자를 추구하는 개발자들을 노린 MAD 포교활동이라 하면 맞을 것 같습니다.&lt;/p&gt;
-&lt;h2 id=&#34;mad-score-확인하기&#34;&gt;
-    &lt;a href=&#34;#mad-score-%ed%99%95%ec%9d%b8%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    MAD score 확인하기
+&lt;h2 id=&#34;mad-score-확인하기&#34;&gt;MAD score 확인하기
 &lt;/h2&gt;&lt;p&gt;여기서는 구글의 Sunflower 프로젝트의 스코어를 확인해보기로 하죠. Sunflower 프로젝트는 구글에서 Jetpack 사용방법 설명을 위해 만든 예제 앱입니다. 다음 Github 주소에서 프로젝트를 다운받습니다.&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/android/sunflower&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://github.com/android/sunflower&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;플러그인-설치&#34;&gt;
-    &lt;a href=&#34;#%ed%94%8c%eb%9f%ac%ea%b7%b8%ec%9d%b8-%ec%84%a4%ec%b9%98&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    플러그인 설치
+&lt;h3 id=&#34;플러그인-설치&#34;&gt;플러그인 설치
 &lt;/h3&gt;&lt;p&gt;Android Studio에 &lt;a class=&#34;link&#34; href=&#34;https://plugins.jetbrains.com/plugin/15549-mad-scorecard&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;MAD Scorecard&lt;/a&gt; 플러그인을 설치합니다. 2020년 12월 이후로 업데이트가 없는 점은 아쉽네요.&lt;/p&gt;
-&lt;h3 id=&#34;플러그인-실행&#34;&gt;
-    &lt;a href=&#34;#%ed%94%8c%eb%9f%ac%ea%b7%b8%ec%9d%b8-%ec%8b%a4%ed%96%89&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    플러그인 실행
+&lt;h3 id=&#34;플러그인-실행&#34;&gt;플러그인 실행
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;Anaylyze -&amp;gt; Create MAD Scorecard&lt;/code&gt;를 선택해 스코어카드를 작성합니다. 앱 번들 유무를 체크하는데 없어도 스코어카드는 정상적으로 만들어집니다.&lt;/p&gt;
-&lt;h3 id=&#34;결과-공유&#34;&gt;
-    &lt;a href=&#34;#%ea%b2%b0%ea%b3%bc-%ea%b3%b5%ec%9c%a0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    결과 공유
+&lt;h3 id=&#34;결과-공유&#34;&gt;결과 공유
 &lt;/h3&gt;&lt;p&gt;스코어가 다음과 같이 매겨졌습니다. 100% 코틀린에 35개의 Jetpack 라이브러리를 사용했다고 나오네요. 역대 최고의 안드로이드 개발자인 MAD 레전드 칭호를 얻었습니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/evaluate-mad-score/summary.png&#34;
 	

@@ -13,9 +13,7 @@
         
         <guid>https://cliearl.github.io/posts/android/progressdialog-thread/</guid>
         <description>&lt;p&gt;이번 포스팅에서는 ProgressDialog와 Thread 사용법에 대해 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;progressdialog란&#34;&gt;
-    &lt;a href=&#34;#progressdialog%eb%9e%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    ProgressDialog란
+&lt;h2 id=&#34;progressdialog란&#34;&gt;ProgressDialog란
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/app/ProgressDialog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ProgressDialog&lt;/a&gt;는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황과 부가적인 문장을 팝업창으로 보여주는 모듈입니다. 시간이 걸리는 파일 다운로드나 복사를 수행할 때 이런창을 띄워주면 기다리는데 유저의 거부감을 줄일 수 있습니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/progressdialog-thread/progressdialog.png&#34;
@@ -30,22 +28,16 @@
     &gt;ProgressBar&lt;/a&gt;를 사용하도록 권장하고 있습니다.&lt;/p&gt;
 &lt;p&gt;&amp;hellip;만, ProgressDialog는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/lang/Thread&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Thread&lt;/a&gt;를 설명하는데 좋은 예제이기 때문에 여기서는 ProgressDialog를 구현하면서 Thread에 대해 이해해 보도록 하겠습니다&lt;/p&gt;
-&lt;h2 id=&#34;스레드란&#34;&gt;
-    &lt;a href=&#34;#%ec%8a%a4%eb%a0%88%eb%93%9c%eb%9e%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    스레드란
+&lt;h2 id=&#34;스레드란&#34;&gt;스레드란
 &lt;/h2&gt;&lt;p&gt;컴퓨터 하드에 저장된 프로그램을 실행하면 운영체제는 프로그램을 메모리에 로딩하고 실행시킵니다. 이 때 메모리로 올라가 실행되고 있는 프로그램을 프로세스라고 합니다. 그리고 프로세스 안에서 실행되는 여러가지 작업 흐름을 각각 스레드라고 합니다.&lt;/p&gt;
 &lt;p&gt;안드로이드로 예를 들면 스마트폰 안에 저장된 유튜브앱은 프로그램이고 앱을 실행시키면 메모리에 유튜브 프로세스가 새로 하나 생성됩니다. 유튜브에는 앱을 보고있는 동안 계속 메뉴화면을 표시하는 스레드가 생기고 동영상을 선택했을 때 유튜브 서버에서 동영상을 다운로드하는 또 하나의 스레드가 생기게 되는 식입니다.&lt;/p&gt;
 &lt;p&gt;안드로이드에서 앱을 실행했을 때 처음으로 시작되는 스레드를 메인 스레드라고 합니다. 메인 스레드는 화면을 표시하고 버튼이나 텍스트뷰에 대한 조작이 이루어졌을 때 그 처리를 담당합니다.&lt;/p&gt;
 &lt;p&gt;이 때 예를들어 ProgressDialog로 1초에 10%씩 증가하는 다운로드 진행상황을 표시한다고 합시다. 0% 를 표시하고 1초 후에 10%, 2초후에 20%.. 를 표시해야 하는거죠.&lt;/p&gt;
 &lt;p&gt;그런데 메인 스레드에서 이 처리를 하게되면 진행상황을 표시하지 않는 1초의 인터벌시간동안 메인스레드가 멈춰서 1초동안 기다리고 있어야 합니다. 그 동안 UI처리는 수행할 수 없게 되죠.&lt;/p&gt;
 &lt;p&gt;그래서 ProgressDialog의 처리는 메인스레드와는 별개로 동작하는 백그라운드 스레드를 추가로 만들어서 구현하게 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;프로그램-작성&#34;&gt;
-    &lt;a href=&#34;#%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%a8-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    프로그램 작성
+&lt;h2 id=&#34;프로그램-작성&#34;&gt;프로그램 작성
 &lt;/h2&gt;&lt;p&gt;그럼 버튼을 터치하면 진행율이 0.2초당 10%씩 증가하는 ProgressDialog를 만들어 보면서 Thread를 구현해 보겠습니다.&lt;/p&gt;
-&lt;h3 id=&#34;view-binding-처리&#34;&gt;
-    &lt;a href=&#34;#view-binding-%ec%b2%98%eb%a6%ac&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    View binding 처리
+&lt;h3 id=&#34;view-binding-처리&#34;&gt;View binding 처리
 &lt;/h3&gt;&lt;p&gt;View Binding 처리를 해 줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -63,9 +55,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;progressdialog-준비&#34;&gt;
-    &lt;a href=&#34;#progressdialog-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    ProgressDialog 준비
+&lt;/div&gt;&lt;h3 id=&#34;progressdialog-준비&#34;&gt;ProgressDialog 준비
 &lt;/h3&gt;&lt;p&gt;메인액티비티 안에 ProgressDialog용 전역변수를 만들어줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -96,9 +86,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;progressDialog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;스레드와-핸들러&#34;&gt;
-    &lt;a href=&#34;#%ec%8a%a4%eb%a0%88%eb%93%9c%ec%99%80-%ed%95%b8%eb%93%a4%eb%9f%ac&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    스레드와 핸들러
+&lt;/div&gt;&lt;h3 id=&#34;스레드와-핸들러&#34;&gt;스레드와 핸들러
 &lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/progressdialog-thread/android-thread-looper-handler.png&#34;
 	
 	
@@ -116,9 +104,7 @@
     &gt;Message&lt;/a&gt; 또는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/lang/Runnable&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Runnable&lt;/a&gt;을 만들어내고 이걸 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/os/MessageQueue&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Message queue&lt;/a&gt;에 담습니다. &lt;code&gt;Looper&lt;/code&gt;는 무한히 루프를 돌며 &lt;code&gt;Message queue&lt;/code&gt;속의 객체를 핸들러에 전달합니다. &lt;code&gt;Handler&lt;/code&gt;는 메시지를 받으면 운영체제가 정해주는 타이밍에 따라 UI조작을 수행하게 되므로 UI요소에 대한 동시접근을 막을 수 있게 됩니다.&lt;/p&gt;
-&lt;h3 id=&#34;핸들러-구현&#34;&gt;
-    &lt;a href=&#34;#%ed%95%b8%eb%93%a4%eb%9f%ac-%ea%b5%ac%ed%98%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    핸들러 구현
+&lt;h3 id=&#34;핸들러-구현&#34;&gt;핸들러 구현
 &lt;/h3&gt;&lt;p&gt;스레드에서 사용할 핸들러 객체는 다음과 같이 만들어 줍니다. &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/os/Handler#handleMessage%28android.os.Message%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;handleMessage&lt;/a&gt; 메소드를 오버라이드하여 그 안에 수행할 UI작업을 작성하면 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -139,9 +125,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;코틀린에서-스레드-사용&#34;&gt;
-    &lt;a href=&#34;#%ec%bd%94%ed%8b%80%eb%a6%b0%ec%97%90%ec%84%9c-%ec%8a%a4%eb%a0%88%eb%93%9c-%ec%82%ac%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    코틀린에서 스레드 사용
+&lt;/div&gt;&lt;h3 id=&#34;코틀린에서-스레드-사용&#34;&gt;코틀린에서 스레드 사용
 &lt;/h3&gt;&lt;p&gt;코틀린에서 스레드를 사용하는 방법은 &lt;a class=&#34;link&#34; href=&#34;%28https://developer.android.com/reference/java/lang/Thread%29&#34; &gt;Thread&lt;/a&gt; 클래스를 상속받아 스레드를 직접 구현하는 법, 그리고 &lt;code&gt;Runnable&lt;/code&gt; 인터페이스로 구현하는 법이 있습니다. 여기서는 스레드 클래스를 변경할 필요가 없기 때문에 간편하게 구현할 수 있는 &lt;code&gt;Runnable&lt;/code&gt; 인터페이스를 사용하겠습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -177,12 +161,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;쓰레드에서는 매 루프마다 현재 progress 값을 체크하고 그 값이 최대값보다 작으면 핸들러에 메시지를 보냅니다. 이 때 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/lang/Thread#sleep%28long,%20int%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Thread.sleep&lt;/a&gt;을 이용해 0.2초 간격으로 스레드를 정지시킵니다.&lt;/p&gt;
-&lt;h2 id=&#34;메모리-리크-방어하기&#34;&gt;
-    &lt;a href=&#34;#%eb%a9%94%eb%aa%a8%eb%a6%ac-%eb%a6%ac%ed%81%ac-%eb%b0%a9%ec%96%b4%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    메모리 리크 방어하기
-&lt;/h2&gt;&lt;h3 id=&#34;메인-루퍼-이용하기&#34;&gt;
-    &lt;a href=&#34;#%eb%a9%94%ec%9d%b8-%eb%a3%a8%ed%8d%bc-%ec%9d%b4%ec%9a%a9%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    메인 루퍼 이용하기
+&lt;h2 id=&#34;메모리-리크-방어하기&#34;&gt;메모리 리크 방어하기
+&lt;/h2&gt;&lt;h3 id=&#34;메인-루퍼-이용하기&#34;&gt;메인 루퍼 이용하기
 &lt;/h3&gt;&lt;p&gt;이렇게 해서 프로그레스다이얼로그를 구현하였습니다. 그런데 핸들러 객체에 하이라이트 된 부분을 보면 &lt;code&gt;This Handler class should be static or leaks might occur&lt;/code&gt; 라는 경고가 표시됩니다. 앞에서 설명했듯이 모든 스레드는 각자의 개별 &lt;code&gt;Looper&lt;/code&gt;를 가지게 됩니다. 그런데 핸들러가 백그라운드 스레드에 의해 만들어진 루퍼를 사용할 경우, 메시지큐에 메시지가 남아있으면 액티비티가 종료되도 죽지않고 살아있게 됩니다. 그래서 메모리누수가 일어날 수 있다는 경고가 발생하는 것입니다.&lt;/p&gt;
 &lt;p&gt;그래서 핸들러가 백그라운드 스레드의 &lt;code&gt;Looper&lt;/code&gt;가 아닌 메인 스레드의 &lt;code&gt;Looper&lt;/code&gt;를 사용하게 하면 핸들러의 수명은 액티비티가 종료될 때 같이 종료되게 되므로 경고메시지가 사라지게 됩니다. 그렇게 하기 위해서는 핸들러를 만들 때 메인 스레드의 루퍼를 전달해주면 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -204,9 +184,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;그러면 메모리 리크 경고가 사라진 것을 알 수 있습니다.&lt;/p&gt;
-&lt;h3 id=&#34;약한참조-이용하기&#34;&gt;
-    &lt;a href=&#34;#%ec%95%bd%ed%95%9c%ec%b0%b8%ec%a1%b0-%ec%9d%b4%ec%9a%a9%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    약한참조 이용하기
+&lt;h3 id=&#34;약한참조-이용하기&#34;&gt;약한참조 이용하기
 &lt;/h3&gt;&lt;p&gt;메모리 리크는 핸들러 클래스를 새로 만들어 주는 방식을 통해 방지할 수도 있습니다.&lt;/p&gt;
 &lt;p&gt;자바에서는 객체간의 관계를 다음과 같이 구분하는데, 메모리 확보를 위해 가비지 컬렉터가 작동하면 강한참조는 무시되고 약한참조를 가진 객체만 삭제되게 됩니다.&lt;/p&gt;
 &lt;ul&gt;
@@ -217,9 +195,7 @@
 &lt;/ul&gt;
 &lt;p&gt;현재 구현한 코드대로라면 핸들러가 메인액티비티에 대해 강한참조를 가지게 되므로 액티비티가 종료되어도 핸들러 객체에 대해 가비지 컬렉터가 작동하지 않게 되어 메모리 리크가 발생하게 됩니다.&lt;/p&gt;
 &lt;p&gt;따라서 메모리 리크를 방지하기 위해서는 핸들러를 메인 액티비티에 대한 참조를 가지지 않는 정적 클래스로 만들면 됩니다.&lt;/p&gt;
-&lt;h3 id=&#34;핸들러-정적-클래스화&#34;&gt;
-    &lt;a href=&#34;#%ed%95%b8%eb%93%a4%eb%9f%ac-%ec%a0%95%ec%a0%81-%ed%81%b4%eb%9e%98%ec%8a%a4%ed%99%94&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    핸들러 정적 클래스화
+&lt;h3 id=&#34;핸들러-정적-클래스화&#34;&gt;핸들러 정적 클래스화
 &lt;/h3&gt;&lt;p&gt;코틀린에서 만들어지는 클래스는 기본적으로 &lt;code&gt;static&lt;/code&gt; 이므로 핸들러 클래스를 다음과 같이 만들어서 사용하면 됩니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -241,9 +217,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;클래스-약한참조화하기&#34;&gt;
-    &lt;a href=&#34;#%ed%81%b4%eb%9e%98%ec%8a%a4-%ec%95%bd%ed%95%9c%ec%b0%b8%ec%a1%b0%ed%99%94%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    클래스 약한참조화하기
+&lt;/div&gt;&lt;h3 id=&#34;클래스-약한참조화하기&#34;&gt;클래스 약한참조화하기
 &lt;/h3&gt;&lt;p&gt;그런데 정적인 핸들러 클래스를 만들었지만 우리가 사용할 핸들러는 액티비티의 &lt;code&gt;progressDialog&lt;/code&gt;를 참조하여야 하므로 다시 참조가 생기게 됩니다, 따라서 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/java/lang/ref/WeakReference&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;WeakReference&lt;/a&gt; 를 이용해서 이를 약한참조로 만들어 줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

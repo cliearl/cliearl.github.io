@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다. # 안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다. Date and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다. 안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다. Date and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.">
 <title>Date and Time 다루기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/date-and-time/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="Date and Time 다루기">
-<meta property='og:description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다. # 안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다. Date and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Date and Time 다루기">
+<meta property='og:description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다. 안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다. Date and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/date-and-time/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='date' /><meta property='article:tag' content='time' /><meta property='article:published_time' content='2021-04-07T20:32:54&#43;09:00'/><meta property='article:modified_time' content='2021-04-07T20:32:54&#43;09:00'/>
 <meta name="twitter:title" content="Date and Time 다루기">
-<meta name="twitter:description" content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다. # 안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다. Date and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.">
+<meta name="twitter:description" content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다. 안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다. Date and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -386,9 +395,7 @@ if (!doNotTrack) {
     
     
     <p>이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다.</p>
-<h2 id="안드로이드의-날짜-라이브러리">
-    <a href="#%ec%95%88%eb%93%9c%eb%a1%9c%ec%9d%b4%eb%93%9c%ec%9d%98-%eb%82%a0%ec%a7%9c-%eb%9d%bc%ec%9d%b4%eb%b8%8c%eb%9f%ac%eb%a6%ac" class="header-anchor">#</a>
-    안드로이드의 날짜 라이브러리
+<h2 id="안드로이드의-날짜-라이브러리">안드로이드의 날짜 라이브러리
 </h2><p>날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 <a class="link" href="https://developer.android.com/reference/java/text/SimpleDateFormat#examples"  target="_blank" rel="noopener"
     >다음 표</a>와 같이 여러가지가 있습니다.</p>
 <div class="table-wrapper"><table>
@@ -445,12 +452,8 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table></div>
-<h2 id="코드-작성">
-    <a href="#%ec%bd%94%eb%93%9c-%ec%9e%91%ec%84%b1" class="header-anchor">#</a>
-    코드 작성
-</h2><h3 id="javautildate">
-    <a href="#javautildate" class="header-anchor">#</a>
-    java.util.Date
+<h2 id="코드-작성">코드 작성
+</h2><h3 id="javautildate">java.util.Date
 </h3><p>그럼 우선은 <a class="link" href="https://developer.android.com/reference/java/util/Date"  target="_blank" rel="noopener"
     >java.util.Date</a> 라이브러리를 이용해서 날짜객체를 만들어 보겠습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -488,9 +491,7 @@ if (!doNotTrack) {
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="m">2021</span><span class="p">-</span><span class="m">04</span><span class="p">-</span><span class="m">07</span> <span class="m">06</span><span class="p">:</span><span class="m">49</span><span class="p">:</span><span class="m">17</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="javatime">
-    <a href="#javatime" class="header-anchor">#</a>
-    java.time
+</div><h3 id="javatime">java.time
 </h3><p>그런데 이 java.util.Date라는 라이브러리는 API level 1 부터 추가된 오래된 라이브러리라 여러 문제도 많고 해서 시간관련 문제를 많이 개선한 <a class="link" href="https://developer.android.com/reference/java/time/package-summary"  target="_blank" rel="noopener"
     >java.time</a> 라이브러리를 사용하는 것을 권해드립니다.</p>
 <p>날짜객체를 만든 뒤 포매터로 표시형식을 조정하는 것은 동일합니다.</p>
@@ -514,9 +515,7 @@ if (!doNotTrack) {
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="m">2021</span><span class="p">-</span><span class="m">04</span><span class="p">-</span><span class="m">07</span> <span class="m">06</span><span class="p">:</span><span class="m">57</span><span class="p">:</span><span class="m">21</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="joda-time">
-    <a href="#joda-time" class="header-anchor">#</a>
-    Joda-Time
+</div><h3 id="joda-time">Joda-Time
 </h3><p>그런데 문제는 java.time이 API level 26에서 새로 추가된 라이브러리이기 때문에 오레오 미만의 기기에서는 시간을 대응하는 코드를 추가로 준비해야 한다는 점입니다.</p>
 <p>이런 경우에 사용할 수 있는 <a class="link" href="https://github.com/JodaOrg/joda-time"  target="_blank" rel="noopener"
     >Joda-Time</a>이라는 라이브러리가 있습니다. Joda-Time은 현재 active하게 개발되진 않지만 API level 26 미만에서 정확한 시간을 사용하기에 적절한 라이브러리입니다.</p>
@@ -559,9 +558,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="두-날짜-사이의-차이-계산하기">
-    <a href="#%eb%91%90-%eb%82%a0%ec%a7%9c-%ec%82%ac%ec%9d%b4%ec%9d%98-%ec%b0%a8%ec%9d%b4-%ea%b3%84%ec%82%b0%ed%95%98%ea%b8%b0" class="header-anchor">#</a>
-    두 날짜 사이의 차이 계산하기
+</div><h3 id="두-날짜-사이의-차이-계산하기">두 날짜 사이의 차이 계산하기
 </h3><p>그러면 다음은 2000년 1월 1일부터 오늘까지 경과한 날수를 계산해보겠습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -825,7 +822,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

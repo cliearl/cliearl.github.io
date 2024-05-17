@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/java-reflection/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="자바의 리플렉션이란">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="자바의 리플렉션이란">
 <meta property='og:description' content="이번 포스팅에서는 자바의 리플렉션에 대해 알아보도록 하겠습니다. 1 val bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java] 위 코드의 의미는 런타임에 뷰모델을 만들기 위해 BookSearchViewModel 클래스를 ViewModelProvider에게 전달해준다는 의미입니다. 이 때 ViewModelProvider의 get 메소드는 다음과 같이 Class를 전달받아서 ViewModelStoreOwner에게 ViewModel을 반환하게 됩니다. 1 2 @MainThread open operator fun &lt;T : ViewModel&gt; get(modelClass: Class&lt;T&gt;): T ViewModelProvider는 컴파일 타임이 아니라 런타임에 실행되어 BookSearchViewModel을 만들어야 하는데 런타임에는 BookSearchViewModel의 클래스 정보를 알 수가 없습니다. 여기서 ::은 자바의 리플렉션 문법인데, 리플렉션은 클래스 타입을 몰라도 그 클래스의 속성에 접근할 수 있게 해주는 API입니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/java-reflection/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -15,16 +15,25 @@
 <meta name="twitter:description" content="이번 포스팅에서는 자바의 리플렉션에 대해 알아보도록 하겠습니다. 1 val bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java] 위 코드의 의미는 런타임에 뷰모델을 만들기 위해 BookSearchViewModel 클래스를 ViewModelProvider에게 전달해준다는 의미입니다. 이 때 ViewModelProvider의 get 메소드는 다음과 같이 Class를 전달받아서 ViewModelStoreOwner에게 ViewModel을 반환하게 됩니다. 1 2 @MainThread open operator fun &lt;T : ViewModel&gt; get(modelClass: Class&lt;T&gt;): T ViewModelProvider는 컴파일 타임이 아니라 런타임에 실행되어 BookSearchViewModel을 만들어야 하는데 런타임에는 BookSearchViewModel의 클래스 정보를 알 수가 없습니다. 여기서 ::은 자바의 리플렉션 문법인데, 리플렉션은 클래스 타입을 몰라도 그 클래스의 속성에 접근할 수 있게 해주는 API입니다.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -577,7 +586,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 

@@ -12,9 +12,7 @@
         <pubDate>Sun, 05 Dec 2021 10:20:46 +0900</pubDate>
         
         <guid>https://cliearl.github.io/posts/android/prevent-fragment-memory-leak-during-viewbinding/</guid>
-        <description>&lt;h2 id=&#34;들어가기&#34;&gt;
-    &lt;a href=&#34;#%eb%93%a4%ec%96%b4%ea%b0%80%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    들어가기
+        <description>&lt;h2 id=&#34;들어가기&#34;&gt;들어가기
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/apply-viewbinding/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;findViewById 대신 View Binding 사용하기&lt;/a&gt; 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/prevent-fragment-memory-leak-during-viewbinding/viewbinding-table.png&#34;
@@ -27,9 +25,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;fragment에서의-메모리-누수&#34;&gt;
-    &lt;a href=&#34;#fragment%ec%97%90%ec%84%9c%ec%9d%98-%eb%a9%94%eb%aa%a8%eb%a6%ac-%eb%88%84%ec%88%98&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Fragment에서의 메모리 누수
+&lt;h2 id=&#34;fragment에서의-메모리-누수&#34;&gt;Fragment에서의 메모리 누수
 &lt;/h2&gt;&lt;p&gt;그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 &lt;code&gt;onDestroyView&lt;/code&gt;에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://developer.android.com/images/guide/fragments/fragment-view-lifecycle.png&#34;
 	
@@ -41,12 +37,8 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;메모리-누수-대응법&#34;&gt;
-    &lt;a href=&#34;#%eb%a9%94%eb%aa%a8%eb%a6%ac-%eb%88%84%ec%88%98-%eb%8c%80%ec%9d%91%eb%b2%95&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    메모리 누수 대응법
-&lt;/h2&gt;&lt;h3 id=&#34;_binding의-직접-해제&#34;&gt;
-    &lt;a href=&#34;#_binding%ec%9d%98-%ec%a7%81%ec%a0%91-%ed%95%b4%ec%a0%9c&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    &lt;code&gt;_binding&lt;/code&gt;의 직접 해제
+&lt;h2 id=&#34;메모리-누수-대응법&#34;&gt;메모리 누수 대응법
+&lt;/h2&gt;&lt;h3 id=&#34;_binding의-직접-해제&#34;&gt;&lt;code&gt;_binding&lt;/code&gt;의 직접 해제
 &lt;/h3&gt;&lt;p&gt;그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 &lt;code&gt;_binding&lt;/code&gt; 변수를 만들어 사용한 뒤 &lt;code&gt;onDestroyView&lt;/code&gt;에서 해제해주는 구조를 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/topic/libraries/view-binding#fragments&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;공식 문서&lt;/a&gt; 에서 제안하고 있습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -101,9 +93,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;autoclearedvalue-사용하기&#34;&gt;
-    &lt;a href=&#34;#autoclearedvalue-%ec%82%ac%ec%9a%a9%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    AutoClearedValue 사용하기
+&lt;/div&gt;&lt;h3 id=&#34;autoclearedvalue-사용하기&#34;&gt;AutoClearedValue 사용하기
 &lt;/h3&gt;&lt;p&gt;그런데 Fragment마다 &lt;code&gt;_binding&lt;/code&gt;을 사용하면 보일러플레이트 코드가 너무 많아지고, 리소스를 해제하는 걸 깜박할 수도 있습니다. 그래서 구글에서는 binding의 초기화를 위임하는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/android/architecture-components-samples/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/util/AutoClearedValue.kt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;AutoClearedValue&lt;/a&gt;라는 개념을 제안했습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -277,9 +267,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;viewbindingpropertydelegate-사용&#34;&gt;
-    &lt;a href=&#34;#viewbindingpropertydelegate-%ec%82%ac%ec%9a%a9&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    ViewBindingPropertyDelegate 사용
+&lt;/div&gt;&lt;h3 id=&#34;viewbindingpropertydelegate-사용&#34;&gt;ViewBindingPropertyDelegate 사용
 &lt;/h3&gt;&lt;p&gt;AutoclearedValue는 어디까지나 코드 스니펫일 뿐이므로 업데이트가 있을 경우 관리가 쉽지 않습니다. 그래서 이 작업을 하기위해 만들어진 &lt;a class=&#34;link&#34; href=&#34;https://github.com/androidbroadcast/ViewBindingPropertyDelegate&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ViewBindingPropertyDelegate&lt;/a&gt; 또는  &lt;a class=&#34;link&#34; href=&#34;https://github.com/wada811/ViewBinding-ktx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ViewBinding-ktx&lt;/a&gt;같이 Delegate를 활용하는 라이브러리를 사용하는 방법이 있습니다.&lt;/p&gt;

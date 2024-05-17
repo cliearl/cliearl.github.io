@@ -19,9 +19,7 @@
     &gt;Retrofit 2과 함께하는 정말 쉬운 HTTP&lt;/a&gt; 를 보는것이 가장 정확할 것 같습니다.&lt;/p&gt;
 &lt;p&gt;이 강의에서는 경기데이터드림에서 제공하는 &lt;a class=&#34;link&#34; href=&#34;https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&amp;amp;rows=10&amp;amp;sortColumn=&amp;amp;sortDirection=&amp;amp;infId=461Q599QLK8UTE14E3LW12837248&amp;amp;infSeq=1&amp;amp;order=&amp;amp;loc=&amp;amp;searchWord=%EC%BD%94%EB%A1%9C%EB%82%98&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;코로나바이러스 감염증 선별진료소 운영 의료기관 현황&lt;/a&gt; API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;h2 id=&#34;라이브러리-추가&#34;&gt;
-    &lt;a href=&#34;#%eb%9d%bc%ec%9d%b4%eb%b8%8c%eb%9f%ac%eb%a6%ac-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    라이브러리 추가
+&lt;h2 id=&#34;라이브러리-추가&#34;&gt;라이브러리 추가
 &lt;/h2&gt;&lt;p&gt;build.gradle에 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/retrofit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Retrofit&lt;/a&gt;과 JSON을 다루기 위한 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/moshi/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Moshi&lt;/a&gt; 컨버터, 그리고 로그를 찍기위한 &lt;a class=&#34;link&#34; href=&#34;https://github.com/square/okhttp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -46,9 +44,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;com.squareup.okhttp3:logging-interceptor:4.9.1&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;권한-추가&#34;&gt;
-    &lt;a href=&#34;#%ea%b6%8c%ed%95%9c-%ec%b6%94%ea%b0%80&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    권한 추가
+&lt;/div&gt;&lt;h2 id=&#34;권한-추가&#34;&gt;권한 추가
 &lt;/h2&gt;&lt;p&gt;HTTP 통신에 인터넷을 사용해야 하니 &lt;code&gt;AndroidManefest.xml&lt;/code&gt;에서 권한을 추가해줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -58,12 +54,8 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;uses-permission&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;android:name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;android.permission.INTERNET&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;data-transfer-object-준비&#34;&gt;
-    &lt;a href=&#34;#data-transfer-object-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Data Transfer Object 준비
-&lt;/h2&gt;&lt;h3 id=&#34;데이터-형식-확인&#34;&gt;
-    &lt;a href=&#34;#%eb%8d%b0%ec%9d%b4%ed%84%b0-%ed%98%95%ec%8b%9d-%ed%99%95%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    데이터 형식 확인
+&lt;/div&gt;&lt;h2 id=&#34;data-transfer-object-준비&#34;&gt;Data Transfer Object 준비
+&lt;/h2&gt;&lt;h3 id=&#34;데이터-형식-확인&#34;&gt;데이터 형식 확인
 &lt;/h3&gt;&lt;p&gt;API의 주소인 &lt;a class=&#34;link&#34; href=&#34;https://openapi.gg.go.kr/EmgMedInfo?type=json&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://openapi.gg.go.kr/EmgMedInfo?type=json&lt;/a&gt; 에 웹브라우저로 접속해보면 다음과 같은 값을 반환받게 됩니다. &lt;code&gt;&amp;quot;head&amp;quot;&lt;/code&gt;안의 항목은 필요하지 않은 메타정보이고, &lt;code&gt;&amp;quot;row&amp;quot;&lt;/code&gt; 안의 내용이 Recyclerview로 표시해야 하는 것들입니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -250,9 +242,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;dto-클래스-작성&#34;&gt;
-    &lt;a href=&#34;#dto-%ed%81%b4%eb%9e%98%ec%8a%a4-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    DTO 클래스 작성
+&lt;/div&gt;&lt;h3 id=&#34;dto-클래스-작성&#34;&gt;DTO 클래스 작성
 &lt;/h3&gt;&lt;p&gt;JSON 형식으로 받아온 텍스트는 앱에서 사용할 수 있는 데이터 객체로 변환하게 되는데 이 때 그 객체의 틀이 되는것이 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Data_transfer_object&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Data Transfer Object (DTO)&lt;/a&gt;입니다.&lt;/p&gt;
 &lt;p&gt;그럼 이 JSON에 대응하는 DTO를 작성합니다. &lt;a class=&#34;link&#34; href=&#34;https://plugins.jetbrains.com/plugin/9960-json-to-kotlin-class-jsontokotlinclass-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -364,9 +354,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;아이템-디자인&#34;&gt;
-    &lt;a href=&#34;#%ec%95%84%ec%9d%b4%ed%85%9c-%eb%94%94%ec%9e%90%ec%9d%b8&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    아이템 디자인
+&lt;/div&gt;&lt;h2 id=&#34;아이템-디자인&#34;&gt;아이템 디자인
 &lt;/h2&gt;&lt;p&gt;Recyclerview에서 사용할 아이템의 디자인을 만들어줍니다. LinearLayout을 써서 API 응답중 Row의 내용을 표시하는 화면을 만들어줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -510,9 +498,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/LinearLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;레이아웃-작성&#34;&gt;
-    &lt;a href=&#34;#%eb%a0%88%ec%9d%b4%ec%95%84%ec%9b%83-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    레이아웃 작성
+&lt;/div&gt;&lt;h2 id=&#34;레이아웃-작성&#34;&gt;레이아웃 작성
 &lt;/h2&gt;&lt;p&gt;다음은 &lt;code&gt;activity_main.xml&lt;/code&gt;을 작성합니다. JSON 응답결과를 표시할 Recyclerview를 하나 배치하고 네트워크 연결을 시작하는데 사용할 플로팅버튼을 하나 달아줍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -582,9 +568,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/androidx.constraintlayout.widget.ConstraintLayout&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;recyclerview-어댑터-작성&#34;&gt;
-    &lt;a href=&#34;#recyclerview-%ec%96%b4%eb%8c%91%ed%84%b0-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Recyclerview 어댑터 작성
+&lt;/div&gt;&lt;h2 id=&#34;recyclerview-어댑터-작성&#34;&gt;Recyclerview 어댑터 작성
 &lt;/h2&gt;&lt;p&gt;DTO 중 Row 클래스의 내용을 받아 ViewHolder에 표시하는 Recyclerview 어댑터를 작성합니다. 데이터의 갱신은 ListAdapter를 사용하여 수행합니다. ListAdapter의 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/recyclerview-listadapter/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기&lt;/a&gt; 강의를 참조하시기 바랍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -700,9 +684,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;서비스-작성&#34;&gt;
-    &lt;a href=&#34;#%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    서비스 작성
+&lt;/div&gt;&lt;h2 id=&#34;서비스-작성&#34;&gt;서비스 작성
 &lt;/h2&gt;&lt;p&gt;Retrofit은 HTTP API의 request를 &lt;a class=&#34;link&#34; href=&#34;https://kotlinlang.org/docs/interfaces.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;인터페이스&lt;/a&gt;로 정의하여 사용합니다. 이 강의에서 사용할 선별진료소 API는 다음과 같은 &lt;a class=&#34;link&#34; href=&#34;https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&amp;amp;rows=10&amp;amp;sortColumn=&amp;amp;sortDirection=&amp;amp;infId=461Q599QLK8UTE14E3LW12837248&amp;amp;infSeq=3&amp;amp;order=&amp;amp;loc=&amp;amp;searchWord=%EC%BD%94%EB%A1%9C%EB%82%98&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;인자&lt;/a&gt;를 받을 수 있게 만들어져 있습니다.&lt;/p&gt;
@@ -762,12 +744,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;코드를 해석하면 &lt;code&gt;getEmgMedData&lt;/code&gt; 는 &lt;code&gt;BASE_URL/EmgMedInfo?KEY=&amp;quot;KEY&amp;quot;&amp;amp;Type=&amp;quot;Type&amp;quot;&lt;/code&gt;이라는 GET 요청을 보내고 &lt;code&gt;Call&amp;lt;EmgMedResponse&amp;gt;&lt;/code&gt; 객체를 반환받는 동작을 하는 함수라는 뜻이 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;retrofit-객체-준비&#34;&gt;
-    &lt;a href=&#34;#retrofit-%ea%b0%9d%ec%b2%b4-%ec%a4%80%eb%b9%84&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Retrofit 객체 준비
-&lt;/h2&gt;&lt;h3 id=&#34;retrofitapi-작성&#34;&gt;
-    &lt;a href=&#34;#retrofitapi-%ec%9e%91%ec%84%b1&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    RetrofitApi 작성
+&lt;h2 id=&#34;retrofit-객체-준비&#34;&gt;Retrofit 객체 준비
+&lt;/h2&gt;&lt;h3 id=&#34;retrofitapi-작성&#34;&gt;RetrofitApi 작성
 &lt;/h3&gt;&lt;p&gt;Retrofit을 사용하기 위해서는 우선 객체를 만들어주어야 합니다. 이 때 여러개의 객체가 만들어지면 자원도 낭비되고 통신에 혼선도 발생할 수 있으므로 &lt;code&gt;object&lt;/code&gt; 키워드를 써서 싱글톤으로 만들어지도록 합니다. 이 때 각 변수에는 &lt;code&gt;lazy&lt;/code&gt;를 적용함으로써 실제 사용되는 순간이 와야 비로소 만들어지게 되고, 단 하나의 인스턴스만이 만들어지도록 하였습니다. 싱글톤에 대한 구체적인 설명은 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/understanding-singleton-pattern/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;알기쉬운 Singleton Pattern&lt;/a&gt; 강의를 참고하시기 바랍니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -824,9 +802,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/2.x/retrofit/retrofit2/Retrofit.Builder.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;빌더 패턴&lt;/a&gt;을 통해 retrofit 객체를 만들어줍니다. &lt;code&gt;addConverterFactory&lt;/code&gt;에서 DTO 변환에 사용할 JSON 컨버터를 Moshi로 지정하고, &lt;code&gt;baseUrl&lt;/code&gt; 을 전달한 뒤 &lt;code&gt;build()&lt;/code&gt;로 객체를 생성합니다. 그리고나서 retrofit 인스턴스의 &lt;code&gt;create&lt;/code&gt; 명령을 이용해서 emgMedService의 인스턴스를 만들어줍니다.&lt;/p&gt;
-&lt;h3 id=&#34;전송패킷-모니터링&#34;&gt;
-    &lt;a href=&#34;#%ec%a0%84%ec%86%a1%ed%8c%a8%ed%82%b7-%eb%aa%a8%eb%8b%88%ed%84%b0%eb%a7%81&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    전송패킷 모니터링
+&lt;h3 id=&#34;전송패킷-모니터링&#34;&gt;전송패킷 모니터링
 &lt;/h3&gt;&lt;p&gt;retrofit 객체를 생성할때 &lt;code&gt;client&lt;/code&gt; 속성에 &lt;code&gt;okHttpClient&lt;/code&gt;를 넘겨주면 로그캣에서 패킷내용을 모니터링할 수 있습니다. okHttpClient는 다음과 같이 서버와 코어 사이에서 데이터를 가로채는 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/okhttp/interceptors/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Interceptor&lt;/a&gt;로서 기능하는 객체입니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/download-json-data-using-retrofit/okhttp-interceptors.png&#34;
@@ -839,9 +815,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;retrofit-구동&#34;&gt;
-    &lt;a href=&#34;#retrofit-%ea%b5%ac%eb%8f%99&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    Retrofit 구동
+&lt;h2 id=&#34;retrofit-구동&#34;&gt;Retrofit 구동
 &lt;/h2&gt;&lt;p&gt;그럼 MainActivity에서 Retrofit을 사용해보겠습니다. 플로팅 버튼에 대해 다음 내용의 &lt;code&gt;retrofitWork()&lt;/code&gt;를 실행하는 클릭리스너를 구성합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -898,9 +872,7 @@
     &gt;execute&lt;/a&gt;를 사용하면 request를 보내고 response를 받는 행위를 동기적으로 행합니다. 그리고 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/2.x/retrofit/retrofit2/Call.html#enqueue-retrofit2.Callback-&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;enqueue&lt;/a&gt; 작업을 실행하면 request는 비동기적으로 보내고, response는 콜백으로 받게 됩니다. 여기서는 네트워크 작업을 안정적으로 수행하기 위해 enqueue로 실행하도록 하였습니다.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;enqueue&lt;/code&gt;의 통신결과는 성공했을 때 &lt;code&gt;onResponse&lt;/code&gt;, 실패했을 때 &lt;code&gt;onFailure&lt;/code&gt; 를 리스너로 받을 수 있으므로 각 상황에 따른 처리를 해 줍니다. 통신에 성공하면 &lt;code&gt;response.isSuccessful&lt;/code&gt;을 확인하여 사용할 수 있는 응답이 돌아왔는지 확인하고, 그렇다면 body에서 값을 꺼내어 Recyclerview에 넘겨주면 됩니다.&lt;/p&gt;
-&lt;h2 id=&#34;코루틴에서-사용하기&#34;&gt;
-    &lt;a href=&#34;#%ec%bd%94%eb%a3%a8%ed%8b%b4%ec%97%90%ec%84%9c-%ec%82%ac%ec%9a%a9%ed%95%98%ea%b8%b0&#34; class=&#34;header-anchor&#34;&gt;#&lt;/a&gt;
-    코루틴에서 사용하기
+&lt;h2 id=&#34;코루틴에서-사용하기&#34;&gt;코루틴에서 사용하기
 &lt;/h2&gt;&lt;p&gt;retrofit의 &lt;a class=&#34;link&#34; href=&#34;https://square.github.io/retrofit/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;사양&lt;/a&gt;에 따르면 &lt;code&gt;enqueue&lt;/code&gt;는 request를 백그라운드 스레드에서, response 콜백은 메인스레드에서 처리하게 됩니다. 그런데 코루틴을 사용하면 콜백을 쓰지 않아도 동일한 처리를 할 수 있습니다. 그래서 이번엔 코루틴 안에서 retrofit 처리를 수행하도록 해 보겠습니다. 코루틴에 대한 구체적인 설명에 대해서는 &lt;a class=&#34;link&#34; href=&#34;https://cliearl.github.io/posts/android/coroutine-principle/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;알기쉬운 코루틴 이론&lt;/a&gt;을 참조하시기 바랍니다.&lt;/p&gt;

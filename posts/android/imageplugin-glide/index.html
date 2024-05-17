@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 앱에서 움직이는 GIF를 표시하는 법에 대해 알아보도록 하겠습니다. 안드로이드에서 이미지를 보여줄때는 화면을 구성하는 xml파일에 ImageView를 올리고 그 이미지뷰에 그림파일을 삽입해주면 됩니다. 이 때 그림파일은 drawable 폴더에 넣어주며 파일이름은 영문소문자 + 언더바로만 구성합니다. # ImageView로 이미지 표시 이미지를 표시하기 위해서는 다음과 같이 imageView의 setImageResource 메소드를 사용합니다. 그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다. 1 imageView.setImageResource(R.drawable.sample00) # Glide 사용 하지만 Glide라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 앱에서 움직이는 GIF를 표시하는 법에 대해 알아보도록 하겠습니다. 안드로이드에서 이미지를 보여줄때는 화면을 구성하는 xml파일에 ImageView를 올리고 그 이미지뷰에 그림파일을 삽입해주면 됩니다. 이 때 그림파일은 drawable 폴더에 넣어주며 파일이름은 영문소문자 + 언더바로만 구성합니다. ImageView로 이미지 표시 이미지를 표시하기 위해서는 다음과 같이 imageView의 setImageResource 메소드를 사용합니다. 그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다. 1 imageView.setImageResource(R.drawable.sample00) Glide 사용 하지만 Glide라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.">
 <title>Glide로 앱에서 움직이는 GIF 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/imageplugin-glide/'>
 
-<link rel="stylesheet" href="/scss/style.min.760e3dabc1e140d2e6abd27a8ca0aabb60e568829b29f67d2df12024136eff37.css"><meta property='og:title' content="Glide로 앱에서 움직이는 GIF 표시하기">
-<meta property='og:description' content="이번 포스팅에서는 앱에서 움직이는 GIF를 표시하는 법에 대해 알아보도록 하겠습니다. 안드로이드에서 이미지를 보여줄때는 화면을 구성하는 xml파일에 ImageView를 올리고 그 이미지뷰에 그림파일을 삽입해주면 됩니다. 이 때 그림파일은 drawable 폴더에 넣어주며 파일이름은 영문소문자 + 언더바로만 구성합니다. # ImageView로 이미지 표시 이미지를 표시하기 위해서는 다음과 같이 imageView의 setImageResource 메소드를 사용합니다. 그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다. 1 imageView.setImageResource(R.drawable.sample00) # Glide 사용 하지만 Glide라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.">
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Glide로 앱에서 움직이는 GIF 표시하기">
+<meta property='og:description' content="이번 포스팅에서는 앱에서 움직이는 GIF를 표시하는 법에 대해 알아보도록 하겠습니다. 안드로이드에서 이미지를 보여줄때는 화면을 구성하는 xml파일에 ImageView를 올리고 그 이미지뷰에 그림파일을 삽입해주면 됩니다. 이 때 그림파일은 drawable 폴더에 넣어주며 파일이름은 영문소문자 + 언더바로만 구성합니다. ImageView로 이미지 표시 이미지를 표시하기 위해서는 다음과 같이 imageView의 setImageResource 메소드를 사용합니다. 그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다. 1 imageView.setImageResource(R.drawable.sample00) Glide 사용 하지만 Glide라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/imageplugin-glide/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='ImageView' /><meta property='article:tag' content='Glide' /><meta property='article:tag' content='Picasso' /><meta property='article:tag' content='Fresco' /><meta property='article:published_time' content='2021-04-08T20:40:50&#43;09:00'/><meta property='article:modified_time' content='2021-04-08T20:40:50&#43;09:00'/>
 <meta name="twitter:title" content="Glide로 앱에서 움직이는 GIF 표시하기">
-<meta name="twitter:description" content="이번 포스팅에서는 앱에서 움직이는 GIF를 표시하는 법에 대해 알아보도록 하겠습니다. 안드로이드에서 이미지를 보여줄때는 화면을 구성하는 xml파일에 ImageView를 올리고 그 이미지뷰에 그림파일을 삽입해주면 됩니다. 이 때 그림파일은 drawable 폴더에 넣어주며 파일이름은 영문소문자 + 언더바로만 구성합니다. # ImageView로 이미지 표시 이미지를 표시하기 위해서는 다음과 같이 imageView의 setImageResource 메소드를 사용합니다. 그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다. 1 imageView.setImageResource(R.drawable.sample00) # Glide 사용 하지만 Glide라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 앱에서 움직이는 GIF를 표시하는 법에 대해 알아보도록 하겠습니다. 안드로이드에서 이미지를 보여줄때는 화면을 구성하는 xml파일에 ImageView를 올리고 그 이미지뷰에 그림파일을 삽입해주면 됩니다. 이 때 그림파일은 drawable 폴더에 넣어주며 파일이름은 영문소문자 + 언더바로만 구성합니다. ImageView로 이미지 표시 이미지를 표시하기 위해서는 다음과 같이 imageView의 setImageResource 메소드를 사용합니다. 그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다. 1 imageView.setImageResource(R.drawable.sample00) Glide 사용 하지만 Glide라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ZL04TTHRBF', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    
+  
+
 
     </head>
     <body class="
@@ -381,9 +390,7 @@ if (!doNotTrack) {
     <p>이번 포스팅에서는 앱에서 움직이는 GIF를 표시하는 법에 대해 알아보도록 하겠습니다.</p>
 <p>안드로이드에서 이미지를 보여줄때는 화면을 구성하는 xml파일에 <a class="link" href="https://developer.android.com/reference/android/widget/ImageView"  target="_blank" rel="noopener"
     >ImageView</a>를 올리고 그 이미지뷰에 그림파일을 삽입해주면 됩니다. 이 때 그림파일은 <code>drawable</code> 폴더에 넣어주며 파일이름은 영문소문자 + 언더바로만 구성합니다.</p>
-<h2 id="imageview로-이미지-표시">
-    <a href="#imageview%eb%a1%9c-%ec%9d%b4%eb%af%b8%ec%a7%80-%ed%91%9c%ec%8b%9c" class="header-anchor">#</a>
-    ImageView로 이미지 표시
+<h2 id="imageview로-이미지-표시">ImageView로 이미지 표시
 </h2><p>이미지를 표시하기 위해서는 다음과 같이 <code>imageView</code>의 <a class="link" href="https://developer.android.com/reference/android/widget/ImageView#setImageResource%28int%29"  target="_blank" rel="noopener"
     >setImageResource</a> 메소드를 사용합니다. 그런데 이 때 크기가 너무 큰 그림파일은 넣을 수 없고, 움직이는 GIF는 첫번째 프레임만 표시된다는 문제가 있습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -394,9 +401,7 @@ if (!doNotTrack) {
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">imageView</span><span class="p">.</span><span class="n">setImageResource</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">sample00</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="glide-사용">
-    <a href="#glide-%ec%82%ac%ec%9a%a9" class="header-anchor">#</a>
-    Glide 사용
+</div><h2 id="glide-사용">Glide 사용
 </h2><p>하지만 <a class="link" href="https://github.com/bumptech/glide"  target="_blank" rel="noopener"
     >Glide</a>라는 외부 라이브러리를 사용하면 이런 문제를 해결할 수 있습니다.</p>
 <p>이렇게 이미지를 표시하는 라이브러리로는 square의 <a class="link" href="https://github.com/square/picasso"  target="_blank" rel="noopener"
@@ -655,7 +660,7 @@ if (!doNotTrack) {
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.25.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
