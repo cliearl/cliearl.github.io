@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 영상에서는 앱에 스플래시 스크린을 설정하는 법을 알아보도록 하겠습니다.\nSplashscreen API 아이콘을 선택하고 앱이 구동되면 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 기존에는 스플래시 스크린 기능이 안드로이드에 존재하지 않아서 임의로 기능을 구현할 필요가 있었지만 이제 스플래시 스크린 기능이 정식 API로 추가되었기에 API 사용법을 소개하도록 하겠습니다.\nAndroid 12에서는 앱에 스플래시 스크린을 표시할 수 있는 SplashScreen Androidx API가 도입되었습니다. 기존에는 API가 없어서 아이콘 하나를 표시하는 테마를 만들고 그 테마를 SplashActivity에 적용한 뒤, 앱 시작시에 SplashActivity를 실행하는 방식으로 스플래시 스크린을 직접 구현해야했지만 이제는 구글의 공식 API를 통해 스플래시 스크린을 사용할 수 있게 된 것입니다. 개인적인 생각으로는 도입 시기가 늦은 감이 있어 보이지만 어쨌든 공식 API를 사용할 수 있게 된 것은 환영할 일입니다.\n">
+<title>Set Splashscreen on App</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/set-splashscreen-on-app/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Set Splashscreen on App">
+<meta property='og:description' content="이번 영상에서는 앱에 스플래시 스크린을 설정하는 법을 알아보도록 하겠습니다.\nSplashscreen API 아이콘을 선택하고 앱이 구동되면 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 기존에는 스플래시 스크린 기능이 안드로이드에 존재하지 않아서 임의로 기능을 구현할 필요가 있었지만 이제 스플래시 스크린 기능이 정식 API로 추가되었기에 API 사용법을 소개하도록 하겠습니다.\nAndroid 12에서는 앱에 스플래시 스크린을 표시할 수 있는 SplashScreen Androidx API가 도입되었습니다. 기존에는 API가 없어서 아이콘 하나를 표시하는 테마를 만들고 그 테마를 SplashActivity에 적용한 뒤, 앱 시작시에 SplashActivity를 실행하는 방식으로 스플래시 스크린을 직접 구현해야했지만 이제는 구글의 공식 API를 통해 스플래시 스크린을 사용할 수 있게 된 것입니다. 개인적인 생각으로는 도입 시기가 늦은 감이 있어 보이지만 어쨌든 공식 API를 사용할 수 있게 된 것은 환영할 일입니다.\n">
+<meta property='og:url' content='https://cliearl.github.io/posts/android/set-splashscreen-on-app/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='splashscreen' /><meta property='article:published_time' content='2023-02-12T16:50:58&#43;09:00'/><meta property='article:modified_time' content='2023-02-12T16:50:58&#43;09:00'/>
+<meta name="twitter:title" content="Set Splashscreen on App">
+<meta name="twitter:description" content="이번 영상에서는 앱에 스플래시 스크린을 설정하는 법을 알아보도록 하겠습니다.\nSplashscreen API 아이콘을 선택하고 앱이 구동되면 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 기존에는 스플래시 스크린 기능이 안드로이드에 존재하지 않아서 임의로 기능을 구현할 필요가 있었지만 이제 스플래시 스크린 기능이 정식 API로 추가되었기에 API 사용법을 소개하도록 하겠습니다.\nAndroid 12에서는 앱에 스플래시 스크린을 표시할 수 있는 SplashScreen Androidx API가 도입되었습니다. 기존에는 API가 없어서 아이콘 하나를 표시하는 테마를 만들고 그 테마를 SplashActivity에 적용한 뒤, 앱 시작시에 SplashActivity를 실행하는 방식으로 스플래시 스크린을 직접 구현해야했지만 이제는 구글의 공식 API를 통해 스플래시 스크린을 사용할 수 있게 된 것입니다. 개인적인 생각으로는 도입 시기가 늦은 감이 있어 보이지만 어쨌든 공식 API를 사용할 수 있게 된 것은 환영할 일입니다.\n">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
+            <h2 class="site-description">@Andromeda Galaxy</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/cliearl'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/coder_frozen'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.youtube.com/channel/UC6V7LBEgcoTZUUgUU0Jv3xg'
+                        target="_blank"
+                        title="Youtube"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="4" />
+  <path d="M10 9l5 3l-5 3z" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/page/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://cliearl.github.io/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#splashscreen-api">Splashscreen API</a></li>
+    <li><a href="#api-specification">API specification</a>
+      <ol>
+        <li><a href="#app-startup-time">App startup time</a></li>
+        <li><a href="#splashscreen-icon">Splashscreen Icon</a></li>
+      </ol>
+    </li>
+    <li><a href="#api-적용하기">API 적용하기</a>
+      <ol>
+        <li><a href="#단순-아이콘-표시하기">단순 아이콘 표시하기</a></li>
+        <li><a href="#스플래시-화면을-장시간-표시하기">스플래시 화면을 장시간 표시하기</a></li>
+        <li><a href="#아이콘-탈출-효과-주기">아이콘 탈출 효과 주기</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                Android
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/android/set-splashscreen-on-app/">Set Splashscreen on App</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 12, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 영상에서는 앱에 스플래시 스크린을 설정하는 법을 알아보도록 하겠습니다.</p>
+<h2 id="splashscreen-api">Splashscreen API
+</h2><p>아이콘을 선택하고 앱이 구동되면 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 기존에는 스플래시 스크린 기능이 안드로이드에 존재하지 않아서 임의로 기능을 구현할 필요가 있었지만 이제 스플래시 스크린 기능이 정식 API로 추가되었기에 API 사용법을 소개하도록 하겠습니다.</p>
+<p>Android 12에서는 앱에 스플래시 스크린을 표시할 수 있는 <a class="link" href="https://developer.android.com/guide/topics/ui/splash-screen"  target="_blank" rel="noopener"
+    >SplashScreen</a> Androidx API가 도입되었습니다. 기존에는 API가 없어서 아이콘 하나를 표시하는 테마를 만들고 그 테마를 <code>SplashActivity</code>에 적용한 뒤, 앱 시작시에 <code>SplashActivity</code>를 실행하는 방식으로 스플래시 스크린을 직접 구현해야했지만 이제는 구글의 공식 API를 통해 스플래시 스크린을 사용할 수 있게 된 것입니다. 개인적인 생각으로는 도입 시기가 늦은 감이 있어 보이지만 어쨌든 공식 API를 사용할 수 있게 된 것은 환영할 일입니다.</p>
+<p>스플래시 스크린을 사용하면 유저가 앱을 바로 사용하지 못하고 우선 로고를 봐야하는 불편함이 있기 때문에 원래는 <a class="link" href="https://www.oreilly.com/library/view/smashing-android-ui/9781118387351/28_9781118387351-ch21.html"  target="_blank" rel="noopener"
+    >안티패턴으로 취급</a>되었습니다. 하지만 앱이 조금씩 거대해지면서 초기로딩에 소요되는 시간도 점차 길어지게 되었고 그렇다면 어차피 로딩중에 백지화면을 띄우느니 그 동안 로고라도 표시하는게 지연시간을 더 효율적으로 사용하는 것이란 의견이 강해지게 되었습니다. 중구난방으로 작성되던 스플래시 스크린의 구현방법을 통일하고 표현방법도 일관되게 정리할 수 있게 되었으니 구글로서도 API를 개발할만한 충분한 동기가 있었을 것 같습니다.</p>
+<h2 id="api-specification">API specification
+</h2><h3 id="app-startup-time">App startup time
+</h3><p>앱은 콜드 스타트, 웜 스타트, 핫 스타트라는 세 가지 상태 중 하나에서 시작됩니다. 각 상태의 정의는 다음과 같습니다.</p>
+<ul>
+<li>콜드 스타트 : 앱의 프로세스가 실행되고 있지 않음</li>
+<li>웜 스타트 : 액티비티가 생성되지 않음</li>
+<li>핫 스타트 : 액티비티가 백그라운드에 있음</li>
+</ul>
+<p><img src="https://developer.android.com/topic/performance/vitals/images/startup-modes-r1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처: https://developer.android.com/topic/performance/vitals/launch-time"
+	
+	
+></p>
+<p>기존의 방법으로는 스타트 상태를 구분할 수 없어 스플래시 스크린 화면을 일괄적으로 표시하였지만, 스플래시 스크린 API는 콜드 스타트와 웜 스타트 시에만 스플래시 스크린을 표시하고 핫 스타트 시에는 표시하지 않게 하여 앱을 빠르게 로딩할 수 있도록 합니다.</p>
+<h3 id="splashscreen-icon">Splashscreen Icon
+</h3><p>스플래시 스크린에 사용할 아이콘은 다음 사항에 따라 준비되어야 합니다.</p>
+<p><img src="https://developer.android.com/static/images/guide/topics/ui/splash-screen/splash-screen-composition.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처: https://developer.android.com/guide/topics/ui/splash-screen"
+	
+	
+></p>
+<ol>
+<li>앱 아이콘은 벡터 드로어블이어야 하고 정지 혹은 애니메이션 어느쪽이든 상관없음. 애니메이션인 경우 1초를 넘지 않도록 권장하며 기본값은 런처 아이콘이 사용됨</li>
+<li>아이콘 백그라운드는 옵션이며 적응형 아이콘을 사용할 경우 아이콘과 배경 사이에 충분한 콘트라스트가 있을 경우 배경이 표시됨</li>
+<li>적응형 아이콘을 사용할 경우 포그라운드의 1/3은 가려짐</li>
+<li>배경은 단일 색상으로 구성됨</li>
+</ol>
+<p><img src="https://developer.android.com/static/images/guide/topics/ui/splash-screen/splash-screen-icon-dimensions.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="출처: https://developer.android.com/guide/topics/ui/splash-screen"
+	
+	
+></p>
+<ul>
+<li>브랜드 이미지: 200×80 dp여야 합니다.</li>
+<li>아이콘 배경이 있는 앱 아이콘: 240×240 dp이고 지름이 160 dp인 원 안에 맞아야 합니다.</li>
+<li>아이콘 배경이 없는 앱 아이콘: 288×288 dp이고 지름이 192 dp인 원 안에 맞아야 합니다.</li>
+</ul>
+<h2 id="api-적용하기">API 적용하기
+</h2><h3 id="단순-아이콘-표시하기">단순 아이콘 표시하기
+</h3><p>우선 API 사용을 위해 <a class="link" href="https://developer.android.com/jetpack/androidx/releases/core"  target="_blank" rel="noopener"
+    >디펜던시</a>를 추가합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s2">&#34;androidx.core:core-splashscreen:1.0.0&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>스플래시 아이콘으로 사용할 벡터 아이콘을 <code>drawable</code> 폴더에 추가합니다. 아이콘은 <a class="link" href="https://github.com/ellisonchan/SplashScreen"  target="_blank" rel="noopener"
+    >ellisonchan/SplashScreen</a> 저장소의 <code>ic_kotlin_hero_new.xml</code> 파일을 사용하도록 하겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;vector</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:aapt=</span><span class="s">&#34;http://schemas.android.com/aapt&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:width=</span><span class="s">&#34;640dp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:height=</span><span class="s">&#34;640dp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:viewportWidth=</span><span class="s">&#34;640&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:viewportHeight=</span><span class="s">&#34;640&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;path</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:pathData=</span><span class="s">&#34;M322.565,171.76l-145.45,152.975l0,136.725l145.225,-145.5l144.475,-144.2z&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeLineJoin=</span><span class="s">&#34;miter&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeWidth=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:fillType=</span><span class="s">&#34;nonZero&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeLineCap=</span><span class="s">&#34;butt&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;aapt:attr</span> <span class="na">name=</span><span class="s">&#34;android:fillColor&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;gradient</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:startY=</span><span class="s">&#34;422.17175&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:startX=</span><span class="s">&#34;144.278&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:endY=</span><span class="s">&#34;189.88942&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:endX=</span><span class="s">&#34;376.56033&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:type=</span><span class="s">&#34;linear&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.1075&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FFC757BC&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.2138&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FFD0609A&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.42540002&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FFE1725C&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.6048&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FFEE7E2F&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.74300003&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FFF58613&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.8232&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FFF88909&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/gradient&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/aapt:attr&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/path&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;path</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:pathData=</span><span class="s">&#34;M177.115,461.46l145.225,-145.5l144.475,145.5z&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeLineJoin=</span><span class="s">&#34;miter&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeWidth=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:fillType=</span><span class="s">&#34;nonZero&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeLineCap=</span><span class="s">&#34;butt&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;aapt:attr</span> <span class="na">name=</span><span class="s">&#34;android:fillColor&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;gradient</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:startY=</span><span class="s">&#34;504.0033&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:startX=</span><span class="s">&#34;279.2872&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:endY=</span><span class="s">&#34;381.63876&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:endX=</span><span class="s">&#34;401.65176&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:type=</span><span class="s">&#34;linear&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.09677&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF0095D5&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.3007&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF238AD9&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.6211&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF557BDE&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.8643&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF7472E2&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;1&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF806EE3&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/gradient&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/aapt:attr&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/path&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;path</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:pathData=</span><span class="s">&#34;M177.115,171.76l145.45,0l-145.45,152.975z&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeLineJoin=</span><span class="s">&#34;miter&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeWidth=</span><span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:fillType=</span><span class="s">&#34;nonZero&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeLineCap=</span><span class="s">&#34;butt&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;aapt:attr</span> <span class="na">name=</span><span class="s">&#34;android:fillColor&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;gradient</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:startY=</span><span class="s">&#34;261.53333&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:startX=</span><span class="s">&#34;163.82558&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:endY=</span><span class="s">&#34;154.57826&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:endX=</span><span class="s">&#34;270.78058&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">android:type=</span><span class="s">&#34;linear&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.09677&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF0095D5&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.3007&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF238AD9&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.6211&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF557BDE&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;0.8643&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF7472E2&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;item</span> <span class="na">android:offset=</span><span class="s">&#34;1&#34;</span> <span class="na">android:color=</span><span class="s">&#34;#FF806EE3&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/gradient&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/aapt:attr&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/path&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;path</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:pathData=</span><span class="s">&#34;M430.415,395.435c-2.35,-2.35 -2.325,-6.175 0.025,-8.525s6.175,-2.325 8.5,0.025c2.35,2.35 2.325,6.175 -0.025,8.5C436.59,397.81 432.765,397.785 430.415,395.435M383.515,348.26c-2.35,-2.35 -2.325,-6.175 0.025,-8.525c2.35,-2.35 6.175,-2.325 8.5,0.025c2.35,2.35 2.325,6.175 -0.025,8.5S385.84,350.61 383.515,348.26M457.665,371.41l23.25,-6.15c1.325,-0.35 2.125,-1.725 1.775,-3.05c-0.35,-1.325 -1.725,-2.125 -3.05,-1.775l-23.55,6.25c-3.55,-9.6 -9.25,-18.7 -17.125,-26.6c-7.875,-7.925 -16.925,-13.675 -26.5,-17.275l6.375,-23.525c0.35,-1.325 -0.425,-2.7 -1.75,-3.075c-1.325,-0.35 -2.7,0.425 -3.075,1.75l-6.3,23.225c-22.525,-6.725 -47.325,-2 -66.3,13.95l101.925,102.5C459.39,418.735 464.265,393.96 457.665,371.41&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeLineJoin=</span><span class="s">&#34;miter&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeWidth=</span><span class="s">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:fillColor=</span><span class="s">&#34;#3DDC84&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:fillType=</span><span class="s">&#34;nonZero&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:strokeLineCap=</span><span class="s">&#34;butt&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/vector&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음으로 스플래시 스크린에 적용할 테마를 설정합니다. <code>themes.xml</code> 내부에 <code>Theme.SplashScreen</code>을 상속받는 테마를 추가하고 설정값을 다음과 같이 변경하면 됩니다. 예를 들어 백그라운드 색상을 지정하고 싶으면 <a class="link" href="https://developer.android.com/reference/android/R.attr#windowSplashScreenBackground"  target="_blank" rel="noopener"
+    >windowSplashScreenBackground</a> 속성을 사용하면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;style</span> <span class="na">name=</span><span class="s">&#34;Theme.App.Splash&#34;</span> <span class="na">parent=</span><span class="s">&#34;Theme.SplashScreen&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    // 백그라운드 색상
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;windowSplashScreenBackground&#34;</span><span class="nt">&gt;</span>@color/purple_200<span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">    // 스플래시 종료 후 표시될 액티비티의 테마
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;postSplashScreenTheme&#34;</span><span class="nt">&gt;</span>@style/Theme.MyApplication<span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl">    // 표시할 아이콘
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&#34;windowSplashScreenAnimatedIcon&#34;</span><span class="nt">&gt;</span>@drawable/ic_kotlin_hero_new<span class="nt">&lt;/item&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/style&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>그리고 이 테마를 <code>AndroidManifest</code>의 application 테마로 지정합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;application</span> 
+</span></span><span class="line"><span class="cl">        <span class="na">android:theme=</span><span class="s">&#34;@style/Theme.App.Splash&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        ...        
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/application&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/manifest&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>그리고 <code>MainActivity</code>에서 <code>setContentView</code>가 수행되기 전에 <a class="link" href="https://developer.android.com/reference/androidx/core/splashscreen/SplashScreen.Companion#%28android.app.Activity%29.installSplashScreen%28%29"  target="_blank" rel="noopener"
+    >installSplashScreen</a>을 실행하면 스플래시 스크린이 표시됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl">class MainActivity : AppCompatActivity() {
+</span></span><span class="line"><span class="cl">    override fun onCreate(savedInstanceState: Bundle?) {
+</span></span><span class="line"><span class="cl">        super.onCreate(savedInstanceState)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gi">+        installSplashScreen()
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>        setContentView(R.layout.activity_main)
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="스플래시-화면을-장시간-표시하기">스플래시 화면을 장시간 표시하기
+</h3><p>스플래시 스크린 표시가 종료되는 타이밍은 MainActivity 화면이 처음으로 그려지기 시작할 때 입니다. 만약 스플래시 스크린의 표시 시간을 더 길게 하고 싶다면<a class="link" href="https://developer.android.com/reference/android/view/ViewTreeObserver.OnPreDrawListener"  target="_blank" rel="noopener"
+    >ViewTreeObserver.OnPreDrawListener</a>를 사용하여 <code>isReady</code>가 <code>true</code>일때 앱이 시작되도록 할 수 있습니다. 여기서는 5초 후에 <code>isReady</code> 플래그를 <code>true</code>로 바꾸도록 했습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl">class MainActivity : AppCompatActivity() {
+</span></span><span class="line"><span class="cl"><span class="gi">+    private var isReady = false
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span><span class="line"><span class="cl">    override fun onCreate(savedInstanceState: Bundle?) {
+</span></span><span class="line"><span class="cl">        super.onCreate(savedInstanceState)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        installSplashScreen()
+</span></span><span class="line"><span class="cl">        setContentView(R.layout.activity_main)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gi">+        thread(start=true) {
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            for (i in 1..5) {
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                Thread.sleep(1000)
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            }
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            isReady = true
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        }
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span><span class="line"><span class="cl"><span class="gi">+        val content: View = findViewById(android.R.id.content)
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        content.viewTreeObserver.addOnPreDrawListener(
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            object : ViewTreeObserver.OnPreDrawListener {
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                override fun onPreDraw(): Boolean {
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                    // Check if the initial data is ready.
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                    return if (isReady) {
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                        // The content is ready; start drawing.
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                        content.viewTreeObserver.removeOnPreDrawListener+(this)
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                        true
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                    } else {
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                        // The content is not ready; suspend.
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                        false
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                    }
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                }
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            }
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        )
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="아이콘-탈출-효과-주기">아이콘 탈출 효과 주기
+</h3><p>Android 12(API 31) 이상의 기기에서는 스플래시 아이콘에 탈출 효과를 줄 수도 있습니다. 다음 코드는 스플래시 스크린이 종료되면 아이콘을 화면 위쪽으로 탈출시키는 애니메이션을 보여주는 <a class="link" href="https://developer.android.com/guide/topics/ui/splash-screen#customize-animation"  target="_blank" rel="noopener"
+    >예제</a>입니다. <a class="link" href="https://developer.android.com/reference/android/window/SplashScreen#setOnExitAnimationListener%28android.window.SplashScreen.OnExitAnimationListener%29"  target="_blank" rel="noopener"
+    >setOnExitAnimationListener</a>를 사용하여 스플래시 스크린의 종료를 체크하고 <a class="link" href="https://developer.android.com/reference/android/animation/ObjectAnimator"  target="_blank" rel="noopener"
+    >ObjectAnimator</a>로 애니메이션을 정의하면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@RequiresApi</span><span class="p">(</span><span class="nc">Build</span><span class="p">.</span><span class="nc">VERSION_CODES</span><span class="p">.</span><span class="n">S</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Add a callback that&#39;s called when the splash screen is animating to
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// the app content.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">splashScreen</span><span class="p">.</span><span class="n">setOnExitAnimationListener</span> <span class="p">{</span> <span class="n">splashScreenView</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Create your custom animation.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">val</span> <span class="py">slideUp</span> <span class="p">=</span> <span class="nc">ObjectAnimator</span><span class="p">.</span><span class="n">ofFloat</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">splashScreenView</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nc">View</span><span class="p">.</span><span class="n">TRANSLATION_Y</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="m">0f</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">-</span><span class="n">splashScreenView</span><span class="p">.</span><span class="n">height</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">slideUp</span><span class="p">.</span><span class="n">interpolator</span> <span class="p">=</span> <span class="n">AnticipateInterpolator</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">slideUp</span><span class="p">.</span><span class="n">duration</span> <span class="p">=</span> <span class="m">200L</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Call SplashScreenView.remove at the end of your custom animation.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">slideUp</span><span class="p">.</span><span class="n">doOnEnd</span> <span class="p">{</span> <span class="n">splashScreenView</span><span class="p">.</span><span class="n">remove</span><span class="p">()</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Run your animation.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">slideUp</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 Splashscreen API를 이용해 앱에 스플래시 스크린을 설정하는 법에 대해 알아보았습니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/splashscreen/">Splashscreen</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+        <div class="article-list--compact links">
+    
+        <article>
+            <a href="https://github.com/cliearl/android-tutorial/tree/master/" target="_blank" rel="noopener">
+                <div class="article-details">
+                    <h2 class="article-title">GitHub/cliearl</h2>
+                    <footer class="article-time">
+                        
+                            Find and download source code of the article from this link.
+                        
+                    </footer>
+                </div>
+        
+                
+                    
+                    
+                    <div class="article-image">
+                        <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
+                    </div>
+                
+            </a>
+        </article>
+    
+</div>
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2307_2309/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.07~23.08</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2306/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.06</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2305/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.05</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2304/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.04</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2303/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.03</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
