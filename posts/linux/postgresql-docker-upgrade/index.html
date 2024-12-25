@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다. Postgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다. Release First release Latest minor version Latest release End of life Milestones 11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions 12 2019-10-03 12.8 2021-08-12 2024-11-14 Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.\nPostgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다.\nRelease First release Latest minor version Latest release End of life Milestones 11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions 12 2019-10-03 12.8 2021-08-12 2024-11-14 Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface. 13 2020-09-24 13.4 2021-08-12 2025-11-13 Space savings and performance gains from de-duplication of B-tree index entries, improved performance for queries that use aggregates or partitioned tables, better query planning when using extended statistics, parallelized vacuuming of indexes, incremental sorting 14 2021-09-30 14.0 2021-09-30 2026-11-12 Added SQL-standard SEARCH and CYCLE clauses for common table expressions, allow DISTINCT to be added to GROUP BY 15 2022-10-13 15.0 2022-10-13 2027-11-11 Implements SQL-standard MERGE statement. PL/Python now only supports current Python 3, and plpythonu means the discontinued What’s New in PostgreSQL 13? 12버전도 지원기간은 많이 남았긴 한데.. 새 버전을 써보고 싶으니 업그레이드하기로 했다. 13의 특징은 다음과 같은 게 있다고 하는데 좀 더 구체적인 설명은 What’s New in PostgreSQL 13? 을 참고하자.\n">
 <title>Postgresql Docker Image의 메이저 버전 업그레이드</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Postgresql Docker Image의 메이저 버전 업그레이드">
-<meta property='og:description' content="Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다. Postgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다. Release First release Latest minor version Latest release End of life Milestones 11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions 12 2019-10-03 12.8 2021-08-12 2024-11-14 Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Postgresql Docker Image의 메이저 버전 업그레이드">
+<meta property='og:description' content="Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.\nPostgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다.\nRelease First release Latest minor version Latest release End of life Milestones 11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions 12 2019-10-03 12.8 2021-08-12 2024-11-14 Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface. 13 2020-09-24 13.4 2021-08-12 2025-11-13 Space savings and performance gains from de-duplication of B-tree index entries, improved performance for queries that use aggregates or partitioned tables, better query planning when using extended statistics, parallelized vacuuming of indexes, incremental sorting 14 2021-09-30 14.0 2021-09-30 2026-11-12 Added SQL-standard SEARCH and CYCLE clauses for common table expressions, allow DISTINCT to be added to GROUP BY 15 2022-10-13 15.0 2022-10-13 2027-11-11 Implements SQL-standard MERGE statement. PL/Python now only supports current Python 3, and plpythonu means the discontinued What’s New in PostgreSQL 13? 12버전도 지원기간은 많이 남았긴 한데.. 새 버전을 써보고 싶으니 업그레이드하기로 했다. 13의 특징은 다음과 같은 게 있다고 하는데 좀 더 구체적인 설명은 What’s New in PostgreSQL 13? 을 참고하자.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Postgresql' /><meta property='article:tag' content='Docker' /><meta property='article:published_time' content='2021-10-09T17:45:11&#43;09:00'/><meta property='article:modified_time' content='2021-10-09T17:45:11&#43;09:00'/>
 <meta name="twitter:title" content="Postgresql Docker Image의 메이저 버전 업그레이드">
-<meta name="twitter:description" content="Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다. Postgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다. Release First release Latest minor version Latest release End of life Milestones 11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions 12 2019-10-03 12.8 2021-08-12 2024-11-14 Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface.">
+<meta name="twitter:description" content="Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.\nPostgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다.\nRelease First release Latest minor version Latest release End of life Milestones 11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions 12 2019-10-03 12.8 2021-08-12 2024-11-14 Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface. 13 2020-09-24 13.4 2021-08-12 2025-11-13 Space savings and performance gains from de-duplication of B-tree index entries, improved performance for queries that use aggregates or partitioned tables, better query planning when using extended statistics, parallelized vacuuming of indexes, incremental sorting 14 2021-09-30 14.0 2021-09-30 2026-11-12 Added SQL-standard SEARCH and CYCLE clauses for common table expressions, allow DISTINCT to be added to GROUP BY 15 2022-10-13 15.0 2022-10-13 2027-11-11 Implements SQL-standard MERGE statement. PL/Python now only supports current Python 3, and plpythonu means the discontinued What’s New in PostgreSQL 13? 12버전도 지원기간은 많이 남았긴 한데.. 새 버전을 써보고 싶으니 업그레이드하기로 했다. 13의 특징은 다음과 같은 게 있다고 하는데 좀 더 구체적인 설명은 What’s New in PostgreSQL 13? 을 참고하자.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -400,58 +394,58 @@
 </h2><p>Postgresql 메이저 버전은 최근것만 <a class="link" href="https://en.wikipedia.org/wiki/PostgreSQL#Release_history"  target="_blank" rel="noopener"
     >정리</a>하면 다음과 같다.</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>Release</th>
-<th>First release</th>
-<th>Latest minor version</th>
-<th>Latest release</th>
-<th>End of life</th>
-<th>Milestones</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>11</td>
-<td>2018-10-18</td>
-<td>11.13</td>
-<td>2021-08-12</td>
-<td>2023-11-09</td>
-<td>Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions</td>
-</tr>
-<tr>
-<td>12</td>
-<td>2019-10-03</td>
-<td>12.8</td>
-<td>2021-08-12</td>
-<td>2024-11-14</td>
-<td>Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface.</td>
-</tr>
-<tr>
-<td>13</td>
-<td>2020-09-24</td>
-<td>13.4</td>
-<td>2021-08-12</td>
-<td>2025-11-13</td>
-<td>Space savings and performance gains from de-duplication of B-tree index entries, improved performance for queries that use aggregates or partitioned tables, better query planning when using extended statistics, parallelized vacuuming of indexes, incremental sorting</td>
-</tr>
-<tr>
-<td>14</td>
-<td>2021-09-30</td>
-<td>14.0</td>
-<td>2021-09-30</td>
-<td>2026-11-12</td>
-<td>Added SQL-standard SEARCH and CYCLE clauses for common table expressions, allow DISTINCT to be added to GROUP BY</td>
-</tr>
-<tr>
-<td>15</td>
-<td>2022-10-13</td>
-<td>15.0</td>
-<td>2022-10-13</td>
-<td>2027-11-11</td>
-<td>Implements SQL-standard MERGE statement. PL/Python now only supports current Python 3, and plpythonu means the discontinued</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Release</th>
+          <th>First release</th>
+          <th>Latest minor version</th>
+          <th>Latest release</th>
+          <th>End of life</th>
+          <th>Milestones</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>11</td>
+          <td>2018-10-18</td>
+          <td>11.13</td>
+          <td>2021-08-12</td>
+          <td>2023-11-09</td>
+          <td>Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions</td>
+      </tr>
+      <tr>
+          <td>12</td>
+          <td>2019-10-03</td>
+          <td>12.8</td>
+          <td>2021-08-12</td>
+          <td>2024-11-14</td>
+          <td>Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface.</td>
+      </tr>
+      <tr>
+          <td>13</td>
+          <td>2020-09-24</td>
+          <td>13.4</td>
+          <td>2021-08-12</td>
+          <td>2025-11-13</td>
+          <td>Space savings and performance gains from de-duplication of B-tree index entries, improved performance for queries that use aggregates or partitioned tables, better query planning when using extended statistics, parallelized vacuuming of indexes, incremental sorting</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>2021-09-30</td>
+          <td>14.0</td>
+          <td>2021-09-30</td>
+          <td>2026-11-12</td>
+          <td>Added SQL-standard SEARCH and CYCLE clauses for common table expressions, allow DISTINCT to be added to GROUP BY</td>
+      </tr>
+      <tr>
+          <td>15</td>
+          <td>2022-10-13</td>
+          <td>15.0</td>
+          <td>2022-10-13</td>
+          <td>2027-11-11</td>
+          <td>Implements SQL-standard MERGE statement. PL/Python now only supports current Python 3, and plpythonu means the discontinued</td>
+      </tr>
+  </tbody>
 </table></div>
 <h2 id="whats-new-in-postgresql-13">What’s New in PostgreSQL 13?
 </h2><p>12버전도 지원기간은 많이 남았긴 한데.. 새 버전을 써보고 싶으니 업그레이드하기로 했다. 13의 특징은 다음과 같은 게 있다고 하는데 좀 더 구체적인 설명은 <a class="link" href="https://www.enterprisedb.com/blog/whats-new-postgresql-13"  target="_blank" rel="noopener"
@@ -575,7 +569,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -585,6 +580,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -728,7 +724,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -817,7 +813,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

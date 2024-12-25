@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다. 들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다.\n들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다. 테스트 커버리지는 100%를 목표해야 한다는 사람도 있고 혹은 100%를 목표하는 것은 무의미한 일이라고 하는 사람도 있습니다. 테스트를 먼저 만들고 프로덕션 코드를 만들어야 한다는 주장도 있고, 실무중에 그러한 방식으로 일을 할 여유가 없다는 사람도 있습니다.\n">
 <title>안드로이드 테스트 자동화 기초</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/android-test-basic/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="안드로이드 테스트 자동화 기초">
-<meta property='og:description' content="이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다. 들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="안드로이드 테스트 자동화 기초">
+<meta property='og:description' content="이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다.\n들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다. 테스트 커버리지는 100%를 목표해야 한다는 사람도 있고 혹은 100%를 목표하는 것은 무의미한 일이라고 하는 사람도 있습니다. 테스트를 먼저 만들고 프로덕션 코드를 만들어야 한다는 주장도 있고, 실무중에 그러한 방식으로 일을 할 여유가 없다는 사람도 있습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/android-test-basic/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='android' /><meta property='article:tag' content='test' /><meta property='article:published_time' content='2023-02-05T16:47:26&#43;09:00'/><meta property='article:modified_time' content='2023-02-05T16:47:26&#43;09:00'/>
 <meta name="twitter:title" content="안드로이드 테스트 자동화 기초">
-<meta name="twitter:description" content="이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다. 들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다.">
+<meta name="twitter:description" content="이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다.\n들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다. 테스트 커버리지는 100%를 목표해야 한다는 사람도 있고 혹은 100%를 목표하는 것은 무의미한 일이라고 하는 사람도 있습니다. 테스트를 먼저 만들고 프로덕션 코드를 만들어야 한다는 주장도 있고, 실무중에 그러한 방식으로 일을 할 여유가 없다는 사람도 있습니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -498,64 +492,64 @@
 </h3><p>단위, 통합, 종단간이라는 분류는 얼핏 듣기에 모호하게 들릴 수 있습니다. 그래서 구글은 사이즈 기준으로 단위 테스트는 소형 테스트, 통합 테스트는 중형 테스트, 그리고 종단간 테스트는 대형 테스트로 분류하기도 합니다. 크기에 따른 각 테스트의 특징은 <a class="link" href="https://testing.googleblog.com/2010/12/test-sizes.html"  target="_blank" rel="noopener"
     >다음 표</a>와 같습니다.</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>Feature</th>
-<th>Small</th>
-<th>Medium</th>
-<th>Large</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Network access</td>
-<td>No</td>
-<td>localhost only</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Database</td>
-<td>No</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>File system access</td>
-<td>No</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Use external systems</td>
-<td>No</td>
-<td>Discouraged</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Multiple threads</td>
-<td>No</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Sleep statements</td>
-<td>No</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>System properties</td>
-<td>No</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Time limit (seconds)</td>
-<td>60</td>
-<td>300</td>
-<td>900+</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Feature</th>
+          <th>Small</th>
+          <th>Medium</th>
+          <th>Large</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Network access</td>
+          <td>No</td>
+          <td>localhost only</td>
+          <td>Yes</td>
+      </tr>
+      <tr>
+          <td>Database</td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>Yes</td>
+      </tr>
+      <tr>
+          <td>File system access</td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>Yes</td>
+      </tr>
+      <tr>
+          <td>Use external systems</td>
+          <td>No</td>
+          <td>Discouraged</td>
+          <td>Yes</td>
+      </tr>
+      <tr>
+          <td>Multiple threads</td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>Yes</td>
+      </tr>
+      <tr>
+          <td>Sleep statements</td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>Yes</td>
+      </tr>
+      <tr>
+          <td>System properties</td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>Yes</td>
+      </tr>
+      <tr>
+          <td>Time limit (seconds)</td>
+          <td>60</td>
+          <td>300</td>
+          <td>900+</td>
+      </tr>
+  </tbody>
 </table></div>
 <h2 id="테스트-기본-원칙">테스트 기본 원칙
 </h2><p>이번에는 프로그램을 테스트할 때 지켜야 하는 몇가지 원칙을 소개하겠습니다.</p>
@@ -1045,54 +1039,54 @@
     >Jetpack Test</a> 라이브러리 입니다. <a class="link" href="https://github.com/android/android-test"  target="_blank" rel="noopener"
     >저장소</a>는 Github에도 공개되어 적극적인 피드백을 받고 있는데, 다음과 같은 아티팩트들로 구성되어 있습니다.</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>Artifact</th>
-<th>Stable Release</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>annotation</td>
-<td>1.0.0</td>
-</tr>
-<tr>
-<td>core</td>
-<td>1.4.0</td>
-</tr>
-<tr>
-<td>espresso</td>
-<td>3.4.0</td>
-</tr>
-<tr>
-<td>ext.junit</td>
-<td>1.1.3</td>
-</tr>
-<tr>
-<td>ext.truth</td>
-<td>1.4.0</td>
-</tr>
-<tr>
-<td>monitor</td>
-<td>1.5.0</td>
-</tr>
-<tr>
-<td>orchestrator</td>
-<td>1.4.1</td>
-</tr>
-<tr>
-<td>runner</td>
-<td>1.4.0</td>
-</tr>
-<tr>
-<td>rules</td>
-<td>1.4.0</td>
-</tr>
-<tr>
-<td>services</td>
-<td>1.4.1</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Artifact</th>
+          <th>Stable Release</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>annotation</td>
+          <td>1.0.0</td>
+      </tr>
+      <tr>
+          <td>core</td>
+          <td>1.4.0</td>
+      </tr>
+      <tr>
+          <td>espresso</td>
+          <td>3.4.0</td>
+      </tr>
+      <tr>
+          <td>ext.junit</td>
+          <td>1.1.3</td>
+      </tr>
+      <tr>
+          <td>ext.truth</td>
+          <td>1.4.0</td>
+      </tr>
+      <tr>
+          <td>monitor</td>
+          <td>1.5.0</td>
+      </tr>
+      <tr>
+          <td>orchestrator</td>
+          <td>1.4.1</td>
+      </tr>
+      <tr>
+          <td>runner</td>
+          <td>1.4.0</td>
+      </tr>
+      <tr>
+          <td>rules</td>
+          <td>1.4.0</td>
+      </tr>
+      <tr>
+          <td>services</td>
+          <td>1.4.1</td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="uiapplication-exerciser-monkey">UI/Application Exerciser Monkey
 </h3><p>안드로이드 앱은 <a class="link" href="https://developer.android.com/studio/test/other-testing-tools/monkey"  target="_blank" rel="noopener"
@@ -1248,7 +1242,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -1258,6 +1253,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -1401,7 +1397,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1490,7 +1486,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

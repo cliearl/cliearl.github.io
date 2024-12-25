@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 안드로이드 기기에 설치된 센서 종류를 확인하는 법에 대해 알아보도록 하겠습니다. Android 플랫폼에서 지원하는 센서의 유형은 다음 표와 같습니다. Sensor Type Description Common Uses TYPE_ACCELEROMETER Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity. Motion detection (shake, tilt, etc.). TYPE_AMBIENT_TEMPERATURE Hardware Measures the ambient room temperature in degrees Celsius (°C). See note below.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 안드로이드 기기에 설치된 센서 종류를 확인하는 법에 대해 알아보도록 하겠습니다.\nAndroid 플랫폼에서 지원하는 센서의 유형은 다음 표와 같습니다.\nSensor Type Description Common Uses TYPE_ACCELEROMETER Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity. Motion detection (shake, tilt, etc.). TYPE_AMBIENT_TEMPERATURE Hardware Measures the ambient room temperature in degrees Celsius (°C). See note below. Monitoring air temperatures. TYPE_GRAVITY Software or Hardware Measures the force of gravity in m/s2 that is applied to a device on all three physical axes (x, y, z). Motion detection (shake, tilt, etc.). TYPE_GYROSCOPE Hardware Measures a device&rsquo;s rate of rotation in rad/s around each of the three physical axes (x, y, and z). Rotation detection (spin, turn, etc.). TYPE_LIGHT Hardware Measures the ambient light level (illumination) in lx. Controlling screen brightness. TYPE_LINEAR_ACCELERATION Software or Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity. Monitoring acceleration along a single axis. TYPE_MAGNETIC_FIELD Hardware Measures the ambient geomagnetic field for all three physical axes (x, y, z) in μT. Creating a compass. TYPE_ORIENTATION Software Measures degrees of rotation that a device makes around all three physical axes (x, y, z). As of API level 3 you can obtain the inclination matrix and rotation matrix for a device by using the gravity sensor and the geomagnetic field sensor in conjunction with the getRotationMatrix() method. Determining device position. TYPE_PRESSURE Hardware Measures the ambient air pressure in hPa or mbar. Monitoring air pressure changes. TYPE_PROXIMITY Hardware Measures the proximity of an object in cm relative to the view screen of a device. This sensor is typically used to determine whether a handset is being held up to a person&rsquo;s ear. Phone position during a call. TYPE_RELATIVE_HUMIDITY Hardware Measures the relative ambient humidity in percent (%). Monitoring dewpoint, absolute, and relative humidity. TYPE_ROTATION_VECTOR Software or Hardware Measures the orientation of a device by providing the three elements of the device&rsquo;s rotation vector. Motion detection and rotation detection. TYPE_TEMPERATURE Hardware Measures the temperature of the device in degrees Celsius (°C). This sensor implementation varies across devices and this sensor was replaced with the TYPE_AMBIENT_TEMPERATURE sensor in API Level 14 Monitoring temperatures. 센서도 많은 종류가 있는 것을 알 수 있습니다. 여기서는 기기에 장착된 센서를 확인하는 방법을 알아볼 겁니다.\n">
 <title>기기에 설치된 센서종류 확인하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/show-sensor-list/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="기기에 설치된 센서종류 확인하기">
-<meta property='og:description' content="이번 포스팅에서는 안드로이드 기기에 설치된 센서 종류를 확인하는 법에 대해 알아보도록 하겠습니다. Android 플랫폼에서 지원하는 센서의 유형은 다음 표와 같습니다. Sensor Type Description Common Uses TYPE_ACCELEROMETER Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity. Motion detection (shake, tilt, etc.). TYPE_AMBIENT_TEMPERATURE Hardware Measures the ambient room temperature in degrees Celsius (°C). See note below.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="기기에 설치된 센서종류 확인하기">
+<meta property='og:description' content="이번 포스팅에서는 안드로이드 기기에 설치된 센서 종류를 확인하는 법에 대해 알아보도록 하겠습니다.\nAndroid 플랫폼에서 지원하는 센서의 유형은 다음 표와 같습니다.\nSensor Type Description Common Uses TYPE_ACCELEROMETER Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity. Motion detection (shake, tilt, etc.). TYPE_AMBIENT_TEMPERATURE Hardware Measures the ambient room temperature in degrees Celsius (°C). See note below. Monitoring air temperatures. TYPE_GRAVITY Software or Hardware Measures the force of gravity in m/s2 that is applied to a device on all three physical axes (x, y, z). Motion detection (shake, tilt, etc.). TYPE_GYROSCOPE Hardware Measures a device&rsquo;s rate of rotation in rad/s around each of the three physical axes (x, y, and z). Rotation detection (spin, turn, etc.). TYPE_LIGHT Hardware Measures the ambient light level (illumination) in lx. Controlling screen brightness. TYPE_LINEAR_ACCELERATION Software or Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity. Monitoring acceleration along a single axis. TYPE_MAGNETIC_FIELD Hardware Measures the ambient geomagnetic field for all three physical axes (x, y, z) in μT. Creating a compass. TYPE_ORIENTATION Software Measures degrees of rotation that a device makes around all three physical axes (x, y, z). As of API level 3 you can obtain the inclination matrix and rotation matrix for a device by using the gravity sensor and the geomagnetic field sensor in conjunction with the getRotationMatrix() method. Determining device position. TYPE_PRESSURE Hardware Measures the ambient air pressure in hPa or mbar. Monitoring air pressure changes. TYPE_PROXIMITY Hardware Measures the proximity of an object in cm relative to the view screen of a device. This sensor is typically used to determine whether a handset is being held up to a person&rsquo;s ear. Phone position during a call. TYPE_RELATIVE_HUMIDITY Hardware Measures the relative ambient humidity in percent (%). Monitoring dewpoint, absolute, and relative humidity. TYPE_ROTATION_VECTOR Software or Hardware Measures the orientation of a device by providing the three elements of the device&rsquo;s rotation vector. Motion detection and rotation detection. TYPE_TEMPERATURE Hardware Measures the temperature of the device in degrees Celsius (°C). This sensor implementation varies across devices and this sensor was replaced with the TYPE_AMBIENT_TEMPERATURE sensor in API Level 14 Monitoring temperatures. 센서도 많은 종류가 있는 것을 알 수 있습니다. 여기서는 기기에 장착된 센서를 확인하는 방법을 알아볼 겁니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/show-sensor-list/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2022-04-02T07:51:58&#43;09:00'/><meta property='article:modified_time' content='2022-04-02T07:51:58&#43;09:00'/>
 <meta name="twitter:title" content="기기에 설치된 센서종류 확인하기">
-<meta name="twitter:description" content="이번 포스팅에서는 안드로이드 기기에 설치된 센서 종류를 확인하는 법에 대해 알아보도록 하겠습니다. Android 플랫폼에서 지원하는 센서의 유형은 다음 표와 같습니다. Sensor Type Description Common Uses TYPE_ACCELEROMETER Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity. Motion detection (shake, tilt, etc.). TYPE_AMBIENT_TEMPERATURE Hardware Measures the ambient room temperature in degrees Celsius (°C). See note below.">
+<meta name="twitter:description" content="이번 포스팅에서는 안드로이드 기기에 설치된 센서 종류를 확인하는 법에 대해 알아보도록 하겠습니다.\nAndroid 플랫폼에서 지원하는 센서의 유형은 다음 표와 같습니다.\nSensor Type Description Common Uses TYPE_ACCELEROMETER Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity. Motion detection (shake, tilt, etc.). TYPE_AMBIENT_TEMPERATURE Hardware Measures the ambient room temperature in degrees Celsius (°C). See note below. Monitoring air temperatures. TYPE_GRAVITY Software or Hardware Measures the force of gravity in m/s2 that is applied to a device on all three physical axes (x, y, z). Motion detection (shake, tilt, etc.). TYPE_GYROSCOPE Hardware Measures a device&rsquo;s rate of rotation in rad/s around each of the three physical axes (x, y, and z). Rotation detection (spin, turn, etc.). TYPE_LIGHT Hardware Measures the ambient light level (illumination) in lx. Controlling screen brightness. TYPE_LINEAR_ACCELERATION Software or Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity. Monitoring acceleration along a single axis. TYPE_MAGNETIC_FIELD Hardware Measures the ambient geomagnetic field for all three physical axes (x, y, z) in μT. Creating a compass. TYPE_ORIENTATION Software Measures degrees of rotation that a device makes around all three physical axes (x, y, z). As of API level 3 you can obtain the inclination matrix and rotation matrix for a device by using the gravity sensor and the geomagnetic field sensor in conjunction with the getRotationMatrix() method. Determining device position. TYPE_PRESSURE Hardware Measures the ambient air pressure in hPa or mbar. Monitoring air pressure changes. TYPE_PROXIMITY Hardware Measures the proximity of an object in cm relative to the view screen of a device. This sensor is typically used to determine whether a handset is being held up to a person&rsquo;s ear. Phone position during a call. TYPE_RELATIVE_HUMIDITY Hardware Measures the relative ambient humidity in percent (%). Monitoring dewpoint, absolute, and relative humidity. TYPE_ROTATION_VECTOR Software or Hardware Measures the orientation of a device by providing the three elements of the device&rsquo;s rotation vector. Motion detection and rotation detection. TYPE_TEMPERATURE Hardware Measures the temperature of the device in degrees Celsius (°C). This sensor implementation varies across devices and this sensor was replaced with the TYPE_AMBIENT_TEMPERATURE sensor in API Level 14 Monitoring temperatures. 센서도 많은 종류가 있는 것을 알 수 있습니다. 여기서는 기기에 장착된 센서를 확인하는 방법을 알아볼 겁니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -359,94 +353,94 @@
 <p>Android 플랫폼에서 지원하는 센서의 유형은 다음 <a class="link" href="https://developer.android.com/guide/topics/sensors/sensors_overview#sensors-intro"  target="_blank" rel="noopener"
     >표</a>와 같습니다.</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>Sensor</th>
-<th>Type</th>
-<th>Description</th>
-<th>Common Uses</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>TYPE_ACCELEROMETER</td>
-<td>Hardware</td>
-<td>Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity.</td>
-<td>Motion detection (shake, tilt, etc.).</td>
-</tr>
-<tr>
-<td>TYPE_AMBIENT_TEMPERATURE</td>
-<td>Hardware</td>
-<td>Measures the ambient room temperature in degrees Celsius (°C). See note below.</td>
-<td>Monitoring air temperatures.</td>
-</tr>
-<tr>
-<td>TYPE_GRAVITY</td>
-<td>Software or Hardware</td>
-<td>Measures the force of gravity in m/s2 that is applied to a device on all three physical axes (x, y, z).</td>
-<td>Motion detection (shake, tilt, etc.).</td>
-</tr>
-<tr>
-<td>TYPE_GYROSCOPE</td>
-<td>Hardware</td>
-<td>Measures a device&rsquo;s rate of rotation in rad/s around each of the three physical axes (x, y, and z).</td>
-<td>Rotation detection (spin, turn, etc.).</td>
-</tr>
-<tr>
-<td>TYPE_LIGHT</td>
-<td>Hardware</td>
-<td>Measures the ambient light level (illumination) in lx.</td>
-<td>Controlling screen brightness.</td>
-</tr>
-<tr>
-<td>TYPE_LINEAR_ACCELERATION</td>
-<td>Software or Hardware</td>
-<td>Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity.</td>
-<td>Monitoring acceleration along a single axis.</td>
-</tr>
-<tr>
-<td>TYPE_MAGNETIC_FIELD</td>
-<td>Hardware</td>
-<td>Measures the ambient geomagnetic field for all three physical axes (x, y, z) in μT.</td>
-<td>Creating a compass.</td>
-</tr>
-<tr>
-<td>TYPE_ORIENTATION</td>
-<td>Software</td>
-<td>Measures degrees of rotation that a device makes around all three physical axes (x, y, z). As of API level 3 you can obtain the inclination matrix and rotation matrix for a device by using the gravity sensor and the geomagnetic field sensor in conjunction with the getRotationMatrix() method.</td>
-<td>Determining device position.</td>
-</tr>
-<tr>
-<td>TYPE_PRESSURE</td>
-<td>Hardware</td>
-<td>Measures the ambient air pressure in hPa or mbar.</td>
-<td>Monitoring air pressure changes.</td>
-</tr>
-<tr>
-<td>TYPE_PROXIMITY</td>
-<td>Hardware</td>
-<td>Measures the proximity of an object in cm relative to the view screen of a device. This sensor is typically used to determine whether a handset is being held up to a person&rsquo;s ear.</td>
-<td>Phone position during a call.</td>
-</tr>
-<tr>
-<td>TYPE_RELATIVE_HUMIDITY</td>
-<td>Hardware</td>
-<td>Measures the relative ambient humidity in percent (%).</td>
-<td>Monitoring dewpoint, absolute, and relative humidity.</td>
-</tr>
-<tr>
-<td>TYPE_ROTATION_VECTOR</td>
-<td>Software or Hardware</td>
-<td>Measures the orientation of a device by providing the three elements of the device&rsquo;s rotation vector.</td>
-<td>Motion detection and rotation detection.</td>
-</tr>
-<tr>
-<td>TYPE_TEMPERATURE</td>
-<td>Hardware</td>
-<td>Measures the temperature of the device in degrees Celsius (°C). This sensor implementation varies across devices and this sensor was replaced with the TYPE_AMBIENT_TEMPERATURE sensor in API Level 14</td>
-<td>Monitoring temperatures.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Sensor</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Common Uses</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>TYPE_ACCELEROMETER</td>
+          <td>Hardware</td>
+          <td>Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity.</td>
+          <td>Motion detection (shake, tilt, etc.).</td>
+      </tr>
+      <tr>
+          <td>TYPE_AMBIENT_TEMPERATURE</td>
+          <td>Hardware</td>
+          <td>Measures the ambient room temperature in degrees Celsius (°C). See note below.</td>
+          <td>Monitoring air temperatures.</td>
+      </tr>
+      <tr>
+          <td>TYPE_GRAVITY</td>
+          <td>Software or Hardware</td>
+          <td>Measures the force of gravity in m/s2 that is applied to a device on all three physical axes (x, y, z).</td>
+          <td>Motion detection (shake, tilt, etc.).</td>
+      </tr>
+      <tr>
+          <td>TYPE_GYROSCOPE</td>
+          <td>Hardware</td>
+          <td>Measures a device&rsquo;s rate of rotation in rad/s around each of the three physical axes (x, y, and z).</td>
+          <td>Rotation detection (spin, turn, etc.).</td>
+      </tr>
+      <tr>
+          <td>TYPE_LIGHT</td>
+          <td>Hardware</td>
+          <td>Measures the ambient light level (illumination) in lx.</td>
+          <td>Controlling screen brightness.</td>
+      </tr>
+      <tr>
+          <td>TYPE_LINEAR_ACCELERATION</td>
+          <td>Software or Hardware</td>
+          <td>Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity.</td>
+          <td>Monitoring acceleration along a single axis.</td>
+      </tr>
+      <tr>
+          <td>TYPE_MAGNETIC_FIELD</td>
+          <td>Hardware</td>
+          <td>Measures the ambient geomagnetic field for all three physical axes (x, y, z) in μT.</td>
+          <td>Creating a compass.</td>
+      </tr>
+      <tr>
+          <td>TYPE_ORIENTATION</td>
+          <td>Software</td>
+          <td>Measures degrees of rotation that a device makes around all three physical axes (x, y, z). As of API level 3 you can obtain the inclination matrix and rotation matrix for a device by using the gravity sensor and the geomagnetic field sensor in conjunction with the getRotationMatrix() method.</td>
+          <td>Determining device position.</td>
+      </tr>
+      <tr>
+          <td>TYPE_PRESSURE</td>
+          <td>Hardware</td>
+          <td>Measures the ambient air pressure in hPa or mbar.</td>
+          <td>Monitoring air pressure changes.</td>
+      </tr>
+      <tr>
+          <td>TYPE_PROXIMITY</td>
+          <td>Hardware</td>
+          <td>Measures the proximity of an object in cm relative to the view screen of a device. This sensor is typically used to determine whether a handset is being held up to a person&rsquo;s ear.</td>
+          <td>Phone position during a call.</td>
+      </tr>
+      <tr>
+          <td>TYPE_RELATIVE_HUMIDITY</td>
+          <td>Hardware</td>
+          <td>Measures the relative ambient humidity in percent (%).</td>
+          <td>Monitoring dewpoint, absolute, and relative humidity.</td>
+      </tr>
+      <tr>
+          <td>TYPE_ROTATION_VECTOR</td>
+          <td>Software or Hardware</td>
+          <td>Measures the orientation of a device by providing the three elements of the device&rsquo;s rotation vector.</td>
+          <td>Motion detection and rotation detection.</td>
+      </tr>
+      <tr>
+          <td>TYPE_TEMPERATURE</td>
+          <td>Hardware</td>
+          <td>Measures the temperature of the device in degrees Celsius (°C). This sensor implementation varies across devices and this sensor was replaced with the TYPE_AMBIENT_TEMPERATURE sensor in API Level 14</td>
+          <td>Monitoring temperatures.</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>센서도 많은 종류가 있는 것을 알 수 있습니다. 여기서는 기기에 장착된 센서를 확인하는 방법을 알아볼 겁니다.</p>
 <p>우선 새로운 프로젝트를 만들고 센서 리스트를 표시할 화면을 작성합니다.</p>
@@ -953,7 +947,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -963,6 +958,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -1131,7 +1127,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1220,7 +1216,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

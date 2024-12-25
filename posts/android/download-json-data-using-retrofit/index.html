@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Retrofit 라이브러리로 HTTP 통신을 수행하는 법에 대해 알아보도록 하겠습니다. 안드로이드에서의 HTTP 통신에 대한 개괄적 설명과 Retrofit을 사용해야 하는 이유에 대해서는 안드로이드의 HTTP 통신 라이브러리 고찰에서 다루었으니 그것을 참조하시면 좋을 것 같습니다. 또한 Retrofit의 기술적 특징에 대해서는 라이브러리 제작자가 설명해 둔 Retrofit 2과 함께하는 정말 쉬운 HTTP 를 보는것이 가장 정확할 것 같습니다. 이 강의에서는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황 API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Retrofit 라이브러리로 HTTP 통신을 수행하는 법에 대해 알아보도록 하겠습니다.\n안드로이드에서의 HTTP 통신에 대한 개괄적 설명과 Retrofit을 사용해야 하는 이유에 대해서는 안드로이드의 HTTP 통신 라이브러리 고찰에서 다루었으니 그것을 참조하시면 좋을 것 같습니다. 또한 Retrofit의 기술적 특징에 대해서는 라이브러리 제작자가 설명해 둔 Retrofit 2과 함께하는 정말 쉬운 HTTP 를 보는것이 가장 정확할 것 같습니다.\n이 강의에서는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황 API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.\n">
 <title>Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/download-json-data-using-retrofit/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기">
-<meta property='og:description' content="이번 포스팅에서는 Retrofit 라이브러리로 HTTP 통신을 수행하는 법에 대해 알아보도록 하겠습니다. 안드로이드에서의 HTTP 통신에 대한 개괄적 설명과 Retrofit을 사용해야 하는 이유에 대해서는 안드로이드의 HTTP 통신 라이브러리 고찰에서 다루었으니 그것을 참조하시면 좋을 것 같습니다. 또한 Retrofit의 기술적 특징에 대해서는 라이브러리 제작자가 설명해 둔 Retrofit 2과 함께하는 정말 쉬운 HTTP 를 보는것이 가장 정확할 것 같습니다. 이 강의에서는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황 API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기">
+<meta property='og:description' content="이번 포스팅에서는 Retrofit 라이브러리로 HTTP 통신을 수행하는 법에 대해 알아보도록 하겠습니다.\n안드로이드에서의 HTTP 통신에 대한 개괄적 설명과 Retrofit을 사용해야 하는 이유에 대해서는 안드로이드의 HTTP 통신 라이브러리 고찰에서 다루었으니 그것을 참조하시면 좋을 것 같습니다. 또한 Retrofit의 기술적 특징에 대해서는 라이브러리 제작자가 설명해 둔 Retrofit 2과 함께하는 정말 쉬운 HTTP 를 보는것이 가장 정확할 것 같습니다.\n이 강의에서는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황 API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/download-json-data-using-retrofit/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Retrofit' /><meta property='article:tag' content='Json' /><meta property='article:tag' content='RecyclerView' /><meta property='article:tag' content='Coroutine' /><meta property='article:published_time' content='2021-11-07T08:32:11&#43;09:00'/><meta property='article:modified_time' content='2021-11-07T08:32:11&#43;09:00'/>
 <meta name="twitter:title" content="Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기">
-<meta name="twitter:description" content="이번 포스팅에서는 Retrofit 라이브러리로 HTTP 통신을 수행하는 법에 대해 알아보도록 하겠습니다. 안드로이드에서의 HTTP 통신에 대한 개괄적 설명과 Retrofit을 사용해야 하는 이유에 대해서는 안드로이드의 HTTP 통신 라이브러리 고찰에서 다루었으니 그것을 참조하시면 좋을 것 같습니다. 또한 Retrofit의 기술적 특징에 대해서는 라이브러리 제작자가 설명해 둔 Retrofit 2과 함께하는 정말 쉬운 HTTP 를 보는것이 가장 정확할 것 같습니다. 이 강의에서는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황 API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 Retrofit 라이브러리로 HTTP 통신을 수행하는 법에 대해 알아보도록 하겠습니다.\n안드로이드에서의 HTTP 통신에 대한 개괄적 설명과 Retrofit을 사용해야 하는 이유에 대해서는 안드로이드의 HTTP 통신 라이브러리 고찰에서 다루었으니 그것을 참조하시면 좋을 것 같습니다. 또한 Retrofit의 기술적 특징에 대해서는 라이브러리 제작자가 설명해 둔 Retrofit 2과 함께하는 정말 쉬운 HTTP 를 보는것이 가장 정확할 것 같습니다.\n이 강의에서는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황 API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -1082,40 +1076,40 @@
     >인터페이스</a>로 정의하여 사용합니다. 이 강의에서 사용할 선별진료소 API는 다음과 같은 <a class="link" href="https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&amp;rows=10&amp;sortColumn=&amp;sortDirection=&amp;infId=461Q599QLK8UTE14E3LW12837248&amp;infSeq=3&amp;order=&amp;loc=&amp;searchWord=%EC%BD%94%EB%A1%9C%EB%82%98"  target="_blank" rel="noopener"
     >인자</a>를 받을 수 있게 만들어져 있습니다.</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>변수명</th>
-<th>타입</th>
-<th>변수 설명</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>KEY</td>
-<td>STRING</td>
-<td>인증키</td>
-<td>기본값 : sample key</td>
-</tr>
-<tr>
-<td>Type</td>
-<td>STRING</td>
-<td>호출 문서(xml, json)</td>
-<td>기본값 : xml</td>
-</tr>
-<tr>
-<td>pIndex</td>
-<td>INTEGER</td>
-<td>페이지 위치</td>
-<td>기본값 : 1(sample key는 1 고정)</td>
-</tr>
-<tr>
-<td>pSize</td>
-<td>INTEGER</td>
-<td>페이지 당 요청 숫자</td>
-<td>기본값 : 100(sample key는 5 고정)</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>변수명</th>
+          <th>타입</th>
+          <th>변수 설명</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>KEY</td>
+          <td>STRING</td>
+          <td>인증키</td>
+          <td>기본값 : sample key</td>
+      </tr>
+      <tr>
+          <td>Type</td>
+          <td>STRING</td>
+          <td>호출 문서(xml, json)</td>
+          <td>기본값 : xml</td>
+      </tr>
+      <tr>
+          <td>pIndex</td>
+          <td>INTEGER</td>
+          <td>페이지 위치</td>
+          <td>기본값 : 1(sample key는 1 고정)</td>
+      </tr>
+      <tr>
+          <td>pSize</td>
+          <td>INTEGER</td>
+          <td>페이지 당 요청 숫자</td>
+          <td>기본값 : 100(sample key는 5 고정)</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>그러면 이중 KEY와 Type 인자를 전달받아 GET 요청을 수행하는 Retrofit 서비스를 하나 만들어보겠습니다. API 요청주소가 <code>https://openapi.gg.go.kr/EmgMedInfo</code> 이므로 고정주소인 Base url은 <code>https://openapi.gg.go.kr/</code> 이고, <code>@GET</code>요청시 인자는 Base url 뒤의 <code>EmgMedInfo</code> 입니다. KEY와 Type 인자는 <code>@Query</code> 어노테이션을 써서 전달해줍니다.</p>
 <p>인터페이스의 메소드인 <code>getEmgMedData</code>는 <a class="link" href="https://square.github.io/retrofit/2.x/retrofit/retrofit2/Call.html"  target="_blank" rel="noopener"
@@ -1389,7 +1383,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -1399,6 +1394,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -1567,7 +1563,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1656,7 +1652,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

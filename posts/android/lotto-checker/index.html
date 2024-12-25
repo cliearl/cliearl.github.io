@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다. 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다. 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다. 그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.\n당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.\n금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.\n그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.\n">
 <title>코루틴으로 로또번호 당첨 확인하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/lotto-checker/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="코루틴으로 로또번호 당첨 확인하기">
-<meta property='og:description' content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다. 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다. 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다. 그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="코루틴으로 로또번호 당첨 확인하기">
+<meta property='og:description' content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.\n당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.\n금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.\n그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/lotto-checker/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='coroutine' /><meta property='article:tag' content='lotto' /><meta property='article:published_time' content='2021-07-17T16:01:01&#43;09:00'/><meta property='article:modified_time' content='2021-07-17T16:01:01&#43;09:00'/>
 <meta name="twitter:title" content="코루틴으로 로또번호 당첨 확인하기">
-<meta name="twitter:description" content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다. 당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다. 금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다. 그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.\n당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.\n금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.\n그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -495,34 +489,34 @@
 </div><h2 id="내-번호와-당첨번호-비교하기">내 번호와 당첨번호 비교하기
 </h2><p>다음은 내 번호와 당첨번호를 비교하는 함수를 만듭니다. 로또의 규칙은 표의 내용과 같이 되어 있습니다. 그래서 <code>whatIsRank</code>에서는 내 로또번호와 당첨번호를 전달받아 처음 6개까지의 숫자를 비교해 일치한 갯수를 세고, 일치한 번호의 갯수가 5개이면 추가로 보너스번호인 7번째 번호가 일치하는지 확인하도록 하면 됩니다.</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th style="text-align:center">순위</th>
-<th style="text-align:center">당첨내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">6개 번호 모두 일치</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">5개 번호 일치 + 나머지 1개가 보너스 번호와 일치</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">5개 번호 일치</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">4개 번호 일치</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">3개 번호 일치</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">순위</th>
+          <th style="text-align: center">당첨내용</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">6개 번호 모두 일치</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">2</td>
+          <td style="text-align: center">5개 번호 일치 + 나머지 1개가 보너스 번호와 일치</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">3</td>
+          <td style="text-align: center">5개 번호 일치</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">4</td>
+          <td style="text-align: center">4개 번호 일치</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">5</td>
+          <td style="text-align: center">3개 번호 일치</td>
+      </tr>
+  </tbody>
 </table></div>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -757,7 +751,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -767,6 +762,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -935,7 +931,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1024,7 +1020,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

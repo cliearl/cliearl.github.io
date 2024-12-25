@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다. Fragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다. 메모리 누수 대응법 _binding의 직접 해제 그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 _binding 변수를 만들어 사용한 뒤 onDestroyView에서 해제해주는 구조를 공식 문서 에서 제안하고 있습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.\nFragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.\n메모리 누수 대응법 _binding의 직접 해제 그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 _binding 변수를 만들어 사용한 뒤 onDestroyView에서 해제해주는 구조를 공식 문서 에서 제안하고 있습니다.\n">
 <title>View Binding 사용시 Fragment의 메모리 누수 대응하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/prevent-fragment-memory-leak-during-viewbinding/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="View Binding 사용시 Fragment의 메모리 누수 대응하기">
-<meta property='og:description' content="들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다. Fragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다. 메모리 누수 대응법 _binding의 직접 해제 그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 _binding 변수를 만들어 사용한 뒤 onDestroyView에서 해제해주는 구조를 공식 문서 에서 제안하고 있습니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="View Binding 사용시 Fragment의 메모리 누수 대응하기">
+<meta property='og:description' content="들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.\nFragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.\n메모리 누수 대응법 _binding의 직접 해제 그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 _binding 변수를 만들어 사용한 뒤 onDestroyView에서 해제해주는 구조를 공식 문서 에서 제안하고 있습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/prevent-fragment-memory-leak-during-viewbinding/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='View Binding' /><meta property='article:tag' content='Memory Leak' /><meta property='article:published_time' content='2021-12-05T10:20:46&#43;09:00'/><meta property='article:modified_time' content='2021-12-05T10:20:46&#43;09:00'/>
 <meta name="twitter:title" content="View Binding 사용시 Fragment의 메모리 누수 대응하기">
-<meta name="twitter:description" content="들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다. Fragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다. 메모리 누수 대응법 _binding의 직접 해제 그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 _binding 변수를 만들어 사용한 뒤 onDestroyView에서 해제해주는 구조를 공식 문서 에서 제안하고 있습니다.">
+<meta name="twitter:description" content="들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.\nFragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.\n메모리 누수 대응법 _binding의 직접 해제 그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 _binding 변수를 만들어 사용한 뒤 onDestroyView에서 해제해주는 구조를 공식 문서 에서 제안하고 있습니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -720,7 +714,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -730,6 +725,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -873,7 +869,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -962,7 +958,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

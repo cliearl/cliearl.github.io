@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다. 안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다. Date and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다.\n안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다.\nDate and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.MMMM.dd GGG hh:mm aaa&rdquo; 02001.July.04 AD 12:08 PM &ldquo;EEE, d MMM yyyy HH:mm:ss Z&rdquo; Wed, 4 Jul 2001 12:08:56 -0700 &ldquo;yyMMddHHmmssZ&rdquo; 010704120856-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSZ&rdquo; 2001-07-04T12:08:56.235-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSXXX&rdquo; 2001-07-04T12:08:56.235-07:00 &ldquo;YYYY-&lsquo;W&rsquo;ww-u&rdquo; 2001-W27-3 코드 작성 java.util.Date 그럼 우선은 java.util.Date 라이브러리를 이용해서 날짜객체를 만들어 보겠습니다.\n">
 <title>Date and Time 다루기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/date-and-time/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Date and Time 다루기">
-<meta property='og:description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다. 안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다. Date and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Date and Time 다루기">
+<meta property='og:description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다.\n안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다.\nDate and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.MMMM.dd GGG hh:mm aaa&rdquo; 02001.July.04 AD 12:08 PM &ldquo;EEE, d MMM yyyy HH:mm:ss Z&rdquo; Wed, 4 Jul 2001 12:08:56 -0700 &ldquo;yyMMddHHmmssZ&rdquo; 010704120856-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSZ&rdquo; 2001-07-04T12:08:56.235-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSXXX&rdquo; 2001-07-04T12:08:56.235-07:00 &ldquo;YYYY-&lsquo;W&rsquo;ww-u&rdquo; 2001-W27-3 코드 작성 java.util.Date 그럼 우선은 java.util.Date 라이브러리를 이용해서 날짜객체를 만들어 보겠습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/date-and-time/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='date' /><meta property='article:tag' content='time' /><meta property='article:published_time' content='2021-04-07T20:32:54&#43;09:00'/><meta property='article:modified_time' content='2021-04-07T20:32:54&#43;09:00'/>
 <meta name="twitter:title" content="Date and Time 다루기">
-<meta name="twitter:description" content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다. 안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다. Date and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.">
+<meta name="twitter:description" content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다.\n안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다.\nDate and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.MMMM.dd GGG hh:mm aaa&rdquo; 02001.July.04 AD 12:08 PM &ldquo;EEE, d MMM yyyy HH:mm:ss Z&rdquo; Wed, 4 Jul 2001 12:08:56 -0700 &ldquo;yyMMddHHmmssZ&rdquo; 010704120856-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSZ&rdquo; 2001-07-04T12:08:56.235-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSXXX&rdquo; 2001-07-04T12:08:56.235-07:00 &ldquo;YYYY-&lsquo;W&rsquo;ww-u&rdquo; 2001-W27-3 코드 작성 java.util.Date 그럼 우선은 java.util.Date 라이브러리를 이용해서 날짜객체를 만들어 보겠습니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -399,58 +393,58 @@
 </h2><p>날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 <a class="link" href="https://developer.android.com/reference/java/text/SimpleDateFormat#examples"  target="_blank" rel="noopener"
     >다음 표</a>와 같이 여러가지가 있습니다.</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>Date and Time Pattern</th>
-<th>Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>&ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo;</td>
-<td>2001.07.04 AD at 12:08:56 PDT</td>
-</tr>
-<tr>
-<td>&ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo;</td>
-<td>Wed, Jul 4, &lsquo;01</td>
-</tr>
-<tr>
-<td>&ldquo;h:mm a&rdquo;</td>
-<td>12:08 PM</td>
-</tr>
-<tr>
-<td>&ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo;</td>
-<td>12 o&rsquo;clock PM, Pacific Daylight Time</td>
-</tr>
-<tr>
-<td>&ldquo;K:mm a, z&rdquo;</td>
-<td>0:08 PM, PDT</td>
-</tr>
-<tr>
-<td>&ldquo;yyyyy.MMMM.dd GGG hh:mm aaa&rdquo;</td>
-<td>02001.July.04 AD 12:08 PM</td>
-</tr>
-<tr>
-<td>&ldquo;EEE, d MMM yyyy HH:mm:ss Z&rdquo;</td>
-<td>Wed, 4 Jul 2001 12:08:56 -0700</td>
-</tr>
-<tr>
-<td>&ldquo;yyMMddHHmmssZ&rdquo;</td>
-<td>010704120856-0700</td>
-</tr>
-<tr>
-<td>&ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSZ&rdquo;</td>
-<td>2001-07-04T12:08:56.235-0700</td>
-</tr>
-<tr>
-<td>&ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSXXX&rdquo;</td>
-<td>2001-07-04T12:08:56.235-07:00</td>
-</tr>
-<tr>
-<td>&ldquo;YYYY-&lsquo;W&rsquo;ww-u&rdquo;</td>
-<td>2001-W27-3</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Date and Time Pattern</th>
+          <th>Result</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>&ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo;</td>
+          <td>2001.07.04 AD at 12:08:56 PDT</td>
+      </tr>
+      <tr>
+          <td>&ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo;</td>
+          <td>Wed, Jul 4, &lsquo;01</td>
+      </tr>
+      <tr>
+          <td>&ldquo;h:mm a&rdquo;</td>
+          <td>12:08 PM</td>
+      </tr>
+      <tr>
+          <td>&ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo;</td>
+          <td>12 o&rsquo;clock PM, Pacific Daylight Time</td>
+      </tr>
+      <tr>
+          <td>&ldquo;K:mm a, z&rdquo;</td>
+          <td>0:08 PM, PDT</td>
+      </tr>
+      <tr>
+          <td>&ldquo;yyyyy.MMMM.dd GGG hh:mm aaa&rdquo;</td>
+          <td>02001.July.04 AD 12:08 PM</td>
+      </tr>
+      <tr>
+          <td>&ldquo;EEE, d MMM yyyy HH:mm:ss Z&rdquo;</td>
+          <td>Wed, 4 Jul 2001 12:08:56 -0700</td>
+      </tr>
+      <tr>
+          <td>&ldquo;yyMMddHHmmssZ&rdquo;</td>
+          <td>010704120856-0700</td>
+      </tr>
+      <tr>
+          <td>&ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSZ&rdquo;</td>
+          <td>2001-07-04T12:08:56.235-0700</td>
+      </tr>
+      <tr>
+          <td>&ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSXXX&rdquo;</td>
+          <td>2001-07-04T12:08:56.235-07:00</td>
+      </tr>
+      <tr>
+          <td>&ldquo;YYYY-&lsquo;W&rsquo;ww-u&rdquo;</td>
+          <td>2001-W27-3</td>
+      </tr>
+  </tbody>
 </table></div>
 <h2 id="코드-작성">코드 작성
 </h2><h3 id="javautildate">java.util.Date
@@ -644,7 +638,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -654,6 +649,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -822,7 +818,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -911,7 +907,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

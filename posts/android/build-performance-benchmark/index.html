@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 내 장비의 안드로이드 스튜디오 빌드능력을 벤치마킹 해 보겠습니다. 2020년 Apple에서 M시리즈 칩셋을 탑재한 맥북이 발표된 이후 밝혀진 엄청난 전성비와 성능은 세상을 놀라게 했습니다. 물론 저도 마찬가지였구요. 저는 2018년형 15인치 MacBook Pro를 사용하고 있는데요 2.2GHz 인텔 코어 i7과 16GB 메모리를 탑재하였고 외장 그래픽으로 Radeon Pro 555X 4 GB가 추가되어 있는 사양입니다. 당시에는 거금을 주고 구입한 머신이지만 에뮬레이터를 하나 띄우고 영상을 녹화하면서 안드로이드 프로젝트를 하나 빌드하면 처리가 느려져서 녹화영상의 프레임이 뚝뚝 떨어지는 문제가 있습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 내 장비의 안드로이드 스튜디오 빌드능력을 벤치마킹 해 보겠습니다.\n2020년 Apple에서 M시리즈 칩셋을 탑재한 맥북이 발표된 이후 밝혀진 엄청난 전성비와 성능은 세상을 놀라게 했습니다. 물론 저도 마찬가지였구요.\n저는 2018년형 15인치 MacBook Pro를 사용하고 있는데요 2.2GHz 인텔 코어 i7과 16GB 메모리를 탑재하였고 외장 그래픽으로 Radeon Pro 555X 4 GB가 추가되어 있는 사양입니다. 당시에는 거금을 주고 구입한 머신이지만 에뮬레이터를 하나 띄우고 영상을 녹화하면서 안드로이드 프로젝트를 하나 빌드하면 처리가 느려져서 녹화영상의 프레임이 뚝뚝 떨어지는 문제가 있습니다.\n">
 <title>내 장비의 안드로이드 스튜디오 빌드능력 벤치마킹하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/build-performance-benchmark/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="내 장비의 안드로이드 스튜디오 빌드능력 벤치마킹하기">
-<meta property='og:description' content="이번 포스팅에서는 내 장비의 안드로이드 스튜디오 빌드능력을 벤치마킹 해 보겠습니다. 2020년 Apple에서 M시리즈 칩셋을 탑재한 맥북이 발표된 이후 밝혀진 엄청난 전성비와 성능은 세상을 놀라게 했습니다. 물론 저도 마찬가지였구요. 저는 2018년형 15인치 MacBook Pro를 사용하고 있는데요 2.2GHz 인텔 코어 i7과 16GB 메모리를 탑재하였고 외장 그래픽으로 Radeon Pro 555X 4 GB가 추가되어 있는 사양입니다. 당시에는 거금을 주고 구입한 머신이지만 에뮬레이터를 하나 띄우고 영상을 녹화하면서 안드로이드 프로젝트를 하나 빌드하면 처리가 느려져서 녹화영상의 프레임이 뚝뚝 떨어지는 문제가 있습니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="내 장비의 안드로이드 스튜디오 빌드능력 벤치마킹하기">
+<meta property='og:description' content="이번 포스팅에서는 내 장비의 안드로이드 스튜디오 빌드능력을 벤치마킹 해 보겠습니다.\n2020년 Apple에서 M시리즈 칩셋을 탑재한 맥북이 발표된 이후 밝혀진 엄청난 전성비와 성능은 세상을 놀라게 했습니다. 물론 저도 마찬가지였구요.\n저는 2018년형 15인치 MacBook Pro를 사용하고 있는데요 2.2GHz 인텔 코어 i7과 16GB 메모리를 탑재하였고 외장 그래픽으로 Radeon Pro 555X 4 GB가 추가되어 있는 사양입니다. 당시에는 거금을 주고 구입한 머신이지만 에뮬레이터를 하나 띄우고 영상을 녹화하면서 안드로이드 프로젝트를 하나 빌드하면 처리가 느려져서 녹화영상의 프레임이 뚝뚝 떨어지는 문제가 있습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/build-performance-benchmark/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='benchmark' /><meta property='article:published_time' content='2022-09-25T11:15:54&#43;09:00'/><meta property='article:modified_time' content='2022-09-25T11:15:54&#43;09:00'/>
 <meta name="twitter:title" content="내 장비의 안드로이드 스튜디오 빌드능력 벤치마킹하기">
-<meta name="twitter:description" content="이번 포스팅에서는 내 장비의 안드로이드 스튜디오 빌드능력을 벤치마킹 해 보겠습니다. 2020년 Apple에서 M시리즈 칩셋을 탑재한 맥북이 발표된 이후 밝혀진 엄청난 전성비와 성능은 세상을 놀라게 했습니다. 물론 저도 마찬가지였구요. 저는 2018년형 15인치 MacBook Pro를 사용하고 있는데요 2.2GHz 인텔 코어 i7과 16GB 메모리를 탑재하였고 외장 그래픽으로 Radeon Pro 555X 4 GB가 추가되어 있는 사양입니다. 당시에는 거금을 주고 구입한 머신이지만 에뮬레이터를 하나 띄우고 영상을 녹화하면서 안드로이드 프로젝트를 하나 빌드하면 처리가 느려져서 녹화영상의 프레임이 뚝뚝 떨어지는 문제가 있습니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 내 장비의 안드로이드 스튜디오 빌드능력을 벤치마킹 해 보겠습니다.\n2020년 Apple에서 M시리즈 칩셋을 탑재한 맥북이 발표된 이후 밝혀진 엄청난 전성비와 성능은 세상을 놀라게 했습니다. 물론 저도 마찬가지였구요.\n저는 2018년형 15인치 MacBook Pro를 사용하고 있는데요 2.2GHz 인텔 코어 i7과 16GB 메모리를 탑재하였고 외장 그래픽으로 Radeon Pro 555X 4 GB가 추가되어 있는 사양입니다. 당시에는 거금을 주고 구입한 머신이지만 에뮬레이터를 하나 띄우고 영상을 녹화하면서 안드로이드 프로젝트를 하나 빌드하면 처리가 느려져서 녹화영상의 프레임이 뚝뚝 떨어지는 문제가 있습니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -433,7 +427,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -443,6 +438,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -611,7 +607,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -700,7 +696,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다. 안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다. assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다. 값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.\n안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.\nassets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다.\n값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.\n">
 <title>Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/assets-json-recycler/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기">
-<meta property='og:description' content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다. 안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다. assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다. 값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기">
+<meta property='og:description' content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.\n안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.\nassets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다.\n값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/assets-json-recycler/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='assets' /><meta property='article:tag' content='json' /><meta property='article:tag' content='recyclerview' /><meta property='article:published_time' content='2021-05-05T23:05:14&#43;09:00'/><meta property='article:modified_time' content='2021-05-05T23:05:14&#43;09:00'/>
 <meta name="twitter:title" content="Assets 폴더에서 로딩한 json 파일 Recyclerview에 표시하기">
-<meta name="twitter:description" content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다. 안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다. assets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다. 값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.">
+<meta name="twitter:description" content="이번 포스팅에서는 Assets 폴더를 사용하는 법에 대해 알아보겠습니다.\n안드로이드의 읽기전용 파일 저장폴더 앱을 만들다보면 읽기전용 파일을 앱에 저장하고 불러와서 사용해야 할 때가 있습니다. 이 때 파일은 다음 두 폴더에 저장할 수 있습니다.\nassets folder resources/raw folder 각 폴더의 특징은 다음과 같습니다.\n값 assets res/raw 파일명 자유롭게 설정 가능 a-z, 0-9, _ 만 사용가능 서브폴더 사용가능 사용불가 파일 리스팅 list()로 가능 불가능 컴파일타임 파일체크 없음 있음 XML에서 접근 불가능 가능 환경별 설정 분리 불가능 가능 간단히 정리하면 XML과 연계하여 다루어야 할 때는 res/raw 폴더를 사용하고, 그렇지 않을 경우 assets 폴더를 사용하면 될 것 같네요.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -404,45 +398,45 @@
 <p><a class="link" href="https://stackoverflow.com/questions/5583608/difference-between-res-and-assets-directories"  target="_blank" rel="noopener"
     >각 폴더의 특징</a>은 다음과 같습니다.</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th style="text-align:center">값</th>
-<th style="text-align:center">assets</th>
-<th style="text-align:center">res/raw</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">파일명</td>
-<td style="text-align:center">자유롭게 설정 가능</td>
-<td style="text-align:center">a-z, 0-9, _ 만 사용가능</td>
-</tr>
-<tr>
-<td style="text-align:center">서브폴더</td>
-<td style="text-align:center">사용가능</td>
-<td style="text-align:center">사용불가</td>
-</tr>
-<tr>
-<td style="text-align:center">파일 리스팅</td>
-<td style="text-align:center">list()로 가능</td>
-<td style="text-align:center">불가능</td>
-</tr>
-<tr>
-<td style="text-align:center">컴파일타임 파일체크</td>
-<td style="text-align:center">없음</td>
-<td style="text-align:center">있음</td>
-</tr>
-<tr>
-<td style="text-align:center">XML에서 접근</td>
-<td style="text-align:center">불가능</td>
-<td style="text-align:center">가능</td>
-</tr>
-<tr>
-<td style="text-align:center">환경별 설정 분리</td>
-<td style="text-align:center">불가능</td>
-<td style="text-align:center">가능</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">값</th>
+          <th style="text-align: center">assets</th>
+          <th style="text-align: center">res/raw</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">파일명</td>
+          <td style="text-align: center">자유롭게 설정 가능</td>
+          <td style="text-align: center">a-z, 0-9, _ 만 사용가능</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">서브폴더</td>
+          <td style="text-align: center">사용가능</td>
+          <td style="text-align: center">사용불가</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">파일 리스팅</td>
+          <td style="text-align: center">list()로 가능</td>
+          <td style="text-align: center">불가능</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">컴파일타임 파일체크</td>
+          <td style="text-align: center">없음</td>
+          <td style="text-align: center">있음</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">XML에서 접근</td>
+          <td style="text-align: center">불가능</td>
+          <td style="text-align: center">가능</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">환경별 설정 분리</td>
+          <td style="text-align: center">불가능</td>
+          <td style="text-align: center">가능</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>간단히 정리하면 XML과 연계하여 다루어야 할 때는 <code>res/raw</code> 폴더를 사용하고, 그렇지 않을 경우 <code>assets</code> 폴더를 사용하면 될 것 같네요.</p>
 <h2 id="앱-만들어보기">앱 만들어보기
@@ -794,7 +788,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -804,6 +799,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -972,7 +968,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1061,7 +1057,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

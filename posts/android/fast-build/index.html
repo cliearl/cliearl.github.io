@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다. 구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 소개했고 유튜브에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다. 최신버전의 Gradle 사용 우선은 최신버전의 Gradle을 사용하는게 중요합니다. 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다. 버전내역을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다.\n구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 소개했고 유튜브에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다.\n최신버전의 Gradle 사용 우선은 최신버전의 Gradle을 사용하는게 중요합니다. 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다. 버전내역을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.\n">
 <title>앱 빌드속도 빠르게 하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/fast-build/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="앱 빌드속도 빠르게 하기">
-<meta property='og:description' content="이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다. 구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 소개했고 유튜브에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다. 최신버전의 Gradle 사용 우선은 최신버전의 Gradle을 사용하는게 중요합니다. 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다. 버전내역을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="앱 빌드속도 빠르게 하기">
+<meta property='og:description' content="이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다.\n구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 소개했고 유튜브에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다.\n최신버전의 Gradle 사용 우선은 최신버전의 Gradle을 사용하는게 중요합니다. 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다. 버전내역을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/fast-build/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='build' /><meta property='article:tag' content='gradle' /><meta property='article:published_time' content='2021-04-12T19:35:46&#43;09:00'/><meta property='article:modified_time' content='2021-04-12T19:35:46&#43;09:00'/>
 <meta name="twitter:title" content="앱 빌드속도 빠르게 하기">
-<meta name="twitter:description" content="이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다. 구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 소개했고 유튜브에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다. 최신버전의 Gradle 사용 우선은 최신버전의 Gradle을 사용하는게 중요합니다. 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다. 버전내역을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 안드로이드 스튜디오에서 앱의 빌드속도를 빠르게 할 수 있는 여러가지 설정들에 대해 알아보도록 하겠습니다.\n구글에서는 빌드속도를 최적화하는 여러가지 방법들에 대해 정리하여 소개했고 유튜브에서도 공개하고 있습니다. 오늘은 이 내용을 정리해 보겠습니다.\n최신버전의 Gradle 사용 우선은 최신버전의 Gradle을 사용하는게 중요합니다. 모듈에 대한 build.gradle 파일에서 사용하는 코틀린의 버전이나, 그래들 플러그인의 버전을 정할 수 있게 되어 있습니다. 버전내역을 보시면 플러그인이 업데이트 될 수록 빌드를 빠르게 하는 기술이 적용되기 때문에, 버전을 항상 최신버전으로 유지하는게 중요합니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -600,7 +594,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -610,6 +605,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -778,7 +774,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -867,7 +863,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

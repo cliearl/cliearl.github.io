@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 ViewPager를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다. ViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다. 화면 구성 우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 ViewPager를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다.\nViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다.\n화면 구성 우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다. 인디케이터는 CircleIndicator라는 외부 라이브러리를 이용하겠습니다.\n">
 <title>ViewPager를 써서 좌우로 스와이프되는 화면 만들기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewpager-swipe/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="ViewPager를 써서 좌우로 스와이프되는 화면 만들기">
-<meta property='og:description' content="이번 포스팅에서는 ViewPager를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다. ViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다. 화면 구성 우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="ViewPager를 써서 좌우로 스와이프되는 화면 만들기">
+<meta property='og:description' content="이번 포스팅에서는 ViewPager를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다.\nViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다.\n화면 구성 우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다. 인디케이터는 CircleIndicator라는 외부 라이브러리를 이용하겠습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/viewpager-swipe/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='ViewPager' /><meta property='article:tag' content='swipe' /><meta property='article:published_time' content='2021-04-17T18:38:46&#43;09:00'/><meta property='article:modified_time' content='2021-04-17T18:38:46&#43;09:00'/>
 <meta name="twitter:title" content="ViewPager를 써서 좌우로 스와이프되는 화면 만들기">
-<meta name="twitter:description" content="이번 포스팅에서는 ViewPager를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다. ViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다. 화면 구성 우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 ViewPager를 써서 화면을 좌우로 스와이프할 수 있는 앱을 만들어 보겠습니다.\nViewPager는 페이지를 만들어놓고 유저가 좌우로 스와이프 함으로써 각 페이지를 전환할 수 있게 하는 모듈입니다. 예를들어 페이지 1,2,3을 준비하고 이 페이지들을 ViewPager 어댑터에 전달합니다. 어댑터는 페이지를 순서대로 배열하고 페이지 2를 표시합니다. 페이지 1과 3은 화면 바깥의 좌우로 배치한 뒤 스와이프를 하면 현재 페이지를 밀어내고 화면 밖에서 대기하는 페이지가 ViewPager 화면으로 들어오게 됩니다.\n화면 구성 우선은 화면을 구성하겠습니다. 화면에는 현재 어떤 페이지인지를 보여주는 인디케이터를 설치하고 나머지 영역을 ViewPager로 지정합니다. 인디케이터는 CircleIndicator라는 외부 라이브러리를 이용하겠습니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -769,7 +763,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -779,6 +774,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -947,7 +943,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1036,7 +1032,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

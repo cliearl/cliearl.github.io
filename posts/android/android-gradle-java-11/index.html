@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다. Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다. Default Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.\nAndroid Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.\nDefault Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.\n">
 <title>Android Studio Arctic Fox와 JDK 11의 도입</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Android Studio Arctic Fox와 JDK 11의 도입">
-<meta property='og:description' content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다. Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다. Default Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Android Studio Arctic Fox와 JDK 11의 도입">
+<meta property='og:description' content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.\nAndroid Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.\nDefault Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='JDK' /><meta property='article:published_time' content='2021-08-15T14:23:23&#43;09:00'/><meta property='article:modified_time' content='2021-08-15T14:23:23&#43;09:00'/>
 <meta name="twitter:title" content="Android Studio Arctic Fox와 JDK 11의 도입">
-<meta name="twitter:description" content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다. Android Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다. Default Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.\nAndroid Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.\nDefault Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -402,30 +396,30 @@
 <p>2021년 7월 말에 Android Studio의 버전이 <code>Arctic Fox|2020.3.1</code> 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 <a class="link" href="https://developer.android.com/studio/releases/gradle-plugin#7-0-0"  target="_blank" rel="noopener"
     >7.0.0</a>으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th></th>
-<th>Default Version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gradle</td>
-<td>7.0.2</td>
-</tr>
-<tr>
-<td>SDK Build Tools</td>
-<td>30.0.2</td>
-</tr>
-<tr>
-<td>NDK</td>
-<td>21.4.7075529</td>
-</tr>
-<tr>
-<td>JDK</td>
-<td>11</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Default Version</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Gradle</td>
+          <td>7.0.2</td>
+      </tr>
+      <tr>
+          <td>SDK Build Tools</td>
+          <td>30.0.2</td>
+      </tr>
+      <tr>
+          <td>NDK</td>
+          <td>21.4.7075529</td>
+      </tr>
+      <tr>
+          <td>JDK</td>
+          <td>11</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.</p>
 <h2 id="java-8에서-11로-변경된-이유">Java 8에서 11로 변경된 이유
@@ -590,7 +584,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -600,6 +595,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -743,7 +739,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -832,7 +828,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 싱글톤 패턴에 대해 알아보도록 하겠습니다. Singleton 이란 싱글톤(Singleton)은 소프트웨어 디자인패턴의 한 종류로, 프로그램 안에서 클래스의 인스턴스가 단 하나만 존재해야 할 때 사용합니다. 예를들어 데이터베이스를 변경할 수 있는 DBHandler 클래스의 인스턴스가 두개 있어서 동시에 데이터베이스에 접근한다면 문제가 생기겠죠. 자바에서는 일반적으로 다음과 같은 방식으로 싱글톤을 구현할 수 있습니다. private를 이용해 외부에서 생성자에 접근하지 못하도록 막고 getInstance를 통해야 인스턴스를 만들 수 있게 합니다. 이 때 static instance를 확인해서 인스턴스가 없으면 객체를 새로 만들고, 있다면 그대로 반환해주는 구조를 가집니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 싱글톤 패턴에 대해 알아보도록 하겠습니다.\nSingleton 이란 싱글톤(Singleton)은 소프트웨어 디자인패턴의 한 종류로, 프로그램 안에서 클래스의 인스턴스가 단 하나만 존재해야 할 때 사용합니다. 예를들어 데이터베이스를 변경할 수 있는 DBHandler 클래스의 인스턴스가 두개 있어서 동시에 데이터베이스에 접근한다면 문제가 생기겠죠.\n자바에서는 일반적으로 다음과 같은 방식으로 싱글톤을 구현할 수 있습니다. private를 이용해 외부에서 생성자에 접근하지 못하도록 막고 getInstance를 통해야 인스턴스를 만들 수 있게 합니다. 이 때 static instance를 확인해서 인스턴스가 없으면 객체를 새로 만들고, 있다면 그대로 반환해주는 구조를 가집니다.\n">
 <title>알기쉬운 Singleton Pattern</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/understanding-singleton-pattern/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="알기쉬운 Singleton Pattern">
-<meta property='og:description' content="이번 포스팅에서는 싱글톤 패턴에 대해 알아보도록 하겠습니다. Singleton 이란 싱글톤(Singleton)은 소프트웨어 디자인패턴의 한 종류로, 프로그램 안에서 클래스의 인스턴스가 단 하나만 존재해야 할 때 사용합니다. 예를들어 데이터베이스를 변경할 수 있는 DBHandler 클래스의 인스턴스가 두개 있어서 동시에 데이터베이스에 접근한다면 문제가 생기겠죠. 자바에서는 일반적으로 다음과 같은 방식으로 싱글톤을 구현할 수 있습니다. private를 이용해 외부에서 생성자에 접근하지 못하도록 막고 getInstance를 통해야 인스턴스를 만들 수 있게 합니다. 이 때 static instance를 확인해서 인스턴스가 없으면 객체를 새로 만들고, 있다면 그대로 반환해주는 구조를 가집니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="알기쉬운 Singleton Pattern">
+<meta property='og:description' content="이번 포스팅에서는 싱글톤 패턴에 대해 알아보도록 하겠습니다.\nSingleton 이란 싱글톤(Singleton)은 소프트웨어 디자인패턴의 한 종류로, 프로그램 안에서 클래스의 인스턴스가 단 하나만 존재해야 할 때 사용합니다. 예를들어 데이터베이스를 변경할 수 있는 DBHandler 클래스의 인스턴스가 두개 있어서 동시에 데이터베이스에 접근한다면 문제가 생기겠죠.\n자바에서는 일반적으로 다음과 같은 방식으로 싱글톤을 구현할 수 있습니다. private를 이용해 외부에서 생성자에 접근하지 못하도록 막고 getInstance를 통해야 인스턴스를 만들 수 있게 합니다. 이 때 static instance를 확인해서 인스턴스가 없으면 객체를 새로 만들고, 있다면 그대로 반환해주는 구조를 가집니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/understanding-singleton-pattern/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Design Pattern' /><meta property='article:tag' content='Singleton Pattern' /><meta property='article:published_time' content='2021-09-05T15:59:57&#43;09:00'/><meta property='article:modified_time' content='2021-09-05T15:59:57&#43;09:00'/>
 <meta name="twitter:title" content="알기쉬운 Singleton Pattern">
-<meta name="twitter:description" content="이번 포스팅에서는 싱글톤 패턴에 대해 알아보도록 하겠습니다. Singleton 이란 싱글톤(Singleton)은 소프트웨어 디자인패턴의 한 종류로, 프로그램 안에서 클래스의 인스턴스가 단 하나만 존재해야 할 때 사용합니다. 예를들어 데이터베이스를 변경할 수 있는 DBHandler 클래스의 인스턴스가 두개 있어서 동시에 데이터베이스에 접근한다면 문제가 생기겠죠. 자바에서는 일반적으로 다음과 같은 방식으로 싱글톤을 구현할 수 있습니다. private를 이용해 외부에서 생성자에 접근하지 못하도록 막고 getInstance를 통해야 인스턴스를 만들 수 있게 합니다. 이 때 static instance를 확인해서 인스턴스가 없으면 객체를 새로 만들고, 있다면 그대로 반환해주는 구조를 가집니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 싱글톤 패턴에 대해 알아보도록 하겠습니다.\nSingleton 이란 싱글톤(Singleton)은 소프트웨어 디자인패턴의 한 종류로, 프로그램 안에서 클래스의 인스턴스가 단 하나만 존재해야 할 때 사용합니다. 예를들어 데이터베이스를 변경할 수 있는 DBHandler 클래스의 인스턴스가 두개 있어서 동시에 데이터베이스에 접근한다면 문제가 생기겠죠.\n자바에서는 일반적으로 다음과 같은 방식으로 싱글톤을 구현할 수 있습니다. private를 이용해 외부에서 생성자에 접근하지 못하도록 막고 getInstance를 통해야 인스턴스를 만들 수 있게 합니다. 이 때 static instance를 확인해서 인스턴스가 없으면 객체를 새로 만들고, 있다면 그대로 반환해주는 구조를 가집니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -636,7 +630,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -646,6 +641,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -789,7 +785,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -878,7 +874,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

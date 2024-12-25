@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 스플래시 스크린을 만드는 법에 대해 알아보도록 하겠습니다. 아이콘을 선택하고 앱이 구동되서 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 이때 앱 아이콘과 동일한 이미지로 스플래시 스크린을 설정하면 아이콘이 튀어 나오는듯한 효과를 볼 수 있습니다. 코딩 타임 이번 앱은 앱 아이콘을 설정하는 강의에서 만들었던 프로젝트를 변경하여 만들어 보도록 하겠습니다. 우선은 스플래시 스크린에 표시할 이미지를 선정해야 하는데, 저는 이전에 앱 아이콘으로 사용했던 이미지를 그대로 사용하도록 하겠습니다.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 스플래시 스크린을 만드는 법에 대해 알아보도록 하겠습니다.\n아이콘을 선택하고 앱이 구동되서 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 이때 앱 아이콘과 동일한 이미지로 스플래시 스크린을 설정하면 아이콘이 튀어 나오는듯한 효과를 볼 수 있습니다.\n코딩 타임 이번 앱은 앱 아이콘을 설정하는 강의에서 만들었던 프로젝트를 변경하여 만들어 보도록 하겠습니다.\n우선은 스플래시 스크린에 표시할 이미지를 선정해야 하는데, 저는 이전에 앱 아이콘으로 사용했던 이미지를 그대로 사용하도록 하겠습니다. 이미지는 PNGRepo에서 다운로드 하실 수 있습니다.\n">
 <title>스플래쉬 스크린 설정하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/splashscreen/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="스플래쉬 스크린 설정하기">
-<meta property='og:description' content="이번 포스팅에서는 스플래시 스크린을 만드는 법에 대해 알아보도록 하겠습니다. 아이콘을 선택하고 앱이 구동되서 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 이때 앱 아이콘과 동일한 이미지로 스플래시 스크린을 설정하면 아이콘이 튀어 나오는듯한 효과를 볼 수 있습니다. 코딩 타임 이번 앱은 앱 아이콘을 설정하는 강의에서 만들었던 프로젝트를 변경하여 만들어 보도록 하겠습니다. 우선은 스플래시 스크린에 표시할 이미지를 선정해야 하는데, 저는 이전에 앱 아이콘으로 사용했던 이미지를 그대로 사용하도록 하겠습니다.">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="스플래쉬 스크린 설정하기">
+<meta property='og:description' content="이번 포스팅에서는 스플래시 스크린을 만드는 법에 대해 알아보도록 하겠습니다.\n아이콘을 선택하고 앱이 구동되서 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 이때 앱 아이콘과 동일한 이미지로 스플래시 스크린을 설정하면 아이콘이 튀어 나오는듯한 효과를 볼 수 있습니다.\n코딩 타임 이번 앱은 앱 아이콘을 설정하는 강의에서 만들었던 프로젝트를 변경하여 만들어 보도록 하겠습니다.\n우선은 스플래시 스크린에 표시할 이미지를 선정해야 하는데, 저는 이전에 앱 아이콘으로 사용했던 이미지를 그대로 사용하도록 하겠습니다. 이미지는 PNGRepo에서 다운로드 하실 수 있습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/splashscreen/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='splash screen' /><meta property='article:published_time' content='2021-04-28T21:46:44&#43;09:00'/><meta property='article:modified_time' content='2021-04-28T21:46:44&#43;09:00'/>
 <meta name="twitter:title" content="스플래쉬 스크린 설정하기">
-<meta name="twitter:description" content="이번 포스팅에서는 스플래시 스크린을 만드는 법에 대해 알아보도록 하겠습니다. 아이콘을 선택하고 앱이 구동되서 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 이때 앱 아이콘과 동일한 이미지로 스플래시 스크린을 설정하면 아이콘이 튀어 나오는듯한 효과를 볼 수 있습니다. 코딩 타임 이번 앱은 앱 아이콘을 설정하는 강의에서 만들었던 프로젝트를 변경하여 만들어 보도록 하겠습니다. 우선은 스플래시 스크린에 표시할 이미지를 선정해야 하는데, 저는 이전에 앱 아이콘으로 사용했던 이미지를 그대로 사용하도록 하겠습니다.">
+<meta name="twitter:description" content="이번 포스팅에서는 스플래시 스크린을 만드는 법에 대해 알아보도록 하겠습니다.\n아이콘을 선택하고 앱이 구동되서 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 이때 앱 아이콘과 동일한 이미지로 스플래시 스크린을 설정하면 아이콘이 튀어 나오는듯한 효과를 볼 수 있습니다.\n코딩 타임 이번 앱은 앱 아이콘을 설정하는 강의에서 만들었던 프로젝트를 변경하여 만들어 보도록 하겠습니다.\n우선은 스플래시 스크린에 표시할 이미지를 선정해야 하는데, 저는 이전에 앱 아이콘으로 사용했던 이미지를 그대로 사용하도록 하겠습니다. 이미지는 PNGRepo에서 다운로드 하실 수 있습니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
@@ -31,10 +29,6 @@
           gtag('config', 'G-ZL04TTHRBF');
         }
       </script>
-    
-  
-
-
     </head>
     <body class="
     article-page
@@ -78,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu7d43f913ad33dded6ad6f98c08467f3b_36083_300x0_resize_q75_box.jpg" width="300"
+                        <img src="/img/avatar_hu5587697309432343481.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -562,7 +556,8 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
             delimiters: [
                 { left: "$$", right: "$$", display: true },
                 { left: "$", right: "$", display: false },
@@ -572,6 +567,7 @@
             ignoredClasses: ["gist"]
         });})
 </script>
+
     
 </article>
 
@@ -740,7 +736,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -829,7 +825,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
