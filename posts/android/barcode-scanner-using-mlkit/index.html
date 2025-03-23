@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 구글의 ML Kit을 이용해 바코드 스캐너를 만드는 방법에 대해 알아보도록 하겠습니다.\n들어가기 구글에서는 안드로이드에서 인공지능 기능을 사용할 수 있도록 ML Kit이라는 라이브러리를 발표했는데 이 킷을 이용하면 바코드 스캔, 얼굴 인식, 텍스트 인식, 사물 트래킹 등의 기능을 구현할 수 있습니다.\n바코드를 스캔하는데에는 ZXing (&ldquo;zebra crossing&rdquo;)이라는 라이브러리가 많이 사용됩니다만, 현재는 기능 추가 없이 유지보수만 이루어지고 있습니다. 그래서 여기서는 기능 개선이 적극적으로 이루어지고 있는 ML Kit을 바코드 인식에 사용할 겁니다.\n카메라 사용 준비 바코드 스캐너는 크게 카메라를 구동하는 부분과 캡처화면의 바코드를 인식하는 두 파트로 나뉩니다. 안드로이드의 카메라 모듈은 Jetpack의 CameraX 라이브러리를 써서 구동합니다.\n">
+<title>ML Kit을 이용해 바코드 스캐너 만들기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/barcode-scanner-using-mlkit/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="ML Kit을 이용해 바코드 스캐너 만들기">
+<meta property='og:description' content="이번 포스팅에서는 구글의 ML Kit을 이용해 바코드 스캐너를 만드는 방법에 대해 알아보도록 하겠습니다.\n들어가기 구글에서는 안드로이드에서 인공지능 기능을 사용할 수 있도록 ML Kit이라는 라이브러리를 발표했는데 이 킷을 이용하면 바코드 스캔, 얼굴 인식, 텍스트 인식, 사물 트래킹 등의 기능을 구현할 수 있습니다.\n바코드를 스캔하는데에는 ZXing (&ldquo;zebra crossing&rdquo;)이라는 라이브러리가 많이 사용됩니다만, 현재는 기능 추가 없이 유지보수만 이루어지고 있습니다. 그래서 여기서는 기능 개선이 적극적으로 이루어지고 있는 ML Kit을 바코드 인식에 사용할 겁니다.\n카메라 사용 준비 바코드 스캐너는 크게 카메라를 구동하는 부분과 캡처화면의 바코드를 인식하는 두 파트로 나뉩니다. 안드로이드의 카메라 모듈은 Jetpack의 CameraX 라이브러리를 써서 구동합니다.\n">
+<meta property='og:url' content='https://cliearl.github.io/posts/android/barcode-scanner-using-mlkit/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='ML Kit' /><meta property='article:tag' content='CameraX' /><meta property='article:tag' content='Barcode Scanner' /><meta property='article:published_time' content='2023-02-12T22:30:01&#43;09:00'/><meta property='article:modified_time' content='2023-02-12T22:30:01&#43;09:00'/>
+<meta name="twitter:title" content="ML Kit을 이용해 바코드 스캐너 만들기">
+<meta name="twitter:description" content="이번 포스팅에서는 구글의 ML Kit을 이용해 바코드 스캐너를 만드는 방법에 대해 알아보도록 하겠습니다.\n들어가기 구글에서는 안드로이드에서 인공지능 기능을 사용할 수 있도록 ML Kit이라는 라이브러리를 발표했는데 이 킷을 이용하면 바코드 스캔, 얼굴 인식, 텍스트 인식, 사물 트래킹 등의 기능을 구현할 수 있습니다.\n바코드를 스캔하는데에는 ZXing (&ldquo;zebra crossing&rdquo;)이라는 라이브러리가 많이 사용됩니다만, 현재는 기능 추가 없이 유지보수만 이루어지고 있습니다. 그래서 여기서는 기능 개선이 적극적으로 이루어지고 있는 ML Kit을 바코드 인식에 사용할 겁니다.\n카메라 사용 준비 바코드 스캐너는 크게 카메라를 구동하는 부분과 캡처화면의 바코드를 인식하는 두 파트로 나뉩니다. 안드로이드의 카메라 모듈은 Jetpack의 CameraX 라이브러리를 써서 구동합니다.\n">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
+            <h2 class="site-description">@Andromeda Galaxy</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/cliearl'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/coder_frozen'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.youtube.com/channel/UC6V7LBEgcoTZUUgUU0Jv3xg'
+                        target="_blank"
+                        title="Youtube"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="4" />
+  <path d="M10 9l5 3l-5 3z" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/page/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://cliearl.github.io/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#들어가기">들어가기</a></li>
+    <li><a href="#카메라-사용-준비">카메라 사용 준비</a></li>
+    <li><a href="#바코드-분석기-작성">바코드 분석기 작성</a></li>
+    <li><a href="#바코드-분석기를-카메라와-결합">바코드 분석기를 카메라와 결합</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                Android
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/android/barcode-scanner-using-mlkit/">ML Kit을 이용해 바코드 스캐너 만들기</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 12, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 포스팅에서는 구글의 ML Kit을 이용해 바코드 스캐너를 만드는 방법에 대해 알아보도록 하겠습니다.</p>
+<h2 id="들어가기">들어가기
+</h2><p>구글에서는 안드로이드에서 인공지능 기능을 사용할 수 있도록 <a class="link" href="https://developers.google.com/ml-kit"  target="_blank" rel="noopener"
+    >ML Kit</a>이라는 라이브러리를 발표했는데 이 킷을 이용하면 바코드 스캔, 얼굴 인식, 텍스트 인식, 사물 트래킹 등의 기능을 구현할 수 있습니다.</p>
+<p>바코드를 스캔하는데에는 <a class="link" href="https://github.com/zxing/zxing"  target="_blank" rel="noopener"
+    >ZXing (&ldquo;zebra crossing&rdquo;)</a>이라는 라이브러리가 많이 사용됩니다만, 현재는 기능 추가 없이 유지보수만 이루어지고 있습니다. 그래서 여기서는 기능 개선이 적극적으로 이루어지고 있는 ML Kit을 바코드 인식에 사용할 겁니다.</p>
+<h2 id="카메라-사용-준비">카메라 사용 준비
+</h2><p>바코드 스캐너는 크게 카메라를 구동하는 부분과 캡처화면의 바코드를 인식하는 두 파트로 나뉩니다. 안드로이드의 카메라 모듈은 Jetpack의 <a class="link" href="https://developer.android.com/training/camerax"  target="_blank" rel="noopener"
+    >CameraX</a> 라이브러리를 써서 구동합니다.</p>
+<p>우선은 디펜던시를 추가해주는데요, <a class="link" href="https://developer.android.com/jetpack/androidx/releases/camera"  target="_blank" rel="noopener"
+    >CameraX</a>와 <a class="link" href="https://developers.google.com/ml-kit/vision/barcode-scanning/android"  target="_blank" rel="noopener"
+    >MLKit</a>을 같이 추가해 주겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">def</span> <span class="n">camerax_version</span> <span class="o">=</span> <span class="s2">&#34;1.2.0&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s2">&#34;androidx.camera:camera-core:${camerax_version}&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s2">&#34;androidx.camera:camera-camera2:${camerax_version}&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s2">&#34;androidx.camera:camera-lifecycle:${camerax_version}&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s2">&#34;androidx.camera:camera-view:${camerax_version}&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s1">&#39;com.google.mlkit:barcode-scanning:17.0.3&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 AndroidManifest에서 카메라를 사용할 수 있도록 권한을 부여합니다. 그리고 화면전환이 일어나면 카메라 좌표축도 바뀌기 때문에 단순화를 위해 여기서는 세로모드로 화면을 고정했습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+</span></span><span class="line"><span class="cl">&lt;manifest xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+</span></span><span class="line"><span class="cl">    package=&#34;com.example.barcodereader&#34;&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gi">+    &lt;uses-feature android:name=&#34;android.hardware.camera.any&#34; /&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    &lt;uses-permission android:name=&#34;android.permission.CAMERA&#34; /&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span><span class="line"><span class="cl">    &lt;application
+</span></span><span class="line"><span class="cl">        android:allowBackup=&#34;true&#34;
+</span></span><span class="line"><span class="cl">        android:icon=&#34;@mipmap/ic_launcher&#34;
+</span></span><span class="line"><span class="cl">        android:label=&#34;@string/app_name&#34;
+</span></span><span class="line"><span class="cl">        android:roundIcon=&#34;@mipmap/ic_launcher_round&#34;
+</span></span><span class="line"><span class="cl">        android:supportsRtl=&#34;true&#34;
+</span></span><span class="line"><span class="cl">        android:theme=&#34;@style/Theme.BarcodeReader&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;activity
+</span></span><span class="line"><span class="cl">            android:name=&#34;.MainActivity&#34;
+</span></span><span class="line"><span class="cl"><span class="gi">+            android:screenOrientation=&#34;portrait&#34;
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>            android:exported=&#34;true&#34;&gt;
+</span></span><span class="line"><span class="cl">            &lt;intent-filter&gt;
+</span></span><span class="line"><span class="cl">                &lt;action android:name=&#34;android.intent.action.MAIN&#34; /&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34; /&gt;
+</span></span><span class="line"><span class="cl">            &lt;/intent-filter&gt;
+</span></span><span class="line"><span class="cl">        &lt;/activity&gt;
+</span></span><span class="line"><span class="cl">    &lt;/application&gt;
+</span></span><span class="line"><span class="cl">&lt;/manifest&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 뷰에 카메라 화면을 표시하는 <a class="link" href="https://developer.android.com/reference/androidx/camera/view/PreviewView"  target="_blank" rel="noopener"
+    >PreviewView</a>와, 읽어들인 바코드의 내용을 표시하는 텍스트뷰를 하나씩 추가해 줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;androidx.camera.view.PreviewView</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/viewFinder&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toTopOf=</span><span class="s">&#34;@+id/resultView&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/resultView&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:padding=</span><span class="s">&#34;16dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_alignParentBottom=</span><span class="s">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:background=</span><span class="s">&#34;@color/teal_200&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:textColor=</span><span class="s">&#34;@android:color/black&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:textStyle=</span><span class="s">&#34;bold&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:textSize=</span><span class="s">&#34;18sp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:height=</span><span class="s">&#34;@android:dimen/thumbnail_width&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 카메라의 사용권한을 취득하는 파트를 작성합니다. 권한을 취득하는 구체적인 방법은 <a class="link" href="https://cliearl.github.io/posts/android/request-runtime-permission/"  target="_blank" rel="noopener"
+    >Runtime Permission 이해하고 요청 구현하기</a> 강의에서 다루었으니 참고 바랍니다.</p>
+<p>코드를 간단히 설명하면 <code>REQUIRED_PERMISSIONS</code>에 취득할 권한을 정의하고 <code>isAllPermissionsGranted</code>에서 권한이 취득되었는지 확인합니다. 권한이 없으면 <code>requestMultiplePermissions</code>로 권한을 취득하고, 권한이 확인되었으면 <code>startCamera</code>로 카메라 구동을 시작하는 구조로 되어 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="nc">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Request camera permissions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">isAllPermissionsGranted</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">startCamera</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">requestMultiplePermissions</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">cameraExecutor</span> <span class="p">=</span> <span class="nc">Executors</span><span class="p">.</span><span class="n">newSingleThreadExecutor</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">fun</span> <span class="nf">startCamera</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">fun</span> <span class="nf">isAllPermissionsGranted</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="nc">REQUIRED_PERMISSIONS</span><span class="p">.</span><span class="n">all</span> <span class="p">{</span> <span class="n">permission</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">ContextCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">applicationContext</span><span class="p">,</span> <span class="n">permission</span><span class="p">)</span> <span class="o">==</span> <span class="nc">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">requestMultiplePermissions</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">registerForActivityResult</span><span class="p">(</span><span class="nc">ActivityResultContracts</span><span class="p">.</span><span class="n">RequestMultiplePermissions</span><span class="p">())</span> <span class="p">{</span> <span class="n">permissions</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">permissions</span><span class="p">.</span><span class="n">entries</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">when</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">it</span><span class="p">.</span><span class="k">value</span> <span class="o">-&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nc">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="nc">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">startCamera</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">shouldShowRequestPermissionRationale</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">[</span><span class="m">0</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nc">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="s2">&#34;Permission required to use app!&#34;</span><span class="p">,</span> <span class="nc">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">startCamera</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span> <span class="o">-&gt;</span> <span class="nc">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission denied&#34;</span><span class="p">,</span> <span class="nc">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">val</span> <span class="py">REQUIRED</span><span class="n">_PERMISSIONS</span> <span class="p">=</span> <span class="n">arrayOf</span><span class="p">(</span><span class="nc">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">CAMERA</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 <code>startCamera</code>에서 카메라를 구동합니다. CameraX는 <a class="link" href="https://developer.android.com/reference/androidx/camera/lifecycle/ProcessCameraProvider"  target="_blank" rel="noopener"
+    >ProcessCameraProvider</a>를 사용해 현재 화면의 lifecycleowner와 카메라의 lifecycle을 연동합니다. 그리고 <a class="link" href="https://developer.android.com/reference/androidx/camera/lifecycle/ProcessCameraProvider#bindToLifecycle%28androidx.lifecycle.LifecycleOwner,%20androidx.camera.core.CameraSelector,%20androidx.camera.core.UseCase...%29"  target="_blank" rel="noopener"
+    >bindToLifecycle</a>로 카메라의 세팅값과 Use case를 전달해 주면 카메라가 작동하게 되지요. 여기서는 preview 기능을 사용할 것이므로 Preview를 만들어서 전달해 주었습니다. 이 때 카메라에 대해 <a class="link" href="https://developer.android.com/reference/androidx/camera/core/CameraControl#enableTorch%28boolean%29"  target="_blank" rel="noopener"
+    >enableTorch</a>를 사용하면 플래시 사용 여부를 결정할 수도 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@SuppressLint</span><span class="p">(</span><span class="s2">&#34;UnsafeOptInUsageError&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">startCamera</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">cameraProviderFuture</span> <span class="p">=</span> <span class="nc">ProcessCameraProvider</span><span class="p">.</span><span class="n">getInstance</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 카메라 세팅
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">cameraSelector</span> <span class="p">=</span> <span class="nc">CameraSelector</span><span class="p">.</span><span class="n">DEFAULT_BACK_CAMERA</span> <span class="c1">// Select back camera as a default
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 프리뷰 세팅
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">preview</span> <span class="p">=</span> <span class="nc">Preview</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">also</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">it</span><span class="p">.</span><span class="n">setSurfaceProvider</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">viewFinder</span><span class="p">.</span><span class="n">surfaceProvider</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">cameraProviderFuture</span><span class="p">.</span><span class="n">addListener</span><span class="p">(</span><span class="n">Runnable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 카메라의 lifecycle을 lifecycleowner와 연결시킴
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">val</span> <span class="py">cameraProvider</span><span class="p">:</span> <span class="n">ProcessCameraProvider</span> <span class="p">=</span> <span class="n">cameraProviderFuture</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Unbind use cases before rebinding
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cameraProvider</span><span class="p">.</span><span class="n">unbindAll</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Bind use cases to camera
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">val</span> <span class="py">camera</span> <span class="p">=</span> <span class="n">cameraProvider</span><span class="p">.</span><span class="n">bindToLifecycle</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="k">this</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cameraSelector</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">preview</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">//Handle flash
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">camera</span><span class="p">.</span><span class="n">cameraControl</span><span class="p">.</span><span class="n">enableTorch</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nc">ContextCompat</span><span class="p">.</span><span class="n">getMainExecutor</span><span class="p">(</span><span class="k">this</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="바코드-분석기-작성">바코드 분석기 작성
+</h2><p>다음은 바코드를 분석하는 Use case를 카메라에 추가로 전달할 겁니다. 그것을 위해서 <a class="link" href="https://developer.android.com/reference/androidx/camera/core/ImageAnalysis.Analyzer"  target="_blank" rel="noopener"
+    >ImageAnalysis.Analyzer</a>를 상속하는 <code>BarcodeAnalyzer</code>를 만들어줍니다. 이 클래스는 <a class="link" href="https://developer.android.com/reference/androidx/camera/core/ImageAnalysis.Analyzer#analyze%28androidx.camera.core.ImageProxy%29"  target="_blank" rel="noopener"
+    >analyze</a> 내부에서 머신러닝을 이용해 이미지를 분석합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@ExperimentalGetImage</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BarcodeAnalyzer</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">onBarcodesDetected</span><span class="p">:</span> <span class="p">(</span><span class="n">barcodes</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Barcode</span><span class="p">&gt;)</span> <span class="o">-&gt;</span> <span class="n">Unit</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">:</span> <span class="nc">ImageAnalysis</span><span class="p">.</span><span class="n">Analyzer</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">analyze</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">ImageProxy</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">image</span><span class="p">.</span><span class="n">image</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">inputImage</span> <span class="p">=</span> <span class="nc">InputImage</span><span class="p">.</span><span class="n">fromMediaImage</span><span class="p">(</span><span class="k">it</span><span class="p">,</span> <span class="n">image</span><span class="p">.</span><span class="n">imageInfo</span><span class="p">.</span><span class="n">rotationDegrees</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">barcodeScannerOptions</span> <span class="p">=</span> <span class="nc">BarcodeScannerOptions</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="n">setBarcodeFormats</span><span class="p">(</span><span class="nc">Barcode</span><span class="p">.</span><span class="n">FORMAT_ALL_FORMATS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">scanner</span> <span class="p">=</span> <span class="nc">BarcodeScanning</span><span class="p">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">barcodeScannerOptions</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">scanner</span><span class="p">.</span><span class="n">process</span><span class="p">(</span><span class="n">inputImage</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="n">addOnSuccessListener</span> <span class="p">{</span> <span class="n">barcodes</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">onBarcodesDetected</span><span class="p">(</span><span class="n">barcodes</span><span class="p">.</span><span class="n">toList</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="n">addOnFailureListener</span> <span class="p">{</span> <span class="n">failure</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">failure</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="n">addOnCompleteListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">image</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>우선 <a class="link" href="https://developers.google.com/android/reference/com/google/mlkit/vision/common/InputImage"  target="_blank" rel="noopener"
+    >InputImage</a>를 써서 캡처한 이미지를 불러옵니다. 그리고 <a class="link" href="https://developers.google.com/android/reference/com/google/mlkit/vision/barcode/BarcodeScanning"  target="_blank" rel="noopener"
+    >BarcodeScanner</a>의 인스턴스를 만들어 주는데요, 이때 스캔할 <a class="link" href="https://developers.google.com/android/reference/com/google/mlkit/vision/barcode/common/Barcode.BarcodeFormat"  target="_blank" rel="noopener"
+    >바코드 포맷</a>은 다음 중에서 고를 수 있습니다. FORMAT_ALL_FORMATS이 기본값이지만 처리가 늦어지므로 필요한 포맷만을 정확히 지정하는 것이 좋습니다.</p>
+<ul>
+<li>Barcode.FORMAT_UNKNOWN</li>
+<li>Barcode.FORMAT_ALL_FORMATS</li>
+<li>Barcode.FORMAT_CODE_128</li>
+<li>Barcode.FORMAT_CODE_39</li>
+<li>Barcode.FORMAT_CODE_93</li>
+<li>Barcode.FORMAT_CODABAR</li>
+<li>Barcode.FORMAT_DATA_MATRIX</li>
+<li>Barcode.FORMAT_EAN_13</li>
+<li>Barcode.FORMAT_EAN_8</li>
+<li>Barcode.FORMAT_ITF</li>
+<li>Barcode.FORMAT_QR_CODE</li>
+<li>Barcode.FORMAT_UPC_A</li>
+<li>Barcode.FORMAT_UPC_E</li>
+<li>Barcode.FORMAT_PDF417</li>
+<li>Barcode.FORMAT_AZTEC</li>
+</ul>
+<p>그 다음은 스캐너에 이미지를 전달한 후 콜백에 처리 결과를 등록하면 되는데요, 여기서는 처리가 성공할 경우 그 결과를 반환하고 image 객체를 닫아주도록 했습니다.</p>
+<h2 id="바코드-분석기를-카메라와-결합">바코드 분석기를 카메라와 결합
+</h2><p>다음은 바코드 분석기의 인스턴스를 imageAnalyzer로 만들고 camera에 Usecase로 전달합니다. 바코드를 분석하는 작업은 백그라운드 스레드에서 진행할건데 스레드가 새로 계속 생성되지 않도록 <a class="link" href="https://developer.android.com/reference/java/util/concurrent/Executors#newSingleThreadExecutor%28%29"  target="_blank" rel="noopener"
+    >newSingleThreadExecutor</a>로 만들어 줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl">class MainActivity : AppCompatActivity() {
+</span></span><span class="line"><span class="cl"><span class="gi">+    private lateinit var cameraExecutor: ExecutorService
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span><span class="line"><span class="cl">    override fun onCreate(savedInstanceState: Bundle?) {
+</span></span><span class="line"><span class="cl">        super.onCreate(savedInstanceState)
+</span></span><span class="line"><span class="cl">        setContentView(binding.root)
+</span></span><span class="line"><span class="cl"><span class="gi">+        cameraExecutor = Executors.newSingleThreadExecutor()
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>        ...
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    @SuppressLint(&#34;UnsafeOptInUsageError&#34;)
+</span></span><span class="line"><span class="cl">    private fun startCamera() {
+</span></span><span class="line"><span class="cl">        ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gi">+        // 이미지 분석
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        val imageAnalyzer = ImageAnalysis.Builder().build().also {
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            it.setAnalyzer(cameraExecutor, BarcodeAnalyzer { barcodes -&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                barcodes.forEach { barcode -&gt;
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                    val value = barcode.rawValue
+</span></span></span><span class="line"><span class="cl"><span class="gi">+//                    Log.d(&#34;TAG&#34;, value.toString())
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                    binding.resultView.text = value
+</span></span></span><span class="line"><span class="cl"><span class="gi">+                }
+</span></span></span><span class="line"><span class="cl"><span class="gi">+            })
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        }
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span><span class="line"><span class="cl">        cameraProviderFuture.addListener(Runnable {
+</span></span><span class="line"><span class="cl">            // Used to bind the lifecycle of cameras to the lifecycle owner
+</span></span><span class="line"><span class="cl">            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            try {
+</span></span><span class="line"><span class="cl">                // Unbind use cases before rebinding
+</span></span><span class="line"><span class="cl">                cameraProvider.unbindAll()
+</span></span><span class="line"><span class="cl">                // Bind use cases to camera
+</span></span><span class="line"><span class="cl">                val camera = cameraProvider.bindToLifecycle(
+</span></span><span class="line"><span class="cl">                    this,
+</span></span><span class="line"><span class="cl">                    cameraSelector,
+</span></span><span class="line"><span class="cl">                    preview,
+</span></span><span class="line"><span class="cl"><span class="gi">+                    imageAnalyzer
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>                )
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                //Handle flash
+</span></span><span class="line"><span class="cl">                camera.cameraControl.enableTorch(false)
+</span></span><span class="line"><span class="cl">            } catch(e: Exception) {
+</span></span><span class="line"><span class="cl">                e.printStackTrace()
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }, ContextCompat.getMainExecutor(this))
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gi">+    override fun onDestroy() {
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        super.onDestroy()
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        cameraExecutor.shutdown()
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    }
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게해서 MLKit으로 바코드 스캐너를 구현하는 방법에 대해 알아보았습니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ml-kit/">ML Kit</a>
+        
+            <a href="/tags/camerax/">CameraX</a>
+        
+            <a href="/tags/barcode-scanner/">Barcode Scanner</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+        <div class="article-list--compact links">
+    
+        <article>
+            <a href="https://github.com/cliearl/android-tutorial/tree/master/" target="_blank" rel="noopener">
+                <div class="article-details">
+                    <h2 class="article-title">GitHub/cliearl</h2>
+                    <footer class="article-time">
+                        
+                            Find and download source code of the article from this link.
+                        
+                    </footer>
+                </div>
+        
+                
+                    
+                    
+                    <div class="article-image">
+                        <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
+                    </div>
+                
+            </a>
+        </article>
+    
+</div>
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2307_2309/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.07~23.08</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2306/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.06</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2305/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.05</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2304/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.04</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2303/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.03</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

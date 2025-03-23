@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 수평계 앱을 만드는 방법에 대해 알아보도록 하겠습니다.\n수평계는 다음과 같이 액체 속에 공기방울이 들어가 있는 것으로, 공기방울이 중력의 반대방향으로 움직이기 때문에 기울기 정도를 직관적으로 확인할 수 있습니다. 여기서는 이 수평계를 구현하는 앱을 만들어 볼 겁니다.\n지난 강의에서 중력센서를 사용해 기기의 기울기 각도를 확인하는 법을 알아보았는데요, 이 기울기 각도에 따라 공기방울이 움직이게 하면 될 것 같습니다.\n기존 코드 확인 그럼 중력센서로부터 기울기 각도를 계산하는 기존 코드를 확인하겠습니다.\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 class MainActivity : AppCompatActivity(), SensorEventListener { private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) } private val sensorManager by lazy { getSystemService(Context.SENSOR_SERVICE) as SensorManager } private lateinit var event: SensorEvent @SuppressLint(&#34;SourceLockedOrientationActivity&#34;) override fun onCreate(savedInstanceState: Bundle?) { // 세로모드 고정 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT super.onCreate(savedInstanceState) setContentView(binding.root) } override fun onResume() { super.onResume() sensorManager.registerListener( this, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_FASTEST ) } override fun onPause() { super.onPause() sensorManager.unregisterListener(this) } override fun onSensorChanged(event: SensorEvent?) { event?.let { this.event = event val x = event.values[0] val y = event.values[1] val z = event.values[2] val r = sqrt(x.pow(2) + y.pow(2) + z.pow(2)) Log.d(&#34;MainActivity&#34;, &#34;onSensorChanged: x: $x, y: $y, z: $z, R: $r&#34;) val xAngle = (90 - acos(x / r) * 180 / PI).toFloat() val yAngle = (90 - acos(y / r) * 180 / PI).toFloat() } } override fun onAccuracyChanged(p0: Sensor?, p1: Int) {} } TiltView 작성 여기서는 각도를 전달받는 TiltView라는 View 클래스를 만듭니다 이 클래스는 각도를 전달받은 뒤 수평계 화면을 표시합니다. 수평계 그래픽은 Paint와 Canvas를 써서 화면에 직접 그리도록 하겠습니다.\n">
+<title>수평계 앱 만들기</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/android/tilt-calculator/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="수평계 앱 만들기">
+<meta property='og:description' content="이번 포스팅에서는 수평계 앱을 만드는 방법에 대해 알아보도록 하겠습니다.\n수평계는 다음과 같이 액체 속에 공기방울이 들어가 있는 것으로, 공기방울이 중력의 반대방향으로 움직이기 때문에 기울기 정도를 직관적으로 확인할 수 있습니다. 여기서는 이 수평계를 구현하는 앱을 만들어 볼 겁니다.\n지난 강의에서 중력센서를 사용해 기기의 기울기 각도를 확인하는 법을 알아보았는데요, 이 기울기 각도에 따라 공기방울이 움직이게 하면 될 것 같습니다.\n기존 코드 확인 그럼 중력센서로부터 기울기 각도를 계산하는 기존 코드를 확인하겠습니다.\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 class MainActivity : AppCompatActivity(), SensorEventListener { private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) } private val sensorManager by lazy { getSystemService(Context.SENSOR_SERVICE) as SensorManager } private lateinit var event: SensorEvent @SuppressLint(&#34;SourceLockedOrientationActivity&#34;) override fun onCreate(savedInstanceState: Bundle?) { // 세로모드 고정 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT super.onCreate(savedInstanceState) setContentView(binding.root) } override fun onResume() { super.onResume() sensorManager.registerListener( this, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_FASTEST ) } override fun onPause() { super.onPause() sensorManager.unregisterListener(this) } override fun onSensorChanged(event: SensorEvent?) { event?.let { this.event = event val x = event.values[0] val y = event.values[1] val z = event.values[2] val r = sqrt(x.pow(2) + y.pow(2) + z.pow(2)) Log.d(&#34;MainActivity&#34;, &#34;onSensorChanged: x: $x, y: $y, z: $z, R: $r&#34;) val xAngle = (90 - acos(x / r) * 180 / PI).toFloat() val yAngle = (90 - acos(y / r) * 180 / PI).toFloat() } } override fun onAccuracyChanged(p0: Sensor?, p1: Int) {} } TiltView 작성 여기서는 각도를 전달받는 TiltView라는 View 클래스를 만듭니다 이 클래스는 각도를 전달받은 뒤 수평계 화면을 표시합니다. 수평계 그래픽은 Paint와 Canvas를 써서 화면에 직접 그리도록 하겠습니다.\n">
+<meta property='og:url' content='https://cliearl.github.io/posts/android/tilt-calculator/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Tilt calculator' /><meta property='article:published_time' content='2023-02-12T22:34:11&#43;09:00'/><meta property='article:modified_time' content='2023-02-12T22:34:11&#43;09:00'/>
+<meta name="twitter:title" content="수평계 앱 만들기">
+<meta name="twitter:description" content="이번 포스팅에서는 수평계 앱을 만드는 방법에 대해 알아보도록 하겠습니다.\n수평계는 다음과 같이 액체 속에 공기방울이 들어가 있는 것으로, 공기방울이 중력의 반대방향으로 움직이기 때문에 기울기 정도를 직관적으로 확인할 수 있습니다. 여기서는 이 수평계를 구현하는 앱을 만들어 볼 겁니다.\n지난 강의에서 중력센서를 사용해 기기의 기울기 각도를 확인하는 법을 알아보았는데요, 이 기울기 각도에 따라 공기방울이 움직이게 하면 될 것 같습니다.\n기존 코드 확인 그럼 중력센서로부터 기울기 각도를 계산하는 기존 코드를 확인하겠습니다.\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 class MainActivity : AppCompatActivity(), SensorEventListener { private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) } private val sensorManager by lazy { getSystemService(Context.SENSOR_SERVICE) as SensorManager } private lateinit var event: SensorEvent @SuppressLint(&#34;SourceLockedOrientationActivity&#34;) override fun onCreate(savedInstanceState: Bundle?) { // 세로모드 고정 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT super.onCreate(savedInstanceState) setContentView(binding.root) } override fun onResume() { super.onResume() sensorManager.registerListener( this, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_FASTEST ) } override fun onPause() { super.onPause() sensorManager.unregisterListener(this) } override fun onSensorChanged(event: SensorEvent?) { event?.let { this.event = event val x = event.values[0] val y = event.values[1] val z = event.values[2] val r = sqrt(x.pow(2) + y.pow(2) + z.pow(2)) Log.d(&#34;MainActivity&#34;, &#34;onSensorChanged: x: $x, y: $y, z: $z, R: $r&#34;) val xAngle = (90 - acos(x / r) * 180 / PI).toFloat() val yAngle = (90 - acos(y / r) * 180 / PI).toFloat() } } override fun onAccuracyChanged(p0: Sensor?, p1: Int) {} } TiltView 작성 여기서는 각도를 전달받는 TiltView라는 View 클래스를 만듭니다 이 클래스는 각도를 전달받은 뒤 수평계 화면을 표시합니다. 수평계 그래픽은 Paint와 Canvas를 써서 화면에 직접 그리도록 하겠습니다.\n">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
+            <h2 class="site-description">@Andromeda Galaxy</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/cliearl'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/coder_frozen'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.youtube.com/channel/UC6V7LBEgcoTZUUgUU0Jv3xg'
+                        target="_blank"
+                        title="Youtube"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="4" />
+  <path d="M10 9l5 3l-5 3z" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/page/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://cliearl.github.io/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#기존-코드-확인">기존 코드 확인</a></li>
+    <li><a href="#tiltview-작성">TiltView 작성</a></li>
+    <li><a href="#화면-작성">화면 작성</a></li>
+    <li><a href="#mainactivity">MainActivity</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/android/" >
+                Android
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/android/tilt-calculator/">수평계 앱 만들기</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 12, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    9 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>이번 포스팅에서는 수평계 앱을 만드는 방법에 대해 알아보도록 하겠습니다.</p>
+<p>수평계는 다음과 같이 액체 속에 공기방울이 들어가 있는 것으로, 공기방울이 중력의 반대방향으로 움직이기 때문에 기울기 정도를 직관적으로 확인할 수 있습니다. 여기서는 이 수평계를 구현하는 앱을 만들어 볼 겁니다.</p>
+<p><img src="https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/2603341841/B.jpg?73000000"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>지난 강의에서 중력센서를 사용해 기기의 기울기 각도를 확인하는 법을 알아보았는데요, 이 기울기 각도에 따라 공기방울이 움직이게 하면 될 것 같습니다.</p>
+<h2 id="기존-코드-확인">기존 코드 확인
+</h2><p>그럼 중력센서로부터 기울기 각도를 계산하는 기존 코드를 확인하겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">(),</span> <span class="n">SensorEventListener</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">binding</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">sensorManager</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">getSystemService</span><span class="p">(</span><span class="nc">Context</span><span class="p">.</span><span class="n">SENSOR_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">SensorManager</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">event</span><span class="p">:</span> <span class="n">SensorEvent</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@SuppressLint</span><span class="p">(</span><span class="s2">&#34;SourceLockedOrientationActivity&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 세로모드 고정
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">requestedOrientation</span> <span class="p">=</span> <span class="nc">ActivityInfo</span><span class="p">.</span><span class="n">SCREEN_ORIENTATION_PORTRAIT</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onResume</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onResume</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sensorManager</span><span class="p">.</span><span class="n">registerListener</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sensorManager</span><span class="p">.</span><span class="n">getDefaultSensor</span><span class="p">(</span><span class="nc">Sensor</span><span class="p">.</span><span class="n">TYPE_GRAVITY</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="nc">SensorManager</span><span class="p">.</span><span class="n">SENSOR_DELAY_FASTEST</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPause</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onPause</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sensorManager</span><span class="p">.</span><span class="n">unregisterListener</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSensorChanged</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SensorEvent</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">event</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">event</span> <span class="p">=</span> <span class="n">event</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">y</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">z</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">r</span> <span class="p">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="n">y</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="n">z</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nc">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;MainActivity&#34;</span><span class="p">,</span> <span class="s2">&#34;onSensorChanged: x: </span><span class="si">$x</span><span class="s2">, y: </span><span class="si">$y</span><span class="s2">, z: </span><span class="si">$z</span><span class="s2">, R: </span><span class="si">$r</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">xAngle</span> <span class="p">=</span> <span class="p">(</span><span class="m">90</span> <span class="p">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">x</span> <span class="p">/</span> <span class="n">r</span><span class="p">)</span> <span class="p">*</span> <span class="m">180</span> <span class="p">/</span> <span class="n">PI</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">yAngle</span> <span class="p">=</span> <span class="p">(</span><span class="m">90</span> <span class="p">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">y</span> <span class="p">/</span> <span class="n">r</span><span class="p">)</span> <span class="p">*</span> <span class="m">180</span> <span class="p">/</span> <span class="n">PI</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onAccuracyChanged</span><span class="p">(</span><span class="n">p0</span><span class="p">:</span> <span class="n">Sensor</span><span class="p">?,</span> <span class="n">p1</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="tiltview-작성">TiltView 작성
+</h2><p>여기서는 각도를 전달받는 TiltView라는 View 클래스를 만듭니다 이 클래스는 각도를 전달받은 뒤 수평계 화면을 표시합니다. 수평계 그래픽은 <a class="link" href="https://developer.android.com/reference/android/graphics/Paint"  target="_blank" rel="noopener"
+    >Paint</a>와 <a class="link" href="https://developer.android.com/reference/android/graphics/Canvas"  target="_blank" rel="noopener"
+    >Canvas</a>를 써서 화면에 직접 그리도록 하겠습니다.</p>
+<p>우선은 <code>onSensorEvent</code> 에서 각도를 전달받은 뒤 xPos, yPos로 변환합니다. 그리고 함수 마지막에 <a class="link" href="https://developer.android.com/reference/android/view/View#invalidate%28%29"  target="_blank" rel="noopener"
+    >invalidate</a>를 실행시켜 화면을 다시 그리도록 합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TiltView</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">attrs</span><span class="p">:</span> <span class="n">AttributeSet</span><span class="p">)</span> <span class="p">:</span> <span class="n">View</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">xPos</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">yPos</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">onSensorEvent</span><span class="p">(</span><span class="n">xAngle</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">yAngle</span><span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 각도를 진폭으로 스케일
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 정방향으로 세웠을 때 y가 -값이 나오므로 계산을 4/4분면에서 직관적으로 하기 위해 +로 변환
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">xPos</span> <span class="p">=</span> <span class="n">xAngle</span> <span class="p">*</span> <span class="n">scale</span>
+</span></span><span class="line"><span class="cl">        <span class="n">yPos</span> <span class="p">=</span> <span class="n">yAngle</span> <span class="p">*</span> <span class="p">-</span><span class="n">scale</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 뷰를 다시 그리기 위해 onDraw를 호출
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">invalidate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 화면 드로잉에 사용할 페인트 객체를 만들어줍니다. 여기서는 굵은 선, 얇은 선, 흰색 채우기, 녹색 채우기, 버블 채우기용 객체를 준비했습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TiltView</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">attrs</span><span class="p">:</span> <span class="n">AttributeSet</span><span class="p">)</span> <span class="p">:</span> <span class="n">View</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 드로잉에 사용할 Paint 객체
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">private</span> <span class="k">val</span> <span class="py">thickStroke</span> <span class="p">=</span> <span class="n">Paint</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">thinStroke</span> <span class="p">=</span> <span class="n">Paint</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">whiteFill</span> <span class="p">=</span> <span class="n">Paint</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">greenFill</span> <span class="p">=</span> <span class="n">Paint</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">bubbleFill</span> <span class="p">=</span> <span class="n">Paint</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 페인트 객체 생성
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">thickStroke</span><span class="p">.</span><span class="n">style</span> <span class="p">=</span> <span class="nc">Paint</span><span class="p">.</span><span class="nc">Style</span><span class="p">.</span><span class="n">STROKE</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thickStroke</span><span class="p">.</span><span class="n">strokeWidth</span> <span class="p">=</span> <span class="m">5f</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">thinStroke</span><span class="p">.</span><span class="n">style</span> <span class="p">=</span> <span class="nc">Paint</span><span class="p">.</span><span class="nc">Style</span><span class="p">.</span><span class="n">STROKE</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thinStroke</span><span class="p">.</span><span class="n">strokeWidth</span> <span class="p">=</span> <span class="m">3f</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">whiteFill</span><span class="p">.</span><span class="n">style</span> <span class="p">=</span> <span class="nc">Paint</span><span class="p">.</span><span class="nc">Style</span><span class="p">.</span><span class="n">FILL</span>
+</span></span><span class="line"><span class="cl">        <span class="n">whiteFill</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="nc">Color</span><span class="p">.</span><span class="n">WHITE</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">greenFill</span><span class="p">.</span><span class="n">style</span> <span class="p">=</span> <span class="nc">Paint</span><span class="p">.</span><span class="nc">Style</span><span class="p">.</span><span class="n">FILL</span>
+</span></span><span class="line"><span class="cl">        <span class="n">greenFill</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="nc">Color</span><span class="p">.</span><span class="n">rgb</span><span class="p">(</span><span class="m">190</span><span class="p">,</span> <span class="m">220</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">bubbleFill</span><span class="p">.</span><span class="n">style</span> <span class="p">=</span> <span class="nc">Paint</span><span class="p">.</span><span class="nc">Style</span><span class="p">.</span><span class="n">FILL</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bubbleFill</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="nc">Color</span><span class="p">.</span><span class="n">rgb</span><span class="p">(</span><span class="m">230</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bubbleFill</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="m">200</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 화면 작성에 필요한 각종 상수값을 준비해줍니다. 우선 <code>onDraw</code> 호출 전에 화면의 높이와 너비를 알 수 있는 <a class="link" href="https://developer.android.com/reference/android/view/View#onSizeChanged%28int,%20int,%20int,%20int%29"  target="_blank" rel="noopener"
+    >onSizeChanged</a> 내부에서 화면 크기를 확인합니다. 그리고 상단, 좌측 레벨, 원 수평계의 중심을 결정해 주고요, 버블의 크기와 동작 반경을 결정해 줍니다. 그리고 사각 레벨로 사용할 사각형도 정의해 줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TiltView</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">attrs</span><span class="p">:</span> <span class="n">AttributeSet</span><span class="p">)</span> <span class="p">:</span> <span class="n">View</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 스크린사이즈용 변수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">private</span> <span class="k">var</span> <span class="py">screenW</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">screenH</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">leftLevelCenterX</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">upperLevelCenterY</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">circleCenterX</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">circleCenterY</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">circleInnerR</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">circleOuterR</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">bubbleR</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">bubbleBoundary</span> <span class="p">=</span> <span class="m">0f</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">squareRound</span> <span class="p">=</span> <span class="m">10f</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 레벨용 변수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">upperLevelOut</span><span class="p">:</span> <span class="n">RectF</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">upperLevelIn</span><span class="p">:</span> <span class="n">RectF</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">leftLevelOut</span><span class="p">:</span> <span class="n">RectF</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">leftLevelIn</span><span class="p">:</span> <span class="n">RectF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSizeChanged</span><span class="p">(</span><span class="n">w</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">oldw</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">oldh</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onSizeChanged</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">oldw</span><span class="p">,</span> <span class="n">oldh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">screenW</span> <span class="p">=</span> <span class="n">w</span>
+</span></span><span class="line"><span class="cl">        <span class="n">screenH</span> <span class="p">=</span> <span class="n">h</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 상수값 결정
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">leftLevelCenterX</span> <span class="p">=</span> <span class="p">(((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.15f</span> <span class="p">-</span> <span class="n">screenW</span> <span class="p">*</span> <span class="m">0.05f</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span> <span class="p">+</span> <span class="n">screenW</span> <span class="p">*</span> <span class="m">0.05f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">upperLevelCenterY</span> <span class="p">=</span> <span class="p">(((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.15f</span> <span class="p">-</span> <span class="n">screenW</span> <span class="p">*</span> <span class="m">0.05f</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span> <span class="p">+</span> <span class="n">screenW</span> <span class="p">*</span> <span class="m">0.05f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">circleCenterX</span> <span class="p">=</span> <span class="p">(((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.95f</span> <span class="p">-</span> <span class="n">screenW</span> <span class="p">*</span> <span class="m">0.25f</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span> <span class="p">+</span> <span class="n">screenW</span> <span class="p">*</span> <span class="m">0.25f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">circleCenterY</span> <span class="p">=</span> <span class="p">(((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.95f</span> <span class="p">-</span> <span class="n">screenW</span> <span class="p">*</span> <span class="m">0.25f</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span> <span class="p">+</span> <span class="n">screenW</span> <span class="p">*</span> <span class="m">0.25f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">circleOuterR</span> <span class="p">=</span> <span class="p">(((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.95f</span> <span class="p">-</span> <span class="n">screenW</span> <span class="p">*</span> <span class="m">0.25f</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">circleInnerR</span> <span class="p">=</span> <span class="p">((</span><span class="n">circleOuterR</span> <span class="p">*</span> <span class="m">0.95f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bubbleR</span> <span class="p">=</span> <span class="p">((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.03f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bubbleBoundary</span> <span class="p">=</span> <span class="n">circleInnerR</span> <span class="p">-</span> <span class="n">bubbleR</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">upperLevelOut</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">RectF</span><span class="p">((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.25f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.05f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.95f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.15f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">upperLevelIn</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">RectF</span><span class="p">((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.26f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.06f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.94f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.14f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">leftLevelOut</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">RectF</span><span class="p">((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.05f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.25f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.15f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.95f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">leftLevelIn</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">RectF</span><span class="p">((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.06f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.26f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.14f</span><span class="p">),</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.94f</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 <a class="link" href="https://developer.android.com/reference/android/view/View#onDraw%28android.graphics.Canvas%29"  target="_blank" rel="noopener"
+    >onDraw</a>로 화면을 그려주는데요, 코드가 길기 때문에 몇 개 모듈로 나누어 설명하겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TiltView</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">attrs</span><span class="p">:</span> <span class="n">AttributeSet</span><span class="p">)</span> <span class="p">:</span> <span class="n">View</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onDraw</span><span class="p">(</span><span class="n">canvas</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawBackground</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">findBubblePosition</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawBubble</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawBubbleGuide</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>우선은 배경색과 수평기의 형체를 그려주는 <code>drawBackground</code> 메소드를 작성합니다. <a class="link" href="https://developer.android.com/reference/android/graphics/Canvas#drawColor%28int%29"  target="_blank" rel="noopener"
+    >drawColor</a>로 배경색을 칠해주고 <a class="link" href="https://developer.android.com/reference/android/graphics/Canvas#drawRoundRect%28android.graphics.RectF,%20float,%20float,%20android.graphics.Paint%29"  target="_blank" rel="noopener"
+    >drawRoundRect</a>로 상단과 좌단 레벨을 그려줍니다. 마지막으로 <a class="link" href="https://developer.android.com/reference/android/graphics/Canvas#drawCircle%28float,%20float,%20float,%20android.graphics.Paint%29"  target="_blank" rel="noopener"
+    >drawCircle</a>로 중앙의 수평계를 그려줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">drawBackground</span><span class="p">(</span><span class="n">canvas</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 배경 드로잉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">canvas</span><span class="o">?.</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawColor</span><span class="p">(</span><span class="nc">Color</span><span class="p">.</span><span class="n">rgb</span><span class="p">(</span><span class="m">139</span><span class="p">,</span> <span class="m">69</span><span class="p">,</span> <span class="m">19</span><span class="p">))</span>  <span class="c1">// 배경색
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 상단 레벨
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawRoundRect</span><span class="p">(</span><span class="n">upperLevelOut</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">thickStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawRoundRect</span><span class="p">(</span><span class="n">upperLevelOut</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">whiteFill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawRoundRect</span><span class="p">(</span><span class="n">upperLevelIn</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">thinStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawRoundRect</span><span class="p">(</span><span class="n">upperLevelIn</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">greenFill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 좌측 레벨
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawRoundRect</span><span class="p">(</span><span class="n">leftLevelOut</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">thickStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawRoundRect</span><span class="p">(</span><span class="n">leftLevelOut</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">whiteFill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawRoundRect</span><span class="p">(</span><span class="n">leftLevelIn</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">thinStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawRoundRect</span><span class="p">(</span><span class="n">leftLevelIn</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">squareRound</span><span class="p">,</span> <span class="n">greenFill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 중앙 원
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawCircle</span><span class="p">(</span><span class="n">circleCenterX</span><span class="p">,</span> <span class="n">circleCenterY</span><span class="p">,</span> <span class="n">circleOuterR</span><span class="p">,</span> <span class="n">thickStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawCircle</span><span class="p">(</span><span class="n">circleCenterX</span><span class="p">,</span> <span class="n">circleCenterY</span><span class="p">,</span> <span class="n">circleOuterR</span><span class="p">,</span> <span class="n">whiteFill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawCircle</span><span class="p">(</span><span class="n">circleCenterX</span><span class="p">,</span> <span class="n">circleCenterY</span><span class="p">,</span> <span class="n">circleInnerR</span><span class="p">,</span> <span class="n">thinStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawCircle</span><span class="p">(</span><span class="n">circleCenterX</span><span class="p">,</span> <span class="n">circleCenterY</span><span class="p">,</span> <span class="n">circleInnerR</span><span class="p">,</span> <span class="n">greenFill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음은 원형 수평계를 4/4분면이라 가정하고 센서에서 전달받은 각도값을 4/4분면 위의 좌표로 변환하는 <code>findBubblePosition</code> 메소드를 작성합니다. 여기서 버블의 위치는 원형 수평계의 중심에 대해 각도값을 더한 만큼을 좌표값으로 하였습니다. 이 때 버블이 원형 수평계 밖으로 벗어날 경우, 몇 번째 사분면에 위치하는지를 감지해 원의 경계 이상으로 나가지 않도록 좌표값을 다시 계산해주도록 했습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">findBubblePosition</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 중심 버블 위치보정
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">bubbleXpos</span> <span class="p">=</span> <span class="n">circleCenterX</span> <span class="p">+</span> <span class="n">xPos</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bubbleYpos</span> <span class="p">=</span> <span class="n">circleCenterY</span> <span class="p">+</span> <span class="n">yPos</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">xPos</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="o">&amp;&amp;</span> <span class="n">yPos</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 1사분면
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">((</span><span class="n">xPos</span><span class="p">).</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="p">(</span><span class="n">yPos</span><span class="p">).</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">bubbleBoundary</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">newXpos</span> <span class="p">=</span> <span class="p">(</span><span class="n">bubbleBoundary</span> <span class="p">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">yPos</span> <span class="p">/</span> <span class="n">xPos</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">newYpos</span> <span class="p">=</span> <span class="p">(</span><span class="n">bubbleBoundary</span> <span class="p">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">yPos</span> <span class="p">/</span> <span class="n">xPos</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">bubbleXpos</span> <span class="p">=</span> <span class="n">circleCenterX</span> <span class="p">+</span> <span class="n">newXpos</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bubbleYpos</span> <span class="p">=</span> <span class="n">circleCenterY</span> <span class="p">+</span> <span class="n">newYpos</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">xPos</span> <span class="p">&lt;</span> <span class="m">0</span> <span class="o">&amp;&amp;</span> <span class="n">yPos</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 2사분면
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">((</span><span class="n">xPos</span><span class="p">).</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="p">(</span><span class="n">yPos</span><span class="p">).</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">bubbleBoundary</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">newXpos</span> <span class="p">=</span> <span class="p">-(</span><span class="n">bubbleBoundary</span> <span class="p">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">yPos</span> <span class="p">/</span> <span class="n">xPos</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">newYpos</span> <span class="p">=</span> <span class="p">-(</span><span class="n">bubbleBoundary</span> <span class="p">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">yPos</span> <span class="p">/</span> <span class="n">xPos</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">bubbleXpos</span> <span class="p">=</span> <span class="n">circleCenterX</span> <span class="p">+</span> <span class="n">newXpos</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bubbleYpos</span> <span class="p">=</span> <span class="n">circleCenterY</span> <span class="p">+</span> <span class="n">newYpos</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">xPos</span> <span class="p">&lt;</span> <span class="m">0</span> <span class="o">&amp;&amp;</span> <span class="n">yPos</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 3사분면
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">((</span><span class="n">xPos</span><span class="p">).</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="p">(</span><span class="n">yPos</span><span class="p">).</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">bubbleBoundary</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">newXpos</span> <span class="p">=</span> <span class="p">-(</span><span class="n">bubbleBoundary</span> <span class="p">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">yPos</span> <span class="p">/</span> <span class="n">xPos</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">newYpos</span> <span class="p">=</span> <span class="p">-(</span><span class="n">bubbleBoundary</span> <span class="p">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">yPos</span> <span class="p">/</span> <span class="n">xPos</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">bubbleXpos</span> <span class="p">=</span> <span class="n">circleCenterX</span> <span class="p">+</span> <span class="n">newXpos</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bubbleYpos</span> <span class="p">=</span> <span class="n">circleCenterY</span> <span class="p">+</span> <span class="n">newYpos</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">xPos</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="o">&amp;&amp;</span> <span class="n">yPos</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 4사분면
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">((</span><span class="n">xPos</span><span class="p">).</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="p">(</span><span class="n">yPos</span><span class="p">).</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">bubbleBoundary</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">newXpos</span> <span class="p">=</span> <span class="p">(</span><span class="n">bubbleBoundary</span> <span class="p">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">yPos</span> <span class="p">/</span> <span class="n">xPos</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">newYpos</span> <span class="p">=</span> <span class="p">(</span><span class="n">bubbleBoundary</span> <span class="p">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">yPos</span> <span class="p">/</span> <span class="n">xPos</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">bubbleXpos</span> <span class="p">=</span> <span class="n">circleCenterX</span> <span class="p">+</span> <span class="n">newXpos</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bubbleYpos</span> <span class="p">=</span> <span class="n">circleCenterY</span> <span class="p">+</span> <span class="n">newYpos</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>findBubblePosition</code>으로 버블의 위치를 정했으니 <code>drawCircle</code>로 버블을 화면에 그려줍니다. 이 때 상단 레벨속의 버블은 x축으로만 움직일 수 있으니 y값을 고정하고, 좌단 레벨속의 버블은 동일하게 x값을 고정하면 되겠죠.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">drawBubble</span><span class="p">(</span><span class="n">canvas</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 버블 드로잉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">canvas</span><span class="o">?.</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 상단 (yPos가 고정)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawCircle</span><span class="p">(</span><span class="n">bubbleXpos</span><span class="p">,</span> <span class="n">upperLevelCenterY</span><span class="p">,</span> <span class="n">bubbleR</span><span class="p">,</span> <span class="n">thinStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawCircle</span><span class="p">(</span><span class="n">bubbleXpos</span><span class="p">,</span> <span class="n">upperLevelCenterY</span><span class="p">,</span> <span class="n">bubbleR</span><span class="p">,</span> <span class="n">bubbleFill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 좌측 (xPos가 고정)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawCircle</span><span class="p">(</span><span class="n">leftLevelCenterX</span><span class="p">,</span> <span class="n">bubbleYpos</span><span class="p">,</span> <span class="n">bubbleR</span><span class="p">,</span> <span class="n">thinStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawCircle</span><span class="p">(</span><span class="n">leftLevelCenterX</span><span class="p">,</span> <span class="n">bubbleYpos</span><span class="p">,</span> <span class="n">bubbleR</span><span class="p">,</span> <span class="n">bubbleFill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 중앙
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawCircle</span><span class="p">(</span><span class="n">bubbleXpos</span><span class="p">,</span> <span class="n">bubbleYpos</span><span class="p">,</span> <span class="n">bubbleR</span><span class="p">,</span> <span class="n">thinStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawCircle</span><span class="p">(</span><span class="n">bubbleXpos</span><span class="p">,</span> <span class="n">bubbleYpos</span><span class="p">,</span> <span class="n">bubbleR</span><span class="p">,</span> <span class="n">bubbleFill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>마지막으로 수평계 위에 가이드를 그려줍니다. Canvas는 그리는 순서대로 z축 깊이가 결정되기 때문에 가장 위의 레이어로에 표시되어야 하는 가이드를 가장 나중에 그린 것입니다. <code>drawCircle</code>로 원 가이드를 그리고 <a class="link" href="https://developer.android.com/reference/android/graphics/Canvas#drawLine%28float,%20float,%20float,%20float,%20android.graphics.Paint%29"  target="_blank" rel="noopener"
+    >drawLine</a>으로 십자 가이드를 그려줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">drawBubbleGuide</span><span class="p">(</span><span class="n">canvas</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 가이드
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">canvas</span><span class="o">?.</span><span class="n">apply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 원 가이드 중앙
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawCircle</span><span class="p">(</span><span class="n">circleCenterX</span><span class="p">,</span> <span class="n">circleCenterY</span><span class="p">,</span> <span class="n">bubbleR</span><span class="p">,</span> <span class="n">thinStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 원 가이드 상단
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawCircle</span><span class="p">(</span><span class="n">circleCenterX</span><span class="p">,</span> <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.10f</span><span class="p">),</span> <span class="n">bubbleR</span><span class="p">,</span> <span class="n">thinStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 원 가이드 좌측
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawCircle</span><span class="p">((</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.10f</span><span class="p">),</span> <span class="n">circleCenterY</span><span class="p">,</span> <span class="n">bubbleR</span><span class="p">,</span> <span class="n">thinStroke</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 십자가이드 상단
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawLine</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.26f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.10f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.94f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.10f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">thinStroke</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawLine</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">circleCenterX</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.06f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">circleCenterX</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.14f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">thinStroke</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 십자가이드 좌측
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawLine</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.10f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.26f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.10f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.94f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">thinStroke</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawLine</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.06f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">circleCenterY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.14f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">circleCenterY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">thinStroke</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 십자가이드 중앙
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">drawLine</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">circleCenterX</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.26f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">circleCenterX</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.94f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">thinStroke</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">drawLine</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.26f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">circleCenterY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">screenW</span> <span class="p">*</span> <span class="m">0.94f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">circleCenterY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">thinStroke</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="화면-작성">화면 작성
+</h2><p>다음은 화면을 구성합니다. <code>TiltView</code>를 추가했고 x, y 각도값을 표시하는 <code>TextView</code>를 두 개 추가한 단순한 화면입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">xmlns:tools=</span><span class="s">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">tools:context=</span><span class="s">&#34;.MainActivity&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;com.example.tiltcalculator.TiltView</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/tiltView&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toTopOf=</span><span class="s">&#34;@+id/linearLayout&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintTop_toTopOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;LinearLayout</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:id=</span><span class="s">&#34;@+id/linearLayout&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintBottom_toBottomOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintEnd_toEndOf=</span><span class="s">&#34;parent&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">app:layout_constraintStart_toStartOf=</span><span class="s">&#34;parent&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_xangle&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_margin=</span><span class="s">&#34;16dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:background=</span><span class="s">&#34;@android:drawable/editbox_background_normal&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:hint=</span><span class="s">&#34;xAngle&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:padding=</span><span class="s">&#34;5dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;TextView</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:id=</span><span class="s">&#34;@+id/tv_yangle&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:layout_margin=</span><span class="s">&#34;16dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:background=</span><span class="s">&#34;@android:drawable/editbox_background_normal&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:hint=</span><span class="s">&#34;yAngle&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:padding=</span><span class="s">&#34;5dp&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">android:textSize=</span><span class="s">&#34;24sp&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/LinearLayout&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="mainactivity">MainActivity
+</h2><p>이제 MainActivity에서 획득한 x, y 각도값을 TiltView에 전달함으로써 매 센서 이벤트마다 화면 드로잉을 수행하도록 합니다. 이 때 각 <code>TextView</code>에는 x, y축 각도를 표시하도록 하고 그 값이 0이 되었을 때는 수평상태가 되었다고 표시하도록 했습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onSensorChanged</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SensorEvent</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">event</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">tiltView</span><span class="p">.</span><span class="n">onSensorEvent</span><span class="p">(</span><span class="n">xAngle</span> <span class="p">=</span> <span class="n">xAngle</span><span class="p">,</span> <span class="n">yAngle</span> <span class="p">=</span> <span class="n">yAngle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">xAngle</span> <span class="p">*</span> <span class="m">10</span><span class="p">)</span> <span class="p">/</span> <span class="m">10</span> <span class="o">==</span> <span class="m">0.0f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvXangle</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Horizontally Aligned&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvXangle</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="nc">String</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&#34;x: %.1f</span><span class="se">\u00B0</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">xAngle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">yAngle</span> <span class="p">*</span> <span class="m">10</span><span class="p">)</span> <span class="p">/</span> <span class="m">10</span> <span class="o">==</span> <span class="m">0.0f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvYangle</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Vertically Aligned&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="p">.</span><span class="n">tvYangle</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="nc">String</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&#34;y: %.1f</span><span class="se">\u00B0</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">yAngle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 해서 안드로이드로 수평계를 만드는 법에 대해 알아보았습니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tilt-calculator/">Tilt Calculator</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+        <div class="article-list--compact links">
+    
+        <article>
+            <a href="https://github.com/cliearl/android-tutorial/tree/master/" target="_blank" rel="noopener">
+                <div class="article-details">
+                    <h2 class="article-title">GitHub/cliearl</h2>
+                    <footer class="article-time">
+                        
+                            Find and download source code of the article from this link.
+                        
+                    </footer>
+                </div>
+        
+                
+                    
+                    
+                    <div class="article-image">
+                        <img src="/images/common/GitHub-Mark-Light-120px-plus.png" loading="lazy">
+                    </div>
+                
+            </a>
+        </article>
+    
+</div>
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2307_2309/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.07~23.08</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2306/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.06</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2305/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.05</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2304/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.04</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/android/devnews_2303/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">냉동코더의 안드로이드 개발 뉴스::23.03</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
