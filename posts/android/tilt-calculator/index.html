@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/tilt-calculator/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="수평계 앱 만들기">
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="수평계 앱 만들기">
 <meta property='og:description' content="이번 포스팅에서는 수평계 앱을 만드는 방법에 대해 알아보도록 하겠습니다.\n수평계는 다음과 같이 액체 속에 공기방울이 들어가 있는 것으로, 공기방울이 중력의 반대방향으로 움직이기 때문에 기울기 정도를 직관적으로 확인할 수 있습니다. 여기서는 이 수평계를 구현하는 앱을 만들어 볼 겁니다.\n지난 강의에서 중력센서를 사용해 기기의 기울기 각도를 확인하는 법을 알아보았는데요, 이 기울기 각도에 따라 공기방울이 움직이게 하면 될 것 같습니다.\n기존 코드 확인 그럼 중력센서로부터 기울기 각도를 계산하는 기존 코드를 확인하겠습니다.\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 class MainActivity : AppCompatActivity(), SensorEventListener { private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) } private val sensorManager by lazy { getSystemService(Context.SENSOR_SERVICE) as SensorManager } private lateinit var event: SensorEvent @SuppressLint(&#34;SourceLockedOrientationActivity&#34;) override fun onCreate(savedInstanceState: Bundle?) { // 세로모드 고정 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT super.onCreate(savedInstanceState) setContentView(binding.root) } override fun onResume() { super.onResume() sensorManager.registerListener( this, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_FASTEST ) } override fun onPause() { super.onPause() sensorManager.unregisterListener(this) } override fun onSensorChanged(event: SensorEvent?) { event?.let { this.event = event val x = event.values[0] val y = event.values[1] val z = event.values[2] val r = sqrt(x.pow(2) + y.pow(2) + z.pow(2)) Log.d(&#34;MainActivity&#34;, &#34;onSensorChanged: x: $x, y: $y, z: $z, R: $r&#34;) val xAngle = (90 - acos(x / r) * 180 / PI).toFloat() val yAngle = (90 - acos(y / r) * 180 / PI).toFloat() } } override fun onAccuracyChanged(p0: Sensor?, p1: Int) {} } TiltView 작성 여기서는 각도를 전달받는 TiltView라는 View 클래스를 만듭니다 이 클래스는 각도를 전달받은 뒤 수평계 화면을 표시합니다. 수평계 그래픽은 Paint와 Canvas를 써서 화면에 직접 그리도록 하겠습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/tilt-calculator/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -1410,7 +1410,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
