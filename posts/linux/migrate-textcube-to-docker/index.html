@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.\n그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.\ntextcube 도커 띄우기 https://registry.hub.docker.com/r/nacyot/textcube/ 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정. 컨테이너 옵션은 따로 건들 것이 없음\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.\n그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.\ntextcube 도커 띄우기 https://hub.docker.com/r/maracom/textcube 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정. 컨테이너 옵션은 따로 건들 것이 없음\n">
 <title>텍스트큐브를 도커로 마이그레이션하기</title>
 
 <link rel='canonical' href='https://cliearl.github.io/posts/linux/migrate-textcube-to-docker/'>
 
 <link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="텍스트큐브를 도커로 마이그레이션하기">
-<meta property='og:description' content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.\n그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.\ntextcube 도커 띄우기 https://registry.hub.docker.com/r/nacyot/textcube/ 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정. 컨테이너 옵션은 따로 건들 것이 없음\n">
+<meta property='og:description' content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.\n그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.\ntextcube 도커 띄우기 https://hub.docker.com/r/maracom/textcube 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정. 컨테이너 옵션은 따로 건들 것이 없음\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/linux/migrate-textcube-to-docker/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='textcube' /><meta property='article:tag' content='docker' /><meta property='article:published_time' content='2022-11-09T15:53:08&#43;09:00'/><meta property='article:modified_time' content='2022-11-09T15:53:08&#43;09:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='textcube' /><meta property='article:tag' content='docker' /><meta property='article:published_time' content='2022-11-09T15:53:08&#43;09:00'/><meta property='article:modified_time' content='2025-08-14T15:53:08&#43;09:00'/>
 <meta name="twitter:title" content="텍스트큐브를 도커로 마이그레이션하기">
-<meta name="twitter:description" content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.\n그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.\ntextcube 도커 띄우기 https://registry.hub.docker.com/r/nacyot/textcube/ 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정. 컨테이너 옵션은 따로 건들 것이 없음\n">
+<meta name="twitter:description" content="기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.\n그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.\ntextcube 도커 띄우기 https://hub.docker.com/r/maracom/textcube 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정. 컨테이너 옵션은 따로 건들 것이 없음\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
@@ -389,8 +389,8 @@
     <p>기존 시놀로지 webstation에서 돌리고 있는 텍스트큐브 블로그가 있었는데 DSM이 7.0으로 업그레이드하면서 PHP 5를 사용할 수 없게 되었다. 텍스트큐브는 PHP 5.6에서 잘 돌아가지만 7.0으로 올리면 여러가지 문제가 생겼기에 그냥 쓰고 있었다.</p>
 <p>그런데 이번에 DSM을 7.0으로 올릴 수 밖에 없는 상황이 되었고 여러가지로 찾아본 결과 역시 DSM 7.0에서 PHP 5를 사용하는 방법은 없었기에 텍스트큐브 블로그를 도커에 띄워서 쓰기로 했다. 다음은 내가 수행한 작업내역.</p>
 <h2 id="textcube-도커-띄우기">textcube 도커 띄우기
-</h2><p><a class="link" href="https://registry.hub.docker.com/r/nacyot/textcube/"  target="_blank" rel="noopener"
-    >https://registry.hub.docker.com/r/nacyot/textcube/</a>
+</h2><p><a class="link" href="https://hub.docker.com/r/maracom/textcube"  target="_blank" rel="noopener"
+    >https://hub.docker.com/r/maracom/textcube</a>
 위 이미지를 사용해 컨테이너 띄우고 리버스 프록시 설정. 컨테이너 옵션은 따로 건들 것이 없음</p>
 <h2 id="터미널에서-시놀로지에-ssh로-접속">터미널에서 시놀로지에 ssh로 접속
 </h2><div class="highlight"><div class="chroma">
@@ -420,7 +420,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="gp">$</span> docker cp /volume1/USER/attach/1 <span class="o">[</span>CONTAINER ID<span class="o">]</span>:/var/www/html/attach
+<pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="gp">$</span> docker cp /volume1/USER/attach/1 <span class="o">[</span>CONTAINER ID<span class="o">]</span>:/var/www/app/attach
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="도커-컨테이너-접속">도커 컨테이너 접속
@@ -468,7 +468,19 @@
 
         <span>Licensed under CC BY 4.0</span>
     </section>
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Aug 14, 2025 15:53 KST
+        </span>
+    </section></footer>
 
 
     
