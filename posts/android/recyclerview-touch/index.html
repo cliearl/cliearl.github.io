@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/recyclerview-touch/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="RecyclerView를 Swipe, Drag, Touch하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="RecyclerView를 Swipe, Drag, Touch하기">
 <meta property='og:description' content="이번 포스팅에서는 RecyclerView에 Swipe, Drag, Touch 동작을 연결하는 법에 대해 알아보도록 하겠습니다.\n이번에 만들어볼 앱에서는 ViewHolder를 스와이프하면 삭제가 되고, 잡고 끌면 위아래로 ViewHolder를 이동할 수 있으며, ViewHolder를 터치하면 그 내용이 변하는 동작을 수행하도록 하겠습니다.\n여기서는 제가 RecyclerView에 View Binding 적용하기 강의에서 만들었던 Recyclerview 앱을 수정하는 방식으로 구현해보겠습니다.\n리팩토링 우선 View Binding을 사용하도록 설정을 추가합니다.\n1 2 3 android { buildFeatures.viewBinding true } 메인액티비티에서 만들어주던 dataSet은 초기화시 데이터를 바로 입력하도록 하고 Recyclerview 어댑터 안쪽으로 이동시켜서 받아오는 파라미터를 삭제합니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/recyclerview-touch/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -356,7 +356,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Apr 18, 2021</time>
+                <time class="article-time--published" datetime='2021-04-18T22:40:04&#43;09:00'>Apr 18, 2021</time>
             </div>
         
 
@@ -878,18 +878,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -1058,7 +1064,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1147,7 +1153,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/viewbinding-recyclerview/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="RecyclerView에 View Binding 적용하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="RecyclerView에 View Binding 적용하기">
 <meta property='og:description' content="이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.\nView Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.\n이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.\n코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.\n1 2 3 4 5 6 7 plugins { - id &#39;kotlin-android-extensions&#39; } android { + buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 ActivityMainBinding 클래스를 초기화하여 binding이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 binding.recyclerView로 접근하여 설정합니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/viewbinding-recyclerview/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -357,7 +357,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Apr 17, 2021</time>
+                <time class="article-time--published" datetime='2021-04-17T22:43:04&#43;09:00'>Apr 17, 2021</time>
             </div>
         
 
@@ -628,18 +628,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -808,7 +814,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -897,7 +903,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

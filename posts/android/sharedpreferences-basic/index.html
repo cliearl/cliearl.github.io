@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/sharedpreferences-basic/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="SharedPreferences로 앱 설정값 저장하고 불러오기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="SharedPreferences로 앱 설정값 저장하고 불러오기">
 <meta property='og:description' content="이번 포스팅에서는 SharedPreferences를 사용하는 법에 대해 알아보도록 하겠습니다.\n데이터를 앱에 저장하는 방법 데이터를 앱에 저장하는 방법에는 크게 세가지가 있습니다.\n파일 I/O (내부 또는 외부 저장소) 접근 권한을 획득하고 파일을 열었다 닫았다 하는 수고가 필요함 관계형 데이터베이스 SQLite 등을 이용해 복잡한 관계형 데이터를 저장할 수 있음 간단한 데이터를 저장할거라면 구축과 관리에 많은 시간과 노려이 요구됨 SharedPreference Key/Value 형태로 이용함 내부적으로는 XML 파일로 저장됨 파일을 열고 닫을 필요 없이 핸들러를 만들어서 간편하게 사용가능함 SharedPreferences는 보통 복잡한 데이터를 기록하기보다는, 게임의 환경설정이라든지 그런 단순한 내용을 저장하는데 적절한 저장공간이라고 생각하면 됩니다. 그래서 이번에는 SharedPreferences를 사용해서 게임설정값을 저장하고 복원하는 앱을 만들어보도록 하겠습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/sharedpreferences-basic/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -356,7 +356,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Apr 20, 2021</time>
+                <time class="article-time--published" datetime='2021-04-20T21:35:43&#43;09:00'>Apr 20, 2021</time>
             </div>
         
 
@@ -970,18 +970,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -1150,7 +1156,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1239,7 +1245,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

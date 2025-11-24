@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/linux/docker-hexo-blog/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="도커로 Hexo 블로그 만들고 github.io 주소로 접속하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="도커로 Hexo 블로그 만들고 github.io 주소로 접속하기">
 <meta property='og:description' content="도커로 Hexo 블로그를 만들고 github.io 주소로 접속하도록 해 보았다.\n개인적으로 사용하고 있는 텍큐 블로그가 있는데 기술관련 내용을 쓰기는 너무 불편하고 오래되기도 해서 마크다운으로 사용할 수 있는 블로그 툴을 찾아봤다.\n처음엔 입출력 속도만 개선해보려고 PHP 버전을 5.6에서 7.3으로 올려봤는데 텍큐가 너무 오래되다보니 패치를 해도 잘 안돌아가고 해서 v7로 올리는 건 포기.\n그 다음으로는 업뎃 잘되는 워드프레스에 텍스트큐브의 블로그 내용을 다 옮기고 기술내용도 거기서 다 같이 쓸려고 했다. 그래서 TTXML Importer로 데이터를 옮겨봤는데 글만 옮겨지고 그외 카운터 정보같은건 옮길 수가 없었다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/linux/docker-hexo-blog/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -304,12 +304,12 @@
     <li><a href="#icarus-테마-셋업">icarus 테마 셋업</a></li>
     <li><a href="#hexo-admin에-패스워드-설정">hexo-admin에 패스워드 설정</a></li>
     <li><a href="#hexo-admin에서-deploy-설정">hexo-admin에서 deploy 설정</a></li>
-    <li><a href="#유용한-플러그인"><a href="https://hexo.io/plugins/">유용한 플러그인</a></a>
+    <li><a href="#유용한-플러그인">유용한 플러그인</a>
       <ol>
-        <li><a href="#hexo-deployer-git"><a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a></a></li>
-        <li><a href="#hexo-generator-feed"><a href="https://github.com/hexojs/hexo-generator-feed">hexo-generator-feed</a></a></li>
-        <li><a href="#hexo-generator-sitemap"><a href="https://github.com/hexojs/hexo-generator-sitemap">hexo-generator-sitemap</a></a></li>
-        <li><a href="#hexo-math"><a href="https://github.com/hexojs/hexo-math">hexo-math</a></a></li>
+        <li><a href="#hexo-deployer-git">hexo-deployer-git</a></li>
+        <li><a href="#hexo-generator-feed">hexo-generator-feed</a></li>
+        <li><a href="#hexo-generator-sitemap">hexo-generator-sitemap</a></li>
+        <li><a href="#hexo-math">hexo-math</a></li>
       </ol>
     </li>
   </ol>
@@ -361,7 +361,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Oct 09, 2020</time>
+                <time class="article-time--published" datetime='2020-10-09T19:24:00&#43;09:00'>Oct 09, 2020</time>
             </div>
         
 
@@ -632,18 +632,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -787,7 +793,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -876,7 +882,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

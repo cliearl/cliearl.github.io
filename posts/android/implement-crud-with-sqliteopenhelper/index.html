@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/implement-crud-with-sqliteopenhelper/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="SQLite 이해하고 SQLiteOpenHelper로 CRUD 구현하기">
 <meta property='og:description' content="이번 포스팅에서는 두 파트에 걸쳐 안드로이드에서 SQLite를 다루는 법에 대해 알아보도록 하겠습니다.\nPart A. 데이터베이스 관계형 데이터베이스 여러 사람들의 연락처 데이터는 다음과 같이 테이블 구조로 관리할 수 있습니다. 이런 식으로 통일된 규칙의 데이터를 관리할 수 있는 테이블을 데이터베이스라고 합니다.\n순서 이름 전화번호 이메일 주소 0 김철수 010-1111-1111 kim@abc.com 서울 1 이영희 010-2222-2222 lee@abc.com 서울 2 박모모 010-3333-3333 park@abc.com 인천 이 때 1행 2열의 이름을 Key라고 하고 2행 2열의 김철수를 Value라고 합니다. 전화번호, 이메일, 주소도 역시 Key이고 그에 대응되는 값들도 역시 Value가 되겠죠. 순서라는 Key는 각 데이터에 대해 겹치지 않는 고유한 값이기 때문에 고유키(Primary Key)라고 합니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/implement-crud-with-sqliteopenhelper/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -379,7 +379,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Sep 25, 2021</time>
+                <time class="article-time--published" datetime='2021-09-25T17:33:35&#43;09:00'>Sep 25, 2021</time>
             </div>
         
 
@@ -614,7 +614,8 @@
     >Save data using SQLite</a>에서는 다음과 같은 이유로 이 작업을 직접 수행하는것을 권하지 않고 있습니다.</p>
 <blockquote>
 <p>원시 SQL 쿼리에 관한 컴파일 시간 확인이 없습니다. 따라서 데이터 그래프가 변경됨에 따라 영향을 받는 SQL 쿼리를 수동으로 업데이트해야 합니다. 이 과정은 시간이 오래 걸리고 오류가 쉽게 발생할 수 있습니다.</p>
-<p>SQL 쿼리와 데이터 객체 간에 변환하려면 많은 상용구 코드를 사용해야 합니다.</p></blockquote>
+<p>SQL 쿼리와 데이터 객체 간에 변환하려면 많은 상용구 코드를 사용해야 합니다.</p>
+</blockquote>
 <p>그 대신 구글에서는 SQLite를 더 안전하게 사용할 수 있는 <a class="link" href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper"  target="_blank" rel="noopener"
     >SQLiteOpenHelper</a>라는 헬퍼클래스를 제공하고 있습니다. 다음 파트에서는 이 SQLiteOpenHelper 클래스를 사용해서 CRUD작업을 하는 간단한 앱을 만들어보도록 하겠습니다.</p>
 <h2 id="part-b-샘플-앱-작성">Part B. 샘플 앱 작성
@@ -1470,18 +1471,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -1650,7 +1657,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1739,7 +1746,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

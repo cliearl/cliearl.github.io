@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/scrcpy-mirroring/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="scrcpy로 안드로이드 기기 화면 미러링하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="scrcpy로 안드로이드 기기 화면 미러링하기">
 <meta property='og:description' content="이번 포스팅에서는 단말의 화면을 미러링하는 방법에 대해 알아보도록 하겠습니다.\nscrcpy 안드로이드 스튜디오의 에뮬레이터는 HAXM이라는 기술을 써서 처리속도를 올릴 수 있지만 작업 환경에 따라서는 HAXM을 사용할 수 없을 수도 있고 또 HAXM이 적용되었다고 해도 에뮬레이터의 특성상 실제 단말보다는 처리속도가 느릴 수 밖에 없기 때문에 개발에는 실제 단말을 사용하는 경우가 많습니다.\n그런데 실제 단말을 사용하더라도 에뮬레이터처럼 모니터 화면에서 단말화면을 보면서 조작하고 싶은 경우가 있을 수 있는데 그런 경우에 사용할 수 있는 솔루션 중 하나가 scrcpy입니다. 안드로이드 스튜디오의 에뮬레이터를 구동하지 않기 때문에 컴퓨터 파워를 절약할 수 있다는 이점이 있습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/scrcpy-mirroring/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -351,7 +351,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Mar 27, 2023</time>
+                <time class="article-time--published" datetime='2023-03-27T16:05:18&#43;09:00'>Mar 27, 2023</time>
             </div>
         
 
@@ -424,7 +424,8 @@
     >Enable adb debugging on your device</a> 문서를 참고해 단말에서 USB 디버깅을 활성화 시켜주어야 합니다.</p>
 <blockquote>
 <p>Android 4.2 이상 버전에서는 개발자 옵션 화면이 기본적으로 숨겨져 있습니다. 이 옵션을 표시하려면 Settings &gt; About phone으로 이동하여 Build number를 일곱 번 탭합니다. 이전 화면으로 돌아가 하단에서 Developer options를 찾습니다.</p>
-<p>일부 기기에서는 개발자 옵션 화면의 위치나 이름이 다를 수도 있습니다.</p></blockquote>
+<p>일부 기기에서는 개발자 옵션 화면의 위치나 이름이 다를 수도 있습니다.</p>
+</blockquote>
 <p>준비가 완료되었다면 터미널에서 scrcpy를 실행시켜 줍니다. usb로 연결했을 때는 <code>-d</code>, TCP/IP로 연결했을 땐 <code>-e</code> 옵션을 붙여주면 됩니다. 저는 adb로 wifi연결을 한 뒤 <code>-e</code> 옵션으로 구동하는데요, 이렇게 하면 무선으로 실기기 화면을 미러링 할 수 있어 개발할 때 편리합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -488,18 +489,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -668,7 +675,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -757,7 +764,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

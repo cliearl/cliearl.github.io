@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/etc/show-current-language-in-macos/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="macOS에서 현재 사용 언어 표시하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="macOS에서 현재 사용 언어 표시하기">
 <meta property='og:description' content="맥을 전체화면에서 쓰면 언어를 전환했을 때 전환된 언어가 어떤 것인지 확인할 수가 없다는 불편함이 있어서 방법을 찾아봤다.\nisHud 현재 언어를 화면에 표시해주는 isHUD 라는 앱이 있는데 2018년 이후로 업뎃이 안되고 있어 쓰기가 좀 깨름찍하다.\nInput Source Pro Input Source Pro 라는 최신 앱도 있다.\nHammerspoon Hammerspoon 은 Lua로 시스템과 상호작용할 수 있게하는 앱이다. 이걸 설치하고 Open Config에서 다음 코드를 붙여넣으면 한글, 영어, 일본어를 전환할 때마다 전환한 언어를 화면에 오버레이로 1초간 표시해준다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/etc/show-current-language-in-macos/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -352,7 +352,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Oct 01, 2023</time>
+                <time class="article-time--published" datetime='2023-10-01T16:16:21&#43;09:00'>Oct 01, 2023</time>
             </div>
         
 
@@ -516,18 +516,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -580,7 +586,7 @@
             
                 
 <article class="">
-    <a href="/posts/etc/pycharm-extensions/">
+    <a href="/posts/python/pycharm-extensions/">
         
         
 
@@ -696,7 +702,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -785,7 +791,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

@@ -283,10 +283,10 @@
         </item>
         <item>
         <title>내가 사용하는 Pycharm Extensions</title>
-        <link>https://cliearl.github.io/posts/etc/pycharm-extensions/</link>
+        <link>https://cliearl.github.io/posts/python/pycharm-extensions/</link>
         <pubDate>Sun, 13 Aug 2023 16:07:41 +0900</pubDate>
         
-        <guid>https://cliearl.github.io/posts/etc/pycharm-extensions/</guid>
+        <guid>https://cliearl.github.io/posts/python/pycharm-extensions/</guid>
         <description>&lt;h2 id=&#34;atom-material-icons&#34;&gt;Atom Material Icons
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://plugins.jetbrains.com/plugin/10044-atom-material-icons&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -870,7 +870,8 @@
     &gt;Enable adb debugging on your device&lt;/a&gt; 문서를 참고해 단말에서 USB 디버깅을 활성화 시켜주어야 합니다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Android 4.2 이상 버전에서는 개발자 옵션 화면이 기본적으로 숨겨져 있습니다. 이 옵션을 표시하려면 Settings &amp;gt; About phone으로 이동하여 Build number를 일곱 번 탭합니다. 이전 화면으로 돌아가 하단에서 Developer options를 찾습니다.&lt;/p&gt;
-&lt;p&gt;일부 기기에서는 개발자 옵션 화면의 위치나 이름이 다를 수도 있습니다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;일부 기기에서는 개발자 옵션 화면의 위치나 이름이 다를 수도 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;준비가 완료되었다면 터미널에서 scrcpy를 실행시켜 줍니다. usb로 연결했을 때는 &lt;code&gt;-d&lt;/code&gt;, TCP/IP로 연결했을 땐 &lt;code&gt;-e&lt;/code&gt; 옵션을 붙여주면 됩니다. 저는 adb로 wifi연결을 한 뒤 &lt;code&gt;-e&lt;/code&gt; 옵션으로 구동하는데요, 이렇게 하면 무선으로 실기기 화면을 미러링 할 수 있어 개발할 때 편리합니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5748,7 +5749,8 @@
     &gt;Design Principles and Design Patterns&lt;/a&gt;에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.&lt;/p&gt;
 &lt;h3 id=&#34;단일-책임-원칙-single-responsibility-principle-srp&#34;&gt;단일 책임 원칙 (Single responsibility principle, SRP)
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;There should never be more than one reason for a class to change.&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&amp;ldquo;There should never be more than one reason for a class to change.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;단일 책임 원칙이란 클래스가 여러개의 책임을 갖게 되면, 각 책임마다 클래스를 변경할 수 있는 이유가 생기므로 책임을 단 한 개만 가지도록 설계하라는 뜻입니다.&lt;/p&gt;
 &lt;p&gt;예를 들면 네트워크에 접속해서, 암호화된 데이터를 다운로드하고, 데이터를 복호화한 뒤, 파일로 저장하는 &lt;code&gt;Work&lt;/code&gt; 클래스가 있다고 하겠습니다. 네 개의 책임 중 하나만 변경이 되어도 이 클래스는 수정되어야 합니다. 또 이 클래스에 연결된 클래스가 있다면 책임 하나의 기능 변경이 일어나도 연결된 모든 클래스가 그에 맞춰 수정되어야 하지요.&lt;/p&gt;
 &lt;script async type=&#34;application/javascript&#34; src=&#34;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js&#34;&gt;
@@ -5804,7 +5806,8 @@ classDiagram
 &lt;/div&gt;
 &lt;h3 id=&#34;개방-폐쇄-원칙-open-closed-principle-ocp&#34;&gt;개방-폐쇄 원칙 (Open-closed principle, OCP)
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Software entities &amp;hellip; should be open for extension, but closed for modification.&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&amp;ldquo;Software entities &amp;hellip; should be open for extension, but closed for modification.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;개방-폐쇄 원칙은 객체를 수정하지 않고도 기능을 확장할 수 있게 설계해야 한다는 뜻입니다. 이게 어떻게 가능할까요?&lt;/p&gt;
 &lt;p&gt;예를 들어 네트워크에서 데이터를 읽어오는 &lt;code&gt;DataReader&lt;/code&gt; 클래스가 있다고 하겠습니다. 이 때 네트워크에서 데이터를 다운로드하는 기능은 &lt;code&gt;NetworkAccess&lt;/code&gt; 클래스로 분리시킵니다. 그리고 &lt;code&gt;DataSource&lt;/code&gt; 인터페이스를 만들어서 &lt;code&gt;NetworkAccess&lt;/code&gt;가 &lt;code&gt;DataSource&lt;/code&gt;를 상속하게 합니다.&lt;/p&gt;
 &lt;script async type=&#34;application/javascript&#34; src=&#34;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js&#34;&gt;
@@ -5853,7 +5856,8 @@ classDiagram
 &lt;p&gt;기능을 확장하는 부분은 인터페이스를 사용해 추상화하고, 새로운 기능의 추가에는 상속(다형성)을 적용함으로써 클래스를 유연하게 변경할 수 있게 되는 것입니다.&lt;/p&gt;
 &lt;h3 id=&#34;리스코프-치환-원칙-liskov-substitution-principle-lsp&#34;&gt;리스코프 치환 원칙 (Liskov substitution principle, LSP)
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&amp;ldquo;Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;리스코프 치환 원칙에 따르면 상위타입 객체가 하위타입 객체로 변환되어도 상위타입을 사용하는 프로그램은 정상적으로 동작해야 합니다.&lt;/p&gt;
 &lt;p&gt;잘 알려진 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Circle%E2%80%93ellipse_problem&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;직사각형-정사각형 문제&lt;/a&gt;를 예로들어 설명을 해 보겠습니다. 직사각형의 정의는 &lt;code&gt;네 각이 직각인 사각형&lt;/code&gt;이고, 정사각형은 &lt;code&gt;네 각이 직각이면서 네 변의 길이가 모두 같은 사각형&lt;/code&gt;입니다.&lt;/p&gt;
@@ -5957,7 +5961,8 @@ classDiagram
 &lt;p&gt;LSP를 위반한다는 것은 하위타입이 상위타입의 명세를 제대로 지키지 않고 있다는 뜻입니다. 만약 상위타입의 코드에서 하위타입을 구분해야 하는 경우, 상위타입으로 치환할 수 없기 때문에 코드 내부에서 &lt;code&gt;instanceOf&lt;/code&gt; 를 써야 합니다. 그런데 이렇게 하면 하위타입을 새로 만들때마다 상위타입의 코드를 수정해야 하니 결과적으로 OCP도 깨지기 쉬워져서 기능확장이 어려워지게 됩니다.&lt;/p&gt;
 &lt;h3 id=&#34;인터페이스-분리-원칙-interface-segregation-principle-isp&#34;&gt;인터페이스 분리 원칙 (Interface segregation principle, ISP)
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Many client-specific interfaces are better than one general-purpose interface.&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&amp;ldquo;Many client-specific interfaces are better than one general-purpose interface.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;이 문장의 뜻은 구현할 필요가 없는 메소드를 가진 인터페이스를 객체에 사용하지 말라는 뜻입니다. 예를 들어 동물을 표현하는 &lt;code&gt;Animal&lt;/code&gt; 인터페이스가 있다고 하겠습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6034,7 +6039,8 @@ classDiagram
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;의존성-역전-원칙-dependency-inversion-principle-dip&#34;&gt;의존성 역전 원칙 (Dependency inversion principle, DIP)
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Depend upon abstractions, [not] concretions.&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&amp;ldquo;Depend upon abstractions, [not] concretions.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Dependency, 의존이란 무엇일까요. 객체 A가 객체 B를 생성하거나 객체 B의 메서드를 호출할 때 A는 B에 의존한다, 혹은 A가 의존성 B를 갖는다고 표현합니다. 다음 그림에서는 &lt;code&gt;Car&lt;/code&gt; 클래스가 &lt;code&gt;Engine&lt;/code&gt; 클래스에 의존하고 있습니다.&lt;/p&gt;
 &lt;script async type=&#34;application/javascript&#34; src=&#34;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js&#34;&gt;
     var config = {
@@ -7561,7 +7567,8 @@ $$&lt;p&gt;수평계는 기기가 화면을 +z 방향으로 하고 누워있을 
 &lt;li&gt;Location is turned off in the device settings. The result could be null even if the last location was previously retrieved because disabling location also clears the cache.&lt;/li&gt;
 &lt;li&gt;The device never recorded its location, which could be the case of a new device or a device that has been restored to factory settings.&lt;/li&gt;
 &lt;li&gt;Google Play services on the device has restarted, and there is no active Fused Location Provider client that has requested location after the services restarted. To avoid this situation you can create a new client and request location updates yourself. For more information, see Receiving Location Updates.&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;생명주기-관리&#34;&gt;생명주기 관리
 &lt;/h2&gt;&lt;p&gt;프래그먼트의 생명주기에 따라 구글맵을 관리하기 위한 처리를 해 줍니다. 맵을 액티비티에서 &lt;code&gt;SupportMapFragment&lt;/code&gt;로 구현할 경우에는 신경쓰지 않아도 되는 부분입니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -10167,7 +10174,8 @@ Support Library는 수많은 API들을 통합한 라이브러리이기 때문에
 &lt;p&gt;그리고 Androidx를 소개했던 세션에서 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/jetpack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Jetpack&lt;/a&gt;도 같이 발표됩니다.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Jetpack is a suite of libraries to help developers follow best practices, reduce boilerplate code, and write code that works consistently across Android versions and devices so that developers can focus on the code they care about.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Jetpack is a suite of libraries to help developers follow best practices, reduce boilerplate code, and write code that works consistently across Android versions and devices so that developers can focus on the code they care about.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Jetpack은 한마디로 안드로이드 앱을 더 완성도 높게 만들 수 있는 라이브러리의 모음입니다. 주로 androidx의 라이브러리가 포함되지만 androidx가 아닌 라이브러리가 포함될 수도 있습니다.&lt;/p&gt;
 &lt;p&gt;같은 기능을 구현하더라도 개발자의 숙련도에 따라 앱의 안정성이 달라지는 현상을 가능한 줄이기 위해 구글에서 가이드라인을 만들었고 그 가이드라인에 따르기 위해 사용해야할 라이브러리를 정의한 문서스펙이라고 생각하시면 좋을 것 같습니다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cliearl.github.io/images/support-library-androidx-jetpack/jetpack-category.png&#34;
@@ -13036,7 +13044,8 @@ journey
     &gt;Save data using SQLite&lt;/a&gt;에서는 다음과 같은 이유로 이 작업을 직접 수행하는것을 권하지 않고 있습니다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;원시 SQL 쿼리에 관한 컴파일 시간 확인이 없습니다. 따라서 데이터 그래프가 변경됨에 따라 영향을 받는 SQL 쿼리를 수동으로 업데이트해야 합니다. 이 과정은 시간이 오래 걸리고 오류가 쉽게 발생할 수 있습니다.&lt;/p&gt;
-&lt;p&gt;SQL 쿼리와 데이터 객체 간에 변환하려면 많은 상용구 코드를 사용해야 합니다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;SQL 쿼리와 데이터 객체 간에 변환하려면 많은 상용구 코드를 사용해야 합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;그 대신 구글에서는 SQLite를 더 안전하게 사용할 수 있는 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;SQLiteOpenHelper&lt;/a&gt;라는 헬퍼클래스를 제공하고 있습니다. 다음 파트에서는 이 SQLiteOpenHelper 클래스를 사용해서 CRUD작업을 하는 간단한 앱을 만들어보도록 하겠습니다.&lt;/p&gt;
 &lt;h2 id=&#34;part-b-샘플-앱-작성&#34;&gt;Part B. 샘플 앱 작성
@@ -16894,7 +16903,8 @@ journey
     &gt;구글&lt;/a&gt;이 다음과 같이 밝힌 것처럼 메모리 누수등 여러가지 문제가 있었습니다. 그래서 API 30부터는 AsyncTask를 deprecate 시키고 &lt;a class=&#34;link&#34; href=&#34;https://developer.android.com/kotlin/coroutines&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;코루틴&lt;/a&gt;을 사용하도록 권장하고 있습니다.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;AsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes. It also has inconsistent behavior on different versions of the platform, swallows exceptions from {@code doInBackground}, and does not provide much utility over using {@link Executor}s directly.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;AsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes. It also has inconsistent behavior on different versions of the platform, swallows exceptions from {@code doInBackground}, and does not provide much utility over using {@link Executor}s directly.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;코루틴은 1958년 멜빈 콘웨이가 처음 제창했다고 하는 개념으로 현재 &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Coroutine#Programming_languages_with_native_support&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;여러 프로그래밍 언어&lt;/a&gt;에 구현되어 있으며 코틀린만의 고유한 개념은 아닙니다.&lt;/p&gt;
 &lt;p&gt;프로그래밍에서 루틴이란 프로그램의 흐름을 추상적으로 일컫는 말입니다. 루틴은 크게 메인루틴과 서브루틴으로 나눌 수 있는데요. 예를들어 main 함수에 의해 수행되는 프로그램의 흐름을 메인루틴이라고 한다면, main 함수 안에서 실행되는 개별 함수들에 의해 수행되는 흐름을 서브루틴이라 비유할 수 있겠습니다.&lt;/p&gt;
@@ -25313,10 +25323,10 @@ journey
         </item>
         <item>
         <title>VSCODE에서 Python VirtualEnv 환경설정하기</title>
-        <link>https://cliearl.github.io/posts/etc/python-virtualenv-settings/</link>
+        <link>https://cliearl.github.io/posts/python/python-virtualenv-settings/</link>
         <pubDate>Sun, 13 Dec 2020 15:37:00 +0900</pubDate>
         
-        <guid>https://cliearl.github.io/posts/etc/python-virtualenv-settings/</guid>
+        <guid>https://cliearl.github.io/posts/python/python-virtualenv-settings/</guid>
         <description>&lt;p&gt;VS Code에 파이썬 가상환경 설정하고 사용하는 법에 대해 정리했다.&lt;/p&gt;
 &lt;h2 id=&#34;venv-환경-작성&#34;&gt;venv 환경 작성
 &lt;/h2&gt;&lt;ul&gt;

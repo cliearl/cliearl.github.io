@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/google-maps-basic/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="프래그먼트에서 구글맵 구현하고 내 위치 표시하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="프래그먼트에서 구글맵 구현하고 내 위치 표시하기">
 <meta property='og:description' content="이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다.\n구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다.\n1 2 3 4 &lt;fragment class=&#34;com.google.android.gms.maps.SupportMapFragment&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34;/&gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.\n1 2 3 4 &lt;com.google.android.gms.maps.MapView android:id=&#34;@+id/mapview&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34; /&gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/google-maps-basic/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -363,7 +363,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">May 02, 2022</time>
+                <time class="article-time--published" datetime='2022-05-02T20:16:12&#43;09:00'>May 02, 2022</time>
             </div>
         
 
@@ -1006,7 +1006,8 @@
 <li>Location is turned off in the device settings. The result could be null even if the last location was previously retrieved because disabling location also clears the cache.</li>
 <li>The device never recorded its location, which could be the case of a new device or a device that has been restored to factory settings.</li>
 <li>Google Play services on the device has restarted, and there is no active Fused Location Provider client that has requested location after the services restarted. To avoid this situation you can create a new client and request location updates yourself. For more information, see Receiving Location Updates.</li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <h2 id="생명주기-관리">생명주기 관리
 </h2><p>프래그먼트의 생명주기에 따라 구글맵을 관리하기 위한 처리를 해 줍니다. 맵을 액티비티에서 <code>SupportMapFragment</code>로 구현할 경우에는 신경쓰지 않아도 되는 부분입니다.</p>
 <div class="highlight"><div class="chroma">
@@ -1106,18 +1107,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -1286,7 +1293,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1375,7 +1382,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

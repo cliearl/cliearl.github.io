@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/etc/mermaid-usage/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Hugo에서 mermaid 사용하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="Hugo에서 mermaid 사용하기">
 <meta property='og:description' content="Mermaid.js는 자바스크립트 기반의 차트 툴이다. 이를 Hugo에서 사용하는 방법이 있어 소개한다.\nHugo shortcode 설정 layouts/shortcodes/ 아래에 다음과 같은 파일을 작성하여 shortcode로 사용할 수 있도록 한다. 이 때 package version은 항상 최신의 것을 가져오도록 한다.\n1 2 3 4 5 6 7 8 9 10 11 12 &lt;script async type=&#34;application/javascript&#34; src=&#34;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js&#34;&gt; var config = { startOnLoad:true, theme:&#39;{{ if .Get &#34;theme&#34; }}{{ .Get &#34;theme&#34; }}{{ else }}neutral{{ end }}&#39;, align:&#39;{{ if .Get &#34;align&#34; }}{{ .Get &#34;align&#34; }}{{ else }}center{{ end }}&#39; }; mermaid.initialize(config); &lt;/script&gt; &lt;div class=&#34;mermaid&#34;&gt; {{.Inner}} &lt;/div&gt; Mermaid로 그릴 수 있는 차트 종류 더 구체적인 사용방법은 mermaid 홈페이지 에서 확인 가능하다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/etc/mermaid-usage/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -361,7 +361,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Nov 08, 2021</time>
+                <time class="article-time--published" datetime='2021-11-08T10:56:19&#43;09:00'>Nov 08, 2021</time>
             </div>
         
 
@@ -767,18 +767,24 @@ journey
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -819,7 +825,7 @@ journey
             
                 
 <article class="">
-    <a href="/posts/etc/pycharm-extensions/">
+    <a href="/posts/python/pycharm-extensions/">
         
         
 
@@ -922,7 +928,7 @@ journey
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1011,7 +1017,7 @@ journey
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Android Studio Arctic Fox와 JDK 11의 도입">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="Android Studio Arctic Fox와 JDK 11의 도입">
 <meta property='og:description' content="이번 포스팅에서는 Android Studio Arctic Fox와 JDK 11의 도입에 관한 내용을 다루어보도록 하겠습니다.\nAndroid Gradle 7.0.0 도입 2021년 7월 말에 Android Studio의 버전이 Arctic Fox|2020.3.1 로 올라갔습니다. 그 과정에서 Android Gradle plugin의 버전도 4.2.0에서 7.0.0으로 올라갔는데요, Android Gradle 7.0.0의 사양은 다음과 같습니다.\nDefault Version Gradle 7.0.2 SDK Build Tools 30.0.2 NDK 21.4.7075529 JDK 11 이번 플러그인의 가장 큰 변화중 하나는 디폴트 JDK 버전을 1.8에서 11로 올린점입니다. Java SE 8은 2014년 3월에 발표되었는데, 2019년 1월에 무료 업데이트가 종료되고 현재는 유료 업데이트만을 지원하고 있습니다. 따라서 구글에서는 사실상 기능지원이 종료된 8을 버리기로 결정한 것으로 보입니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/android-gradle-java-11/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -353,7 +353,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Aug 15, 2021</time>
+                <time class="article-time--published" datetime='2021-08-15T14:23:23&#43;09:00'>Aug 15, 2021</time>
             </div>
         
 
@@ -584,18 +584,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -739,7 +745,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -828,7 +834,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

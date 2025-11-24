@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/sharedpreferneces-gson/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="SharedPreferences를 json 포맷으로 관리하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="SharedPreferences를 json 포맷으로 관리하기">
 <meta property='og:description' content="이번 포스팅에서는 SharedPreferences에 복잡한 형태의 데이터를 json 포맷으로 저장하고 불러오는 법에 대해 알아보도록 하겠습니다.\nSharedPreferences는 Key-Value 형태로 이루어진 딕셔너리를 저장하도록 설계된 저장장소인데요, 이 Value 부분에 json으로 구성된 긴 형태의 데이터를 저장함으로써 복잡한 형태의 데이터도 저장할 수가 있습니다.\n이 때 앱 안의 데이터를 json으로 Serialize하고 다시 복원하는 Deserialize를 편하게 실행하게 해 주는 Gson이라는 라이브러리가 있습니다. 이번 포스팅에서는 이 라이브러리를 활용하겠습니다.\n여기서는 Data class 이해하고 RecyclerView에서 사용하기 강의에서 만들었던 프로젝트를 수정하면서 구현해보겠습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/sharedpreferneces-gson/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -355,7 +355,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Apr 22, 2021</time>
+                <time class="article-time--published" datetime='2021-04-22T20:33:39&#43;09:00'>Apr 22, 2021</time>
             </div>
         
 
@@ -606,18 +606,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -786,7 +792,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -875,7 +881,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

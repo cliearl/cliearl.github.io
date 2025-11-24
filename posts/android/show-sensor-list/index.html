@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/show-sensor-list/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="기기에 설치된 센서종류 확인하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="기기에 설치된 센서종류 확인하기">
 <meta property='og:description' content="이번 포스팅에서는 안드로이드 기기에 설치된 센서 종류를 확인하는 법에 대해 알아보도록 하겠습니다.\nAndroid 플랫폼에서 지원하는 센서의 유형은 다음 표와 같습니다.\nSensor Type Description Common Uses TYPE_ACCELEROMETER Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), including the force of gravity. Motion detection (shake, tilt, etc.). TYPE_AMBIENT_TEMPERATURE Hardware Measures the ambient room temperature in degrees Celsius (°C). See note below. Monitoring air temperatures. TYPE_GRAVITY Software or Hardware Measures the force of gravity in m/s2 that is applied to a device on all three physical axes (x, y, z). Motion detection (shake, tilt, etc.). TYPE_GYROSCOPE Hardware Measures a device&rsquo;s rate of rotation in rad/s around each of the three physical axes (x, y, and z). Rotation detection (spin, turn, etc.). TYPE_LIGHT Hardware Measures the ambient light level (illumination) in lx. Controlling screen brightness. TYPE_LINEAR_ACCELERATION Software or Hardware Measures the acceleration force in m/s2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity. Monitoring acceleration along a single axis. TYPE_MAGNETIC_FIELD Hardware Measures the ambient geomagnetic field for all three physical axes (x, y, z) in μT. Creating a compass. TYPE_ORIENTATION Software Measures degrees of rotation that a device makes around all three physical axes (x, y, z). As of API level 3 you can obtain the inclination matrix and rotation matrix for a device by using the gravity sensor and the geomagnetic field sensor in conjunction with the getRotationMatrix() method. Determining device position. TYPE_PRESSURE Hardware Measures the ambient air pressure in hPa or mbar. Monitoring air pressure changes. TYPE_PROXIMITY Hardware Measures the proximity of an object in cm relative to the view screen of a device. This sensor is typically used to determine whether a handset is being held up to a person&rsquo;s ear. Phone position during a call. TYPE_RELATIVE_HUMIDITY Hardware Measures the relative ambient humidity in percent (%). Monitoring dewpoint, absolute, and relative humidity. TYPE_ROTATION_VECTOR Software or Hardware Measures the orientation of a device by providing the three elements of the device&rsquo;s rotation vector. Motion detection and rotation detection. TYPE_TEMPERATURE Hardware Measures the temperature of the device in degrees Celsius (°C). This sensor implementation varies across devices and this sensor was replaced with the TYPE_AMBIENT_TEMPERATURE sensor in API Level 14 Monitoring temperatures. 센서도 많은 종류가 있는 것을 알 수 있습니다. 여기서는 기기에 장착된 센서를 확인하는 방법을 알아볼 겁니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/show-sensor-list/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -319,7 +319,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Apr 02, 2022</time>
+                <time class="article-time--published" datetime='2022-04-02T07:51:58&#43;09:00'>Apr 02, 2022</time>
             </div>
         
 
@@ -947,18 +947,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -1127,7 +1133,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1216,7 +1222,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/support-library-androidx-jetpack/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Support Library와 Androidx와 Jetpack">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="Support Library와 Androidx와 Jetpack">
 <meta property='og:description' content="Support Library Support Library의 필요성 구글에서는 Android API의 하위 호환성 문제를 해결하기 위해 Support Library를 만들었습니다. 예를들어 롤리팝(API 21)부터 도입된 RecyclerView는 API 21 이하의 기기에서는 사용할 수 없지만 다음 서포트 라이브러리를 추가하면 API 7 이상의 기기부터 RecyclerView를 사용할 수 있습니다.\n1 com.android.support:recyclerview-v7:28.0.0 com.android.support로 시작하는 서포트 라이브러리는 수많은 종류가 준비되어 있습니다. 이중에는 v4, v7, v13 등 v가 붙은 패키지들이 있는데요, 이것들은 각각 사용가능한 최소 API 레벨을 의미합니다. 예를들어 v4가 붙어있으면 API 레벨 4부터 이용할 수 있는 라이브러리라는 의미이지요.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/support-library-androidx-jetpack/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -363,7 +363,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Nov 21, 2021</time>
+                <time class="article-time--published" datetime='2021-11-21T10:55:30&#43;09:00'>Nov 21, 2021</time>
             </div>
         
 
@@ -473,7 +473,8 @@ Support Library는 수많은 API들을 통합한 라이브러리이기 때문에
 <p>그리고 Androidx를 소개했던 세션에서 <a class="link" href="https://developer.android.com/jetpack"  target="_blank" rel="noopener"
     >Jetpack</a>도 같이 발표됩니다.</p>
 <blockquote>
-<p>Jetpack is a suite of libraries to help developers follow best practices, reduce boilerplate code, and write code that works consistently across Android versions and devices so that developers can focus on the code they care about.</p></blockquote>
+<p>Jetpack is a suite of libraries to help developers follow best practices, reduce boilerplate code, and write code that works consistently across Android versions and devices so that developers can focus on the code they care about.</p>
+</blockquote>
 <p>Jetpack은 한마디로 안드로이드 앱을 더 완성도 높게 만들 수 있는 라이브러리의 모음입니다. 주로 androidx의 라이브러리가 포함되지만 androidx가 아닌 라이브러리가 포함될 수도 있습니다.</p>
 <p>같은 기능을 구현하더라도 개발자의 숙련도에 따라 앱의 안정성이 달라지는 현상을 가능한 줄이기 위해 구글에서 가이드라인을 만들었고 그 가이드라인에 따르기 위해 사용해야할 라이브러리를 정의한 문서스펙이라고 생각하시면 좋을 것 같습니다.</p>
 <p><img src="/images/support-library-androidx-jetpack/jetpack-category.png"
@@ -552,18 +553,24 @@ Support Library는 수많은 API들을 통합한 라이브러리이기 때문에
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -707,7 +714,7 @@ Support Library는 수많은 API들을 통합한 라이브러리이기 때문에
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -796,7 +803,7 @@ Support Library는 수많은 API들을 통합한 라이브러리이기 때문에
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

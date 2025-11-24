@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/android-test-basic/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="안드로이드 테스트 자동화 기초">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="안드로이드 테스트 자동화 기초">
 <meta property='og:description' content="이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다.\n들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다. 테스트 커버리지는 100%를 목표해야 한다는 사람도 있고 혹은 100%를 목표하는 것은 무의미한 일이라고 하는 사람도 있습니다. 테스트를 먼저 만들고 프로덕션 코드를 만들어야 한다는 주장도 있고, 실무중에 그러한 방식으로 일을 할 여유가 없다는 사람도 있습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/android-test-basic/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -395,7 +395,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Feb 05, 2023</time>
+                <time class="article-time--published" datetime='2023-02-05T16:47:26&#43;09:00'>Feb 05, 2023</time>
             </div>
         
 
@@ -1242,18 +1242,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -1397,7 +1403,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1486,7 +1492,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

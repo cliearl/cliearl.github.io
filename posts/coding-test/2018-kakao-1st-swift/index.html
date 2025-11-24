@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/coding-test/2018-kakao-1st-swift/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="2018 카카오 신입 공채 1차 코딩 테스트 Swift 답안">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="2018 카카오 신입 공채 1차 코딩 테스트 Swift 답안">
 <meta property='og:description' content="문제해설 http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/\n비밀지도 (비트연산) https://www.welcomekakao.com/learn/courses/30/lessons/17681\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 func solution(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -&gt; [String] { var answer = [String](repeating: &#34;&#34;, count: n) var bitAdded = Array&lt;Int&gt;() for i in 0..&lt;n { bitAdded.append(arr1[i] | arr2[i]) } for i in 0..&lt;n { for _ in 0..&lt;n { // 2진수로 변환한 값의 맨 뒷자리가 튀어나온다 // 그걸 반환배열의 맨 앞으로 넣어준다 answer[i].insert(bitAdded[i] % 2 == 1 ? &#34;#&#34; : &#34; &#34;, at: answer[i].startIndex) // 비트를 오른쪽으로 하나 옮김 bitAdded[i] &gt;&gt;= 1 } } return answer } 다트 게임 (정규표현식) https://www.welcomekakao.com/learn/courses/30/lessons/17682\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/coding-test/2018-kakao-1st-swift/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -356,7 +356,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Aug 30, 2019</time>
+                <time class="article-time--published" datetime='2019-08-30T14:06:53&#43;09:00'>Aug 30, 2019</time>
             </div>
         
 
@@ -1380,18 +1380,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -1509,7 +1515,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1598,7 +1604,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

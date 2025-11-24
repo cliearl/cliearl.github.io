@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/linux/install-gogs-on-synology/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Synology에 Gogs 설치하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="Synology에 Gogs 설치하기">
 <meta property='og:description' content="깃 저장소 관리 서비스 Git repositories 를 관리하는 서비스는 여러가지가 있는데 Github는 프라이빗 저장소에 제한이 있다. Gitlab은 시놀로지에 설치는 되는데 Docker를 지원하는 고가의 기종에서만 가능하다. 도커를 지원하는 시놀로지 모델은 다음과 같다.\n19 시리즈 : RS1619xs+, RS1219+, DS1819+ 18 시리즈 : FS1018, RS3618xs, RS2818RP+, RS2418RP+, RS2418+, RS818RP+, RS818+, DS3018xs, DS1618+, DS918+, DS718+, DS218+ 17 시리즈 : FS3017, FS2017, RS18017xs+, RS4017xs+, RS3617xs+, RS3617RPxs, RS3617xs, DS3617xs, DS1817+, DS1517+ 16 시리즈 : RS18016xs+, RS2416RP+, RS2416+, DS916+, DS716+, DS716+II, DS216+, DS216+II 15 시리즈 : RS815RP+, RS815+, RC18015xs+, DS3615xs, DS2415+, DS1815+, DS1515+, DS415+ 14 시리즈 : RS3614xs+, RS3614RPxs, RS3614xs, RS2414RP+, RS2414+, RS814RP+, RS814+ 13 시리즈 : RS10613xs+, RS3413xs+, DS2413+, DS1813+, DS1513+, DS713+ 12 시리즈 : RS3412RPxs, RS3412xs, RS2212RP+, RS2212+, RS812RP+, RS812+, DS3612xs, DS1812+, DS1512+, DS712+, DS412+ 11 시리즈 : RS3411RPxs, RS3411xs, RS2211RP+, RS2211+, DS3611xs, DS2411+, DS1511+, DS411+, DS411+II 10 시리즈 : RS810RP+, RS810+, DS1010+, DS710+ Gogs 선정 어쨌든 프라이빗 소스를 서비스회사에 맡기고 싶진 않아 개인서버에 git을 설치하고 웹에서 매니징을 할수 있게 해 주는 서비스를 찾아보니 Gogs와 Gogs에서 파생되어 나온 Gitea가 있다. 두 서비스의 차이점은 Slant에서 비교했는데 Gogs는 시놀로지 서버에 설치되므로 Gogs를 사용하기로 했다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/linux/install-gogs-on-synology/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -361,7 +361,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Feb 08, 2019</time>
+                <time class="article-time--published" datetime='2019-02-08T00:54:25&#43;09:00'>Feb 08, 2019</time>
             </div>
         
 
@@ -506,18 +506,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -661,7 +667,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -750,7 +756,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

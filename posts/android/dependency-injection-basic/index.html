@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/dependency-injection-basic/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Dependency Injection 기초">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="Dependency Injection 기초">
 <meta property='og:description' content="이번 영상에서는 의존성 주입에 대해 알아보도록 하겠습니다.\nSOLID 원칙 의존성 주입은 객체지향 프로그래밍의 개념중 하나인데요, 이것을 이해하기 위해 우선은 객체지향 설계의 5대원칙으로 일컬어지는 SOLID 원칙에 대해 알아볼 필요가 있습니다. SOLID 원칙이란 로버트 마틴 선생이 2000년에 Design Principles and Design Patterns에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.\n단일 책임 원칙 (Single responsibility principle, SRP) &ldquo;There should never be more than one reason for a class to change.&rdquo;\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/dependency-injection-basic/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -365,7 +365,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Jul 31, 2022</time>
+                <time class="article-time--published" datetime='2022-07-31T21:19:03&#43;09:00'>Jul 31, 2022</time>
             </div>
         
 
@@ -403,7 +403,8 @@
     >Design Principles and Design Patterns</a>에서 주창한 객체 지향 프로그래밍 및 설계의 기본 원칙을, Michael Feathers가 두문자어 기억법을 써서 다섯가지로 정리한 것입니다.</p>
 <h3 id="단일-책임-원칙-single-responsibility-principle-srp">단일 책임 원칙 (Single responsibility principle, SRP)
 </h3><blockquote>
-<p>&ldquo;There should never be more than one reason for a class to change.&rdquo;</p></blockquote>
+<p>&ldquo;There should never be more than one reason for a class to change.&rdquo;</p>
+</blockquote>
 <p>단일 책임 원칙이란 클래스가 여러개의 책임을 갖게 되면, 각 책임마다 클래스를 변경할 수 있는 이유가 생기므로 책임을 단 한 개만 가지도록 설계하라는 뜻입니다.</p>
 <p>예를 들면 네트워크에 접속해서, 암호화된 데이터를 다운로드하고, 데이터를 복호화한 뒤, 파일로 저장하는 <code>Work</code> 클래스가 있다고 하겠습니다. 네 개의 책임 중 하나만 변경이 되어도 이 클래스는 수정되어야 합니다. 또 이 클래스에 연결된 클래스가 있다면 책임 하나의 기능 변경이 일어나도 연결된 모든 클래스가 그에 맞춰 수정되어야 하지요.</p>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
@@ -459,7 +460,8 @@ classDiagram
 </div>
 <h3 id="개방-폐쇄-원칙-open-closed-principle-ocp">개방-폐쇄 원칙 (Open-closed principle, OCP)
 </h3><blockquote>
-<p>&ldquo;Software entities &hellip; should be open for extension, but closed for modification.&rdquo;</p></blockquote>
+<p>&ldquo;Software entities &hellip; should be open for extension, but closed for modification.&rdquo;</p>
+</blockquote>
 <p>개방-폐쇄 원칙은 객체를 수정하지 않고도 기능을 확장할 수 있게 설계해야 한다는 뜻입니다. 이게 어떻게 가능할까요?</p>
 <p>예를 들어 네트워크에서 데이터를 읽어오는 <code>DataReader</code> 클래스가 있다고 하겠습니다. 이 때 네트워크에서 데이터를 다운로드하는 기능은 <code>NetworkAccess</code> 클래스로 분리시킵니다. 그리고 <code>DataSource</code> 인터페이스를 만들어서 <code>NetworkAccess</code>가 <code>DataSource</code>를 상속하게 합니다.</p>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
@@ -508,7 +510,8 @@ classDiagram
 <p>기능을 확장하는 부분은 인터페이스를 사용해 추상화하고, 새로운 기능의 추가에는 상속(다형성)을 적용함으로써 클래스를 유연하게 변경할 수 있게 되는 것입니다.</p>
 <h3 id="리스코프-치환-원칙-liskov-substitution-principle-lsp">리스코프 치환 원칙 (Liskov substitution principle, LSP)
 </h3><blockquote>
-<p>&ldquo;Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.&rdquo;</p></blockquote>
+<p>&ldquo;Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.&rdquo;</p>
+</blockquote>
 <p>리스코프 치환 원칙에 따르면 상위타입 객체가 하위타입 객체로 변환되어도 상위타입을 사용하는 프로그램은 정상적으로 동작해야 합니다.</p>
 <p>잘 알려진 <a class="link" href="https://en.wikipedia.org/wiki/Circle%E2%80%93ellipse_problem"  target="_blank" rel="noopener"
     >직사각형-정사각형 문제</a>를 예로들어 설명을 해 보겠습니다. 직사각형의 정의는 <code>네 각이 직각인 사각형</code>이고, 정사각형은 <code>네 각이 직각이면서 네 변의 길이가 모두 같은 사각형</code>입니다.</p>
@@ -612,7 +615,8 @@ classDiagram
 <p>LSP를 위반한다는 것은 하위타입이 상위타입의 명세를 제대로 지키지 않고 있다는 뜻입니다. 만약 상위타입의 코드에서 하위타입을 구분해야 하는 경우, 상위타입으로 치환할 수 없기 때문에 코드 내부에서 <code>instanceOf</code> 를 써야 합니다. 그런데 이렇게 하면 하위타입을 새로 만들때마다 상위타입의 코드를 수정해야 하니 결과적으로 OCP도 깨지기 쉬워져서 기능확장이 어려워지게 됩니다.</p>
 <h3 id="인터페이스-분리-원칙-interface-segregation-principle-isp">인터페이스 분리 원칙 (Interface segregation principle, ISP)
 </h3><blockquote>
-<p>&ldquo;Many client-specific interfaces are better than one general-purpose interface.&rdquo;</p></blockquote>
+<p>&ldquo;Many client-specific interfaces are better than one general-purpose interface.&rdquo;</p>
+</blockquote>
 <p>이 문장의 뜻은 구현할 필요가 없는 메소드를 가진 인터페이스를 객체에 사용하지 말라는 뜻입니다. 예를 들어 동물을 표현하는 <code>Animal</code> 인터페이스가 있다고 하겠습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -689,7 +693,8 @@ classDiagram
 </div>
 </div><h3 id="의존성-역전-원칙-dependency-inversion-principle-dip">의존성 역전 원칙 (Dependency inversion principle, DIP)
 </h3><blockquote>
-<p>&ldquo;Depend upon abstractions, [not] concretions.&rdquo;</p></blockquote>
+<p>&ldquo;Depend upon abstractions, [not] concretions.&rdquo;</p>
+</blockquote>
 <p>Dependency, 의존이란 무엇일까요. 객체 A가 객체 B를 생성하거나 객체 B의 메서드를 호출할 때 A는 B에 의존한다, 혹은 A가 의존성 B를 갖는다고 표현합니다. 다음 그림에서는 <code>Car</code> 클래스가 <code>Engine</code> 클래스에 의존하고 있습니다.</p>
 <script async type="application/javascript" src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js">
     var config = {
@@ -1133,18 +1138,24 @@ flowchart RL
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -1288,7 +1299,7 @@ flowchart RL
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1377,7 +1388,7 @@ flowchart RL
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

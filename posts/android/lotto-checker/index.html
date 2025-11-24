@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/lotto-checker/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="코루틴으로 로또번호 당첨 확인하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="코루틴으로 로또번호 당첨 확인하기">
 <meta property='og:description' content="이번 포스팅에서는 코루틴을 사용해서 로또번호의 당첨을 확인하는 법에 대해 알아보도록 하겠습니다.\n당첨번호 조회하기 이전에 로또번호 생성기 만들기강의에서 로또번호를 생성하는 앱을 만들어보았는데요, 여기서는 이 앱에 코루틴을 이용해서 당첨여부를 확인하는 기능을 추가하도록 하겠습니다. 코루틴에 대한 이론설명은 알기쉬운 코루틴 이론 강의를 참조하시기 바랍니다.\n금주의 로또 당첨번호는 동행복권 홈페이지에서 확인할 수 있습니다. 다른 회차의 당첨번호는 홈페이지의 회차별 당첨번호 페이지에서 확인할 수 있게 되어 있습니다.\n그런데 이렇게 홈페이지에 접속하지 않고도 당첨번호는 API로 조회할 수 있습니다. 다음 주소의 &ldquo;회차&quot;라고 되어 있는 부분에 확인하고 싶은 회차의 숫자를 넣으시면 됩니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/lotto-checker/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -355,7 +355,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Jul 17, 2021</time>
+                <time class="article-time--published" datetime='2021-07-17T16:01:01&#43;09:00'>Jul 17, 2021</time>
             </div>
         
 
@@ -751,18 +751,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -931,7 +937,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -1020,7 +1026,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

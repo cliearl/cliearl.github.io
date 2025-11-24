@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/date-and-time/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Date and Time 다루기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="Date and Time 다루기">
 <meta property='og:description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다.\n안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다.\nDate and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.MMMM.dd GGG hh:mm aaa&rdquo; 02001.July.04 AD 12:08 PM &ldquo;EEE, d MMM yyyy HH:mm:ss Z&rdquo; Wed, 4 Jul 2001 12:08:56 -0700 &ldquo;yyMMddHHmmssZ&rdquo; 010704120856-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSZ&rdquo; 2001-07-04T12:08:56.235-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSXXX&rdquo; 2001-07-04T12:08:56.235-07:00 &ldquo;YYYY-&lsquo;W&rsquo;ww-u&rdquo; 2001-W27-3 코드 작성 java.util.Date 그럼 우선은 java.util.Date 라이브러리를 이용해서 날짜객체를 만들어 보겠습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/date-and-time/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -358,7 +358,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Apr 07, 2021</time>
+                <time class="article-time--published" datetime='2021-04-07T20:32:54&#43;09:00'>Apr 07, 2021</time>
             </div>
         
 
@@ -638,18 +638,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -818,7 +824,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -907,7 +913,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

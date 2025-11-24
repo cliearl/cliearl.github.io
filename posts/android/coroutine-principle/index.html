@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/coroutine-principle/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="알기쉬운 코루틴 이론">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="알기쉬운 코루틴 이론">
 <meta property='og:description' content="이번 포스팅에서는 코틀린의 코루틴(Coroutine)에 대해 알아보도록 하겠습니다.\n코루틴의 개념 안드로이드에서는 AsyncTask를 이용해서 손쉽게 비동기 프로그래밍을 구현했었지만 구글이 다음과 같이 밝힌 것처럼 메모리 누수등 여러가지 문제가 있었습니다. 그래서 API 30부터는 AsyncTask를 deprecate 시키고 코루틴을 사용하도록 권장하고 있습니다.\nAsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes. It also has inconsistent behavior on different versions of the platform, swallows exceptions from {@code doInBackground}, and does not provide much utility over using {@link Executor}s directly.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/coroutine-principle/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -379,7 +379,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Jun 28, 2021</time>
+                <time class="article-time--published" datetime='2021-06-28T22:01:50&#43;09:00'>Jun 28, 2021</time>
             </div>
         
 
@@ -416,7 +416,8 @@
     >구글</a>이 다음과 같이 밝힌 것처럼 메모리 누수등 여러가지 문제가 있었습니다. 그래서 API 30부터는 AsyncTask를 deprecate 시키고 <a class="link" href="https://developer.android.com/kotlin/coroutines"  target="_blank" rel="noopener"
     >코루틴</a>을 사용하도록 권장하고 있습니다.</p>
 <blockquote>
-<p>AsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes. It also has inconsistent behavior on different versions of the platform, swallows exceptions from {@code doInBackground}, and does not provide much utility over using {@link Executor}s directly.</p></blockquote>
+<p>AsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes. It also has inconsistent behavior on different versions of the platform, swallows exceptions from {@code doInBackground}, and does not provide much utility over using {@link Executor}s directly.</p>
+</blockquote>
 <p>코루틴은 1958년 멜빈 콘웨이가 처음 제창했다고 하는 개념으로 현재 <a class="link" href="https://en.wikipedia.org/wiki/Coroutine#Programming_languages_with_native_support"  target="_blank" rel="noopener"
     >여러 프로그래밍 언어</a>에 구현되어 있으며 코틀린만의 고유한 개념은 아닙니다.</p>
 <p>프로그래밍에서 루틴이란 프로그램의 흐름을 추상적으로 일컫는 말입니다. 루틴은 크게 메인루틴과 서브루틴으로 나눌 수 있는데요. 예를들어 main 함수에 의해 수행되는 프로그램의 흐름을 메인루틴이라고 한다면, main 함수 안에서 실행되는 개별 함수들에 의해 수행되는 흐름을 서브루틴이라 비유할 수 있겠습니다.</p>
@@ -726,18 +727,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -881,7 +888,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -970,7 +977,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

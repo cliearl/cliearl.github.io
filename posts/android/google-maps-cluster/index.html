@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/google-maps-cluster/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="구글맵에 커스텀 마커와 클러스터아이템 적용하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="구글맵에 커스텀 마커와 클러스터아이템 적용하기">
 <meta property='og:description' content="이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다.\n다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다.\n출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering\n여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다.\nDependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다.\n1 2 3 dependencies { implementation &#39;com.google.maps.android:android-maps-utils:2.3.0&#39; } 선별진료소 데이터 준비 마커에 사용할 선별진료소 데이터는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황데이터를 사용하겠습니다. 이 데이터에는 마커에 바로 사용할 수 있는 경도와 위도정보가 포함되어 있기 때문에 이번 강의의 제물로 선택되었습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/google-maps-cluster/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -355,7 +355,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">May 02, 2022</time>
+                <time class="article-time--published" datetime='2022-05-02T20:18:53&#43;09:00'>May 02, 2022</time>
             </div>
         
 
@@ -724,18 +724,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -904,7 +910,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -993,7 +999,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

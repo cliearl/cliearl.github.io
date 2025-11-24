@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/autoset-buildnumber/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="프로젝트의 빌드넘버 자동증가 시키기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="프로젝트의 빌드넘버 자동증가 시키기">
 <meta property='og:description' content="이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다.\n버전넘버와 빌드넘버 버전넘버 소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 1.0.0 과 같이 세자리로 결정을 합니다.\n첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다.\n그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다.\n다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/autoset-buildnumber/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -356,7 +356,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Apr 06, 2021</time>
+                <time class="article-time--published" datetime='2021-04-06T19:24:59&#43;09:00'>Apr 06, 2021</time>
             </div>
         
 
@@ -615,18 +615,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -795,7 +801,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -884,7 +890,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

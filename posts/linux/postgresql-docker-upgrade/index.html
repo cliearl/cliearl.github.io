@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Postgresql Docker Image의 메이저 버전 업그레이드">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="Postgresql Docker Image의 메이저 버전 업그레이드">
 <meta property='og:description' content="Docker로 Postgresql의 12버전을 사용하고 있었는데 2021-09-30부로 14버전이 발표됐다. 이젠 12를 버리고 13으로 가야겠다 싶어 업그레이드 방법을 정리한다.\nPostgresql Version Postgresql 메이저 버전은 최근것만 정리하면 다음과 같다.\nRelease First release Latest minor version Latest release End of life Milestones 11 2018-10-18 11.13 2021-08-12 2023-11-09 Increased robustness and performance for partitioning, transactions supported in stored procedures, enhanced abilities for query parallelism, just-in-time (JIT) compiling for expressions 12 2019-10-03 12.8 2021-08-12 2024-11-14 Improvements to query performance and space utilization; SQL/JSON path expression support; generated columns; improvements to internationalization, and authentication; new pluggable table storage interface. 13 2020-09-24 13.4 2021-08-12 2025-11-13 Space savings and performance gains from de-duplication of B-tree index entries, improved performance for queries that use aggregates or partitioned tables, better query planning when using extended statistics, parallelized vacuuming of indexes, incremental sorting 14 2021-09-30 14.0 2021-09-30 2026-11-12 Added SQL-standard SEARCH and CYCLE clauses for common table expressions, allow DISTINCT to be added to GROUP BY 15 2022-10-13 15.0 2022-10-13 2027-11-11 Implements SQL-standard MERGE statement. PL/Python now only supports current Python 3, and plpythonu means the discontinued What’s New in PostgreSQL 13? 12버전도 지원기간은 많이 남았긴 한데.. 새 버전을 써보고 싶으니 업그레이드하기로 했다. 13의 특징은 다음과 같은 게 있다고 하는데 좀 더 구체적인 설명은 What’s New in PostgreSQL 13? 을 참고하자.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/linux/postgresql-docker-upgrade/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -358,7 +358,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Oct 09, 2021</time>
+                <time class="article-time--published" datetime='2021-10-09T17:45:11&#43;09:00'>Oct 09, 2021</time>
             </div>
         
 
@@ -569,18 +569,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -724,7 +730,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -813,7 +819,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/gadmob-banner/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Google Admob으로 배너광고 표시하기">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="Google Admob으로 배너광고 표시하기">
 <meta property='og:description' content="이번 포스팅에서는 구글 애드몹 라이브러리를 이용해서 앱에 배너광고를 표시하는 법에 대해 알아보도록 하겠습니다.\n우선은 build.gradle에 애드몹 라이브러를 추가해줍니다.\n1 2 3 dependencies { implementation &#39;com.google.android.gms:play-services-ads:19.7.0&#39; } 다음은 AndroidManifest.xml에 인터넷 접근권한을 부여하고 애드몹 ID 정보를 추가합니다. 애드몹 ID는 구글 애드몹 사이트에 가입하고 자신의 앱을 등록하면 받을 수 있습니다. 여기서는 Mobile Ads SDK (Android)에서 테스트를 할때 사용하라고 주는 값을 사용하였습니다.\n1 2 3 4 5 6 7 &lt;uses-permission android:name=&#34;android.permission.INTERNET&#34;/&gt; &lt;application &lt;meta-data android:name=&#34;com.google.android.gms.ads.APPLICATION_ID&#34; android:value=&#34;ca-app-pub-3940256099942544~3347511713&#34; /&gt; &lt;/application&gt; 다음은 화면 xml에 광고를 표시하기 위한 AdView를 추가합니다. 배너 사이즈는 이미 정해진 리스트 중에서 고를 수 있는데 여기서는 SMART_BANNER를 선택했습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/gadmob-banner/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -319,7 +319,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Apr 21, 2021</time>
+                <time class="article-time--published" datetime='2021-04-21T22:17:58&#43;09:00'>Apr 21, 2021</time>
             </div>
         
 
@@ -588,18 +588,24 @@
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
-	const mainArticleElement = document.querySelector(".main-article");
-        renderMathInElement(mainArticleElement, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
+        const elementsToRender = [".main-article", ".widget--toc"];
 
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
     
 </article>
 
@@ -768,7 +774,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -857,7 +863,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
