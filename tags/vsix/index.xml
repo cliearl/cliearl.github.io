@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Vsix on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/tags/vsix/</link>
+        <description>Recent content in Vsix on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <lastBuildDate>Mon, 24 Nov 2025 22:10:28 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/vsix/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>VS Code 확장(Extension) VSIX 파일 직접 다운로드 링크 생성하기</title>
+        <link>https://cliearl.github.io/posts/etc/download-vscode-extensions/</link>
+        <pubDate>Mon, 24 Nov 2025 22:10:28 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/etc/download-vscode-extensions/</guid>
+        <description>&lt;h2 id=&#34;-vs-code-확장extension-vsix-파일-직접-다운로드-링크-생성-방법-2025년-최신&#34;&gt;🛠️ VS Code 확장(Extension) VSIX 파일 직접 다운로드 링크 생성 방법 (2025년 최신)
+&lt;/h2&gt;&lt;p&gt;최근 마이크로소프트가 Visual Studio Marketplace 웹사이트에서 &lt;code&gt;.vsix&lt;/code&gt; 파일 다운로드 버튼을 제거했습니다. 이로 인해 인터넷이 연결되지 않은 환경이나 특정 버전의 파일을 설치하려는 사용자들에게 불편함이 생겼습니다.&lt;/p&gt;
+&lt;p&gt;하지만, 특정 규칙을 이용하면 Marketplace URL만으로도 &lt;code&gt;.vsix&lt;/code&gt; 파일을 다운로드할 수 있는 &lt;strong&gt;직접 링크&lt;/strong&gt;를 생성할 수 있습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-vsix-다운로드-링크-생성-공식&#34;&gt;📥 VSIX 다운로드 링크 생성 공식
+&lt;/h3&gt;&lt;p&gt;모든 VS Code 확장은 다음 공식에 따라 직접 다운로드 링크가 생성됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;공식:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://{게시자 이름}.gallery.vsassets.io/_apis/public/gallery/publisher/{게시자 이름}/extension/{확장 프로그램 이름}/{버전}/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;-필수-정보-추출-방법&#34;&gt;🔍 필수 정보 추출 방법
+&lt;/h3&gt;&lt;p&gt;다운로드 링크를 만들기 위해 필요한 3가지 정보는 Marketplace URL에서 쉽게 추출할 수 있습니다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;정보&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;추출 위치&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;예시 값&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;게시자 이름&lt;/strong&gt; (&lt;code&gt;publisher&lt;/code&gt;)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;itemName=&lt;/code&gt; 뒤의 첫 번째 부분&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;GrapeCity&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;확장 프로그램 이름&lt;/strong&gt; (&lt;code&gt;extension name&lt;/code&gt;)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;itemName=&lt;/code&gt; 뒤의 두 번째 부분&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;gc-excelviewer&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;버전&lt;/strong&gt; (&lt;code&gt;version&lt;/code&gt;)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Marketplace 페이지 또는 GitHub에서 확인&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;4.2.64&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;-예시-excel-viewer-버전-4264&#34;&gt;&lt;strong&gt;💡 예시: Excel Viewer (버전 4.2.64)&lt;/strong&gt;
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Marketplace URL:&lt;/strong&gt;
+&lt;code&gt;https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;필수 정보:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Publisher: &lt;code&gt;GrapeCity&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Extension Name: &lt;code&gt;gc-excelviewer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Version: &lt;code&gt;4.2.64&lt;/code&gt; (← &lt;strong&gt;이 정보만 별도로 확인 필요&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;생성된 다운로드 URL:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://GrapeCity.gallery.vsassets.io/_apis/public/gallery/publisher/GrapeCity/extension/gc-excelviewer/4.2.64/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-다운로드한-vsix-파일-설치-방법&#34;&gt;🔧 다운로드한 VSIX 파일 설치 방법
+&lt;/h3&gt;&lt;p&gt;다운로드한 &lt;code&gt;.vsix&lt;/code&gt; 파일은 VS Code 내에서 쉽게 설치할 수 있습니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;VS Code를 실행합니다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl&lt;/code&gt; + &lt;code&gt;Shift&lt;/code&gt; + &lt;code&gt;P&lt;/code&gt; (또는 &lt;code&gt;Cmd&lt;/code&gt; + &lt;code&gt;Shift&lt;/code&gt; + &lt;code&gt;P&lt;/code&gt;)를 눌러 &lt;strong&gt;명령 팔레트&lt;/strong&gt;를 엽니다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VSIX&lt;/code&gt;를 입력하고 &lt;strong&gt;&lt;code&gt;Install from VSIX...&lt;/code&gt;&lt;/strong&gt; 명령을 선택합니다.&lt;/li&gt;
+&lt;li&gt;다운로드한 &lt;code&gt;.vsix&lt;/code&gt; 파일을 선택하면 설치가 완료됩니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이 방법으로 오프라인 환경에서도 원하는 VS Code 확장을 자유롭게 설치할 수 있습니다.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
