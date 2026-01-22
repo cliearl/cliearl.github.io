@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 자바의 리플렉션에 대해 알아보도록 하겠습니다.\n1 val bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java] 위 코드의 의미는 런타임에 뷰모델을 만들기 위해 BookSearchViewModel 클래스를 ViewModelProvider에게 전달해준다는 의미입니다. 이 때 ViewModelProvider의 get 메소드는 다음과 같이 Class를 전달받아서 ViewModelStoreOwner에게 ViewModel을 반환하게 됩니다.\n1 2 @MainThread open operator fun &lt;T : ViewModel&gt; get(modelClass: Class&lt;T&gt;): T ViewModelProvider는 컴파일 타임이 아니라 런타임에 실행되어 BookSearchViewModel을 만들어야 하는데 런타임에는 BookSearchViewModel의 클래스 정보를 알 수가 없습니다.\n여기서 ::은 자바의 리플렉션 문법인데, 리플렉션은 클래스 타입을 몰라도 그 클래스의 속성에 접근할 수 있게 해주는 API입니다. 그러니까 위의 코드에서는 리플렉션을 통해 ViewModelProvider에게 BookSearchViewModel 클래스 정보를 전달해 준 것이고 따라서 런타임에 BookSearchViewModel 인스턴스가 만들어지게 된 것입니다.\n">
 <title>자바의 리플렉션이란</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -583,7 +583,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

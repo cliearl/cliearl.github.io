@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 RecyclerView에 ListAdapter를 적용하는 법에 대해 알아보도록 하겠습니다.\n들어가기 Recyclerview의 데이터가 변하면 Recyclerview Adapter가 제공하는 notifyItem 메소드를 사용해서 ViewHolder 내용을 갱신할 수 있습니다.\n1 2 3 4 5 6 notifyItemChanged(int) notifyItemInserted(int) notifyItemRemoved(int) notifyItemRangeChanged(int, int) notifyItemRangeInserted(int, int) notifyItemRangeRemoved(int, int) 그런데 데이터가 변경되는 방식을 확인하고 그때마다 이렇게 notify를 일일이 해 주는것은 번거롭기도 하고, 또 사용하기에 따라서는 갱신이 필요없는 ViewHolder를 같이 갱신하는 불필요한 작업이 생길수도 있습니다.\nDiffUtil DiffUtil은 두 데이터셋을 받아서 그 차이를 계산해주는 클래스입니다. DiffUtil을 사용하면 두 데이터 셋을 비교한 뒤 그중 변한부분만을 파악하여 Recyclerview에 반영할 수 있습니다.\n">
 <title>DiffUtil과 ListAdapter 이해하고 RecyclerView에 적용하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -489,7 +489,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// Google Developers에서 제공하는 코드</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">UserAdapter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RecyclerView</span><span class="p">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="n">UserViewHolder</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">UserAdapter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RecyclerView</span><span class="p">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="n">UserViewHolder</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AsyncListDiffer</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mDiffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AsyncListDiffer</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">DIFF_CALLBACK</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getItemCount</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -519,7 +519,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">oldUser</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">newUser</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="listadapter">ListAdapter
@@ -558,7 +558,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="c1">// Google Developers에서 제공하는 코드
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">UserAdapter</span> <span class="n">extends</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">User</span><span class="p">,</span> <span class="n">UserViewHolder</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">UserAdapter</span> <span class="n">extends</span> <span class="n">ListAdapter</span><span class="p">&lt;</span><span class="n">User</span><span class="p">,</span> <span class="n">UserViewHolder</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">UserAdapter</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">(</span><span class="nc">User</span><span class="p">.</span><span class="n">DIFF_CALLBACK</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -572,14 +572,14 @@
 </span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">boolean</span> <span class="n">areItemsTheSame</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="p">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// User properties may have changed if reloaded from the DB, but ID is fixed
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">getId</span><span class="p">()</span> <span class="o">==</span> <span class="n">newUser</span><span class="p">.</span><span class="n">getId</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">getId</span><span class="p">()</span> <span class="o">==</span> <span class="n">newUser</span><span class="p">.</span><span class="n">getId</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="n">boolean</span> <span class="n">areContentsTheSame</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">                <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">oldUser</span><span class="p">,</span> <span class="nd">@NonNull</span> <span class="n">User</span> <span class="n">newUser</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// NOTE: if you use equals, your object must properly override Object#equals()
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// Incorrectly returning false here will result in too many animations.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">newUser</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// Incorrectly returning false here will result in too many animations.
+</span></span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">oldUser</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">newUser</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -917,8 +917,8 @@
 </span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">moveItem</span><span class="p">(</span><span class="n">fromPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">toPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">newList</span> <span class="p">=</span> <span class="n">currentList</span><span class="p">.</span><span class="n">toMutableList</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// val item = newList.removeAt(fromPosition)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// newList.add(toPosition, item)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nc">Collections</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">newList</span><span class="p">,</span> <span class="n">fromPosition</span><span class="p">,</span> <span class="n">toPosition</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// newList.add(toPosition, item)
+</span></span></span><span class="line"><span class="cl">        <span class="nc">Collections</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">newList</span><span class="p">,</span> <span class="n">fromPosition</span><span class="p">,</span> <span class="n">toPosition</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">submitList</span><span class="p">(</span><span class="n">newList</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -1002,22 +1002,22 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 홀딩중인 ViewHolder 투명도를 변경
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSelectedChanged</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">:</span> <span class="nc">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">?,</span> <span class="n">actionState</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onSelectedChanged</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">:</span> <span class="nc">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span><span class="p">?,</span> <span class="n">actionState</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onSelectedChanged</span><span class="p">(</span><span class="n">viewHolder</span><span class="p">,</span> <span class="n">actionState</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="k">when</span> <span class="p">(</span><span class="n">actionState</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nc">ItemTouchHelper</span><span class="p">.</span><span class="n">ACTION_STATE_DRAG</span><span class="p">,</span> <span class="nc">ItemTouchHelper</span><span class="p">.</span><span class="n">ACTION_STATE_SWIPE</span> <span class="o">-&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="n">viewHolder</span> <span class="k">as</span> <span class="n">MyViewHolder</span><span class="p">).</span><span class="n">setAlpha</span><span class="p">(</span><span class="m">0.5f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="n">viewHolder</span> <span class="k">as</span> <span class="n">MyViewHolder</span><span class="p">).</span><span class="n">setAlpha</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 홀딩중인 ViewHolder 투명도를 되돌림
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">clearView</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">clearView</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="n">recyclerView</span><span class="p">:</span> <span class="n">RecyclerView</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">viewHolder</span><span class="p">:</span> <span class="nc">RecyclerView</span><span class="p">.</span><span class="n">ViewHolder</span>
 </span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">clearView</span><span class="p">(</span><span class="n">recyclerView</span><span class="p">,</span> <span class="n">viewHolder</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="n">viewHolder</span> <span class="k">as</span> <span class="n">MyViewHolder</span><span class="p">).</span><span class="n">setAlpha</span><span class="p">(</span><span class="m">1.0f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="n">viewHolder</span> <span class="k">as</span> <span class="n">MyViewHolder</span><span class="p">).</span><span class="n">setAlpha</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1142,12 +1142,12 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">dataSet</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">Monster</span><span class="p">&gt;().</span><span class="n">apply</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;타일런트&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Zombie</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">50</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;조커&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">23</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">200</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;그렘린&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Goblin</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">5</span><span class="p">),</span> <span class="k">true</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;리오레우스&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">2500</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10000</span><span class="p">,</span> <span class="m">1000</span><span class="p">,</span> <span class="m">50000</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;사우론&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="m">200</span><span class="p">,</span> <span class="m">1000</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;리바이어던&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span> <span class="m">250</span><span class="p">,</span> <span class="m">10000</span><span class="p">),</span> <span class="k">true</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;타일런트&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Zombie</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;조커&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;그렘린&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Goblin</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="k">true</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;리오레우스&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;사우론&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Human</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="k">false</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="p">(</span><span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;리바이어던&#34;</span><span class="p">,</span> <span class="nc">Race</span><span class="p">.</span><span class="n">Dragon</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">listOf</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">10000</span><span class="p">),</span> <span class="k">true</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
@@ -1408,7 +1408,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 코틀린의 코루틴(Coroutine)에 대해 알아보도록 하겠습니다.\n코루틴의 개념 안드로이드에서는 AsyncTask를 이용해서 손쉽게 비동기 프로그래밍을 구현했었지만 구글이 다음과 같이 밝힌 것처럼 메모리 누수등 여러가지 문제가 있었습니다. 그래서 API 30부터는 AsyncTask를 deprecate 시키고 코루틴을 사용하도록 권장하고 있습니다.\nAsyncTask was intended to enable proper and easy use of the UI thread. However, the most common use case was for integrating into UI, and that would cause Context leaks, missed callbacks, or crashes on configuration changes. It also has inconsistent behavior on different versions of the platform, swallows exceptions from {@code doInBackground}, and does not provide much utility over using {@link Executor}s directly.\n">
 <title>알기쉬운 코루틴 이론</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -517,7 +517,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// New coroutine
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>코루틴은 일시정지될수 있는 작업의 흐름이기 때문에 Job은 코루틴의 여러가지 상태를 반영할 수 있도록 다음과 같이 설계되었습니다.</p>
@@ -630,15 +630,15 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">fetchDocs</span><span class="p">()</span> <span class="p">{</span>                      <span class="c1">// Dispatchers.Main
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="k">get</span><span class="p">(</span><span class="s2">&#34;developer.android.com&#34;</span><span class="p">)</span>  <span class="c1">// Dispatchers.Main
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">show</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>                               <span class="c1">// Dispatchers.Main
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="k">get</span><span class="p">(</span><span class="s2">&#34;developer.android.com&#34;</span><span class="p">)</span>  <span class="c1">// Dispatchers.Main
+</span></span></span><span class="line"><span class="cl">    <span class="n">show</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>                               <span class="c1">// Dispatchers.Main
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span>                 <span class="c1">// Dispatchers.Main
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">withContext</span><span class="p">(</span><span class="nc">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>              <span class="c1">// Dispatchers.IO (main-safety block)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="cm">/* perform network IO here */</span>          <span class="c1">// Dispatchers.IO (main-safety block)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>                                          <span class="c1">// Dispatchers.Main
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">withContext</span><span class="p">(</span><span class="nc">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>              <span class="c1">// Dispatchers.IO (main-safety block)
+</span></span></span><span class="line"><span class="cl">        <span class="cm">/* perform network IO here */</span>          <span class="c1">// Dispatchers.IO (main-safety block)
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>                                          <span class="c1">// Dispatchers.Main
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="코루틴-지연">코루틴 지연
@@ -883,7 +883,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

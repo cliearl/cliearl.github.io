@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 구글맵 마커를 커스텀하고 클러스터링하는 법에 대해 알아보도록 하겠습니다.\n다음과 같이 좁은 공간에 마커가 모여있을 경우 마커를 뭉쳐서 숫자로 변환하는 것을 클러스터링이라고 합니다. 지도를 확대하면 클러스터가 개별 마커로 펼쳐지기 때문에 많은 마커를 표시해야 하는 경우에 공간을 효율적으로 사용할 수 있습니다.\n출처 : https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering\n여기서는 기존에 작성했던 구글맵 프로젝트에 코로나 선별진료소를 표시하면서 클러스터링을 구현해보도록 하겠습니다.\nDependency 추가 build.gradle에 클러스터링에 사용할 클래스를 담은 android-maps-utils 를 추가합니다.\n1 2 3 dependencies { implementation &#39;com.google.maps.android:android-maps-utils:2.3.0&#39; } 선별진료소 데이터 준비 마커에 사용할 선별진료소 데이터는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황데이터를 사용하겠습니다. 이 데이터에는 마커에 바로 사용할 수 있는 경도와 위도정보가 포함되어 있기 때문에 이번 강의의 제물로 선택되었습니다.\n">
 <title>구글맵에 커스텀 마커와 클러스터아이템 적용하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -452,16 +452,16 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">CoronaMedItem</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">AGRGT</span><span class="n">_DE</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 2021-04-01
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">DISTRCT</span><span class="n">_DIV_DTLS</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 호흡기전담클리닉
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">EMGC</span><span class="n">_CENTER_TELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 031-8003-8275
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">MEDINST</span><span class="n">_NM</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 상쾌한이비인후과의원
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_LOTNO_ADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 경기도 화성시 반송동 216-1번지
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_ROADNM_ADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 경기도 화성시 동탄솔빛로 44
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_WGS84_LAT</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 37.1928811270
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_WGS84_LOGT</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 127.0729965789
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">REPRSNT</span><span class="n">_TELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">DISTRCT</span><span class="n">_DIV_DTLS</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 호흡기전담클리닉
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">EMGC</span><span class="n">_CENTER_TELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 031-8003-8275
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">MEDINST</span><span class="n">_NM</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 상쾌한이비인후과의원
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_LOTNO_ADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 경기도 화성시 반송동 216-1번지
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_ROADNM_ADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 경기도 화성시 동탄솔빛로 44
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_WGS84_LAT</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 37.1928811270
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">REFINE</span><span class="n">_WGS84_LOGT</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="c1">// 127.0729965789
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">REPRSNT</span><span class="n">_TELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">SIGUN</span><span class="n">_NM</span><span class="p">:</span> <span class="n">String</span> <span class="c1">// 화성시
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>마지막으로 <code>asset</code> 폴더에서 불러온 데이터를 DAO로 변환하는 함수를 작성합니다. 함수의 자세한 설명은 <a class="link" href="https://cliearl.github.io/posts/android/assets-json-recycler/"  target="_blank" rel="noopener"
@@ -523,7 +523,7 @@
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">val</span> <span class="py">mapIcon</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">drawable</span> <span class="p">=</span>
 </span></span><span class="line"><span class="cl">        <span class="nc">ResourcesCompat</span><span class="p">.</span><span class="n">getDrawable</span><span class="p">(</span><span class="n">resources</span><span class="p">,</span> <span class="nc">R</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">mapicon</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span> <span class="k">as</span> <span class="n">BitmapDrawable</span>
-</span></span><span class="line"><span class="cl">    <span class="nc">Bitmap</span><span class="p">.</span><span class="n">createScaledBitmap</span><span class="p">(</span><span class="n">drawable</span><span class="p">.</span><span class="n">bitmap</span><span class="p">,</span> <span class="m">64</span><span class="p">,</span> <span class="m">64</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nc">Bitmap</span><span class="p">.</span><span class="n">createScaledBitmap</span><span class="p">(</span><span class="n">drawable</span><span class="p">.</span><span class="n">bitmap</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -674,17 +674,17 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gi">+ private lateinit var clusterManager: ClusterManager&lt;CoronaMedClusterItem&gt;
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gu">@SuppressLint(&#34;MissingPermission&#34;)
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span>override fun onMapReady(googleMap: GoogleMap) {
+</span></span></span><span class="line"><span class="cl">override fun onMapReady(googleMap: GoogleMap) {
 </span></span><span class="line"><span class="cl">    ...
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="gi">+    clusterManager = ClusterManager(requireContext(), map)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+    CoronaMedClusterRenderer(requireContext(), map, clusterManager)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+    map.setOnCameraIdleListener(clusterManager)
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gi">+    addMarkers()
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
+</span></span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게해서 구글맵에 커스텀 마커와 클러스터아이템을 적용하는 법에 대해 알아보았습니다.</p>
@@ -905,7 +905,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

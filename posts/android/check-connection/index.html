@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 단말의 인터넷 연결상태를 체크하는 법에 대해 알아보도록 하겠습니다.\n앱을 만들다보면 WIFI를 사용할 수 있는 환경에서 대용량 데이터를 다운로드하도록 하는 등의 처리를 위해 단말의 인터넷 연결상태를 체크해야 할 일이 있습니다. 이때 ConnectivityManager를 사용하면 단말이 어떤 접속환경을 통해 인터넷에 연결되어 있는지 확인할 수 있습니다.\n권한추가 인터넷에 접근하고 네트워크 상태를 가져오기 위해 AndroidManifest.xml에 다음 권한을 추가합니다.\n1 2 &lt;uses-permission android:name=&#34;android.permission.ACCESS_NETWORK_STATE&#34; /&gt; &lt;uses-permission android:name=&#34;android.permission.INTERNET&#34; /&gt; 네트워크 타입 확인 우선은 단말이 연결된 네트워크가 와아파이인지 셀룰러인지 확인하는 코드를 써 보겠습니다.\n">
 <title>단말의 인터넷 연결상태 체크하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -494,10 +494,10 @@
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">urlConnection</span> <span class="p">=</span> <span class="n">URL</span><span class="p">(</span><span class="n">host</span><span class="p">).</span><span class="n">openConnection</span><span class="p">()</span> <span class="k">as</span> <span class="n">HttpURLConnection</span>
 </span></span><span class="line"><span class="cl">            <span class="n">urlConnection</span><span class="p">.</span><span class="n">setRequestProperty</span><span class="p">(</span><span class="s2">&#34;User-Agent&#34;</span><span class="p">,</span> <span class="nc">System</span><span class="p">.</span><span class="n">getProperty</span><span class="p">(</span><span class="s2">&#34;http.agent&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="n">urlConnection</span><span class="p">.</span><span class="n">connectTimeout</span> <span class="p">=</span> <span class="m">1000</span>
+</span></span><span class="line"><span class="cl">            <span class="n">urlConnection</span><span class="p">.</span><span class="n">connectTimeout</span> <span class="p">=</span> <span class="mi">1000</span>
 </span></span><span class="line"><span class="cl">            <span class="n">urlConnection</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">responseCode</span> <span class="p">=</span> <span class="n">urlConnection</span><span class="p">.</span><span class="n">responseCode</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">responseCode</span> <span class="o">==</span> <span class="m">204</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">responseCode</span> <span class="o">==</span> <span class="mi">204</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="n">isSuccess</span> <span class="p">=</span> <span class="k">true</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
@@ -773,7 +773,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

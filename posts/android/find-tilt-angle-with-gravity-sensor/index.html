@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 기기의 수평도를 확인하는 법에 대해 알아보도록 하겠습니다.\n좌표계와 기울기에 대한 이해 안드로이드 시스템의 좌표계는 다음과 같이 구성됩니다.\n출처 : https://developer.android.com/guide/topics/sensors/sensors_motion#sensors-motion-rotate\n기기가 세워진 상태로 정지하고 있을 때 가속도 센서로 각 축에 걸리는 가속도를 측정하면 x, z 축에서는 0, 그리고 y 축에는 9.8 m/s^2 값이 확인됩니다. y축의 -방향으로 9.8 m/s^2의 중력이 걸리고 있으므로 기기는 +방향으로 9.8 m/s^2 만큼 가속되는 것이기 때문입니다. 같은 이유로 기기를 책상에 눕혀놓으면 축이 바뀌면서 x, y 축에는 0, 그리고 z 축에는 +9.8 m/s^2의 가속도가 걸리게 됩니다.\n">
 <title>중력센서를 사용해 기기의 기울기 각도 확인하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -438,7 +438,7 @@ $$<p>수평계는 기기가 화면을 +z 방향으로 하고 누워있을 때의
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@SuppressLint</span><span class="p">(</span><span class="s2">&#34;SourceLockedOrientationActivity&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 세로모드 고정
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">requestedOrientation</span> <span class="p">=</span> <span class="nc">ActivityInfo</span><span class="p">.</span><span class="n">SCREEN_ORIENTATION_PORTRAIT</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">requestedOrientation</span> <span class="p">=</span> <span class="nc">ActivityInfo</span><span class="p">.</span><span class="n">SCREEN_ORIENTATION_PORTRAIT</span>
 </span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -517,14 +517,14 @@ $$<p>수평계는 기기가 화면을 +z 방향으로 하고 누워있을 때의
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onSensorChanged</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">SensorEvent</span><span class="p">?)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">event</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">y</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">z</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">r</span> <span class="p">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="n">y</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">+</span> <span class="n">z</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="m">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">y</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">z</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">r</span> <span class="p">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">+</span> <span class="n">y</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">+</span> <span class="n">z</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="nc">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;MainActivity&#34;</span><span class="p">,</span> <span class="s2">&#34;onSensorChanged: x: </span><span class="si">$x</span><span class="s2">, y: </span><span class="si">$y</span><span class="s2">, z: </span><span class="si">$z</span><span class="s2">, R: </span><span class="si">$r</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">xrAngle</span> <span class="p">=</span> <span class="p">(</span><span class="m">90</span> <span class="p">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">x</span> <span class="p">/</span> <span class="n">r</span><span class="p">)</span> <span class="p">*</span> <span class="m">180</span> <span class="p">/</span> <span class="n">PI</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">yrAngle</span> <span class="p">=</span> <span class="p">(</span><span class="m">90</span> <span class="p">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">y</span> <span class="p">/</span> <span class="n">r</span><span class="p">)</span> <span class="p">*</span> <span class="m">180</span> <span class="p">/</span> <span class="n">PI</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">xrAngle</span> <span class="p">=</span> <span class="p">(</span><span class="mi">90</span> <span class="p">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">x</span> <span class="p">/</span> <span class="n">r</span><span class="p">)</span> <span class="p">*</span> <span class="mi">180</span> <span class="p">/</span> <span class="n">PI</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">yrAngle</span> <span class="p">=</span> <span class="p">(</span><span class="mi">90</span> <span class="p">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">y</span> <span class="p">/</span> <span class="n">r</span><span class="p">)</span> <span class="p">*</span> <span class="mi">180</span> <span class="p">/</span> <span class="n">PI</span><span class="p">).</span><span class="n">toFloat</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">textview</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="nc">String</span><span class="p">.</span><span class="n">format</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">            <span class="s2">&#34;x-rotation: %.1f</span><span class="se">\u00B0</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> y-rotation: %.1f</span><span class="se">\u00B0</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">xrAngle</span><span class="p">,</span> <span class="n">yrAngle</span><span class="p">)</span>
@@ -754,7 +754,7 @@ $$<p>수평계는 기기가 화면을 +z 방향으로 하고 누워있을 때의
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

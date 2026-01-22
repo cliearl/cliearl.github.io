@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Dokka로 프로젝트를 문서화하는 법에 대해 알아보도록 하겠습니다.\nDokka는 코틀린과 자바로 작성된 프로젝트의 코드를 분석해서 문서화해주는 플러그인인데요 Java의 Javadoc과 Kotlin의 Kdoc 구조를 분석할 수 있습니다. 문서는 Javadoc, HTML 형식으로 출력할 수 있습니다.\n그러면 안드로이드 스튜디오의 예제 프로젝트에 Dokka를 적용해 보도록 하겠습니다. 우선 New project &gt; Login Activity를 선택합니다. 이 프로젝트는 약간의 구조화가 되어 있고 클래스마다 주석이 달려있기 때문에 Dokka의 예제로 사용하기 좋아보인다는 이유로 당첨되었습니다.\n다음은 build.gradle에 플러그인을 추가합니다.\n">
 <title>Dokka로 프로젝트 문서화하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -380,12 +380,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="c1">// Top-level build.gradle
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">plugins</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">plugins</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">id</span> <span class="s2">&#34;org.jetbrains.dokka&#34;</span> <span class="n">version</span> <span class="s2">&#34;1.7.10&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// App-level build.gradle
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">plugins</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">plugins</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">id</span> <span class="s2">&#34;org.jetbrains.dokka&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -553,128 +553,128 @@
 </span></span><span class="line"><span class="cl">    <span class="n">outputDirectory</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">buildDir</span><span class="p">.</span><span class="n">resolve</span><span class="p">(</span><span class="s2">&#34;dokka&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Set module name displayed in the final output
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">moduleName</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s2">&#34;moduleName&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">moduleName</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s2">&#34;moduleName&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Use default or set to custom path to cache directory
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// to enable package-list caching
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// When this is set to default, caches are stored in $USER_HOME/.cache/dokka
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cacheRoot</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">file</span><span class="p">(</span><span class="s2">&#34;default&#34;</span><span class="p">))</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// to enable package-list caching
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// When this is set to default, caches are stored in $USER_HOME/.cache/dokka
+</span></span></span><span class="line"><span class="cl">    <span class="n">cacheRoot</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">file</span><span class="p">(</span><span class="s2">&#34;default&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Suppress obvious functions like default toString or equals. Defaults to true
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">suppressObviousFunctions</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">suppressObviousFunctions</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Suppress all inherited members that were not overriden in a given class. 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Eg. using it you can suppress toString or equals functions but you can&#39;t suppress componentN or copy on data class. To do that use with suppressObviousFunctions
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Defaults to false
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">suppressInheritedMembers</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// Eg. using it you can suppress toString or equals functions but you can&#39;t suppress componentN or copy on data class. To do that use with suppressObviousFunctions
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// Defaults to false
+</span></span></span><span class="line"><span class="cl">    <span class="n">suppressInheritedMembers</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Used to prevent resolving package-lists online. When this option is set to true, only local files are resolved  
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">offlineMode</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">offlineMode</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="n">dokkaSourceSets</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">configureEach</span> <span class="p">{</span> <span class="c1">// Or source set name, for single-platform the default source sets are `main` and `test`
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Used when configuring source sets manually for declaring which source sets this one depends on
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">dependsOn</span><span class="p">(</span><span class="s2">&#34;otherSourceSetName&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">dependsOn</span><span class="p">(</span><span class="s2">&#34;otherSourceSetName&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Used to remove a source set from documentation, test source sets are suppressed by default  
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">suppress</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">suppress</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Use to include or exclude non public members 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">includeNonPublic</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">includeNonPublic</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Do not output deprecated members. Applies globally, can be overridden by packageOptions
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">skipDeprecated</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">skipDeprecated</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Emit warnings about not documented members. Applies globally, also can be overridden by packageOptions
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">reportUndocumented</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">reportUndocumented</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Do not create index pages for empty packages
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">skipEmptyPackages</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">skipEmptyPackages</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// This name will be shown in the final output
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">displayName</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s2">&#34;JVM&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">displayName</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s2">&#34;JVM&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Platform used for code analysis. See the &#34;Platforms&#34; section of this readme
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">platform</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="n">jetbrains</span><span class="p">.</span><span class="n">dokka</span><span class="p">.</span><span class="nc">Platform</span><span class="p">.</span><span class="n">jvm</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">platform</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="n">jetbrains</span><span class="p">.</span><span class="n">dokka</span><span class="p">.</span><span class="nc">Platform</span><span class="p">.</span><span class="n">jvm</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Property used for manual addition of files to the classpath
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// This property does not override the classpath collected automatically but appends to it
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">classpath</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="k">file</span><span class="p">(</span><span class="s2">&#34;libs/dependency.jar&#34;</span><span class="p">))</span>
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// This property does not override the classpath collected automatically but appends to it
+</span></span></span><span class="line"><span class="cl">            <span class="n">classpath</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="k">file</span><span class="p">(</span><span class="s2">&#34;libs/dependency.jar&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// List of files with module and package documentation
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// https://kotlinlang.org/docs/reference/kotlin-doc.html#module-and-package-documentation
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">includes</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="s2">&#34;packages.md&#34;</span><span class="p">,</span> <span class="s2">&#34;extra.md&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// https://kotlinlang.org/docs/reference/kotlin-doc.html#module-and-package-documentation
+</span></span></span><span class="line"><span class="cl">            <span class="n">includes</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="s2">&#34;packages.md&#34;</span><span class="p">,</span> <span class="s2">&#34;extra.md&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// List of files or directories containing sample code (referenced with @sample tags)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">samples</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="s2">&#34;samples/basic.kt&#34;</span><span class="p">,</span> <span class="s2">&#34;samples/advanced.kt&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">samples</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="s2">&#34;samples/basic.kt&#34;</span><span class="p">,</span> <span class="s2">&#34;samples/advanced.kt&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// By default, sourceRoots are taken from Kotlin Plugin and kotlinTasks, following roots will be appended to them
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// Repeat for multiple sourceRoots
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">sourceRoots</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="k">file</span><span class="p">(</span><span class="s2">&#34;src&#34;</span><span class="p">))</span>
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// Repeat for multiple sourceRoots
+</span></span></span><span class="line"><span class="cl">            <span class="n">sourceRoots</span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="k">file</span><span class="p">(</span><span class="s2">&#34;src&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Specifies the location of the project source code on the Web.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// If provided, Dokka generates &#34;source&#34; links for each declaration.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// Repeat for multiple mappings
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">sourceLink</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// If provided, Dokka generates &#34;source&#34; links for each declaration.
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// Repeat for multiple mappings
+</span></span></span><span class="line"><span class="cl">            <span class="n">sourceLink</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// Unix based directory relative path to the root of the project (where you execute gradle respectively). 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">localDirectory</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">file</span><span class="p">(</span><span class="s2">&#34;src/main/kotlin&#34;</span><span class="p">))</span>
+</span></span></span><span class="line"><span class="cl">                <span class="n">localDirectory</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">file</span><span class="p">(</span><span class="s2">&#34;src/main/kotlin&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">                <span class="c1">// URL showing where the source code can be accessed through the web browser
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">remoteUrl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="n">net</span><span class="p">.</span><span class="n">URL</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">                <span class="n">remoteUrl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="n">net</span><span class="p">.</span><span class="n">URL</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">                    <span class="s2">&#34;https://github.com/cy6erGn0m/vertx3-lang-kotlin/blob/master/src/main/kotlin&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// Suffix which is used to append the line number to the URL. Use #L for GitHub
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">remoteLineSuffix</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s2">&#34;#L&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">                <span class="n">remoteLineSuffix</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s2">&#34;#L&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Used for linking to JDK documentation
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">jdkVersion</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="m">8</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">jdkVersion</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Disable linking to online kotlin-stdlib documentation
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">noStdlibLink</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">noStdlibLink</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Disable linking to online JDK documentation
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">noJdkLink</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">noJdkLink</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Disable linking to online Android documentation (only applicable for Android projects)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">noAndroidSdkLink</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">noAndroidSdkLink</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Allows linking to documentation of the project&#34;s dependencies (generated with Javadoc or Dokka)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// Repeat for multiple links
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">externalDocumentationLink</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// Repeat for multiple links
+</span></span></span><span class="line"><span class="cl">            <span class="n">externalDocumentationLink</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// Root URL of the generated documentation to link with. The trailing slash is required!
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">url</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="s2">&#34;https://example.com/docs/&#34;</span><span class="p">))</span>
+</span></span></span><span class="line"><span class="cl">                <span class="n">url</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">URL</span><span class="p">(</span><span class="s2">&#34;https://example.com/docs/&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">                <span class="c1">// If package-list file is located in non-standard location
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// packageListUrl = URL(&#34;file:///home/user/localdocs/package-list&#34;)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">                <span class="c1">// packageListUrl = URL(&#34;file:///home/user/localdocs/package-list&#34;)
+</span></span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Allows to customize documentation generation options on a per-package basis
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// Repeat for multiple packageOptions
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// If multiple packages match the same matchingRegex, the longuest matchingRegex will be used
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">perPackageOption</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// Repeat for multiple packageOptions
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// If multiple packages match the same matchingRegex, the longuest matchingRegex will be used
+</span></span></span><span class="line"><span class="cl">            <span class="n">perPackageOption</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// will match kotlin and all sub-packages of it
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">matchingRegex</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s2">&#34;kotlin($|</span><span class="se">\\</span><span class="s2">.).*&#34;</span><span class="p">)</span> 
+</span></span></span><span class="line"><span class="cl">                <span class="n">matchingRegex</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s2">&#34;kotlin($|</span><span class="se">\\</span><span class="s2">.).*&#34;</span><span class="p">)</span> 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">                <span class="c1">// All options are optional
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">skipDeprecated</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">                <span class="n">skipDeprecated</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                <span class="n">reportUndocumented</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="c1">// Emit warnings about not documented members 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">includeNonPublic</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">                <span class="n">includeNonPublic</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// Suppress a package
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">perPackageOption</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">perPackageOption</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="n">matchingRegex</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">&#34;&#34;&#34;.*\.internal.*&#34;&#34;&#34;</span><span class="p">)</span> <span class="c1">// will match all .internal packages and sub-packages 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">suppress</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">                <span class="n">suppress</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// Include generated files in documentation
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// By default Dokka will omit all files in folder named generated that is a child of buildDir
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">suppressGeneratedFiles</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// By default Dokka will omit all files in folder named generated that is a child of buildDir
+</span></span></span><span class="line"><span class="cl">            <span class="n">suppressGeneratedFiles</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// Configures a plugin separately from the global configuration
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">pluginConfiguration</span><span class="p">&lt;</span><span class="n">PluginClass</span><span class="p">,</span> <span class="n">ConfigurationClass</span><span class="p">&gt;{</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">pluginConfiguration</span><span class="p">&lt;</span><span class="n">PluginClass</span><span class="p">,</span> <span class="n">ConfigurationClass</span><span class="p">&gt;{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// values
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -914,7 +914,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

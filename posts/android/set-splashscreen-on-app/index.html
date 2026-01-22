@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 영상에서는 앱에 스플래시 스크린을 설정하는 법을 알아보도록 하겠습니다.\nSplashscreen API 아이콘을 선택하고 앱이 구동되면 메인화면을 보여주기 전까지 로딩 시간이 필요한데 그 시간동안 보여주는 화면을 스플래시 스크린이라고 합니다. 기존에는 스플래시 스크린 기능이 안드로이드에 존재하지 않아서 임의로 기능을 구현할 필요가 있었지만 이제 스플래시 스크린 기능이 정식 API로 추가되었기에 API 사용법을 소개하도록 하겠습니다.\nAndroid 12에서는 앱에 스플래시 스크린을 표시할 수 있는 SplashScreen Androidx API가 도입되었습니다. 기존에는 API가 없어서 아이콘 하나를 표시하는 테마를 만들고 그 테마를 SplashActivity에 적용한 뒤, 앱 시작시에 SplashActivity를 실행하는 방식으로 스플래시 스크린을 직접 구현해야했지만 이제는 구글의 공식 API를 통해 스플래시 스크린을 사용할 수 있게 된 것입니다. 개인적인 생각으로는 도입 시기가 늦은 감이 있어 보이지만 어쨌든 공식 API를 사용할 수 있게 된 것은 환영할 일입니다.\n">
 <title>앱에 스플래시 스크린 추가하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -690,7 +690,7 @@
 </span></span><span class="line"><span class="cl">        super.onCreate(savedInstanceState)
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gi">+        installSplashScreen()
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>        setContentView(R.layout.activity_main)
+</span></span></span><span class="line"><span class="cl">        setContentView(R.layout.activity_main)
 </span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
@@ -738,7 +738,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl">class MainActivity : AppCompatActivity() {
 </span></span><span class="line"><span class="cl"><span class="gi">+    private var isReady = false
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    override fun onCreate(savedInstanceState: Bundle?) {
 </span></span><span class="line"><span class="cl">        super.onCreate(savedInstanceState)
 </span></span><span class="line"><span class="cl">
@@ -751,7 +751,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="gi">+            }
 </span></span></span><span class="line"><span class="cl"><span class="gi">+            isReady = true
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        }
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gi">+        val content: View = findViewById(android.R.id.content)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        content.viewTreeObserver.addOnPreDrawListener(
 </span></span></span><span class="line"><span class="cl"><span class="gi">+            object : ViewTreeObserver.OnPreDrawListener {
@@ -768,7 +768,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="gi">+                }
 </span></span></span><span class="line"><span class="cl"><span class="gi">+            }
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        )
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>    }
+</span></span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -808,23 +808,23 @@
 </span></span><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="o">..</span><span class="p">.</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Add a callback that&#39;s called when the splash screen is animating to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// the app content.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">splashScreen</span><span class="p">.</span><span class="n">setOnExitAnimationListener</span> <span class="p">{</span> <span class="n">splashScreenView</span> <span class="o">-&gt;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// the app content.
+</span></span></span><span class="line"><span class="cl">    <span class="n">splashScreen</span><span class="p">.</span><span class="n">setOnExitAnimationListener</span> <span class="p">{</span> <span class="n">splashScreenView</span> <span class="o">-&gt;</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// Create your custom animation.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">val</span> <span class="py">slideUp</span> <span class="p">=</span> <span class="nc">ObjectAnimator</span><span class="p">.</span><span class="n">ofFloat</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">slideUp</span> <span class="p">=</span> <span class="nc">ObjectAnimator</span><span class="p">.</span><span class="n">ofFloat</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">            <span class="n">splashScreenView</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="nc">View</span><span class="p">.</span><span class="n">TRANSLATION_Y</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="m">0f</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="mf">0f</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="p">-</span><span class="n">splashScreenView</span><span class="p">.</span><span class="n">height</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">slideUp</span><span class="p">.</span><span class="n">interpolator</span> <span class="p">=</span> <span class="n">AnticipateInterpolator</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="n">slideUp</span><span class="p">.</span><span class="n">duration</span> <span class="p">=</span> <span class="m">200L</span>
+</span></span><span class="line"><span class="cl">        <span class="n">slideUp</span><span class="p">.</span><span class="n">duration</span> <span class="p">=</span> <span class="mi">200L</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// Call SplashScreenView.remove at the end of your custom animation.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">slideUp</span><span class="p">.</span><span class="n">doOnEnd</span> <span class="p">{</span> <span class="n">splashScreenView</span><span class="p">.</span><span class="n">remove</span><span class="p">()</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">slideUp</span><span class="p">.</span><span class="n">doOnEnd</span> <span class="p">{</span> <span class="n">splashScreenView</span><span class="p">.</span><span class="n">remove</span><span class="p">()</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// Run your animation.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">slideUp</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">slideUp</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1053,7 +1053,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

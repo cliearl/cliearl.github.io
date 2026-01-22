@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 RecyclerView에 View Binding을 적용하는 법에 대해 알아보도록 하겠습니다.\nView Binding을 사용해야 하는 이유나 그 장점에 대해서는 findViewById 대신 View Binding 사용하기 포스팅과 유튜브 강의를 참조하시고 이번 포스팅에선 변환하는 방법에 대해서만 설명하도록 하겠습니다.\n이번 포스팅에서 변환에 사용한 프로젝트는 앱에서 RecyclerView 사용하기 포스팅에서 작성한 것을 사용하도록 하겠습니다.\n코드 작성 View Binding 활성화 우선은 gradle에서 kotlin-android-extensions 플러그인을 삭제하고 View Binding을 활성화합니다.\n1 2 3 4 5 6 7 plugins { - id &#39;kotlin-android-extensions&#39; } android { + buildFeatures.viewBinding true } 메인액티비티 수정 다음은 메인액티비티를 수정해줍니다. View Binding을 활성화하는 순간 생기는 ActivityMainBinding 클래스를 초기화하여 binding이라는 인스턴스로 사용합니다. 기존의 RecyclerView의 프로퍼티는 binding.recyclerView로 접근하여 설정합니다.\n">
 <title>RecyclerView에 View Binding 적용하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -409,11 +409,11 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl">plugins {
 </span></span><span class="line"><span class="cl"><span class="gd">-    id &#39;kotlin-android-extensions&#39;
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span>}
+</span></span></span><span class="line"><span class="cl">}
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">android {
 </span></span><span class="line"><span class="cl"><span class="gi">+    buildFeatures.viewBinding true
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
+</span></span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="메인액티비티-수정">메인액티비티 수정
@@ -459,7 +459,7 @@
 </span></span><span class="line"><span class="cl">    override fun onCreate(savedInstanceState: Bundle?) {
 </span></span><span class="line"><span class="cl">        super.onCreate(savedInstanceState)
 </span></span><span class="line"><span class="cl"><span class="gd">-        setContentView(R.layout.activity_main)
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gd">-        addData()
 </span></span></span><span class="line"><span class="cl"><span class="gd">-
 </span></span></span><span class="line"><span class="cl"><span class="gd">-        recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -467,14 +467,14 @@
 </span></span></span><span class="line"><span class="cl"><span class="gd">-
 </span></span></span><span class="line"><span class="cl"><span class="gd">-        recycler_view.adapter = RecyclerViewAdapter(dataSet)
 </span></span></span><span class="line"><span class="cl"><span class="gd">-        recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gi">+        binding = ActivityMainBinding.inflate(layoutInflater)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        setContentView(binding.root)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        addData()
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        binding.recyclerView.adapter = RecyclerViewAdapter(dataSet)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        binding.recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>    }
+</span></span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    private fun addData() {
 </span></span><span class="line"><span class="cl">        for (i in 0..99) {
@@ -516,9 +516,9 @@
 </span></span><span class="line"><span class="cl">    ): ViewHolder {
 </span></span><span class="line"><span class="cl"><span class="gd">-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
 </span></span></span><span class="line"><span class="cl"><span class="gd">-        return ViewHolder(view)
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+        val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+</span></span></span><span class="line"><span class="cl"><span class="gi">+        val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        return ViewHolder(binding)
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>    }
+</span></span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 </span></span><span class="line"><span class="cl">        holder.bind(dataSet[position])
@@ -565,12 +565,12 @@
 </span></span></span><span class="line"><span class="cl"><span class="gd">-            tvSub.text = data[1]
 </span></span></span><span class="line"><span class="cl"><span class="gd">-        }
 </span></span></span><span class="line"><span class="cl"><span class="gd">-    }
-</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+    class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+</span></span></span><span class="line"><span class="cl"><span class="gi">+    class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        fun bind(data:List&lt;String&gt;) {
 </span></span></span><span class="line"><span class="cl"><span class="gi">+            binding.tvMain.text = data[0]
 </span></span></span><span class="line"><span class="cl"><span class="gi">+            binding.tvSub.text = data[1]
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        }
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>    }
+</span></span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -809,7 +809,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

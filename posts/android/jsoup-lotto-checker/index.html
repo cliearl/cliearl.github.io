@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 jsoup을 이용해서 html을 파싱하는 법에 대해 알아보도록 하겠습니다.\njsoup이란 jsoup은 html을 파싱하기 위해 만들어진 오픈소스 자바 라이브러리입니다. 웹페이지를 HTML5 DOM으로 변환하여 요소들을 간편하게 추출할 수 있습니다. 자바 라이브러리이니만큼 코틀린에서도 자유롭게 사용이 가능하지요.\njsoup에는 여러가지 클래스가 있는데 그 중 제 생각에 중요한 것들만 정리하면 다음과 같습니다.\n클래스 설명 Document jsoup로 얻어온 html 문서 Element 데이터를 추출할 수 있는 개별 html 요소 Elements Iterable한 Element 집합의 자료형 Connection http 접속에 관련한 메소드를 가지는 클래스 파싱할 html 구조 확인 그럼 코루틴으로 로또번호 당첨 확인하기 강의에서 만들었던 코루틴으로 로또번호 당첨을 확인하는 앱에 jsoup을 적용해보도록 하겠습니다. 기존의 앱은 당첨번호를 가져오는데 API를 사용했지만 이번에는 웹페이지에서 가져와야 합니다. 동행복권 홈페이지에 접속하면 메인화면에 금주의 당첨번호를 표시하고 있는데 이 내용을 가져오면 될 것 같습니다.\n">
 <title>jsoup으로 로또 홈페이지의 당첨번호 파싱하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -465,7 +465,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="n">jsoup</span><span class="p">:</span><span class="n">jsoup</span><span class="p">:</span><span class="m">1.14</span><span class="p">.</span><span class="m">1</span><span class="err">&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="n">jsoup</span><span class="p">:</span><span class="n">jsoup</span><span class="p">:</span><span class="mf">1.14.1</span><span class="err">&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="crawllottonumbers-작성">crawlLottoNumbers 작성
@@ -497,9 +497,9 @@
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">crawlLottoNumbers</span><span class="p">()</span> <span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">lottoNumbers</span> <span class="p">=</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;()</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// var doc: Document? = null
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">try</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">doc</span> <span class="p">=</span> <span class="nc">Jsoup</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&#34;https://dhlottery.co.kr/common.do?method=main&#34;</span><span class="p">).</span><span class="k">get</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="m">6</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="k">val</span> <span class="py">drwtNo</span> <span class="p">=</span> <span class="n">doc</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;#drwtNo</span><span class="si">$i</span><span class="s2">&#34;</span><span class="p">).</span><span class="n">text</span><span class="p">().</span><span class="n">toInt</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">                <span class="n">lottoNumbers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">drwtNo</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
@@ -807,7 +807,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

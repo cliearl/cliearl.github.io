@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 프로젝트의 빌드넘버를 자동으로 증가시키는 법에 대해 알아보도록 하겠습니다.\n버전넘버와 빌드넘버 버전넘버 소프트웨어의 기능이 변할때마다 그것을 구분하기 위해서 버전넘버를 사용하는데요, 일반적인 규칙은 1.0.0 과 같이 세자리로 결정을 합니다.\n첫째자리는 뒤로 되돌릴 수 없는 수준의 큰 변경이 있을때, 둘째자리는 여러가지 새로운 기능이 추가되었을 때 증가를 시키고, 셋째자리는 기능이 추가되지는 않지만 버그가 수정되었을 때 증가를 시킵니다.\n그래서 첫째자리는 메이저 버전, 둘째자리는 마이너 버전, 셋째자리는 패치버전이라고 하는 이름이 있습니다.\n다만 이것은 꼭 지켜야 하는 규칙은 아니고, 날짜를 버전넘버로 사용하는 소프트웨어도 있습니다.\n">
 <title>프로젝트의 빌드넘버 자동증가 시키기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -512,7 +512,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">android</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 저장된 값을 불러오는 부분
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">def</span> <span class="n">versionPropsFile</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;version.properties&#39;</span><span class="o">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">def</span> <span class="n">versionPropsFile</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;version.properties&#39;</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">def</span> <span class="n">versionBuild</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">def</span> <span class="n">versionNumber</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">if</span> <span class="o">(</span><span class="n">versionPropsFile</span><span class="o">.</span><span class="na">canRead</span><span class="o">())</span> <span class="o">{</span>
@@ -525,7 +525,7 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 읽어온 빌드넘버를 증가시키는 부분
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ext</span><span class="o">.</span><span class="na">autoIncrementBuildNumber</span> <span class="o">=</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ext</span><span class="o">.</span><span class="na">autoIncrementBuildNumber</span> <span class="o">=</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">versionPropsFile</span><span class="o">.</span><span class="na">canRead</span><span class="o">())</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="kt">def</span> <span class="n">versionProps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">()</span>
 </span></span><span class="line"><span class="cl">            <span class="n">versionProps</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">versionPropsFile</span><span class="o">))</span>
@@ -538,7 +538,7 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 함수를 실행시키는 부분
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">gradle</span><span class="o">.</span><span class="na">taskGraph</span><span class="o">.</span><span class="na">whenReady</span> <span class="o">{</span> <span class="n">taskGraph</span> <span class="o">-&gt;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">gradle</span><span class="o">.</span><span class="na">taskGraph</span><span class="o">.</span><span class="na">whenReady</span> <span class="o">{</span> <span class="n">taskGraph</span> <span class="o">-&gt;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">taskGraph</span><span class="o">.</span><span class="na">hasTask</span><span class="o">(</span><span class="n">assembleDebug</span><span class="o">))</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">autoIncrementBuildNumber</span><span class="o">()</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">taskGraph</span><span class="o">.</span><span class="na">hasTask</span><span class="o">(</span><span class="n">assembleRelease</span><span class="o">))</span> <span class="o">{</span>
@@ -549,7 +549,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">compileSdkVersion</span> <span class="mi">29</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 수정한 내용을 앱에 반영해 줌
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">defaultConfig</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">defaultConfig</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">applicationId</span> <span class="s2">&#34;com.example.autobuildnum&#34;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">minSdkVersion</span> <span class="mi">21</span>
 </span></span><span class="line"><span class="cl">        <span class="n">targetSdkVersion</span> <span class="mi">29</span>
@@ -796,7 +796,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

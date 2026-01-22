@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 날짜와 시간을 다루는 법에 대해 알아보도록 하겠습니다.\n안드로이드의 날짜 라이브러리 날짜를 다루기 위해서는 일반적으로 날짜객체를 만들고 그 날짜객체를 자기가 필요로 하는 양식에 맞춰서 표현하도록 하면 되는데요, 이때 사용할 수 있는 날짜 패턴은 다음 표와 같이 여러가지가 있습니다.\nDate and Time Pattern Result &ldquo;yyyy.MM.dd G &lsquo;at&rsquo; HH:mm:ss z&rdquo; 2001.07.04 AD at 12:08:56 PDT &ldquo;EEE, MMM d, &lsquo;&lsquo;yy&rdquo; Wed, Jul 4, &lsquo;01 &ldquo;h:mm a&rdquo; 12:08 PM &ldquo;hh &lsquo;o&rsquo;&lsquo;clock&rsquo; a, zzzz&rdquo; 12 o&rsquo;clock PM, Pacific Daylight Time &ldquo;K:mm a, z&rdquo; 0:08 PM, PDT &ldquo;yyyyy.MMMM.dd GGG hh:mm aaa&rdquo; 02001.July.04 AD 12:08 PM &ldquo;EEE, d MMM yyyy HH:mm:ss Z&rdquo; Wed, 4 Jul 2001 12:08:56 -0700 &ldquo;yyMMddHHmmssZ&rdquo; 010704120856-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSZ&rdquo; 2001-07-04T12:08:56.235-0700 &ldquo;yyyy-MM-dd&rsquo;T&rsquo;HH:mm:ss.SSSXXX&rdquo; 2001-07-04T12:08:56.235-07:00 &ldquo;YYYY-&lsquo;W&rsquo;ww-u&rdquo; 2001-W27-3 코드 작성 java.util.Date 그럼 우선은 java.util.Date 라이브러리를 이용해서 날짜객체를 만들어 보겠습니다.\n">
 <title>Date and Time 다루기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -463,7 +463,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">utilDate</span><span class="p">.</span><span class="n">toString</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 출력
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Wed</span> <span class="n">Apr</span> <span class="m">07</span> <span class="m">06</span><span class="p">:</span><span class="m">48</span><span class="p">:</span><span class="m">15</span> <span class="n">UTC</span> <span class="m">2021</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">Wed</span> <span class="n">Apr</span> <span class="mi">07</span> <span class="mi">06</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">15</span> <span class="n">UTC</span> <span class="mi">2021</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음은 이 객체의 표현패턴을 바꿔보겠습니다.</p>
@@ -482,7 +482,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">formatType</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">utilDate</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 출력
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="m">2021</span><span class="p">-</span><span class="m">04</span><span class="p">-</span><span class="m">07</span> <span class="m">06</span><span class="p">:</span><span class="m">49</span><span class="p">:</span><span class="m">17</span>
+</span></span></span><span class="line"><span class="cl"><span class="mi">2021</span><span class="p">-</span><span class="mi">04</span><span class="p">-</span><span class="mi">07</span> <span class="mi">06</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mi">17</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="javatime">java.time
@@ -506,7 +506,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">println</span><span class="p">(</span><span class="n">nowString</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 출력
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="m">2021</span><span class="p">-</span><span class="m">04</span><span class="p">-</span><span class="m">07</span> <span class="m">06</span><span class="p">:</span><span class="m">57</span><span class="p">:</span><span class="m">21</span>
+</span></span></span><span class="line"><span class="cl"><span class="mi">2021</span><span class="p">-</span><span class="mi">04</span><span class="p">-</span><span class="mi">07</span> <span class="mi">06</span><span class="p">:</span><span class="mi">57</span><span class="p">:</span><span class="mi">21</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="joda-time">Joda-Time
@@ -535,7 +535,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="c1">// gradle에 추가
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">joda</span><span class="p">-</span><span class="n">time</span><span class="p">:</span><span class="n">joda</span><span class="p">-</span><span class="n">time</span><span class="p">:</span><span class="m">2.10</span><span class="p">.</span><span class="m">10</span><span class="err">&#39;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="err">&#39;</span><span class="n">joda</span><span class="p">-</span><span class="n">time</span><span class="p">:</span><span class="n">joda</span><span class="p">-</span><span class="n">time</span><span class="p">:</span><span class="mf">2.10.10</span><span class="err">&#39;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">val</span> <span class="py">timeDate</span><span class="p">:</span> <span class="n">String</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nc">Build</span><span class="p">.</span><span class="nc">VERSION</span><span class="p">.</span><span class="n">SDK_INT</span> <span class="o">&gt;=</span> <span class="nc">Build</span><span class="p">.</span><span class="nc">VERSION_CODES</span><span class="p">.</span><span class="n">O</span><span class="p">)</span> <span class="p">{</span>
@@ -572,14 +572,14 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">val</span> <span class="py">period</span><span class="p">:</span> <span class="n">Int</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nc">Build</span><span class="p">.</span><span class="nc">VERSION</span><span class="p">.</span><span class="n">SDK_INT</span> <span class="o">&gt;=</span> <span class="nc">Build</span><span class="p">.</span><span class="nc">VERSION_CODES</span><span class="p">.</span><span class="n">O</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">startDate</span> <span class="p">=</span> <span class="nc">LocalDate</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">startDate</span> <span class="p">=</span> <span class="nc">LocalDate</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">todayDate</span> <span class="p">=</span> <span class="nc">LocalDate</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">differenceDate</span> <span class="p">=</span> <span class="n">startDate</span><span class="p">.</span><span class="n">until</span><span class="p">(</span><span class="n">todayDate</span><span class="p">,</span> <span class="nc">ChronoUnit</span><span class="p">.</span><span class="n">DAYS</span><span class="p">)</span> <span class="p">+</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">differenceDate</span> <span class="p">=</span> <span class="n">startDate</span><span class="p">.</span><span class="n">until</span><span class="p">(</span><span class="n">todayDate</span><span class="p">,</span> <span class="nc">ChronoUnit</span><span class="p">.</span><span class="n">DAYS</span><span class="p">)</span> <span class="p">+</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl">    <span class="n">period</span> <span class="p">=</span> <span class="n">differenceDate</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">startDate</span> <span class="p">=</span> <span class="n">org</span><span class="p">.</span><span class="n">joda</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="n">LocalDate</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">startDate</span> <span class="p">=</span> <span class="n">org</span><span class="p">.</span><span class="n">joda</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="n">LocalDate</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">todayDate</span> <span class="p">=</span> <span class="n">org</span><span class="p">.</span><span class="n">joda</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nc">LocalDate</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">differenceDate</span> <span class="p">=</span> <span class="nc">Days</span><span class="p">.</span><span class="n">daysBetween</span><span class="p">(</span><span class="n">startDate</span><span class="p">,</span> <span class="n">todayDate</span><span class="p">).</span><span class="n">days</span> <span class="p">+</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">differenceDate</span> <span class="p">=</span> <span class="nc">Days</span><span class="p">.</span><span class="n">daysBetween</span><span class="p">(</span><span class="n">startDate</span><span class="p">,</span> <span class="n">todayDate</span><span class="p">).</span><span class="n">days</span> <span class="p">+</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl">    <span class="n">period</span> <span class="p">=</span> <span class="n">differenceDate</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -819,7 +819,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

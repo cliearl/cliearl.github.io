@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Retrofit 라이브러리로 HTTP 통신을 수행하는 법에 대해 알아보도록 하겠습니다.\n안드로이드에서의 HTTP 통신에 대한 개괄적 설명과 Retrofit을 사용해야 하는 이유에 대해서는 안드로이드의 HTTP 통신 라이브러리 고찰에서 다루었으니 그것을 참조하시면 좋을 것 같습니다. 또한 Retrofit의 기술적 특징에 대해서는 라이브러리 제작자가 설명해 둔 Retrofit 2과 함께하는 정말 쉬운 HTTP 를 보는것이 가장 정확할 것 같습니다.\n이 강의에서는 경기데이터드림에서 제공하는 코로나바이러스 감염증 선별진료소 운영 의료기관 현황 API를 통해 가져온 JSON 데이터를 Recyclerview에 표시해보면서 Retrofit을 어떻게 사용하는지 알아보도록 하겠습니다.\n">
 <title>Retrofit으로 다운받은 Json 데이터를 RecyclerView에 표시하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -423,11 +423,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="c1">// Retrofit
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">implementation</span> <span class="s1">&#39;com.squareup.retrofit2:retrofit:2.9.0&#39;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.squareup.retrofit2:retrofit:2.9.0&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.squareup.retrofit2:converter-moshi:2.9.0&#39;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// OkHttp
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">implementation</span> <span class="s1">&#39;com.squareup.okhttp3:okhttp:4.9.1&#39;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.squareup.okhttp3:okhttp:4.9.1&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.squareup.okhttp3:logging-interceptor:4.9.1&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -702,43 +702,43 @@
 </span></span><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">Head</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;api_version&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">apiVersion</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 1.0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;list_total_count&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;list_total_count&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">listTotalCount</span><span class="p">:</span> <span class="n">Int</span><span class="p">?,</span> <span class="c1">// 172
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;RESULT&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;RESULT&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rESULT</span><span class="p">:</span> <span class="n">RESULT</span><span class="p">?</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">RESULT</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;CODE&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">cODE</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// INFO-000
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;MESSAGE&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;MESSAGE&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">mESSAGE</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="c1">// 정상 처리되었습니다.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">data</span> <span class="k">class</span> <span class="nc">Row</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;DISTRCT_DIV_NM&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">dISTRCTDIVNM</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 국민안심병원+호흡기전담클리닉
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;EMGNCY_CENTER_TELNO&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">eMGNCYCENTERTELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 031-8060-5000
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;MEDCARE_INST_NM&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;MEDCARE_INST_NM&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">mEDCAREINSTNM</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 센트럴아동병원
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_LOTNO_ADDR&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEFINELOTNOADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 경기도 화성시 반송동 93-1번지 동탄위버폴리스
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_ROADNM_ADDR&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEFINEROADNMADDR</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// null
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_WGS84_LAT&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEFINEWGS84LAT</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 37.2046139805
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REFINE_WGS84_LOGT&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEFINEWGS84LOGT</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 127.0720402235
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REPRSNT_TELNO&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;REPRSNT_TELNO&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">rEPRSNTTELNO</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// null
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SIGUN_CD&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SIGUN_CD&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sIGUNCD</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 41590
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SIGUN_NM&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SIGUN_NM&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sIGUNNM</span><span class="p">:</span> <span class="n">String</span><span class="p">?,</span> <span class="c1">// 화성시
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SUM_DE&#34;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nd">@field</span><span class="p">:</span><span class="n">Json</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;SUM_DE&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">sUMDE</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="c1">// 2021-06-09
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="아이템-디자인">아이템 디자인
@@ -1242,7 +1242,7 @@
 </span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">isSuccessful</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="nc">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&#34;TAG&#34;</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">().</span><span class="n">toString</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// head를 스킵하기 위해 index 1번을 가져옴
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">()</span><span class="o">?.</span><span class="n">emgMedInfo</span><span class="o">?.</span><span class="k">get</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="o">?.</span><span class="n">row</span>
+</span></span></span><span class="line"><span class="cl">                    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">()</span><span class="o">?.</span><span class="n">emgMedInfo</span><span class="o">?.</span><span class="k">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">?.</span><span class="n">row</span>
 </span></span><span class="line"><span class="cl">                    <span class="n">myRecyclerViewAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="n">result</span><span class="o">!!</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
@@ -1314,7 +1314,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="n">withContext</span><span class="p">(</span><span class="nc">Dispatchers</span><span class="p">.</span><span class="n">Main</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">isSuccessful</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">()</span><span class="o">?.</span><span class="n">emgMedInfo</span><span class="o">?.</span><span class="k">get</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="o">?.</span><span class="n">row</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">()</span><span class="o">?.</span><span class="n">emgMedInfo</span><span class="o">?.</span><span class="k">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">?.</span><span class="n">row</span>
 </span></span><span class="line"><span class="cl">            <span class="n">result</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="n">myRecyclerViewAdapter</span><span class="p">.</span><span class="n">submitList</span><span class="p">(</span><span class="k">it</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
@@ -1564,7 +1564,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

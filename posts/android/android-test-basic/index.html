@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 영상에서는 안드로이드의 테스트 자동화 기초에 대한 이론을 다루어 보도록 하겠습니다.\n들어가기 테스트는 소프트웨어 개발과 함께 시작된 행위니만큼 긴 역사를 가지고 있습니다. The History of Software Testing에서는 소프트웨어 테스팅이 1822년 찰스 베비지의 차분 엔진 제작과 함께 시작되었다고 하고, 버그라는 단어는 토마스 에디슨이 1878년 동료에게 보내는 편지에서 처음 사용된 것으로 알려져 있습니다. 따라서 테스트 방법론에서는 서로 대립하는 수많은 주장이 긴 시간동안 개발되어져 왔습니다. 테스트 유형이 피라미드 구조를 가져야 한다는 사람도 있고 아이스크림 콘 형태를 가져야 한다는 사람도 있습니다. 테스트 커버리지는 100%를 목표해야 한다는 사람도 있고 혹은 100%를 목표하는 것은 무의미한 일이라고 하는 사람도 있습니다. 테스트를 먼저 만들고 프로덕션 코드를 만들어야 한다는 주장도 있고, 실무중에 그러한 방식으로 일을 할 여유가 없다는 사람도 있습니다.\n">
 <title>안드로이드 테스트 자동화 기초</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -603,13 +603,13 @@
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@Test</span>
 </span></span><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">x1</span><span class="n">_multiplyBy2_2</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// GIVEN
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="m">1</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// WHEN
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="nc">Utils</span><span class="p">.</span><span class="n">multipleBy2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="nc">Utils</span><span class="p">.</span><span class="n">multipleBy2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// THEN
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">assertEquals</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -649,7 +649,7 @@
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DummyAccountDao</span> <span class="p">:</span> <span class="n">AccountDao</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">showMember</span><span class="p">()</span> <span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// No implementation
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -705,7 +705,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SpyAccountDao</span> <span class="p">:</span> <span class="n">AccountDao</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">callMemberCount</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">callMemberCount</span> <span class="p">=</span> <span class="mi">0</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">showMember</span><span class="p">()</span> <span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">memberList</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;Alice&#34;</span><span class="p">,</span> <span class="s2">&#34;Bob&#34;</span><span class="p">)</span>
@@ -752,8 +752,8 @@
 </span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">var</span> <span class="py">accounts</span> <span class="p">=</span> <span class="n">HashMap</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span>
 </span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl">    <span class="k">init</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">accounts</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="s2">&#34;Alice&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">accounts</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="s2">&#34;Bob&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="s2">&#34;Alice&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">accounts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="s2">&#34;Bob&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">saveItem</span><span class="p">(</span><span class="n">userId</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
@@ -928,13 +928,13 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// JUnit</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">assertTrue</span><span class="p">(</span><span class="n">notificationText</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&#34;testuser@google.com&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">assertTrue</span><span class="p">(</span><span class="n">notificationText</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&#34;testuser@google.com&#34;</span><span class="p">));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// AssertJ, Truth</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">assertThat</span><span class="p">(</span><span class="n">notificationText</span><span class="p">).</span><span class="na">contains</span><span class="p">(</span><span class="s">&#34;testuser@google.com&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// AssertJ, Truth</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">assertThat</span><span class="p">(</span><span class="n">notificationText</span><span class="p">).</span><span class="na">contains</span><span class="p">(</span><span class="s">&#34;testuser@google.com&#34;</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Hamcrest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">assertThat</span><span class="p">(</span><span class="n">notificationText</span><span class="p">,</span><span class="w"> </span><span class="n">containsString</span><span class="p">(</span><span class="s">&#34;testuser@google.com&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Hamcrest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">assertThat</span><span class="p">(</span><span class="n">notificationText</span><span class="p">,</span><span class="w"> </span><span class="n">containsString</span><span class="p">(</span><span class="s">&#34;testuser@google.com&#34;</span><span class="p">));</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="mocking">Mocking
@@ -1398,7 +1398,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

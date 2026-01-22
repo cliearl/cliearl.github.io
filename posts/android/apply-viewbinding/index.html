@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 View Binding을 사용하는 법에 대해 알아보도록 하겠습니다.\n">
 <title>findViewById 대신 View Binding 사용하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -475,7 +475,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">//            Snackbar.make(view, &#34;Replace with your own action&#34;, Snackbar.LENGTH_LONG)
 </span></span></span><span class="line"><span class="cl"><span class="c1">//                    .setAction(&#34;Action&#34;, null).show()
 </span></span></span><span class="line"><span class="cl"><span class="c1">//        }
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">binding</span> <span class="p">=</span> <span class="nc">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">binding</span> <span class="p">=</span> <span class="nc">ActivityMainBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">layoutInflater</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">setSupportActionBar</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">toolbar</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -486,15 +486,15 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreateOptionsMenu</span><span class="p">(</span><span class="n">menu</span><span class="p">:</span> <span class="n">Menu</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// Inflate the menu; this adds items to the action bar if it is present.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">menuInflater</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">menu</span><span class="p">.</span><span class="n">menu_main</span><span class="p">,</span> <span class="n">menu</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">menuInflater</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">menu</span><span class="p">.</span><span class="n">menu_main</span><span class="p">,</span> <span class="n">menu</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">true</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onOptionsItemSelected</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MenuItem</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// Handle action bar item clicks here. The action bar will
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// automatically handle clicks on the Home/Up button, so long
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// as you specify a parent activity in AndroidManifest.xml.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">itemId</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// automatically handle clicks on the Home/Up button, so long
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// as you specify a parent activity in AndroidManifest.xml.
+</span></span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">itemId</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nc">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">action_settings</span> <span class="o">-&gt;</span> <span class="k">true</span>
 </span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="o">-&gt;</span> <span class="k">super</span><span class="p">.</span><span class="n">onOptionsItemSelected</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
@@ -551,7 +551,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">):</span> <span class="n">View</span><span class="p">?</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// Inflate the layout for this fragment
 </span></span></span><span class="line"><span class="cl"><span class="c1">//        return inflater.inflate(R.layout.fragment_first, container, false)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">_binding</span> <span class="p">=</span> <span class="nc">FragmentFirstBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">_binding</span> <span class="p">=</span> <span class="nc">FragmentFirstBinding</span><span class="p">.</span><span class="n">inflate</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">binding</span><span class="p">.</span><span class="n">root</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -561,7 +561,7 @@
 </span></span><span class="line"><span class="cl"><span class="c1">//        view.findViewById&lt;Button&gt;(R.id.button_first).setOnClickListener {
 </span></span></span><span class="line"><span class="cl"><span class="c1">//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
 </span></span></span><span class="line"><span class="cl"><span class="c1">//        }
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">binding</span><span class="p">.</span><span class="n">textview</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;first fragment text&#34;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">textview</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;first fragment text&#34;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">buttonFirst</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">findNavController</span><span class="p">().</span><span class="n">navigate</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">action_FirstFragment_to_SecondFragment</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
@@ -807,7 +807,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

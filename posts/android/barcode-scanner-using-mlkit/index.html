@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 구글의 ML Kit을 이용해 바코드 스캐너를 만드는 방법에 대해 알아보도록 하겠습니다.\n들어가기 구글에서는 안드로이드에서 인공지능 기능을 사용할 수 있도록 ML Kit이라는 라이브러리를 발표했는데 이 킷을 이용하면 바코드 스캔, 얼굴 인식, 텍스트 인식, 사물 트래킹 등의 기능을 구현할 수 있습니다.\n바코드를 스캔하는데에는 ZXing (&ldquo;zebra crossing&rdquo;)이라는 라이브러리가 많이 사용됩니다만, 현재는 기능 추가 없이 유지보수만 이루어지고 있습니다. 그래서 여기서는 기능 개선이 적극적으로 이루어지고 있는 ML Kit을 바코드 인식에 사용할 겁니다.\n카메라 사용 준비 바코드 스캐너는 크게 카메라를 구동하는 부분과 캡처화면의 바코드를 인식하는 두 파트로 나뉩니다. 안드로이드의 카메라 모듈은 Jetpack의 CameraX 라이브러리를 써서 구동합니다.\n">
 <title>ML Kit을 이용해 바코드 스캐너 만들기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -456,7 +456,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gi">+    &lt;uses-feature android:name=&#34;android.hardware.camera.any&#34; /&gt;
 </span></span></span><span class="line"><span class="cl"><span class="gi">+    &lt;uses-permission android:name=&#34;android.permission.CAMERA&#34; /&gt;
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    &lt;application
 </span></span><span class="line"><span class="cl">        android:allowBackup=&#34;true&#34;
 </span></span><span class="line"><span class="cl">        android:icon=&#34;@mipmap/ic_launcher&#34;
@@ -467,7 +467,7 @@
 </span></span><span class="line"><span class="cl">        &lt;activity
 </span></span><span class="line"><span class="cl">            android:name=&#34;.MainActivity&#34;
 </span></span><span class="line"><span class="cl"><span class="gi">+            android:screenOrientation=&#34;portrait&#34;
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>            android:exported=&#34;true&#34;&gt;
+</span></span></span><span class="line"><span class="cl">            android:exported=&#34;true&#34;&gt;
 </span></span><span class="line"><span class="cl">            &lt;intent-filter&gt;
 </span></span><span class="line"><span class="cl">                &lt;action android:name=&#34;android.intent.action.MAIN&#34; /&gt;
 </span></span><span class="line"><span class="cl">
@@ -612,7 +612,7 @@
 </span></span><span class="line"><span class="cl">        <span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// Request camera permissions
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">isAllPermissionsGranted</span><span class="p">())</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">isAllPermissionsGranted</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">startCamera</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">requestMultiplePermissions</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">)</span>
@@ -638,7 +638,7 @@
 </span></span><span class="line"><span class="cl">                        <span class="nc">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&#34;Permission granted&#34;</span><span class="p">,</span> <span class="nc">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">                        <span class="n">startCamera</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">                    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">shouldShowRequestPermissionRationale</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">[</span><span class="m">0</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">shouldShowRequestPermissionRationale</span><span class="p">(</span><span class="n">REQUIRED_PERMISSIONS</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                        <span class="nc">Snackbar</span><span class="p">.</span><span class="n">make</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">root</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                            <span class="s2">&#34;Permission required to use app!&#34;</span><span class="p">,</span> <span class="nc">Snackbar</span><span class="p">.</span><span class="n">LENGTH_SHORT</span><span class="p">).</span><span class="n">show</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">                        <span class="n">startCamera</span><span class="p">()</span>
@@ -700,9 +700,9 @@
 </span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">fun</span> <span class="nf">startCamera</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">cameraProviderFuture</span> <span class="p">=</span> <span class="nc">ProcessCameraProvider</span><span class="p">.</span><span class="n">getInstance</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 카메라 세팅
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">cameraSelector</span> <span class="p">=</span> <span class="nc">CameraSelector</span><span class="p">.</span><span class="n">DEFAULT_BACK_CAMERA</span> <span class="c1">// Select back camera as a default
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 프리뷰 세팅
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">preview</span> <span class="p">=</span> <span class="nc">Preview</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">cameraSelector</span> <span class="p">=</span> <span class="nc">CameraSelector</span><span class="p">.</span><span class="n">DEFAULT_BACK_CAMERA</span> <span class="c1">// Select back camera as a default
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 프리뷰 세팅
+</span></span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">preview</span> <span class="p">=</span> <span class="nc">Preview</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">also</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">it</span><span class="p">.</span><span class="n">setSurfaceProvider</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="n">viewFinder</span><span class="p">.</span><span class="n">surfaceProvider</span><span class="p">)</span>
@@ -710,20 +710,20 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="n">cameraProviderFuture</span><span class="p">.</span><span class="n">addListener</span><span class="p">(</span><span class="n">Runnable</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 카메라의 lifecycle을 lifecycleowner와 연결시킴
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">val</span> <span class="py">cameraProvider</span><span class="p">:</span> <span class="n">ProcessCameraProvider</span> <span class="p">=</span> <span class="n">cameraProviderFuture</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">cameraProvider</span><span class="p">:</span> <span class="n">ProcessCameraProvider</span> <span class="p">=</span> <span class="n">cameraProviderFuture</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// Unbind use cases before rebinding
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cameraProvider</span><span class="p">.</span><span class="n">unbindAll</span><span class="p">()</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">cameraProvider</span><span class="p">.</span><span class="n">unbindAll</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// Bind use cases to camera
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">val</span> <span class="py">camera</span> <span class="p">=</span> <span class="n">cameraProvider</span><span class="p">.</span><span class="n">bindToLifecycle</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">camera</span> <span class="p">=</span> <span class="n">cameraProvider</span><span class="p">.</span><span class="n">bindToLifecycle</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">                <span class="k">this</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                <span class="n">cameraSelector</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                <span class="n">preview</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">//Handle flash
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">camera</span><span class="p">.</span><span class="n">cameraControl</span><span class="p">.</span><span class="n">enableTorch</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">camera</span><span class="p">.</span><span class="n">cameraControl</span><span class="p">.</span><span class="n">enableTorch</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Exception</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
@@ -875,12 +875,12 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl">class MainActivity : AppCompatActivity() {
 </span></span><span class="line"><span class="cl"><span class="gi">+    private lateinit var cameraExecutor: ExecutorService
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    override fun onCreate(savedInstanceState: Bundle?) {
 </span></span><span class="line"><span class="cl">        super.onCreate(savedInstanceState)
 </span></span><span class="line"><span class="cl">        setContentView(binding.root)
 </span></span><span class="line"><span class="cl"><span class="gi">+        cameraExecutor = Executors.newSingleThreadExecutor()
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>        ...
+</span></span></span><span class="line"><span class="cl">        ...
 </span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    @SuppressLint(&#34;UnsafeOptInUsageError&#34;)
@@ -897,7 +897,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="gi">+                }
 </span></span></span><span class="line"><span class="cl"><span class="gi">+            })
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        }
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        cameraProviderFuture.addListener(Runnable {
 </span></span><span class="line"><span class="cl">            // Used to bind the lifecycle of cameras to the lifecycle owner
 </span></span><span class="line"><span class="cl">            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -911,7 +911,7 @@
 </span></span><span class="line"><span class="cl">                    cameraSelector,
 </span></span><span class="line"><span class="cl">                    preview,
 </span></span><span class="line"><span class="cl"><span class="gi">+                    imageAnalyzer
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>                )
+</span></span></span><span class="line"><span class="cl">                )
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">                //Handle flash
 </span></span><span class="line"><span class="cl">                camera.cameraControl.enableTorch(false)
@@ -925,7 +925,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        super.onDestroy()
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        cameraExecutor.shutdown()
 </span></span></span><span class="line"><span class="cl"><span class="gi">+    }
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
+</span></span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게해서 MLKit으로 바코드 스캐너를 구현하는 방법에 대해 알아보았습니다.</p>
@@ -1156,7 +1156,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

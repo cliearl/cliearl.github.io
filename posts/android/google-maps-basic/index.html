@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 프래그먼트에서 구글맵을 구현하는 방법에 대해 알아보도록 하겠습니다.\n구글 맵 구현법 안드로이드에서 구글맵을 구현하는 법은 두가지가 있는데요, 우선은 액티비티에서 OnMapReadyCallback을 구현하고 SupportMapFragment를 통해 다음과 같이 화면에 표시하는 방법이 있습니다.\n1 2 3 4 &lt;fragment class=&#34;com.google.android.gms.maps.SupportMapFragment&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34;/&gt; 두번째는 독립된 프래그먼트에서 OnMapReadyCallback을 구현한 뒤 MapView 컴포넌트에 표시하는 방법이 있습니다.\n1 2 3 4 &lt;com.google.android.gms.maps.MapView android:id=&#34;@+id/mapview&#34; android:layout_width=&#34;match_parent&#34; android:layout_height=&#34;match_parent&#34; /&gt; 액티비티로 구글맵을 구현하는 방법은 구글 디벨로퍼 사이트에서 자세하게 설명하고 있기 때문에, 여기서는 독립된 프래그먼트를 만들어 구글맵을 구현하는 방법을 알아보도록 하겠습니다.\n">
 <title>프래그먼트에서 구글맵 구현하고 내 위치 표시하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -636,7 +636,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="c1">// Google maps
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">implementation</span> <span class="s1">&#39;com.google.android.gms:play-services-maps:18.0.2&#39;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.google.android.gms:play-services-maps:18.0.2&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.google.android.gms:play-services-location:19.0.1&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -742,7 +742,7 @@
 </span></span><span class="line"><span class="cl">    private val binding get() = _binding!!
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gi">+    private lateinit var map: GoogleMap
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    override fun onCreateView(
 </span></span><span class="line"><span class="cl">        inflater: LayoutInflater,
 </span></span><span class="line"><span class="cl">        container: ViewGroup?,
@@ -756,7 +756,7 @@
 </span></span><span class="line"><span class="cl">        super.onViewCreated(view, savedInstanceState)
 </span></span><span class="line"><span class="cl"><span class="gi">+        binding.mapView.onCreate(savedInstanceState)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        binding.mapView.getMapAsync(this)
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>    }
+</span></span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gi">+    override fun onMapReady(googleMap: GoogleMap) {
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        map = googleMap
@@ -771,12 +771,12 @@
 </span></span></span><span class="line"><span class="cl"><span class="gi">+                .title(&#34;서울시청&#34;)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        )
 </span></span></span><span class="line"><span class="cl"><span class="gi">+    }
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gi">+    override fun onSaveInstanceState(outState: Bundle) {
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        super.onSaveInstanceState(outState)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        binding.mapView.onSaveInstanceState(outState)
 </span></span></span><span class="line"><span class="cl"><span class="gi">+    }
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    override fun onDestroyView() {
 </span></span><span class="line"><span class="cl">        _binding = null
 </span></span><span class="line"><span class="cl">        super.onDestroyView()
@@ -914,7 +914,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gi">+ @SuppressLint(&#34;MissingPermission&#34;)
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>override fun onMapReady(googleMap: GoogleMap) {
+</span></span></span><span class="line"><span class="cl">override fun onMapReady(googleMap: GoogleMap) {
 </span></span><span class="line"><span class="cl">    map = googleMap
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gi">+    try {
@@ -923,7 +923,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="gi">+    } catch (e: Exception) {
 </span></span></span><span class="line"><span class="cl"><span class="gi">+        e.printStackTrace()
 </span></span></span><span class="line"><span class="cl"><span class="gi">+    }
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
+</span></span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="fusedlocationproviderclient-이용하기">FusedLocationProviderClient 이용하기
@@ -965,12 +965,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gi">+ private lateinit var fusedLocationClient: FusedLocationProviderClient
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 </span></span><span class="line"><span class="cl">    super.onViewCreated(view, savedInstanceState)
 </span></span><span class="line"><span class="cl">    ...
 </span></span><span class="line"><span class="cl"><span class="gi">+    fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-</span></span></span><span class="line"><span class="cl"><span class="gi"></span>}
+</span></span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>그리고 플로팅 버튼을 클릭했을 때 <code>fusedLocationProviderClient</code>의 <a class="link" href="https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient.html#getLastLocation%28%29"  target="_blank" rel="noopener"
@@ -992,7 +992,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">fusedLocationClient</span><span class="p">.</span><span class="n">lastLocation</span><span class="p">.</span><span class="n">addOnSuccessListener</span> <span class="p">{</span> <span class="n">location</span> <span class="p">:</span> <span class="n">Location</span><span class="p">?</span> <span class="o">-&gt;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">location</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">mylocation</span> <span class="p">=</span> <span class="n">LatLng</span><span class="p">(</span><span class="n">location</span><span class="p">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">location</span><span class="p">.</span><span class="n">longitude</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">cameraUpdate</span> <span class="p">=</span> <span class="nc">CameraUpdateFactory</span><span class="p">.</span><span class="n">newLatLngZoom</span><span class="p">(</span><span class="n">mylocation</span><span class="p">,</span> <span class="m">14f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">val</span> <span class="py">cameraUpdate</span> <span class="p">=</span> <span class="nc">CameraUpdateFactory</span><span class="p">.</span><span class="n">newLatLngZoom</span><span class="p">(</span><span class="n">mylocation</span><span class="p">,</span> <span class="mf">14f</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="n">map</span><span class="p">.</span><span class="n">animateCamera</span><span class="p">(</span><span class="n">cameraUpdate</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -1288,7 +1288,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 Recyclerview를 사용하는 법에 대해 알아보도록 하겠습니다.\nRecyclerview의 특징 Recyclerview는 화면에 리스트 형식의 데이터를 표시하기 위해서 사용하는 모듈입니다. 보통 화면에 리스트뷰를 표시할수 있게 하는 ListView는 예를들어 데이터가 10개 있을 경우 데이터를 표시하기 위한 ViewHolder가 10개 필요합니다. 그러나 Recyclerview는 ViewHolder를 6개만 만들고 화면에는 5개를 표시한 후 화면 바깥으로 1번 ViewHolder가 빠져나가면 7번 ViewHolder로 변경해서 재사용합니다. 그래서 자원을 더 아낄 수 있게 되는 것이죠.\n또 데이터는 Recyclerview Adapter를 통해 ViewHolder에 들어가게 되는데 ViewHolder에 데이터 1을 넣어서 표현했을 경우, ViewHolder는 그대로 놔두고 데이터 2를 넣는 식으로 ViewHolder를 재활용해서 사용할 수 있습니다. 그래서 Recyclerview라는 이름이 붙게 된 것이죠.\n">
 <title>앱에서 RecyclerView 사용하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -576,8 +576,8 @@
 </span></span><span class="line"><span class="cl">        <span class="k">private</span> <span class="k">val</span> <span class="py">tvSub</span><span class="p">:</span> <span class="n">TextView</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">tv_sub</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">fun</span> <span class="nf">bind</span><span class="p">(</span><span class="k">data</span><span class="p">:</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">tvMain</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="n">tvSub</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvMain</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tvSub</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="k">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -616,7 +616,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">fun</span> <span class="nf">addData</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">99</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="mi">99</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">dataSet</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th main&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th sub&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -670,13 +670,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">recycler_view</span><span class="p">.</span><span class="n">layoutManager</span> <span class="p">=</span> <span class="n">LinearLayoutManager</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nc">LinearLayoutManager</span><span class="p">.</span><span class="n">HORIZONTAL</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//        recycler_view.layoutManager = GridLayoutManager(this, 2)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">recycler_view</span><span class="p">.</span><span class="n">adapter</span> <span class="p">=</span> <span class="n">RecyclerViewAdapter</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">recycler_view</span><span class="p">.</span><span class="n">addItemDecoration</span><span class="p">(</span><span class="n">DividerItemDecoration</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nc">DividerItemDecoration</span><span class="p">.</span><span class="n">HORIZONTAL</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">fun</span> <span class="nf">addData</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">99</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="mi">99</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">dataSet</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th main&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">$i</span><span class="s2"> th sub&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -916,7 +916,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

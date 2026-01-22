@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 ProgressBar와 AsyncTask의 사용방법에 대해 알아보도록 하겠습니다.\n들어가기 ProgressBar는 안드로이드가 어떤 작업을 진행할때 그 작업의 진행상황을 보여주는 모듈입니다. 시간이 걸리는 처리가 필요할 때 표시해주면 기다리는 유저의 거부감을 줄일 수 있습니다. 이 기능은 기존에는 ProgressDialog를 이용해서 구현했는데 다이얼로그가 표시될 때 유저의 조작을 제한한다는 문제가 있어 API level 26에서 deprecated 되고 ProgressBar로 대체되었습니다.\n메인 스레드의 관점에서 보면 ProgressBar는 처리에 긴 시간이 걸리기 때문에 메인 스레드와는 별개의 스레드에서 처리를 수행해야 할 필요가 있습니다. 별개의 스레드에서 처리를 수행하는데는 여러가지 방법이 있을 수 있는데 여기서는 AsyncTask 클래스를 이용해서 ProgressBar를 구현해 보도록 하겠습니다.\n">
 <title>ProgressBar로 AsyncTask 이해하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -649,13 +649,13 @@
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">count</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="n">size</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nc">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nc">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">InterruptedException</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>  <span class="p">-</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>  <span class="p">-</span> <span class="mi">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">isCancelled</span><span class="p">)</span> <span class="k">break</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -737,7 +737,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="c1">// MainActivity
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">binding</span><span class="p">.</span><span class="n">cancelButton</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">downloadTask</span><span class="o">?.</span><span class="n">cancel</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
@@ -749,9 +749,9 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="c1">// DownloadTask
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancelled</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : 0&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="mi">0</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -822,13 +822,13 @@
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">doInBackground</span><span class="p">(</span><span class="k">vararg</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">count</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="n">size</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nc">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nc">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">InterruptedException</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>  <span class="p">-</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="n">publishProgress</span><span class="p">(((</span><span class="n">i</span> <span class="p">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">count</span><span class="p">.</span><span class="n">toFloat</span><span class="p">()</span>  <span class="p">-</span> <span class="mi">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">isCancelled</span><span class="p">)</span> <span class="k">break</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -840,7 +840,7 @@
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : </span><span class="si">${values[0]}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="n">values</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">!!</span>
+</span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">!!</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onPostExecute</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">String</span><span class="p">?)</span> <span class="p">{</span>
@@ -855,7 +855,7 @@
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">==</span> <span class="k">null</span> <span class="o">||</span> <span class="n">activity</span><span class="p">.</span><span class="n">isFinishing</span><span class="p">)</span> <span class="k">return</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s2">&#34;Progress : 0&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">activity</span><span class="p">.</span><span class="n">binding</span><span class="p">.</span><span class="n">progressBar</span><span class="p">.</span><span class="n">progress</span> <span class="p">=</span> <span class="mi">0</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1097,7 +1097,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">

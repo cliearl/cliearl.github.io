@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 포스팅에서는 프로젝트 안에 작성된 ViewPager1 모듈을 ViewPager2 모듈로 변환하는 법에 대해 알아보도록 하겠습니다.\n안드로이드 라이브러리가 androidx로 바뀌는 과정에서 ViewPager 라이브러리도 업그레이드 해달라는 요구가 꽤 많았습니다. 그래서 구글에서는 ViewPager2 라이브러리를 개발했습니다.\nViewPager2의 특징 구글에서 설명하는 ViewPager2의 [장점]((https://developer.android.com/training/animation/vp2-migration)은 다음과 같습니다.\nVertical scrolling : 세로스크롤 Right-to-left support : 페이지를 오른쪽에서 왼쪽으로 정렬 modifiable Fragment collenctions : 프래그먼트의 변화를 동적으로 반영 가능 DiffUtil : Recyclerview의 DiffUtil을 사용 가능 ViewPager1 라이브러리는 더이상 관리되지 않음 ViewPager2로 변환 여기서는 기존에 ViewPager를 써서 좌우로 스와이프되는 화면 만들기 강의에서 작성했던 ViewPager1 프로젝트를 변환하는 방식으로 구현해 보도록 하겠습니다.\n">
 <title>ViewPager1 프로젝트를 ViewPager2 프로젝트로 변환하기</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_25447d16e4ca7a90.jpg" width="300"
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -492,7 +492,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CustomPagerAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">:</span> <span class="n">FragmentActivity</span><span class="p">):</span> <span class="n">FragmentStateAdapter</span><span class="p">(</span><span class="n">fa</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">PAGENUMBER</span> <span class="p">=</span> <span class="m">4</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">val</span> <span class="py">PAGENUMBER</span> <span class="p">=</span> <span class="mi">4</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getItemCount</span><span class="p">():</span> <span class="n">Int</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PAGENUMBER</span>
@@ -500,10 +500,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">createFragment</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Fragment</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="m">0</span> <span class="o">-&gt;</span> <span class="nc">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img00</span><span class="p">,</span> <span class="s2">&#34;test 00&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="m">1</span> <span class="o">-&gt;</span> <span class="nc">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img01</span><span class="p">,</span> <span class="s2">&#34;test 01&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="m">2</span> <span class="o">-&gt;</span> <span class="nc">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img02</span><span class="p">,</span> <span class="s2">&#34;test 02&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="m">3</span> <span class="o">-&gt;</span> <span class="nc">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img03</span><span class="p">,</span> <span class="s2">&#34;test 03&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">0</span> <span class="o">-&gt;</span> <span class="nc">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img00</span><span class="p">,</span> <span class="s2">&#34;test 00&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">1</span> <span class="o">-&gt;</span> <span class="nc">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img01</span><span class="p">,</span> <span class="s2">&#34;test 01&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">2</span> <span class="o">-&gt;</span> <span class="nc">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img02</span><span class="p">,</span> <span class="s2">&#34;test 02&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">3</span> <span class="o">-&gt;</span> <span class="nc">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img03</span><span class="p">,</span> <span class="s2">&#34;test 03&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="o">-&gt;</span> <span class="nc">TestFragment</span><span class="p">.</span><span class="n">newInstance</span><span class="p">(</span><span class="nc">R</span><span class="p">.</span><span class="n">raw</span><span class="p">.</span><span class="n">img00</span><span class="p">,</span> <span class="s2">&#34;page00&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -778,7 +778,7 @@
         
             2020 - 
         
-        2025 냉동코더의 기술블로그
+        2026 냉동코더의 기술블로그
     </section>
     
     <section class="powerby">
