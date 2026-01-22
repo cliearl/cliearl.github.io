@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Wsl2 on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/tags/wsl2/</link>
+        <description>Recent content in Wsl2 on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 23 Jan 2026 00:49:39 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/tags/wsl2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[WSL2] Python 3.14 설치 가이드 및 시스템 기본 버전 관리법</title>
+        <link>https://cliearl.github.io/posts/linux/python-install/</link>
+        <pubDate>Fri, 23 Jan 2026 00:49:39 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/linux/python-install/</guid>
+        <description>&lt;p&gt;WSL2(Ubuntu)를 사용하다 보면 최신 버전의 Python을 테스트해야 할 때가 있습니다. 하지만 단순히 설치만 한다고 해서 터미널에서 &lt;code&gt;python3&lt;/code&gt;를 입력했을 때 바로 최신 버전이 나타나지는 않습니다. 오늘은 &lt;strong&gt;Python 3.14 설치법&lt;/strong&gt;과 함께 &lt;strong&gt;시스템 환경을 망가뜨리지 않고 버전을 전환하는 방법&lt;/strong&gt;을 정리해 보겠습니다.&lt;/p&gt;
+&lt;h2 id=&#34;1-wsl2에-python-314-설치하기-deadsnakes-ppa&#34;&gt;1. WSL2에 Python 3.14 설치하기 (deadsnakes PPA)
+&lt;/h2&gt;&lt;p&gt;Ubuntu의 기본 저장소는 안정성을 위해 보수적인 버전을 유지합니다. 최신 버전을 가장 쉽고 빠르게 설치하는 방법은 &lt;code&gt;deadsnakes&lt;/code&gt; PPA를 사용하는 것입니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 패키지 업데이트 및 PPA 추가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install software-properties-common -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo add-apt-repository ppa:deadsnakes/ppa
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Python 3.14 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install python3.14 python3.14-venv python3.14-dev -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 설치 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3.14 --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;2-왜-python3를-치면-여전히-구버전이-나올까&#34;&gt;2. 왜 &lt;code&gt;python3&lt;/code&gt;를 치면 여전히 구버전이 나올까?
+&lt;/h2&gt;&lt;p&gt;설치를 마쳤음에도 &lt;code&gt;python3 --version&lt;/code&gt;을 입력하면 기존 버전(예: 3.12)이 출력됩니다. 그 이유는 Ubuntu 시스템 내부에 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;시스템 의존성:&lt;/strong&gt; Ubuntu의 시스템 도구(apt, cloud-init 등)는 특정 Python 버전에 의존하여 동작합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;심볼릭 링크:&lt;/strong&gt; &lt;code&gt;/usr/bin/python3&lt;/code&gt;라는 명령어가 기본적으로 기존 버전을 가리키도록 고정되어 있기 때문입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-해결-방법-어떤-방식을-선택할-것인가&#34;&gt;3. 해결 방법: 어떤 방식을 선택할 것인가?
+&lt;/h2&gt;&lt;h3 id=&#34;방법-a-가상환경venv-활용-가장-권장&#34;&gt;방법 A: 가상환경(venv) 활용 (가장 권장)
+&lt;/h3&gt;&lt;p&gt;시스템 환경은 그대로 두고, 프로젝트 단위로 Python 버전을 격리하는 방식입니다. 가장 안전하며 개발 표준에 가깝습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 가상환경 생성 및 활성화&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3.14 -m venv .venv
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;source&lt;/span&gt; .venv/bin/activate
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 이제 이 환경 안에서는 python3가 3.14로 동작합니다.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;방법-b-alias별칭-설정-개인-사용자용&#34;&gt;방법 B: Alias(별칭) 설정 (개인 사용자용)
+&lt;/h3&gt;&lt;p&gt;시스템 전체 설정을 바꾸지 않고, 내 터미널에서만 편하게 명령어를 쓰고 싶을 때 유용합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# .bashrc 파일에 별칭 추가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;alias python3=&amp;#39;/usr/bin/python3.14&amp;#39;&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; ~/.bashrc
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;source&lt;/span&gt; ~/.bashrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;방법-c-update-alternatives-주의-필요&#34;&gt;방법 C: update-alternatives (주의 필요)
+&lt;/h3&gt;&lt;p&gt;시스템 전역에서 &lt;code&gt;python3&lt;/code&gt;의 우선순위를 강제로 바꾸는 방법입니다. 다만, 이 방법은 시스템 도구와의 충돌 가능성이 있어 초보자에게는 권장하지 않습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.14 &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo update-alternatives --config python3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;요약&#34;&gt;요약
+&lt;/h2&gt;&lt;p&gt;최신 기능을 맛보기 위해 Python 3.14를 설치했다면, 시스템 기본값을 건드리기보다는 **가상환경(venv)**을 만들어 사용하는 습관을 들이는 것이 좋습니다. 시스템 안정성도 지키고, 프로젝트별 버전 관리도 수월해지기 때문입니다.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

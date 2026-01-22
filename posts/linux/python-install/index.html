@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="WSL2(Ubuntu)를 사용하다 보면 최신 버전의 Python을 테스트해야 할 때가 있습니다. 하지만 단순히 설치만 한다고 해서 터미널에서 python3를 입력했을 때 바로 최신 버전이 나타나지는 않습니다. 오늘은 Python 3.14 설치법과 함께 시스템 환경을 망가뜨리지 않고 버전을 전환하는 방법을 정리해 보겠습니다.\n1. WSL2에 Python 3.14 설치하기 (deadsnakes PPA) Ubuntu의 기본 저장소는 안정성을 위해 보수적인 버전을 유지합니다. 최신 버전을 가장 쉽고 빠르게 설치하는 방법은 deadsnakes PPA를 사용하는 것입니다.\n1 2 3 4 5 6 7 8 9 10 11 # 패키지 업데이트 및 PPA 추가 sudo apt update sudo apt install software-properties-common -y sudo add-apt-repository ppa:deadsnakes/ppa sudo apt update # Python 3.14 설치 sudo apt install python3.14 python3.14-venv python3.14-dev -y # 설치 확인 python3.14 --version 2. 왜 python3를 치면 여전히 구버전이 나올까? 설치를 마쳤음에도 python3 --version을 입력하면 기존 버전(예: 3.12)이 출력됩니다. 그 이유는 Ubuntu 시스템 내부에 있습니다.\n">
+<title>[WSL2] Python 3.14 설치 가이드 및 시스템 기본 버전 관리법</title>
+
+<link rel='canonical' href='https://cliearl.github.io/posts/linux/python-install/'>
+
+<link rel="stylesheet" href="/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css"><meta property='og:title' content="[WSL2] Python 3.14 설치 가이드 및 시스템 기본 버전 관리법">
+<meta property='og:description' content="WSL2(Ubuntu)를 사용하다 보면 최신 버전의 Python을 테스트해야 할 때가 있습니다. 하지만 단순히 설치만 한다고 해서 터미널에서 python3를 입력했을 때 바로 최신 버전이 나타나지는 않습니다. 오늘은 Python 3.14 설치법과 함께 시스템 환경을 망가뜨리지 않고 버전을 전환하는 방법을 정리해 보겠습니다.\n1. WSL2에 Python 3.14 설치하기 (deadsnakes PPA) Ubuntu의 기본 저장소는 안정성을 위해 보수적인 버전을 유지합니다. 최신 버전을 가장 쉽고 빠르게 설치하는 방법은 deadsnakes PPA를 사용하는 것입니다.\n1 2 3 4 5 6 7 8 9 10 11 # 패키지 업데이트 및 PPA 추가 sudo apt update sudo apt install software-properties-common -y sudo add-apt-repository ppa:deadsnakes/ppa sudo apt update # Python 3.14 설치 sudo apt install python3.14 python3.14-venv python3.14-dev -y # 설치 확인 python3.14 --version 2. 왜 python3를 치면 여전히 구버전이 나올까? 설치를 마쳤음에도 python3 --version을 입력하면 기존 버전(예: 3.12)이 출력됩니다. 그 이유는 Ubuntu 시스템 내부에 있습니다.\n">
+<meta property='og:url' content='https://cliearl.github.io/posts/linux/python-install/'>
+<meta property='og:site_name' content='냉동코더의 기술블로그'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='linux' /><meta property='article:tag' content='python' /><meta property='article:tag' content='wsl2' /><meta property='article:published_time' content='2026-01-23T00:49:39&#43;09:00'/><meta property='article:modified_time' content='2026-01-23T00:49:39&#43;09:00'/>
+<meta name="twitter:title" content="[WSL2] Python 3.14 설치 가이드 및 시스템 기본 버전 관리법">
+<meta name="twitter:description" content="WSL2(Ubuntu)를 사용하다 보면 최신 버전의 Python을 테스트해야 할 때가 있습니다. 하지만 단순히 설치만 한다고 해서 터미널에서 python3를 입력했을 때 바로 최신 버전이 나타나지는 않습니다. 오늘은 Python 3.14 설치법과 함께 시스템 환경을 망가뜨리지 않고 버전을 전환하는 방법을 정리해 보겠습니다.\n1. WSL2에 Python 3.14 설치하기 (deadsnakes PPA) Ubuntu의 기본 저장소는 안정성을 위해 보수적인 버전을 유지합니다. 최신 버전을 가장 쉽고 빠르게 설치하는 방법은 deadsnakes PPA를 사용하는 것입니다.\n1 2 3 4 5 6 7 8 9 10 11 # 패키지 업데이트 및 PPA 추가 sudo apt update sudo apt install software-properties-common -y sudo add-apt-repository ppa:deadsnakes/ppa sudo apt update # Python 3.14 설치 sudo apt install python3.14 python3.14-venv python3.14-dev -y # 설치 확인 python3.14 --version 2. 왜 python3를 치면 여전히 구버전이 나올까? 설치를 마쳤음에도 python3 --version을 입력하면 기존 버전(예: 3.12)이 출력됩니다. 그 이유는 Ubuntu 시스템 내부에 있습니다.\n">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZL04TTHRBF');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cd6cc162777ace27.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔰</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">냉동코더의 기술블로그</a></h1>
+            <h2 class="site-description">@Andromeda Galaxy</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/cliearl'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/coder_frozen'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.youtube.com/channel/UC6V7LBEgcoTZUUgUU0Jv3xg'
+                        target="_blank"
+                        title="Youtube"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="4" />
+  <path d="M10 9l5 3l-5 3z" />
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/page/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='https://cliearl.github.io/index.xml' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                
+                <span>RSS</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-wsl2에-python-314-설치하기-deadsnakes-ppa">1. WSL2에 Python 3.14 설치하기 (deadsnakes PPA)</a></li>
+    <li><a href="#2-왜-python3를-치면-여전히-구버전이-나올까">2. 왜 <code>python3</code>를 치면 여전히 구버전이 나올까?</a></li>
+    <li><a href="#3-해결-방법-어떤-방식을-선택할-것인가">3. 해결 방법: 어떤 방식을 선택할 것인가?</a>
+      <ol>
+        <li><a href="#방법-a-가상환경venv-활용-가장-권장">방법 A: 가상환경(venv) 활용 (가장 권장)</a></li>
+        <li><a href="#방법-b-alias별칭-설정-개인-사용자용">방법 B: Alias(별칭) 설정 (개인 사용자용)</a></li>
+        <li><a href="#방법-c-update-alternatives-주의-필요">방법 C: update-alternatives (주의 필요)</a></li>
+      </ol>
+    </li>
+    <li><a href="#요약">요약</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" >
+                Linux
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/linux/python-install/">[WSL2] Python 3.14 설치 가이드 및 시스템 기본 버전 관리법</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-01-23T00:49:39&#43;09:00'>Jan 23, 2026</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>WSL2(Ubuntu)를 사용하다 보면 최신 버전의 Python을 테스트해야 할 때가 있습니다. 하지만 단순히 설치만 한다고 해서 터미널에서 <code>python3</code>를 입력했을 때 바로 최신 버전이 나타나지는 않습니다. 오늘은 <strong>Python 3.14 설치법</strong>과 함께 <strong>시스템 환경을 망가뜨리지 않고 버전을 전환하는 방법</strong>을 정리해 보겠습니다.</p>
+<h2 id="1-wsl2에-python-314-설치하기-deadsnakes-ppa">1. WSL2에 Python 3.14 설치하기 (deadsnakes PPA)
+</h2><p>Ubuntu의 기본 저장소는 안정성을 위해 보수적인 버전을 유지합니다. 최신 버전을 가장 쉽고 빠르게 설치하는 방법은 <code>deadsnakes</code> PPA를 사용하는 것입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 패키지 업데이트 및 PPA 추가</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install software-properties-common -y
+</span></span><span class="line"><span class="cl">sudo add-apt-repository ppa:deadsnakes/ppa
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Python 3.14 설치</span>
+</span></span><span class="line"><span class="cl">sudo apt install python3.14 python3.14-venv python3.14-dev -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 설치 확인</span>
+</span></span><span class="line"><span class="cl">python3.14 --version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-왜-python3를-치면-여전히-구버전이-나올까">2. 왜 <code>python3</code>를 치면 여전히 구버전이 나올까?
+</h2><p>설치를 마쳤음에도 <code>python3 --version</code>을 입력하면 기존 버전(예: 3.12)이 출력됩니다. 그 이유는 Ubuntu 시스템 내부에 있습니다.</p>
+<ul>
+<li><strong>시스템 의존성:</strong> Ubuntu의 시스템 도구(apt, cloud-init 등)는 특정 Python 버전에 의존하여 동작합니다.</li>
+<li><strong>심볼릭 링크:</strong> <code>/usr/bin/python3</code>라는 명령어가 기본적으로 기존 버전을 가리키도록 고정되어 있기 때문입니다.</li>
+</ul>
+<h2 id="3-해결-방법-어떤-방식을-선택할-것인가">3. 해결 방법: 어떤 방식을 선택할 것인가?
+</h2><h3 id="방법-a-가상환경venv-활용-가장-권장">방법 A: 가상환경(venv) 활용 (가장 권장)
+</h3><p>시스템 환경은 그대로 두고, 프로젝트 단위로 Python 버전을 격리하는 방식입니다. 가장 안전하며 개발 표준에 가깝습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 가상환경 생성 및 활성화</span>
+</span></span><span class="line"><span class="cl">python3.14 -m venv .venv
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> .venv/bin/activate
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 이제 이 환경 안에서는 python3가 3.14로 동작합니다.</span>
+</span></span><span class="line"><span class="cl">python3 --version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="방법-b-alias별칭-설정-개인-사용자용">방법 B: Alias(별칭) 설정 (개인 사용자용)
+</h3><p>시스템 전체 설정을 바꾸지 않고, 내 터미널에서만 편하게 명령어를 쓰고 싶을 때 유용합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># .bashrc 파일에 별칭 추가</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;alias python3=&#39;/usr/bin/python3.14&#39;&#34;</span> &gt;&gt; ~/.bashrc
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> ~/.bashrc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="방법-c-update-alternatives-주의-필요">방법 C: update-alternatives (주의 필요)
+</h3><p>시스템 전역에서 <code>python3</code>의 우선순위를 강제로 바꾸는 방법입니다. 다만, 이 방법은 시스템 도구와의 충돌 가능성이 있어 초보자에게는 권장하지 않습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 <span class="m">1</span>
+</span></span><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.14 <span class="m">2</span>
+</span></span><span class="line"><span class="cl">sudo update-alternatives --config python3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="요약">요약
+</h2><p>최신 기능을 맛보기 위해 Python 3.14를 설치했다면, 시스템 기본값을 건드리기보다는 **가상환경(venv)**을 만들어 사용하는 습관을 들이는 것이 좋습니다. 시스템 안정성도 지키고, 프로젝트별 버전 관리도 수월해지기 때문입니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">Linux</a>
+        
+            <a href="/tags/python/">Python</a>
+        
+            <a href="/tags/wsl2/">Wsl2</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/linux/migrate-textcube-to-docker/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">텍스트큐브를 도커로 마이그레이션하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/linux/wordpress-setup/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 WordPress 설치하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/linux/postgresql-docker-upgrade/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Postgresql Docker Image의 메이저 버전 업그레이드</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/linux/introduce-calibre-web/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">전자책 관리 앱 Calibre-web 도입</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/linux/hugo-blog/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hexo에서 Hugo로 블로그 엔진 변경</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="cliearl/cliearl.github.io"
+        issue-term="cliearl"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 냉동코더의 기술블로그
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.33.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

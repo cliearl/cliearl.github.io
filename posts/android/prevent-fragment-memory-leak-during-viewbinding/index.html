@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://cliearl.github.io/posts/android/prevent-fragment-memory-leak-during-viewbinding/'>
 
-<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="View Binding 사용시 Fragment의 메모리 누수 대응하기">
+<link rel="stylesheet" href="/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css"><meta property='og:title' content="View Binding 사용시 Fragment의 메모리 누수 대응하기">
 <meta property='og:description' content="들어가기 findViewById 대신 View Binding 사용하기 강의에서 View Binding에 대해 다루었습니다. View Binding을 도입하면 코드를 더 안전하게 작성할 수 있고 빌드도 빠르게 할 수 있습니다.\nFragment에서의 메모리 누수 그런데 Fragment에서 View Binding을 쓸 때는 메모리 누수가 일어날 수 있는 문제가 있습니다. 다음 그림을 보시면 Fragment 속의 View는 onDestroyView에서 파괴되고 생명주기가 종료되지만, 그 시점에서 Fragment는 여전히 유지되고 있는 것을 알 수 있습니다.\n메모리 누수 대응법 _binding의 직접 해제 그래서 구글에서는 Fragment에서 View Binding을 적용할 때 다음과 같이 _binding 변수를 만들어 사용한 뒤 onDestroyView에서 해제해주는 구조를 공식 문서 에서 제안하고 있습니다.\n">
 <meta property='og:url' content='https://cliearl.github.io/posts/android/prevent-fragment-memory-leak-during-viewbinding/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
@@ -875,7 +875,7 @@
     
     <section class="powerby">
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.33.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -957,6 +957,7 @@
                 rel="stylesheet" 
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
+    
 
             </main>
         </div>
