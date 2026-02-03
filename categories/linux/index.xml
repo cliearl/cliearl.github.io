@@ -92,8 +92,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
 &lt;h3 id=&#34;3-vs-code에서-활용하기&#34;&gt;3. VS Code에서 활용하기
-&lt;/h3&gt;&lt;h4 id=&#34;-통합-터미널-활용-best-practice&#34;&gt;① 통합 터미널 활용 (Best Practice)
-&lt;/h4&gt;&lt;p&gt;별도의 창 없이 VS Code 하단 터미널(&lt;code&gt;Ctrl + &lt;/code&gt; `)에서 즉시 비서를 깨웁니다.&lt;/p&gt;
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;통합 터미널 활용 (Best Practice)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;별도의 창 없이 VS Code 하단 터미널(&lt;code&gt;Ctrl + &lt;/code&gt; `)에서 즉시 비서를 깨웁니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;실행:&lt;/strong&gt; &lt;code&gt;ollama launch claude --model qwen3-coder&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -112,15 +114,18 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ANTHROPIC_API_KEY&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;ollama&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;-공식-확장-프로그램-설치&#34;&gt;② 공식 확장 프로그램 설치
-&lt;/h4&gt;&lt;p&gt;VS Code 마켓플레이스에서 &lt;code&gt;Claude Code&lt;/code&gt;를 설치하면 아래 단축키를 통해 에디터와 AI 사이를 더 빠르게 오갈 수 있습니다.&lt;/p&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;공식 확장 프로그램 설치&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;VS Code 마켓플레이스에서 &lt;code&gt;Claude Code&lt;/code&gt;를 설치하면 아래 단축키를 통해 에디터와 AI 사이를 더 빠르게 오갈 수 있습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;Ctrl + Esc&lt;/code&gt;: 터미널 포커스 전환&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Alt + K&lt;/code&gt;: 선택 영역에 대한 즉시 질문&lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;4--성능-최적화-팁-컨텍스트-윈도우-확장&#34;&gt;4. 🚀 성능 최적화 팁: 컨텍스트 윈도우 확장
-&lt;/h3&gt;&lt;p&gt;Claude Code는 여러 파일을 동시에 분석하므로 AI의 &amp;lsquo;기억력&amp;rsquo;이 매우 중요합니다. Ollama의 기본 컨텍스트 크기는 대개 부족하므로, 아래 설정을 통해 이를 확장해 줍니다.&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;🚀 성능 최적화 팁: 컨텍스트 윈도우 확장&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Claude Code는 여러 파일을 동시에 분석하므로 AI의 &amp;lsquo;기억력&amp;rsquo;이 매우 중요합니다. Ollama의 기본 컨텍스트 크기는 대개 부족하므로, 아래 설정을 통해 이를 확장해 줍니다.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;설정 방법:&lt;/strong&gt;
 &lt;code&gt;~/.bashrc&lt;/code&gt; 또는 &lt;code&gt;~/.zshrc&lt;/code&gt; 파일 하단에 아래 환경 변수를 추가하세요.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -134,6 +139,76 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;추가 후 &lt;code&gt;source ~/.bashrc&lt;/code&gt;로 반영합니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4-추천-모델&#34;&gt;4. 추천 모델
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;2026년 2월 3일 기준&lt;/strong&gt;, 16GB VRAM에 맞는 최신 모델 추천 리스트입니다. 필요에 따라 골라 쓰세요!&lt;/p&gt;
+&lt;h3 id=&#34;-1-차세대-표준-the-next-gen&#34;&gt;👑 1. 차세대 &amp;lsquo;표준&amp;rsquo; (The Next Gen)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1. Llama 4 (13B)&lt;/strong&gt; ⭐ &lt;strong&gt;(전천후 1위)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; Llama 3의 영광을 이어받은 2026년형 표준입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;16GB 최적화:&lt;/strong&gt; 메타가 8B와 70B 사이의 간극을 메우기 위해 내놓은 &lt;strong&gt;13B&lt;/strong&gt; 모델입니다. 16GB VRAM에 올리면 약 8~9GB를 차지하며, 나머지 공간을 활용해 긴 문맥(128k)을 소화할 수 있습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 코딩, 상식, 추론 모든 면에서 이전 세대(Llama 3.3)를 압도합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull llama4:13b&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;2. Gemma 3 (12B)&lt;/strong&gt; 💎 &lt;strong&gt;(논리 &amp;amp; 글쓰기)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; 구글이 작정하고 내놓은 최신 모델입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;16GB 최적화:&lt;/strong&gt; 기존 9B에서 파라미터를 늘려 &lt;strong&gt;12B&lt;/strong&gt;로 출시되었습니다. 16GB VRAM에 아주 쾌적하게 들어갑니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 특히 &lt;strong&gt;PyTorch 딥러닝 코드 해석&lt;/strong&gt;이나 &lt;strong&gt;복잡한 논문 요약&lt;/strong&gt;에서 라마 4보다 더 학구적인 답변을 줍니다. MCNP 매뉴얼 해석용으로 최고입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull gemma3:12b&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-2-코딩--에이전트-claude-code-연동&#34;&gt;💻 2. 코딩 &amp;amp; 에이전트 (Claude Code 연동)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;3. Qwen 3-Coder (14B)&lt;/strong&gt; 🛠️ &lt;strong&gt;(코딩의 신)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; Qwen 2.5의 성공 이후 알리바바가 내놓은 후속작입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 여전히 &lt;strong&gt;코딩 능력은 세계 1위&lt;/strong&gt;입니다. 특히 Claude Code 같은 에이전트 도구가 파일을 수정하고 터미널을 제어하는 능력(Function Calling)이 Llama 4보다 더 정교합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull qwen3-coder:14b&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;4. DeepSeek-Coder-V3 (16B MoE)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; 전문가 혼합(MoE) 아키텍처를 극한으로 깎았습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 평소엔 가볍게 돌다가, 어려운 수학/알고리즘 문제를 만나면 전문가 모델을 활성화합니다. 16GB VRAM을 풀(Full)로 쓰지만 성능은 70B급에 육박합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull deepseek-coder-v3&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-3-추론--사고형-reasoning&#34;&gt;🧠 3. 추론 &amp;amp; 사고형 (Reasoning)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;5. DeepSeek-R2 (Distill 14B)&lt;/strong&gt; 🕵️ &lt;strong&gt;(디버깅 해결사)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; R1의 센세이션 이후 나온 개선판입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 생각하는 시간(&lt;code&gt;&amp;lt;think&amp;gt;&lt;/code&gt;)이 더 빨라졌고, 논리적 비약이 줄었습니다. 코드가 왜 틀렸는지 &lt;strong&gt;원리부터 설명&lt;/strong&gt;해주는 능력은 타의 추종을 불허합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull deepseek-r2:14b&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;6. Phi-5 (Medium)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; 마이크로소프트의 소형 모델 시리즈 최신작입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 10B 내외의 사이즈로, &lt;strong&gt;수학적 추론&lt;/strong&gt; 능력이 비약적으로 상승했습니다. 시뮬레이션 데이터 계산 검증용으로 좋습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull phi5&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-4-한국어-특화-k-llm&#34;&gt;🇰🇷 4. 한국어 특화 (K-LLM)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;7. EXAONE 4.0 (8B)&lt;/strong&gt; 🧪 &lt;strong&gt;(과학/연구)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; LG AI연구원의 최신 버전입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 3.5 버전보다 &lt;strong&gt;과학/공학 전문성&lt;/strong&gt;이 더욱 강화되었습니다. 방사선 계측이나 원자력 관련 국내 문서를 다룰 때 대체 불가능한 성능을 보여줍니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull exaone4.0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;8. HCX-004 (HyperCLOVA X 경량화)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; 네이버가 공개한(혹은 Ollama로 포팅된) 로컬 구동 가능 버전입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 한국어의 뉘앙스, 높임말, 행정 용어 처리는 여전히 최고입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull hcx-004&lt;/code&gt; (가상의 이름, 실제로는 &lt;code&gt;solar-pro&lt;/code&gt; 최신 버전을 대체제로 추천)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-5-가성비--속도-speed&#34;&gt;⚡ 5. 가성비 &amp;amp; 속도 (Speed)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;9. Mistral-Next (12B)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; 미스트랄의 최신 주력 모델입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 12GB~16GB 구간에서 가장 &lt;strong&gt;빠른 토큰 생성 속도&lt;/strong&gt;를 자랑합니다. 성격 급한 한국인에게 딱 맞는 속도입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull mistral-next&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;10. Yi-Coder-2 (9B)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태:&lt;/strong&gt; 01.AI의 코딩 특화 모델 후속작입니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징:&lt;/strong&gt; 32k 이상의 긴 코드를 한 번에 넣어도 속도 저하가 거의 없습니다. 레거시 코드를 통째로 분석할 때 유용합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령어:&lt;/strong&gt; &lt;code&gt;ollama pull yi-coder-2&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
