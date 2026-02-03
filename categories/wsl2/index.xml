@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Wsl2 on 냉동코더의 기술블로그</title>
+        <link>https://cliearl.github.io/categories/wsl2/</link>
+        <description>Recent content in Wsl2 on 냉동코더의 기술블로그</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Tue, 03 Feb 2026 10:16:59 +0900</lastBuildDate><atom:link href="https://cliearl.github.io/categories/wsl2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>WSL2 &#43; Claude Code &#43; Ollama &#43; VS Code: 나만의 로컬 AI 코딩 에이전트 구축하기</title>
+        <link>https://cliearl.github.io/posts/linux/wsl2-claudecode-ollama-vscode/</link>
+        <pubDate>Tue, 03 Feb 2026 10:16:59 +0900</pubDate>
+        
+        <guid>https://cliearl.github.io/posts/linux/wsl2-claudecode-ollama-vscode/</guid>
+        <description>&lt;p&gt;최근 &lt;strong&gt;Anthropic&lt;/strong&gt;에서 출시한 터미널 기반 AI 코딩 도구인 &lt;strong&gt;Claude Code&lt;/strong&gt;가 큰 화제입니다. 특히 &lt;a class=&#34;link&#34; href=&#34;https://docs.ollama.com/integrations/claude-code&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ollama 공식 문서&lt;/a&gt;에 따르면, 이제 Ollama를 통해 Anthropic의 유료 모델이 아닌 &lt;strong&gt;로컬 오픈소스 모델&lt;/strong&gt;을 Claude Code의 두뇌로 연결하여 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;이 글에서는 &lt;strong&gt;WSL2 환경&lt;/strong&gt;에서 Ollama와 Claude Code를 연동하여, VS Code 내에서 강력한 로컬 AI 코딩 비서를 구축하는 방법을 단계별로 안내합니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-단계별-설치-가이드-wsl2-내부&#34;&gt;1. 단계별 설치 가이드 (WSL2 내부)
+&lt;/h3&gt;&lt;p&gt;WSL2 터미널(Ubuntu 등)을 열고 아래 명령어를 순서대로 입력하여 도구들을 설치합니다.&lt;/p&gt;
+&lt;h4 id=&#34;step-1-ollama-설치-wsl2-전용-linux-버전&#34;&gt;STEP 1: Ollama 설치 (WSL2 전용 Linux 버전)
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -fsSL https://ollama.com/install.sh &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;step-2-nodejs-20-이상-설치&#34;&gt;STEP 2: Node.js 20 이상 설치
+&lt;/h4&gt;&lt;p&gt;Claude Code 구동에 필요한 최신 Node.js를 &lt;code&gt;fnm&lt;/code&gt;으로 설치합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# fnm(Fast Node Manager) 설치 및 설정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -fsSL https://fnm.vercel.app/install &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;source&lt;/span&gt; ~/.bashrc
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Node.js 20 설치 및 사용 설정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;fnm install &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;fnm use &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;step-3-claude-code-cli-설치&#34;&gt;STEP 3: Claude Code CLI 설치
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install -g @anthropic-ai/claude-code
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;2-네트워크-이해-및-통로-열기-핵심-설정&#34;&gt;2. 네트워크 이해 및 &amp;ldquo;통로&amp;rdquo; 열기 (핵심 설정)
+&lt;/h3&gt;&lt;p&gt;윈도우에 설치된 Ollama 엔진과 WSL2 내부의 Claude Code가 대화하려면 두 환경 사이의 장벽을 허물어야 합니다.&lt;/p&gt;
+&lt;h4 id=&#34;-wsl2-네트워크-구조와-localhost&#34;&gt;🔍 WSL2 네트워크 구조와 &amp;rsquo;localhost&#39;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;포트 포워딩:&lt;/strong&gt; 윈도우는 기본적으로 &lt;code&gt;localhost&lt;/code&gt; 포워딩을 지원하여, 윈도우의 특정 포트 신호를 WSL2 내부로 자동 전달합니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;미러 모드(Mirrored Mode):&lt;/strong&gt; 2026년 표준 방식입니다. 윈도우의 네트워크 인터페이스를 리눅스에 그대로 복사하여, 서로 다른 방에 살고 있지만 문(Port)을 항상 열어두어 옆방 물건(&lt;code&gt;localhost&lt;/code&gt;)을 내 것처럼 쓰는 상태를 만듭니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;-윈도우-ollama-환경-변수-설정&#34;&gt;① 윈도우 Ollama 환경 변수 설정
+&lt;/h4&gt;&lt;p&gt;윈도우용 Ollama가 외부(WSL2) 요청을 수신하도록 설정합니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Ollama 종료:&lt;/strong&gt; 트레이 아이콘 우클릭 → &lt;code&gt;Quit Ollama&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;환경 변수 추가:&lt;/strong&gt; [시스템 환경 변수 편집] → [환경 변수] → &amp;lsquo;사용자 변수&amp;rsquo;에 추가.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;변수 이름: &lt;code&gt;OLLAMA_HOST&lt;/code&gt; / 변수 값: &lt;code&gt;0.0.0.0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Ollama 재실행.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;-wsl2-미러-모드-활성화-강력-추천&#34;&gt;② WSL2 미러 모드 활성화 (강력 추천)
+&lt;/h4&gt;&lt;p&gt;윈도우 사용자 폴더(&lt;code&gt;%UserProfile%&lt;/code&gt;)에 &lt;code&gt;.wslconfig&lt;/code&gt; 파일을 만들거나 수정하여 진짜 &lt;code&gt;localhost&lt;/code&gt; 공유를 활성화하세요.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;[wsl2]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;networkingMode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;mirrored&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;3-vs-code에서-활용하기&#34;&gt;3. VS Code에서 활용하기
+&lt;/h3&gt;&lt;h4 id=&#34;-통합-터미널-활용-best-practice&#34;&gt;① 통합 터미널 활용 (Best Practice)
+&lt;/h4&gt;&lt;p&gt;별도의 창 없이 VS Code 하단 터미널(&lt;code&gt;Ctrl + &lt;/code&gt; `)에서 즉시 비서를 깨웁니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;실행:&lt;/strong&gt; &lt;code&gt;ollama launch claude --model qwen3-coder&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;만약 위의 코드가 동작하지 않는다면 환경변수를 수동으로 추가해야 합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Claude Code를 로컬 Ollama에 연결하기 위한 필수 설정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ANTHROPIC_BASE_URL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://localhost:11434&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ANTHROPIC_AUTH_TOKEN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;ollama&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ANTHROPIC_API_KEY&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;ollama&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;-공식-확장-프로그램-설치&#34;&gt;② 공식 확장 프로그램 설치
+&lt;/h4&gt;&lt;p&gt;VS Code 마켓플레이스에서 &lt;code&gt;Claude Code&lt;/code&gt;를 설치하면 아래 단축키를 통해 에디터와 AI 사이를 더 빠르게 오갈 수 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + Esc&lt;/code&gt;: 터미널 포커스 전환&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Alt + K&lt;/code&gt;: 선택 영역에 대한 즉시 질문&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4--성능-최적화-팁-컨텍스트-윈도우-확장&#34;&gt;4. 🚀 성능 최적화 팁: 컨텍스트 윈도우 확장
+&lt;/h3&gt;&lt;p&gt;Claude Code는 여러 파일을 동시에 분석하므로 AI의 &amp;lsquo;기억력&amp;rsquo;이 매우 중요합니다. Ollama의 기본 컨텍스트 크기는 대개 부족하므로, 아래 설정을 통해 이를 확장해 줍니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;설정 방법:&lt;/strong&gt;
+&lt;code&gt;~/.bashrc&lt;/code&gt; 또는 &lt;code&gt;~/.zshrc&lt;/code&gt; 파일 하단에 아래 환경 변수를 추가하세요.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 모델이 한 번에 읽을 수 있는 양을 32K로 확장 (VRAM이 넉넉하다면 64K 권장)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;OLLAMA_NUM_CTX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;32768&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;추가 후 &lt;code&gt;source ~/.bashrc&lt;/code&gt;로 반영합니다.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
