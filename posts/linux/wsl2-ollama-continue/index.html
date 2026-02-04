@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="시놀로지에서 도커 이미지를 업데이트하는 법에 대해 정리하였다.\n도커패널 &gt; 컨테이너 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 중지]\n도커패널 &gt; 레지스트리 &gt; 업데이트할 이미지 찾아서 [다운로드]\n(이전 다운로드 받은 이미지(image) 삭제 하지 않아도 됨)\n도커패널 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 지우기]\n(이전 설정은 지워지지 않음)\n도커패널 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 시작점]\n">
-<title>Synology에서 Docker Image 업데이트하기</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="최근 딥러닝 학습과 코딩을 병행하며 보안과 속도, 두 마리 토끼를 잡기 위해 로컬 LLM 환경을 구축했습니다. 특히 RTX 5060 Ti 16GB의 넉넉한 VRAM을 활용해 고성능 모델인 Qwen2.5-Coder 14B를 올린 최적의 세팅을 공유합니다.\n1. 환경 구성 및 하드웨어 GPU: NVIDIA RTX 5060 Ti (16GB VRAM) - 14B 모델 구동의 마지노선이자 최적의 선택 OS: Windows 11 + WSL2 (Ubuntu) Backend: Ollama (Windows용 설치) IDE: VS Code + Continue Extension 2. Ollama &amp; 모델 세팅 먼저 로컬에서 AI의 뇌 역할을 할 모델을 내려받습니다. 16GB VRAM 기준, 코딩 실력이 검증된 14B 모델이 가장 쾌적합니다.\n">
+<title>나만의 로컬 AI 코딩 환경 (WSL2 &#43; Ollama &#43; Continue)</title>
 
-<link rel='canonical' href='https://cliearl.github.io/posts/linux/synology-docker-update/'>
+<link rel='canonical' href='https://cliearl.github.io/posts/linux/wsl2-ollama-continue/'>
 
-<link rel="stylesheet" href="/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css"><meta property='og:title' content="Synology에서 Docker Image 업데이트하기">
-<meta property='og:description' content="시놀로지에서 도커 이미지를 업데이트하는 법에 대해 정리하였다.\n도커패널 &gt; 컨테이너 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 중지]\n도커패널 &gt; 레지스트리 &gt; 업데이트할 이미지 찾아서 [다운로드]\n(이전 다운로드 받은 이미지(image) 삭제 하지 않아도 됨)\n도커패널 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 지우기]\n(이전 설정은 지워지지 않음)\n도커패널 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 시작점]\n">
-<meta property='og:url' content='https://cliearl.github.io/posts/linux/synology-docker-update/'>
+<link rel="stylesheet" href="/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css"><meta property='og:title' content="나만의 로컬 AI 코딩 환경 (WSL2 + Ollama + Continue)">
+<meta property='og:description' content="최근 딥러닝 학습과 코딩을 병행하며 보안과 속도, 두 마리 토끼를 잡기 위해 로컬 LLM 환경을 구축했습니다. 특히 RTX 5060 Ti 16GB의 넉넉한 VRAM을 활용해 고성능 모델인 Qwen2.5-Coder 14B를 올린 최적의 세팅을 공유합니다.\n1. 환경 구성 및 하드웨어 GPU: NVIDIA RTX 5060 Ti (16GB VRAM) - 14B 모델 구동의 마지노선이자 최적의 선택 OS: Windows 11 + WSL2 (Ubuntu) Backend: Ollama (Windows용 설치) IDE: VS Code + Continue Extension 2. Ollama &amp; 모델 세팅 먼저 로컬에서 AI의 뇌 역할을 할 모델을 내려받습니다. 16GB VRAM 기준, 코딩 실력이 검증된 14B 모델이 가장 쾌적합니다.\n">
+<meta property='og:url' content='https://cliearl.github.io/posts/linux/wsl2-ollama-continue/'>
 <meta property='og:site_name' content='냉동코더의 기술블로그'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='synology' /><meta property='article:tag' content='docker' /><meta property='article:tag' content='update' /><meta property='article:published_time' content='2020-11-23T02:55:00&#43;09:00'/><meta property='article:modified_time' content='2020-11-23T02:55:00&#43;09:00'/>
-<meta name="twitter:title" content="Synology에서 Docker Image 업데이트하기">
-<meta name="twitter:description" content="시놀로지에서 도커 이미지를 업데이트하는 법에 대해 정리하였다.\n도커패널 &gt; 컨테이너 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 중지]\n도커패널 &gt; 레지스트리 &gt; 업데이트할 이미지 찾아서 [다운로드]\n(이전 다운로드 받은 이미지(image) 삭제 하지 않아도 됨)\n도커패널 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 지우기]\n(이전 설정은 지워지지 않음)\n도커패널 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 시작점]\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-02-03T10:16:59&#43;09:00'/><meta property='article:modified_time' content='2026-02-03T10:16:59&#43;09:00'/>
+<meta name="twitter:title" content="나만의 로컬 AI 코딩 환경 (WSL2 + Ollama + Continue)">
+<meta name="twitter:description" content="최근 딥러닝 학습과 코딩을 병행하며 보안과 속도, 두 마리 토끼를 잡기 위해 로컬 LLM 환경을 구축했습니다. 특히 RTX 5060 Ti 16GB의 넉넉한 VRAM을 활용해 고성능 모델인 Qwen2.5-Coder 14B를 올린 최적의 세팅을 공유합니다.\n1. 환경 구성 및 하드웨어 GPU: NVIDIA RTX 5060 Ti (16GB VRAM) - 14B 모델 구동의 마지노선이자 최적의 선택 OS: Windows 11 + WSL2 (Ubuntu) Backend: Ollama (Windows용 설치) IDE: VS Code + Continue Extension 2. Ollama &amp; 모델 세팅 먼저 로컬에서 AI의 뇌 역할을 할 모델을 내려받습니다. 16GB VRAM 기준, 코딩 실력이 검증된 14B 모델이 가장 쾌적합니다.\n">
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZL04TTHRBF"></script>
@@ -278,7 +278,46 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-환경-구성-및-하드웨어">1. 환경 구성 및 하드웨어</a></li>
+    <li><a href="#2-ollama--모델-세팅">2. Ollama &amp; 모델 세팅</a></li>
+    <li><a href="#3-continue-설정-configyaml">3. Continue 설정 (config.yaml)</a></li>
+    <li><a href="#4-슬래시-커맨드-커스터마이징-md-방식">4. 슬래시 커맨드 커스터마이징 (.md 방식)</a>
+      <ol>
+        <li><a href="#-continuepromptscommitmd">📄 ~/.continue/prompts/commit.md</a></li>
+      </ol>
+    </li>
+    <li><a href="#5-마치며">5. 마치며</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -292,12 +331,24 @@
                 Linux
             </a>
         
+            <a href="/categories/ollama/" >
+                Ollama
+            </a>
+        
+            <a href="/categories/wsl2/" >
+                Wsl2
+            </a>
+        
+            <a href="/categories/vscode/" >
+                Vscode
+            </a>
+        
     </header>
     
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/posts/linux/synology-docker-update/">Synology에서 Docker Image 업데이트하기</a>
+            <a href="/posts/linux/wsl2-ollama-continue/">나만의 로컬 AI 코딩 환경 (WSL2 &#43; Ollama &#43; Continue)</a>
         </h2>
     
         
@@ -319,7 +370,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published" datetime='2020-11-23T02:55:00&#43;09:00'>Nov 23, 2020</time>
+                <time class="article-time--published" datetime='2026-02-03T10:16:59&#43;09:00'>Feb 03, 2026</time>
             </div>
         
 
@@ -334,7 +385,7 @@
 
 
                 <time class="article-time--reading">
-                    1 minute read
+                    2 minute read
                 </time>
             </div>
         
@@ -349,39 +400,125 @@
     <section class="article-content">
     
     
-    <p>시놀로지에서 도커 이미지를 업데이트하는 법에 대해 정리하였다.</p>
-<ol>
-<li>
-<p>도커패널 &gt; 컨테이너 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 중지]</p>
-</li>
-<li>
-<p>도커패널 &gt; 레지스트리 &gt; 업데이트할 이미지 찾아서 [다운로드]<br>
-(이전 다운로드 받은 이미지(image) 삭제 하지 않아도 됨)</p>
-</li>
-<li>
-<p>도커패널 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 지우기]<br>
-(이전 설정은 지워지지 않음)</p>
-</li>
-<li>
-<p>도커패널 &gt; 업데이트할 컨테이너 선택후 [작업 -&gt; 시작점]</p>
-</li>
-</ol>
+    <p>최근 딥러닝 학습과 코딩을 병행하며 보안과 속도, 두 마리 토끼를 잡기 위해 <strong>로컬 LLM</strong> 환경을 구축했습니다. 특히 <strong>RTX 5060 Ti 16GB</strong>의 넉넉한 VRAM을 활용해 고성능 모델인 <strong>Qwen2.5-Coder 14B</strong>를 올린 최적의 세팅을 공유합니다.</p>
+<hr>
+<h2 id="1-환경-구성-및-하드웨어">1. 환경 구성 및 하드웨어
+</h2><ul>
+<li><strong>GPU</strong>: NVIDIA RTX 5060 Ti (16GB VRAM) - <em>14B 모델 구동의 마지노선이자 최적의 선택</em></li>
+<li><strong>OS</strong>: Windows 11 + WSL2 (Ubuntu)</li>
+<li><strong>Backend</strong>: <a class="link" href="https://ollama.com/"  target="_blank" rel="noopener"
+    >Ollama</a> (Windows용 설치)</li>
+<li><strong>IDE</strong>: VS Code + <a class="link" href="https://www.continue.dev/"  target="_blank" rel="noopener"
+    >Continue</a> Extension</li>
+</ul>
+<hr>
+<h2 id="2-ollama--모델-세팅">2. Ollama &amp; 모델 세팅
+</h2><p>먼저 로컬에서 AI의 뇌 역할을 할 모델을 내려받습니다. 16GB VRAM 기준, 코딩 실력이 검증된 <strong>14B 모델</strong>이 가장 쾌적합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 모델 다운로드 (약 9GB)</span>
+</span></span><span class="line"><span class="cl">ollama pull qwen2.5-coder:14b-instruct
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 임베딩 모델 (코드베이스 검색용)</span>
+</span></span><span class="line"><span class="cl">ollama pull nomic-embed-text
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 짧은 별명 만들기 (선택사항)</span>
+</span></span><span class="line"><span class="cl">ollama cp qwen2.5-coder:14b-instruct qwen14
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="3-continue-설정-configyaml">3. Continue 설정 (config.yaml)
+</h2><p>VS Code에서 Continue 확장 프로그램을 설치한 후, <code>~/.continue/config.yaml</code>을 다음과 같이 설정합니다. 불필요한 설정을 걷어내고 로컬 Ollama에 집중한 구성입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Local Config</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">1.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">models</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Qwen14</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">ollama</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l">qwen2.5-coder:14b-instruct</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">apiBase</span><span class="p">:</span><span class="w"> </span><span class="l">http://127.0.0.1:11434</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">roles</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">chat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">edit</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">apply</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">autocomplete</span><span class="w">
+</span></span></span><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Nomic Embed</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">ollama</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l">nomic-embed-text:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">roles</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">embed</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="4-슬래시-커맨드-커스터마이징-md-방식">4. 슬래시 커맨드 커스터마이징 (.md 방식)
+</h2><p>최신 Continue 버전에서는 <code>config.yaml</code>을 직접 수정하는 대신, <code>.md</code> 파일을 통해 명령어를 추가하는 방식을 권장합니다.</p>
+<h3 id="-continuepromptscommitmd">📄 ~/.continue/prompts/commit.md
+</h3><p>이 파일을 생성하면 채팅창에서 <code>/commit</code> 한 번으로 <strong>스테이징된 파일들만 분석</strong>하여 커밋 메시지를 자동 생성할 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">name: commit
+</span></span><span class="line"><span class="cl">description: &#34;스테이징된 변경 사항으로 커밋 메시지 생성&#34;
+</span></span><span class="line"><span class="cl">invokable: true
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">Analyze ONLY the STAGED changes (git diff --cached).
+</span></span><span class="line"><span class="cl">Ignore unstaged changes.
+</span></span><span class="line"><span class="cl">Generate a concise commit message in Korean following conventional commits format.
+</span></span><span class="line"><span class="cl">DO NOT use tools. Output only the message.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="5-마치며">5. 마치며
+</h2><p>이제 내 컴퓨터 안에서 보안 걱정 없이, 인터넷 연결 없이도 최고의 코딩 비서를 부릴 수 있게 되었습니다. 특히 <code>@</code> 기호를 사용하여 특정 파일이나 코드베이스 전체를 맥락으로 던져주는 기능은 로컬 환경에서 더 빛을 발합니다.</p>
 
 </section>
 
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/synology/">Synology</a>
-        
-            <a href="/tags/docker/">Docker</a>
-        
-            <a href="/tags/update/">Update</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">
@@ -444,6 +581,19 @@
             
                 
 <article class="">
+    <a href="/posts/linux/python-install/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[WSL2] Python 3.14 설치 가이드 및 시스템 기본 버전 관리법</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/posts/linux/migrate-textcube-to-docker/">
         
         
@@ -457,51 +607,38 @@
             
                 
 <article class="">
+    <a href="/posts/linux/wordpress-setup/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Linux &#43; Nginx &#43; MariaDB &#43; PHP 셋업하고 WordPress 설치하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/linux/postgresql-docker-upgrade/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Postgresql Docker Image의 메이저 버전 업그레이드</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/posts/linux/introduce-calibre-web/">
         
         
 
         <div class="article-details">
             <h2 class="article-title">전자책 관리 앱 Calibre-web 도입</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/posts/linux/docker-hexo-blog/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">도커로 Hexo 블로그 만들고 github.io 주소로 접속하기</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/posts/linux/wsl2-ollama-continue/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">나만의 로컬 AI 코딩 환경 (WSL2 &#43; Ollama &#43; Continue)</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/posts/linux/python-install/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">[WSL2] Python 3.14 설치 가이드 및 시스템 기본 버전 관리법</h2>
         </div>
     </a>
 </article>
